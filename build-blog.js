@@ -240,6 +240,36 @@ const blogPostTemplate = (post) => `<!DOCTYPE html>
     </div>
   </footer>
 
+  <!-- Article Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "${escapeHtml(post.title)}",
+    "description": "${escapeHtml(post.description)}",
+    "datePublished": "${post.dateISO}",
+    "dateModified": "${post.dateISO}",
+    "author": {
+      "@type": "Organization",
+      "name": "Clearly",
+      "url": "https://getclearly.app"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Clearly",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://getclearly.app/blog/${post.slug}.html"
+    },
+    "image": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png"
+  }
+  </script>
+
 </body>
 </html>`;
 
@@ -551,7 +581,9 @@ async function build() {
     const title = getProperty(page, 'Title');
     const slug = generateSlug(title, getProperty(page, 'Slug'));
     const description = getProperty(page, 'Description') || '';
-    const date = formatDate(getProperty(page, 'Date'));
+    const rawDate = getProperty(page, 'Date');
+    const date = formatDate(rawDate);
+    const dateISO = rawDate || new Date().toISOString().split('T')[0];
 
     console.log(`Processing: ${title}`);
 
@@ -560,7 +592,7 @@ async function build() {
     let content = blocksToHtml(blocks);
     content = wrapListItems(content);
 
-    const post = { title, slug, description, date, content };
+    const post = { title, slug, description, date, dateISO, content };
     processedPosts.push(post);
 
     // Write individual post page
