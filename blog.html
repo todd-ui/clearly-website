@@ -3,48 +3,125 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog - Clearly</title>
-  <meta name="description" content="Co-parenting tips, insights, and updates from Clearly.">
+  <title>Common Ground - Ideas for Calmer Co-Parenting | Clearly</title>
+  <meta name="description" content="Real topics, practical advice, and perspectives for co-parents. Schedules, tricky conversations, and a calmer way forward.">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
   <style>
+    .blog-hero {
+      padding: 100px 0 80px;
+      background: linear-gradient(135deg, #f0faf7 0%, #e8f5f1 50%, #f8fdfb 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .blog-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(13, 147, 115, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .blog-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30%;
+      left: -10%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(13, 147, 115, 0.05) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .blog-hero .container {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 700px;
+    }
+    .blog-hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .blog-hero-badge svg {
+      width: 16px;
+      height: 16px;
+    }
+    .blog-hero h1 {
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 8px;
+      line-height: 1.2;
+    }
+    .blog-hero-subtitle {
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 20px;
+    }
+    .blog-hero p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    .blog-section {
+      padding: 60px 0 100px;
+    }
+    @media (max-width: 768px) {
+      .blog-hero { padding: 80px 0 50px; }
+      .blog-hero h1 { font-size: 32px; }
+    }
     .blog-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 32px;
-      margin-top: 48px;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 28px;
     }
     .blog-card {
       background: var(--surface);
       border: 1px solid var(--border);
-      border-radius: 16px;
-      overflow: hidden;
-      transition: box-shadow 0.2s;
+      border-radius: 20px;
+      padding: 32px;
+      transition: box-shadow 0.3s, transform 0.3s;
     }
     .blog-card:hover {
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
     }
-    .blog-card-image {
-      height: 180px;
+    .blog-card-icon {
+      width: 56px;
+      height: 56px;
       background: var(--primary-soft);
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 48px;
+      margin-bottom: 20px;
     }
-    .blog-card-content {
-      padding: 24px;
-    }
-    .blog-card-tag {
-      font-size: 12px;
-      font-weight: 600;
+    .blog-card-icon svg {
+      width: 28px;
+      height: 28px;
       color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 8px;
+    }
+    .blog-card-date {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 10px;
     }
     .blog-card h3 {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 600;
       margin-bottom: 12px;
       line-height: 1.4;
@@ -57,26 +134,46 @@
       text-decoration: none;
     }
     .blog-card p {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
-    .coming-soon {
+    .blog-card-link {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .blog-card-link:hover {
+      text-decoration: none;
+    }
+    .blog-card-link svg {
+      width: 18px;
+      height: 18px;
+      transition: transform 0.2s;
+    }
+    .blog-card:hover .blog-card-link svg {
+      transform: translateX(4px);
+    }
+    .no-posts {
       text-align: center;
       padding: 80px 0;
-    }
-    .coming-soon h2 {
-      font-size: 24px;
-      margin-bottom: 12px;
-    }
-    .coming-soon p {
       color: var(--text-secondary);
+    }
+    @media (max-width: 768px) {
+      .blog-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
   <nav class="nav">
     <div class="container">
       <a href="/" class="nav-brand">
@@ -85,80 +182,114 @@
       </a>
       <ul class="nav-links">
         <li><a href="/#features">Features</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
         <li><a href="/help.html">Help</a></li>
         <li><a href="/blog.html">Blog</a></li>
-        <li><a href="/download.html" class="nav-cta">Download</a></li>
+        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Download</a></li>
       </ul>
       <button class="nav-toggle">☰</button>
     </div>
   </nav>
 
-  <!-- Page Header -->
-  <header class="page-header">
+  <header class="blog-hero">
     <div class="container">
-      <h1>Blog</h1>
-      <p>Tips and insights for successful co-parenting</p>
+      <div class="blog-hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+        Clearly Blog
+      </div>
+      <h1>Common Ground</h1>
+      <p class="blog-hero-subtitle">Ideas for calmer co-parenting.</p>
+      <p>Co-parenting brings enough complexity on its own. Common Ground is here to make the communication part a little easier — with real topics, practical advice, and perspectives from people who get it. Whether you're figuring out schedules, navigating tricky conversations, or just looking for a calmer way forward, you're in the right place.</p>
     </div>
   </header>
 
-  <!-- Blog Content -->
-  <section class="faq-section">
+  <section class="blog-section">
     <div class="container">
-
-      <div class="coming-soon">
-        <h2>Coming Soon</h2>
-        <p>We're working on helpful articles about co-parenting, communication, and making life easier for your family.</p>
-        <p style="margin-top: 24px;">
-          <a href="mailto:care@getclearly.app" class="btn btn-secondary">Get notified when we publish</a>
-        </p>
-      </div>
-
-      <!-- Placeholder for future blog posts
+      
       <div class="blog-grid">
+        
         <article class="blog-card">
-          <div class="blog-card-image">📅</div>
-          <div class="blog-card-content">
-            <div class="blog-card-tag">Scheduling</div>
-            <h3><a href="#">5 Tips for Managing a Shared Custody Calendar</a></h3>
-            <p>Keeping track of who has the kids and when doesn't have to be stressful. Here's how to make it work.</p>
+          <div class="blog-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
           </div>
+          <div class="blog-card-date">January 6, 2026</div>
+          <h3><a href="/blog/discussions-how-non-emotional.html">How to Move Emotional Discussions Through to Resolution: A Harvard Negotiation Project Framework</a></h3>
+          <p>The Harvard Negotiation Project's framework helps navigate emotional discussions by separating people from problems, focusing on underlying interests rather than positions, generating creative options for mutual gain, and using objective criteria to reach fair resolutions. By managing emotions constructively and building agreement incrementally, even the most challenging conversations can move from conflict to productive resolution while preserving relationships.</p>
+          <a href="/blog/discussions-how-non-emotional.html" class="blog-card-link">
+            Read article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
         </article>
-
+        
         <article class="blog-card">
-          <div class="blog-card-image">💬</div>
-          <div class="blog-card-content">
-            <div class="blog-card-tag">Communication</div>
-            <h3><a href="#">How to Keep Co-Parent Communication Conflict-Free</a></h3>
-            <p>Practical strategies for keeping conversations focused on what matters: the kids.</p>
+          <div class="blog-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
           </div>
+          <div class="blog-card-date">January 3, 2026</div>
+          <h3><a href="/blog/kids-first.html">The Importance of Putting Kids First in Co-Parenting</a></h3>
+          <p>Successful co-parenting requires parents to prioritize their children's well-being above personal conflicts by maintaining consistent routines, communicating respectfully, and never speaking negatively about each other. By keeping children at the center of every decision, parents can provide the stability and security needed for their children to thrive despite family changes.</p>
+          <a href="/blog/kids-first.html" class="blog-card-link">
+            Read article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
         </article>
-
+        
         <article class="blog-card">
-          <div class="blog-card-image">💳</div>
-          <div class="blog-card-content">
-            <div class="blog-card-tag">Finances</div>
-            <h3><a href="#">Splitting Expenses Fairly: A Co-Parent's Guide</a></h3>
-            <p>How to handle shared costs without the awkward conversations.</p>
+          <div class="blog-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
           </div>
+          <div class="blog-card-date">December 7, 2025</div>
+          <h3><a href="/blog/what-matters.html">Finding What Really Matters: A Guide for Co-Parents to Navigate Difficult Conversations</a></h3>
+          <p>To navigate difficult co-parenting conversations, focus on what truly matters—your child's well-being—by setting aside emotions, identifying the core issue, and working together on solutions rather than blame.</p>
+          <a href="/blog/what-matters.html" class="blog-card-link">
+            Read article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
         </article>
+        
       </div>
-      -->
-
+      
     </div>
   </section>
 
-  <!-- Footer -->
   <footer class="footer">
     <div class="container">
-      <ul class="footer-links">
-        <li><a href="/#features">Features</a></li>
-        <li><a href="/blog.html">Blog</a></li>
-        <li><a href="/help.html">Help</a></li>
-        <li><a href="/privacy.html">Privacy</a></li>
-        <li><a href="/terms.html">Terms</a></li>
-      </ul>
-      <div class="footer-info">
-        © 2025 Clearly. All rights reserved. · <a href="mailto:care@getclearly.app">care@getclearly.app</a>
+      <div class="footer-top">
+        <div class="footer-brand-section">
+          <div class="footer-brand">
+            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+            <span>Clearly</span>
+          </div>
+          <p class="footer-tagline">Co-parenting made clear.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <ul>
+              <li><a href="/#features">Features</a></li>
+              <li><a href="/#pricing">Pricing</a></li>
+              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Download</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="/help.html">Help Center</a></li>
+              <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="/privacy.html">Privacy Policy</a></li>
+              <li><a href="/terms.html">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 Clearly LLC. All rights reserved.</p>
+        <p>Proudly designed and developed in the USA.</p>
       </div>
     </div>
   </footer>

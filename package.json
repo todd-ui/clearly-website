@@ -1,0 +1,25 @@
+{
+  "name": "clearly-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node build-blog.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/todd-ui/clearly-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/todd-ui/clearly-website/issues"
+  },
+  "homepage": "https://github.com/todd-ui/clearly-website#readme",
+  "dependencies": {
+    "@notionhq/client": "^2.2.15"
+  }
+}
