@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog - Clearly</title>
+  <meta name="description" content="Co-parenting tips, insights, and updates from Clearly.">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+  <style>
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 32px;
+      margin-top: 48px;
+    }
+    .blog-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: box-shadow 0.2s;
+    }
+    .blog-card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+    .blog-card-image {
+      height: 180px;
+      background: var(--primary-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+    }
+    .blog-card-content {
+      padding: 24px;
+    }
+    .blog-card-tag {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    .blog-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+    .blog-card h3 a {
+      color: var(--text);
+    }
+    .blog-card h3 a:hover {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .blog-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+    .coming-soon {
+      text-align: center;
+      padding: 80px 0;
+    }
+    .coming-soon h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    .coming-soon p {
+      color: var(--text-secondary);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <a href="/" class="nav-brand">
+        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+        Clearly
+      </a>
+      <ul class="nav-links">
+        <li><a href="/#features">Features</a></li>
+        <li><a href="/help.html">Help</a></li>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="/download.html" class="nav-cta">Download</a></li>
+      </ul>
+      <button class="nav-toggle">☰</button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <div class="container">
+      <h1>Blog</h1>
+      <p>Tips and insights for successful co-parenting</p>
+    </div>
+  </header>
+
+  <!-- Blog Content -->
+  <section class="faq-section">
+    <div class="container">
+
+      <div class="coming-soon">
+        <h2>Coming Soon</h2>
+        <p>We're working on helpful articles about co-parenting, communication, and making life easier for your family.</p>
+        <p style="margin-top: 24px;">
+          <a href="mailto:care@getclearly.app" class="btn btn-secondary">Get notified when we publish</a>
+        </p>
+      </div>
+
+      <!-- Placeholder for future blog posts
+      <div class="blog-grid">
+        <article class="blog-card">
+          <div class="blog-card-image">📅</div>
+          <div class="blog-card-content">
+            <div class="blog-card-tag">Scheduling</div>
+            <h3><a href="#">5 Tips for Managing a Shared Custody Calendar</a></h3>
+            <p>Keeping track of who has the kids and when doesn't have to be stressful. Here's how to make it work.</p>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-card-image">💬</div>
+          <div class="blog-card-content">
+            <div class="blog-card-tag">Communication</div>
+            <h3><a href="#">How to Keep Co-Parent Communication Conflict-Free</a></h3>
+            <p>Practical strategies for keeping conversations focused on what matters: the kids.</p>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-card-image">💳</div>
+          <div class="blog-card-content">
+            <div class="blog-card-tag">Finances</div>
+            <h3><a href="#">Splitting Expenses Fairly: A Co-Parent's Guide</a></h3>
+            <p>How to handle shared costs without the awkward conversations.</p>
+          </div>
+        </article>
+      </div>
+      -->
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <ul class="footer-links">
+        <li><a href="/#features">Features</a></li>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="/help.html">Help</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+      </ul>
+      <div class="footer-info">
+        © 2025 Clearly. All rights reserved. · <a href="mailto:care@getclearly.app">care@getclearly.app</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>
