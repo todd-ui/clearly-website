@@ -134,8 +134,19 @@ const blogPostTemplate = (post) => `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>${escapeHtml(post.title)} - Clearly Blog</title>
+  <title>${escapeHtml(post.title)} | Clearly Blog</title>
   <meta name="description" content="${escapeHtml(post.description)}">
+  <link rel="canonical" href="https://getclearly.app/blog/${post.slug}.html">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://getclearly.app/blog/${post.slug}.html">
+  <meta property="og:title" content="${escapeHtml(post.title)}">
+  <meta property="og:description" content="${escapeHtml(post.description)}">
+  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/og-image.png">
+  <meta property="og:site_name" content="Clearly">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${escapeHtml(post.title)}">
+  <meta name="twitter:description" content="${escapeHtml(post.description)}">
+  <meta name="robots" content="index, follow">
   <link rel="stylesheet" href="../styles.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
   <style>
@@ -237,8 +248,20 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Common Ground - Ideas for Calmer Co-Parenting | Clearly</title>
-  <meta name="description" content="Real topics, practical advice, and perspectives for co-parents. Schedules, tricky conversations, and a calmer way forward.">
+  <title>Common Ground - Co-Parenting Tips & Advice | Clearly</title>
+  <meta name="description" content="Real topics, practical advice, and perspectives for co-parents. Custody schedules, communication strategies, and tips for calmer co-parenting.">
+  <link rel="canonical" href="https://getclearly.app/blog.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getclearly.app/blog.html">
+  <meta property="og:title" content="Common Ground - Co-Parenting Tips & Advice">
+  <meta property="og:description" content="Real topics, practical advice, and perspectives for co-parents.">
+  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/og-image.png">
+  <meta property="og:site_name" content="Clearly">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Common Ground - Co-Parenting Tips & Advice">
+  <meta name="twitter:description" content="Real topics, practical advice, and perspectives for co-parents.">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="co-parenting tips, custody advice, shared parenting, divorce resources, co-parent communication">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
   <style>
@@ -550,6 +573,50 @@ async function build() {
   const listHtml = blogListTemplate(processedPosts);
   fs.writeFileSync(path.join(__dirname, 'blog.html'), listHtml);
   console.log('-> blog.html');
+
+  // Generate sitemap.xml
+  const today = new Date().toISOString().split('T')[0];
+  const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://getclearly.app/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/help.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/privacy.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/terms.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+${processedPosts.map(post => `  <url>
+    <loc>https://getclearly.app/blog/${post.slug}.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>`).join('\n')}
+</urlset>`;
+  fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemap);
+  console.log('-> sitemap.xml');
 
   console.log('Blog build complete!');
 }
