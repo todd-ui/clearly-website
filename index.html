@@ -465,6 +465,11 @@
   </footer>
 
   <script>
+    // Mobile menu toggle
+    document.querySelector('.nav-toggle').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('open');
+    });
+
     // Scroll animations
     const observerOptions = {
       threshold: 0.1,

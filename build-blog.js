@@ -244,6 +244,13 @@ const blogPostTemplate = (post) => `<!DOCTYPE html>
     </div>
   </footer>
 
+  <script>
+    // Mobile menu toggle
+    document.querySelector('.nav-toggle').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('open');
+    });
+  </script>
+
   <!-- Article Structured Data -->
   <script type="application/ld+json">
   {
@@ -625,6 +632,11 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
   </footer>
 
   <script>
+    // Mobile menu toggle
+    document.querySelector('.nav-toggle').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('open');
+    });
+
     // Category filtering
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {

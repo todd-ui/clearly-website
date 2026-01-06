@@ -150,9 +150,37 @@ img {
 @media (max-width: 768px) {
   .nav-links {
     display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--surface);
+    flex-direction: column;
+    padding: 20px;
+    border-top: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-links li {
+    margin: 0;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links li:last-child {
+    border-bottom: none;
+    padding-top: 16px;
+  }
+  .nav-links .nav-cta {
+    text-align: center;
+    display: block;
   }
   .nav-toggle {
     display: block;
+  }
+  .nav .container {
+    position: relative;
   }
 }
 
