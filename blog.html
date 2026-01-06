@@ -214,8 +214,6 @@
     /* Category Chip */
     .blog-card-category {
       display: inline-block;
-      background: var(--primary-soft);
-      color: var(--primary);
       font-size: 12px;
       font-weight: 600;
       padding: 4px 12px;
@@ -223,6 +221,18 @@
       margin-bottom: 12px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+    }
+    .blog-card-category[data-cat="Communication"] {
+      background: rgba(59, 130, 246, 0.1);
+      color: #2563eb;
+    }
+    .blog-card-category[data-cat="Co-Parenting Basics"] {
+      background: rgba(13, 147, 115, 0.1);
+      color: #0d9373;
+    }
+    .blog-card-category[data-cat="Your Children"] {
+      background: rgba(168, 85, 247, 0.1);
+      color: #9333ea;
     }
     .blog-card.hidden {
       display: none;
@@ -276,7 +286,7 @@
       <div class="blog-grid">
         
         <article class="blog-card" data-category="Your Children">
-          <span class="blog-card-category">Your Children</span>
+          <span class="blog-card-category" data-cat="Your Children">Your Children</span>
           <div class="blog-card-date">January 14, 2026</div>
           <h3><a href="/blog/children-fear-abandonment-divorce.html">Fear of Abandonment: What Your Child Won't Say But Is Feeling</a></h3>
           <p>Children of divorced parents often develop abandonment fears when exposed to parental conflict. Learn the signs.</p>
@@ -287,7 +297,7 @@
         </article>
         
         <article class="blog-card" data-category="Co-Parenting Basics">
-          <span class="blog-card-category">Co-Parenting Basics</span>
+          <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">January 5, 2026</div>
           <h3><a href="/blog/creating-first-co-parenting-plan-essential-elements.html">Creating Your First Co-Parenting Plan: Essential Elements Every Parent Needs</a></h3>
           <p>Learn the must-have components of an effective co-parenting plan, from custody schedules to decision-making frameworks that protect your family.</p>
@@ -298,7 +308,7 @@
         </article>
         
         <article class="blog-card" data-category="Your Children">
-          <span class="blog-card-category">Your Children</span>
+          <span class="blog-card-category" data-cat="Your Children">Your Children</span>
           <div class="blog-card-date">December 31, 2025</div>
           <h3><a href="/blog/children-wellbeing-divorce-research.html">The #1 Predictor of Children's Wellbeing After Divorce</a></h3>
           <p>It's not the divorce itself that determines how children fare—research points to one factor that matters most.</p>
@@ -309,7 +319,7 @@
         </article>
         
         <article class="blog-card" data-category="Your Children">
-          <span class="blog-card-category">Your Children</span>
+          <span class="blog-card-category" data-cat="Your Children">Your Children</span>
           <div class="blog-card-date">December 14, 2025</div>
           <h3><a href="/blog/co-parenting-communication-channels.html">Beyond Text: Choosing the Right Communication Channel</a></h3>
           <p>Email, text, apps, phone calls—each has its place. Learn when to use which channel for different conversations.</p>
@@ -320,7 +330,7 @@
         </article>
         
         <article class="blog-card" data-category="Co-Parenting Basics">
-          <span class="blog-card-category">Co-Parenting Basics</span>
+          <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">November 30, 2025</div>
           <h3><a href="/blog/counter-parenting-signs-solutions.html">When 'Co-Parenting' Becomes 'Counter-Parenting': Recognizing the Difference</a></h3>
           <p>Sometimes what looks like co-parenting is actually working against your child's best interests. Learn to recognize the warning signs.</p>
@@ -331,7 +341,7 @@
         </article>
         
         <article class="blog-card" data-category="Communication">
-          <span class="blog-card-category">Communication</span>
+          <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">November 14, 2025</div>
           <h3><a href="/blog/gray-rock-method-coparenting.html">The Gray Rock Method: When Minimal Response Is Best</a></h3>
           <p>Sometimes the most powerful response is the most boring one. Learn how Gray Rock defuses high-conflict situations.</p>
@@ -342,7 +352,7 @@
         </article>
         
         <article class="blog-card" data-category="Communication">
-          <span class="blog-card-category">Communication</span>
+          <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">October 31, 2025</div>
           <h3><a href="/blog/co-parenting-communication-boundaries.html">Setting 'Office Hours' for Co-Parent Communication</a></h3>
           <p>You don't have to be available 24/7. Learn how communication boundaries reduce stress and improve your co-parenting.</p>
@@ -353,7 +363,7 @@
         </article>
         
         <article class="blog-card" data-category="Co-Parenting Basics">
-          <span class="blog-card-category">Co-Parenting Basics</span>
+          <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">October 14, 2025</div>
           <h3><a href="/blog/mindset-shift-divorced-coparents.html">From Married Co-Parents to Divorced Co-Parents: The Mindset Shift</a></h3>
           <p>The hardest part of co-parenting after divorce isn't logistics—it's changing how you think about your relationship.</p>
@@ -364,7 +374,7 @@
         </article>
         
         <article class="blog-card" data-category="Communication">
-          <span class="blog-card-category">Communication</span>
+          <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">September 30, 2025</div>
           <h3><a href="/blog/biff-method-co-parenting-communication.html">The BIFF Method: Brief, Informative, Friendly, and Firm Communication</a></h3>
           <p>Master the gold standard for high-conflict co-parenting communication. BIFF responses keep conversations productive.</p>
@@ -375,7 +385,7 @@
         </article>
         
         <article class="blog-card" data-category="Communication">
-          <span class="blog-card-category">Communication</span>
+          <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">September 14, 2025</div>
           <h3><a href="/blog/tone-in-text-co-parenting.html">Why Tone Gets Lost in Text—And What to Do About It</a></h3>
           <p>That message you thought was neutral? Your co-parent read it completely differently. Here's why and what to do.</p>
@@ -386,7 +396,7 @@
         </article>
         
         <article class="blog-card" data-category="Communication">
-          <span class="blog-card-category">Communication</span>
+          <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">August 31, 2025</div>
           <h3><a href="/blog/co-parenting-documentation-guide.html">Documentation That Protects: What to Record and Why</a></h3>
           <p>Good documentation isn't about building a case—it's about creating clarity and accountability. Learn what to track.</p>
@@ -397,7 +407,7 @@
         </article>
         
         <article class="blog-card" data-category="Co-Parenting Basics">
-          <span class="blog-card-category">Co-Parenting Basics</span>
+          <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">August 14, 2025</div>
           <h3><a href="/blog/co-parenting-spectrum-finding-balance.html">The Spectrum of Co-Parenting: Finding Your Sweet Spot</a></h3>
           <p>Most families aren't fully cooperative or completely parallel. Discover how to find the right balance for your unique situation.</p>
@@ -408,7 +418,7 @@
         </article>
         
         <article class="blog-card" data-category="Co-Parenting Basics">
-          <span class="blog-card-category">Co-Parenting Basics</span>
+          <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">July 31, 2025</div>
           <h3><a href="/blog/co-parenting-vs-parallel-parenting.html">Co-Parenting vs. Parallel Parenting: Which Approach Fits Your Situation?</a></h3>
           <p>Not all post-divorce parenting looks the same. Learn the key differences between cooperative co-parenting and low-contact parallel parenting.</p>

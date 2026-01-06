@@ -493,8 +493,6 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
     /* Category Chip */
     .blog-card-category {
       display: inline-block;
-      background: var(--primary-soft);
-      color: var(--primary);
       font-size: 12px;
       font-weight: 600;
       padding: 4px 12px;
@@ -502,6 +500,18 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
       margin-bottom: 12px;
       text-transform: uppercase;
       letter-spacing: 0.5px;
+    }
+    .blog-card-category[data-cat="Communication"] {
+      background: rgba(59, 130, 246, 0.1);
+      color: #2563eb;
+    }
+    .blog-card-category[data-cat="Co-Parenting Basics"] {
+      background: rgba(13, 147, 115, 0.1);
+      color: #0d9373;
+    }
+    .blog-card-category[data-cat="Your Children"] {
+      background: rgba(168, 85, 247, 0.1);
+      color: #9333ea;
     }
     .blog-card.hidden {
       display: none;
@@ -551,7 +561,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
       <div class="blog-grid">
         ${posts.map(post => `
         <article class="blog-card" data-category="${escapeHtml(post.category)}">
-          ${post.category ? `<span class="blog-card-category">${escapeHtml(post.category)}</span>` : ''}
+          ${post.category ? `<span class="blog-card-category" data-cat="${escapeHtml(post.category)}">${escapeHtml(post.category)}</span>` : ''}
           <div class="blog-card-date">${post.date}</div>
           <h3><a href="/blog/${post.slug}.html">${escapeHtml(post.title)}</a></h3>
           <p>${escapeHtml(post.description)}</p>
