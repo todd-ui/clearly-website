@@ -306,12 +306,15 @@ async function createNotionPage(topic, article, publishDate) {
       'Description': {
         rich_text: [{ text: { content: topic.description } }]
       },
-      'Published': {
-        checkbox: true
-      },
-      'Date': {
-        date: { start: publishDate }
-      }
+     'Published': {
+  checkbox: true
+},
+'Date': {
+  date: { start: publishDate }
+},
+'Category': {
+  select: { name: topic.category }
+}
     }
   });
   
