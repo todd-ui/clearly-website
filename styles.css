@@ -221,6 +221,7 @@ img {
     display: block;
     padding: 14px 16px;
     border-radius: 10px;
+    font-size: 18px;
     font-weight: 500;
     transition: background 0.2s;
   }
