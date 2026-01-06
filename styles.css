@@ -143,41 +143,105 @@ img {
   display: none;
   background: none;
   border: none;
-  font-size: 24px;
+  width: 44px;
+  height: 44px;
   cursor: pointer;
+  position: relative;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+
+.nav-toggle:hover {
+  background: var(--primary-soft);
+}
+
+.nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--text);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.nav-toggle span:nth-child(1) { top: 14px; }
+.nav-toggle span:nth-child(2) { top: 21px; }
+.nav-toggle span:nth-child(3) { top: 28px; }
+
+.nav-toggle.open span:nth-child(1) {
+  top: 21px;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.nav-toggle.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle.open span:nth-child(3) {
+  top: 21px;
+  transform: translateX(-50%) rotate(-45deg);
 }
 
 @media (max-width: 768px) {
   .nav-links {
     display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--surface);
+    top: calc(100% + 8px);
+    left: 16px;
+    right: 16px;
+    background: white;
     flex-direction: column;
-    padding: 20px;
-    border-top: 1px solid var(--border);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    padding: 8px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    z-index: 100;
   }
   .nav-links.open {
     display: flex;
+    animation: slideDown 0.2s ease;
+  }
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
   .nav-links li {
     margin: 0;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--border);
+  }
+  .nav-links li a {
+    display: block;
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+  .nav-links li a:hover {
+    background: var(--primary-soft);
   }
   .nav-links li:last-child {
-    border-bottom: none;
-    padding-top: 16px;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid var(--border);
   }
   .nav-links .nav-cta {
     text-align: center;
     display: block;
+    margin: 0 8px;
+    padding: 14px 20px;
   }
   .nav-toggle {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .nav .container {
     position: relative;

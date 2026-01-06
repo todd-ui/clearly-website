@@ -183,9 +183,13 @@ const blogPostTemplate = (post) => `<!DOCTYPE html>
         <li><a href="/#pricing">Pricing</a></li>
         <li><a href="/faq.html">FAQ</a></li>
         <li><a href="/blog.html">Blog</a></li>
-        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Download</a></li>
+        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
       </ul>
-      <button class="nav-toggle">☰</button>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
 
@@ -216,7 +220,7 @@ const blogPostTemplate = (post) => `<!DOCTYPE html>
             <ul>
               <li><a href="/#features">Features</a></li>
               <li><a href="/#pricing">Pricing</a></li>
-              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Download</a></li>
+              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -246,8 +250,11 @@ const blogPostTemplate = (post) => `<!DOCTYPE html>
 
   <script>
     // Mobile menu toggle
-    document.querySelector('.nav-toggle').addEventListener('click', () => {
-      document.querySelector('.nav-links').classList.toggle('open');
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
     });
   </script>
 
@@ -538,9 +545,13 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
         <li><a href="/#pricing">Pricing</a></li>
         <li><a href="/faq.html">FAQ</a></li>
         <li><a href="/blog.html">Blog</a></li>
-        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Download</a></li>
+        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
       </ul>
-      <button class="nav-toggle">☰</button>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
 
@@ -603,7 +614,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
             <ul>
               <li><a href="/#features">Features</a></li>
               <li><a href="/#pricing">Pricing</a></li>
-              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Download</a></li>
+              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -633,8 +644,11 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
 
   <script>
     // Mobile menu toggle
-    document.querySelector('.nav-toggle').addEventListener('click', () => {
-      document.querySelector('.nav-links').classList.toggle('open');
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
     });
 
     // Category filtering
