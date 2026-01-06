@@ -179,7 +179,7 @@ const blogPostTemplate = (post) => `<!DOCTYPE html>
       <ul class="nav-links">
         <li><a href="/#features">Features</a></li>
         <li><a href="/#pricing">Pricing</a></li>
-        <li><a href="/help.html">Help</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
         <li><a href="/blog.html">Blog</a></li>
         <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Download</a></li>
       </ul>
@@ -220,6 +220,7 @@ const blogPostTemplate = (post) => `<!DOCTYPE html>
           <div class="footer-col">
             <h4>Support</h4>
             <ul>
+              <li><a href="/faq.html">FAQ</a></li>
               <li><a href="/help.html">Help Center</a></li>
               <li><a href="/professionals.html">For Legal & Family Professionals</a></li>
               <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
@@ -472,7 +473,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
       <ul class="nav-links">
         <li><a href="/#features">Features</a></li>
         <li><a href="/#pricing">Pricing</a></li>
-        <li><a href="/help.html">Help</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
         <li><a href="/blog.html">Blog</a></li>
         <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Download</a></li>
       </ul>
@@ -541,6 +542,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
           <div class="footer-col">
             <h4>Support</h4>
             <ul>
+              <li><a href="/faq.html">FAQ</a></li>
               <li><a href="/help.html">Help Center</a></li>
               <li><a href="/professionals.html">For Legal & Family Professionals</a></li>
               <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
@@ -624,6 +626,12 @@ async function build() {
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/faq.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/help.html</loc>
