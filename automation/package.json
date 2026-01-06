@@ -1,0 +1,14 @@
+{
+  "name": "clearly-blog-automation",
+  "version": "1.0.0",
+  "description": "Automated blog post generation for Clearly",
+  "main": "generate-post.js",
+  "scripts": {
+    "new": "node generate-post.js new",
+    "backfill": "node generate-post.js backfill"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.52.0",
+    "@notionhq/client": "^2.2.15"
+  }
+}
