@@ -183,6 +183,50 @@
     @media (max-width: 768px) {
       .blog-grid { grid-template-columns: 1fr; }
     }
+    /* Category Filter */
+    .blog-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+      justify-content: center;
+    }
+    .filter-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+    /* Category Chip */
+    .blog-card-category {
+      display: inline-block;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .blog-card.hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -219,55 +263,156 @@
   <section class="blog-section">
     <div class="container">
       
+      <div class="blog-filters">
+        <button class="filter-btn active" data-category="all">All</button>
+        
+        <button class="filter-btn" data-category="Your Children">Your Children</button>
+        
+        <button class="filter-btn" data-category="Co-Parenting Basics">Co-Parenting Basics</button>
+        
+        <button class="filter-btn" data-category="Communication">Communication</button>
+        
+      </div>
       <div class="blog-grid">
         
-        <article class="blog-card">
-          <div class="blog-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-          </div>
-          <div class="blog-card-date">January 6, 2026</div>
-          <h3><a href="/blog/discussions-how-non-emotional.html">How to Move Emotional Discussions Through to Resolution: A Harvard Negotiation Project Framework</a></h3>
-          <p>The Harvard Negotiation Project's framework helps navigate emotional discussions by separating people from problems, focusing on underlying interests rather than positions, generating creative options for mutual gain, and using objective criteria to reach fair resolutions. By managing emotions constructively and building agreement incrementally, even the most challenging conversations can move from conflict to productive resolution while preserving relationships.</p>
-          <a href="/blog/discussions-how-non-emotional.html" class="blog-card-link">
+        <article class="blog-card" data-category="Your Children">
+          <span class="blog-card-category">Your Children</span>
+          <div class="blog-card-date">January 14, 2026</div>
+          <h3><a href="/blog/children-fear-abandonment-divorce.html">Fear of Abandonment: What Your Child Won't Say But Is Feeling</a></h3>
+          <p>Children of divorced parents often develop abandonment fears when exposed to parental conflict. Learn the signs.</p>
+          <a href="/blog/children-fear-abandonment-divorce.html" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
         </article>
         
-        <article class="blog-card">
-          <div class="blog-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-          </div>
-          <div class="blog-card-date">January 3, 2026</div>
-          <h3><a href="/blog/kids-first.html">The Importance of Putting Kids First in Co-Parenting</a></h3>
-          <p>Successful co-parenting requires parents to prioritize their children's well-being above personal conflicts by maintaining consistent routines, communicating respectfully, and never speaking negatively about each other. By keeping children at the center of every decision, parents can provide the stability and security needed for their children to thrive despite family changes.</p>
-          <a href="/blog/kids-first.html" class="blog-card-link">
+        <article class="blog-card" data-category="Co-Parenting Basics">
+          <span class="blog-card-category">Co-Parenting Basics</span>
+          <div class="blog-card-date">January 5, 2026</div>
+          <h3><a href="/blog/creating-first-co-parenting-plan-essential-elements.html">Creating Your First Co-Parenting Plan: Essential Elements Every Parent Needs</a></h3>
+          <p>Learn the must-have components of an effective co-parenting plan, from custody schedules to decision-making frameworks that protect your family.</p>
+          <a href="/blog/creating-first-co-parenting-plan-essential-elements.html" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
         </article>
         
-        <article class="blog-card">
-          <div class="blog-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-          </div>
-          <div class="blog-card-date">December 7, 2025</div>
-          <h3><a href="/blog/what-matters.html">Finding What Really Matters: A Guide for Co-Parents to Navigate Difficult Conversations</a></h3>
-          <p>To navigate difficult co-parenting conversations, focus on what truly matters—your child's well-being—by setting aside emotions, identifying the core issue, and working together on solutions rather than blame.</p>
-          <a href="/blog/what-matters.html" class="blog-card-link">
+        <article class="blog-card" data-category="Your Children">
+          <span class="blog-card-category">Your Children</span>
+          <div class="blog-card-date">December 31, 2025</div>
+          <h3><a href="/blog/children-wellbeing-divorce-research.html">The #1 Predictor of Children's Wellbeing After Divorce</a></h3>
+          <p>It's not the divorce itself that determines how children fare—research points to one factor that matters most.</p>
+          <a href="/blog/children-wellbeing-divorce-research.html" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
         </article>
         
-        <article class="blog-card">
-          <div class="blog-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-          </div>
-          <div class="blog-card-date">November 13, 2025</div>
-          <h3><a href="/blog/words-to-say.html">The One Word to Drop (and the One Word to Embrace) for Healthier Co-Parenting</a></h3>
-          <p>Stop trying to make co-parenting &quot;fair&quot; by keeping score, and instead embrace flexibility by responding to your children's needs in the moment—this shift transforms co-parenting from an adversarial transaction into a collaborative partnership that benefits everyone.</p>
-          <a href="/blog/words-to-say.html" class="blog-card-link">
+        <article class="blog-card" data-category="Your Children">
+          <span class="blog-card-category">Your Children</span>
+          <div class="blog-card-date">December 14, 2025</div>
+          <h3><a href="/blog/co-parenting-communication-channels.html">Beyond Text: Choosing the Right Communication Channel</a></h3>
+          <p>Email, text, apps, phone calls—each has its place. Learn when to use which channel for different conversations.</p>
+          <a href="/blog/co-parenting-communication-channels.html" class="blog-card-link">
+            Read article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </article>
+        
+        <article class="blog-card" data-category="Co-Parenting Basics">
+          <span class="blog-card-category">Co-Parenting Basics</span>
+          <div class="blog-card-date">November 30, 2025</div>
+          <h3><a href="/blog/counter-parenting-signs-solutions.html">When 'Co-Parenting' Becomes 'Counter-Parenting': Recognizing the Difference</a></h3>
+          <p>Sometimes what looks like co-parenting is actually working against your child's best interests. Learn to recognize the warning signs.</p>
+          <a href="/blog/counter-parenting-signs-solutions.html" class="blog-card-link">
+            Read article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </article>
+        
+        <article class="blog-card" data-category="Communication">
+          <span class="blog-card-category">Communication</span>
+          <div class="blog-card-date">November 14, 2025</div>
+          <h3><a href="/blog/gray-rock-method-coparenting.html">The Gray Rock Method: When Minimal Response Is Best</a></h3>
+          <p>Sometimes the most powerful response is the most boring one. Learn how Gray Rock defuses high-conflict situations.</p>
+          <a href="/blog/gray-rock-method-coparenting.html" class="blog-card-link">
+            Read article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </article>
+        
+        <article class="blog-card" data-category="Communication">
+          <span class="blog-card-category">Communication</span>
+          <div class="blog-card-date">October 31, 2025</div>
+          <h3><a href="/blog/co-parenting-communication-boundaries.html">Setting 'Office Hours' for Co-Parent Communication</a></h3>
+          <p>You don't have to be available 24/7. Learn how communication boundaries reduce stress and improve your co-parenting.</p>
+          <a href="/blog/co-parenting-communication-boundaries.html" class="blog-card-link">
+            Read article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </article>
+        
+        <article class="blog-card" data-category="Co-Parenting Basics">
+          <span class="blog-card-category">Co-Parenting Basics</span>
+          <div class="blog-card-date">October 14, 2025</div>
+          <h3><a href="/blog/mindset-shift-divorced-coparents.html">From Married Co-Parents to Divorced Co-Parents: The Mindset Shift</a></h3>
+          <p>The hardest part of co-parenting after divorce isn't logistics—it's changing how you think about your relationship.</p>
+          <a href="/blog/mindset-shift-divorced-coparents.html" class="blog-card-link">
+            Read article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </article>
+        
+        <article class="blog-card" data-category="Communication">
+          <span class="blog-card-category">Communication</span>
+          <div class="blog-card-date">September 30, 2025</div>
+          <h3><a href="/blog/biff-method-co-parenting-communication.html">The BIFF Method: Brief, Informative, Friendly, and Firm Communication</a></h3>
+          <p>Master the gold standard for high-conflict co-parenting communication. BIFF responses keep conversations productive.</p>
+          <a href="/blog/biff-method-co-parenting-communication.html" class="blog-card-link">
+            Read article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </article>
+        
+        <article class="blog-card" data-category="Communication">
+          <span class="blog-card-category">Communication</span>
+          <div class="blog-card-date">September 14, 2025</div>
+          <h3><a href="/blog/tone-in-text-co-parenting.html">Why Tone Gets Lost in Text—And What to Do About It</a></h3>
+          <p>That message you thought was neutral? Your co-parent read it completely differently. Here's why and what to do.</p>
+          <a href="/blog/tone-in-text-co-parenting.html" class="blog-card-link">
+            Read article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </article>
+        
+        <article class="blog-card" data-category="Communication">
+          <span class="blog-card-category">Communication</span>
+          <div class="blog-card-date">August 31, 2025</div>
+          <h3><a href="/blog/co-parenting-documentation-guide.html">Documentation That Protects: What to Record and Why</a></h3>
+          <p>Good documentation isn't about building a case—it's about creating clarity and accountability. Learn what to track.</p>
+          <a href="/blog/co-parenting-documentation-guide.html" class="blog-card-link">
+            Read article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </article>
+        
+        <article class="blog-card" data-category="Co-Parenting Basics">
+          <span class="blog-card-category">Co-Parenting Basics</span>
+          <div class="blog-card-date">August 14, 2025</div>
+          <h3><a href="/blog/co-parenting-spectrum-finding-balance.html">The Spectrum of Co-Parenting: Finding Your Sweet Spot</a></h3>
+          <p>Most families aren't fully cooperative or completely parallel. Discover how to find the right balance for your unique situation.</p>
+          <a href="/blog/co-parenting-spectrum-finding-balance.html" class="blog-card-link">
+            Read article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </article>
+        
+        <article class="blog-card" data-category="Co-Parenting Basics">
+          <span class="blog-card-category">Co-Parenting Basics</span>
+          <div class="blog-card-date">July 31, 2025</div>
+          <h3><a href="/blog/co-parenting-vs-parallel-parenting.html">Co-Parenting vs. Parallel Parenting: Which Approach Fits Your Situation?</a></h3>
+          <p>Not all post-divorce parenting looks the same. Learn the key differences between cooperative co-parenting and low-contact parallel parenting.</p>
+          <a href="/blog/co-parenting-vs-parallel-parenting.html" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -321,6 +466,28 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Category filtering
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.dataset.category;
+
+        // Update active button
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter cards
+        document.querySelectorAll('.blog-card').forEach(card => {
+          if (category === 'all' || card.dataset.category === category) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>

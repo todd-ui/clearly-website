@@ -106,6 +106,8 @@ function getProperty(page, name) {
       return prop.date?.start || '';
     case 'checkbox':
       return prop.checkbox;
+    case 'select':
+      return prop.select?.name || '';
     default:
       return '';
   }
@@ -460,6 +462,50 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
     @media (max-width: 768px) {
       .blog-grid { grid-template-columns: 1fr; }
     }
+    /* Category Filter */
+    .blog-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 32px;
+      justify-content: center;
+    }
+    .filter-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+    }
+    .filter-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+    /* Category Chip */
+    .blog-card-category {
+      display: inline-block;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .blog-card.hidden {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -496,12 +542,16 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
   <section class="blog-section">
     <div class="container">
       ${posts.length > 0 ? `
+      <div class="blog-filters">
+        <button class="filter-btn active" data-category="all">All</button>
+        ${[...new Set(posts.map(p => p.category).filter(c => c))].map(cat => `
+        <button class="filter-btn" data-category="${escapeHtml(cat)}">${escapeHtml(cat)}</button>
+        `).join('')}
+      </div>
       <div class="blog-grid">
         ${posts.map(post => `
-        <article class="blog-card">
-          <div class="blog-card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-          </div>
+        <article class="blog-card" data-category="${escapeHtml(post.category)}">
+          ${post.category ? `<span class="blog-card-category">${escapeHtml(post.category)}</span>` : ''}
           <div class="blog-card-date">${post.date}</div>
           <h3><a href="/blog/${post.slug}.html">${escapeHtml(post.title)}</a></h3>
           <p>${escapeHtml(post.description)}</p>
@@ -564,6 +614,28 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
     </div>
   </footer>
 
+  <script>
+    // Category filtering
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const category = btn.dataset.category;
+
+        // Update active button
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter cards
+        document.querySelectorAll('.blog-card').forEach(card => {
+          if (category === 'all' || card.dataset.category === category) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+  </script>
+
 </body>
 </html>`;
 
@@ -589,15 +661,16 @@ async function build() {
     const rawDate = getProperty(page, 'Date');
     const date = formatDate(rawDate);
     const dateISO = rawDate || new Date().toISOString().split('T')[0];
+    const category = getProperty(page, 'Category') || '';
 
-    console.log(`Processing: ${title}`);
+    console.log(`Processing: ${title} [${category || 'No category'}]`);
 
     // Get page content
     const blocks = await getPageContent(page.id);
     let content = blocksToHtml(blocks);
     content = wrapListItems(content);
 
-    const post = { title, slug, description, date, dateISO, content };
+    const post = { title, slug, description, date, dateISO, content, category };
     processedPosts.push(post);
 
     // Write individual post page
