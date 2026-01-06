@@ -1,0 +1,44 @@
+name: Publish Blog Post
+
+on:
+  schedule:
+    - cron: '0 9 1 * *'
+    - cron: '0 9 15 * *'
+  
+  workflow_dispatch:
+    inputs:
+      command:
+        description: 'Command to run'
+        required: true
+        default: 'new'
+        type: choice
+        options:
+          - new
+          - backfill
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Install dependencies
+        run: |
+          cd automation
+          npm install
+      
+      - name: Run blog generator
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          cd automation
+          node generate-post.js ${{ github.event.inputs.command || 'new' }}
