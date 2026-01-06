@@ -335,11 +335,10 @@ async function createNotionPage(topic, article, publishDate) {
   return page;
 }
 
-// Determine which category to use next (rotates through categories)
+// Randomly select a category
 async function getNextCategory(existingPosts) {
-  const totalPosts = existingPosts.length;
-  const categoryIndex = totalPosts % CATEGORIES.length;
-  return CATEGORIES[categoryIndex];
+  const randomIndex = Math.floor(Math.random() * CATEGORIES.length);
+  return CATEGORIES[randomIndex];
 }
 
 // Main function: Generate and publish a new article
