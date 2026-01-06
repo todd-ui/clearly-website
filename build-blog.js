@@ -221,7 +221,7 @@ const blogPostTemplate = (post) => `<!DOCTYPE html>
             <h4>Support</h4>
             <ul>
               <li><a href="/help.html">Help Center</a></li>
-              <li><a href="/professionals.html">For Professionals</a></li>
+              <li><a href="/professionals.html">For Legal & Family Professionals</a></li>
               <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
             </ul>
           </div>
@@ -291,6 +291,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Common Ground - Co-Parenting Tips & Advice">
   <meta name="twitter:description" content="Real topics, practical advice, and perspectives for co-parents.">
+  <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
   <meta name="robots" content="index, follow">
   <meta name="keywords" content="co-parenting tips, custody advice, shared parenting, divorce resources, co-parent communication">
   <link rel="stylesheet" href="styles.css">
@@ -541,7 +542,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
             <h4>Support</h4>
             <ul>
               <li><a href="/help.html">Help Center</a></li>
-              <li><a href="/professionals.html">For Professionals</a></li>
+              <li><a href="/professionals.html">For Legal & Family Professionals</a></li>
               <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
             </ul>
           </div>
