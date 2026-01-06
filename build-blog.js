@@ -221,6 +221,7 @@ const blogPostTemplate = (post) => `<!DOCTYPE html>
             <h4>Support</h4>
             <ul>
               <li><a href="/help.html">Help Center</a></li>
+              <li><a href="/professionals.html">For Professionals</a></li>
               <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
             </ul>
           </div>
@@ -540,6 +541,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
             <h4>Support</h4>
             <ul>
               <li><a href="/help.html">Help Center</a></li>
+              <li><a href="/professionals.html">For Professionals</a></li>
               <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
             </ul>
           </div>
@@ -639,6 +641,12 @@ async function build() {
     <lastmod>${today}</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/professionals.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 ${processedPosts.map(post => `  <url>
     <loc>https://getclearly.app/blog/${post.slug}.html</loc>
