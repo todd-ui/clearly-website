@@ -131,7 +131,7 @@ function generateSlug(title, existingSlug) {
     .replace(/^-|-$/g, '');
 }
 
-const blogPostTemplate = (post) => `<!DOCTYPE html>
+const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -176,6 +176,23 @@ const blogPostTemplate = (post) => `<!DOCTYPE html>
     .blog-post-content a { color: var(--primary); }
     .back-link { display: inline-block; margin-bottom: 32px; color: var(--primary); font-weight: 500; }
     .back-link:hover { text-decoration: none; }
+
+    /* Related Articles */
+    .related-articles { background: var(--surface); padding: 80px 0; border-top: 1px solid var(--border); }
+    .related-articles h2 { font-size: 28px; font-weight: 700; margin-bottom: 32px; text-align: center; }
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 960px; margin: 0 auto; }
+    .related-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
+    .related-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); text-decoration: none; }
+    .related-card h3 { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
+    .related-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin: 0; }
+    .related-category { display: inline-block; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 20px; margin-bottom: 12px; background: rgba(13, 130, 104, 0.1); color: #0d9373; }
+    .related-category[data-cat="Communication"] { background: rgba(59, 130, 246, 0.1); color: #2563eb; }
+    .related-category[data-cat="Co-Parenting Basics"] { background: rgba(13, 147, 115, 0.1); color: #0d9373; }
+    .related-category[data-cat="Your Children"] { background: rgba(168, 85, 247, 0.1); color: #9333ea; }
+    @media (max-width: 768px) {
+      .related-grid { grid-template-columns: 1fr; }
+      .related-articles { padding: 60px 24px; }
+    }
   </style>
 </head>
 <body>
@@ -211,6 +228,23 @@ const blogPostTemplate = (post) => `<!DOCTYPE html>
       ${post.content}
     </div>
   </article>
+
+  ${relatedPosts.length > 0 ? `
+  <section class="related-articles">
+    <div class="container">
+      <h2>Related Articles</h2>
+      <div class="related-grid">
+        ${relatedPosts.map(p => `
+        <a href="/blog/${p.slug}.html" class="related-card">
+          <span class="related-category" data-cat="${p.category}">${p.category || 'Article'}</span>
+          <h3>${escapeHtml(p.title)}</h3>
+          <p>${escapeHtml(p.description.substring(0, 120))}${p.description.length > 120 ? '...' : ''}</p>
+        </a>
+        `).join('')}
+      </div>
+    </div>
+  </section>
+  ` : ''}
 
   <footer class="footer">
     <div class="container">
@@ -724,11 +758,18 @@ async function build() {
 
     const post = { title, slug, description, date, dateISO, content, category };
     processedPosts.push(post);
+  }
 
-    // Write individual post page
-    const postHtml = blogPostTemplate(post);
-    fs.writeFileSync(path.join(blogDir, `${slug}.html`), postHtml);
-    console.log(`  -> blog/${slug}.html`);
+  // Write individual post pages with related articles
+  for (const post of processedPosts) {
+    // Get 3 related posts (same category first, then others, excluding current)
+    const sameCategory = processedPosts.filter(p => p.slug !== post.slug && p.category === post.category);
+    const otherPosts = processedPosts.filter(p => p.slug !== post.slug && p.category !== post.category);
+    const relatedPosts = [...sameCategory, ...otherPosts].slice(0, 3);
+
+    const postHtml = blogPostTemplate(post, relatedPosts);
+    fs.writeFileSync(path.join(blogDir, `${post.slug}.html`), postHtml);
+    console.log(`  -> blog/${post.slug}.html`);
   }
 
   // Write blog listing page
