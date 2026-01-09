@@ -39,152 +39,6 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
   <link rel="apple-touch-icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
-
-  <style>
-    /* Pre-launch specific styles */
-    .hero-prelaunch {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 120px 0 80px;
-      background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%);
-    }
-    .hero-prelaunch .hero-container {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-    .hero-prelaunch h1 {
-      font-size: 56px;
-      line-height: 1.1;
-      margin-bottom: 24px;
-    }
-    .hero-prelaunch .hero-subtitle {
-      font-size: 20px;
-      color: var(--text-secondary);
-      margin-bottom: 16px;
-      line-height: 1.6;
-    }
-    .coming-badge {
-      display: inline-block;
-      background: var(--primary-soft);
-      color: var(--primary);
-      padding: 8px 20px;
-      border-radius: 100px;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 32px;
-      letter-spacing: 0.5px;
-    }
-
-    /* Email signup form */
-    .signup-form {
-      margin-top: 40px;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .signup-form form {
-      display: flex;
-      gap: 12px;
-    }
-    .signup-form input[type="email"] {
-      flex: 1;
-      padding: 16px 20px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      font-size: 16px;
-      background: var(--surface);
-    }
-    .signup-form input[type="email"]:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px var(--primary-soft);
-    }
-    .signup-form button {
-      padding: 16px 28px;
-      white-space: nowrap;
-    }
-    .signup-note {
-      font-size: 13px;
-      color: var(--text-muted);
-      margin-top: 12px;
-    }
-    .signup-success {
-      background: var(--primary-soft);
-      border: 1px solid var(--primary);
-      border-radius: 12px;
-      padding: 20px;
-      text-align: center;
-      display: none;
-    }
-    .signup-success.visible {
-      display: block;
-    }
-    .signup-success h4 {
-      color: var(--primary);
-      margin-bottom: 4px;
-    }
-
-    /* Preview section */
-    .preview-section {
-      padding: 80px 0;
-      background: var(--surface);
-    }
-    .preview-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    .preview-item {
-      text-align: center;
-      padding: 32px 24px;
-      background: var(--bg);
-      border-radius: 20px;
-      border: 1px solid var(--border);
-    }
-    .preview-icon {
-      width: 56px;
-      height: 56px;
-      background: var(--primary-soft);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 20px;
-      color: var(--primary);
-    }
-    .preview-item h3 {
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
-    .preview-item p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-    @media (max-width: 768px) {
-      .hero-prelaunch h1 {
-        font-size: 36px;
-      }
-      .hero-prelaunch .hero-subtitle {
-        font-size: 17px;
-      }
-      .signup-form form {
-        flex-direction: column;
-      }
-      .signup-form button {
-        width: 100%;
-      }
-      .preview-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-    }
-  </style>
 </head>
 <body>
 
@@ -210,51 +64,50 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero-prelaunch">
-    <div class="container hero-container fade-in">
-      <span class="coming-badge">Coming Spring 2026</span>
-      <h1>A new way to<br>co-parent.</h1>
-      <p class="hero-subtitle">We're building something different — a co-parenting app designed from the ground up to reduce conflict and keep the focus on your kids.</p>
-      <p class="hero-subtitle">Shared schedules. Expense tracking. And tools that actually help you communicate.</p>
-
-      <div class="signup-form" id="notify">
-        <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="waitlistForm">
-          <input type="hidden" name="form-name" value="waitlist">
-          <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
-          <input type="email" name="email" placeholder="Enter your email" required>
-          <button type="submit" class="btn btn-primary">Stay in the Loop</button>
-        </form>
-        <p class="signup-note">Be the first to know when we launch. No spam, ever.</p>
-        <div class="signup-success" id="signupSuccess">
-          <h4>You're on the list!</h4>
-          <p>We'll let you know as soon as Clearly is ready.</p>
+  <section class="hero">
+    <div class="container hero-container">
+      <div class="hero-content fade-in">
+        <div style="display: inline-block; background: #E6F5F1; color: #0D8268; padding: 8px 20px; border-radius: 100px; font-size: 14px; font-weight: 600; margin-bottom: 24px;">Coming Spring 2026</div>
+        <h1>A new way to<br>co-parent.</h1>
+        <p>We're building something different — a co-parenting app designed from the ground up to reduce conflict and keep the focus on your kids.</p>
+        <div class="hero-buttons" id="notify">
+          <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <input type="hidden" name="form-name" value="waitlist">
+            <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
+            <input type="email" name="email" placeholder="Enter your email" required style="flex: 1; min-width: 200px; padding: 14px 18px; border: 1px solid #E8E6E3; border-radius: 10px; font-size: 16px; background: #FAFBFC;">
+            <button type="submit" class="btn btn-primary">Stay in the Loop</button>
+          </form>
         </div>
+        <p class="hero-note">Be the first to know when we launch. No spam, ever.</p>
+      </div>
+      <div class="hero-phone fade-in fade-in-delay">
+        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly App" style="border-radius: 0; box-shadow: none; width: 240px; margin: 0 auto;">
       </div>
     </div>
   </section>
 
-  <!-- What's Coming Preview -->
-  <section class="preview-section">
+  <!-- Features Overview -->
+  <section class="features" id="features">
     <div class="container">
-      <h2 class="section-title fade-in" style="margin-bottom: 48px;">What we're building</h2>
-      <div class="preview-grid">
-        <div class="preview-item fade-in">
-          <div class="preview-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+      <h2 class="section-title fade-in">What we're building</h2>
+      <div class="features-grid">
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
           </div>
           <h3>Shared Schedules</h3>
           <p>One calendar both parents can see. Custody patterns, holidays, and swaps — always in sync.</p>
         </div>
-        <div class="preview-item fade-in">
-          <div class="preview-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
           </div>
           <h3>Expense Tracking</h3>
           <p>Log expenses, split costs automatically, and track reimbursements. No more spreadsheets.</p>
         </div>
-        <div class="preview-item fade-in">
-          <div class="preview-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"></path><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+        <div class="feature-card fade-in">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
           </div>
           <h3>Better Communication</h3>
           <p>Tools designed to keep conversations productive and focused on what matters most.</p>
@@ -263,7 +116,7 @@
     </div>
   </section>
 
-  <!-- Why Clearly -->
+  <!-- Showcase: Our Mission -->
   <section class="showcase showcase-alt">
     <div class="container">
       <div class="showcase-content fade-in">
@@ -273,17 +126,17 @@
         <p>We're taking a different approach — building tools that actually help reduce conflict, not just document it. Because at the end of the day, what matters most is the kids.</p>
       </div>
       <div class="showcase-image fade-in">
-        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" style="max-width: 200px; margin: 0 auto; display: block;">
+        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" style="max-width: 200px; margin: 0 auto; display: block; border-radius: 0; box-shadow: none;">
       </div>
     </div>
   </section>
 
-  <!-- Resources Section -->
-  <section class="features" style="padding: 80px 0;">
+  <!-- Free Resources -->
+  <section class="features">
     <div class="container">
       <h2 class="section-title fade-in">Free resources while you wait</h2>
-      <p style="text-align: center; color: var(--text-secondary); margin-bottom: 48px; max-width: 600px; margin-left: auto; margin-right: auto;" class="fade-in">We've built helpful tools for co-parents — available now, completely free.</p>
-      <div class="features-grid" style="max-width: 800px; margin: 0 auto;">
+      <p style="text-align: center; color: #5C5856; margin-top: -40px; margin-bottom: 48px; max-width: 600px; margin-left: auto; margin-right: auto;" class="fade-in">We've built helpful tools for co-parents — available now, completely free.</p>
+      <div class="features-grid" style="max-width: 800px; margin: 0 auto; grid-template-columns: repeat(2, 1fr);">
         <a href="/calculators/" class="feature-card fade-in" style="text-decoration: none; color: inherit;">
           <div class="feature-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="10" x2="10" y2="10"></line><line x1="14" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="10" y2="14"></line><line x1="14" y1="14" x2="16" y2="14"></line><line x1="8" y1="18" x2="16" y2="18"></line></svg>
@@ -302,7 +155,7 @@
     </div>
   </section>
 
-  <!-- Final CTA -->
+  <!-- CTA Section -->
   <section class="cta">
     <div class="cta-pattern"></div>
     <div class="container fade-in">
@@ -310,15 +163,13 @@
         <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="cta-icon">
         <h2>Be the first to know</h2>
         <p>Join our waitlist and we'll notify you the moment Clearly is ready to download.</p>
-        <div class="signup-form" style="margin-top: 32px;">
-          <form name="waitlist-footer" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="waitlistFormFooter">
-            <input type="hidden" name="form-name" value="waitlist-footer">
-            <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
-            <input type="email" name="email" placeholder="Enter your email" required>
-            <button type="submit" class="btn btn-primary" style="background: white; color: var(--primary);">Stay in the Loop</button>
-          </form>
-          <p class="signup-note" style="color: rgba(255,255,255,0.7);">No spam. Unsubscribe anytime.</p>
-        </div>
+        <form name="waitlist-footer" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display: flex; gap: 12px; max-width: 420px; margin: 32px auto 0; flex-wrap: wrap; justify-content: center;">
+          <input type="hidden" name="form-name" value="waitlist-footer">
+          <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
+          <input type="email" name="email" placeholder="Enter your email" required style="flex: 1; min-width: 200px; padding: 14px 18px; border: 1px solid rgba(255,255,255,0.3); border-radius: 10px; font-size: 16px; background: rgba(255,255,255,0.1); color: white;">
+          <button type="submit" class="btn" style="padding: 14px 24px; background: white; color: #0D8268; border-radius: 10px; font-weight: 600;">Stay in the Loop</button>
+        </form>
+        <p style="font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 12px;">No spam. Unsubscribe anytime.</p>
       </div>
     </div>
   </section>
@@ -396,6 +247,10 @@
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(form);
+        const button = form.querySelector('button[type="submit"]');
+        const originalText = button.textContent;
+        button.textContent = 'Joining...';
+        button.disabled = true;
 
         try {
           await fetch('/', {
@@ -403,17 +258,10 @@
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams(formData).toString()
           });
-
-          // Show success message
-          form.style.display = 'none';
-          const successEl = form.parentElement.querySelector('.signup-success');
-          if (successEl) {
-            successEl.classList.add('visible');
-          } else {
-            // For footer form, just show inline message
-            form.outerHTML = '<p style="color: var(--primary); font-weight: 600;">You\'re on the list! We\'ll be in touch.</p>';
-          }
+          form.innerHTML = '<p style="color: #0D8268; font-weight: 600; padding: 14px 0;">You\'re on the list! We\'ll be in touch.</p>';
         } catch (error) {
+          button.textContent = originalText;
+          button.disabled = false;
           alert('Something went wrong. Please try again.');
         }
       });
