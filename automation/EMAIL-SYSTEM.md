@@ -60,10 +60,12 @@ Until verified, you can only send to your own email address.
 waitlist (
   id UUID PRIMARY KEY,
   email TEXT UNIQUE,
-  source TEXT,          -- 'homepage-hero', 'faq', 'professionals', etc.
+  source TEXT,                  -- 'homepage-hero', 'faq', 'professionals', etc.
   created_at TIMESTAMPTZ,
   welcome_email_sent BOOLEAN,
-  welcome_email_sent_at TIMESTAMPTZ
+  welcome_email_sent_at TIMESTAMPTZ,
+  launch_email_sent BOOLEAN,    -- Tracks launch announcement
+  launch_email_sent_at TIMESTAMPTZ
 )
 ```
 
@@ -88,18 +90,35 @@ COPY (SELECT * FROM waitlist) TO '/tmp/waitlist.csv' CSV HEADER;
 
 ## Sending Launch Announcement
 
-When ready to launch, run:
+When ready to launch:
 
+### 1. Apply the migration (one time)
+```bash
+# Run this SQL in Supabase Dashboard → SQL Editor:
+ALTER TABLE waitlist
+ADD COLUMN IF NOT EXISTS launch_email_sent BOOLEAN DEFAULT NULL,
+ADD COLUMN IF NOT EXISTS launch_email_sent_at TIMESTAMPTZ DEFAULT NULL;
+```
+
+### 2. Preview with dry run
 ```bash
 cd automation
+SUPABASE_SERVICE_KEY=your_key RESEND_API_KEY=your_key node send-launch-email.js --dry-run
+```
+
+### 3. Send for real
+```bash
 SUPABASE_SERVICE_KEY=your_key RESEND_API_KEY=your_key node send-launch-email.js
 ```
 
 The script will:
-1. Fetch all subscribers
-2. Show you how many will receive emails
-3. Wait 5 seconds (cancel with Ctrl+C)
-4. Send emails with rate limiting
+1. Fetch subscribers who haven't received the launch email yet
+2. Show you a preview of who will receive emails
+3. Wait 10 seconds (cancel with Ctrl+C)
+4. Send emails with rate limiting (10/second)
+5. Mark each subscriber as having received the launch email
+
+**Safe to run multiple times** - it only sends to people who haven't received it yet.
 
 ## Costs
 

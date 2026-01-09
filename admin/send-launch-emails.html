@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send Launch Emails | Clearly Admin</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #FAFAF9;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 500px;
+      width: 100%;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+      border: 1px solid #E8E7E4;
+    }
+    h1 {
+      font-size: 24px;
+      color: #1A1917;
+      margin-bottom: 8px;
+    }
+    .subtitle {
+      color: #5C5856;
+      margin-bottom: 32px;
+    }
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 16px 24px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 12px;
+      transition: all 0.2s;
+    }
+    .btn-preview {
+      background: #E6F5F1;
+      color: #0D8268;
+      border: 1px solid #A8DFD0;
+    }
+    .btn-preview:hover {
+      background: #d4ede6;
+    }
+    .btn-send {
+      background: #0D8268;
+      color: white;
+    }
+    .btn-send:hover {
+      background: #0a6b56;
+    }
+    .btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .result {
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: 12px;
+      display: none;
+    }
+    .result.show { display: block; }
+    .result.success {
+      background: #E6F5F1;
+      border: 1px solid #A8DFD0;
+      color: #0a6b56;
+    }
+    .result.error {
+      background: #FEF2F2;
+      border: 1px solid #FECACA;
+      color: #991B1B;
+    }
+    .result pre {
+      margin-top: 12px;
+      font-size: 13px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .warning {
+      background: #FEF3C7;
+      border: 1px solid #F59E0B;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 24px;
+      font-size: 14px;
+      color: #92400E;
+    }
+    .logo {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="logo">
+    <h1>Send Launch Emails</h1>
+    <p class="subtitle">Send the "Clearly is Live!" announcement to all waitlist subscribers.</p>
+
+    <div class="warning">
+      <strong>Warning:</strong> The "Send Emails" button will send real emails to all waitlist subscribers who haven't received the launch email yet.
+    </div>
+
+    <button class="btn btn-preview" onclick="preview()">Preview (See who will receive)</button>
+    <button class="btn btn-send" onclick="sendEmails()">Send Emails</button>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    const FUNCTION_URL = 'https://dwncravjhkbclbuzijra.supabase.co/functions/v1/send-launch-emails';
+
+    async function preview() {
+      const btn = document.querySelector('.btn-preview');
+      const result = document.getElementById('result');
+
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+
+      try {
+        const response = await fetch(FUNCTION_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({})
+        });
+        const data = await response.json();
+
+        result.className = 'result show success';
+        result.innerHTML = `
+          <strong>${data.message || 'Preview'}</strong>
+          <pre>${JSON.stringify(data, null, 2)}</pre>
+        `;
+      } catch (error) {
+        result.className = 'result show error';
+        result.innerHTML = `<strong>Error:</strong> ${error.message}`;
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Preview (See who will receive)';
+    }
+
+    async function sendEmails() {
+      const btn = document.querySelector('.btn-send');
+      const result = document.getElementById('result');
+
+      if (!confirm('Are you sure you want to send launch emails to ALL waitlist subscribers?')) {
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Sending...';
+
+      try {
+        const response = await fetch(FUNCTION_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ confirm: true })
+        });
+        const data = await response.json();
+
+        result.className = 'result show success';
+        result.innerHTML = `
+          <strong>${data.message || 'Complete'}</strong>
+          <pre>${JSON.stringify(data, null, 2)}</pre>
+        `;
+      } catch (error) {
+        result.className = 'result show error';
+        result.innerHTML = `<strong>Error:</strong> ${error.message}`;
+      }
+
+      btn.disabled = false;
+      btn.textContent = 'Send Emails';
+    }
+  </script>
+</body>
+</html>
