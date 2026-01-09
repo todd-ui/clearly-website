@@ -66,6 +66,12 @@
     .calc-info-box { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
     .calc-info-box h4 { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
     .calc-info-box p { font-size: 14px; color: var(--text-secondary); margin: 0; }
+    .calc-toggle { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+    .calc-toggle-switch { position: relative; width: 48px; height: 28px; background: var(--border); border-radius: 14px; cursor: pointer; transition: background 0.2s; }
+    .calc-toggle-switch.active { background: var(--primary); }
+    .calc-toggle-switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 24px; height: 24px; background: white; border-radius: 50%; transition: transform 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
+    .calc-toggle-switch.active::after { transform: translateX(20px); }
+    .calc-toggle label { font-size: 14px; color: var(--text-secondary); cursor: pointer; }
     @media (max-width: 768px) {
       .calc-page-header h1 { font-size: 28px; }
       .income-grid { grid-template-columns: 1fr; }
@@ -166,6 +172,23 @@
               <label>Monthly Health Insurance (children)</label>
               <div class="calc-input-prefix"><input type="number" class="calc-input" id="healthIns" placeholder="0"></div>
             </div>
+          </div>
+          <div class="calc-toggle" style="margin-top: 20px;">
+            <div class="calc-toggle-switch" id="sharedToggle" onclick="toggleShared()"></div>
+            <label onclick="toggleShared()">Substantial time-sharing (non-custodial parent has 20%+ overnights)</label>
+          </div>
+          <div id="sharedFields" style="display: none; margin-top: 20px;">
+            <div class="income-grid">
+              <div class="calc-field">
+                <label>Parent 1's Overnights per Year</label>
+                <input type="number" class="calc-input" id="p1Overnights" placeholder="182" max="365">
+              </div>
+              <div class="calc-field">
+                <label>Parent 2's Overnights per Year</label>
+                <input type="number" class="calc-input" id="p2Overnights" placeholder="183" max="365">
+              </div>
+            </div>
+            <p class="calc-note">For substantial time-sharing, non-custodial parent must have at least 73 overnights (20%).</p>
           </div>
         </div>
       </div>
@@ -348,6 +371,13 @@
     function formatCurrency(amount) { return '$' + Math.round(amount).toLocaleString(); }
     function getVal(id) { return parseFloat(document.getElementById(id).value) || 0; }
 
+    function toggleShared() {
+      const toggle = document.getElementById('sharedToggle');
+      const fields = document.getElementById('sharedFields');
+      toggle.classList.toggle('active');
+      fields.style.display = toggle.classList.contains('active') ? 'block' : 'none';
+    }
+
     function calculateTotals() {
       const combined = getVal('p1Income') + getVal('p2Income');
       document.getElementById('combinedIncome').textContent = formatCurrency(combined);
@@ -389,6 +419,7 @@
       const custodialParent = document.getElementById('custodialParent').value;
       const childcare = getVal('childcare');
       const healthIns = getVal('healthIns');
+      const isSubstantialTimeShare = document.getElementById('sharedToggle').classList.contains('active');
 
       if (combined <= 0) {
         alert('Please enter income for at least one parent.');
@@ -401,14 +432,36 @@
       // Add childcare and health insurance
       const totalObligation = basicObligation + childcare + healthIns;
 
-      // Calculate each parent's share
+      // Calculate each parent's share of income
       const p1Share = p1Income / combined;
       const p2Share = p2Income / combined;
 
-      // Non-custodial parent pays their share
-      const payorIsP1 = custodialParent === '2';
-      const payorShare = payorIsP1 ? p1Share : p2Share;
-      const monthlySupport = totalObligation * payorShare;
+      let monthlySupport;
+      let payorIsP1;
+
+      if (isSubstantialTimeShare) {
+        // Florida substantial time-sharing formula (FL 61.30(11)(b)(10))
+        const p1Overnights = getVal('p1Overnights') || 182;
+        const p2Overnights = getVal('p2Overnights') || 183;
+        const totalOvernights = p1Overnights + p2Overnights;
+
+        // Each parent's time percentage
+        const p1Time = p1Overnights / totalOvernights;
+        const p2Time = p2Overnights / totalOvernights;
+
+        // Adjusted obligation: each parent owes based on income share × time with other parent
+        const p1Owes = totalObligation * p1Share * p2Time;
+        const p2Owes = totalObligation * p2Share * p1Time;
+
+        // Net support - the difference
+        monthlySupport = Math.abs(p1Owes - p2Owes);
+        payorIsP1 = p1Owes > p2Owes;
+      } else {
+        // Standard calculation - non-custodial parent pays their share
+        payorIsP1 = custodialParent === '2';
+        const payorShare = payorIsP1 ? p1Share : p2Share;
+        monthlySupport = totalObligation * payorShare;
+      }
 
       // Display results
       document.getElementById('resultsSection').classList.add('visible');
@@ -416,7 +469,7 @@
       document.getElementById('annualSupport').textContent = formatCurrency(monthlySupport * 12);
       document.getElementById('payorParent').textContent = payorIsP1 ? 'Parent 1' : 'Parent 2';
       document.getElementById('basicObligation').textContent = formatCurrency(totalObligation);
-      document.getElementById('incomeShare').textContent = (payorShare * 100).toFixed(1) + '%';
+      document.getElementById('incomeShare').textContent = ((payorIsP1 ? p1Share : p2Share) * 100).toFixed(1) + '%';
 
       document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
     }
@@ -424,6 +477,8 @@
     function resetCalculator() {
       document.querySelectorAll('.calc-input').forEach(input => input.value = '');
       document.querySelectorAll('.calc-select').forEach(select => select.selectedIndex = 0);
+      document.getElementById('sharedToggle').classList.remove('active');
+      document.getElementById('sharedFields').style.display = 'none';
       calculateTotals();
       document.getElementById('resultsSection').classList.remove('visible');
       window.scrollTo({ top: 0, behavior: 'smooth' });
