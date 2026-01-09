@@ -21,7 +21,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app/">
   <meta property="og:title" content="Clearly - A new way to co-parent | Coming Spring 2026">
-  <meta property="og:description" content="A fresh approach to co-parenting is coming. Shared schedules, expense tracking, and tools designed to reduce conflict.">
+  <meta property:og:description" content="A fresh approach to co-parenting is coming. Shared schedules, expense tracking, and tools designed to reduce conflict.">
   <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
   <meta property="og:site_name" content="Clearly">
 
@@ -39,6 +39,287 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
   <link rel="apple-touch-icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+
+  <style>
+    /* Pre-launch Landing Page Enhancements */
+
+    /* Coming Soon Badge */
+    .coming-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #E6F5F1 0%, #D4EDE6 100%);
+      color: var(--primary);
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 28px;
+      border: 1px solid var(--primary-border);
+      box-shadow: 0 2px 8px rgba(13, 130, 104, 0.1);
+    }
+    .coming-badge::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: var(--primary);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.1); }
+    }
+
+    /* Hero Visual - Abstract decorative element */
+    .hero-visual {
+      flex: 0 0 400px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .hero-visual-inner {
+      position: relative;
+      width: 320px;
+      height: 320px;
+    }
+    .hero-visual-circle {
+      position: absolute;
+      border-radius: 50%;
+    }
+    .hero-visual-circle-1 {
+      width: 320px;
+      height: 320px;
+      background: linear-gradient(135deg, #E6F5F1 0%, #D4EDE6 100%);
+      top: 0;
+      left: 0;
+    }
+    .hero-visual-circle-2 {
+      width: 240px;
+      height: 240px;
+      background: linear-gradient(135deg, #D4EDE6 0%, #B8E0D4 100%);
+      top: 40px;
+      left: 40px;
+    }
+    .hero-visual-circle-3 {
+      width: 160px;
+      height: 160px;
+      background: linear-gradient(135deg, var(--primary) 0%, #14a085 100%);
+      top: 80px;
+      left: 80px;
+      box-shadow: 0 20px 60px rgba(13, 130, 104, 0.3);
+    }
+    .hero-visual-logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+      z-index: 2;
+    }
+    .hero-visual-float {
+      position: absolute;
+      background: white;
+      border-radius: 16px;
+      padding: 14px 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 3;
+      animation: float 3s ease-in-out infinite;
+    }
+    .hero-visual-float-1 {
+      top: 20px;
+      right: -20px;
+      animation-delay: 0s;
+    }
+    .hero-visual-float-2 {
+      bottom: 40px;
+      left: -30px;
+      animation-delay: 1.5s;
+    }
+    .hero-visual-float svg {
+      width: 20px;
+      height: 20px;
+      color: var(--primary);
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    /* Email Signup Form */
+    .signup-form {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      max-width: 460px;
+    }
+    .signup-input {
+      flex: 1;
+      min-width: 220px;
+      padding: 16px 20px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 16px;
+      background: white;
+      color: var(--text);
+      transition: all 0.2s;
+    }
+    .signup-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px rgba(13, 130, 104, 0.1);
+    }
+    .signup-input::placeholder {
+      color: var(--text-muted);
+    }
+    .signup-btn {
+      padding: 16px 28px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .signup-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(13, 130, 104, 0.3);
+    }
+    .signup-btn:active {
+      transform: translateY(0);
+    }
+    .signup-note {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 12px;
+    }
+    .signup-success {
+      padding: 16px 20px;
+      background: var(--primary-soft);
+      border: 1px solid var(--primary-border);
+      border-radius: 12px;
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* Mission Section Visual */
+    .mission-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+    .mission-visual-bg {
+      width: 280px;
+      height: 280px;
+      background: linear-gradient(135deg, var(--primary-soft) 0%, #D4EDE6 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mission-visual-icon {
+      width: 120px;
+      height: 120px;
+      border-radius: 32px;
+      box-shadow: 0 20px 60px rgba(13, 130, 104, 0.2);
+    }
+
+    /* CTA Form */
+    .cta-form {
+      display: flex;
+      gap: 12px;
+      max-width: 440px;
+      margin: 32px auto 0;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .cta-input {
+      flex: 1;
+      min-width: 200px;
+      padding: 16px 20px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      font-size: 16px;
+      background: rgba(255,255,255,0.1);
+      color: white;
+      transition: all 0.2s;
+    }
+    .cta-input:focus {
+      outline: none;
+      border-color: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.15);
+    }
+    .cta-input::placeholder {
+      color: rgba(255,255,255,0.6);
+    }
+    .cta-btn {
+      padding: 16px 28px;
+      background: white;
+      color: var(--primary);
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .cta-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .hero-visual {
+        flex: none;
+        width: 100%;
+        order: -1;
+        margin-bottom: 20px;
+      }
+      .hero-visual-inner {
+        width: 240px;
+        height: 240px;
+        margin: 0 auto;
+      }
+      .hero-visual-circle-1 { width: 240px; height: 240px; }
+      .hero-visual-circle-2 { width: 180px; height: 180px; top: 30px; left: 30px; }
+      .hero-visual-circle-3 { width: 120px; height: 120px; top: 60px; left: 60px; }
+      .hero-visual-logo { width: 56px; height: 56px; border-radius: 14px; }
+      .hero-visual-float { display: none; }
+      .signup-form {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .signup-input, .signup-btn {
+        width: 100%;
+      }
+      .cta-form {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0 20px;
+      }
+      .cta-input, .cta-btn {
+        width: 100%;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -67,21 +348,32 @@
   <section class="hero">
     <div class="container hero-container">
       <div class="hero-content fade-in">
-        <div style="display: inline-block; background: #E6F5F1; color: #0D8268; padding: 8px 20px; border-radius: 100px; font-size: 14px; font-weight: 600; margin-bottom: 24px;">Coming Spring 2026</div>
+        <div class="coming-badge">Coming Spring 2026</div>
         <h1>A new way to<br>co-parent.</h1>
         <p>We're building something different — a co-parenting app designed from the ground up to reduce conflict and keep the focus on your kids.</p>
-        <div class="hero-buttons" id="notify">
-          <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <input type="hidden" name="form-name" value="waitlist">
-            <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
-            <input type="email" name="email" placeholder="Enter your email" required style="flex: 1; min-width: 200px; padding: 14px 18px; border: 1px solid #E8E6E3; border-radius: 10px; font-size: 16px; background: #FAFBFC;">
-            <button type="submit" class="btn btn-primary">Stay in the Loop</button>
-          </form>
-        </div>
-        <p class="hero-note">Be the first to know when we launch. No spam, ever.</p>
+        <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="signup-form" id="notify">
+          <input type="hidden" name="form-name" value="waitlist">
+          <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
+          <input type="email" name="email" placeholder="Enter your email" required class="signup-input">
+          <button type="submit" class="signup-btn">Stay in the Loop</button>
+        </form>
+        <p class="signup-note">Be the first to know when we launch. No spam, ever.</p>
       </div>
-      <div class="hero-phone fade-in fade-in-delay">
-        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly App" style="border-radius: 0; box-shadow: none; width: 240px; margin: 0 auto;">
+      <div class="hero-visual fade-in fade-in-delay">
+        <div class="hero-visual-inner">
+          <div class="hero-visual-circle hero-visual-circle-1"></div>
+          <div class="hero-visual-circle hero-visual-circle-2"></div>
+          <div class="hero-visual-circle hero-visual-circle-3"></div>
+          <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="hero-visual-logo">
+          <div class="hero-visual-float hero-visual-float-1">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            Shared Calendar
+          </div>
+          <div class="hero-visual-float hero-visual-float-2">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            Clear Communication
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -126,7 +418,11 @@
         <p>We're taking a different approach — building tools that actually help reduce conflict, not just document it. Because at the end of the day, what matters most is the kids.</p>
       </div>
       <div class="showcase-image fade-in">
-        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" style="max-width: 200px; margin: 0 auto; display: block; border-radius: 0; box-shadow: none;">
+        <div class="mission-visual">
+          <div class="mission-visual-bg">
+            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="mission-visual-icon">
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -135,7 +431,7 @@
   <section class="features">
     <div class="container">
       <h2 class="section-title fade-in">Free resources while you wait</h2>
-      <p style="text-align: center; color: #5C5856; margin-top: -40px; margin-bottom: 48px; max-width: 600px; margin-left: auto; margin-right: auto;" class="fade-in">We've built helpful tools for co-parents — available now, completely free.</p>
+      <p style="text-align: center; color: var(--text-secondary); margin-top: -40px; margin-bottom: 48px; max-width: 600px; margin-left: auto; margin-right: auto;" class="fade-in">We've built helpful tools for co-parents — available now, completely free.</p>
       <div class="features-grid" style="max-width: 800px; margin: 0 auto; grid-template-columns: repeat(2, 1fr);">
         <a href="/calculators/" class="feature-card fade-in" style="text-decoration: none; color: inherit;">
           <div class="feature-icon">
@@ -163,13 +459,13 @@
         <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="cta-icon">
         <h2>Be the first to know</h2>
         <p>Join our waitlist and we'll notify you the moment Clearly is ready to download.</p>
-        <form name="waitlist-footer" method="POST" data-netlify="true" netlify-honeypot="bot-field" style="display: flex; gap: 12px; max-width: 420px; margin: 32px auto 0; flex-wrap: wrap; justify-content: center;">
+        <form name="waitlist-footer" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="cta-form">
           <input type="hidden" name="form-name" value="waitlist-footer">
           <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
-          <input type="email" name="email" placeholder="Enter your email" required style="flex: 1; min-width: 200px; padding: 14px 18px; border: 1px solid rgba(255,255,255,0.3); border-radius: 10px; font-size: 16px; background: rgba(255,255,255,0.1); color: white;">
-          <button type="submit" class="btn" style="padding: 14px 24px; background: white; color: #0D8268; border-radius: 10px; font-weight: 600;">Stay in the Loop</button>
+          <input type="email" name="email" placeholder="Enter your email" required class="cta-input">
+          <button type="submit" class="cta-btn">Stay in the Loop</button>
         </form>
-        <p style="font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 12px;">No spam. Unsubscribe anytime.</p>
+        <p style="font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 16px;">No spam. Unsubscribe anytime.</p>
       </div>
     </div>
   </section>
@@ -258,7 +554,7 @@
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: new URLSearchParams(formData).toString()
           });
-          form.innerHTML = '<p style="color: #0D8268; font-weight: 600; padding: 14px 0;">You\'re on the list! We\'ll be in touch.</p>';
+          form.innerHTML = '<div class="signup-success">You\'re on the list! We\'ll be in touch.</div>';
         } catch (error) {
           button.textContent = originalText;
           button.disabled = false;
