@@ -46,20 +46,22 @@ serve(async (req) => {
     // Insert into waitlist
     const { data, error: dbError } = await supabase
       .from("waitlist")
-      .upsert(
-        { email: email.toLowerCase().trim(), source },
-        { onConflict: "email", ignoreDuplicates: true }
-      )
+      .insert({ email: email.toLowerCase().trim(), source })
       .select()
       .single();
 
-    if (dbError && dbError.code !== "23505") {
-      // 23505 is unique violation (duplicate) - we ignore that
-      console.error("Database error:", dbError);
-      return new Response(JSON.stringify({ error: "Failed to save email" }), {
-        status: 500,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+    // Handle duplicate emails gracefully
+    if (dbError) {
+      if (dbError.code === "23505") {
+        // Duplicate email - that's fine, they're already on the list
+        console.log("Duplicate email:", email);
+      } else {
+        console.error("Database error:", dbError);
+        return new Response(JSON.stringify({ error: "Failed to save email", details: dbError.message }), {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
     }
 
     // Send welcome email via Resend
