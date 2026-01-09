@@ -417,6 +417,47 @@
     .btn-download svg {
       flex-shrink: 0;
     }
+
+    /* Version Banner */
+    .calc-version-banner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-top: 20px;
+      padding: 16px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      font-size: 13px;
+    }
+    .calc-version-banner .version-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .calc-version-banner .version-label {
+      color: var(--text-muted);
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+    }
+    .calc-version-banner .version-value {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .calc-version-banner .version-link {
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .calc-version-banner .version-link:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      .calc-version-banner {
+        gap: 16px;
+      }
+    }
   </style>
 
   <!-- jsPDF Library for PDF Generation -->
@@ -454,7 +495,20 @@
       </div>
       <h1>New York Child Support &<br>Maintenance Calculator</h1>
       <p>Calculate guideline child support and spousal maintenance using New York's official CSSA formulas.</p>
-      <p class="last-updated">Based on NY Domestic Relations Law. Last updated: January 2025</p>
+      <div class="calc-version-banner">
+        <div class="version-item">
+          <span class="version-label">Guidelines Effective</span>
+          <span class="version-value">March 2024 - February 2026</span>
+        </div>
+        <div class="version-item">
+          <span class="version-label">Calculator Updated</span>
+          <span class="version-value">January 9, 2025</span>
+        </div>
+        <div class="version-item">
+          <span class="version-label">Source</span>
+          <a href="https://www.nysenate.gov/legislation/laws/DOM" target="_blank" class="version-link">NY DRL §236, §240</a>
+        </div>
+      </div>
     </div>
   </header>
 

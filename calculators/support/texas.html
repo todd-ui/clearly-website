@@ -113,6 +113,14 @@
     .btn-download { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 24px; padding: 16px 24px; background: var(--surface); border: 1px solid var(--border); color: var(--text); font-size: 16px; font-weight: 600; border-radius: 12px; cursor: pointer; transition: all 0.2s ease; }
     .btn-download:hover { background: var(--bg); border-color: var(--primary); color: var(--primary); }
     .btn-download svg { flex-shrink: 0; }
+
+    /* Version Banner */
+    .calc-version-banner { display: flex; flex-wrap: wrap; gap: 24px; margin-top: 20px; padding: 16px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; font-size: 13px; }
+    .calc-version-banner .version-item { display: flex; flex-direction: column; gap: 2px; }
+    .calc-version-banner .version-label { color: var(--text-muted); font-weight: 500; text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px; }
+    .calc-version-banner .version-value { color: var(--text); font-weight: 600; }
+    .calc-version-banner .version-link { color: var(--primary); text-decoration: none; }
+    .calc-version-banner .version-link:hover { text-decoration: underline; }
   </style>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
@@ -148,7 +156,20 @@
       </div>
       <h1>Texas Child Support Calculator</h1>
       <p>Calculate guideline child support using Texas Family Code Section 154.125.</p>
-      <p class="last-updated">Based on Texas guidelines effective September 2025. Income cap: $11,700/month.</p>
+      <div class="calc-version-banner">
+        <div class="version-item">
+          <span class="version-label">Guidelines Effective</span>
+          <span class="version-value">September 2025</span>
+        </div>
+        <div class="version-item">
+          <span class="version-label">Calculator Updated</span>
+          <span class="version-value">January 9, 2025</span>
+        </div>
+        <div class="version-item">
+          <span class="version-label">Source</span>
+          <a href="https://statutes.capitol.texas.gov/Docs/FA/htm/FA.154.htm" target="_blank" class="version-link">TX Family Code §154.125</a>
+        </div>
+      </div>
     </div>
   </header>
 
