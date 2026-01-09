@@ -631,36 +631,59 @@
     function downloadPDF() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
-      const primaryColor = [79, 70, 229];
-      const textColor = [17, 24, 39];
-      const mutedColor = [107, 114, 128];
-      const bgColor = [249, 250, 251];
+      const primaryColor = [13, 130, 104]; // Teal #0D8268
+      const primaryLight = [230, 245, 241];
+      const textColor = [26, 25, 23];
+      const mutedColor = [140, 135, 128];
 
       // Header
       doc.setFillColor(...primaryColor);
-      doc.rect(0, 0, 210, 40, 'F');
+      doc.rect(0, 0, 210, 32, 'F');
       doc.setTextColor(255, 255, 255);
-      doc.setFontSize(24);
+      doc.setFontSize(20);
       doc.setFont('helvetica', 'bold');
-      doc.text('Clearly', 20, 25);
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'normal');
-      doc.text('Child Support Estimate', 60, 25);
+      doc.text('Clearly', 20, 20);
       doc.setFontSize(10);
-      doc.text('California  |  ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }), 20, 35);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Child Support Estimate  |  California', 52, 20);
+      doc.setFontSize(8);
+      doc.text(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }), 20, 28);
 
-      let yPos = 55;
+      let yPos = 42;
 
-      // Income Summary
+      // Income Details
+      doc.setFillColor(...primaryLight);
+      doc.roundedRect(15, yPos - 3, 180, 55, 2, 2, 'F');
+      doc.setTextColor(...primaryColor);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Income Details', 20, yPos + 5);
+
       doc.setTextColor(...textColor);
-      doc.setFontSize(11);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Income Summary', 20, yPos);
-      yPos += 8;
+      doc.setFontSize(8);
       doc.setFont('helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.text('Combined Net Income: ' + document.getElementById('combinedIncome').textContent, 20, yPos);
-      yPos += 15;
+
+      const p1Gross = formatCurrency(getVal('p1Gross'));
+      const p1Taxes = formatCurrency(getVal('p1Taxes'));
+      const p1Net = document.getElementById('p1Net')?.textContent || '$0';
+      const p2Gross = formatCurrency(getVal('p2Gross'));
+      const p2Taxes = formatCurrency(getVal('p2Taxes'));
+      const p2Net = document.getElementById('p2Net')?.textContent || '$0';
+
+      doc.text('Parent 1: Gross: ' + p1Gross + '  |  Taxes: ' + p1Taxes + '  |  Net: ' + p1Net, 20, yPos + 14);
+      doc.text('Parent 2: Gross: ' + p2Gross + '  |  Taxes: ' + p2Taxes + '  |  Net: ' + p2Net, 20, yPos + 22);
+
+      const p1TimeShare = getVal('p1TimeShare') || 50;
+      const p2TimeShare = 100 - p1TimeShare;
+      doc.text('Time Share: Parent 1: ' + p1TimeShare + '%  |  Parent 2: ' + p2TimeShare + '%', 20, yPos + 32);
+
+      const numChildren = document.getElementById('numChildren')?.value || '1';
+      doc.text('Number of Children: ' + numChildren, 20, yPos + 40);
+
+      doc.setFont('helvetica', 'bold');
+      doc.text('Combined Net Income: ' + document.getElementById('combinedIncome').textContent, 20, yPos + 48);
+
+      yPos += 62;
 
       // Results
       const monthlySupport = document.getElementById('monthlySupport').textContent;
@@ -668,34 +691,49 @@
       const payorParent = document.getElementById('payorParent').textContent;
 
       doc.setFillColor(...primaryColor);
-      doc.roundedRect(15, yPos - 5, 180, 40, 3, 3, 'F');
+      doc.roundedRect(15, yPos - 3, 180, 35, 2, 2, 'F');
       doc.setTextColor(255, 255, 255);
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Guideline Child Support', 20, yPos + 5);
-      doc.setFontSize(20);
-      doc.text(monthlySupport + '/month', 20, yPos + 22);
       doc.setFontSize(10);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Guideline Child Support', 20, yPos + 6);
+      doc.setFontSize(8);
       doc.setFont('helvetica', 'normal');
-      doc.text('Annual: ' + annualSupport + '  |  Payor: ' + payorParent, 20, yPos + 32);
+      doc.text('Payor: ' + payorParent, 20, yPos + 14);
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('TOTAL: ' + monthlySupport + '/month  (' + annualSupport + '/year)', 20, yPos + 26);
 
-      yPos += 55;
+      yPos += 45;
+
+      // Guidelines
+      doc.setTextColor(...textColor);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Guidelines Applied:', 20, yPos);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(...mutedColor);
+      yPos += 5;
+      doc.text('Formula: CS = K × [HN - (H% × TN)]  |  CA Family Code §4055', 20, yPos);
+
+      yPos += 12;
 
       // Disclaimer
-      doc.setTextColor(...mutedColor);
-      doc.setFontSize(8);
-      const disclaimer = 'DISCLAIMER: This estimate is based on California Family Code Section 4055 guidelines. Actual court-ordered amounts may differ based on judicial discretion, hardship deductions, and specific circumstances. This does not constitute legal advice.';
-      const splitDisclaimer = doc.splitTextToSize(disclaimer, 170);
+      doc.setFontSize(7);
+      const disclaimer = 'DISCLAIMER: This estimate is based on CA Family Code §4055. Actual amounts may differ based on judicial discretion, hardship deductions, and circumstances. This is not legal advice.';
+      const splitDisclaimer = doc.splitTextToSize(disclaimer, 175);
       doc.text(splitDisclaimer, 20, yPos);
 
-      yPos += splitDisclaimer.length * 4 + 10;
+      yPos += splitDisclaimer.length * 3 + 8;
 
       // Footer
       doc.setDrawColor(...primaryColor);
       doc.setLineWidth(0.5);
       doc.line(20, yPos, 190, yPos);
-      doc.setFontSize(9);
-      doc.text('Generated by Clearly  |  getclearly.app  |  ' + new Date().toLocaleDateString(), 20, yPos + 8);
+      doc.setFontSize(8);
+      doc.setTextColor(...primaryColor);
+      doc.text('Generated by Clearly  |  getclearly.app', 20, yPos + 5);
+      doc.setTextColor(...mutedColor);
+      doc.text('Guidelines: 2024 (SB 343)', 145, yPos + 5);
 
       doc.save('CA-Child-Support-Estimate-' + new Date().toISOString().split('T')[0] + '.pdf');
     }

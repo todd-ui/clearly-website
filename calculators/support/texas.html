@@ -514,62 +514,113 @@
     function downloadPDF() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
-      const primaryColor = [79, 70, 229];
-      const textColor = [17, 24, 39];
-      const mutedColor = [107, 114, 128];
+      const primaryColor = [13, 130, 104]; // Teal #0D8268
+      const primaryLight = [230, 245, 241];
+      const textColor = [26, 25, 23];
+      const mutedColor = [140, 135, 128];
 
+      // Header
       doc.setFillColor(...primaryColor);
-      doc.rect(0, 0, 210, 40, 'F');
+      doc.rect(0, 0, 210, 32, 'F');
       doc.setTextColor(255, 255, 255);
-      doc.setFontSize(24);
+      doc.setFontSize(20);
       doc.setFont('helvetica', 'bold');
-      doc.text('Clearly', 20, 25);
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'normal');
-      doc.text('Child Support Estimate', 60, 25);
+      doc.text('Clearly', 20, 20);
       doc.setFontSize(10);
-      doc.text('Texas  |  ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }), 20, 35);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Child Support Estimate  |  Texas', 52, 20);
+      doc.setFontSize(8);
+      doc.text(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }), 20, 28);
 
-      let yPos = 55;
+      let yPos = 42;
+
+      // Income Details
+      doc.setFillColor(...primaryLight);
+      doc.roundedRect(15, yPos - 3, 180, 45, 2, 2, 'F');
+      doc.setTextColor(...primaryColor);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Income Details (Obligor)', 20, yPos + 5);
+
       doc.setTextColor(...textColor);
-      doc.setFontSize(11);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Income Summary', 20, yPos);
-      yPos += 8;
+      doc.setFontSize(8);
       doc.setFont('helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.text('Net Monthly Resources: ' + document.getElementById('netResourcesUsed').textContent, 20, yPos);
-      yPos += 15;
 
+      const grossIncome = formatCurrency(getVal('grossIncome'));
+      const federalTax = formatCurrency(getVal('federalTax'));
+      const stateTax = formatCurrency(getVal('stateTax'));
+      const socialSecurity = formatCurrency(getVal('socialSecurity'));
+      const healthIns = formatCurrency(getVal('healthIns'));
+      const unionDues = formatCurrency(getVal('unionDues'));
+      const netResources = document.getElementById('netResources').textContent;
+
+      doc.text('Gross Monthly Income: ' + grossIncome, 20, yPos + 14);
+      doc.text('Deductions:', 20, yPos + 22);
+      doc.text('Federal Tax: ' + federalTax + '  |  State Tax: ' + stateTax + '  |  Social Security: ' + socialSecurity, 50, yPos + 22);
+      doc.text('Health Insurance: ' + healthIns + '  |  Union Dues: ' + unionDues, 50, yPos + 29);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Net Monthly Resources: ' + netResources, 20, yPos + 38);
+
+      yPos += 52;
+
+      // Children info
+      const numChildren = document.getElementById('numChildren').value;
+      const otherChildren = document.getElementById('otherChildren').value;
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.text('Children Before Court: ' + numChildren + '  |  Other Children Obligor Supports: ' + otherChildren, 20, yPos);
+      yPos += 10;
+
+      // Results
       const monthlySupport = document.getElementById('monthlySupport').textContent;
       const annualSupport = document.getElementById('annualSupport').textContent;
       const percentage = document.getElementById('percentageApplied').textContent;
+      const netUsed = document.getElementById('netResourcesUsed').textContent;
 
       doc.setFillColor(...primaryColor);
-      doc.roundedRect(15, yPos - 5, 180, 40, 3, 3, 'F');
+      doc.roundedRect(15, yPos - 3, 180, 38, 2, 2, 'F');
       doc.setTextColor(255, 255, 255);
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Guideline Child Support', 20, yPos + 5);
-      doc.setFontSize(20);
-      doc.text(monthlySupport + '/month', 20, yPos + 22);
       doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      doc.text('Annual: ' + annualSupport + '  |  Rate: ' + percentage, 20, yPos + 32);
-
-      yPos += 55;
-      doc.setTextColor(...mutedColor);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Guideline Child Support', 20, yPos + 6);
       doc.setFontSize(8);
-      const disclaimer = 'DISCLAIMER: This estimate is based on Texas Family Code Section 154.125 guidelines. Actual amounts may differ based on judicial discretion and specific circumstances. This is not legal advice.';
-      const splitDisclaimer = doc.splitTextToSize(disclaimer, 170);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Net Resources Used: ' + netUsed + '  |  Percentage Applied: ' + percentage, 20, yPos + 14);
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('TOTAL: ' + monthlySupport + '/month  (' + annualSupport + '/year)', 20, yPos + 28);
+
+      yPos += 48;
+
+      // Guidelines
+      doc.setTextColor(...textColor);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Guidelines Applied:', 20, yPos);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(...mutedColor);
+      yPos += 5;
+      doc.text('Income Cap: $11,700/month (Sept 2025)  |  Percentages: 20%/25%/30%/35%/40% for 1-5 children', 20, yPos);
+
+      yPos += 12;
+
+      // Disclaimer
+      doc.setFontSize(7);
+      const disclaimer = 'DISCLAIMER: This estimate is based on Texas Family Code §154.125. Actual amounts may differ based on judicial discretion and circumstances. This is not legal advice.';
+      const splitDisclaimer = doc.splitTextToSize(disclaimer, 175);
       doc.text(splitDisclaimer, 20, yPos);
 
-      yPos += splitDisclaimer.length * 4 + 10;
+      yPos += splitDisclaimer.length * 3 + 8;
+
+      // Footer
       doc.setDrawColor(...primaryColor);
       doc.setLineWidth(0.5);
       doc.line(20, yPos, 190, yPos);
-      doc.setFontSize(9);
-      doc.text('Generated by Clearly  |  getclearly.app  |  ' + new Date().toLocaleDateString(), 20, yPos + 8);
+      doc.setFontSize(8);
+      doc.setTextColor(...primaryColor);
+      doc.text('Generated by Clearly  |  getclearly.app', 20, yPos + 5);
+      doc.setTextColor(...mutedColor);
+      doc.text('Guidelines: September 2025', 140, yPos + 5);
 
       doc.save('TX-Child-Support-Estimate-' + new Date().toISOString().split('T')[0] + '.pdf');
     }

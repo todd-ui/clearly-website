@@ -462,62 +462,114 @@
     function downloadPDF() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
-      const primaryColor = [79, 70, 229];
-      const textColor = [17, 24, 39];
-      const mutedColor = [107, 114, 128];
+      const primaryColor = [13, 130, 104]; // Teal #0D8268
+      const primaryLight = [230, 245, 241];
+      const textColor = [26, 25, 23];
+      const mutedColor = [140, 135, 128];
 
+      // Header
       doc.setFillColor(...primaryColor);
-      doc.rect(0, 0, 210, 40, 'F');
+      doc.rect(0, 0, 210, 32, 'F');
       doc.setTextColor(255, 255, 255);
-      doc.setFontSize(24);
+      doc.setFontSize(20);
       doc.setFont('helvetica', 'bold');
-      doc.text('Clearly', 20, 25);
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'normal');
-      doc.text('Child Support Estimate', 60, 25);
+      doc.text('Clearly', 20, 20);
       doc.setFontSize(10);
-      doc.text('Pennsylvania  |  ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }), 20, 35);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Child Support Estimate  |  Pennsylvania', 52, 20);
+      doc.setFontSize(8);
+      doc.text(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }), 20, 28);
 
-      let yPos = 55;
+      let yPos = 42;
+
+      // Income Details
+      doc.setFillColor(...primaryLight);
+      doc.roundedRect(15, yPos - 3, 180, 42, 2, 2, 'F');
+      doc.setTextColor(...primaryColor);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Income Details', 20, yPos + 5);
+
       doc.setTextColor(...textColor);
-      doc.setFontSize(11);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Income Summary', 20, yPos);
-      yPos += 8;
+      doc.setFontSize(8);
       doc.setFont('helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.text('Combined Net Income: ' + document.getElementById('combinedIncome').textContent, 20, yPos);
-      yPos += 15;
 
+      const p1Income = formatCurrency(getVal('p1Income'));
+      const p2Income = formatCurrency(getVal('p2Income'));
+      const combined = document.getElementById('combinedIncome').textContent;
+
+      doc.text('Parent 1 Monthly Net Income: ' + p1Income, 20, yPos + 14);
+      doc.text('Parent 2 Monthly Net Income: ' + p2Income, 20, yPos + 22);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Combined Net Income: ' + combined, 20, yPos + 32);
+
+      yPos += 48;
+
+      // Children & custody
+      const numChildren = document.getElementById('numChildren')?.value || '1';
+      const custodial = document.getElementById('custodialParent')?.value === '1' ? 'Parent 1' : 'Parent 2';
+      const isShared = document.getElementById('sharedToggle')?.classList.contains('active');
+      const childcare = formatCurrency(getVal('childcare'));
+      const healthIns = formatCurrency(getVal('healthIns'));
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(8);
+      doc.text('Children: ' + numChildren + '  |  Custodial Parent: ' + custodial + (isShared ? '  |  Shared Custody: Yes' : ''), 20, yPos);
+      yPos += 6;
+      doc.text('Additional Expenses - Childcare: ' + childcare + '  |  Health Insurance: ' + healthIns, 20, yPos);
+      yPos += 10;
+
+      // Results
       const monthlySupport = document.getElementById('monthlySupport').textContent;
       const annualSupport = document.getElementById('annualSupport').textContent;
       const payorParent = document.getElementById('payorParent').textContent;
+      const incomeShare = document.getElementById('incomeShare')?.textContent || '';
+      const basicObligation = document.getElementById('basicObligation')?.textContent || '';
 
       doc.setFillColor(...primaryColor);
-      doc.roundedRect(15, yPos - 5, 180, 40, 3, 3, 'F');
+      doc.roundedRect(15, yPos - 3, 180, 42, 2, 2, 'F');
       doc.setTextColor(255, 255, 255);
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Guideline Child Support', 20, yPos + 5);
-      doc.setFontSize(20);
-      doc.text(monthlySupport + '/month', 20, yPos + 22);
       doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      doc.text('Annual: ' + annualSupport + '  |  Payor: ' + payorParent, 20, yPos + 32);
-
-      yPos += 55;
-      doc.setTextColor(...mutedColor);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Guideline Child Support', 20, yPos + 6);
       doc.setFontSize(8);
-      const disclaimer = 'DISCLAIMER: This estimate is based on 231 Pa. Code Rule 1910.16 guidelines. Actual amounts may differ based on judicial discretion and specific case factors. This is not legal advice.';
-      const splitDisclaimer = doc.splitTextToSize(disclaimer, 170);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Basic Obligation: ' + basicObligation + '  |  Obligor Income Share: ' + incomeShare, 20, yPos + 14);
+      doc.text('Payor: ' + payorParent, 20, yPos + 22);
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('TOTAL: ' + monthlySupport + '/month  (' + annualSupport + '/year)', 20, yPos + 34);
+
+      yPos += 52;
+
+      // Guidelines
+      doc.setTextColor(...textColor);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Guidelines Applied:', 20, yPos);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(...mutedColor);
+      yPos += 5;
+      doc.text('231 Pa. Code Rule 1910.16-3  |  Income Shares Model  |  Shared Custody: 40%+ overnights', 20, yPos);
+
+      yPos += 12;
+
+      // Disclaimer
+      doc.setFontSize(7);
+      const disclaimer = 'DISCLAIMER: This estimate is based on 231 Pa. Code Rule 1910.16. Actual amounts may differ based on judicial discretion and case factors. This is not legal advice.';
+      const splitDisclaimer = doc.splitTextToSize(disclaimer, 175);
       doc.text(splitDisclaimer, 20, yPos);
 
-      yPos += splitDisclaimer.length * 4 + 10;
+      yPos += splitDisclaimer.length * 3 + 8;
+
+      // Footer
       doc.setDrawColor(...primaryColor);
       doc.setLineWidth(0.5);
       doc.line(20, yPos, 190, yPos);
-      doc.setFontSize(9);
-      doc.text('Generated by Clearly  |  getclearly.app  |  ' + new Date().toLocaleDateString(), 20, yPos + 8);
+      doc.setFontSize(8);
+      doc.setTextColor(...primaryColor);
+      doc.text('Generated by Clearly  |  getclearly.app', 20, yPos + 5);
+      doc.setTextColor(...mutedColor);
+      doc.text('Guidelines: January 2026', 145, yPos + 5);
 
       doc.save('PA-Child-Support-Estimate-' + new Date().toISOString().split('T')[0] + '.pdf');
     }

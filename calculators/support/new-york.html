@@ -1267,152 +1267,158 @@
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
 
-      // Colors matching Clearly brand
-      const primaryColor = [79, 70, 229]; // Indigo
-      const textColor = [17, 24, 39];
-      const mutedColor = [107, 114, 128];
-      const bgColor = [249, 250, 251];
+      // Clearly brand colors
+      const primaryColor = [13, 130, 104]; // Teal #0D8268
+      const primaryLight = [230, 245, 241]; // #E6F5F1
+      const textColor = [26, 25, 23]; // #1A1917
+      const mutedColor = [140, 135, 128]; // #8C8780
 
-      // Get party names or use defaults
+      // Get party names
       const party1Name = document.getElementById('party1Name')?.value || 'Party 1';
       const party2Name = document.getElementById('party2Name')?.value || 'Party 2';
 
-      // Header with Clearly branding
+      // Header
       doc.setFillColor(...primaryColor);
-      doc.rect(0, 0, 210, 40, 'F');
-
+      doc.rect(0, 0, 210, 32, 'F');
       doc.setTextColor(255, 255, 255);
-      doc.setFontSize(24);
+      doc.setFontSize(20);
       doc.setFont('helvetica', 'bold');
-      doc.text('Clearly', 20, 25);
-
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'normal');
-      doc.text('Child Support & Maintenance Estimate', 60, 25);
-
-      // State and date
+      doc.text('Clearly', 20, 20);
       doc.setFontSize(10);
-      doc.text('New York  |  ' + new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }), 20, 35);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Child Support & Maintenance Estimate  |  New York', 52, 20);
+      doc.setFontSize(8);
+      doc.text(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }), 20, 28);
 
-      // Reset text color for body
+      let yPos = 42;
+
+      // Parties
       doc.setTextColor(...textColor);
-
-      let yPos = 55;
-
-      // Party names section
-      doc.setFontSize(11);
+      doc.setFontSize(9);
       doc.setFont('helvetica', 'bold');
-      doc.text('Parties', 20, yPos);
-      yPos += 8;
-
+      doc.text('Parties:', 20, yPos);
       doc.setFont('helvetica', 'normal');
-      doc.setFontSize(10);
-      doc.text(party1Name + '  &  ' + party2Name, 20, yPos);
-      yPos += 15;
+      doc.text(party1Name + '  &  ' + party2Name, 42, yPos);
+      yPos += 10;
 
-      // Maintenance Results
+      // Income Details Section
+      doc.setFillColor(...primaryLight);
+      doc.roundedRect(15, yPos - 3, 180, 52, 2, 2, 'F');
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(9);
+      doc.setTextColor(...primaryColor);
+      doc.text('Income Details', 20, yPos + 5);
+
+      doc.setTextColor(...textColor);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+
+      // Party 1 income breakdown
+      const p1Wages = getVal('p1Wages');
+      const p1SelfEmp = getVal('p1SelfEmployment');
+      const p1Other = getVal('p1OtherIncome') + getVal('p1Investment') + getVal('p1Benefits');
+      const p1Fica = getVal('p1Fica');
+      const p1CityTax = getVal('p1CityTax');
+      const p1Total = document.getElementById('party1Total')?.textContent || '$0';
+
+      doc.text(party1Name + ':', 20, yPos + 13);
+      doc.text('Wages: ' + formatCurrency(p1Wages) + '  |  Self-Emp: ' + formatCurrency(p1SelfEmp) + '  |  Other: ' + formatCurrency(p1Other), 55, yPos + 13);
+      doc.text('Deductions - FICA: ' + formatCurrency(p1Fica) + '  |  City Tax: ' + formatCurrency(p1CityTax) + '  |  Net: ' + p1Total, 55, yPos + 20);
+
+      // Party 2 income breakdown
+      const p2Wages = getVal('p2Wages');
+      const p2SelfEmp = getVal('p2SelfEmployment');
+      const p2Other = getVal('p2OtherIncome') + getVal('p2Investment') + getVal('p2Benefits');
+      const p2Fica = getVal('p2Fica');
+      const p2CityTax = getVal('p2CityTax');
+      const p2Total = document.getElementById('party2Total')?.textContent || '$0';
+
+      doc.text(party2Name + ':', 20, yPos + 30);
+      doc.text('Wages: ' + formatCurrency(p2Wages) + '  |  Self-Emp: ' + formatCurrency(p2SelfEmp) + '  |  Other: ' + formatCurrency(p2Other), 55, yPos + 30);
+      doc.text('Deductions - FICA: ' + formatCurrency(p2Fica) + '  |  City Tax: ' + formatCurrency(p2CityTax) + '  |  Net: ' + p2Total, 55, yPos + 37);
+
+      doc.setFont('helvetica', 'bold');
+      doc.text('Combined Net Income: ' + (document.getElementById('combinedIncome')?.textContent || '$0'), 20, yPos + 47);
+
+      yPos += 60;
+
+      // Children info
+      const hasChildren = document.getElementById('hasChildrenYes')?.checked;
+      if (hasChildren) {
+        const numChildren = document.getElementById('numChildren')?.value || '0';
+        const custodialParent = document.getElementById('custodialParent')?.value === '1' ? party1Name : party2Name;
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(8);
+        doc.text('Number of Children: ' + numChildren + '  |  Custodial Parent: ' + custodialParent, 20, yPos);
+        yPos += 8;
+      }
+
+      // Results Section
+      doc.setFillColor(...primaryColor);
+      doc.roundedRect(15, yPos - 3, 180, hasChildren ? 55 : 40, 2, 2, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFont('helvetica', 'bold');
+      doc.setFontSize(10);
+      doc.text('Calculation Results', 20, yPos + 6);
+
       const maintenanceMonthly = document.getElementById('maintenanceMonthly').textContent;
       const maintenanceAnnual = document.getElementById('maintenanceAnnual').textContent;
       const maintenancePayor = document.getElementById('maintenancePayor').textContent;
-      const maintenancePayee = document.getElementById('maintenancePayee').textContent;
 
-      doc.setFillColor(...bgColor);
-      doc.roundedRect(15, yPos - 5, 180, 45, 3, 3, 'F');
-
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'bold');
-      doc.setTextColor(...primaryColor);
-      doc.text('Spousal Maintenance', 20, yPos + 5);
-
-      doc.setTextColor(...textColor);
-      doc.setFontSize(18);
-      doc.text(maintenanceMonthly + '/month', 20, yPos + 18);
-
-      doc.setFontSize(10);
+      doc.setFontSize(8);
       doc.setFont('helvetica', 'normal');
-      doc.setTextColor(...mutedColor);
-      doc.text('Annual: ' + maintenanceAnnual, 20, yPos + 28);
-      doc.text('Payor: ' + maintenancePayor + '  |  Payee: ' + maintenancePayee, 20, yPos + 36);
+      doc.text('Spousal Maintenance: ' + maintenanceMonthly + '/month (' + maintenanceAnnual + '/year)  |  Payor: ' + maintenancePayor, 20, yPos + 15);
 
-      yPos += 55;
-
-      // Child Support Results (if visible)
+      let resultY = yPos + 23;
       const childSupportSection = document.getElementById('childSupportResults');
       if (childSupportSection && childSupportSection.style.display !== 'none') {
         const childSupportMonthly = document.getElementById('childSupportMonthly').textContent;
         const childSupportAnnual = document.getElementById('childSupportAnnual').textContent;
         const cssaPercentage = document.getElementById('cssaPercentage').textContent;
         const childSupportPayor = document.getElementById('childSupportPayor').textContent;
-
-        doc.setFillColor(...bgColor);
-        doc.roundedRect(15, yPos - 5, 180, 45, 3, 3, 'F');
-
-        doc.setFontSize(12);
-        doc.setFont('helvetica', 'bold');
-        doc.setTextColor(...primaryColor);
-        doc.text('Child Support', 20, yPos + 5);
-
-        doc.setTextColor(...textColor);
-        doc.setFontSize(18);
-        doc.text(childSupportMonthly + '/month', 20, yPos + 18);
-
-        doc.setFontSize(10);
-        doc.setFont('helvetica', 'normal');
-        doc.setTextColor(...mutedColor);
-        doc.text('Annual: ' + childSupportAnnual + '  |  CSSA: ' + cssaPercentage, 20, yPos + 28);
-        doc.text('Payor: ' + childSupportPayor, 20, yPos + 36);
-
-        yPos += 55;
+        doc.text('Child Support: ' + childSupportMonthly + '/month (' + childSupportAnnual + '/year)  |  CSSA: ' + cssaPercentage + '  |  Payor: ' + childSupportPayor, 20, resultY);
+        resultY += 10;
       }
 
-      // Combined Summary
       const totalMonthly = document.getElementById('totalMonthly').textContent;
       const totalAnnual = document.getElementById('totalAnnual').textContent;
-
-      doc.setFillColor(...primaryColor);
-      doc.roundedRect(15, yPos - 5, 180, 35, 3, 3, 'F');
-
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(12);
       doc.setFont('helvetica', 'bold');
-      doc.text('Total Combined Support', 20, yPos + 5);
+      doc.setFontSize(12);
+      doc.text('TOTAL: ' + totalMonthly + '/month  (' + totalAnnual + '/year)', 20, resultY + 5);
 
-      doc.setFontSize(20);
-      doc.text(totalMonthly + '/month', 20, yPos + 20);
+      yPos += hasChildren ? 65 : 50;
 
-      doc.setFontSize(10);
+      // Guidelines Applied
+      doc.setTextColor(...textColor);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Guidelines Applied:', 20, yPos);
       doc.setFont('helvetica', 'normal');
-      doc.text('Annual: ' + totalAnnual, 130, yPos + 20);
+      doc.setTextColor(...mutedColor);
+      yPos += 5;
+      doc.text('Income Cap: $183,000 (March 2024 - Feb 2026)  |  Self-Support Reserve: $21,128  |  CSSA: 17%/25%/29%/31%/35%', 20, yPos);
 
-      yPos += 50;
+      yPos += 12;
 
       // Disclaimer
-      doc.setTextColor(...mutedColor);
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'normal');
-
-      const disclaimer = 'DISCLAIMER: This estimate is based on New York statutory guideline formulas (DRL §236 and §240). ' +
-        'Actual court-ordered amounts may differ based on judicial discretion, deviation factors, above-cap income ' +
-        'considerations, add-on expenses, and the specific circumstances of your case. This does not constitute legal advice. ' +
-        'Please consult a qualified family law attorney for guidance specific to your situation.';
-
-      const splitDisclaimer = doc.splitTextToSize(disclaimer, 170);
+      doc.setFontSize(7);
+      const disclaimer = 'DISCLAIMER: This estimate is based on NY DRL §236 and §240. Actual amounts may differ based on judicial discretion, deviation factors, and case circumstances. This is not legal advice. Consult a family law attorney.';
+      const splitDisclaimer = doc.splitTextToSize(disclaimer, 175);
       doc.text(splitDisclaimer, 20, yPos);
 
-      yPos += splitDisclaimer.length * 4 + 10;
+      yPos += splitDisclaimer.length * 3 + 8;
 
       // Footer
       doc.setDrawColor(...primaryColor);
       doc.setLineWidth(0.5);
       doc.line(20, yPos, 190, yPos);
-
-      doc.setFontSize(9);
+      doc.setFontSize(8);
+      doc.setTextColor(...primaryColor);
+      doc.text('Generated by Clearly  |  getclearly.app', 20, yPos + 5);
       doc.setTextColor(...mutedColor);
-      doc.text('Generated by Clearly  |  getclearly.app  |  ' + new Date().toLocaleDateString(), 20, yPos + 8);
+      doc.text('Guidelines: March 2024 - Feb 2026', 130, yPos + 5);
 
-      // Save the PDF
-      const fileName = 'NY-Support-Estimate-' + new Date().toISOString().split('T')[0] + '.pdf';
-      doc.save(fileName);
+      doc.save('NY-Support-Estimate-' + new Date().toISOString().split('T')[0] + '.pdf');
     }
 
     // Initialize
