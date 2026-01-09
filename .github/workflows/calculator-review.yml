@@ -1,0 +1,88 @@
+name: Annual Calculator Review Reminder
+
+on:
+  # Run automatically on January 1st at 9am UTC
+  schedule:
+    - cron: '0 9 1 1 *'
+  # Allow manual trigger from Actions tab
+  workflow_dispatch:
+
+jobs:
+  create-review-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create Annual Review Issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const year = new Date().getFullYear();
+
+            const issueBody = `## Annual Child Support Calculator Review - ${year}
+
+            It's time to review and update the child support calculators to ensure they reflect current state guidelines.
+
+            ### Review Checklist
+
+            #### New York
+            - [ ] Check if income cap has been updated (updates every 2 years in Jan/Feb)
+            - [ ] Verify self-support reserve amount
+            - [ ] Confirm CSSA percentages unchanged
+            - [ ] Source: [NY DRL §240](https://www.nysenate.gov/legislation/laws/DOM/240)
+
+            #### California
+            - [ ] Check for any formula changes (rare)
+            - [ ] Verify K-factor multipliers
+            - [ ] Source: [CA Family Code §4055](https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=4055.&lawCode=FAM)
+
+            #### Texas
+            - [ ] Update income cap (changes every September)
+            - [ ] Verify multiple family percentages
+            - [ ] Source: [TX Family Code §154.125](https://statutes.capitol.texas.gov/Docs/FA/htm/FA.154.htm)
+
+            #### Florida
+            - [ ] Check support schedule for updates
+            - [ ] Verify time-sharing thresholds
+            - [ ] Source: [FL Statute 61.30](https://www.flsenate.gov/Laws/Statutes/${year}/61.30)
+
+            #### Illinois
+            - [ ] Check income shares schedule
+            - [ ] Verify low-income thresholds
+            - [ ] Source: [750 ILCS 5/505](https://www.ilga.gov/legislation/ilcs/ilcs4.asp?ActID=2086)
+
+            #### Pennsylvania
+            - [ ] Check support schedule for amendments
+            - [ ] Verify shared custody formula
+            - [ ] Source: [231 Pa. Code Rule 1910.16-3](https://www.pacodeandbulletin.gov/)
+
+            ### After Updates
+
+            1. Update values in \`/calculators/calculator-config.js\`
+            2. Update any embedded schedules in state HTML files
+            3. Update \`lastUpdated\` and \`guidelinesEffective\` dates
+            4. Update \`dateModified\` in structured data
+            5. Test calculations against official state calculators
+            6. Commit and deploy changes
+
+            ### Resources
+
+            - [Maintenance Guide](/calculators/MAINTENANCE.md)
+            - [Calculator Config](/calculators/calculator-config.js)
+
+            ---
+
+            *This issue was automatically created by the Annual Calculator Review workflow.*
+            `;
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `📋 Annual Child Support Calculator Review - ${year}`,
+              body: issueBody,
+              labels: ['maintenance', 'calculators']
+            });
+
+            console.log(`Created annual review issue for ${year}`);
