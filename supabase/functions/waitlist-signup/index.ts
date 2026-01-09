@@ -83,40 +83,54 @@ serve(async (req) => {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a1a; max-width: 600px; margin: 0 auto; padding: 40px 20px;">
-  <div style="text-align: center; margin-bottom: 32px;">
-    <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" style="width: 64px; height: 64px; border-radius: 16px;">
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1a1a1a; margin: 0; padding: 0; background-color: #f5f7f9;">
+  <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+
+    <!-- Header with brand color -->
+    <div style="background: linear-gradient(135deg, #0D8268 0%, #14a085 100%); border-radius: 16px 16px 0 0; padding: 40px 32px; text-align: center;">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" style="width: 72px; height: 72px; border-radius: 18px; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
+      <h1 style="font-size: 28px; font-weight: 700; margin: 24px 0 0 0; color: white;">You're on the list!</h1>
+    </div>
+
+    <!-- Body -->
+    <div style="background: white; border-radius: 0 0 16px 16px; padding: 40px 32px; box-shadow: 0 4px 24px rgba(0,0,0,0.06);">
+      <p style="color: #4a5568; margin: 0 0 20px 0; font-size: 16px;">
+        Thanks for joining the Clearly waitlist. We're building a new kind of co-parenting app — one that's designed to <strong style="color: #1a1a1a;">reduce conflict</strong>, not just document it.
+      </p>
+
+      <p style="color: #4a5568; margin: 0 0 24px 0; font-size: 16px;">
+        We'll let you know the moment Clearly is ready to download. In the meantime, check out our free resources:
+      </p>
+
+      <!-- Resources -->
+      <div style="background: linear-gradient(135deg, #E6F5F1 0%, #D4EDE6 100%); border-radius: 12px; padding: 24px; margin-bottom: 24px; border: 1px solid rgba(13, 130, 104, 0.1);">
+        <p style="margin: 0 0 16px 0; font-size: 15px;">
+          <a href="https://getclearly.app/calculators/" style="color: #0D8268; text-decoration: none; font-weight: 600;">📊 Child Support Calculators</a><br>
+          <span style="color: #4a5568; font-size: 14px;">Free estimates for NY, CA, TX, FL, IL, and PA</span>
+        </p>
+        <p style="margin: 0; font-size: 15px;">
+          <a href="https://getclearly.app/blog.html" style="color: #0D8268; text-decoration: none; font-weight: 600;">📖 Co-Parenting Blog</a><br>
+          <span style="color: #4a5568; font-size: 14px;">Practical advice and insights for navigating co-parenting</span>
+        </p>
+      </div>
+
+      <p style="color: #4a5568; margin: 0 0 24px 0; font-size: 16px;">
+        Thanks for being an early supporter. We can't wait to share Clearly with you.
+      </p>
+
+      <p style="color: #1a1a1a; margin: 0; font-weight: 600;">
+        — The Clearly Team
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <div style="text-align: center; padding: 24px 0;">
+      <p style="font-size: 13px; color: #a0aec0; margin: 0;">
+        You signed up at <a href="https://getclearly.app" style="color: #0D8268; text-decoration: none;">getclearly.app</a>
+      </p>
+    </div>
+
   </div>
-
-  <h1 style="font-size: 24px; font-weight: 700; margin-bottom: 16px; text-align: center;">You're on the list!</h1>
-
-  <p style="color: #4a5568; margin-bottom: 24px;">
-    Thanks for joining the Clearly waitlist. We're building a new kind of co-parenting app — one that's designed to reduce conflict, not just document it.
-  </p>
-
-  <p style="color: #4a5568; margin-bottom: 24px;">
-    We'll let you know the moment Clearly is ready to download. In the meantime, check out our free resources:
-  </p>
-
-  <div style="background: #f7fafc; border-radius: 12px; padding: 24px; margin-bottom: 24px;">
-    <p style="margin: 0 0 12px 0;"><a href="https://getclearly.app/calculators/" style="color: #0D8268; text-decoration: none; font-weight: 600;">Child Support Calculators</a> — Free estimates for 6 states</p>
-    <p style="margin: 0;"><a href="https://getclearly.app/blog.html" style="color: #0D8268; text-decoration: none; font-weight: 600;">Co-Parenting Blog</a> — Practical advice and insights</p>
-  </div>
-
-  <p style="color: #4a5568; margin-bottom: 32px;">
-    Thanks for being an early supporter. We can't wait to share Clearly with you.
-  </p>
-
-  <p style="color: #4a5568; margin-bottom: 0;">
-    — The Clearly Team
-  </p>
-
-  <hr style="border: none; border-top: 1px solid #e2e8f0; margin: 40px 0 24px;">
-
-  <p style="font-size: 12px; color: #a0aec0; text-align: center;">
-    You're receiving this because you signed up at getclearly.app.<br>
-    <a href="https://getclearly.app" style="color: #a0aec0;">getclearly.app</a>
-  </p>
 </body>
 </html>
             `,
