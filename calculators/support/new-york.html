@@ -1316,37 +1316,41 @@
       // Party 1 income breakdown
       const p1Wages = getVal('p1Wages');
       const p1SelfEmp = getVal('p1SelfEmployment');
-      const p1Other = getVal('p1OtherIncome') + getVal('p1Investment') + getVal('p1Benefits');
-      const p1Fica = getVal('p1Fica');
+      const p1OtherIncome = getVal('p1Other') + getVal('p1Investment') + getVal('p1Benefits');
       const p1CityTax = getVal('p1CityTax');
-      const p1Total = document.getElementById('party1Total')?.textContent || '$0';
+      const p1Gross = document.getElementById('p1GrossTotal')?.textContent || '$0';
+      const p1Adjusted = document.getElementById('p1AdjustedTotal')?.textContent || '$0';
 
       doc.text(party1Name + ':', 20, yPos + 13);
-      doc.text('Wages: ' + formatCurrency(p1Wages) + '  |  Self-Emp: ' + formatCurrency(p1SelfEmp) + '  |  Other: ' + formatCurrency(p1Other), 55, yPos + 13);
-      doc.text('Deductions - FICA: ' + formatCurrency(p1Fica) + '  |  City Tax: ' + formatCurrency(p1CityTax) + '  |  Net: ' + p1Total, 55, yPos + 20);
+      doc.text('Wages: ' + formatCurrency(p1Wages) + '  |  Self-Emp: ' + formatCurrency(p1SelfEmp) + '  |  Other: ' + formatCurrency(p1OtherIncome), 55, yPos + 13);
+      doc.text('Gross: ' + p1Gross + '  |  City Tax: ' + formatCurrency(p1CityTax) + '  |  Adjusted: ' + p1Adjusted, 55, yPos + 20);
 
       // Party 2 income breakdown
       const p2Wages = getVal('p2Wages');
       const p2SelfEmp = getVal('p2SelfEmployment');
-      const p2Other = getVal('p2OtherIncome') + getVal('p2Investment') + getVal('p2Benefits');
-      const p2Fica = getVal('p2Fica');
+      const p2OtherIncome = getVal('p2Other') + getVal('p2Investment') + getVal('p2Benefits');
       const p2CityTax = getVal('p2CityTax');
-      const p2Total = document.getElementById('party2Total')?.textContent || '$0';
+      const p2Gross = document.getElementById('p2GrossTotal')?.textContent || '$0';
+      const p2Adjusted = document.getElementById('p2AdjustedTotal')?.textContent || '$0';
 
       doc.text(party2Name + ':', 20, yPos + 30);
-      doc.text('Wages: ' + formatCurrency(p2Wages) + '  |  Self-Emp: ' + formatCurrency(p2SelfEmp) + '  |  Other: ' + formatCurrency(p2Other), 55, yPos + 30);
-      doc.text('Deductions - FICA: ' + formatCurrency(p2Fica) + '  |  City Tax: ' + formatCurrency(p2CityTax) + '  |  Net: ' + p2Total, 55, yPos + 37);
+      doc.text('Wages: ' + formatCurrency(p2Wages) + '  |  Self-Emp: ' + formatCurrency(p2SelfEmp) + '  |  Other: ' + formatCurrency(p2OtherIncome), 55, yPos + 30);
+      doc.text('Gross: ' + p2Gross + '  |  City Tax: ' + formatCurrency(p2CityTax) + '  |  Adjusted: ' + p2Adjusted, 55, yPos + 37);
 
+      // Combined income
+      const p1AdjVal = parseFloat(p1Adjusted.replace(/[$,]/g, '')) || 0;
+      const p2AdjVal = parseFloat(p2Adjusted.replace(/[$,]/g, '')) || 0;
       doc.setFont('helvetica', 'bold');
-      doc.text('Combined Net Income: ' + (document.getElementById('combinedIncome')?.textContent || '$0'), 20, yPos + 47);
+      doc.text('Combined Adjusted Income: ' + formatCurrency(p1AdjVal + p2AdjVal), 20, yPos + 47);
 
       yPos += 60;
 
       // Children info
-      const hasChildren = document.getElementById('hasChildrenYes')?.checked;
+      const hasChildren = document.querySelector('[name="hasChildren"]:checked')?.value === 'yes';
       if (hasChildren) {
-        const numChildren = document.getElementById('numChildren')?.value || '0';
-        const custodialParent = document.getElementById('custodialParent')?.value === '1' ? party1Name : party2Name;
+        const numChildren = document.getElementById('numChildren')?.value || '1';
+        const custodialVal = document.getElementById('custodialParent')?.value;
+        const custodialParent = custodialVal === 'party1' ? party1Name : party2Name;
         doc.setFont('helvetica', 'normal');
         doc.setFontSize(8);
         doc.text('Number of Children: ' + numChildren + '  |  Custodial Parent: ' + custodialParent, 20, yPos);
