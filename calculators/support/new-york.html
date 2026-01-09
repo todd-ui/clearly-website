@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DYZ1XEXPMT');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>New York Child Support Calculator 2025 | Free & Private | Clearly</title>
+  <meta name="description" content="Calculate NY child support and spousal maintenance using official 2025 CSSA formulas. Free, private calculator - no data stored. Based on NY Domestic Relations Law.">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://getclearly.app/calculators/support/new-york.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getclearly.app/calculators/support/new-york.html">
+  <meta property="og:title" content="New York Child Support Calculator 2025 | Free & Private">
+  <meta property="og:description" content="Calculate NY child support and spousal maintenance using official 2025 CSSA formulas. Free, private - no data stored.">
+  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+  <meta property="og:site_name" content="Clearly">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="New York Child Support Calculator 2025">
+  <meta name="twitter:description" content="Calculate NY child support and spousal maintenance using official 2025 formulas. Free, private - no data stored.">
+  <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+
+  <!-- Additional SEO -->
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="new york child support calculator, NY maintenance calculator, NY spousal support, CSSA calculator, NY alimony calculator, new york divorce calculator">
+  <meta name="author" content="Clearly LLC">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
+  <link rel="apple-touch-icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+
+  <style>
+    .calc-page-header {
+      padding: 60px 0 40px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    .calc-page-header .container {
+      max-width: 900px;
+    }
+    .calc-page-header h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+    .calc-page-header p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+    .calc-page-header .last-updated {
+      font-size: 14px;
+      color: var(--text-muted);
+    }
+    .calc-breadcrumb {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .calc-breadcrumb a {
+      color: var(--primary);
+    }
+
+    .calculator-section {
+      padding: 40px 0 80px;
+    }
+    .calculator-section .container {
+      max-width: 900px;
+    }
+
+    /* Form Styling */
+    .calc-form-group {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .calc-form-header {
+      padding: 20px 24px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .calc-form-header h3 {
+      font-size: 17px;
+      font-weight: 600;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .calc-form-header .toggle-icon {
+      transition: transform 0.2s;
+      color: var(--text-muted);
+    }
+    .calc-form-group.collapsed .toggle-icon {
+      transform: rotate(-90deg);
+    }
+    .calc-form-body {
+      padding: 24px;
+    }
+    .calc-form-group.collapsed .calc-form-body {
+      display: none;
+    }
+
+    /* Two-column income grid */
+    .income-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+    .income-column h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary-soft);
+    }
+
+    /* Input styling */
+    .calc-field {
+      margin-bottom: 16px;
+    }
+    .calc-field:last-child {
+      margin-bottom: 0;
+    }
+    .calc-field label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+    .calc-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 16px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .calc-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-soft);
+    }
+    .calc-input::placeholder {
+      color: var(--text-muted);
+    }
+    .calc-input-prefix {
+      position: relative;
+    }
+    .calc-input-prefix .calc-input {
+      padding-left: 28px;
+    }
+    .calc-input-prefix::before {
+      content: "$";
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
+    /* Subtotals */
+    .calc-subtotal {
+      background: var(--primary-soft);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .calc-subtotal label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary-dark);
+      margin: 0;
+    }
+    .calc-subtotal-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    /* Radio/Toggle groups */
+    .calc-toggle-group {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .calc-toggle {
+      flex: 1;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .calc-toggle:hover {
+      border-color: var(--primary);
+    }
+    .calc-toggle.active {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+    .calc-toggle input {
+      display: none;
+    }
+    .calc-toggle-label {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    /* Select styling */
+    .calc-select {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 16px;
+      background: var(--surface);
+      cursor: pointer;
+    }
+    .calc-select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    /* Results section */
+    .calc-results-section {
+      margin-top: 32px;
+    }
+    .calc-results-card {
+      background: var(--primary-soft);
+      border: 1px solid var(--primary-border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+    .calc-results-card h3 {
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--primary-dark);
+      margin-bottom: 20px;
+    }
+    .calc-result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--primary-border);
+    }
+    .calc-result-row:last-child {
+      border-bottom: none;
+    }
+    .calc-result-label {
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+    .calc-result-value {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .calc-result-primary {
+      background: var(--primary);
+      color: white;
+      padding: 16px 20px;
+      border-radius: 12px;
+      margin: -8px -8px 16px;
+    }
+    .calc-result-primary .calc-result-label {
+      color: rgba(255,255,255,0.8);
+    }
+    .calc-result-primary .calc-result-value {
+      font-size: 28px;
+      color: white;
+    }
+
+    /* Disclaimer */
+    .calc-disclaimer {
+      background: #FEF3C7;
+      border: 1px solid #F59E0B;
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-top: 24px;
+    }
+    .calc-disclaimer h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #92400E;
+      margin-bottom: 8px;
+    }
+    .calc-disclaimer p {
+      font-size: 14px;
+      color: #78350F;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Calculate button */
+    .calc-button-row {
+      margin-top: 32px;
+      display: flex;
+      gap: 16px;
+    }
+    .btn-calculate {
+      flex: 1;
+      padding: 18px 32px;
+      font-size: 18px;
+      border: none;
+    }
+    .btn-reset {
+      padding: 18px 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-secondary);
+    }
+    .btn-reset:hover {
+      border-color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    /* Info notes */
+    .calc-note {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* Section divider */
+    .calc-section-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 32px 0;
+    }
+
+    /* Hidden initially */
+    .calc-results-section {
+      display: none;
+    }
+    .calc-results-section.visible {
+      display: block;
+    }
+
+    @media (max-width: 768px) {
+      .calc-page-header {
+        padding: 40px 0 30px;
+      }
+      .calc-page-header h1 {
+        font-size: 28px;
+      }
+      .income-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .calc-button-row {
+        flex-direction: column;
+      }
+      .calc-results-card {
+        padding: 24px;
+      }
+      .calc-result-primary .calc-result-value {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <a href="/" class="nav-brand">
+        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+        Clearly
+      </a>
+      <ul class="nav-links">
+        <li><a href="/#features">Features</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="calc-page-header">
+    <div class="container">
+      <div class="calc-breadcrumb">
+        <a href="/calculators/">All Calculators</a> / New York
+      </div>
+      <h1>New York Child Support &<br>Maintenance Calculator</h1>
+      <p>Calculate guideline child support and spousal maintenance using New York's official CSSA formulas.</p>
+      <p class="last-updated">Based on NY Domestic Relations Law. Last updated: January 2025</p>
+    </div>
+  </header>
+
+  <!-- Calculator Section -->
+  <section class="calculator-section">
+    <div class="container">
+
+      <!-- Party Names (Optional) -->
+      <div class="calc-form-group collapsed">
+        <div class="calc-form-header" onclick="toggleSection(this)">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            Party Names (Optional)
+          </h3>
+          <svg class="toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="calc-form-body">
+          <div class="income-grid">
+            <div class="calc-field">
+              <label>Party 1 Name</label>
+              <input type="text" class="calc-input" id="party1Name" placeholder="e.g., Self">
+            </div>
+            <div class="calc-field">
+              <label>Party 2 Name</label>
+              <input type="text" class="calc-input" id="party2Name" placeholder="e.g., Co-parent">
+            </div>
+          </div>
+          <p class="calc-note">Names are optional and are never stored. They're only used to personalize your results.</p>
+        </div>
+      </div>
+
+      <!-- Income Section -->
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="toggleSection(this)">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+            Annual Income
+          </h3>
+          <svg class="toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="calc-form-body">
+          <p class="calc-note" style="margin-top: 0; margin-bottom: 20px;">Enter all amounts as annual (yearly) figures. Leave blank or enter 0 for items that don't apply.</p>
+
+          <div class="income-grid">
+            <!-- Party 1 Income -->
+            <div class="income-column">
+              <h4>Party 1 Income</h4>
+
+              <div class="calc-field">
+                <label>Gross wages & salary</label>
+                <div class="calc-input-prefix">
+                  <input type="number" class="calc-input" id="p1Wages" placeholder="0" onchange="calculateTotals()">
+                </div>
+              </div>
+
+              <div class="calc-field">
+                <label>Self-employment income (net)</label>
+                <div class="calc-input-prefix">
+                  <input type="number" class="calc-input" id="p1SelfEmployment" placeholder="0" onchange="calculateTotals()">
+                </div>
+              </div>
+
+              <div class="calc-field">
+                <label>Investment income</label>
+                <div class="calc-input-prefix">
+                  <input type="number" class="calc-input" id="p1Investment" placeholder="0" onchange="calculateTotals()">
+                </div>
+              </div>
+
+              <div class="calc-field">
+                <label>Other income (rental, etc.)</label>
+                <div class="calc-input-prefix">
+                  <input type="number" class="calc-input" id="p1Other" placeholder="0" onchange="calculateTotals()">
+                </div>
+              </div>
+
+              <div class="calc-field">
+                <label>Benefits (SS, disability, etc.)</label>
+                <div class="calc-input-prefix">
+                  <input type="number" class="calc-input" id="p1Benefits" placeholder="0" onchange="calculateTotals()">
+                </div>
+              </div>
+
+              <div class="calc-subtotal">
+                <label>Party 1 Gross Income</label>
+                <span class="calc-subtotal-value" id="p1GrossTotal">$0</span>
+              </div>
+            </div>
+
+            <!-- Party 2 Income -->
+            <div class="income-column">
+              <h4>Party 2 Income</h4>
+
+              <div class="calc-field">
+                <label>Gross wages & salary</label>
+                <div class="calc-input-prefix">
+                  <input type="number" class="calc-input" id="p2Wages" placeholder="0" onchange="calculateTotals()">
+                </div>
+              </div>
+
+              <div class="calc-field">
+                <label>Self-employment income (net)</label>
+                <div class="calc-input-prefix">
+                  <input type="number" class="calc-input" id="p2SelfEmployment" placeholder="0" onchange="calculateTotals()">
+                </div>
+              </div>
+
+              <div class="calc-field">
+                <label>Investment income</label>
+                <div class="calc-input-prefix">
+                  <input type="number" class="calc-input" id="p2Investment" placeholder="0" onchange="calculateTotals()">
+                </div>
+              </div>
+
+              <div class="calc-field">
+                <label>Other income (rental, etc.)</label>
+                <div class="calc-input-prefix">
+                  <input type="number" class="calc-input" id="p2Other" placeholder="0" onchange="calculateTotals()">
+                </div>
+              </div>
+
+              <div class="calc-field">
+                <label>Benefits (SS, disability, etc.)</label>
+                <div class="calc-input-prefix">
+                  <input type="number" class="calc-input" id="p2Benefits" placeholder="0" onchange="calculateTotals()">
+                </div>
+              </div>
+
+              <div class="calc-subtotal">
+                <label>Party 2 Gross Income</label>
+                <span class="calc-subtotal-value" id="p2GrossTotal">$0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Deductions Section -->
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="toggleSection(this)">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            Deductions
+          </h3>
+          <svg class="toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="calc-form-body">
+          <p class="calc-note" style="margin-top: 0; margin-bottom: 20px;">FICA taxes (Social Security + Medicare) can be estimated at 7.65% of wages, or you can enter actual amounts.</p>
+
+          <div class="calc-toggle-group">
+            <label class="calc-toggle active" onclick="toggleFICA('estimate')">
+              <input type="radio" name="ficaMethod" value="estimate" checked>
+              <span class="calc-toggle-label">Estimate FICA (7.65%)</span>
+            </label>
+            <label class="calc-toggle" onclick="toggleFICA('manual')">
+              <input type="radio" name="ficaMethod" value="manual">
+              <span class="calc-toggle-label">Enter Manually</span>
+            </label>
+          </div>
+
+          <div class="income-grid" id="manualFICA" style="display: none;">
+            <div class="calc-field">
+              <label>Party 1 FICA Taxes Paid</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="p1FICA" placeholder="0" onchange="calculateTotals()">
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Party 2 FICA Taxes Paid</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="p2FICA" placeholder="0" onchange="calculateTotals()">
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-section-divider"></div>
+
+          <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">Additional deductions (if applicable):</p>
+
+          <div class="income-grid">
+            <div class="income-column">
+              <div class="calc-field">
+                <label>Party 1: NYC/Yonkers Tax</label>
+                <div class="calc-input-prefix">
+                  <input type="number" class="calc-input" id="p1CityTax" placeholder="0" onchange="calculateTotals()">
+                </div>
+              </div>
+              <div class="calc-field">
+                <label>Party 1: Support to Non-Parties</label>
+                <div class="calc-input-prefix">
+                  <input type="number" class="calc-input" id="p1OtherSupport" placeholder="0" onchange="calculateTotals()">
+                </div>
+                <p class="calc-note">Maintenance/child support paid to others</p>
+              </div>
+            </div>
+            <div class="income-column">
+              <div class="calc-field">
+                <label>Party 2: NYC/Yonkers Tax</label>
+                <div class="calc-input-prefix">
+                  <input type="number" class="calc-input" id="p2CityTax" placeholder="0" onchange="calculateTotals()">
+                </div>
+              </div>
+              <div class="calc-field">
+                <label>Party 2: Support to Non-Parties</label>
+                <div class="calc-input-prefix">
+                  <input type="number" class="calc-input" id="p2OtherSupport" placeholder="0" onchange="calculateTotals()">
+                </div>
+                <p class="calc-note">Maintenance/child support paid to others</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="income-grid" style="margin-top: 20px;">
+            <div class="calc-subtotal">
+              <label>Party 1 Adjusted Income</label>
+              <span class="calc-subtotal-value" id="p1AdjustedTotal">$0</span>
+            </div>
+            <div class="calc-subtotal">
+              <label>Party 2 Adjusted Income</label>
+              <span class="calc-subtotal-value" id="p2AdjustedTotal">$0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Children Section -->
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="toggleSection(this)">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            Children
+          </h3>
+          <svg class="toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="calc-form-body">
+          <div class="calc-field">
+            <label>Do you have children together under age 21?</label>
+            <div class="calc-toggle-group" style="margin-top: 8px; margin-bottom: 0;">
+              <label class="calc-toggle" onclick="toggleChildren('no')">
+                <input type="radio" name="hasChildren" value="no" checked>
+                <span class="calc-toggle-label">No</span>
+              </label>
+              <label class="calc-toggle active" onclick="toggleChildren('yes')">
+                <input type="radio" name="hasChildren" value="yes">
+                <span class="calc-toggle-label">Yes</span>
+              </label>
+            </div>
+          </div>
+
+          <div id="childrenDetails">
+            <div class="calc-section-divider"></div>
+
+            <div class="income-grid">
+              <div class="calc-field">
+                <label>Number of children</label>
+                <select class="calc-select" id="numChildren" onchange="calculateTotals()">
+                  <option value="1">1 child</option>
+                  <option value="2">2 children</option>
+                  <option value="3">3 children</option>
+                  <option value="4">4 children</option>
+                  <option value="5">5 or more children</option>
+                </select>
+              </div>
+              <div class="calc-field">
+                <label>Primary custodial parent</label>
+                <select class="calc-select" id="custodialParent" onchange="calculateTotals()">
+                  <option value="party1">Party 1</option>
+                  <option value="party2">Party 2</option>
+                </select>
+              </div>
+            </div>
+            <p class="calc-note">The non-custodial parent typically pays child support to the custodial parent. In shared custody situations, courts may adjust accordingly.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Maintenance Duration (Optional) -->
+      <div class="calc-form-group collapsed">
+        <div class="calc-form-header" onclick="toggleSection(this)">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Maintenance Duration (Optional)
+          </h3>
+          <svg class="toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="calc-form-body">
+          <p class="calc-note" style="margin-top: 0; margin-bottom: 20px;">New York's advisory schedule suggests maintenance duration based on marriage length. Enter dates to see the guideline range.</p>
+
+          <div class="income-grid">
+            <div class="calc-field">
+              <label>Date of marriage</label>
+              <input type="date" class="calc-input" id="marriageDate" onchange="calculateDuration()">
+            </div>
+            <div class="calc-field">
+              <label>Date divorce action commenced</label>
+              <input type="date" class="calc-input" id="divorceDate" onchange="calculateDuration()">
+            </div>
+          </div>
+
+          <div id="durationResult" style="display: none; margin-top: 20px;">
+            <div class="calc-subtotal">
+              <label>Marriage Length</label>
+              <span class="calc-subtotal-value" id="marriageLength">-</span>
+            </div>
+            <div class="calc-subtotal" style="margin-top: 12px;">
+              <label>Advisory Maintenance Duration</label>
+              <span class="calc-subtotal-value" id="maintenanceDuration">-</span>
+            </div>
+            <p class="calc-note" style="margin-top: 12px;">Duration guidelines: 0-15 years = 15-30% of marriage length; 15-20 years = 30-40%; 20+ years = 35-50%</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calculate Button -->
+      <div class="calc-button-row">
+        <button class="btn btn-primary btn-calculate" onclick="calculateSupport()">Calculate Support</button>
+        <button class="btn btn-reset" onclick="resetCalculator()">Reset</button>
+      </div>
+
+      <!-- Results Section -->
+      <div class="calc-results-section" id="resultsSection">
+        <div class="calc-section-divider" style="margin-top: 40px;"></div>
+        <h2 style="font-size: 24px; font-weight: 700; margin: 32px 0 24px;">Results</h2>
+
+        <!-- Maintenance Results -->
+        <div class="calc-results-card" id="maintenanceResults">
+          <h3>Spousal Maintenance</h3>
+          <div class="calc-result-primary">
+            <div class="calc-result-row" style="border: none; padding: 0;">
+              <span class="calc-result-label">Guideline Monthly Amount</span>
+              <span class="calc-result-value" id="maintenanceMonthly">$0</span>
+            </div>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Annual Amount</span>
+            <span class="calc-result-value" id="maintenanceAnnual">$0</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Payor</span>
+            <span class="calc-result-value" id="maintenancePayor">-</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Payee</span>
+            <span class="calc-result-value" id="maintenancePayee">-</span>
+          </div>
+          <div class="calc-result-row" id="durationRow" style="display: none;">
+            <span class="calc-result-label">Advisory Duration</span>
+            <span class="calc-result-value" id="maintenanceDurationResult">-</span>
+          </div>
+        </div>
+
+        <!-- Child Support Results -->
+        <div class="calc-results-card" id="childSupportResults">
+          <h3>Child Support</h3>
+          <div class="calc-result-primary">
+            <div class="calc-result-row" style="border: none; padding: 0;">
+              <span class="calc-result-label">Guideline Monthly Amount</span>
+              <span class="calc-result-value" id="childSupportMonthly">$0</span>
+            </div>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Annual Amount</span>
+            <span class="calc-result-value" id="childSupportAnnual">$0</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">CSSA Percentage Applied</span>
+            <span class="calc-result-value" id="cssaPercentage">-</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Payor</span>
+            <span class="calc-result-value" id="childSupportPayor">-</span>
+          </div>
+        </div>
+
+        <!-- Combined Summary -->
+        <div class="calc-results-card" style="background: var(--surface); border-color: var(--border);">
+          <h3 style="color: var(--text);">Combined Summary</h3>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Total Monthly Support</span>
+            <span class="calc-result-value" id="totalMonthly">$0</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Total Annual Support</span>
+            <span class="calc-result-value" id="totalAnnual">$0</span>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="calc-disclaimer">
+          <h4>Important Disclaimer</h4>
+          <p>These calculations are <strong>estimates only</strong> based on New York's statutory guideline formulas (DRL &sect;236 and &sect;240). Actual court-ordered amounts may differ based on judicial discretion, deviation factors, above-cap income considerations, add-on expenses (childcare, medical, education), and the specific circumstances of your case. This calculator does not constitute legal advice. Please consult a qualified family law attorney for guidance specific to your situation.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="cta-pattern"></div>
+    <div class="container fade-in">
+      <div class="cta-content">
+        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="cta-icon">
+        <h2>Managing co-parenting?</h2>
+        <p>Clearly helps co-parents coordinate schedules, track expenses, and communicate without conflict.</p>
+        <a href="https://apps.apple.com/app/clearly" target="_blank" class="app-store-badge">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83" alt="Download on the App Store">
+        </a>
+        <p class="cta-note">Free trial included. No credit card required.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-section">
+          <div class="footer-brand">
+            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+            <span>Clearly</span>
+          </div>
+          <p class="footer-tagline">Co-parenting made clear.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <ul>
+              <li><a href="/#features">Features</a></li>
+              <li><a href="/#pricing">Pricing</a></li>
+              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="/calculators/">Support Calculator</a></li>
+              <li><a href="/faq.html">FAQ</a></li>
+              <li><a href="/help.html">Help Center</a></li>
+              <li><a href="/blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="/professionals.html">For Professionals</a></li>
+              <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="/privacy.html">Privacy Policy</a></li>
+              <li><a href="/terms.html">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Clearly LLC. All rights reserved.</p>
+        <p>Proudly designed and developed in the USA.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // NY CSSA Configuration
+    const NY_CONFIG = {
+      incomeCap: 228000, // 2025 cap (adjusted biennially)
+      childSupportPercentages: {
+        1: 0.17,
+        2: 0.25,
+        3: 0.29,
+        4: 0.31,
+        5: 0.35
+      },
+      selfSupportReserve: 18347, // Federal poverty line for single person (approx)
+      ficaRate: 0.0765
+    };
+
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+
+    // Section toggle
+    function toggleSection(header) {
+      const group = header.parentElement;
+      group.classList.toggle('collapsed');
+    }
+
+    // FICA toggle
+    function toggleFICA(method) {
+      const toggles = document.querySelectorAll('.calc-toggle-group .calc-toggle');
+      toggles[0].classList.toggle('active', method === 'estimate');
+      toggles[1].classList.toggle('active', method === 'manual');
+      document.getElementById('manualFICA').style.display = method === 'manual' ? 'grid' : 'none';
+      calculateTotals();
+    }
+
+    // Children toggle
+    function toggleChildren(hasChildren) {
+      const toggles = document.querySelectorAll('[name="hasChildren"]');
+      toggles.forEach(t => {
+        t.parentElement.classList.toggle('active', t.value === hasChildren);
+      });
+      document.getElementById('childrenDetails').style.display = hasChildren === 'yes' ? 'block' : 'none';
+    }
+
+    // Format currency
+    function formatCurrency(amount) {
+      return '$' + Math.round(amount).toLocaleString();
+    }
+
+    // Get input value
+    function getVal(id) {
+      return parseFloat(document.getElementById(id).value) || 0;
+    }
+
+    // Calculate totals
+    function calculateTotals() {
+      // Party 1 gross
+      const p1Gross = getVal('p1Wages') + getVal('p1SelfEmployment') + getVal('p1Investment') + getVal('p1Other') + getVal('p1Benefits');
+      document.getElementById('p1GrossTotal').textContent = formatCurrency(p1Gross);
+
+      // Party 2 gross
+      const p2Gross = getVal('p2Wages') + getVal('p2SelfEmployment') + getVal('p2Investment') + getVal('p2Other') + getVal('p2Benefits');
+      document.getElementById('p2GrossTotal').textContent = formatCurrency(p2Gross);
+
+      // Calculate FICA
+      const ficaMethod = document.querySelector('[name="ficaMethod"]:checked')?.value || 'estimate';
+      let p1FICA, p2FICA;
+
+      if (ficaMethod === 'estimate') {
+        // FICA only applies to wages and self-employment, capped at SS wage base
+        const ssWageBase = 168600; // 2024 SS wage base
+        p1FICA = Math.min(getVal('p1Wages') + getVal('p1SelfEmployment'), ssWageBase) * NY_CONFIG.ficaRate;
+        p2FICA = Math.min(getVal('p2Wages') + getVal('p2SelfEmployment'), ssWageBase) * NY_CONFIG.ficaRate;
+      } else {
+        p1FICA = getVal('p1FICA');
+        p2FICA = getVal('p2FICA');
+      }
+
+      // Calculate adjusted income
+      const p1Adjusted = p1Gross - p1FICA - getVal('p1CityTax') - getVal('p1OtherSupport');
+      const p2Adjusted = p2Gross - p2FICA - getVal('p2CityTax') - getVal('p2OtherSupport');
+
+      document.getElementById('p1AdjustedTotal').textContent = formatCurrency(Math.max(0, p1Adjusted));
+      document.getElementById('p2AdjustedTotal').textContent = formatCurrency(Math.max(0, p2Adjusted));
+    }
+
+    // Calculate maintenance duration
+    function calculateDuration() {
+      const marriageDate = document.getElementById('marriageDate').value;
+      const divorceDate = document.getElementById('divorceDate').value;
+
+      if (marriageDate && divorceDate) {
+        const start = new Date(marriageDate);
+        const end = new Date(divorceDate);
+        const years = (end - start) / (365.25 * 24 * 60 * 60 * 1000);
+
+        if (years > 0) {
+          document.getElementById('durationResult').style.display = 'block';
+          document.getElementById('marriageLength').textContent = years.toFixed(1) + ' years';
+
+          // NY advisory schedule
+          let minPct, maxPct;
+          if (years <= 15) {
+            minPct = 0.15; maxPct = 0.30;
+          } else if (years <= 20) {
+            minPct = 0.30; maxPct = 0.40;
+          } else {
+            minPct = 0.35; maxPct = 0.50;
+          }
+
+          const minMonths = Math.round(years * 12 * minPct);
+          const maxMonths = Math.round(years * 12 * maxPct);
+
+          document.getElementById('maintenanceDuration').textContent = minMonths + ' - ' + maxMonths + ' months';
+        }
+      }
+    }
+
+    // Main calculation
+    function calculateSupport() {
+      // Get adjusted incomes
+      const p1GrossText = document.getElementById('p1AdjustedTotal').textContent;
+      const p2GrossText = document.getElementById('p2AdjustedTotal').textContent;
+      const p1Income = parseFloat(p1GrossText.replace(/[$,]/g, '')) || 0;
+      const p2Income = parseFloat(p2GrossText.replace(/[$,]/g, '')) || 0;
+
+      const party1Name = document.getElementById('party1Name').value || 'Party 1';
+      const party2Name = document.getElementById('party2Name').value || 'Party 2';
+
+      // Determine payor (higher income)
+      const p1IsPayor = p1Income > p2Income;
+      const payorIncome = p1IsPayor ? p1Income : p2Income;
+      const payeeIncome = p1IsPayor ? p2Income : p1Income;
+      const payorName = p1IsPayor ? party1Name : party2Name;
+      const payeeName = p1IsPayor ? party2Name : party1Name;
+
+      // Check if children exist
+      const hasChildren = document.querySelector('[name="hasChildren"]:checked')?.value === 'yes';
+      const numChildren = hasChildren ? parseInt(document.getElementById('numChildren').value) : 0;
+      const custodialParent = hasChildren ? document.getElementById('custodialParent').value : null;
+
+      // === MAINTENANCE CALCULATION ===
+      // Cap income for calculation
+      const cappedPayorIncome = Math.min(payorIncome, NY_CONFIG.incomeCap);
+      const cappedPayeeIncome = Math.min(payeeIncome, NY_CONFIG.incomeCap);
+
+      // Maintenance formulas (adjust percentages if concurrent child support)
+      let payorPct = hasChildren ? 0.20 : 0.30;
+      let payeePct = hasChildren ? 0.25 : 0.20;
+
+      // Formula 1: (payor income × payorPct) - (payee income × payeePct)
+      const formula1 = (cappedPayorIncome * payorPct) - (cappedPayeeIncome * payeePct);
+
+      // Formula 2: 40% of combined income minus payee income
+      const formula2 = ((cappedPayorIncome + cappedPayeeIncome) * 0.40) - cappedPayeeIncome;
+
+      // Use lower of two, but not less than zero
+      let maintenanceAnnual = Math.max(0, Math.min(formula1, formula2));
+
+      // Self-support reserve check for payor
+      const payorAfterMaintenance = payorIncome - maintenanceAnnual;
+      if (payorAfterMaintenance < NY_CONFIG.selfSupportReserve) {
+        maintenanceAnnual = Math.max(0, payorIncome - NY_CONFIG.selfSupportReserve);
+      }
+
+      const maintenanceMonthly = maintenanceAnnual / 12;
+
+      // === CHILD SUPPORT CALCULATION ===
+      let childSupportAnnual = 0;
+      let cssaPct = 0;
+      let csPayorName = '';
+
+      if (hasChildren && numChildren > 0) {
+        // Get the percentage based on number of children
+        cssaPct = NY_CONFIG.childSupportPercentages[Math.min(numChildren, 5)];
+
+        // Determine who pays child support (non-custodial parent)
+        // After maintenance adjustment
+        let csPayorIncome, csPayorIsP1;
+
+        if (custodialParent === 'party1') {
+          // Party 2 is non-custodial, pays child support
+          csPayorIsP1 = false;
+          // Adjust Party 2's income for maintenance received/paid
+          csPayorIncome = p1IsPayor ? p2Income + maintenanceAnnual : p2Income - maintenanceAnnual;
+          csPayorName = party2Name;
+        } else {
+          // Party 1 is non-custodial, pays child support
+          csPayorIsP1 = true;
+          // Adjust Party 1's income for maintenance received/paid
+          csPayorIncome = p1IsPayor ? p1Income - maintenanceAnnual : p1Income + maintenanceAnnual;
+          csPayorName = party1Name;
+        }
+
+        // Cap for child support
+        const cappedCSIncome = Math.min(Math.max(0, csPayorIncome), NY_CONFIG.incomeCap);
+
+        // Calculate child support
+        childSupportAnnual = cappedCSIncome * cssaPct;
+
+        // Self-support reserve check
+        const csPayorAfter = csPayorIncome - childSupportAnnual;
+        if (csPayorAfter < NY_CONFIG.selfSupportReserve) {
+          childSupportAnnual = Math.max(0, csPayorIncome - NY_CONFIG.selfSupportReserve);
+        }
+      }
+
+      const childSupportMonthly = childSupportAnnual / 12;
+
+      // === DISPLAY RESULTS ===
+      document.getElementById('resultsSection').classList.add('visible');
+
+      // Maintenance results
+      document.getElementById('maintenanceMonthly').textContent = formatCurrency(maintenanceMonthly);
+      document.getElementById('maintenanceAnnual').textContent = formatCurrency(maintenanceAnnual);
+      document.getElementById('maintenancePayor').textContent = maintenanceAnnual > 0 ? payorName : 'N/A';
+      document.getElementById('maintenancePayee').textContent = maintenanceAnnual > 0 ? payeeName : 'N/A';
+
+      // Duration if calculated
+      const durationText = document.getElementById('maintenanceDuration')?.textContent;
+      if (durationText && durationText !== '-') {
+        document.getElementById('durationRow').style.display = 'flex';
+        document.getElementById('maintenanceDurationResult').textContent = durationText;
+      }
+
+      // Child support results
+      if (hasChildren) {
+        document.getElementById('childSupportResults').style.display = 'block';
+        document.getElementById('childSupportMonthly').textContent = formatCurrency(childSupportMonthly);
+        document.getElementById('childSupportAnnual').textContent = formatCurrency(childSupportAnnual);
+        document.getElementById('cssaPercentage').textContent = (cssaPct * 100) + '% (' + numChildren + ' child' + (numChildren > 1 ? 'ren' : '') + ')';
+        document.getElementById('childSupportPayor').textContent = csPayorName;
+      } else {
+        document.getElementById('childSupportResults').style.display = 'none';
+      }
+
+      // Combined summary
+      const totalMonthly = maintenanceMonthly + childSupportMonthly;
+      const totalAnnual = maintenanceAnnual + childSupportAnnual;
+      document.getElementById('totalMonthly').textContent = formatCurrency(totalMonthly);
+      document.getElementById('totalAnnual').textContent = formatCurrency(totalAnnual);
+
+      // Scroll to results
+      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Reset calculator
+    function resetCalculator() {
+      // Reset all inputs
+      document.querySelectorAll('.calc-input').forEach(input => {
+        if (input.type === 'number' || input.type === 'text') {
+          input.value = '';
+        } else if (input.type === 'date') {
+          input.value = '';
+        }
+      });
+
+      // Reset selects
+      document.querySelectorAll('.calc-select').forEach(select => {
+        select.selectedIndex = 0;
+      });
+
+      // Reset toggles
+      toggleFICA('estimate');
+      toggleChildren('yes');
+
+      // Reset totals
+      calculateTotals();
+
+      // Hide results
+      document.getElementById('resultsSection').classList.remove('visible');
+      document.getElementById('durationResult').style.display = 'none';
+      document.getElementById('durationRow').style.display = 'none';
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', function() {
+      calculateTotals();
+    });
+  </script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "New York Child Support Calculator",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "Clearly LLC",
+      "url": "https://getclearly.app"
+    },
+    "description": "Calculate New York child support and spousal maintenance using official 2025 CSSA guidelines. Privacy-first: all calculations performed locally.",
+    "featureList": [
+      "Child support calculation using CSSA percentages",
+      "Spousal maintenance calculation",
+      "Income cap adjustments",
+      "FICA and city tax deductions",
+      "Maintenance duration guidelines"
+    ],
+    "dateModified": "2025-01-01"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is child support calculated in New York?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "New York uses the Child Support Standards Act (CSSA). The non-custodial parent pays a percentage of their income after FICA deductions: 17% for 1 child, 25% for 2 children, 29% for 3 children, 31% for 4 children, and 35% for 5 or more children. An income cap applies (currently $228,000 in 2025)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is spousal maintenance calculated in New York?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "New York uses two formulas and applies the lower result: (1) 30% of payor's income minus 20% of payee's income, or (2) 40% of combined income minus payee's income. If child support is also being paid, the percentages adjust to 20% and 25% respectively."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the income cap for child support in New York?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The income cap for child support calculations in New York is $228,000 as of 2025. This cap is adjusted every two years. Courts have discretion to apply guideline percentages to income above the cap."
+        }
+      }
+    ]
+  }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DYZ1XEXPMT');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Child Support & Maintenance Calculator | All 50 States | Clearly</title>
+  <meta name="description" content="Free child support and spousal maintenance calculator for all 50 US states. Privacy-first: no data stored, all calculations happen in your browser. Based on official state guidelines.">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://getclearly.app/calculators/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getclearly.app/calculators/">
+  <meta property="og:title" content="Child Support & Maintenance Calculator | All 50 States">
+  <meta property="og:description" content="Free child support and spousal maintenance calculator for all 50 US states. Privacy-first: no data stored.">
+  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+  <meta property="og:site_name" content="Clearly">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Child Support & Maintenance Calculator | All 50 States">
+  <meta name="twitter:description" content="Free child support and spousal maintenance calculator for all 50 US states. Privacy-first: no data stored.">
+  <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+
+  <!-- Additional SEO -->
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="child support calculator, spousal support calculator, maintenance calculator, alimony calculator, divorce calculator, custody calculator, child support by state">
+  <meta name="author" content="Clearly LLC">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
+  <link rel="apple-touch-icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+
+  <style>
+    .calc-hero {
+      padding: 80px 0 60px;
+      text-align: center;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+    }
+    .calc-hero h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      letter-spacing: -0.02em;
+    }
+    .calc-hero p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 40px;
+    }
+    .state-selector {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .state-select {
+      width: 100%;
+      padding: 16px 20px;
+      font-size: 18px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      background: var(--surface);
+      color: var(--text);
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%235C5856' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+    }
+    .state-select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .popular-states {
+      margin-top: 24px;
+    }
+    .popular-states p {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .state-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+    .state-chip {
+      display: inline-block;
+      padding: 10px 20px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .state-chip:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .state-chip.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: white;
+    }
+    .state-chip.coming-soon {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .features-section {
+      padding: 80px 0;
+      background: var(--surface);
+    }
+    .features-section h2 {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 48px;
+    }
+    .calc-features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .calc-feature {
+      text-align: center;
+    }
+    .calc-feature-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--primary-soft);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      color: var(--primary);
+    }
+    .calc-feature h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .calc-feature p {
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+    .all-states-section {
+      padding: 80px 0;
+    }
+    .all-states-section h2 {
+      text-align: center;
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .all-states-section > .container > p {
+      text-align: center;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+    }
+    .states-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 12px;
+    }
+    .state-link {
+      display: block;
+      padding: 14px 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .state-link:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      text-decoration: none;
+    }
+    .state-link.available {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+      color: var(--primary);
+      font-weight: 500;
+    }
+    .state-link.coming-soon {
+      color: var(--text-muted);
+      background: var(--bg);
+    }
+    .state-link .status {
+      font-size: 12px;
+      color: var(--text-muted);
+      display: block;
+      margin-top: 4px;
+    }
+    .disclaimer-section {
+      padding: 60px 0;
+      background: var(--surface);
+    }
+    .disclaimer-card {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #FEF3C7;
+      border: 1px solid #F59E0B;
+      border-radius: 16px;
+      padding: 32px;
+    }
+    .disclaimer-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #92400E;
+      margin-bottom: 16px;
+    }
+    .disclaimer-card p {
+      font-size: 15px;
+      color: #78350F;
+      margin-bottom: 12px;
+      line-height: 1.6;
+    }
+    .disclaimer-card p:last-child {
+      margin-bottom: 0;
+    }
+    @media (max-width: 768px) {
+      .calc-hero {
+        padding: 60px 0 40px;
+      }
+      .calc-hero h1 {
+        font-size: 32px;
+      }
+      .calc-features {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .states-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <a href="/" class="nav-brand">
+        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+        Clearly
+      </a>
+      <ul class="nav-links">
+        <li><a href="/#features">Features</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="calc-hero">
+    <div class="container fade-in">
+      <h1>Child Support &<br>Maintenance Calculator</h1>
+      <p>Free, private calculators based on your state's official guidelines. All calculations happen in your browser — we never store your data.</p>
+
+      <div class="state-selector">
+        <select class="state-select" id="stateSelect" onchange="navigateToState(this.value)">
+          <option value="">Select your state...</option>
+          <option value="new-york">New York</option>
+          <option value="california" disabled>California (Coming Soon)</option>
+          <option value="texas" disabled>Texas (Coming Soon)</option>
+          <option value="florida" disabled>Florida (Coming Soon)</option>
+        </select>
+      </div>
+
+      <div class="popular-states">
+        <p>Popular calculators:</p>
+        <div class="state-chips">
+          <a href="/calculators/support/new-york.html" class="state-chip active">New York</a>
+          <span class="state-chip coming-soon">California</span>
+          <span class="state-chip coming-soon">Texas</span>
+          <span class="state-chip coming-soon">Florida</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="container">
+      <h2 class="fade-in">Why use our calculator?</h2>
+      <div class="calc-features">
+        <div class="calc-feature fade-in">
+          <div class="calc-feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          </div>
+          <h3>100% Private</h3>
+          <p>All calculations happen in your browser. We never see, store, or transmit your financial data.</p>
+        </div>
+        <div class="calc-feature fade-in">
+          <div class="calc-feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><polyline points="9 12 11 14 15 10"></polyline></svg>
+          </div>
+          <h3>Official Formulas</h3>
+          <p>Based on each state's statutory guidelines and updated regularly to reflect current law.</p>
+        </div>
+        <div class="calc-feature fade-in">
+          <div class="calc-feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          </div>
+          <h3>Comprehensive</h3>
+          <p>Includes maintenance (alimony), child support, income caps, deductions, and deviation options.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- All States Section -->
+  <section class="all-states-section">
+    <div class="container">
+      <h2 class="fade-in">All 50 States</h2>
+      <p class="fade-in">We're adding new states regularly. Available calculators are highlighted.</p>
+
+      <div class="states-grid fade-in">
+        <a href="#" class="state-link coming-soon">Alabama<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Alaska<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Arizona<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Arkansas<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">California<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Colorado<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Connecticut<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Delaware<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Florida<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Georgia<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Hawaii<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Idaho<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Illinois<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Indiana<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Iowa<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Kansas<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Kentucky<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Louisiana<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Maine<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Maryland<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Massachusetts<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Michigan<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Minnesota<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Mississippi<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Missouri<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Montana<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Nebraska<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Nevada<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">New Hampshire<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">New Jersey<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">New Mexico<span class="status">Coming soon</span></a>
+        <a href="/calculators/support/new-york.html" class="state-link available">New York<span class="status">Available</span></a>
+        <a href="#" class="state-link coming-soon">North Carolina<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">North Dakota<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Ohio<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Oklahoma<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Oregon<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Pennsylvania<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Rhode Island<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">South Carolina<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">South Dakota<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Tennessee<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Texas<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Utah<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Vermont<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Virginia<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Washington<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">West Virginia<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Wisconsin<span class="status">Coming soon</span></a>
+        <a href="#" class="state-link coming-soon">Wyoming<span class="status">Coming soon</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Disclaimer Section -->
+  <section class="disclaimer-section">
+    <div class="container">
+      <div class="disclaimer-card fade-in">
+        <h3>Important Disclaimer</h3>
+        <p>These calculators provide <strong>estimates only</strong> based on statutory guidelines. Actual support amounts may differ based on judicial discretion, specific circumstances of your case, and local court practices.</p>
+        <p>This tool is for informational purposes only and does not constitute legal advice. For guidance specific to your situation, please consult a qualified family law attorney.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="cta-pattern"></div>
+    <div class="container fade-in">
+      <div class="cta-content">
+        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="cta-icon">
+        <h2>Managing co-parenting?</h2>
+        <p>Clearly helps co-parents coordinate schedules, track expenses, and communicate without conflict.</p>
+        <a href="https://apps.apple.com/app/clearly" target="_blank" class="app-store-badge">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83" alt="Download on the App Store">
+        </a>
+        <p class="cta-note">Free trial included. No credit card required.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-section">
+          <div class="footer-brand">
+            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+            <span>Clearly</span>
+          </div>
+          <p class="footer-tagline">Co-parenting made clear.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <ul>
+              <li><a href="/#features">Features</a></li>
+              <li><a href="/#pricing">Pricing</a></li>
+              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="/calculators/">Support Calculator</a></li>
+              <li><a href="/faq.html">FAQ</a></li>
+              <li><a href="/help.html">Help Center</a></li>
+              <li><a href="/blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="/professionals.html">For Professionals</a></li>
+              <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="/privacy.html">Privacy Policy</a></li>
+              <li><a href="/terms.html">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Clearly LLC. All rights reserved.</p>
+        <p>Proudly designed and developed in the USA.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+
+    // Scroll animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // State selector navigation
+    function navigateToState(state) {
+      if (state) {
+        window.location.href = '/calculators/support/' + state + '.html';
+      }
+    }
+  </script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Child Support & Maintenance Calculator",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "Clearly LLC",
+      "url": "https://getclearly.app"
+    },
+    "description": "Free child support and spousal maintenance calculators for all 50 US states. Privacy-first: all calculations performed in your browser.",
+    "featureList": [
+      "Child support calculation",
+      "Spousal maintenance calculation",
+      "State-specific formulas",
+      "Income deductions",
+      "Privacy-first design"
+    ]
+  }
+  </script>
+
+</body>
+</html>
