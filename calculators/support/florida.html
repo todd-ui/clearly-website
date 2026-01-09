@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
+  <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-DYZ1XEXPMT');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Florida Child Support Calculator 2025 | Free & Private | Clearly</title>
+  <meta name="description" content="Calculate Florida child support using the official income shares model. Free, private calculator based on Florida Statute 61.30. No data stored.">
+  <link rel="canonical" href="https://getclearly.app/calculators/support/florida.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getclearly.app/calculators/support/florida.html">
+  <meta property="og:title" content="Florida Child Support Calculator 2025 | Free & Private">
+  <meta property="og:description" content="Calculate Florida child support using the income shares model. Free, private - no data stored.">
+  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="florida child support calculator, FL child support, florida statute 61.30, florida child support guidelines 2025, income shares florida">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
+  <style>
+    .calc-page-header { padding: 60px 0 40px; background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%); border-bottom: 1px solid var(--border); }
+    .calc-page-header .container { max-width: 900px; }
+    .calc-page-header h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+    .calc-page-header p { font-size: 17px; color: var(--text-secondary); margin-bottom: 8px; }
+    .calc-page-header .last-updated { font-size: 14px; color: var(--text-muted); }
+    .calc-breadcrumb { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; }
+    .calc-breadcrumb a { color: var(--primary); }
+    .calculator-section { padding: 40px 0 80px; }
+    .calculator-section .container { max-width: 900px; }
+    .calc-form-group { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; overflow: hidden; }
+    .calc-form-header { padding: 20px 24px; background: var(--bg); border-bottom: 1px solid var(--border); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .calc-form-header h3 { font-size: 17px; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 10px; }
+    .calc-form-body { padding: 24px; }
+    .calc-form-group.collapsed .calc-form-body { display: none; }
+    .income-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .income-column h4 { font-size: 15px; font-weight: 600; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--primary-soft); }
+    .calc-field { margin-bottom: 16px; }
+    .calc-field label { display: block; font-size: 14px; font-weight: 500; color: var(--text-secondary); margin-bottom: 6px; }
+    .calc-input { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; }
+    .calc-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+    .calc-input-prefix { position: relative; }
+    .calc-input-prefix .calc-input { padding-left: 28px; }
+    .calc-input-prefix::before { content: "$"; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+    .calc-subtotal { background: var(--primary-soft); border-radius: 8px; padding: 14px 16px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .calc-subtotal label { font-size: 14px; font-weight: 600; color: var(--primary-dark); margin: 0; }
+    .calc-subtotal-value { font-size: 18px; font-weight: 700; color: var(--primary); }
+    .calc-select { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; background: var(--surface); }
+    .calc-results-section { margin-top: 32px; display: none; }
+    .calc-results-section.visible { display: block; }
+    .calc-results-card { background: var(--primary-soft); border: 1px solid var(--primary-border); border-radius: 20px; padding: 32px; margin-bottom: 20px; }
+    .calc-results-card h3 { font-size: 14px; font-weight: 600; text-transform: uppercase; color: var(--primary-dark); margin-bottom: 20px; }
+    .calc-result-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--primary-border); }
+    .calc-result-row:last-child { border-bottom: none; }
+    .calc-result-label { font-size: 15px; color: var(--text-secondary); }
+    .calc-result-value { font-size: 18px; font-weight: 700; color: var(--text); }
+    .calc-result-primary { background: var(--primary); color: white; padding: 16px 20px; border-radius: 12px; margin: -8px -8px 16px; }
+    .calc-result-primary .calc-result-label { color: rgba(255,255,255,0.8); }
+    .calc-result-primary .calc-result-value { font-size: 28px; color: white; }
+    .calc-disclaimer { background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 12px; padding: 20px 24px; margin-top: 24px; }
+    .calc-disclaimer h4 { font-size: 15px; font-weight: 600; color: #92400E; margin-bottom: 8px; }
+    .calc-disclaimer p { font-size: 14px; color: #78350F; margin: 0; line-height: 1.6; }
+    .calc-button-row { margin-top: 32px; display: flex; gap: 16px; }
+    .btn-calculate { flex: 1; padding: 18px 32px; font-size: 18px; border: none; }
+    .btn-reset { padding: 18px 24px; background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); }
+    .calc-note { font-size: 13px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+    .calc-info-box { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    .calc-info-box h4 { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
+    .calc-info-box p { font-size: 14px; color: var(--text-secondary); margin: 0; }
+    @media (max-width: 768px) {
+      .calc-page-header h1 { font-size: 28px; }
+      .income-grid { grid-template-columns: 1fr; }
+      .calc-button-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <a href="/" class="nav-brand"><img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">Clearly</a>
+      <ul class="nav-links">
+        <li><a href="/#features">Features</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <header class="calc-page-header">
+    <div class="container">
+      <div class="calc-breadcrumb"><a href="/calculators/">All Calculators</a> / Florida</div>
+      <h1>Florida Child Support Calculator</h1>
+      <p>Calculate guideline child support using Florida's income shares model (Florida Statute 61.30).</p>
+      <p class="last-updated">Based on Florida guidelines. Both parents' incomes determine support.</p>
+    </div>
+  </header>
+
+  <section class="calculator-section">
+    <div class="container">
+      <div class="calc-info-box">
+        <h4>How Florida Calculates Child Support</h4>
+        <p>Florida uses the Income Shares model. Both parents' net incomes are combined to determine what would have been spent on the children in an intact household. Each parent then pays their proportional share based on their percentage of the combined income.</p>
+      </div>
+
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="this.parentElement.classList.toggle('collapsed')">
+          <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>Monthly Income</h3>
+        </div>
+        <div class="calc-form-body">
+          <div class="income-grid">
+            <div class="income-column">
+              <h4>Parent 1</h4>
+              <div class="calc-field">
+                <label>Net Monthly Income</label>
+                <div class="calc-input-prefix"><input type="number" class="calc-input" id="p1Income" placeholder="0" onchange="calculateTotals()"></div>
+                <p class="calc-note">After taxes and allowable deductions</p>
+              </div>
+            </div>
+            <div class="income-column">
+              <h4>Parent 2</h4>
+              <div class="calc-field">
+                <label>Net Monthly Income</label>
+                <div class="calc-input-prefix"><input type="number" class="calc-input" id="p2Income" placeholder="0" onchange="calculateTotals()"></div>
+                <p class="calc-note">After taxes and allowable deductions</p>
+              </div>
+            </div>
+          </div>
+          <div class="calc-subtotal">
+            <label>Combined Net Monthly Income</label>
+            <span class="calc-subtotal-value" id="combinedIncome">$0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="this.parentElement.classList.toggle('collapsed')">
+          <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>Children & Expenses</h3>
+        </div>
+        <div class="calc-form-body">
+          <div class="income-grid">
+            <div class="calc-field">
+              <label>Number of Children</label>
+              <select class="calc-select" id="numChildren">
+                <option value="1">1 child</option>
+                <option value="2">2 children</option>
+                <option value="3">3 children</option>
+                <option value="4">4 children</option>
+                <option value="5">5 children</option>
+                <option value="6">6 children</option>
+              </select>
+            </div>
+            <div class="calc-field">
+              <label>Primary Custodial Parent</label>
+              <select class="calc-select" id="custodialParent">
+                <option value="1">Parent 1</option>
+                <option value="2">Parent 2</option>
+              </select>
+            </div>
+            <div class="calc-field">
+              <label>Monthly Childcare Costs</label>
+              <div class="calc-input-prefix"><input type="number" class="calc-input" id="childcare" placeholder="0"></div>
+            </div>
+            <div class="calc-field">
+              <label>Monthly Health Insurance (children)</label>
+              <div class="calc-input-prefix"><input type="number" class="calc-input" id="healthIns" placeholder="0"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-button-row">
+        <button class="btn btn-primary btn-calculate" onclick="calculateSupport()">Calculate Child Support</button>
+        <button class="btn btn-reset" onclick="resetCalculator()">Reset</button>
+      </div>
+
+      <div class="calc-results-section" id="resultsSection">
+        <h2 style="font-size: 24px; font-weight: 700; margin: 32px 0 24px;">Results</h2>
+        <div class="calc-results-card">
+          <h3>Guideline Child Support</h3>
+          <div class="calc-result-primary">
+            <div class="calc-result-row" style="border: none; padding: 0;">
+              <span class="calc-result-label">Monthly Child Support</span>
+              <span class="calc-result-value" id="monthlySupport">$0</span>
+            </div>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Annual Amount</span>
+            <span class="calc-result-value" id="annualSupport">$0</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Payor</span>
+            <span class="calc-result-value" id="payorParent">-</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Basic Support Obligation</span>
+            <span class="calc-result-value" id="basicObligation">$0</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Payor's Income Share</span>
+            <span class="calc-result-value" id="incomeShare">0%</span>
+          </div>
+        </div>
+        <div class="calc-disclaimer">
+          <h4>Important Disclaimer</h4>
+          <p>This calculator provides <strong>estimates only</strong> based on Florida Statute 61.30 guidelines. Actual amounts may differ based on judicial discretion, shared parenting adjustments (substantial time-sharing), and specific case factors. This is not legal advice. Consult a Florida family law attorney for accurate guidance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-pattern"></div>
+    <div class="container"><div class="cta-content">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="cta-icon">
+      <h2>Managing co-parenting?</h2>
+      <p>Clearly helps co-parents coordinate schedules, track expenses, and communicate without conflict.</p>
+      <a href="https://apps.apple.com/app/clearly" target="_blank" class="app-store-badge"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83" alt="Download on the App Store"></a>
+    </div></div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-section">
+          <div class="footer-brand"><img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly"><span>Clearly</span></div>
+          <p class="footer-tagline">Co-parenting made clear.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col"><h4>Product</h4><ul><li><a href="/#features">Features</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li></ul></div>
+          <div class="footer-col"><h4>Resources</h4><ul><li><a href="/calculators/">Support Calculator</a></li><li><a href="/faq.html">FAQ</a></li><li><a href="/help.html">Help Center</a></li><li><a href="/blog.html">Blog</a></li></ul></div>
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="/professionals.html">For Professionals</a></li><li><a href="mailto:care@getclearly.app">Contact Us</a></li></ul></div>
+          <div class="footer-col"><h4>Legal</h4><ul><li><a href="/privacy.html">Privacy Policy</a></li><li><a href="/terms.html">Terms of Service</a></li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2025 Clearly LLC. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script>
+    // Florida child support schedule (simplified - based on FL Statute 61.30)
+    const FL_SCHEDULE = {
+      // Combined monthly income brackets and basic obligation per child
+      // Format: [maxIncome, [1child, 2child, 3child, 4child, 5child, 6child]]
+      brackets: [
+        [800, [190, 211, 213, 215, 216, 218]],
+        [1000, [213, 305, 308, 310, 312, 315]],
+        [1500, [280, 437, 541, 593, 643, 693]],
+        [2000, [345, 545, 683, 754, 823, 892]],
+        [2500, [408, 646, 813, 902, 988, 1073]],
+        [3000, [469, 743, 938, 1044, 1146, 1248]],
+        [3500, [528, 837, 1059, 1181, 1299, 1417]],
+        [4000, [586, 929, 1176, 1314, 1448, 1582]],
+        [4500, [643, 1019, 1291, 1444, 1593, 1743]],
+        [5000, [699, 1108, 1404, 1572, 1736, 1900]],
+        [5500, [754, 1195, 1515, 1697, 1876, 2054]],
+        [6000, [808, 1281, 1624, 1821, 2014, 2206]],
+        [6500, [861, 1365, 1731, 1942, 2149, 2356]],
+        [7000, [914, 1448, 1837, 2062, 2283, 2503]],
+        [7500, [965, 1530, 1942, 2181, 2415, 2649]],
+        [8000, [1016, 1611, 2045, 2298, 2545, 2793]],
+        [8500, [1067, 1691, 2147, 2413, 2675, 2936]],
+        [9000, [1117, 1770, 2248, 2528, 2802, 3077]],
+        [9500, [1166, 1849, 2349, 2641, 2929, 3217]],
+        [10000, [1215, 1926, 2448, 2754, 3054, 3355]],
+        [15000, [1644, 2606, 3312, 3727, 4134, 4541]]
+      ]
+    };
+
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    navToggle.addEventListener('click', () => { navToggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+
+    function formatCurrency(amount) { return '$' + Math.round(amount).toLocaleString(); }
+    function getVal(id) { return parseFloat(document.getElementById(id).value) || 0; }
+
+    function calculateTotals() {
+      const combined = getVal('p1Income') + getVal('p2Income');
+      document.getElementById('combinedIncome').textContent = formatCurrency(combined);
+    }
+
+    function getBasicObligation(combinedIncome, numChildren) {
+      for (let i = 0; i < FL_SCHEDULE.brackets.length; i++) {
+        if (combinedIncome <= FL_SCHEDULE.brackets[i][0]) {
+          return FL_SCHEDULE.brackets[i][1][numChildren - 1];
+        }
+      }
+      // Above max bracket - extrapolate
+      const lastBracket = FL_SCHEDULE.brackets[FL_SCHEDULE.brackets.length - 1];
+      const ratio = combinedIncome / lastBracket[0];
+      return Math.round(lastBracket[1][numChildren - 1] * ratio);
+    }
+
+    function calculateSupport() {
+      const p1Income = getVal('p1Income');
+      const p2Income = getVal('p2Income');
+      const combined = p1Income + p2Income;
+      const numChildren = parseInt(document.getElementById('numChildren').value);
+      const custodialParent = document.getElementById('custodialParent').value;
+      const childcare = getVal('childcare');
+      const healthIns = getVal('healthIns');
+
+      if (combined <= 0) {
+        alert('Please enter income for at least one parent.');
+        return;
+      }
+
+      // Get basic obligation from schedule
+      const basicObligation = getBasicObligation(combined, numChildren);
+
+      // Add childcare and health insurance
+      const totalObligation = basicObligation + childcare + healthIns;
+
+      // Calculate each parent's share
+      const p1Share = p1Income / combined;
+      const p2Share = p2Income / combined;
+
+      // Non-custodial parent pays their share
+      const payorIsP1 = custodialParent === '2';
+      const payorShare = payorIsP1 ? p1Share : p2Share;
+      const monthlySupport = totalObligation * payorShare;
+
+      // Display results
+      document.getElementById('resultsSection').classList.add('visible');
+      document.getElementById('monthlySupport').textContent = formatCurrency(monthlySupport);
+      document.getElementById('annualSupport').textContent = formatCurrency(monthlySupport * 12);
+      document.getElementById('payorParent').textContent = payorIsP1 ? 'Parent 1' : 'Parent 2';
+      document.getElementById('basicObligation').textContent = formatCurrency(totalObligation);
+      document.getElementById('incomeShare').textContent = (payorShare * 100).toFixed(1) + '%';
+
+      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetCalculator() {
+      document.querySelectorAll('.calc-input').forEach(input => input.value = '');
+      document.querySelectorAll('.calc-select').forEach(select => select.selectedIndex = 0);
+      calculateTotals();
+      document.getElementById('resultsSection').classList.remove('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.addEventListener('DOMContentLoaded', calculateTotals);
+  </script>
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Florida Child Support Calculator","applicationCategory":"FinanceApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"creator":{"@type":"Organization","name":"Clearly LLC"},"description":"Calculate Florida child support using the income shares model based on Florida Statute 61.30."}
+  </script>
+</body>
+</html>

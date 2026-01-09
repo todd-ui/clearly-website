@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
+  <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-DYZ1XEXPMT');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Illinois Child Support Calculator 2025 | Free & Private | Clearly</title>
+  <meta name="description" content="Calculate Illinois child support using the official income shares model (750 ILCS 5/505). Free, private calculator - no data stored.">
+  <link rel="canonical" href="https://getclearly.app/calculators/support/illinois.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getclearly.app/calculators/support/illinois.html">
+  <meta property="og:title" content="Illinois Child Support Calculator 2025 | Free & Private">
+  <meta property="og:description" content="Calculate Illinois child support using the income shares model. Free, private - no data stored.">
+  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="illinois child support calculator, IL child support, 750 ILCS 5/505, illinois child support guidelines 2025, income shares illinois">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
+  <style>
+    .calc-page-header { padding: 60px 0 40px; background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%); border-bottom: 1px solid var(--border); }
+    .calc-page-header .container { max-width: 900px; }
+    .calc-page-header h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+    .calc-page-header p { font-size: 17px; color: var(--text-secondary); margin-bottom: 8px; }
+    .calc-page-header .last-updated { font-size: 14px; color: var(--text-muted); }
+    .calc-breadcrumb { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; }
+    .calc-breadcrumb a { color: var(--primary); }
+    .calculator-section { padding: 40px 0 80px; }
+    .calculator-section .container { max-width: 900px; }
+    .calc-form-group { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; overflow: hidden; }
+    .calc-form-header { padding: 20px 24px; background: var(--bg); border-bottom: 1px solid var(--border); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .calc-form-header h3 { font-size: 17px; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 10px; }
+    .calc-form-body { padding: 24px; }
+    .calc-form-group.collapsed .calc-form-body { display: none; }
+    .income-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .income-column h4 { font-size: 15px; font-weight: 600; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--primary-soft); }
+    .calc-field { margin-bottom: 16px; }
+    .calc-field label { display: block; font-size: 14px; font-weight: 500; color: var(--text-secondary); margin-bottom: 6px; }
+    .calc-input { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; }
+    .calc-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+    .calc-input-prefix { position: relative; }
+    .calc-input-prefix .calc-input { padding-left: 28px; }
+    .calc-input-prefix::before { content: "$"; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+    .calc-subtotal { background: var(--primary-soft); border-radius: 8px; padding: 14px 16px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .calc-subtotal label { font-size: 14px; font-weight: 600; color: var(--primary-dark); margin: 0; }
+    .calc-subtotal-value { font-size: 18px; font-weight: 700; color: var(--primary); }
+    .calc-select { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; background: var(--surface); }
+    .calc-results-section { margin-top: 32px; display: none; }
+    .calc-results-section.visible { display: block; }
+    .calc-results-card { background: var(--primary-soft); border: 1px solid var(--primary-border); border-radius: 20px; padding: 32px; margin-bottom: 20px; }
+    .calc-results-card h3 { font-size: 14px; font-weight: 600; text-transform: uppercase; color: var(--primary-dark); margin-bottom: 20px; }
+    .calc-result-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--primary-border); }
+    .calc-result-row:last-child { border-bottom: none; }
+    .calc-result-label { font-size: 15px; color: var(--text-secondary); }
+    .calc-result-value { font-size: 18px; font-weight: 700; color: var(--text); }
+    .calc-result-primary { background: var(--primary); color: white; padding: 16px 20px; border-radius: 12px; margin: -8px -8px 16px; }
+    .calc-result-primary .calc-result-label { color: rgba(255,255,255,0.8); }
+    .calc-result-primary .calc-result-value { font-size: 28px; color: white; }
+    .calc-disclaimer { background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 12px; padding: 20px 24px; margin-top: 24px; }
+    .calc-disclaimer h4 { font-size: 15px; font-weight: 600; color: #92400E; margin-bottom: 8px; }
+    .calc-disclaimer p { font-size: 14px; color: #78350F; margin: 0; line-height: 1.6; }
+    .calc-button-row { margin-top: 32px; display: flex; gap: 16px; }
+    .btn-calculate { flex: 1; padding: 18px 32px; font-size: 18px; border: none; }
+    .btn-reset { padding: 18px 24px; background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); }
+    .calc-note { font-size: 13px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+    .calc-info-box { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    .calc-info-box h4 { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
+    .calc-info-box p { font-size: 14px; color: var(--text-secondary); margin: 0; }
+    .calc-toggle { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+    .calc-toggle-switch { position: relative; width: 48px; height: 28px; background: var(--border); border-radius: 14px; cursor: pointer; transition: background 0.2s; }
+    .calc-toggle-switch.active { background: var(--primary); }
+    .calc-toggle-switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 24px; height: 24px; background: white; border-radius: 50%; transition: transform 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
+    .calc-toggle-switch.active::after { transform: translateX(20px); }
+    .calc-toggle label { font-size: 14px; color: var(--text-secondary); cursor: pointer; }
+    @media (max-width: 768px) {
+      .calc-page-header h1 { font-size: 28px; }
+      .income-grid { grid-template-columns: 1fr; }
+      .calc-button-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <a href="/" class="nav-brand"><img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">Clearly</a>
+      <ul class="nav-links">
+        <li><a href="/#features">Features</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <header class="calc-page-header">
+    <div class="container">
+      <div class="calc-breadcrumb"><a href="/calculators/">All Calculators</a> / Illinois</div>
+      <h1>Illinois Child Support Calculator</h1>
+      <p>Calculate guideline child support using Illinois's income shares model (750 ILCS 5/505).</p>
+      <p class="last-updated">Based on 2025 Illinois guidelines. Both parents' incomes determine support.</p>
+    </div>
+  </header>
+
+  <section class="calculator-section">
+    <div class="container">
+      <div class="calc-info-box">
+        <h4>How Illinois Calculates Child Support</h4>
+        <p>Illinois uses the Income Shares model. Both parents' net incomes are combined to determine the basic support obligation. Each parent then contributes their proportional share based on their percentage of the combined income. Shared parenting adjustments apply when a parent has 146+ overnights (40%).</p>
+      </div>
+
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="this.parentElement.classList.toggle('collapsed')">
+          <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>Monthly Income</h3>
+        </div>
+        <div class="calc-form-body">
+          <div class="income-grid">
+            <div class="income-column">
+              <h4>Parent 1</h4>
+              <div class="calc-field">
+                <label>Gross Monthly Income</label>
+                <div class="calc-input-prefix"><input type="number" class="calc-input" id="p1GrossIncome" placeholder="0" onchange="calculateTotals()"></div>
+                <p class="calc-note">Before taxes</p>
+              </div>
+              <div class="calc-field">
+                <label>Net Monthly Income</label>
+                <div class="calc-input-prefix"><input type="number" class="calc-input" id="p1NetIncome" placeholder="0" onchange="calculateTotals()"></div>
+                <p class="calc-note">After standardized taxes (auto-calculated if left blank)</p>
+              </div>
+            </div>
+            <div class="income-column">
+              <h4>Parent 2</h4>
+              <div class="calc-field">
+                <label>Gross Monthly Income</label>
+                <div class="calc-input-prefix"><input type="number" class="calc-input" id="p2GrossIncome" placeholder="0" onchange="calculateTotals()"></div>
+                <p class="calc-note">Before taxes</p>
+              </div>
+              <div class="calc-field">
+                <label>Net Monthly Income</label>
+                <div class="calc-input-prefix"><input type="number" class="calc-input" id="p2NetIncome" placeholder="0" onchange="calculateTotals()"></div>
+                <p class="calc-note">After standardized taxes (auto-calculated if left blank)</p>
+              </div>
+            </div>
+          </div>
+          <div class="calc-subtotal">
+            <label>Combined Net Monthly Income</label>
+            <span class="calc-subtotal-value" id="combinedIncome">$0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="this.parentElement.classList.toggle('collapsed')">
+          <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>Children & Parenting Time</h3>
+        </div>
+        <div class="calc-form-body">
+          <div class="income-grid">
+            <div class="calc-field">
+              <label>Number of Children</label>
+              <select class="calc-select" id="numChildren">
+                <option value="1">1 child</option>
+                <option value="2">2 children</option>
+                <option value="3">3 children</option>
+                <option value="4">4 children</option>
+                <option value="5">5 children</option>
+                <option value="6">6 children</option>
+              </select>
+            </div>
+            <div class="calc-field">
+              <label>Primary Custodial Parent</label>
+              <select class="calc-select" id="custodialParent">
+                <option value="1">Parent 1</option>
+                <option value="2">Parent 2</option>
+              </select>
+            </div>
+          </div>
+          <div class="calc-toggle">
+            <div class="calc-toggle-switch" id="sharedToggle" onclick="toggleShared()"></div>
+            <label onclick="toggleShared()">Shared parenting (both parents have 40%+ overnights)</label>
+          </div>
+          <div id="sharedFields" style="display: none; margin-top: 20px;">
+            <div class="income-grid">
+              <div class="calc-field">
+                <label>Parent 1's Overnights per Year</label>
+                <input type="number" class="calc-input" id="p1Overnights" placeholder="182" max="365">
+              </div>
+              <div class="calc-field">
+                <label>Parent 2's Overnights per Year</label>
+                <input type="number" class="calc-input" id="p2Overnights" placeholder="183" max="365">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="this.parentElement.classList.toggle('collapsed')">
+          <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>Additional Expenses</h3>
+        </div>
+        <div class="calc-form-body">
+          <div class="income-grid">
+            <div class="calc-field">
+              <label>Monthly Childcare Costs</label>
+              <div class="calc-input-prefix"><input type="number" class="calc-input" id="childcare" placeholder="0"></div>
+              <p class="calc-note">Work-related childcare</p>
+            </div>
+            <div class="calc-field">
+              <label>Monthly Health Insurance (children)</label>
+              <div class="calc-input-prefix"><input type="number" class="calc-input" id="healthIns" placeholder="0"></div>
+              <p class="calc-note">Premium for children only</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-button-row">
+        <button class="btn btn-primary btn-calculate" onclick="calculateSupport()">Calculate Child Support</button>
+        <button class="btn btn-reset" onclick="resetCalculator()">Reset</button>
+      </div>
+
+      <div class="calc-results-section" id="resultsSection">
+        <h2 style="font-size: 24px; font-weight: 700; margin: 32px 0 24px;">Results</h2>
+        <div class="calc-results-card">
+          <h3>Guideline Child Support</h3>
+          <div class="calc-result-primary">
+            <div class="calc-result-row" style="border: none; padding: 0;">
+              <span class="calc-result-label">Monthly Child Support</span>
+              <span class="calc-result-value" id="monthlySupport">$0</span>
+            </div>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Annual Amount</span>
+            <span class="calc-result-value" id="annualSupport">$0</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Payor</span>
+            <span class="calc-result-value" id="payorParent">-</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Basic Support Obligation</span>
+            <span class="calc-result-value" id="basicObligation">$0</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Payor's Income Share</span>
+            <span class="calc-result-value" id="incomeShare">0%</span>
+          </div>
+        </div>
+        <div class="calc-disclaimer">
+          <h4>Important Disclaimer</h4>
+          <p>This calculator provides <strong>estimates only</strong> based on 750 ILCS 5/505 guidelines. Actual amounts may differ based on judicial discretion, deviations, and specific case factors. Low-income provisions may apply if income is below 75% of federal poverty guidelines. This is not legal advice. Consult an Illinois family law attorney for accurate guidance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-pattern"></div>
+    <div class="container"><div class="cta-content">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="cta-icon">
+      <h2>Managing co-parenting?</h2>
+      <p>Clearly helps co-parents coordinate schedules, track expenses, and communicate without conflict.</p>
+      <a href="https://apps.apple.com/app/clearly" target="_blank" class="app-store-badge"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83" alt="Download on the App Store"></a>
+    </div></div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-section">
+          <div class="footer-brand"><img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly"><span>Clearly</span></div>
+          <p class="footer-tagline">Co-parenting made clear.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col"><h4>Product</h4><ul><li><a href="/#features">Features</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li></ul></div>
+          <div class="footer-col"><h4>Resources</h4><ul><li><a href="/calculators/">Support Calculator</a></li><li><a href="/faq.html">FAQ</a></li><li><a href="/help.html">Help Center</a></li><li><a href="/blog.html">Blog</a></li></ul></div>
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="/professionals.html">For Professionals</a></li><li><a href="mailto:care@getclearly.app">Contact Us</a></li></ul></div>
+          <div class="footer-col"><h4>Legal</h4><ul><li><a href="/privacy.html">Privacy Policy</a></li><li><a href="/terms.html">Terms of Service</a></li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2025 Clearly LLC. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script>
+    // Illinois child support schedule (based on income shares model)
+    // Using percentages: 1 child=20%, 2=28%, 3=32%, 4=40%, 5=45%, 6+=50%
+    const IL_CONFIG = {
+      percentages: { 1: 0.20, 2: 0.28, 3: 0.32, 4: 0.40, 5: 0.45, 6: 0.50 },
+      incomeCap: 30000, // Monthly cap for schedule
+      lowIncomeThreshold: 1295, // ~75% FPL monthly
+      lowIncomePerChild: 40,
+      lowIncomeMax: 120,
+      // Simplified gross to net conversion (approximate)
+      grossToNet: 0.72 // Roughly 28% for taxes
+    };
+
+    // Illinois basic obligation schedule (approximate based on income shares)
+    const IL_SCHEDULE = {
+      brackets: [
+        [1000, [200, 280, 320, 400, 450, 500]],
+        [1500, [300, 420, 480, 600, 675, 750]],
+        [2000, [400, 560, 640, 800, 900, 1000]],
+        [2500, [500, 700, 800, 1000, 1125, 1250]],
+        [3000, [600, 840, 960, 1200, 1350, 1500]],
+        [3500, [700, 980, 1120, 1400, 1575, 1750]],
+        [4000, [800, 1120, 1280, 1600, 1800, 2000]],
+        [4500, [900, 1260, 1440, 1800, 2025, 2250]],
+        [5000, [1000, 1400, 1600, 2000, 2250, 2500]],
+        [6000, [1200, 1680, 1920, 2400, 2700, 3000]],
+        [7000, [1400, 1960, 2240, 2800, 3150, 3500]],
+        [8000, [1600, 2240, 2560, 3200, 3600, 4000]],
+        [9000, [1800, 2520, 2880, 3600, 4050, 4500]],
+        [10000, [2000, 2800, 3200, 4000, 4500, 5000]],
+        [12500, [2500, 3500, 4000, 5000, 5625, 6250]],
+        [15000, [3000, 4200, 4800, 6000, 6750, 7500]],
+        [20000, [4000, 5600, 6400, 8000, 9000, 10000]],
+        [25000, [5000, 7000, 8000, 10000, 11250, 12500]],
+        [30000, [6000, 8400, 9600, 12000, 13500, 15000]]
+      ]
+    };
+
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    navToggle.addEventListener('click', () => { navToggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+
+    function formatCurrency(amount) { return '$' + Math.round(amount).toLocaleString(); }
+    function getVal(id) { return parseFloat(document.getElementById(id).value) || 0; }
+
+    function toggleShared() {
+      const toggle = document.getElementById('sharedToggle');
+      const fields = document.getElementById('sharedFields');
+      toggle.classList.toggle('active');
+      fields.style.display = toggle.classList.contains('active') ? 'block' : 'none';
+    }
+
+    function grossToNet(gross) {
+      return gross * IL_CONFIG.grossToNet;
+    }
+
+    function calculateTotals() {
+      let p1Net = getVal('p1NetIncome');
+      let p2Net = getVal('p2NetIncome');
+
+      // Auto-calculate net if only gross provided
+      if (p1Net === 0 && getVal('p1GrossIncome') > 0) {
+        p1Net = grossToNet(getVal('p1GrossIncome'));
+      }
+      if (p2Net === 0 && getVal('p2GrossIncome') > 0) {
+        p2Net = grossToNet(getVal('p2GrossIncome'));
+      }
+
+      const combined = p1Net + p2Net;
+      document.getElementById('combinedIncome').textContent = formatCurrency(combined);
+    }
+
+    function getBasicObligation(combinedIncome, numChildren) {
+      const childIdx = Math.min(numChildren, 6) - 1;
+
+      for (let i = 0; i < IL_SCHEDULE.brackets.length; i++) {
+        if (combinedIncome <= IL_SCHEDULE.brackets[i][0]) {
+          return IL_SCHEDULE.brackets[i][1][childIdx];
+        }
+      }
+      // Above max bracket - extrapolate using percentage
+      const pct = IL_CONFIG.percentages[Math.min(numChildren, 6)];
+      return combinedIncome * pct;
+    }
+
+    function calculateSupport() {
+      let p1Net = getVal('p1NetIncome');
+      let p2Net = getVal('p2NetIncome');
+
+      // Auto-calculate net if only gross provided
+      if (p1Net === 0 && getVal('p1GrossIncome') > 0) {
+        p1Net = grossToNet(getVal('p1GrossIncome'));
+      }
+      if (p2Net === 0 && getVal('p2GrossIncome') > 0) {
+        p2Net = grossToNet(getVal('p2GrossIncome'));
+      }
+
+      const combined = p1Net + p2Net;
+      const numChildren = parseInt(document.getElementById('numChildren').value);
+      const custodialParent = document.getElementById('custodialParent').value;
+      const childcare = getVal('childcare');
+      const healthIns = getVal('healthIns');
+      const isShared = document.getElementById('sharedToggle').classList.contains('active');
+
+      if (combined <= 0) {
+        alert('Please enter income for at least one parent.');
+        return;
+      }
+
+      // Calculate shares
+      const p1Share = p1Net / combined;
+      const p2Share = p2Net / combined;
+
+      // Get basic obligation from schedule
+      let basicObligation = getBasicObligation(combined, numChildren);
+
+      // Add additional expenses
+      const totalObligation = basicObligation + childcare + healthIns;
+
+      // Determine payor (non-custodial parent)
+      const payorIsP1 = custodialParent === '2';
+      let payorShare = payorIsP1 ? p1Share : p2Share;
+      let payorNet = payorIsP1 ? p1Net : p2Net;
+
+      let monthlySupport;
+
+      // Check for low-income provision
+      if (payorNet < IL_CONFIG.lowIncomeThreshold) {
+        monthlySupport = Math.min(numChildren * IL_CONFIG.lowIncomePerChild, IL_CONFIG.lowIncomeMax);
+      } else if (isShared) {
+        // Shared parenting calculation
+        const p1Overnights = getVal('p1Overnights') || 182;
+        const p2Overnights = getVal('p2Overnights') || 183;
+        const totalOvernights = p1Overnights + p2Overnights;
+
+        const p1TimeShare = p1Overnights / totalOvernights;
+        const p2TimeShare = p2Overnights / totalOvernights;
+
+        // Shared custody formula: BSOA * 1.5 * (each parent's share adjusted by time)
+        const adjustedObligation = totalObligation * 1.5;
+        const p1Obligation = adjustedObligation * p1Share * p2TimeShare;
+        const p2Obligation = adjustedObligation * p2Share * p1TimeShare;
+
+        monthlySupport = Math.abs(p1Obligation - p2Obligation);
+      } else {
+        // Standard calculation
+        monthlySupport = totalObligation * payorShare;
+      }
+
+      // Display results
+      document.getElementById('resultsSection').classList.add('visible');
+      document.getElementById('monthlySupport').textContent = formatCurrency(monthlySupport);
+      document.getElementById('annualSupport').textContent = formatCurrency(monthlySupport * 12);
+      document.getElementById('payorParent').textContent = payorIsP1 ? 'Parent 1' : 'Parent 2';
+      document.getElementById('basicObligation').textContent = formatCurrency(totalObligation);
+      document.getElementById('incomeShare').textContent = (payorShare * 100).toFixed(1) + '%';
+
+      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetCalculator() {
+      document.querySelectorAll('.calc-input').forEach(input => input.value = '');
+      document.querySelectorAll('.calc-select').forEach(select => select.selectedIndex = 0);
+      document.getElementById('sharedToggle').classList.remove('active');
+      document.getElementById('sharedFields').style.display = 'none';
+      calculateTotals();
+      document.getElementById('resultsSection').classList.remove('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.addEventListener('DOMContentLoaded', calculateTotals);
+  </script>
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Illinois Child Support Calculator","applicationCategory":"FinanceApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"creator":{"@type":"Organization","name":"Clearly LLC"},"description":"Calculate Illinois child support using the income shares model based on 750 ILCS 5/505."}
+  </script>
+</body>
+</html>

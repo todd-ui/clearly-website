@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
+  <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-DYZ1XEXPMT');</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pennsylvania Child Support Calculator 2025 | Free & Private | Clearly</title>
+  <meta name="description" content="Calculate Pennsylvania child support using the official income shares model (231 Pa. Code Rule 1910.16). Free, private calculator - no data stored.">
+  <link rel="canonical" href="https://getclearly.app/calculators/support/pennsylvania.html">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getclearly.app/calculators/support/pennsylvania.html">
+  <meta property="og:title" content="Pennsylvania Child Support Calculator 2025 | Free & Private">
+  <meta property="og:description" content="Calculate PA child support using the income shares model. Free, private - no data stored.">
+  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="pennsylvania child support calculator, PA child support, 231 Pa Code 1910.16, pennsylvania child support guidelines 2025, income shares pennsylvania">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
+  <style>
+    .calc-page-header { padding: 60px 0 40px; background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%); border-bottom: 1px solid var(--border); }
+    .calc-page-header .container { max-width: 900px; }
+    .calc-page-header h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+    .calc-page-header p { font-size: 17px; color: var(--text-secondary); margin-bottom: 8px; }
+    .calc-page-header .last-updated { font-size: 14px; color: var(--text-muted); }
+    .calc-breadcrumb { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; }
+    .calc-breadcrumb a { color: var(--primary); }
+    .calculator-section { padding: 40px 0 80px; }
+    .calculator-section .container { max-width: 900px; }
+    .calc-form-group { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; overflow: hidden; }
+    .calc-form-header { padding: 20px 24px; background: var(--bg); border-bottom: 1px solid var(--border); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .calc-form-header h3 { font-size: 17px; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 10px; }
+    .calc-form-body { padding: 24px; }
+    .calc-form-group.collapsed .calc-form-body { display: none; }
+    .income-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .income-column h4 { font-size: 15px; font-weight: 600; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--primary-soft); }
+    .calc-field { margin-bottom: 16px; }
+    .calc-field label { display: block; font-size: 14px; font-weight: 500; color: var(--text-secondary); margin-bottom: 6px; }
+    .calc-input { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; }
+    .calc-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+    .calc-input-prefix { position: relative; }
+    .calc-input-prefix .calc-input { padding-left: 28px; }
+    .calc-input-prefix::before { content: "$"; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+    .calc-subtotal { background: var(--primary-soft); border-radius: 8px; padding: 14px 16px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .calc-subtotal label { font-size: 14px; font-weight: 600; color: var(--primary-dark); margin: 0; }
+    .calc-subtotal-value { font-size: 18px; font-weight: 700; color: var(--primary); }
+    .calc-select { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; background: var(--surface); }
+    .calc-results-section { margin-top: 32px; display: none; }
+    .calc-results-section.visible { display: block; }
+    .calc-results-card { background: var(--primary-soft); border: 1px solid var(--primary-border); border-radius: 20px; padding: 32px; margin-bottom: 20px; }
+    .calc-results-card h3 { font-size: 14px; font-weight: 600; text-transform: uppercase; color: var(--primary-dark); margin-bottom: 20px; }
+    .calc-result-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--primary-border); }
+    .calc-result-row:last-child { border-bottom: none; }
+    .calc-result-label { font-size: 15px; color: var(--text-secondary); }
+    .calc-result-value { font-size: 18px; font-weight: 700; color: var(--text); }
+    .calc-result-primary { background: var(--primary); color: white; padding: 16px 20px; border-radius: 12px; margin: -8px -8px 16px; }
+    .calc-result-primary .calc-result-label { color: rgba(255,255,255,0.8); }
+    .calc-result-primary .calc-result-value { font-size: 28px; color: white; }
+    .calc-disclaimer { background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 12px; padding: 20px 24px; margin-top: 24px; }
+    .calc-disclaimer h4 { font-size: 15px; font-weight: 600; color: #92400E; margin-bottom: 8px; }
+    .calc-disclaimer p { font-size: 14px; color: #78350F; margin: 0; line-height: 1.6; }
+    .calc-button-row { margin-top: 32px; display: flex; gap: 16px; }
+    .btn-calculate { flex: 1; padding: 18px 32px; font-size: 18px; border: none; }
+    .btn-reset { padding: 18px 24px; background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); }
+    .calc-note { font-size: 13px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+    .calc-info-box { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    .calc-info-box h4 { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
+    .calc-info-box p { font-size: 14px; color: var(--text-secondary); margin: 0; }
+    .calc-toggle { display: flex; align-items: center; gap: 12px; margin-top: 16px; }
+    .calc-toggle-switch { position: relative; width: 48px; height: 28px; background: var(--border); border-radius: 14px; cursor: pointer; transition: background 0.2s; }
+    .calc-toggle-switch.active { background: var(--primary); }
+    .calc-toggle-switch::after { content: ""; position: absolute; top: 2px; left: 2px; width: 24px; height: 24px; background: white; border-radius: 50%; transition: transform 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
+    .calc-toggle-switch.active::after { transform: translateX(20px); }
+    .calc-toggle label { font-size: 14px; color: var(--text-secondary); cursor: pointer; }
+    @media (max-width: 768px) {
+      .calc-page-header h1 { font-size: 28px; }
+      .income-grid { grid-template-columns: 1fr; }
+      .calc-button-row { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container">
+      <a href="/" class="nav-brand"><img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">Clearly</a>
+      <ul class="nav-links">
+        <li><a href="/#features">Features</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </nav>
+
+  <header class="calc-page-header">
+    <div class="container">
+      <div class="calc-breadcrumb"><a href="/calculators/">All Calculators</a> / Pennsylvania</div>
+      <h1>Pennsylvania Child Support Calculator</h1>
+      <p>Calculate guideline child support using Pennsylvania's income shares model (231 Pa. Code Rule 1910.16).</p>
+      <p class="last-updated">Based on 2025 PA guidelines. Both parents' incomes determine support.</p>
+    </div>
+  </header>
+
+  <section class="calculator-section">
+    <div class="container">
+      <div class="calc-info-box">
+        <h4>How Pennsylvania Calculates Child Support</h4>
+        <p>Pennsylvania uses the Income Shares model. Both parents' monthly net incomes are combined to find the basic support obligation from the schedule. Each parent's share is proportional to their income. Shared custody adjustments apply when a parent has 40%+ overnights (146+ nights/year).</p>
+      </div>
+
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="this.parentElement.classList.toggle('collapsed')">
+          <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>Monthly Net Income</h3>
+        </div>
+        <div class="calc-form-body">
+          <div class="income-grid">
+            <div class="income-column">
+              <h4>Parent 1</h4>
+              <div class="calc-field">
+                <label>Monthly Net Income</label>
+                <div class="calc-input-prefix"><input type="number" class="calc-input" id="p1Income" placeholder="0" onchange="calculateTotals()"></div>
+                <p class="calc-note">After taxes, FICA, union dues, etc.</p>
+              </div>
+            </div>
+            <div class="income-column">
+              <h4>Parent 2</h4>
+              <div class="calc-field">
+                <label>Monthly Net Income</label>
+                <div class="calc-input-prefix"><input type="number" class="calc-input" id="p2Income" placeholder="0" onchange="calculateTotals()"></div>
+                <p class="calc-note">After taxes, FICA, union dues, etc.</p>
+              </div>
+            </div>
+          </div>
+          <div class="calc-subtotal">
+            <label>Combined Monthly Net Income</label>
+            <span class="calc-subtotal-value" id="combinedIncome">$0</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="this.parentElement.classList.toggle('collapsed')">
+          <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>Children & Custody</h3>
+        </div>
+        <div class="calc-form-body">
+          <div class="income-grid">
+            <div class="calc-field">
+              <label>Number of Children</label>
+              <select class="calc-select" id="numChildren">
+                <option value="1">1 child</option>
+                <option value="2">2 children</option>
+                <option value="3">3 children</option>
+                <option value="4">4 children</option>
+                <option value="5">5 children</option>
+                <option value="6">6 children</option>
+              </select>
+            </div>
+            <div class="calc-field">
+              <label>Primary Custodial Parent</label>
+              <select class="calc-select" id="custodialParent">
+                <option value="1">Parent 1</option>
+                <option value="2">Parent 2</option>
+              </select>
+            </div>
+          </div>
+          <div class="calc-toggle">
+            <div class="calc-toggle-switch" id="sharedToggle" onclick="toggleShared()"></div>
+            <label onclick="toggleShared()">Shared custody (obligor has 40%+ overnights)</label>
+          </div>
+          <div id="sharedFields" style="display: none; margin-top: 20px;">
+            <div class="calc-field">
+              <label>Non-Custodial Parent's Overnights per Year</label>
+              <input type="number" class="calc-input" id="obligorOvernights" placeholder="146" max="182">
+              <p class="calc-note">Must be at least 146 (40%) for shared custody formula</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="this.parentElement.classList.toggle('collapsed')">
+          <h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"></path><path d="M2 17l10 5 10-5"></path><path d="M2 12l10 5 10-5"></path></svg>Additional Expenses</h3>
+        </div>
+        <div class="calc-form-body">
+          <div class="income-grid">
+            <div class="calc-field">
+              <label>Monthly Childcare Costs</label>
+              <div class="calc-input-prefix"><input type="number" class="calc-input" id="childcare" placeholder="0"></div>
+              <p class="calc-note">Work-related childcare expenses</p>
+            </div>
+            <div class="calc-field">
+              <label>Monthly Health Insurance (children)</label>
+              <div class="calc-input-prefix"><input type="number" class="calc-input" id="healthIns" placeholder="0"></div>
+              <p class="calc-note">Premium attributable to children only</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="calc-button-row">
+        <button class="btn btn-primary btn-calculate" onclick="calculateSupport()">Calculate Child Support</button>
+        <button class="btn btn-reset" onclick="resetCalculator()">Reset</button>
+      </div>
+
+      <div class="calc-results-section" id="resultsSection">
+        <h2 style="font-size: 24px; font-weight: 700; margin: 32px 0 24px;">Results</h2>
+        <div class="calc-results-card">
+          <h3>Guideline Child Support</h3>
+          <div class="calc-result-primary">
+            <div class="calc-result-row" style="border: none; padding: 0;">
+              <span class="calc-result-label">Monthly Child Support</span>
+              <span class="calc-result-value" id="monthlySupport">$0</span>
+            </div>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Annual Amount</span>
+            <span class="calc-result-value" id="annualSupport">$0</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Payor</span>
+            <span class="calc-result-value" id="payorParent">-</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Basic Support Obligation</span>
+            <span class="calc-result-value" id="basicObligation">$0</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Obligor's Income Share</span>
+            <span class="calc-result-value" id="incomeShare">0%</span>
+          </div>
+        </div>
+        <div class="calc-disclaimer">
+          <h4>Important Disclaimer</h4>
+          <p>This calculator provides <strong>estimates only</strong> based on 231 Pa. Code Rule 1910.16 guidelines. Actual amounts may differ based on judicial discretion, deviations, and specific case factors. For high-income cases (combined income over $30,000/month), the court has discretion. This is not legal advice. Consult a Pennsylvania family law attorney for accurate guidance.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-pattern"></div>
+    <div class="container"><div class="cta-content">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="cta-icon">
+      <h2>Managing co-parenting?</h2>
+      <p>Clearly helps co-parents coordinate schedules, track expenses, and communicate without conflict.</p>
+      <a href="https://apps.apple.com/app/clearly" target="_blank" class="app-store-badge"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83" alt="Download on the App Store"></a>
+    </div></div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-section">
+          <div class="footer-brand"><img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly"><span>Clearly</span></div>
+          <p class="footer-tagline">Co-parenting made clear.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col"><h4>Product</h4><ul><li><a href="/#features">Features</a></li><li><a href="/#pricing">Pricing</a></li><li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li></ul></div>
+          <div class="footer-col"><h4>Resources</h4><ul><li><a href="/calculators/">Support Calculator</a></li><li><a href="/faq.html">FAQ</a></li><li><a href="/help.html">Help Center</a></li><li><a href="/blog.html">Blog</a></li></ul></div>
+          <div class="footer-col"><h4>Company</h4><ul><li><a href="/professionals.html">For Professionals</a></li><li><a href="mailto:care@getclearly.app">Contact Us</a></li></ul></div>
+          <div class="footer-col"><h4>Legal</h4><ul><li><a href="/privacy.html">Privacy Policy</a></li><li><a href="/terms.html">Terms of Service</a></li></ul></div>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2025 Clearly LLC. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <script>
+    // Pennsylvania basic child support schedule (231 Pa. Code Rule 1910.16-3)
+    // Format: [maxCombinedIncome, [1child, 2child, 3child, 4child, 5child, 6child]]
+    const PA_SCHEDULE = {
+      incomeCap: 30000,
+      brackets: [
+        [1300, [124, 143, 159, 168, 176, 183]],
+        [1500, [283, 401, 473, 523, 559, 595]],
+        [2000, [407, 577, 680, 751, 803, 855]],
+        [2500, [511, 723, 853, 942, 1008, 1073]],
+        [3000, [605, 857, 1011, 1116, 1193, 1271]],
+        [3500, [693, 981, 1157, 1277, 1366, 1455]],
+        [4000, [776, 1099, 1296, 1431, 1530, 1630]],
+        [4500, [856, 1212, 1430, 1578, 1688, 1798]],
+        [5000, [933, 1320, 1557, 1719, 1838, 1958]],
+        [5500, [1007, 1425, 1681, 1856, 1984, 2113]],
+        [6000, [1080, 1528, 1803, 1990, 2128, 2266]],
+        [6500, [1151, 1628, 1921, 2120, 2267, 2415]],
+        [7000, [1220, 1726, 2036, 2248, 2404, 2560]],
+        [7500, [1287, 1822, 2149, 2372, 2537, 2702]],
+        [8000, [1354, 1915, 2260, 2494, 2668, 2841]],
+        [8500, [1419, 2007, 2368, 2614, 2795, 2977]],
+        [9000, [1482, 2097, 2474, 2731, 2921, 3110]],
+        [9500, [1544, 2185, 2577, 2845, 3042, 3240]],
+        [10000, [1605, 2271, 2679, 2957, 3162, 3367]],
+        [10500, [1665, 2355, 2779, 3067, 3280, 3493]],
+        [11000, [1723, 2438, 2876, 3175, 3395, 3615]],
+        [12000, [1837, 2600, 3067, 3385, 3620, 3855]],
+        [13000, [1948, 2756, 3251, 3589, 3838, 4087]],
+        [14000, [2054, 2906, 3428, 3784, 4047, 4310]],
+        [15000, [2156, 3051, 3599, 3972, 4248, 4524]],
+        [16000, [2254, 3190, 3763, 4154, 4442, 4730]],
+        [17000, [2349, 3323, 3920, 4328, 4628, 4928]],
+        [18000, [2440, 3452, 4072, 4495, 4807, 5118]],
+        [19000, [2527, 3576, 4218, 4656, 4979, 5302]],
+        [20000, [2612, 3696, 4359, 4811, 5145, 5480]],
+        [21000, [2694, 3811, 4495, 4961, 5305, 5650]],
+        [22000, [2773, 3923, 4627, 5107, 5461, 5816]],
+        [23000, [2849, 4031, 4755, 5248, 5612, 5976]],
+        [24000, [2923, 4136, 4878, 5384, 5758, 6131]],
+        [25000, [2995, 4237, 4998, 5517, 5899, 6282]],
+        [26000, [3065, 4336, 5114, 5645, 6037, 6428]],
+        [27000, [3133, 4432, 5227, 5770, 6170, 6570]],
+        [28000, [3198, 4525, 5337, 5891, 6300, 6708]],
+        [29000, [3262, 4615, 5444, 6009, 6426, 6843]],
+        [30000, [3324, 4703, 5548, 6124, 6549, 6974]]
+      ]
+    };
+
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    navToggle.addEventListener('click', () => { navToggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
+
+    function formatCurrency(amount) { return '$' + Math.round(amount).toLocaleString(); }
+    function getVal(id) { return parseFloat(document.getElementById(id).value) || 0; }
+
+    function toggleShared() {
+      const toggle = document.getElementById('sharedToggle');
+      const fields = document.getElementById('sharedFields');
+      toggle.classList.toggle('active');
+      fields.style.display = toggle.classList.contains('active') ? 'block' : 'none';
+    }
+
+    function calculateTotals() {
+      const combined = getVal('p1Income') + getVal('p2Income');
+      document.getElementById('combinedIncome').textContent = formatCurrency(combined);
+    }
+
+    function getBasicObligation(combinedIncome, numChildren) {
+      const childIdx = Math.min(numChildren, 6) - 1;
+
+      // Find bracket
+      for (let i = 0; i < PA_SCHEDULE.brackets.length; i++) {
+        if (combinedIncome <= PA_SCHEDULE.brackets[i][0]) {
+          // Linear interpolation between brackets
+          if (i === 0) {
+            return PA_SCHEDULE.brackets[i][1][childIdx];
+          }
+          const prevBracket = PA_SCHEDULE.brackets[i - 1];
+          const currBracket = PA_SCHEDULE.brackets[i];
+          const incomeRange = currBracket[0] - prevBracket[0];
+          const incomeAbovePrev = combinedIncome - prevBracket[0];
+          const ratio = incomeAbovePrev / incomeRange;
+          const obligationRange = currBracket[1][childIdx] - prevBracket[1][childIdx];
+          return prevBracket[1][childIdx] + (obligationRange * ratio);
+        }
+      }
+      // Above max - use max bracket value (court has discretion)
+      return PA_SCHEDULE.brackets[PA_SCHEDULE.brackets.length - 1][1][childIdx];
+    }
+
+    function calculateSupport() {
+      const p1Income = getVal('p1Income');
+      const p2Income = getVal('p2Income');
+      const combined = p1Income + p2Income;
+      const numChildren = parseInt(document.getElementById('numChildren').value);
+      const custodialParent = document.getElementById('custodialParent').value;
+      const childcare = getVal('childcare');
+      const healthIns = getVal('healthIns');
+      const isShared = document.getElementById('sharedToggle').classList.contains('active');
+
+      if (combined <= 0) {
+        alert('Please enter income for at least one parent.');
+        return;
+      }
+
+      // Get basic obligation from schedule
+      const basicObligation = getBasicObligation(combined, numChildren);
+
+      // Calculate each parent's share
+      const p1Share = p1Income / combined;
+      const p2Share = p2Income / combined;
+
+      // Determine obligor (non-custodial parent)
+      const obligorIsP1 = custodialParent === '2';
+      const obligorShare = obligorIsP1 ? p1Share : p2Share;
+
+      // Calculate obligor's portion of basic support
+      let obligorBasic = basicObligation * obligorShare;
+
+      // Apply shared custody adjustment if applicable
+      if (isShared) {
+        const overnights = getVal('obligorOvernights') || 146;
+        if (overnights >= 146) {
+          // PA shared custody formula reduces support based on overnights
+          // Formula: (365 - overnights) / 365 adjustment factor
+          const adjustmentFactor = (365 - overnights) / 365;
+          // The formula reduces the basic obligation to account for increased expenses during parenting time
+          obligorBasic = obligorBasic * adjustmentFactor * 1.5; // PA uses 1.5x multiplier then adjustment
+        }
+      }
+
+      // Add proportional share of additional expenses
+      const additionalExpenses = childcare + healthIns;
+      const obligorAdditional = additionalExpenses * obligorShare;
+
+      // Total monthly support
+      const monthlySupport = obligorBasic + obligorAdditional;
+      const totalObligation = basicObligation + additionalExpenses;
+
+      // Display results
+      document.getElementById('resultsSection').classList.add('visible');
+      document.getElementById('monthlySupport').textContent = formatCurrency(monthlySupport);
+      document.getElementById('annualSupport').textContent = formatCurrency(monthlySupport * 12);
+      document.getElementById('payorParent').textContent = obligorIsP1 ? 'Parent 1' : 'Parent 2';
+      document.getElementById('basicObligation').textContent = formatCurrency(totalObligation);
+      document.getElementById('incomeShare').textContent = (obligorShare * 100).toFixed(1) + '%';
+
+      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetCalculator() {
+      document.querySelectorAll('.calc-input').forEach(input => input.value = '');
+      document.querySelectorAll('.calc-select').forEach(select => select.selectedIndex = 0);
+      document.getElementById('sharedToggle').classList.remove('active');
+      document.getElementById('sharedFields').style.display = 'none';
+      calculateTotals();
+      document.getElementById('resultsSection').classList.remove('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.addEventListener('DOMContentLoaded', calculateTotals);
+  </script>
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Pennsylvania Child Support Calculator","applicationCategory":"FinanceApplication","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"creator":{"@type":"Organization","name":"Clearly LLC"},"description":"Calculate Pennsylvania child support using the income shares model based on 231 Pa. Code Rule 1910.16."}
+  </script>
+</body>
+</html>

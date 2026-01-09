@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DYZ1XEXPMT');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>California Child Support Calculator 2025 | Free & Private | Clearly</title>
+  <meta name="description" content="Calculate California child support using the official guideline formula. Free, private calculator - no data stored. Based on California Family Code Section 4055.">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://getclearly.app/calculators/support/california.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getclearly.app/calculators/support/california.html">
+  <meta property="og:title" content="California Child Support Calculator 2025 | Free & Private">
+  <meta property="og:description" content="Calculate California child support using the official guideline formula. Free, private - no data stored.">
+  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+  <meta property="og:site_name" content="Clearly">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="California Child Support Calculator 2025">
+  <meta name="twitter:description" content="Calculate California child support using official guideline formula. Free, private - no data stored.">
+  <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+
+  <!-- Additional SEO -->
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="california child support calculator, CA child support, california family code 4055, california child support formula, california child support guidelines 2025">
+  <meta name="author" content="Clearly LLC">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
+  <link rel="apple-touch-icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+
+  <style>
+    .calc-page-header { padding: 60px 0 40px; background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%); border-bottom: 1px solid var(--border); }
+    .calc-page-header .container { max-width: 900px; }
+    .calc-page-header h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em; }
+    .calc-page-header p { font-size: 17px; color: var(--text-secondary); margin-bottom: 8px; }
+    .calc-page-header .last-updated { font-size: 14px; color: var(--text-muted); }
+    .calc-breadcrumb { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; }
+    .calc-breadcrumb a { color: var(--primary); }
+    .calculator-section { padding: 40px 0 80px; }
+    .calculator-section .container { max-width: 900px; }
+    .calc-form-group { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; overflow: hidden; }
+    .calc-form-header { padding: 20px 24px; background: var(--bg); border-bottom: 1px solid var(--border); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .calc-form-header h3 { font-size: 17px; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 10px; }
+    .calc-form-header .toggle-icon { transition: transform 0.2s; color: var(--text-muted); }
+    .calc-form-group.collapsed .toggle-icon { transform: rotate(-90deg); }
+    .calc-form-body { padding: 24px; }
+    .calc-form-group.collapsed .calc-form-body { display: none; }
+    .income-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .income-column h4 { font-size: 15px; font-weight: 600; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--primary-soft); }
+    .calc-field { margin-bottom: 16px; }
+    .calc-field:last-child { margin-bottom: 0; }
+    .calc-field label { display: block; font-size: 14px; font-weight: 500; color: var(--text-secondary); margin-bottom: 6px; }
+    .calc-input { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; transition: border-color 0.2s, box-shadow 0.2s; }
+    .calc-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+    .calc-input::placeholder { color: var(--text-muted); }
+    .calc-input-prefix { position: relative; }
+    .calc-input-prefix .calc-input { padding-left: 28px; }
+    .calc-input-prefix::before { content: "$"; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 16px; }
+    .calc-input-suffix { position: relative; }
+    .calc-input-suffix .calc-input { padding-right: 36px; }
+    .calc-input-suffix::after { content: "%"; position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 16px; }
+    .calc-subtotal { background: var(--primary-soft); border-radius: 8px; padding: 14px 16px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .calc-subtotal label { font-size: 14px; font-weight: 600; color: var(--primary-dark); margin: 0; }
+    .calc-subtotal-value { font-size: 18px; font-weight: 700; color: var(--primary); }
+    .calc-select { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; background: var(--surface); cursor: pointer; }
+    .calc-select:focus { outline: none; border-color: var(--primary); }
+    .calc-results-section { margin-top: 32px; display: none; }
+    .calc-results-section.visible { display: block; }
+    .calc-results-card { background: var(--primary-soft); border: 1px solid var(--primary-border); border-radius: 20px; padding: 32px; margin-bottom: 20px; }
+    .calc-results-card h3 { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--primary-dark); margin-bottom: 20px; }
+    .calc-result-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--primary-border); }
+    .calc-result-row:last-child { border-bottom: none; }
+    .calc-result-label { font-size: 15px; color: var(--text-secondary); }
+    .calc-result-value { font-size: 18px; font-weight: 700; color: var(--text); }
+    .calc-result-primary { background: var(--primary); color: white; padding: 16px 20px; border-radius: 12px; margin: -8px -8px 16px; }
+    .calc-result-primary .calc-result-label { color: rgba(255,255,255,0.8); }
+    .calc-result-primary .calc-result-value { font-size: 28px; color: white; }
+    .calc-disclaimer { background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 12px; padding: 20px 24px; margin-top: 24px; }
+    .calc-disclaimer h4 { font-size: 15px; font-weight: 600; color: #92400E; margin-bottom: 8px; }
+    .calc-disclaimer p { font-size: 14px; color: #78350F; margin: 0; line-height: 1.6; }
+    .calc-button-row { margin-top: 32px; display: flex; gap: 16px; }
+    .btn-calculate { flex: 1; padding: 18px 32px; font-size: 18px; border: none; }
+    .btn-reset { padding: 18px 24px; background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); }
+    .btn-reset:hover { border-color: var(--text-muted); text-decoration: none; }
+    .calc-note { font-size: 13px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+    .calc-section-divider { height: 1px; background: var(--border); margin: 32px 0; }
+    .calc-info-box { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    .calc-info-box h4 { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
+    .calc-info-box p { font-size: 14px; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+    .calc-formula { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 16px; margin-top: 12px; font-family: monospace; font-size: 14px; color: var(--text); text-align: center; }
+    @media (max-width: 768px) {
+      .calc-page-header { padding: 40px 0 30px; }
+      .calc-page-header h1 { font-size: 28px; }
+      .income-grid { grid-template-columns: 1fr; gap: 24px; }
+      .calc-button-row { flex-direction: column; }
+      .calc-results-card { padding: 24px; }
+      .calc-result-primary .calc-result-value { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <a href="/" class="nav-brand">
+        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+        Clearly
+      </a>
+      <ul class="nav-links">
+        <li><a href="/#features">Features</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="calc-page-header">
+    <div class="container">
+      <div class="calc-breadcrumb">
+        <a href="/calculators/">All Calculators</a> / California
+      </div>
+      <h1>California Child Support Calculator</h1>
+      <p>Calculate guideline child support using California's algebraic formula (Family Code Section 4055).</p>
+      <p class="last-updated">Based on California guidelines updated September 2024 (SB 343).</p>
+    </div>
+  </header>
+
+  <!-- Calculator Section -->
+  <section class="calculator-section">
+    <div class="container">
+
+      <!-- Info Box -->
+      <div class="calc-info-box">
+        <h4>How California Calculates Child Support</h4>
+        <p>California uses a unique algebraic formula that considers both parents' incomes and the amount of time each parent spends with the children. Unlike percentage-based states, California calculates support based on income differential and custody time.</p>
+        <div class="calc-formula">CS = K × [HN - (H% × TN)]</div>
+        <p style="margin-top: 12px; font-size: 13px;">Where K is a factor based on income, HN is the higher earner's net income, H% is their time-share percentage, and TN is total combined net income.</p>
+      </div>
+
+      <!-- Parent 1 Income -->
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="toggleSection(this)">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            Parent 1 - Monthly Income
+          </h3>
+          <svg class="toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="calc-form-body">
+          <div class="income-grid">
+            <div class="calc-field">
+              <label>Gross Monthly Income</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="p1Gross" placeholder="0" onchange="calculateTotals()">
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Monthly Tax Deductions</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="p1Taxes" placeholder="0" onchange="calculateTotals()">
+              </div>
+              <p class="calc-note">Federal, state, FICA taxes</p>
+            </div>
+            <div class="calc-field">
+              <label>Health Insurance (for self)</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="p1Health" placeholder="0" onchange="calculateTotals()">
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Mandatory Retirement</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="p1Retirement" placeholder="0" onchange="calculateTotals()">
+              </div>
+            </div>
+          </div>
+          <div class="calc-subtotal">
+            <label>Parent 1 Net Disposable Income</label>
+            <span class="calc-subtotal-value" id="p1Net">$0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Parent 2 Income -->
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="toggleSection(this)">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+            Parent 2 - Monthly Income
+          </h3>
+          <svg class="toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="calc-form-body">
+          <div class="income-grid">
+            <div class="calc-field">
+              <label>Gross Monthly Income</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="p2Gross" placeholder="0" onchange="calculateTotals()">
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Monthly Tax Deductions</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="p2Taxes" placeholder="0" onchange="calculateTotals()">
+              </div>
+              <p class="calc-note">Federal, state, FICA taxes</p>
+            </div>
+            <div class="calc-field">
+              <label>Health Insurance (for self)</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="p2Health" placeholder="0" onchange="calculateTotals()">
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Mandatory Retirement</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="p2Retirement" placeholder="0" onchange="calculateTotals()">
+              </div>
+            </div>
+          </div>
+          <div class="calc-subtotal">
+            <label>Parent 2 Net Disposable Income</label>
+            <span class="calc-subtotal-value" id="p2Net">$0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custody Time -->
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="toggleSection(this)">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            Custody Time-Share
+          </h3>
+          <svg class="toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="calc-form-body">
+          <p class="calc-note" style="margin-top: 0; margin-bottom: 20px;">Enter the percentage of time each parent has physical custody. Must total 100%.</p>
+          <div class="income-grid">
+            <div class="calc-field">
+              <label>Parent 1 Time-Share</label>
+              <div class="calc-input-suffix">
+                <input type="number" class="calc-input" id="p1Time" placeholder="50" value="50" min="0" max="100" onchange="updateTimeShare(1)">
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Parent 2 Time-Share</label>
+              <div class="calc-input-suffix">
+                <input type="number" class="calc-input" id="p2Time" placeholder="50" value="50" min="0" max="100" onchange="updateTimeShare(2)">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Children & Add-Ons -->
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="toggleSection(this)">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            Children & Add-On Expenses
+          </h3>
+          <svg class="toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="calc-form-body">
+          <div class="income-grid">
+            <div class="calc-field">
+              <label>Number of Children</label>
+              <select class="calc-select" id="numChildren">
+                <option value="1">1 child</option>
+                <option value="2">2 children</option>
+                <option value="3">3 children</option>
+                <option value="4">4 children</option>
+                <option value="5">5+ children</option>
+              </select>
+            </div>
+            <div class="calc-field">
+              <label>Monthly Childcare Costs</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="childcare" placeholder="0">
+              </div>
+              <p class="calc-note">Work-related childcare expenses</p>
+            </div>
+            <div class="calc-field">
+              <label>Children's Health Insurance</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="childHealth" placeholder="0">
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Uninsured Health Costs</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="uninsured" placeholder="0">
+              </div>
+              <p class="calc-note">Average monthly out-of-pocket medical</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calculate Button -->
+      <div class="calc-button-row">
+        <button class="btn btn-primary btn-calculate" onclick="calculateSupport()">Calculate Child Support</button>
+        <button class="btn btn-reset" onclick="resetCalculator()">Reset</button>
+      </div>
+
+      <!-- Results Section -->
+      <div class="calc-results-section" id="resultsSection">
+        <div class="calc-section-divider" style="margin-top: 40px;"></div>
+        <h2 style="font-size: 24px; font-weight: 700; margin: 32px 0 24px;">Results</h2>
+
+        <div class="calc-results-card">
+          <h3>Guideline Child Support</h3>
+          <div class="calc-result-primary">
+            <div class="calc-result-row" style="border: none; padding: 0;">
+              <span class="calc-result-label">Monthly Child Support</span>
+              <span class="calc-result-value" id="monthlySupport">$0</span>
+            </div>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Annual Amount</span>
+            <span class="calc-result-value" id="annualSupport">$0</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Payor</span>
+            <span class="calc-result-value" id="payorParent">-</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Combined Net Income</span>
+            <span class="calc-result-value" id="combinedIncome">$0</span>
+          </div>
+          <div class="calc-result-row" id="addOnRow" style="display: none;">
+            <span class="calc-result-label">Add-On Share (childcare, health)</span>
+            <span class="calc-result-value" id="addOnAmount">$0</span>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="calc-disclaimer">
+          <h4>Important Disclaimer</h4>
+          <p>This calculator provides <strong>estimates only</strong> based on California Family Code Section 4055 guidelines. California's actual formula is complex with additional factors. Actual court-ordered amounts may differ based on judicial discretion, hardship deductions, and specific circumstances. This calculator does not constitute legal advice. For accurate calculations, use the <a href="https://childsupport.ca.gov/guideline-calculator/" target="_blank" style="color: #92400E;">official California calculator</a> or consult a family law attorney.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="cta-pattern"></div>
+    <div class="container fade-in">
+      <div class="cta-content">
+        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="cta-icon">
+        <h2>Managing co-parenting?</h2>
+        <p>Clearly helps co-parents coordinate schedules, track expenses, and communicate without conflict.</p>
+        <a href="https://apps.apple.com/app/clearly" target="_blank" class="app-store-badge">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83" alt="Download on the App Store">
+        </a>
+        <p class="cta-note">Free trial included. No credit card required.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-section">
+          <div class="footer-brand">
+            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+            <span>Clearly</span>
+          </div>
+          <p class="footer-tagline">Co-parenting made clear.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <ul>
+              <li><a href="/#features">Features</a></li>
+              <li><a href="/#pricing">Pricing</a></li>
+              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="/calculators/">Support Calculator</a></li>
+              <li><a href="/faq.html">FAQ</a></li>
+              <li><a href="/help.html">Help Center</a></li>
+              <li><a href="/blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="/professionals.html">For Professionals</a></li>
+              <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="/privacy.html">Privacy Policy</a></li>
+              <li><a href="/terms.html">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Clearly LLC. All rights reserved.</p>
+        <p>Proudly designed and developed in the USA.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // California Configuration
+    const CA_CONFIG = {
+      // K factor multipliers by number of children
+      kMultipliers: { 1: 1.0, 2: 1.6, 3: 2.0, 4: 2.3, 5: 2.5 },
+      // Low income adjustment threshold (as of Jan 2026)
+      lowIncomeThreshold: 2929
+    };
+
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+
+    // Section toggle
+    function toggleSection(header) {
+      header.parentElement.classList.toggle('collapsed');
+    }
+
+    // Format currency
+    function formatCurrency(amount) {
+      return '$' + Math.round(Math.abs(amount)).toLocaleString();
+    }
+
+    // Get input value
+    function getVal(id) {
+      return parseFloat(document.getElementById(id).value) || 0;
+    }
+
+    // Calculate net incomes
+    function calculateTotals() {
+      const p1Net = getVal('p1Gross') - getVal('p1Taxes') - getVal('p1Health') - getVal('p1Retirement');
+      const p2Net = getVal('p2Gross') - getVal('p2Taxes') - getVal('p2Health') - getVal('p2Retirement');
+      document.getElementById('p1Net').textContent = formatCurrency(Math.max(0, p1Net));
+      document.getElementById('p2Net').textContent = formatCurrency(Math.max(0, p2Net));
+    }
+
+    // Update time share (ensure they total 100)
+    function updateTimeShare(parent) {
+      const p1Time = getVal('p1Time');
+      const p2Time = getVal('p2Time');
+      if (parent === 1) {
+        document.getElementById('p2Time').value = Math.max(0, 100 - p1Time);
+      } else {
+        document.getElementById('p1Time').value = Math.max(0, 100 - p2Time);
+      }
+    }
+
+    // Main calculation
+    function calculateSupport() {
+      // Get net incomes
+      const p1Net = Math.max(0, getVal('p1Gross') - getVal('p1Taxes') - getVal('p1Health') - getVal('p1Retirement'));
+      const p2Net = Math.max(0, getVal('p2Gross') - getVal('p2Taxes') - getVal('p2Health') - getVal('p2Retirement'));
+      const totalNet = p1Net + p2Net;
+
+      // Get time shares
+      const p1Time = getVal('p1Time') / 100;
+      const p2Time = getVal('p2Time') / 100;
+
+      // Determine higher earner
+      const p1IsHigher = p1Net >= p2Net;
+      const higherNet = p1IsHigher ? p1Net : p2Net;
+      const higherTime = p1IsHigher ? p1Time : p2Time;
+
+      // Get children and add-ons
+      const numChildren = parseInt(document.getElementById('numChildren').value);
+      const childcare = getVal('childcare');
+      const childHealth = getVal('childHealth');
+      const uninsured = getVal('uninsured');
+      const totalAddOns = childcare + childHealth + uninsured;
+
+      // Calculate K factor (simplified California formula)
+      // K = 1 + H% (decimal) for higher earner with majority time
+      // Adjusted for children
+      let k;
+      if (totalNet <= 800) {
+        k = 0.20 + totalNet / 16000;
+      } else {
+        // Standard K factor calculation
+        const baseK = 0.25 + (0.015 * Math.min(totalNet / 1000, 10));
+        k = Math.min(0.50, baseK);
+      }
+
+      // Apply children multiplier
+      k = k * CA_CONFIG.kMultipliers[numChildren];
+
+      // California formula: CS = K × [HN - (H% × TN)]
+      let baseSupport = k * (higherNet - (higherTime * totalNet));
+
+      // Ensure support is positive and reasonable
+      baseSupport = Math.max(0, baseSupport);
+
+      // Add-on expenses split proportionally by income
+      const higherIncomeShare = totalNet > 0 ? higherNet / totalNet : 0.5;
+      const addOnShare = totalAddOns * higherIncomeShare;
+
+      // Total support from higher earner
+      const totalSupport = baseSupport + (p1IsHigher ? addOnShare : -addOnShare);
+
+      // Determine actual payor (could flip if lower earner has more time)
+      let monthlySupport = Math.abs(totalSupport);
+      let payor = totalSupport > 0 ? (p1IsHigher ? 'Parent 1' : 'Parent 2') : (p1IsHigher ? 'Parent 2' : 'Parent 1');
+
+      // If very low or equal, no support
+      if (monthlySupport < 50 || Math.abs(p1Net - p2Net) < 100) {
+        monthlySupport = 0;
+        payor = 'Neither (equal or near-equal)';
+      }
+
+      // Display results
+      document.getElementById('resultsSection').classList.add('visible');
+      document.getElementById('monthlySupport').textContent = formatCurrency(monthlySupport);
+      document.getElementById('annualSupport').textContent = formatCurrency(monthlySupport * 12);
+      document.getElementById('payorParent').textContent = payor;
+      document.getElementById('combinedIncome').textContent = formatCurrency(totalNet);
+
+      if (totalAddOns > 0) {
+        document.getElementById('addOnRow').style.display = 'flex';
+        document.getElementById('addOnAmount').textContent = formatCurrency(addOnShare) + '/month';
+      } else {
+        document.getElementById('addOnRow').style.display = 'none';
+      }
+
+      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Reset calculator
+    function resetCalculator() {
+      document.querySelectorAll('.calc-input').forEach(input => {
+        if (input.id === 'p1Time' || input.id === 'p2Time') {
+          input.value = '50';
+        } else {
+          input.value = '';
+        }
+      });
+      document.querySelectorAll('.calc-select').forEach(select => select.selectedIndex = 0);
+      calculateTotals();
+      document.getElementById('resultsSection').classList.remove('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', calculateTotals);
+  </script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "California Child Support Calculator",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "creator": { "@type": "Organization", "name": "Clearly LLC", "url": "https://getclearly.app" },
+    "description": "Calculate California child support using the official guideline formula based on California Family Code Section 4055.",
+    "dateModified": "2025-01-01"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is child support calculated in California?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "California uses an algebraic formula: CS = K × [HN - (H% × TN)]. This considers both parents' net disposable incomes and the percentage of time each parent has custody. K is a factor based on combined income, HN is the higher earner's net income, H% is their time-share, and TN is total combined income."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does custody time affect child support in California?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, significantly. California's formula directly incorporates each parent's percentage of custodial time. The more time the higher-earning parent has with the children, the less support they typically pay, because they're directly providing for the children during that time."
+        }
+      }
+    ]
+  }
+  </script>
+
+</body>
+</html>

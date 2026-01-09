@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DYZ1XEXPMT');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Texas Child Support Calculator 2025 | Free & Private | Clearly</title>
+  <meta name="description" content="Calculate Texas child support using official 2025 guidelines. Free, private calculator based on Texas Family Code. No data stored - all calculations in your browser.">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://getclearly.app/calculators/support/texas.html">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getclearly.app/calculators/support/texas.html">
+  <meta property="og:title" content="Texas Child Support Calculator 2025 | Free & Private">
+  <meta property="og:description" content="Calculate Texas child support using official 2025 guidelines. Free, private - no data stored.">
+  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+  <meta property="og:site_name" content="Clearly">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Texas Child Support Calculator 2025">
+  <meta name="twitter:description" content="Calculate Texas child support using official 2025 guidelines. Free, private - no data stored.">
+  <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+
+  <!-- Additional SEO -->
+  <meta name="robots" content="index, follow">
+  <meta name="keywords" content="texas child support calculator, TX child support, texas family code 154.125, texas child support percentage, texas child support guidelines 2025">
+  <meta name="author" content="Clearly LLC">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
+  <link rel="apple-touch-icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+
+  <style>
+    .calc-page-header {
+      padding: 60px 0 40px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
+      border-bottom: 1px solid var(--border);
+    }
+    .calc-page-header .container { max-width: 900px; }
+    .calc-page-header h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; letter-spacing: -0.02em; }
+    .calc-page-header p { font-size: 17px; color: var(--text-secondary); margin-bottom: 8px; }
+    .calc-page-header .last-updated { font-size: 14px; color: var(--text-muted); }
+    .calc-breadcrumb { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; }
+    .calc-breadcrumb a { color: var(--primary); }
+    .calculator-section { padding: 40px 0 80px; }
+    .calculator-section .container { max-width: 900px; }
+    .calc-form-group { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; margin-bottom: 20px; overflow: hidden; }
+    .calc-form-header { padding: 20px 24px; background: var(--bg); border-bottom: 1px solid var(--border); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+    .calc-form-header h3 { font-size: 17px; font-weight: 600; margin: 0; display: flex; align-items: center; gap: 10px; }
+    .calc-form-header .toggle-icon { transition: transform 0.2s; color: var(--text-muted); }
+    .calc-form-group.collapsed .toggle-icon { transform: rotate(-90deg); }
+    .calc-form-body { padding: 24px; }
+    .calc-form-group.collapsed .calc-form-body { display: none; }
+    .income-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    .income-column h4 { font-size: 15px; font-weight: 600; color: var(--primary); margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid var(--primary-soft); }
+    .calc-field { margin-bottom: 16px; }
+    .calc-field:last-child { margin-bottom: 0; }
+    .calc-field label { display: block; font-size: 14px; font-weight: 500; color: var(--text-secondary); margin-bottom: 6px; }
+    .calc-input { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; transition: border-color 0.2s, box-shadow 0.2s; }
+    .calc-input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px var(--primary-soft); }
+    .calc-input::placeholder { color: var(--text-muted); }
+    .calc-input-prefix { position: relative; }
+    .calc-input-prefix .calc-input { padding-left: 28px; }
+    .calc-input-prefix::before { content: "$"; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 16px; }
+    .calc-subtotal { background: var(--primary-soft); border-radius: 8px; padding: 14px 16px; margin-top: 20px; display: flex; justify-content: space-between; align-items: center; }
+    .calc-subtotal label { font-size: 14px; font-weight: 600; color: var(--primary-dark); margin: 0; }
+    .calc-subtotal-value { font-size: 18px; font-weight: 700; color: var(--primary); }
+    .calc-select { width: 100%; padding: 12px 14px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; background: var(--surface); cursor: pointer; }
+    .calc-select:focus { outline: none; border-color: var(--primary); }
+    .calc-results-section { margin-top: 32px; display: none; }
+    .calc-results-section.visible { display: block; }
+    .calc-results-card { background: var(--primary-soft); border: 1px solid var(--primary-border); border-radius: 20px; padding: 32px; margin-bottom: 20px; }
+    .calc-results-card h3 { font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--primary-dark); margin-bottom: 20px; }
+    .calc-result-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--primary-border); }
+    .calc-result-row:last-child { border-bottom: none; }
+    .calc-result-label { font-size: 15px; color: var(--text-secondary); }
+    .calc-result-value { font-size: 18px; font-weight: 700; color: var(--text); }
+    .calc-result-primary { background: var(--primary); color: white; padding: 16px 20px; border-radius: 12px; margin: -8px -8px 16px; }
+    .calc-result-primary .calc-result-label { color: rgba(255,255,255,0.8); }
+    .calc-result-primary .calc-result-value { font-size: 28px; color: white; }
+    .calc-disclaimer { background: #FEF3C7; border: 1px solid #F59E0B; border-radius: 12px; padding: 20px 24px; margin-top: 24px; }
+    .calc-disclaimer h4 { font-size: 15px; font-weight: 600; color: #92400E; margin-bottom: 8px; }
+    .calc-disclaimer p { font-size: 14px; color: #78350F; margin: 0; line-height: 1.6; }
+    .calc-button-row { margin-top: 32px; display: flex; gap: 16px; }
+    .btn-calculate { flex: 1; padding: 18px 32px; font-size: 18px; border: none; }
+    .btn-reset { padding: 18px 24px; background: var(--surface); border: 1px solid var(--border); color: var(--text-secondary); }
+    .btn-reset:hover { border-color: var(--text-muted); text-decoration: none; }
+    .calc-note { font-size: 13px; color: var(--text-muted); margin-top: 8px; font-style: italic; }
+    .calc-section-divider { height: 1px; background: var(--border); margin: 32px 0; }
+    .calc-info-box { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; margin-bottom: 20px; }
+    .calc-info-box h4 { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
+    .calc-info-box p { font-size: 14px; color: var(--text-secondary); margin: 0; }
+    .calc-info-box ul { margin: 12px 0 0; padding-left: 20px; }
+    .calc-info-box li { font-size: 14px; color: var(--text-secondary); margin-bottom: 6px; }
+    @media (max-width: 768px) {
+      .calc-page-header { padding: 40px 0 30px; }
+      .calc-page-header h1 { font-size: 28px; }
+      .income-grid { grid-template-columns: 1fr; gap: 24px; }
+      .calc-button-row { flex-direction: column; }
+      .calc-results-card { padding: 24px; }
+      .calc-result-primary .calc-result-value { font-size: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="container">
+      <a href="/" class="nav-brand">
+        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+        Clearly
+      </a>
+      <ul class="nav-links">
+        <li><a href="/#features">Features</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="calc-page-header">
+    <div class="container">
+      <div class="calc-breadcrumb">
+        <a href="/calculators/">All Calculators</a> / Texas
+      </div>
+      <h1>Texas Child Support Calculator</h1>
+      <p>Calculate guideline child support using Texas Family Code Section 154.125.</p>
+      <p class="last-updated">Based on Texas guidelines effective September 2025. Income cap: $11,700/month.</p>
+    </div>
+  </header>
+
+  <!-- Calculator Section -->
+  <section class="calculator-section">
+    <div class="container">
+
+      <!-- Info Box -->
+      <div class="calc-info-box">
+        <h4>How Texas Calculates Child Support</h4>
+        <p>Texas uses a percentage of the non-custodial parent's net monthly resources:</p>
+        <ul>
+          <li><strong>1 child:</strong> 20% of net resources</li>
+          <li><strong>2 children:</strong> 25% of net resources</li>
+          <li><strong>3 children:</strong> 30% of net resources</li>
+          <li><strong>4 children:</strong> 35% of net resources</li>
+          <li><strong>5+ children:</strong> 40% of net resources</li>
+        </ul>
+        <p style="margin-top: 12px;">The guideline cap is $11,700/month in net resources (as of September 2025).</p>
+      </div>
+
+      <!-- Non-Custodial Parent Income -->
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="toggleSection(this)">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+            Non-Custodial Parent's Monthly Income
+          </h3>
+          <svg class="toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="calc-form-body">
+          <p class="calc-note" style="margin-top: 0; margin-bottom: 20px;">Enter monthly amounts. Net resources include all income minus taxes, Social Security, union dues, and health insurance for the child.</p>
+
+          <div class="income-grid">
+            <div class="calc-field">
+              <label>Gross Monthly Income</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="grossIncome" placeholder="0" onchange="calculateNet()">
+              </div>
+              <p class="calc-note">Wages, salary, tips, commissions, bonuses, self-employment income</p>
+            </div>
+            <div class="calc-field">
+              <label>Other Monthly Income</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="otherIncome" placeholder="0" onchange="calculateNet()">
+              </div>
+              <p class="calc-note">Rental income, dividends, interest, trust income, etc.</p>
+            </div>
+          </div>
+
+          <div class="calc-section-divider"></div>
+
+          <h4 style="font-size: 15px; font-weight: 600; margin-bottom: 16px;">Deductions from Gross Income</h4>
+
+          <div class="income-grid">
+            <div class="calc-field">
+              <label>Federal & State Taxes</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="taxes" placeholder="0" onchange="calculateNet()">
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Social Security Taxes</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="socialSecurity" placeholder="0" onchange="calculateNet()">
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Union Dues</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="unionDues" placeholder="0" onchange="calculateNet()">
+              </div>
+            </div>
+            <div class="calc-field">
+              <label>Health Insurance for Child</label>
+              <div class="calc-input-prefix">
+                <input type="number" class="calc-input" id="healthInsurance" placeholder="0" onchange="calculateNet()">
+              </div>
+            </div>
+          </div>
+
+          <div class="calc-subtotal">
+            <label>Net Monthly Resources</label>
+            <span class="calc-subtotal-value" id="netResources">$0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Children Section -->
+      <div class="calc-form-group">
+        <div class="calc-form-header" onclick="toggleSection(this)">
+          <h3>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            Children
+          </h3>
+          <svg class="toggle-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+        <div class="calc-form-body">
+          <div class="income-grid">
+            <div class="calc-field">
+              <label>Number of children before the court</label>
+              <select class="calc-select" id="numChildren">
+                <option value="1">1 child</option>
+                <option value="2">2 children</option>
+                <option value="3">3 children</option>
+                <option value="4">4 children</option>
+                <option value="5">5 or more children</option>
+              </select>
+            </div>
+            <div class="calc-field">
+              <label>Other children obligor has duty to support</label>
+              <select class="calc-select" id="otherChildren">
+                <option value="0">None</option>
+                <option value="1">1 other child</option>
+                <option value="2">2 other children</option>
+                <option value="3">3 other children</option>
+                <option value="4">4 other children</option>
+                <option value="5">5+ other children</option>
+              </select>
+              <p class="calc-note">Children from other relationships the obligor supports</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calculate Button -->
+      <div class="calc-button-row">
+        <button class="btn btn-primary btn-calculate" onclick="calculateSupport()">Calculate Child Support</button>
+        <button class="btn btn-reset" onclick="resetCalculator()">Reset</button>
+      </div>
+
+      <!-- Results Section -->
+      <div class="calc-results-section" id="resultsSection">
+        <div class="calc-section-divider" style="margin-top: 40px;"></div>
+        <h2 style="font-size: 24px; font-weight: 700; margin: 32px 0 24px;">Results</h2>
+
+        <div class="calc-results-card">
+          <h3>Guideline Child Support</h3>
+          <div class="calc-result-primary">
+            <div class="calc-result-row" style="border: none; padding: 0;">
+              <span class="calc-result-label">Monthly Child Support</span>
+              <span class="calc-result-value" id="monthlySupport">$0</span>
+            </div>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Annual Amount</span>
+            <span class="calc-result-value" id="annualSupport">$0</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Percentage Applied</span>
+            <span class="calc-result-value" id="percentageApplied">-</span>
+          </div>
+          <div class="calc-result-row">
+            <span class="calc-result-label">Net Resources Used</span>
+            <span class="calc-result-value" id="netResourcesUsed">$0</span>
+          </div>
+          <div class="calc-result-row" id="capNote" style="display: none;">
+            <span class="calc-result-label">Note</span>
+            <span class="calc-result-value" style="font-size: 14px; font-weight: 500;">Income capped at $11,700/month</span>
+          </div>
+        </div>
+
+        <!-- Disclaimer -->
+        <div class="calc-disclaimer">
+          <h4>Important Disclaimer</h4>
+          <p>This calculator provides <strong>estimates only</strong> based on Texas Family Code Section 154.125 guidelines. Actual court-ordered amounts may differ based on judicial discretion, deviation factors, the child's best interests, and specific circumstances of your case. Courts may order support above or below guidelines. This calculator does not constitute legal advice. Please consult a qualified family law attorney for guidance specific to your situation.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="cta-pattern"></div>
+    <div class="container fade-in">
+      <div class="cta-content">
+        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="cta-icon">
+        <h2>Managing co-parenting?</h2>
+        <p>Clearly helps co-parents coordinate schedules, track expenses, and communicate without conflict.</p>
+        <a href="https://apps.apple.com/app/clearly" target="_blank" class="app-store-badge">
+          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83" alt="Download on the App Store">
+        </a>
+        <p class="cta-note">Free trial included. No credit card required.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand-section">
+          <div class="footer-brand">
+            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+            <span>Clearly</span>
+          </div>
+          <p class="footer-tagline">Co-parenting made clear.</p>
+        </div>
+        <div class="footer-nav">
+          <div class="footer-col">
+            <h4>Product</h4>
+            <ul>
+              <li><a href="/#features">Features</a></li>
+              <li><a href="/#pricing">Pricing</a></li>
+              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Resources</h4>
+            <ul>
+              <li><a href="/calculators/">Support Calculator</a></li>
+              <li><a href="/faq.html">FAQ</a></li>
+              <li><a href="/help.html">Help Center</a></li>
+              <li><a href="/blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="/professionals.html">For Professionals</a></li>
+              <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="/privacy.html">Privacy Policy</a></li>
+              <li><a href="/terms.html">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Clearly LLC. All rights reserved.</p>
+        <p>Proudly designed and developed in the USA.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Texas Configuration
+    const TX_CONFIG = {
+      incomeCap: 11700, // Monthly cap as of Sept 2025
+      // Standard percentages (no other children)
+      standardPercentages: {
+        1: 0.20,
+        2: 0.25,
+        3: 0.30,
+        4: 0.35,
+        5: 0.40
+      },
+      // Multiple family percentages - [children before court][other children]
+      multipleFamily: {
+        1: { 0: 0.20, 1: 0.175, 2: 0.16, 3: 0.1475, 4: 0.136, 5: 0.1333 },
+        2: { 0: 0.25, 1: 0.225, 2: 0.2063, 3: 0.19, 4: 0.1838, 5: 0.1786 },
+        3: { 0: 0.30, 1: 0.2738, 2: 0.252, 3: 0.24, 4: 0.2314, 5: 0.225 },
+        4: { 0: 0.35, 1: 0.3222, 2: 0.30, 3: 0.2867, 4: 0.28, 5: 0.2722 },
+        5: { 0: 0.40, 1: 0.3733, 2: 0.35, 3: 0.3367, 4: 0.3271, 5: 0.32 }
+      }
+    };
+
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+
+    // Section toggle
+    function toggleSection(header) {
+      const group = header.parentElement;
+      group.classList.toggle('collapsed');
+    }
+
+    // Format currency
+    function formatCurrency(amount) {
+      return '$' + Math.round(amount).toLocaleString();
+    }
+
+    // Get input value
+    function getVal(id) {
+      return parseFloat(document.getElementById(id).value) || 0;
+    }
+
+    // Calculate net resources
+    function calculateNet() {
+      const gross = getVal('grossIncome') + getVal('otherIncome');
+      const deductions = getVal('taxes') + getVal('socialSecurity') + getVal('unionDues') + getVal('healthInsurance');
+      const net = Math.max(0, gross - deductions);
+      document.getElementById('netResources').textContent = formatCurrency(net);
+    }
+
+    // Main calculation
+    function calculateSupport() {
+      const netText = document.getElementById('netResources').textContent;
+      let netResources = parseFloat(netText.replace(/[$,]/g, '')) || 0;
+
+      const numChildren = parseInt(document.getElementById('numChildren').value);
+      const otherChildren = parseInt(document.getElementById('otherChildren').value);
+
+      // Apply income cap
+      const cappedNet = Math.min(netResources, TX_CONFIG.incomeCap);
+      const wasCapped = netResources > TX_CONFIG.incomeCap;
+
+      // Get percentage based on multiple family table
+      const percentage = TX_CONFIG.multipleFamily[numChildren][Math.min(otherChildren, 5)];
+
+      // Calculate support
+      const monthlySupport = cappedNet * percentage;
+      const annualSupport = monthlySupport * 12;
+
+      // Display results
+      document.getElementById('resultsSection').classList.add('visible');
+      document.getElementById('monthlySupport').textContent = formatCurrency(monthlySupport);
+      document.getElementById('annualSupport').textContent = formatCurrency(annualSupport);
+      document.getElementById('percentageApplied').textContent = (percentage * 100).toFixed(2) + '%';
+      document.getElementById('netResourcesUsed').textContent = formatCurrency(cappedNet);
+
+      // Show cap note if applicable
+      document.getElementById('capNote').style.display = wasCapped ? 'flex' : 'none';
+
+      // Scroll to results
+      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Reset calculator
+    function resetCalculator() {
+      document.querySelectorAll('.calc-input').forEach(input => input.value = '');
+      document.querySelectorAll('.calc-select').forEach(select => select.selectedIndex = 0);
+      document.getElementById('netResources').textContent = '$0';
+      document.getElementById('resultsSection').classList.remove('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', calculateNet);
+  </script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Texas Child Support Calculator",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "browserRequirements": "Requires JavaScript",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "creator": { "@type": "Organization", "name": "Clearly LLC", "url": "https://getclearly.app" },
+    "description": "Calculate Texas child support using official 2025 guidelines based on Texas Family Code Section 154.125.",
+    "dateModified": "2025-01-01"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How is child support calculated in Texas?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Texas uses a percentage of the non-custodial parent's net monthly resources: 20% for 1 child, 25% for 2 children, 30% for 3, 35% for 4, and 40% for 5 or more. If the parent supports other children, these percentages are adjusted."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the income cap for Texas child support?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "As of September 2025, the Texas child support income cap is $11,700 per month in net resources. Courts can order support on income above this cap, but it requires showing the child's needs exceed guideline amounts."
+        }
+      }
+    ]
+  }
+  </script>
+
+</body>
+</html>
