@@ -664,10 +664,8 @@
         <div class="coming-badge">Coming Spring 2026</div>
         <h1>A new way to<br>co-parent.</h1>
         <p>We're building something different — a co-parenting app designed from the ground up to reduce conflict and keep the focus on your kids.</p>
-        <form name="waitlist" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="signup-form">
-          <input type="hidden" name="form-name" value="waitlist">
-          <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
-          <input type="email" name="email" placeholder="Enter your email" required class="signup-input">
+        <form class="signup-form waitlist-form" data-source="homepage-hero">
+          <input type="email" placeholder="Enter your email" required class="signup-input">
           <button type="submit" class="signup-btn">Get Notified</button>
         </form>
         <p class="signup-note">Be the first to know when we launch. No spam, ever.</p>
@@ -787,10 +785,8 @@
       <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="cta-icon-enhanced fade-in">
       <h2 class="fade-in">Be the first to know</h2>
       <p class="fade-in">Join our waitlist and we'll notify you the moment Clearly is ready to download.</p>
-      <form name="waitlist-footer" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="cta-form fade-in">
-        <input type="hidden" name="form-name" value="waitlist-footer">
-        <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
-        <input type="email" name="email" placeholder="Enter your email" required class="cta-input">
+      <form class="cta-form waitlist-form fade-in" data-source="homepage-cta">
+        <input type="email" placeholder="Enter your email" required class="cta-input">
         <button type="submit" class="cta-btn">Get Notified</button>
       </form>
       <p class="cta-note fade-in">No spam. Unsubscribe anytime.</p>
@@ -865,27 +861,41 @@
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // Form submission handling
-    document.querySelectorAll('form[data-netlify="true"]').forEach(form => {
+    // Form submission handling - Supabase Edge Function
+    const WAITLIST_ENDPOINT = 'https://dwncravjhkbclbuzijra.supabase.co/functions/v1/waitlist-signup';
+
+    document.querySelectorAll('form.waitlist-form').forEach(form => {
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const formData = new FormData(form);
+        const emailInput = form.querySelector('input[type="email"]');
         const button = form.querySelector('button[type="submit"]');
         const originalText = button.textContent;
+        const source = form.dataset.source || 'homepage';
+
         button.textContent = 'Joining...';
         button.disabled = true;
 
         try {
-          await fetch('/', {
+          const response = await fetch(WAITLIST_ENDPOINT, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(formData).toString()
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: emailInput.value,
+              source: source
+            })
           });
-          form.innerHTML = '<div class="signup-success">You\'re on the list! We\'ll be in touch.</div>';
+
+          const data = await response.json();
+
+          if (response.ok) {
+            form.innerHTML = '<div class="signup-success">You\'re on the list! Check your email.</div>';
+          } else {
+            throw new Error(data.error || 'Something went wrong');
+          }
         } catch (error) {
           button.textContent = originalText;
           button.disabled = false;
-          alert('Something went wrong. Please try again.');
+          alert(error.message || 'Something went wrong. Please try again.');
         }
       });
     });

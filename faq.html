@@ -171,10 +171,8 @@
         <h3>Want to know when we launch?</h3>
         <p>Join our waitlist and be the first to try Clearly.</p>
         <div class="signup-inline">
-          <form name="waitlist-faq" method="POST" data-netlify="true" netlify-honeypot="bot-field">
-            <input type="hidden" name="form-name" value="waitlist-faq">
-            <p hidden><label>Don't fill this out: <input name="bot-field"></label></p>
-            <input type="email" name="email" placeholder="Enter your email" required>
+          <form class="waitlist-form" data-source="faq">
+            <input type="email" placeholder="Enter your email" required>
             <button type="submit" class="btn btn-primary">Get Notified</button>
           </form>
           <p class="signup-note">No spam. We'll only email you about the launch.</p>
@@ -286,20 +284,36 @@
       navLinks.classList.toggle('open');
     });
 
-    // Form handling
-    document.querySelectorAll('form[data-netlify="true"]').forEach(form => {
+    // Form handling - Supabase Edge Function
+    const WAITLIST_ENDPOINT = 'https://dwncravjhkbclbuzijra.supabase.co/functions/v1/waitlist-signup';
+
+    document.querySelectorAll('form.waitlist-form').forEach(form => {
       form.addEventListener('submit', async (e) => {
         e.preventDefault();
-        const formData = new FormData(form);
+        const emailInput = form.querySelector('input[type="email"]');
+        const button = form.querySelector('button[type="submit"]');
+        const originalText = button.textContent;
+        const source = form.dataset.source || 'faq';
+
+        button.textContent = 'Joining...';
+        button.disabled = true;
+
         try {
-          await fetch('/', {
+          const response = await fetch(WAITLIST_ENDPOINT, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: new URLSearchParams(formData).toString()
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: emailInput.value, source })
           });
-          form.innerHTML = '<p style="color: var(--primary); font-weight: 600;">You\'re on the list! We\'ll be in touch.</p>';
+          const data = await response.json();
+          if (response.ok) {
+            form.innerHTML = '<p style="color: var(--primary); font-weight: 600;">You\'re on the list! Check your email.</p>';
+          } else {
+            throw new Error(data.error || 'Something went wrong');
+          }
         } catch (error) {
-          alert('Something went wrong. Please try again.');
+          button.textContent = originalText;
+          button.disabled = false;
+          alert(error.message || 'Something went wrong. Please try again.');
         }
       });
     });
