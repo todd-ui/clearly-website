@@ -435,12 +435,10 @@
   </footer>
 
   <script>
-    // California Configuration
+    // California Configuration - Family Code Section 4055
+    // K factor multipliers by number of children (approximate)
     const CA_CONFIG = {
-      // K factor multipliers by number of children
-      kMultipliers: { 1: 1.0, 2: 1.6, 3: 2.0, 4: 2.3, 5: 2.5 },
-      // Low income adjustment threshold (as of Jan 2026)
-      lowIncomeThreshold: 2929
+      kMultipliers: { 1: 1.0, 2: 1.6, 3: 2.0, 4: 2.3, 5: 2.5 }
     };
 
     // Mobile menu toggle
@@ -485,6 +483,35 @@
       }
     }
 
+    // Calculate K factor per Family Code 4055
+    // K = (1 + H%) × [income bracket fraction] when H% ≤ 50%
+    // K = (2 - H%) × [income bracket fraction] when H% > 50%
+    function calculateKFactor(totalNet, higherTimePercent) {
+      // Get the income bracket fraction
+      let bracketFraction;
+      if (totalNet <= 2900) {
+        bracketFraction = 0.165 + (totalNet / 82857);
+      } else if (totalNet <= 5000) {
+        bracketFraction = 0.131 + (totalNet / 42149);
+      } else if (totalNet <= 10000) {
+        bracketFraction = 0.250;
+      } else if (totalNet <= 15000) {
+        bracketFraction = 0.10 + (1499 / totalNet);
+      } else {
+        bracketFraction = 0.12 + (1200 / totalNet);
+      }
+
+      // Apply the H% adjustment
+      let k;
+      if (higherTimePercent <= 0.50) {
+        k = (1 + higherTimePercent) * bracketFraction;
+      } else {
+        k = (2 - higherTimePercent) * bracketFraction;
+      }
+
+      return k;
+    }
+
     // Main calculation
     function calculateSupport() {
       // Get net incomes
@@ -508,17 +535,8 @@
       const uninsured = getVal('uninsured');
       const totalAddOns = childcare + childHealth + uninsured;
 
-      // Calculate K factor (simplified California formula)
-      // K = 1 + H% (decimal) for higher earner with majority time
-      // Adjusted for children
-      let k;
-      if (totalNet <= 800) {
-        k = 0.20 + totalNet / 16000;
-      } else {
-        // Standard K factor calculation
-        const baseK = 0.25 + (0.015 * Math.min(totalNet / 1000, 10));
-        k = Math.min(0.50, baseK);
-      }
+      // Calculate K factor using official Family Code 4055 formula
+      let k = calculateKFactor(totalNet, higherTime);
 
       // Apply children multiplier
       k = k * CA_CONFIG.kMultipliers[numChildren];

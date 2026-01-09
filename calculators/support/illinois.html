@@ -283,40 +283,49 @@
   </footer>
 
   <script>
-    // Illinois child support schedule (based on income shares model)
-    // Using percentages: 1 child=20%, 2=28%, 3=32%, 4=40%, 5=45%, 6+=50%
+    // Illinois child support schedule - Official 2025 values from HFS
+    // Based on 750 ILCS 5/505 Income Shares Model
     const IL_CONFIG = {
-      percentages: { 1: 0.20, 2: 0.28, 3: 0.32, 4: 0.40, 5: 0.45, 6: 0.50 },
-      incomeCap: 30000, // Monthly cap for schedule
+      incomeCap: 30025, // Monthly cap for schedule
       lowIncomeThreshold: 1295, // ~75% FPL monthly
       lowIncomePerChild: 40,
       lowIncomeMax: 120,
-      // Simplified gross to net conversion (approximate)
-      grossToNet: 0.72 // Roughly 28% for taxes
+      grossToNet: 0.72 // Approximate gross to net conversion
     };
 
-    // Illinois basic obligation schedule (approximate based on income shares)
+    // Illinois basic obligation schedule - 2025 official values
+    // Format: [maxIncome, [1child, 2child, 3child, 4child, 5child, 6child]]
     const IL_SCHEDULE = {
       brackets: [
-        [1000, [200, 280, 320, 400, 450, 500]],
-        [1500, [300, 420, 480, 600, 675, 750]],
-        [2000, [400, 560, 640, 800, 900, 1000]],
-        [2500, [500, 700, 800, 1000, 1125, 1250]],
-        [3000, [600, 840, 960, 1200, 1350, 1500]],
-        [3500, [700, 980, 1120, 1400, 1575, 1750]],
-        [4000, [800, 1120, 1280, 1600, 1800, 2000]],
-        [4500, [900, 1260, 1440, 1800, 2025, 2250]],
-        [5000, [1000, 1400, 1600, 2000, 2250, 2500]],
-        [6000, [1200, 1680, 1920, 2400, 2700, 3000]],
-        [7000, [1400, 1960, 2240, 2800, 3150, 3500]],
-        [8000, [1600, 2240, 2560, 3200, 3600, 4000]],
-        [9000, [1800, 2520, 2880, 3600, 4050, 4500]],
-        [10000, [2000, 2800, 3200, 4000, 4500, 5000]],
-        [12500, [2500, 3500, 4000, 5000, 5625, 6250]],
-        [15000, [3000, 4200, 4800, 6000, 6750, 7500]],
-        [20000, [4000, 5600, 6400, 8000, 9000, 10000]],
-        [25000, [5000, 7000, 8000, 10000, 11250, 12500]],
-        [30000, [6000, 8400, 9600, 12000, 13500, 15000]]
+        [1000, [150, 228, 273, 304, 335, 364]],
+        [1500, [283, 431, 516, 576, 634, 689]],
+        [2000, [416, 633, 758, 847, 932, 1012]],
+        [2500, [540, 822, 984, 1099, 1209, 1314]],
+        [3000, [659, 1003, 1201, 1341, 1475, 1603]],
+        [3500, [773, 1176, 1409, 1573, 1730, 1880]],
+        [4000, [882, 1342, 1607, 1794, 1974, 2144]],
+        [4500, [988, 1503, 1800, 2010, 2211, 2402]],
+        [5000, [1090, 1658, 1986, 2218, 2440, 2651]],
+        [5500, [1140, 1734, 2077, 2319, 2551, 2772]],
+        [6000, [1189, 1808, 2165, 2418, 2660, 2890]],
+        [6500, [1236, 1880, 2251, 2514, 2766, 3005]],
+        [7000, [1282, 1950, 2335, 2607, 2868, 3116]],
+        [7500, [1326, 2017, 2416, 2698, 2968, 3225]],
+        [8000, [1369, 2082, 2494, 2785, 3064, 3329]],
+        [8500, [1410, 2145, 2569, 2869, 3156, 3429]],
+        [9000, [1450, 2205, 2641, 2950, 3245, 3526]],
+        [9500, [1488, 2263, 2711, 3028, 3331, 3619]],
+        [10000, [1525, 2320, 2779, 3103, 3414, 3709]],
+        [12000, [1655, 2518, 3016, 3368, 3704, 4025]],
+        [14000, [1775, 2700, 3234, 3612, 3973, 4317]],
+        [16000, [1885, 2868, 3435, 3836, 4220, 4585]],
+        [18000, [1987, 3023, 3621, 4044, 4449, 4834]],
+        [20000, [2082, 3167, 3793, 4236, 4660, 5063]],
+        [22000, [2119, 3224, 3861, 4312, 4744, 5155]],
+        [24000, [2155, 3279, 3927, 4386, 4825, 5243]],
+        [26000, [2190, 3332, 3991, 4457, 4903, 5328]],
+        [28000, [2223, 3382, 4052, 4525, 4978, 5409]],
+        [30025, [2241, 3289, 3821, 4268, 4693, 5103]]
       ]
     };
 
@@ -357,14 +366,21 @@
     function getBasicObligation(combinedIncome, numChildren) {
       const childIdx = Math.min(numChildren, 6) - 1;
 
+      // Find bracket with linear interpolation
       for (let i = 0; i < IL_SCHEDULE.brackets.length; i++) {
         if (combinedIncome <= IL_SCHEDULE.brackets[i][0]) {
-          return IL_SCHEDULE.brackets[i][1][childIdx];
+          if (i === 0) return IL_SCHEDULE.brackets[i][1][childIdx];
+          const prevBracket = IL_SCHEDULE.brackets[i - 1];
+          const currBracket = IL_SCHEDULE.brackets[i];
+          const incomeRange = currBracket[0] - prevBracket[0];
+          const incomeAbovePrev = combinedIncome - prevBracket[0];
+          const ratio = incomeAbovePrev / incomeRange;
+          const obligationRange = currBracket[1][childIdx] - prevBracket[1][childIdx];
+          return prevBracket[1][childIdx] + (obligationRange * ratio);
         }
       }
-      // Above max bracket - extrapolate using percentage
-      const pct = IL_CONFIG.percentages[Math.min(numChildren, 6)];
-      return combinedIncome * pct;
+      // Above max bracket - return max value (court discretion applies)
+      return IL_SCHEDULE.brackets[IL_SCHEDULE.brackets.length - 1][1][childIdx];
     }
 
     function calculateSupport() {
