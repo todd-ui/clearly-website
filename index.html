@@ -137,24 +137,25 @@
       animation: float 3s ease-in-out infinite;
     }
     .hero-visual-float-1 {
-      top: 20px;
-      right: -20px;
+      top: 10px;
+      right: -30px;
       animation-delay: 0s;
     }
     .hero-visual-float-2 {
-      bottom: 40px;
-      left: -30px;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: float-center 3s ease-in-out infinite;
       animation-delay: 1.5s;
     }
     .hero-visual-float-3 {
-      top: 50%;
-      right: -40px;
-      transform: translateY(-50%);
+      top: 45%;
+      right: -60px;
       animation-delay: 0.75s;
     }
     .hero-visual-float-4 {
-      bottom: 120px;
-      left: -50px;
+      top: 40%;
+      left: -60px;
       animation-delay: 2.25s;
     }
     .hero-visual-float svg {
@@ -165,6 +166,10 @@
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-8px); }
+    }
+    @keyframes float-center {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-8px); }
     }
 
     /* Email Signup Form */
