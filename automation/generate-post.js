@@ -550,12 +550,14 @@ if (require.main === module) {
   if (command === 'new') {
     // Generate and publish one new article
     publishNewArticle()
-      .then(() => triggerNetlifyBuild())
+      // DISABLED: Don't trigger Netlify until main is production
+      // .then(() => triggerNetlifyBuild())
       .catch(console.error);
   } else if (command === 'backfill') {
     // Backfill initial 12 articles
     backfillInitialArticles()
-      .then(() => triggerNetlifyBuild())
+      // DISABLED: Don't trigger Netlify until main is production
+      // .then(() => triggerNetlifyBuild())
       .catch(console.error);
   } else {
     console.log('Clearly Blog Generator');
