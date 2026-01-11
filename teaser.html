@@ -508,6 +508,22 @@
       border-radius: 6px;
       opacity: 0.6;
     }
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+    .footer-link {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .footer-link:hover {
+      color: rgba(255,255,255,0.7);
+    }
     .footer-text {
       font-size: 13px;
       color: rgba(255,255,255,0.3);
@@ -696,6 +712,14 @@
     <div class="footer-logo">
       <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
       Clearly
+    </div>
+    <div class="footer-links">
+      <a href="/blog.html" class="footer-link transition-link">Blog</a>
+      <a href="/professionals.html" class="footer-link transition-link">Professionals</a>
+      <a href="/faq.html" class="footer-link transition-link">FAQ</a>
+      <a href="/help.html" class="footer-link transition-link">Help</a>
+      <a href="/privacy.html" class="footer-link transition-link">Privacy</a>
+      <a href="/terms.html" class="footer-link transition-link">Terms</a>
     </div>
     <p class="footer-text">© 2026 Clearly LLC. Designed in the USA.</p>
   </footer>
