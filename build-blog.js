@@ -206,10 +206,9 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
         Clearly
       </a>
       <ul class="nav-links">
-        <li><a href="/calculators/">Calculators</a></li>
-        <li><a href="/faq.html">FAQ</a></li>
         <li><a href="/blog.html">Blog</a></li>
-        <li><a href="/#notify" class="nav-cta">Get Notified</a></li>
+        <li><a href="/professionals.html">Professionals</a></li>
+        <li><a href="/#notify" class="nav-cta">Join Waitlist</a></li>
       </ul>
       <button class="nav-toggle" aria-label="Menu">
         <span></span>
@@ -592,10 +591,9 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
         Clearly
       </a>
       <ul class="nav-links">
-        <li><a href="/calculators/">Calculators</a></li>
-        <li><a href="/faq.html">FAQ</a></li>
         <li><a href="/blog.html">Blog</a></li>
-        <li><a href="/#notify" class="nav-cta">Get Notified</a></li>
+        <li><a href="/professionals.html">Professionals</a></li>
+        <li><a href="/#notify" class="nav-cta">Join Waitlist</a></li>
       </ul>
       <button class="nav-toggle" aria-label="Menu">
         <span></span>
