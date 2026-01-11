@@ -1225,6 +1225,9 @@ img {
   font-weight: 600;
   text-decoration: none;
   transition: all 0.2s;
+  border: none;
+  outline: none;
+  cursor: pointer;
 }
 
 .btn-primary {
