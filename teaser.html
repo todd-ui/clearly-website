@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clearly - Co-parenting Reimagined | Coming Spring 2026</title>
+  <meta name="description" content="Finally, an app built for how modern families actually work. Simple. Intuitive. Beautiful. Join the waitlist.">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0a0a0a;
+      color: white;
+    }
+    :root {
+      --primary: #0D8268;
+      --primary-light: #14b89a;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10,10,10,0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 600;
+      color: white;
+      text-decoration: none;
+    }
+    .logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+    }
+    .nav-cta {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .nav-cta:hover {
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 1000px;
+      background: radial-gradient(circle, rgba(13, 130, 104, 0.12) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .badge {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.7);
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    h1 {
+      font-size: 80px;
+      font-weight: 700;
+      color: white;
+      line-height: 1;
+      margin-bottom: 24px;
+      letter-spacing: -3px;
+    }
+    h1 span {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-tagline {
+      font-size: 22px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 400;
+      margin-bottom: 48px;
+      max-width: 440px;
+      line-height: 1.5;
+    }
+    .hero-phone {
+      position: relative;
+      margin-bottom: 48px;
+    }
+    .phone-glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(13, 130, 104, 0.2) 0%, transparent 60%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: glow 4s ease-in-out infinite;
+    }
+    @keyframes glow {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    }
+    .phone-frame {
+      position: relative;
+      z-index: 1;
+      width: 240px;
+      height: 480px;
+      background: linear-gradient(145deg, #1c1c1c 0%, #0c0c0c 100%);
+      border-radius: 40px;
+      padding: 8px;
+      box-shadow: 0 50px 100px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+      animation: float 5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: #111;
+      border-radius: 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .phone-screen img {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      box-shadow: 0 16px 48px rgba(13, 130, 104, 0.4);
+    }
+    .cta-form {
+      display: flex;
+      gap: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 6px;
+    }
+    .cta-input {
+      background: transparent;
+      border: none;
+      padding: 14px 18px;
+      font-size: 15px;
+      color: white;
+      width: 260px;
+    }
+    .cta-input::placeholder { color: rgba(255,255,255,0.4); }
+    .cta-input:focus { outline: none; }
+    .cta-btn {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cta-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 24px rgba(13, 130, 104, 0.4);
+    }
+    .cta-note {
+      margin-top: 16px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* FEATURES TEASE */
+    .features {
+      padding: 120px 24px;
+      text-align: center;
+      position: relative;
+    }
+    .features::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    }
+    .section-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary-light);
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    .section-subtitle {
+      font-size: 18px;
+      color: rgba(255,255,255,0.5);
+      max-width: 500px;
+      margin: 0 auto 60px;
+      line-height: 1.6;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 40px 32px;
+      text-align: left;
+      transition: all 0.3s;
+    }
+    .feature-card:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.1);
+      transform: translateY(-4px);
+    }
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, rgba(13,130,104,0.2) 0%, rgba(13,130,104,0.1) 100%);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .feature-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--primary-light);
+    }
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+    .feature-card p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+    }
+
+    /* PRINCIPLES */
+    .principles {
+      padding: 120px 24px;
+      text-align: center;
+    }
+    .principles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px 80px;
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    .principle {
+      position: relative;
+      padding-left: 24px;
+    }
+    .principle::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 4px;
+      height: 24px;
+      background: linear-gradient(180deg, var(--primary) 0%, transparent 100%);
+      border-radius: 2px;
+    }
+    .principle h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .principle p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.6;
+    }
+
+    /* FINAL CTA */
+    .final-cta {
+      padding: 120px 24px;
+      text-align: center;
+      position: relative;
+    }
+    .final-cta::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(13, 130, 104, 0.08) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .final-cta h2 {
+      margin-bottom: 16px;
+    }
+    .final-cta .section-subtitle {
+      margin-bottom: 40px;
+    }
+    .final-cta .cta-form {
+      max-width: 420px;
+      margin: 0 auto;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 40px 24px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 16px;
+      color: rgba(255,255,255,0.6);
+      font-weight: 500;
+    }
+    .footer-logo img {
+      width: 24px;
+      height: 24px;
+      border-radius: 6px;
+      opacity: 0.6;
+    }
+    .footer-text {
+      font-size: 13px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .feature-grid { grid-template-columns: 1fr; max-width: 400px; }
+      .principles-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      header { padding: 16px 20px; }
+      h1 { font-size: 48px; letter-spacing: -2px; }
+      h2 { font-size: 36px; }
+      .hero-tagline { font-size: 18px; }
+      .cta-form { flex-direction: column; }
+      .cta-input { width: 100%; text-align: center; }
+      .cta-btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+      Clearly
+    </a>
+    <a href="#notify" class="nav-cta">Join Waitlist</a>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="badge">Coming Spring 2026</div>
+    <h1>Co-parenting.<br><span>Reimagined.</span></h1>
+    <p class="hero-tagline">Simple. Intuitive. Finally beautiful.<br>Built for how modern families actually live.</p>
+
+    <div class="hero-phone">
+      <div class="phone-glow"></div>
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+        </div>
+      </div>
+    </div>
+
+    <form class="cta-form" id="notify">
+      <input type="email" placeholder="Enter your email" required class="cta-input">
+      <button type="submit" class="cta-btn">Get Early Access</button>
+    </form>
+    <p class="cta-note">Be first to experience what's next.</p>
+  </section>
+
+  <!-- Features Tease -->
+  <section class="features">
+    <div class="section-label">What's Coming</div>
+    <h2>Everything you need.<br>Nothing you don't.</h2>
+    <p class="section-subtitle">We've rethought every detail to help you focus on what matters most — your kids.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        </div>
+        <h3>Beautiful scheduling</h3>
+        <p>The most intuitive custody calendar ever built. Based on your actual agreement, integrated with how you live.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <h3>Thoughtful communication</h3>
+        <p>Rooted in proven mediation strategies. Designed to reduce conflict and keep conversations on track.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        </div>
+        <h3>Court-ready records</h3>
+        <p>Best-in-class certified documentation. Every exchange, decision, and agreement — organized and exportable.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Principles -->
+  <section class="principles">
+    <div class="section-label">Our Approach</div>
+    <h2>Built different.</h2>
+    <p class="section-subtitle">We didn't just make another co-parenting app. We started from scratch with one question: what do families actually need?</p>
+
+    <div class="principles-grid">
+      <div class="principle">
+        <h3>Contemporary by design</h3>
+        <p>Integrates seamlessly with the calendars, tools, and workflows you already use. No extra friction.</p>
+      </div>
+      <div class="principle">
+        <h3>Your agreement, your way</h3>
+        <p>Flexible enough to match any custody arrangement. Because every family is different.</p>
+      </div>
+      <div class="principle">
+        <h3>Conflict-aware intelligence</h3>
+        <p>Built on established negotiation and mediation principles. Helps navigate the hard conversations.</p>
+      </div>
+      <div class="principle">
+        <h3>Focus on the kids</h3>
+        <p>Every feature exists to make life easier for your children. That's the only metric that matters.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="final-cta">
+    <div class="section-label">Join the Waitlist</div>
+    <h2>Something better is coming.</h2>
+    <p class="section-subtitle">Be among the first to experience co-parenting designed for modern life.</p>
+
+    <form class="cta-form">
+      <input type="email" placeholder="Enter your email" required class="cta-input">
+      <button type="submit" class="cta-btn">Get Early Access</button>
+    </form>
+    <p class="cta-note">No spam. Just launch updates.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-logo">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+      Clearly
+    </div>
+    <p class="footer-text">© 2026 Clearly LLC. Designed in the USA.</p>
+  </footer>
+
+</body>
+</html>
