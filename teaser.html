@@ -18,6 +18,8 @@
       --text-muted: rgba(255,255,255,0.4);
       --form-bg: rgba(255,255,255,0.05);
       --form-border: rgba(255,255,255,0.1);
+      --header-bg: rgba(10,10,10,0.85);
+      --header-border: rgba(255,255,255,0.05);
     }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -37,9 +39,9 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(10,10,10,0.8);
+      background: var(--header-bg);
       backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid var(--header-border);
     }
     .logo {
       display: flex;
@@ -47,7 +49,7 @@
       gap: 12px;
       font-size: 20px;
       font-weight: 600;
-      color: white;
+      color: var(--text);
       text-decoration: none;
     }
     .logo img {
@@ -56,18 +58,18 @@
       border-radius: 8px;
     }
     .nav-cta {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.15);
+      background: var(--primary);
+      border: none;
       color: white;
       padding: 10px 20px;
       border-radius: 8px;
       font-size: 14px;
       font-weight: 500;
       text-decoration: none;
-      transition: all 0.2s;
+      transition: background 0.2s;
     }
     .nav-cta:hover {
-      background: rgba(255,255,255,0.15);
+      background: var(--primary-light);
     }
     .nav-links {
       display: flex;
@@ -75,14 +77,14 @@
       gap: 32px;
     }
     .nav-link {
-      color: rgba(255,255,255,0.6);
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 14px;
       font-weight: 500;
       transition: color 0.2s;
     }
     .nav-link:hover {
-      color: rgba(255,255,255,0.9);
+      color: var(--text);
     }
 
     /* HERO */
@@ -816,6 +818,11 @@
     const lightFormBg = [255, 255, 255, 1];
     const darkFormBorder = [255, 255, 255, 0.1];
     const lightFormBorder = [232, 231, 228, 1];  // #E8E7E4
+    // Header colors
+    const darkHeaderBg = [10, 10, 10, 0.85];
+    const lightHeaderBg = [250, 250, 249, 0.9];
+    const darkHeaderBorder = [255, 255, 255, 0.05];
+    const lightHeaderBorder = [232, 231, 228, 1];
 
     function updateColors() {
       const scrollY = window.scrollY;
@@ -836,6 +843,8 @@
       document.documentElement.style.setProperty('--text-muted', lerpColorAlpha(darkMuted, lightMuted, eased));
       document.documentElement.style.setProperty('--form-bg', lerpColorAlpha(darkFormBg, lightFormBg, eased));
       document.documentElement.style.setProperty('--form-border', lerpColorAlpha(darkFormBorder, lightFormBorder, eased));
+      document.documentElement.style.setProperty('--header-bg', lerpColorAlpha(darkHeaderBg, lightHeaderBg, eased));
+      document.documentElement.style.setProperty('--header-border', lerpColorAlpha(darkHeaderBorder, lightHeaderBorder, eased));
     }
 
     window.addEventListener('scroll', updateColors, { passive: true });
