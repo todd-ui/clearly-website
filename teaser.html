@@ -156,18 +156,126 @@
     .phone-screen {
       width: 100%;
       height: 100%;
-      background: #111;
+      background: linear-gradient(180deg, #1a1a1a 0%, #111 100%);
       border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+    }
+    .phone-screen::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: linear-gradient(to top, #0c0c0c 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 10;
+    }
+    .mock-ui {
+      padding: 20px 16px;
+      font-size: 11px;
+    }
+    .mock-header {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .mock-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+    }
+    .mock-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4A90A4, #3d7a8c);
+    }
+    .mock-custody-card {
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+    .mock-custody-label {
+      font-size: 10px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .mock-custody-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mock-custody-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4A90A4;
+    }
+    .mock-custody-text {
+      font-size: 13px;
+      font-weight: 500;
+      color: white;
+    }
+    .mock-calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      margin-bottom: 14px;
+    }
+    .mock-day-label {
+      font-size: 8px;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      padding-bottom: 4px;
+    }
+    .mock-day {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 9px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
     }
-    .phone-screen img {
-      width: 64px;
-      height: 64px;
-      border-radius: 16px;
-      box-shadow: 0 16px 48px rgba(13, 130, 104, 0.4);
+    .mock-day.you {
+      background: rgba(74, 144, 164, 0.35);
+      color: white;
+    }
+    .mock-day.them {
+      background: rgba(224, 122, 95, 0.2);
+      color: rgba(255,255,255,0.6);
+    }
+    .mock-day.today {
+      border: 1.5px solid var(--primary);
+    }
+    .mock-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .mock-action {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+    .mock-action-icon {
+      width: 20px;
+      height: 20px;
+      margin: 0 auto 4px;
+      background: rgba(13, 130, 104, 0.3);
+      border-radius: 6px;
+    }
+    .mock-action-label {
+      font-size: 8px;
+      color: rgba(255,255,255,0.5);
     }
     .cta-form {
       display: flex;
@@ -419,7 +527,56 @@
       <div class="phone-glow"></div>
       <div class="phone-frame">
         <div class="phone-screen">
-          <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+          <div class="mock-ui">
+            <div class="mock-header">
+              <span class="mock-title">Today</span>
+              <div class="mock-avatar"></div>
+            </div>
+            <div class="mock-custody-card">
+              <div class="mock-custody-label">With you</div>
+              <div class="mock-custody-status">
+                <div class="mock-custody-dot"></div>
+                <span class="mock-custody-text">Emma & Noah</span>
+              </div>
+            </div>
+            <div class="mock-calendar">
+              <span class="mock-day-label">S</span>
+              <span class="mock-day-label">M</span>
+              <span class="mock-day-label">T</span>
+              <span class="mock-day-label">W</span>
+              <span class="mock-day-label">T</span>
+              <span class="mock-day-label">F</span>
+              <span class="mock-day-label">S</span>
+              <span class="mock-day them">5</span>
+              <span class="mock-day them">6</span>
+              <span class="mock-day them">7</span>
+              <span class="mock-day you">8</span>
+              <span class="mock-day you">9</span>
+              <span class="mock-day you">10</span>
+              <span class="mock-day you today">11</span>
+              <span class="mock-day you">12</span>
+              <span class="mock-day you">13</span>
+              <span class="mock-day you">14</span>
+              <span class="mock-day them">15</span>
+              <span class="mock-day them">16</span>
+              <span class="mock-day them">17</span>
+              <span class="mock-day them">18</span>
+            </div>
+            <div class="mock-actions">
+              <div class="mock-action">
+                <div class="mock-action-icon"></div>
+                <span class="mock-action-label">Date Swap</span>
+              </div>
+              <div class="mock-action">
+                <div class="mock-action-icon"></div>
+                <span class="mock-action-label">New Topic</span>
+              </div>
+              <div class="mock-action">
+                <div class="mock-action-icon"></div>
+                <span class="mock-action-label">Expense</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
