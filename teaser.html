@@ -62,6 +62,29 @@
     .nav-cta:hover {
       background: rgba(255,255,255,0.15);
     }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+    .nav-link {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-link:hover {
+      color: rgba(255,255,255,0.9);
+    }
+    /* Page transition */
+    body {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+    body.fade-out {
+      opacity: 0;
+    }
 
     /* HERO */
     .hero {
@@ -497,12 +520,18 @@
     }
     @media (max-width: 768px) {
       header { padding: 16px 20px; }
+      .nav-links { gap: 16px; }
+      .nav-link { font-size: 13px; }
+      .nav-cta { padding: 8px 14px; font-size: 13px; }
       h1 { font-size: 48px; letter-spacing: -2px; }
       h2 { font-size: 36px; }
       .hero-tagline { font-size: 18px; }
       .cta-form { flex-direction: column; }
       .cta-input { width: 100%; text-align: center; }
       .cta-btn { width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .nav-link { display: none; }
     }
   </style>
 </head>
@@ -514,7 +543,11 @@
       <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
       Clearly
     </a>
-    <a href="#notify" class="nav-cta">Join Waitlist</a>
+    <div class="nav-links">
+      <a href="/blog.html" class="nav-link transition-link">Blog</a>
+      <a href="/professionals.html" class="nav-link transition-link">Professionals</a>
+      <a href="#notify" class="nav-cta">Join Waitlist</a>
+    </div>
   </header>
 
   <!-- Hero -->
@@ -666,6 +699,20 @@
     </div>
     <p class="footer-text">© 2026 Clearly LLC. Designed in the USA.</p>
   </footer>
+
+  <script>
+    // Smooth fade transition to light pages
+    document.querySelectorAll('.transition-link').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const href = this.getAttribute('href');
+        document.body.classList.add('fade-out');
+        setTimeout(() => {
+          window.location.href = href;
+        }, 300);
+      });
+    });
+  </script>
 
 </body>
 </html>
