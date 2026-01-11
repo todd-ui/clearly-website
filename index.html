@@ -1,800 +1,755 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-DYZ1XEXPMT');
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clearly - A new way to co-parent | Coming Spring 2026</title>
-  <meta name="description" content="A fresh approach to co-parenting is coming. Shared schedules, expense tracking, and tools designed to reduce conflict. Join the waitlist for early access.">
-
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://getclearly.app/">
-
-  <!-- Open Graph -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://getclearly.app/">
-  <meta property="og:title" content="Clearly - A new way to co-parent | Coming Spring 2026">
-  <meta property="og:description" content="A fresh approach to co-parenting is coming. Shared schedules, expense tracking, and tools designed to reduce conflict.">
-  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
-  <meta property="og:site_name" content="Clearly">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Clearly - A new way to co-parent | Coming Spring 2026">
-  <meta name="twitter:description" content="A fresh approach to co-parenting is coming. Shared schedules, expense tracking, and tools designed to reduce conflict.">
-  <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
-
-  <!-- Additional SEO -->
-  <meta name="robots" content="index, follow">
-  <meta name="keywords" content="co-parenting app, custody schedule, shared parenting, divorce app, child custody, expense tracking, co-parent communication">
-  <meta name="author" content="Clearly LLC">
-
-  <link rel="stylesheet" href="styles.css">
-
-  <!-- Favicons for Google Search & Browsers (local paths for better Google indexing) -->
-  <link rel="icon" type="image/png" sizes="48x48" href="/favicon.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
-  <link rel="shortcut icon" href="/favicon.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
-
+  <title>Clearly - Co-parenting Reimagined | Coming Spring 2026</title>
+  <meta name="description" content="Finally, an app built for how modern families actually work. Simple. Intuitive. Beautiful. Join the waitlist.">
+  <link rel="icon" type="image/png" href="/favicon.png">
   <style>
-    /* Pre-launch Landing Page Enhancements */
-
-    /* Coming Soon Badge */
-    .coming-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, #E6F5F1 0%, #D4EDE6 100%);
-      color: var(--primary);
-      padding: 10px 20px;
-      border-radius: 100px;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 28px;
-      border: 1px solid var(--primary-border);
-      box-shadow: 0 2px 8px rgba(13, 130, 104, 0.1);
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --primary: #0D8268;
+      --primary-light: #14b89a;
+      --bg: #0a0a0a;
+      --text: #ffffff;
+      --text-secondary: rgba(255,255,255,0.5);
+      --text-muted: rgba(255,255,255,0.4);
+      --form-bg: rgba(255,255,255,0.05);
+      --form-border: rgba(255,255,255,0.1);
+      --header-bg: rgba(10,10,10,0.85);
+      --header-border: rgba(255,255,255,0.05);
     }
-    .coming-badge::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      background: var(--primary);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.6; transform: scale(1.1); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      transition: background 0.1s ease-out;
     }
 
-    /* Hero Visual - Abstract decorative element */
-    .hero-visual {
-      flex: 0 0 400px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .hero-visual-inner {
-      position: relative;
-      width: 320px;
-      height: 320px;
-    }
-    .hero-visual-circle {
-      position: absolute;
-      border-radius: 50%;
-    }
-    .hero-visual-circle-1 {
-      width: 320px;
-      height: 320px;
-      background: linear-gradient(135deg, #E6F5F1 0%, #D4EDE6 100%);
+    /* HEADER */
+    header {
+      position: fixed;
       top: 0;
       left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--header-bg);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--header-border);
     }
-    .hero-visual-circle-2 {
-      width: 240px;
-      height: 240px;
-      background: linear-gradient(135deg, #D4EDE6 0%, #B8E0D4 100%);
-      top: 40px;
-      left: 40px;
-    }
-    .hero-visual-circle-3 {
-      width: 160px;
-      height: 160px;
-      background: linear-gradient(135deg, var(--primary) 0%, #14a085 100%);
-      top: 80px;
-      left: 80px;
-      box-shadow: 0 20px 60px rgba(13, 130, 104, 0.3);
-    }
-    .hero-visual-logo {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 80px;
-      height: 80px;
-      border-radius: 20px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-      z-index: 2;
-    }
-    .hero-visual-float {
-      position: absolute;
-      background: white;
-      border-radius: 16px;
-      padding: 14px 20px;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text);
+    .logo {
       display: flex;
       align-items: center;
-      gap: 10px;
-      z-index: 3;
-      animation: float 3s ease-in-out infinite;
-    }
-    .hero-visual-float-1 {
-      top: 10px;
-      right: -30px;
-      animation-delay: 0s;
-    }
-    .hero-visual-float-2 {
-      bottom: -10px;
-      left: 50%;
-      transform: translateX(-50%);
-      animation: float-center 3s ease-in-out infinite;
-      animation-delay: 1.5s;
-    }
-    .hero-visual-float-3 {
-      top: 45%;
-      right: -60px;
-      animation-delay: 0.75s;
-    }
-    .hero-visual-float-4 {
-      top: 40%;
-      left: -60px;
-      animation-delay: 2.25s;
-    }
-    .hero-visual-float svg {
-      width: 20px;
-      height: 20px;
-      color: var(--primary);
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-    @keyframes float-center {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(-8px); }
-    }
-
-    /* Email Signup Form */
-    .signup-form {
-      display: flex;
       gap: 12px;
-      flex-wrap: wrap;
-      max-width: 460px;
-    }
-    .signup-input {
-      flex: 1;
-      min-width: 220px;
-      padding: 16px 20px;
-      border: 2px solid var(--border);
-      border-radius: 12px;
-      font-size: 16px;
-      background: white;
+      font-size: 20px;
+      font-weight: 600;
       color: var(--text);
-      transition: all 0.2s;
+      text-decoration: none;
     }
-    .signup-input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(13, 130, 104, 0.1);
+    .logo img {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
     }
-    .signup-input::placeholder {
-      color: var(--text-muted);
-    }
-    .signup-btn {
-      padding: 16px 28px;
+    .nav-cta {
       background: var(--primary);
-      color: white;
       border: none;
-      border-radius: 12px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s;
     }
-    .signup-btn:hover {
-      background: var(--primary-dark);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(13, 130, 104, 0.3);
+    .nav-cta:hover {
+      background: var(--primary-light);
     }
-    .signup-btn:active {
-      transform: translateY(0);
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
     }
-    .signup-note {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 12px;
+    .nav-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
     }
-    #notify {
-      scroll-margin-top: 100px;
-    }
-    .signup-success {
-      padding: 16px 20px;
-      background: var(--primary-soft);
-      border: 1px solid var(--primary-border);
-      border-radius: 12px;
-      color: var(--primary);
-      font-weight: 600;
+    .nav-link:hover {
+      color: var(--text);
     }
 
-    /* Enhanced Features Section */
-    .features-enhanced {
-      background: linear-gradient(180deg, #FAFBFC 0%, #F5F7F9 100%);
-      padding: 100px 0;
-    }
-    .features-enhanced .section-title {
-      margin-bottom: 16px;
-    }
-    .section-subtitle {
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
-      color: var(--text-secondary);
-      font-size: 18px;
-      max-width: 560px;
-      margin: 0 auto 60px;
-      line-height: 1.6;
-    }
-    .feature-card-enhanced {
-      background: white;
-      border-radius: 20px;
-      padding: 40px 32px;
-      text-align: center;
-      border: 1px solid var(--border);
-      transition: all 0.3s ease;
+      padding: 120px 24px 80px;
       position: relative;
       overflow: hidden;
     }
-    .feature-card-enhanced::before {
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 1000px;
+      background: radial-gradient(circle, rgba(13, 130, 104, 0.12) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .badge {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.7);
+      padding: 10px 20px;
+      border-radius: 100px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 32px;
+    }
+    h1 {
+      font-size: 80px;
+      font-weight: 700;
+      color: white;
+      line-height: 1;
+      margin-bottom: 24px;
+      letter-spacing: -3px;
+    }
+    h1 span {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-tagline {
+      font-size: 22px;
+      color: rgba(255,255,255,0.5);
+      font-weight: 400;
+      margin-bottom: 48px;
+      max-width: 440px;
+      line-height: 1.5;
+    }
+    .hero-phone {
+      position: relative;
+      margin-bottom: 48px;
+    }
+    .phone-glow {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(13, 130, 104, 0.2) 0%, transparent 60%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: glow 4s ease-in-out infinite;
+    }
+    @keyframes glow {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    }
+    .phone-frame {
+      position: relative;
+      z-index: 1;
+      width: 240px;
+      height: 480px;
+      background: linear-gradient(145deg, #1c1c1c 0%, #0c0c0c 100%);
+      border-radius: 40px;
+      padding: 8px;
+      box-shadow: 0 50px 100px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.1);
+      animation: float 5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .phone-screen {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #1a1a1a 0%, #111 100%);
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+    }
+    .phone-screen::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 60%;
+      background: linear-gradient(to top, #0c0c0c 0%, transparent 100%);
+      pointer-events: none;
+      z-index: 10;
+    }
+    .mock-ui {
+      padding: 20px 16px;
+      font-size: 11px;
+    }
+    .mock-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .mock-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: white;
+    }
+    .mock-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #4A90A4, #3d7a8c);
+    }
+    .mock-custody-card {
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 12px;
+      margin-bottom: 14px;
+    }
+    .mock-custody-label {
+      font-size: 10px;
+      color: rgba(255,255,255,0.4);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .mock-custody-status {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .mock-custody-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4A90A4;
+    }
+    .mock-custody-text {
+      font-size: 13px;
+      font-weight: 500;
+      color: white;
+    }
+    .mock-calendar {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      margin-bottom: 14px;
+    }
+    .mock-day-label {
+      font-size: 8px;
+      color: rgba(255,255,255,0.3);
+      text-align: center;
+      padding-bottom: 4px;
+    }
+    .mock-day {
+      aspect-ratio: 1;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+    }
+    .mock-day.you {
+      background: rgba(74, 144, 164, 0.35);
+      color: white;
+    }
+    .mock-day.them {
+      background: rgba(224, 122, 95, 0.2);
+      color: rgba(255,255,255,0.6);
+    }
+    .mock-day.today {
+      border: 1.5px solid var(--primary);
+    }
+    .mock-actions {
+      display: flex;
+      gap: 8px;
+    }
+    .mock-action {
+      flex: 1;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 10px 8px;
+      text-align: center;
+    }
+    .mock-action-icon {
+      width: 20px;
+      height: 20px;
+      margin: 0 auto 4px;
+      background: rgba(13, 130, 104, 0.3);
+      border-radius: 6px;
+    }
+    .mock-action-label {
+      font-size: 8px;
+      color: rgba(255,255,255,0.5);
+    }
+    .cta-form {
+      display: flex;
+      gap: 8px;
+      background: var(--form-bg);
+      border: 1px solid var(--form-border);
+      border-radius: 14px;
+      padding: 6px;
+    }
+    .cta-input {
+      background: transparent;
+      border: none;
+      padding: 14px 18px;
+      font-size: 15px;
+      color: var(--text);
+      width: 260px;
+    }
+    .cta-input::placeholder { color: var(--text-muted); }
+    .cta-input:focus { outline: none; }
+    .cta-btn {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      color: white;
+      border: none;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .cta-btn:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 24px rgba(13, 130, 104, 0.4);
+    }
+    .cta-note {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* FEATURES TEASE */
+    .features {
+      padding: 120px 24px;
+      text-align: center;
+      position: relative;
+    }
+    .features::before {
       content: "";
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary) 0%, #14a085 100%);
-      opacity: 0;
-      transition: opacity 0.3s ease;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
     }
-    .feature-card-enhanced:hover {
+    .section-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary-light);
+      margin-bottom: 20px;
+    }
+    h2 {
+      font-size: 48px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--text-secondary);
+      max-width: 500px;
+      margin: 0 auto 60px;
+      line-height: 1.6;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .feature-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 20px;
+      padding: 40px 32px;
+      text-align: left;
+      transition: all 0.3s;
+    }
+    .feature-card:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.1);
       transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-      border-color: transparent;
     }
-    .feature-card-enhanced:hover::before {
-      opacity: 1;
-    }
-    .feature-icon-enhanced {
-      width: 64px;
-      height: 64px;
-      background: linear-gradient(135deg, var(--primary-soft) 0%, #D4EDE6 100%);
-      border-radius: 16px;
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, rgba(13,130,104,0.2) 0%, rgba(13,130,104,0.1) 100%);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin: 0 auto 24px;
+      margin-bottom: 20px;
     }
-    .feature-icon-enhanced svg {
-      width: 28px;
-      height: 28px;
-      color: var(--primary);
+    .feature-icon svg {
+      width: 24px;
+      height: 24px;
+      color: var(--primary-light);
     }
-    .feature-card-enhanced h3 {
+    .feature-card h3 {
       font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: var(--text);
+      font-weight: 600;
+      margin-bottom: 10px;
     }
-    .feature-card-enhanced p {
+    .feature-card p {
+      font-size: 15px;
       color: var(--text-secondary);
       line-height: 1.6;
-      font-size: 15px;
     }
 
-    /* Mission Section Visual */
-    .mission-section {
-      background: white;
-      padding: 100px 0;
+    /* PRINCIPLES */
+    .principles {
+      padding: 120px 24px;
+      text-align: center;
     }
-    .mission-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      align-items: center;
-    }
-    .mission-content {
-      max-width: 520px;
-    }
-    .mission-label {
-      display: inline-block;
-      background: linear-gradient(135deg, #E6F5F1 0%, #D4EDE6 100%);
-      color: var(--primary);
-      padding: 8px 16px;
-      border-radius: 100px;
-      font-size: 13px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 24px;
-    }
-    .mission-content h2 {
-      font-size: 36px;
-      font-weight: 800;
-      line-height: 1.2;
-      margin-bottom: 24px;
-      color: var(--text);
-    }
-    .mission-content p {
-      color: var(--text-secondary);
-      font-size: 17px;
-      line-height: 1.7;
-      margin-bottom: 16px;
-    }
-    .mission-content p:last-of-type {
-      margin-bottom: 0;
-    }
-    .mission-visual {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 40px;
-    }
-    .mission-visual-bg {
-      width: 320px;
-      height: 320px;
-      background: linear-gradient(135deg, var(--primary-soft) 0%, #D4EDE6 100%);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    .mission-visual-bg::before {
-      content: "";
-      position: absolute;
-      width: 380px;
-      height: 380px;
-      border: 2px dashed var(--primary-border);
-      border-radius: 50%;
-      animation: spin 60s linear infinite;
-    }
-    @keyframes spin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-    .mission-visual-icon {
-      width: 120px;
-      height: 120px;
-      border-radius: 32px;
-    }
-
-    /* Resources Section */
-    .resources-section {
-      background: linear-gradient(180deg, #F5F7F9 0%, #FAFBFC 100%);
-      padding: 100px 0;
-    }
-    .resources-grid {
+    .principles-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
+      gap: 48px 80px;
       max-width: 900px;
       margin: 0 auto;
+      text-align: left;
     }
-    .resource-card {
-      background: white;
-      border-radius: 20px;
-      padding: 40px;
-      text-decoration: none;
-      color: inherit;
-      border: 1px solid var(--border);
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .resource-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
-      border-color: var(--primary);
-    }
-    .resource-icon {
-      width: 56px;
-      height: 56px;
-      background: linear-gradient(135deg, var(--primary-soft) 0%, #D4EDE6 100%);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 24px;
-    }
-    .resource-icon svg {
-      width: 26px;
-      height: 26px;
-      color: var(--primary);
-    }
-    .resource-card h3 {
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: var(--text);
-    }
-    .resource-card p {
-      color: var(--text-secondary);
-      line-height: 1.6;
-      font-size: 15px;
-      margin-bottom: 20px;
-      flex: 1;
-    }
-    .resource-link {
-      color: var(--primary);
-      font-weight: 600;
-      font-size: 14px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .resource-link svg {
-      width: 16px;
-      height: 16px;
-      transition: transform 0.2s;
-    }
-    .resource-card:hover .resource-link svg {
-      transform: translateX(4px);
-    }
-
-    /* CTA Section Enhanced */
-    .cta-enhanced {
-      background: linear-gradient(135deg, var(--primary) 0%, #14a085 100%);
-      padding: 100px 0;
+    .principle {
       position: relative;
-      overflow: hidden;
+      padding-left: 24px;
     }
-    .cta-enhanced::before {
+    .principle::before {
       content: "";
       position: absolute;
-      top: -50%;
-      left: -50%;
-      width: 200%;
-      height: 200%;
-      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 50%);
-      animation: ctaGlow 15s ease-in-out infinite;
+      left: 0;
+      top: 8px;
+      width: 4px;
+      height: 24px;
+      background: linear-gradient(180deg, var(--primary) 0%, transparent 100%);
+      border-radius: 2px;
     }
-    @keyframes ctaGlow {
-      0%, 100% { transform: translate(0, 0); }
-      50% { transform: translate(10%, 10%); }
+    .principle h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 8px;
     }
-    .cta-inner {
-      position: relative;
-      z-index: 1;
+    .principle p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* FINAL CTA */
+    .final-cta {
+      padding: 120px 24px;
       text-align: center;
-      max-width: 560px;
-      margin: 0 auto;
+      position: relative;
     }
-    .cta-icon-enhanced {
-      width: 80px;
-      height: 80px;
-      border-radius: 24px;
-      margin-bottom: 32px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    .final-cta::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(13, 130, 104, 0.06) 0%, transparent 60%);
+      pointer-events: none;
     }
-    .cta-enhanced h2 {
-      color: white;
-      font-size: 36px;
-      font-weight: 800;
+    .final-cta h2 {
       margin-bottom: 16px;
     }
-    .cta-enhanced > .cta-inner > p {
-      color: rgba(255,255,255,0.9);
-      font-size: 18px;
-      margin-bottom: 32px;
+    .final-cta .section-subtitle {
+      margin-bottom: 40px;
     }
-    .cta-note {
-      font-size: 14px;
-      color: rgba(255,255,255,0.7);
-      margin-top: 20px;
+    .final-cta .cta-form {
+      max-width: 420px;
+      margin: 0 auto;
     }
-
-    /* Responsive adjustments */
-    @media (max-width: 900px) {
-      .mission-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-        text-align: center;
-      }
-      .mission-content {
-        max-width: 100%;
-        order: 2;
-      }
-      .mission-visual {
-        order: 1;
-      }
-      .mission-visual-bg {
-        width: 240px;
-        height: 240px;
-      }
-      .mission-visual-bg::before {
-        width: 280px;
-        height: 280px;
-      }
-      .mission-visual-icon {
-        width: 80px;
-        height: 80px;
-        border-radius: 20px;
-      }
-      .mission-content h2 {
-        font-size: 28px;
-      }
-      .resources-grid {
-        grid-template-columns: 1fr;
-      }
-      .cta-enhanced h2 {
-        font-size: 28px;
-      }
+    .final-cta .cta-note {
+      color: var(--text-muted);
     }
 
-    /* CTA Form */
-    .cta-form {
+    /* FOOTER */
+    footer {
+      padding: 60px 24px 40px;
+      border-top: 1px solid var(--form-border);
+    }
+    .footer-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .footer-top {
       display: flex;
-      gap: 12px;
-      max-width: 440px;
-      margin: 32px auto 0;
-      flex-wrap: wrap;
-      justify-content: center;
+      justify-content: space-between;
+      gap: 60px;
+      margin-bottom: 40px;
     }
-    .cta-input {
-      flex: 1;
-      min-width: 200px;
-      padding: 16px 20px;
-      border: 2px solid rgba(255,255,255,0.2);
-      border-radius: 12px;
-      font-size: 16px;
-      background: rgba(255,255,255,0.1);
-      color: white;
-      transition: all 0.2s;
+    .footer-brand-section {
+      max-width: 240px;
     }
-    .cta-input:focus {
-      outline: none;
-      border-color: rgba(255,255,255,0.5);
-      background: rgba(255,255,255,0.15);
-    }
-    .cta-input::placeholder {
-      color: rgba(255,255,255,0.6);
-    }
-    .cta-btn {
-      padding: 16px 28px;
-      background: white;
-      color: var(--primary);
-      border: none;
-      border-radius: 12px;
-      font-size: 16px;
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      color: var(--text);
       font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
+      font-size: 18px;
     }
-    .cta-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    .footer-brand img {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+    }
+    .footer-tagline {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .footer-nav {
+      display: flex;
+      gap: 60px;
+    }
+    .footer-col h4 {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .footer-col ul {
+      list-style: none;
+    }
+    .footer-col li {
+      margin-bottom: 10px;
+    }
+    .footer-col a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover {
+      color: var(--primary);
+    }
+    .footer-bottom {
+      padding-top: 24px;
+      border-top: 1px solid var(--form-border);
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: var(--text-muted);
     }
 
-    /* Responsive */
+    /* RESPONSIVE */
     @media (max-width: 900px) {
-      .hero-visual {
-        flex: none;
-        width: 100%;
-        order: -1;
-        margin-bottom: 20px;
-      }
-      .hero-visual-inner {
-        width: 240px;
-        height: 240px;
-        margin: 0 auto;
-      }
-      .hero-visual-circle-1 { width: 240px; height: 240px; }
-      .hero-visual-circle-2 { width: 180px; height: 180px; top: 30px; left: 30px; }
-      .hero-visual-circle-3 { width: 120px; height: 120px; top: 60px; left: 60px; }
-      .hero-visual-logo { width: 56px; height: 56px; border-radius: 14px; }
-      .hero-visual-float { display: none; }
-      .signup-form {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .signup-input, .signup-btn {
-        width: 100%;
-      }
-      .cta-form {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 0 20px;
-      }
-      .cta-input, .cta-btn {
-        width: 100%;
-      }
+      .feature-grid { grid-template-columns: 1fr; max-width: 400px; }
+      .principles-grid { grid-template-columns: 1fr; }
+      .footer-top { flex-direction: column; gap: 40px; }
+      .footer-nav { gap: 40px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .footer-nav { flex-direction: column; gap: 32px; }
+    }
+    @media (max-width: 768px) {
+      header { padding: 16px 20px; }
+      .nav-links { gap: 16px; }
+      .nav-link { font-size: 13px; }
+      .nav-cta { padding: 8px 14px; font-size: 13px; }
+      h1 { font-size: 48px; letter-spacing: -2px; }
+      h2 { font-size: 36px; }
+      .hero-tagline { font-size: 18px; }
+      .cta-form { flex-direction: column; }
+      .cta-input { width: 100%; text-align: center; }
+      .cta-btn { width: 100%; }
+    }
+    @media (max-width: 480px) {
+      .nav-link { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="nav">
-    <div class="container">
-      <a href="/" class="nav-brand">
-        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
-        Clearly
-      </a>
-      <ul class="nav-links">
-        <li><a href="/calculators/">Calculators</a></li>
-        <li><a href="/faq.html">FAQ</a></li>
-        <li><a href="/blog.html">Blog</a></li>
-        <li><a href="#notify" class="nav-cta">Get Notified</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+  <!-- Header -->
+  <header>
+    <a href="/teaser.html" class="logo">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+      Clearly
+    </a>
+    <div class="nav-links">
+      <a href="/blog.html" class="nav-link">Blog</a>
+      <a href="/professionals.html" class="nav-link">Professionals</a>
+      <a href="#notify" class="nav-cta">Join Waitlist</a>
     </div>
-  </nav>
+  </header>
 
-  <!-- Hero Section -->
+  <!-- Hero -->
   <section class="hero">
-    <div class="container hero-container">
-      <div class="hero-content fade-in">
-        <div class="coming-badge">Coming Spring 2026</div>
-        <h1>A new way to<br>co-parent.</h1>
-        <p>We're building something different — a co-parenting app designed from the ground up to reduce conflict and keep the focus on your kids.</p>
-        <form class="signup-form waitlist-form" data-source="homepage-hero">
-          <input type="email" placeholder="Enter your email" required class="signup-input">
-          <button type="submit" class="signup-btn">Get Notified</button>
-        </form>
-        <p class="signup-note">Be the first to know when we launch. No spam, ever.</p>
-      </div>
-      <div class="hero-visual fade-in fade-in-delay">
-        <div class="hero-visual-inner">
-          <div class="hero-visual-circle hero-visual-circle-1"></div>
-          <div class="hero-visual-circle hero-visual-circle-2"></div>
-          <div class="hero-visual-circle hero-visual-circle-3"></div>
-          <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="hero-visual-logo">
-          <div class="hero-visual-float hero-visual-float-1">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-            Shared Calendar
-          </div>
-          <div class="hero-visual-float hero-visual-float-2">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-            Clear Communication
-          </div>
-          <div class="hero-visual-float hero-visual-float-3">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-            Expense Tracking
-          </div>
-          <div class="hero-visual-float hero-visual-float-4">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
-            Schedule Swaps
+    <div class="badge">Coming Spring 2026</div>
+    <h1>Co-parenting.<br><span>Reimagined.</span></h1>
+    <p class="hero-tagline">Simple. Intuitive. Finally beautiful.<br>Built for how modern families actually live.</p>
+
+    <div class="hero-phone">
+      <div class="phone-glow"></div>
+      <div class="phone-frame">
+        <div class="phone-screen">
+          <div class="mock-ui">
+            <div class="mock-header">
+              <span class="mock-title">Today</span>
+              <div class="mock-avatar"></div>
+            </div>
+            <div class="mock-custody-card">
+              <div class="mock-custody-label">With you</div>
+              <div class="mock-custody-status">
+                <div class="mock-custody-dot"></div>
+                <span class="mock-custody-text">Emma & Noah</span>
+              </div>
+            </div>
+            <div class="mock-calendar">
+              <span class="mock-day-label">S</span>
+              <span class="mock-day-label">M</span>
+              <span class="mock-day-label">T</span>
+              <span class="mock-day-label">W</span>
+              <span class="mock-day-label">T</span>
+              <span class="mock-day-label">F</span>
+              <span class="mock-day-label">S</span>
+              <span class="mock-day them">5</span>
+              <span class="mock-day them">6</span>
+              <span class="mock-day them">7</span>
+              <span class="mock-day you">8</span>
+              <span class="mock-day you">9</span>
+              <span class="mock-day you">10</span>
+              <span class="mock-day you today">11</span>
+              <span class="mock-day you">12</span>
+              <span class="mock-day you">13</span>
+              <span class="mock-day you">14</span>
+              <span class="mock-day them">15</span>
+              <span class="mock-day them">16</span>
+              <span class="mock-day them">17</span>
+              <span class="mock-day them">18</span>
+            </div>
+            <div class="mock-actions">
+              <div class="mock-action">
+                <div class="mock-action-icon"></div>
+                <span class="mock-action-label">Date Swap</span>
+              </div>
+              <div class="mock-action">
+                <div class="mock-action-icon"></div>
+                <span class="mock-action-label">New Topic</span>
+              </div>
+              <div class="mock-action">
+                <div class="mock-action-icon"></div>
+                <span class="mock-action-label">Expense</span>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+    </div>
+
+    <form class="cta-form">
+      <input type="email" placeholder="Enter your email" required class="cta-input">
+      <button type="submit" class="cta-btn">Get Early Access</button>
+    </form>
+    <p class="cta-note">Be first to experience what's next.</p>
+  </section>
+
+  <!-- Features Tease -->
+  <section class="features">
+    <div class="section-label">What's Coming</div>
+    <h2>Everything you need.<br>Nothing you don't.</h2>
+    <p class="section-subtitle">We've rethought every detail to help you focus on what matters most — your kids.</p>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        </div>
+        <h3>Beautiful scheduling</h3>
+        <p>The most intuitive custody calendar ever built. Based on your actual agreement, integrated with how you live.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+        </div>
+        <h3>Thoughtful communication</h3>
+        <p>Rooted in proven mediation strategies. Designed to reduce conflict and keep conversations on track.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+        </div>
+        <h3>Court-ready records</h3>
+        <p>Best-in-class certified documentation. Every exchange, decision, and agreement — organized and exportable.</p>
       </div>
     </div>
   </section>
 
-  <!-- Features Overview -->
-  <section class="features-enhanced" id="features">
-    <div class="container">
-      <h2 class="section-title fade-in">What we're building</h2>
-      <p class="section-subtitle fade-in">Everything you need to coordinate schedules, track expenses, and communicate effectively — all in one place.</p>
-      <div class="features-grid">
-        <div class="feature-card-enhanced fade-in">
-          <div class="feature-icon-enhanced">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-          </div>
-          <h3>Shared Schedules</h3>
-          <p>One calendar both parents can see. Custody patterns, holidays, and swaps — always in sync.</p>
-        </div>
-        <div class="feature-card-enhanced fade-in">
-          <div class="feature-icon-enhanced">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-          </div>
-          <h3>Expense Tracking</h3>
-          <p>Log expenses, split costs automatically, and track reimbursements. No more spreadsheets.</p>
-        </div>
-        <div class="feature-card-enhanced fade-in">
-          <div class="feature-icon-enhanced">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-          </div>
-          <h3>Better Communication</h3>
-          <p>Tools designed to keep conversations productive and focused on what matters most.</p>
-        </div>
+  <!-- Principles -->
+  <section class="principles">
+    <div class="section-label">Our Approach</div>
+    <h2>Built different.</h2>
+    <p class="section-subtitle">We didn't just make another co-parenting app. We started from scratch with one question: what do families actually need?</p>
+
+    <div class="principles-grid">
+      <div class="principle">
+        <h3>Contemporary by design</h3>
+        <p>Integrates seamlessly with the calendars, tools, and workflows you already use. No extra friction.</p>
+      </div>
+      <div class="principle">
+        <h3>Your agreement, your way</h3>
+        <p>Flexible enough to match any custody arrangement. Because every family is different.</p>
+      </div>
+      <div class="principle">
+        <h3>Conflict-aware intelligence</h3>
+        <p>Built on established negotiation and mediation principles. Helps navigate the hard conversations.</p>
+      </div>
+      <div class="principle">
+        <h3>Focus on the kids</h3>
+        <p>Every feature exists to make life easier for your children. That's the only metric that matters.</p>
       </div>
     </div>
   </section>
 
-  <!-- Mission Section -->
-  <section class="mission-section">
-    <div class="container">
-      <div class="mission-grid">
-        <div class="mission-content fade-in">
-          <span class="mission-label">Our Mission</span>
-          <h2>Co-parenting shouldn't be this hard.</h2>
-          <p>Most co-parenting apps feel like they were designed by lawyers, not parents. They're complicated, clinical, and assume the worst about both of you.</p>
-          <p>We're taking a different approach — building tools that actually help reduce conflict, not just document it. Because at the end of the day, what matters most is the kids.</p>
-        </div>
-        <div class="mission-visual fade-in">
-          <div class="mission-visual-bg">
-            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="mission-visual-icon">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <!-- Final CTA -->
+  <section class="final-cta" id="notify">
+    <div class="section-label">Join the Waitlist</div>
+    <h2>Something better is coming.</h2>
+    <p class="section-subtitle">Be among the first to experience co-parenting designed for modern life.</p>
 
-  <!-- Free Resources -->
-  <section class="resources-section">
-    <div class="container">
-      <h2 class="section-title fade-in">Free resources while you wait</h2>
-      <p class="section-subtitle fade-in">We've built helpful tools for co-parents — available now, completely free.</p>
-      <div class="resources-grid">
-        <a href="/calculators/" class="resource-card fade-in">
-          <div class="resource-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="10" x2="10" y2="10"></line><line x1="14" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="10" y2="14"></line><line x1="14" y1="14" x2="16" y2="14"></line><line x1="8" y1="18" x2="16" y2="18"></line></svg>
-          </div>
-          <h3>Child Support Calculators</h3>
-          <p>Free, private calculators for NY, CA, TX, FL, IL, and PA. Estimate guideline support amounts instantly.</p>
-          <span class="resource-link">
-            Explore calculators
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </a>
-        <a href="/blog.html" class="resource-card fade-in">
-          <div class="resource-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-          </div>
-          <h3>Co-Parenting Blog</h3>
-          <p>Practical advice and insights for navigating co-parenting. New articles added regularly.</p>
-          <span class="resource-link">
-            Read the blog
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          </span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta-enhanced" id="notify">
-    <div class="cta-inner">
-      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="cta-icon-enhanced fade-in">
-      <h2 class="fade-in">Be the first to know</h2>
-      <p class="fade-in">Join our waitlist and we'll notify you the moment Clearly is ready to download.</p>
-      <form class="cta-form waitlist-form fade-in" data-source="homepage-cta">
-        <input type="email" placeholder="Enter your email" required class="cta-input">
-        <button type="submit" class="cta-btn">Get Notified</button>
-      </form>
-    </div>
+    <form class="cta-form">
+      <input type="email" placeholder="Enter your email" required class="cta-input">
+      <button type="submit" class="cta-btn">Get Early Access</button>
+    </form>
+    <p class="cta-note">No spam. Just launch updates.</p>
   </section>
 
   <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
+  <footer>
+    <div class="footer-container">
       <div class="footer-top">
         <div class="footer-brand-section">
           <div class="footer-brand">
@@ -805,17 +760,18 @@
         </div>
         <div class="footer-nav">
           <div class="footer-col">
-            <h4>Resources</h4>
+            <h4>Product</h4>
             <ul>
-              <li><a href="/calculators/">Support Calculators</a></li>
-              <li><a href="/faq.html">FAQ</a></li>
               <li><a href="/blog.html">Blog</a></li>
+              <li><a href="/professionals.html">For Professionals</a></li>
+              <li><a href="#notify">Join Waitlist</a></li>
             </ul>
           </div>
           <div class="footer-col">
-            <h4>Company</h4>
+            <h4>Support</h4>
             <ul>
-              <li><a href="/professionals.html">For Professionals</a></li>
+              <li><a href="/faq.html">FAQ</a></li>
+              <li><a href="/help.html">Help Center</a></li>
               <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
             </ul>
           </div>
@@ -829,105 +785,70 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 Clearly LLC. All rights reserved.</p>
+        <p>© 2026 Clearly LLC. All rights reserved.</p>
         <p>Proudly designed and developed in the USA.</p>
       </div>
     </div>
   </footer>
 
   <script>
-    // Mobile menu toggle
-    const navToggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-
-    // Scroll animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // Form submission handling - Supabase Edge Function
-    const WAITLIST_ENDPOINT = 'https://dwncravjhkbclbuzijra.supabase.co/functions/v1/waitlist-signup';
-
-    document.querySelectorAll('form.waitlist-form').forEach(form => {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const emailInput = form.querySelector('input[type="email"]');
-        const button = form.querySelector('button[type="submit"]');
-        const originalText = button.textContent;
-        const source = form.dataset.source || 'homepage';
-
-        button.textContent = 'Joining...';
-        button.disabled = true;
-
-        try {
-          const response = await fetch(WAITLIST_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              email: emailInput.value,
-              source: source
-            })
-          });
-
-          const data = await response.json();
-
-          if (response.ok) {
-            form.innerHTML = '<div class="signup-success">You\'re on the list! Check your email.</div>';
-          } else {
-            throw new Error(data.error || 'Something went wrong');
-          }
-        } catch (error) {
-          button.textContent = originalText;
-          button.disabled = false;
-          alert(error.message || 'Something went wrong. Please try again.');
-        }
-      });
-    });
-  </script>
-
-  <!-- Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    "name": "Clearly",
-    "applicationCategory": "LifestyleApplication",
-    "operatingSystem": "iOS",
-    "description": "A new approach to co-parenting. Shared schedules, expense tracking, and tools designed to reduce conflict. Coming Spring 2026.",
-    "url": "https://getclearly.app",
-    "author": {
-      "@type": "Organization",
-      "name": "Clearly LLC",
-      "url": "https://getclearly.app"
+    // Scroll-based background fade from dark to light
+    function lerp(start, end, t) {
+      return start + (end - start) * t;
     }
-  }
-  </script>
 
-  <!-- Organization Schema with Logo for Google Search -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Clearly",
-    "url": "https://getclearly.app",
-    "logo": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png",
-    "sameAs": []
-  }
+    function lerpColor(dark, light, t) {
+      return `rgb(${lerp(dark[0], light[0], t)}, ${lerp(dark[1], light[1], t)}, ${lerp(dark[2], light[2], t)})`;
+    }
+
+    function lerpColorAlpha(dark, light, t) {
+      return `rgba(${lerp(dark[0], light[0], t)}, ${lerp(dark[1], light[1], t)}, ${lerp(dark[2], light[2], t)}, ${lerp(dark[3], light[3], t)})`;
+    }
+
+    const darkBg = [10, 10, 10];
+    const lightBg = [250, 250, 249];
+    const darkText = [255, 255, 255];
+    const lightText = [26, 25, 23];
+    const darkSecondary = [255, 255, 255, 0.5];
+    const lightSecondary = [92, 88, 86, 1];  // #5C5856
+    const darkMuted = [255, 255, 255, 0.4];
+    const lightMuted = [140, 135, 128, 1];   // #8C8780
+    // Form colors
+    const darkFormBg = [255, 255, 255, 0.05];
+    const lightFormBg = [255, 255, 255, 1];
+    const darkFormBorder = [255, 255, 255, 0.1];
+    const lightFormBorder = [232, 231, 228, 1];  // #E8E7E4
+    // Header colors
+    const darkHeaderBg = [10, 10, 10, 0.85];
+    const lightHeaderBg = [250, 250, 249, 0.9];
+    const darkHeaderBorder = [255, 255, 255, 0.05];
+    const lightHeaderBorder = [232, 231, 228, 1];
+
+    function updateColors() {
+      const scrollY = window.scrollY;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = Math.min(scrollY / docHeight, 1);
+
+      // Start fading after 40% scroll, complete by 75%
+      const fadeStart = 0.4;
+      const fadeEnd = 0.75;
+      const t = Math.max(0, Math.min(1, (scrollPercent - fadeStart) / (fadeEnd - fadeStart)));
+
+      // Ease the transition
+      const eased = t * t * (3 - 2 * t); // smoothstep
+
+      document.documentElement.style.setProperty('--bg', lerpColor(darkBg, lightBg, eased));
+      document.documentElement.style.setProperty('--text', lerpColor(darkText, lightText, eased));
+      document.documentElement.style.setProperty('--text-secondary', lerpColorAlpha(darkSecondary, lightSecondary, eased));
+      document.documentElement.style.setProperty('--text-muted', lerpColorAlpha(darkMuted, lightMuted, eased));
+      document.documentElement.style.setProperty('--form-bg', lerpColorAlpha(darkFormBg, lightFormBg, eased));
+      document.documentElement.style.setProperty('--form-border', lerpColorAlpha(darkFormBorder, lightFormBorder, eased));
+      document.documentElement.style.setProperty('--header-bg', lerpColorAlpha(darkHeaderBg, lightHeaderBg, eased));
+      document.documentElement.style.setProperty('--header-border', lerpColorAlpha(darkHeaderBorder, lightHeaderBorder, eased));
+    }
+
+    window.addEventListener('scroll', updateColors, { passive: true });
+    updateColors();
   </script>
 
 </body>
