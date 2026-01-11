@@ -86,6 +86,39 @@
     .nav-link:hover {
       color: var(--text);
     }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      width: 44px;
+      height: 44px;
+      cursor: pointer;
+      position: relative;
+      border-radius: 8px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: all 0.3s ease;
+      border-radius: 2px;
+    }
+    .nav-toggle span:nth-child(1) { top: 14px; }
+    .nav-toggle span:nth-child(2) { top: 21px; }
+    .nav-toggle span:nth-child(3) { top: 28px; }
+    .nav-toggle.open span:nth-child(1) {
+      top: 21px;
+      transform: translateX(-50%) rotate(45deg);
+    }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) {
+      top: 21px;
+      transform: translateX(-50%) rotate(-45deg);
+    }
 
     /* HERO */
     .hero {
@@ -576,9 +609,32 @@
     }
     @media (max-width: 768px) {
       header { padding: 16px 20px; }
-      .nav-links { gap: 16px; }
-      .nav-link { font-size: 13px; }
-      .nav-cta { padding: 8px 14px; font-size: 13px; }
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--header-bg);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        padding: 16px 24px 24px;
+        gap: 8px;
+        border-bottom: 1px solid var(--header-border);
+      }
+      .nav-links.open { display: flex; }
+      .nav-link {
+        font-size: 16px;
+        padding: 12px 0;
+        width: 100%;
+        text-align: center;
+      }
+      .nav-cta {
+        width: 100%;
+        text-align: center;
+        margin-top: 8px;
+      }
       h1 { font-size: 48px; letter-spacing: -2px; }
       h2 { font-size: 36px; }
       .hero-tagline { font-size: 18px; }
@@ -590,9 +646,6 @@
       .cta-input { width: 100%; text-align: center; }
       .cta-btn { width: 100%; }
       .hero { padding: 120px 20px 80px; }
-    }
-    @media (max-width: 480px) {
-      .nav-link { display: none; }
     }
   </style>
 </head>
@@ -609,6 +662,11 @@
       <a href="/professionals.html" class="nav-link">Professionals</a>
       <a href="#notify" class="nav-cta">Join Waitlist</a>
     </div>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </header>
 
   <!-- Hero -->
@@ -854,6 +912,14 @@
 
     window.addEventListener('scroll', updateColors, { passive: true });
     updateColors();
+
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
   </script>
 
 </body>
