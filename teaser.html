@@ -8,6 +8,7 @@
   <link rel="icon" type="image/png" href="/favicon.png">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: #0a0a0a;
@@ -423,7 +424,7 @@
       </div>
     </div>
 
-    <form class="cta-form" id="notify">
+    <form class="cta-form">
       <input type="email" placeholder="Enter your email" required class="cta-input">
       <button type="submit" class="cta-btn">Get Early Access</button>
     </form>
@@ -488,7 +489,7 @@
   </section>
 
   <!-- Final CTA -->
-  <section class="final-cta">
+  <section class="final-cta" id="notify">
     <div class="section-label">Join the Waitlist</div>
     <h2>Something better is coming.</h2>
     <p class="section-subtitle">Be among the first to experience co-parenting designed for modern life.</p>
