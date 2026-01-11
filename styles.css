@@ -962,7 +962,12 @@ img {
 /* Footer */
 .footer {
   background: var(--text);
-  padding: 80px 0 40px;
+  padding: 60px 40px 40px;
+}
+
+.footer .container {
+  max-width: none;
+  padding: 0;
 }
 
 .footer-top {
