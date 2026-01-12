@@ -103,7 +103,7 @@ serve(async (req) => {
           </h1>
 
           <p style="color: #5C5856; margin: 0 0 20px 0; font-size: 16px; line-height: 1.8; text-align: center;">
-            Thanks for joining the Clearly waitlist. We're building a co-parenting app for how modern families actually live — <strong style="color: #0D8268;">simple, intuitive, and finally beautiful</strong>.
+            Thanks for joining the Clearly waitlist. We're launching a co-parenting app for how modern families actually live — <strong style="color: #0D8268;">simple, intuitive, and finally beautiful</strong>.
           </p>
 
           <p style="color: #5C5856; margin: 0 0 32px 0; font-size: 16px; line-height: 1.8; text-align: center;">
