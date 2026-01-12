@@ -860,6 +860,35 @@
       line-height: 1.5;
     }
 
+    /* Needs Input Styling */
+    .needs-input {
+      border-color: #f59e0b;
+      background: #fffbeb;
+    }
+
+    .needs-input-badge {
+      font-size: 10px;
+      font-weight: 600;
+      color: #b45309;
+      background: #fef3c7;
+      padding: 3px 8px;
+      border-radius: 100px;
+      margin-right: auto;
+    }
+
+    .needs-input-message {
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      border-radius: 8px;
+      padding: 12px 14px;
+    }
+
+    .needs-input-message p {
+      font-size: 14px;
+      color: #92400e;
+      margin: 0;
+    }
+
     /* Plan Code */
     .plan-code-display {
       background: var(--primary-soft);
@@ -2988,27 +3017,33 @@
           </div>
         ` : ''}
 
-        <div class="review-section ${state.parsedFromPdf ? 'ai-parsed' : ''}">
+        <div class="review-section ${state.parsedFromPdf ? 'ai-parsed' : ''} ${state.expenses.needsInput ? 'needs-input' : ''}">
           <div class="review-section-header">
             <h3>Expenses</h3>
-            ${state.parsedFromPdf ? '<span class="ai-badge">AI Parsed</span>' : ''}
+            ${state.expenses.needsInput ? '<span class="needs-input-badge">Needs Input</span>' : (state.parsedFromPdf ? '<span class="ai-badge">AI Parsed</span>' : '')}
             <span class="edit-link" data-screen="6">Edit</span>
           </div>
-          ${renderCategorySummary('expenses')}
-          <div class="review-item">
-            <span class="review-item-label">Split</span>
-            <span class="review-item-value">${state.expenses.splitYou}% / ${state.expenses.splitCoparent}%</span>
-          </div>
-          ${state.expenses.categories?.length ? `
-            <div class="review-item">
-              <span class="review-item-label">Categories</span>
-              <span class="review-item-value">${state.expenses.categories.map(c => {
-                const cat = EXPENSE_CATEGORIES.find(ec => ec.id === c);
-                return cat?.name || c;
-              }).filter(Boolean).join(', ') || 'Not specified'}</span>
+          ${state.expenses.needsInput ? `
+            <div class="needs-input-message">
+              <p>Expense split was not found in your agreement. Please click Edit to specify how expenses are shared.</p>
             </div>
-          ` : ''}
-          ${renderExcerpt(state.expenses?.excerpt)}
+          ` : `
+            ${renderCategorySummary('expenses')}
+            <div class="review-item">
+              <span class="review-item-label">Split</span>
+              <span class="review-item-value">${state.expenses.splitYou}% / ${state.expenses.splitCoparent}%</span>
+            </div>
+            ${state.expenses.categories?.length ? `
+              <div class="review-item">
+                <span class="review-item-label">Categories</span>
+                <span class="review-item-value">${state.expenses.categories.map(c => {
+                  const cat = EXPENSE_CATEGORIES.find(ec => ec.id === c);
+                  return cat?.name || c;
+                }).filter(Boolean).join(', ') || 'Not specified'}</span>
+              </div>
+            ` : ''}
+            ${renderExcerpt(state.expenses?.excerpt)}
+          `}
         </div>
       `;
 
@@ -3273,15 +3308,19 @@
             state.summer.excerpt = data.summer.excerpt || '';
           }
 
-          // Expenses
+          // Expenses - check if data was found or needs input
           if (data.expenses) {
-            if (typeof data.expenses.splitYou === 'number') {
+            if (typeof data.expenses.splitYou === 'number' && typeof data.expenses.splitCoparent === 'number') {
               state.expenses.splitYou = data.expenses.splitYou;
-            }
-            if (typeof data.expenses.splitCoparent === 'number') {
               state.expenses.splitCoparent = data.expenses.splitCoparent;
+              state.expenses.needsInput = false;
+            } else {
+              // Expense split not found in agreement
+              state.expenses.needsInput = true;
             }
             state.expenses.excerpt = data.expenses.excerpt || '';
+          } else {
+            state.expenses.needsInput = true;
           }
 
           // Store category summaries instead of big summary
