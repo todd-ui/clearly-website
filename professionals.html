@@ -322,7 +322,7 @@
           });
           const data = await response.json();
           if (response.ok) {
-            form.innerHTML = '<p style="color: var(--primary); font-weight: 600;">You\'re on the list! Check your email.</p>';
+            form.innerHTML = '<p style="color: var(--primary); font-weight: 600; font-size: 16px; text-align: center; padding: 16px 24px;">✓ You\'re on the list! We\'ll be in touch.</p>';
           } else {
             throw new Error(data.error || 'Something went wrong');
           }
