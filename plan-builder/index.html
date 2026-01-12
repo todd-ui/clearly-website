@@ -1611,6 +1611,12 @@
 
   <script>
     // ============================================
+    // SUPABASE CONFIG
+    // ============================================
+    const SUPABASE_URL = 'https://dwncravjhkbclbuzijra.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR3bmNyYXZqaGtiY2xidXppanJhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjU5NjIwOTYsImV4cCI6MjA4MTUzODA5Nn0.czjhzVem6uoQvdtY875q4p3hh9USteCn2PtHoyugW0U';
+
+    // ============================================
     // CUSTODY PATTERNS - Ported from app
     // ============================================
     const CUSTODY_PATTERNS = {
@@ -2988,10 +2994,11 @@
           source: 'web-plan-builder',
         };
 
-        const response = await fetch('https://dwncravjhkbclbuzijra.supabase.co/functions/v1/create-plan-template', {
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/create-plan-template`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
           },
           body: JSON.stringify(planData),
         });
@@ -3068,10 +3075,11 @@
 
         $('#uploadStatus').textContent = 'Analyzing your agreement...';
 
-        const response = await fetch('https://dwncravjhkbclbuzijra.supabase.co/functions/v1/parse-agreement', {
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/parse-agreement`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
           },
           body: JSON.stringify({ document: base64 }),
         });
