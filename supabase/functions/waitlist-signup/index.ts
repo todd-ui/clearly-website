@@ -75,9 +75,9 @@ serve(async (req) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            from: "Clearly <noreply@getclearly.app>",
+            from: "Clearly <hello@getclearly.app>",
             to: email,
-            subject: "You're on the list!",
+            subject: "Welcome to Clearly — You're in!",
             html: `
 <!DOCTYPE html>
 <html>
@@ -85,54 +85,51 @@ serve(async (req) => {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1A1917; margin: 0; padding: 0; background-color: #FAFAF9;">
-  <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1A1917; margin: 0; padding: 0; background-color: #0a0a0a;">
+  <div style="max-width: 560px; margin: 0 auto; padding: 48px 24px;">
 
-    <!-- Header with Logo and Title -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="background: linear-gradient(135deg, #0D8268 0%, #14a085 100%); border-radius: 16px 16px 0 0;">
+    <!-- Logo -->
+    <div style="text-align: center; margin-bottom: 40px;">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" width="56" height="56" style="width: 56px; height: 56px; border-radius: 14px;">
+    </div>
+
+    <!-- Main Card -->
+    <table width="100%" cellpadding="0" cellspacing="0" style="background: #FFFFFF; border-radius: 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
       <tr>
-        <td style="padding: 40px 32px; text-align: center;">
-          <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" width="64" height="64" style="width: 64px; height: 64px; border-radius: 16px; display: block; margin: 0 auto;">
-          <h1 style="font-size: 26px; font-weight: 700; margin: 20px 0 0 0; color: #ffffff; letter-spacing: -0.02em;">You're on the list!</h1>
-        </td>
-      </tr>
-    </table>
+        <td style="padding: 48px 40px;">
 
-    <!-- Body -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="background: #FFFFFF; border-radius: 0 0 16px 16px; border: 1px solid #E8E7E4; border-top: none;">
-      <tr>
-        <td style="padding: 32px;">
+          <h1 style="font-size: 28px; font-weight: 700; margin: 0 0 24px 0; color: #1A1917; letter-spacing: -0.02em; text-align: center;">
+            You're in.
+          </h1>
 
-          <p style="color: #5C5856; margin: 0 0 16px 0; font-size: 16px; line-height: 1.7;">
-            Thanks for joining the Clearly waitlist. We're building a new kind of co-parenting app — one designed to <strong style="color: #1A1917;">reduce conflict</strong>, not just document it.
+          <p style="color: #5C5856; margin: 0 0 20px 0; font-size: 16px; line-height: 1.8; text-align: center;">
+            Thanks for joining the Clearly waitlist. We're building something different — a co-parenting app designed to <strong style="color: #0D8268;">reduce conflict</strong>, not just document it.
           </p>
 
-          <p style="color: #5C5856; margin: 0 0 28px 0; font-size: 16px; line-height: 1.7;">
-            We'll let you know the moment Clearly is ready to download. In the meantime, check out our free resources:
+          <p style="color: #5C5856; margin: 0 0 32px 0; font-size: 16px; line-height: 1.8; text-align: center;">
+            Launching Spring 2026. We'll be in touch.
           </p>
 
-          <!-- Resource Cards -->
-          <table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom: 28px;">
+          <!-- Divider -->
+          <div style="height: 1px; background: #E8E7E4; margin: 0 0 32px 0;"></div>
+
+          <!-- Blog CTA -->
+          <p style="color: #8C8780; margin: 0 0 16px 0; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; text-align: center; font-weight: 500;">
+            In the meantime
+          </p>
+
+          <table width="100%" cellpadding="0" cellspacing="0">
             <tr>
-              <td style="padding: 16px 20px; background: #E6F5F1; border-radius: 12px; border: 1px solid #A8DFD0;">
-                <a href="https://getclearly.app/blog.html" style="color: #0D8268; text-decoration: none; font-weight: 600; font-size: 15px; display: block; margin-bottom: 4px;">Our Co-Parenting Blog 'Common Ground'</a>
-                <span style="color: #5C5856; font-size: 14px;">Practical advice for navigating co-parenting</span>
-              </td>
-            </tr>
-            <tr><td style="height: 12px;"></td></tr>
-            <tr>
-              <td style="padding: 16px 20px; background: #E6F5F1; border-radius: 12px; border: 1px solid #A8DFD0;">
-                <a href="https://getclearly.app/calculators/" style="color: #0D8268; text-decoration: none; font-weight: 600; font-size: 15px; display: block; margin-bottom: 4px;">Child Support Calculators</a>
-                <span style="color: #5C5856; font-size: 14px;">Free estimates for NY, CA, TX, FL, IL, and PA</span>
+              <td style="text-align: center;">
+                <a href="https://getclearly.app/blog.html" style="display: inline-block; background: #0D8268; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 14px 28px; border-radius: 10px;">
+                  Read Our Blog
+                </a>
               </td>
             </tr>
           </table>
 
-          <p style="color: #5C5856; margin: 0 0 4px 0; font-size: 16px;">
-            Thanks for being an early supporter. We can't wait to share Clearly with you.
-          </p>
-          <p style="color: #1A1917; margin: 16px 0 0 0; font-weight: 600; font-size: 16px;">
-            — The Clearly Team
+          <p style="color: #8C8780; margin: 20px 0 0 0; font-size: 14px; text-align: center;">
+            Practical advice for navigating co-parenting
           </p>
 
         </td>
@@ -140,8 +137,8 @@ serve(async (req) => {
     </table>
 
     <!-- Footer -->
-    <p style="text-align: center; font-size: 13px; color: #8C8780; margin: 24px 0 0 0;">
-      You signed up at <a href="https://getclearly.app" style="color: #0D8268; text-decoration: none;">getclearly.app</a>
+    <p style="text-align: center; font-size: 13px; color: #5C5856; margin: 32px 0 0 0;">
+      <a href="https://getclearly.app" style="color: #0D8268; text-decoration: none; font-weight: 500;">getclearly.app</a>
     </p>
 
   </div>
