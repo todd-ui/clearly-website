@@ -809,34 +809,55 @@
       font-weight: 500;
     }
 
-    /* AI Summary */
-    .ai-summary-section {
-      background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+    /* AI Parsed Sections */
+    .ai-parsed {
       border-color: var(--primary);
+      border-width: 1px;
     }
 
     .ai-badge {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
       color: var(--primary);
-      background: white;
-      padding: 4px 10px;
+      background: var(--primary-soft);
+      padding: 3px 8px;
       border-radius: 100px;
-      border: 1px solid var(--primary);
+      margin-right: auto;
     }
 
-    .ai-summary-content {
-      font-size: 15px;
-      line-height: 1.7;
+    .category-summary {
+      font-size: 14px;
       color: var(--text);
-    }
-
-    .ai-summary-content p {
+      background: var(--primary-soft);
+      padding: 12px 14px;
+      border-radius: 8px;
       margin-bottom: 12px;
+      line-height: 1.5;
     }
 
-    .ai-summary-content p:last-child {
-      margin-bottom: 0;
+    .excerpt-box {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: #f8f8f7;
+      border-radius: 6px;
+      border-left: 3px solid var(--primary);
+    }
+
+    .excerpt-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .excerpt-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+      font-style: italic;
+      line-height: 1.5;
     }
 
     /* Plan Code */
@@ -2838,20 +2859,60 @@
         : Object.values(state.holidays).filter(v => v === 'you').length + ' with you, ' +
           Object.values(state.holidays).filter(v => v === 'coparent').length + ' with co-parent';
 
-      // AI Summary section if parsed from PDF
-      const summarySection = state.parsedFromPdf && state.parsedSummary ? `
-        <div class="review-section ai-summary-section">
-          <div class="review-section-header">
-            <h3>📄 Agreement Summary</h3>
-            <span class="ai-badge">AI Generated</span>
-          </div>
-          <div class="ai-summary-content">
-            ${state.parsedSummary.split('\\n').map(p => p ? `<p>${p}</p>` : '').join('')}
-          </div>
+      // Helper to render excerpt if available
+      const renderExcerpt = (excerpt) => excerpt ? `
+        <div class="excerpt-box">
+          <span class="excerpt-label">From agreement:</span>
+          <span class="excerpt-text">"${excerpt}"</span>
         </div>
       ` : '';
 
-      container.innerHTML = summarySection + `
+      // Helper to render AI summary for a category
+      const renderCategorySummary = (category) => {
+        const summary = state.categorySummaries?.[category];
+        return summary ? `<div class="category-summary">${summary}</div>` : '';
+      };
+
+      // Build holiday details if parsed from PDF
+      let holidayDetails = '';
+      if (state.parsedFromPdf && Object.keys(state.holidays).length > 0) {
+        const holidayNames = {
+          thanksgiving: 'Thanksgiving',
+          christmas_eve: 'Christmas Eve',
+          christmas_day: 'Christmas Day',
+          new_years_eve: "New Year's Eve",
+          new_years_day: "New Year's Day",
+          easter: 'Easter',
+          memorial_day: 'Memorial Day',
+          july_4th: 'July 4th',
+          labor_day: 'Labor Day',
+          mothers_day: "Mother's Day",
+          fathers_day: "Father's Day",
+          spring_break: 'Spring Break',
+          halloween: 'Halloween'
+        };
+        const assignmentLabels = {
+          you: 'You',
+          coparent: 'Co-parent',
+          alternate_you: 'Alternates (you odd years)',
+          alternate_coparent: 'Alternates (co-parent odd years)'
+        };
+        holidayDetails = Object.entries(state.holidays).map(([key, value]) => `
+          <div class="review-item">
+            <span class="review-item-label">${holidayNames[key] || key}</span>
+            <span class="review-item-value">${assignmentLabels[value] || value}</span>
+          </div>
+        `).join('');
+      } else {
+        holidayDetails = `
+          <div class="review-item">
+            <span class="review-item-label">Arrangement</span>
+            <span class="review-item-value">${holidaySummary}</span>
+          </div>
+        `;
+      }
+
+      container.innerHTML = `
         <div class="review-section">
           <div class="review-section-header">
             <h3>Children</h3>
@@ -2867,14 +2928,16 @@
           </div>
         </div>
 
-        <div class="review-section">
+        <div class="review-section ${state.parsedFromPdf ? 'ai-parsed' : ''}">
           <div class="review-section-header">
             <h3>Regular Schedule</h3>
+            ${state.parsedFromPdf ? '<span class="ai-badge">AI Parsed</span>' : ''}
             <span class="edit-link" data-screen="2">Edit</span>
           </div>
+          ${renderCategorySummary('schedule')}
           <div class="review-item">
             <span class="review-item-label">Pattern</span>
-            <span class="review-item-value">${pattern?.name || 'Custom'}</span>
+            <span class="review-item-value">${pattern?.name || state.schedule.type || 'Custom'}</span>
           </div>
           <div class="review-item">
             <span class="review-item-label">Split</span>
@@ -2884,49 +2947,68 @@
             <span class="review-item-label">Exchange time</span>
             <span class="review-item-value">${formatTime(state.schedule.exchangeTime)}</span>
           </div>
+          ${renderExcerpt(state.schedule?.excerpt)}
         </div>
 
-        <div class="review-section">
+        <div class="review-section ${state.parsedFromPdf ? 'ai-parsed' : ''}">
           <div class="review-section-header">
             <h3>Holidays</h3>
+            ${state.parsedFromPdf ? '<span class="ai-badge">AI Parsed</span>' : ''}
             <span class="edit-link" data-screen="4">Edit</span>
           </div>
-          <div class="review-item">
-            <span class="review-item-label">Arrangement</span>
-            <span class="review-item-value">${holidaySummary}</span>
-          </div>
+          ${renderCategorySummary('holidays')}
+          ${holidayDetails}
         </div>
 
         ${state.summer.enabled ? `
-          <div class="review-section">
+          <div class="review-section ${state.parsedFromPdf ? 'ai-parsed' : ''}">
             <div class="review-section-header">
-              <h3>Summer</h3>
+              <h3>Summer Schedule</h3>
+              ${state.parsedFromPdf ? '<span class="ai-badge">AI Parsed</span>' : ''}
               <span class="edit-link" data-screen="5">Edit</span>
             </div>
+            ${renderCategorySummary('summer')}
             <div class="review-item">
               <span class="review-item-label">Pattern</span>
-              <span class="review-item-value">${state.summer.pattern.replace(/-/g, ' ')}</span>
+              <span class="review-item-value">${state.summer.pattern?.replace(/-/g, ' ') || 'Not specified'}</span>
             </div>
-            <div class="review-item">
-              <span class="review-item-label">Starts with</span>
-              <span class="review-item-value">${state.summer.startsWithYou ? 'You' : 'Co-parent'}</span>
-            </div>
+            ${state.summer.startDate ? `
+              <div class="review-item">
+                <span class="review-item-label">Starts</span>
+                <span class="review-item-value">${state.summer.startDate}</span>
+              </div>
+            ` : ''}
+            ${state.summer.endDate ? `
+              <div class="review-item">
+                <span class="review-item-label">Ends</span>
+                <span class="review-item-value">${state.summer.endDate}</span>
+              </div>
+            ` : ''}
+            ${renderExcerpt(state.summer?.excerpt)}
           </div>
         ` : ''}
 
-        <div class="review-section">
+        <div class="review-section ${state.parsedFromPdf ? 'ai-parsed' : ''}">
           <div class="review-section-header">
             <h3>Expenses</h3>
+            ${state.parsedFromPdf ? '<span class="ai-badge">AI Parsed</span>' : ''}
             <span class="edit-link" data-screen="6">Edit</span>
           </div>
+          ${renderCategorySummary('expenses')}
           <div class="review-item">
             <span class="review-item-label">Split</span>
             <span class="review-item-value">${state.expenses.splitYou}% / ${state.expenses.splitCoparent}%</span>
           </div>
-          <div class="review-item">
-            <span class="review-item-label">Categories</span>
-            <span class="review-item-value">${state.expenses.categories.map(c => EXPENSE_CATEGORIES.find(ec => ec.id === c)?.name).join(', ')}</span>
-          </div>
+          ${state.expenses.categories?.length ? `
+            <div class="review-item">
+              <span class="review-item-label">Categories</span>
+              <span class="review-item-value">${state.expenses.categories.map(c => {
+                const cat = EXPENSE_CATEGORIES.find(ec => ec.id === c);
+                return cat?.name || c;
+              }).filter(Boolean).join(', ') || 'Not specified'}</span>
+            </div>
+          ` : ''}
+          ${renderExcerpt(state.expenses?.excerpt)}
         </div>
       `;
 
@@ -3138,6 +3220,7 @@
         if (response.ok && result.success && result.data) {
           const data = result.data;
           console.log('SUCCESS - entering data application block');
+          console.log('Parsed data:', JSON.stringify(data, null, 2));
 
           // Apply ALL parsed data to state
 
@@ -3152,34 +3235,42 @@
           // Schedule
           if (data.schedule) {
             state.schedule.type = data.schedule.type || state.schedule.type;
-            if (data.schedule.description) {
-              state.schedule.description = data.schedule.description;
-            }
+            state.schedule.excerpt = data.schedule.excerpt || '';
           }
 
           // Exchange time
           if (data.exchangeTime) {
             state.schedule.exchangeTime = data.exchangeTime;
+            state.schedule.exchangeTimeExcerpt = data.exchangeTimeExcerpt || '';
           }
 
-          // Holidays
+          // Holidays - new structure with assignment and excerpt
           if (data.holidays) {
-            state.holidays = { ...state.holidays, ...data.holidays };
+            const holidayAssignments = {};
+            const holidayExcerpts = {};
+            Object.entries(data.holidays).forEach(([key, value]) => {
+              if (typeof value === 'object' && value.assignment) {
+                holidayAssignments[key] = value.assignment;
+                holidayExcerpts[key] = value.excerpt || '';
+              } else {
+                // Fallback for old format
+                holidayAssignments[key] = value;
+              }
+            });
+            state.holidays = holidayAssignments;
+            state.holidayExcerpts = holidayExcerpts;
             state.holidayPreset = 'custom';
           }
 
           // Summer schedule
           if (data.summer) {
-            state.summer.enabled = data.summer.enabled || false;
+            state.summer.enabled = data.summer.enabled !== false;
             if (data.summer.pattern) {
               state.summer.pattern = data.summer.pattern;
             }
-            if (data.summer.startDescription) {
-              state.summer.startDescription = data.summer.startDescription;
-            }
-            if (data.summer.endDescription) {
-              state.summer.endDescription = data.summer.endDescription;
-            }
+            state.summer.startDate = data.summer.startDate || '';
+            state.summer.endDate = data.summer.endDate || '';
+            state.summer.excerpt = data.summer.excerpt || '';
           }
 
           // Expenses
@@ -3190,14 +3281,12 @@
             if (typeof data.expenses.splitCoparent === 'number') {
               state.expenses.splitCoparent = data.expenses.splitCoparent;
             }
-            if (data.expenses.categories && Array.isArray(data.expenses.categories)) {
-              state.expenses.categories = data.expenses.categories;
-            }
+            state.expenses.excerpt = data.expenses.excerpt || '';
           }
 
-          // Store summary
-          if (data.summary) {
-            state.parsedSummary = data.summary;
+          // Store category summaries instead of big summary
+          if (data.categorySummaries) {
+            state.categorySummaries = data.categorySummaries;
           }
 
           state.parsedFromPdf = true;
