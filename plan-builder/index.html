@@ -311,6 +311,12 @@
       margin-bottom: 8px;
     }
 
+    .form-hint {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin: -4px 0 12px 0;
+    }
+
     .form-input {
       width: 100%;
       padding: 14px 16px;
@@ -1520,6 +1526,17 @@
           <h1>Upload your agreement</h1>
           <p class="subtitle">We'll extract your custody terms automatically.</p>
 
+          <div class="form-group" style="margin-bottom: 24px;">
+            <label class="form-label">Which parent are you in this agreement?</label>
+            <p class="form-hint">This helps us correctly assign custody days to "you" vs your co-parent.</p>
+            <div class="chips" id="parentChips">
+              <div class="chip" data-parent="mother">Mother</div>
+              <div class="chip" data-parent="father">Father</div>
+              <div class="chip" data-parent="petitioner">Petitioner (first listed)</div>
+              <div class="chip" data-parent="respondent">Respondent (second listed)</div>
+            </div>
+          </div>
+
           <div class="upload-zone" id="uploadZone">
             <div class="upload-icon">&#128196;</div>
             <h3>Drop your agreement PDF here</h3>
@@ -1850,6 +1867,7 @@
       planCode: null,
       parsedSummary: null, // AI-generated summary from PDF parsing
       parsedFromPdf: false, // Track if plan was parsed from PDF
+      userParentRole: null, // 'mother', 'father', 'petitioner', 'respondent'
     };
 
     const screens = [
@@ -2032,6 +2050,15 @@
       $('#fileInput').addEventListener('change', handleFileUpload);
       $('#skipUpload').addEventListener('click', () => {
         goToScreen(activeScreens.indexOf('screen-children'));
+      });
+
+      // Parent role selection
+      $$('#parentChips .chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+          $$('#parentChips .chip').forEach(c => c.classList.remove('selected'));
+          chip.classList.add('selected');
+          state.userParentRole = chip.dataset.parent;
+        });
       });
 
       // Drag and drop
@@ -3237,13 +3264,17 @@
 
         $('#uploadStatus').textContent = 'Analyzing your agreement...';
 
+        // Include user's parent role for correct assignment mapping
         const response = await fetch(`${SUPABASE_URL}/functions/v1/parse-agreement`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
           },
-          body: JSON.stringify({ document: base64 }),
+          body: JSON.stringify({
+            document: base64,
+            userParentRole: state.userParentRole || 'mother' // default to first parent
+          }),
         });
 
         const result = await response.json();
