@@ -3077,6 +3077,7 @@
         });
 
         const result = await response.json();
+        console.log('Parse result:', result);
 
         if (response.ok && result.data) {
           // Apply parsed data to state
@@ -3089,7 +3090,9 @@
           // Continue to next screen
           goNext();
         } else {
-          alert('Could not parse agreement. Please enter manually.');
+          console.error('Parse error:', result);
+          const errorMsg = result.details || result.error || 'Unknown error';
+          alert('Could not parse agreement: ' + errorMsg + '\n\nPlease enter manually.');
           $('#uploadZone').style.display = 'block';
           $('#uploadLoading').style.display = 'none';
         }
