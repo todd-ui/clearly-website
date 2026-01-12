@@ -809,6 +809,36 @@
       font-weight: 500;
     }
 
+    /* AI Summary */
+    .ai-summary-section {
+      background: linear-gradient(135deg, #f0fdf4 0%, #ecfeff 100%);
+      border-color: var(--primary);
+    }
+
+    .ai-badge {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--primary);
+      background: white;
+      padding: 4px 10px;
+      border-radius: 100px;
+      border: 1px solid var(--primary);
+    }
+
+    .ai-summary-content {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text);
+    }
+
+    .ai-summary-content p {
+      margin-bottom: 12px;
+    }
+
+    .ai-summary-content p:last-child {
+      margin-bottom: 0;
+    }
+
     /* Plan Code */
     .plan-code-display {
       background: var(--primary-soft);
@@ -1768,6 +1798,8 @@
       email: null,
       firstName: null,
       planCode: null,
+      parsedSummary: null, // AI-generated summary from PDF parsing
+      parsedFromPdf: false, // Track if plan was parsed from PDF
     };
 
     const screens = [
@@ -2806,7 +2838,20 @@
         : Object.values(state.holidays).filter(v => v === 'you').length + ' with you, ' +
           Object.values(state.holidays).filter(v => v === 'coparent').length + ' with co-parent';
 
-      container.innerHTML = `
+      // AI Summary section if parsed from PDF
+      const summarySection = state.parsedFromPdf && state.parsedSummary ? `
+        <div class="review-section ai-summary-section">
+          <div class="review-section-header">
+            <h3>📄 Agreement Summary</h3>
+            <span class="ai-badge">AI Generated</span>
+          </div>
+          <div class="ai-summary-content">
+            ${state.parsedSummary.split('\\n').map(p => p ? `<p>${p}</p>` : '').join('')}
+          </div>
+        </div>
+      ` : '';
+
+      container.innerHTML = summarySection + `
         <div class="review-section">
           <div class="review-section-header">
             <h3>Children</h3>
@@ -3088,15 +3133,82 @@
         console.log('Parse result:', result);
 
         if (response.ok && result.data) {
-          // Apply parsed data to state
-          if (result.data.schedule) {
-            state.schedule.type = result.data.schedule.type || state.schedule.type;
+          const data = result.data;
+
+          // Apply ALL parsed data to state
+
+          // Children
+          if (data.children && Array.isArray(data.children)) {
+            state.children = data.children.map(c => ({
+              name: c.name || '',
+              ageGroup: c.ageGroup || '6-12',
+            }));
           }
-          if (result.data.holidays) {
-            state.holidays = { ...state.holidays, ...result.data.holidays };
+
+          // Schedule
+          if (data.schedule) {
+            state.schedule.type = data.schedule.type || state.schedule.type;
+            if (data.schedule.description) {
+              state.schedule.description = data.schedule.description;
+            }
           }
-          // Continue to next screen
-          goNext();
+
+          // Exchange time
+          if (data.exchangeTime) {
+            state.schedule.exchangeTime = data.exchangeTime;
+          }
+
+          // Holidays
+          if (data.holidays) {
+            state.holidays = { ...state.holidays, ...data.holidays };
+            state.holidayPreset = 'custom';
+          }
+
+          // Summer schedule
+          if (data.summer) {
+            state.summer.enabled = data.summer.enabled || false;
+            if (data.summer.pattern) {
+              state.summer.pattern = data.summer.pattern;
+            }
+            if (data.summer.startDescription) {
+              state.summer.startDescription = data.summer.startDescription;
+            }
+            if (data.summer.endDescription) {
+              state.summer.endDescription = data.summer.endDescription;
+            }
+          }
+
+          // Expenses
+          if (data.expenses) {
+            if (typeof data.expenses.splitYou === 'number') {
+              state.expenses.splitYou = data.expenses.splitYou;
+            }
+            if (typeof data.expenses.splitCoparent === 'number') {
+              state.expenses.splitCoparent = data.expenses.splitCoparent;
+            }
+            if (data.expenses.categories && Array.isArray(data.expenses.categories)) {
+              state.expenses.categories = data.expenses.categories;
+            }
+          }
+
+          // Store summary
+          if (data.summary) {
+            state.parsedSummary = data.summary;
+          }
+
+          state.parsedFromPdf = true;
+
+          console.log('State after parsing:', state);
+
+          // Jump directly to Review screen (index 8 in screensWithUpload)
+          const reviewIndex = activeScreens.indexOf('screen-review');
+          if (reviewIndex !== -1) {
+            state.currentScreen = reviewIndex;
+            renderScreen();
+            updateProgress();
+          } else {
+            goNext();
+          }
         } else {
           console.error('Parse error:', result);
           const errorMsg = result.details || result.error || 'Unknown error';
