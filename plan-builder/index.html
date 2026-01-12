@@ -3130,10 +3130,14 @@
         });
 
         const result = await response.json();
-        console.log('Parse result:', result);
+        console.log('Parse response ok:', response.ok);
+        console.log('Parse result:', JSON.stringify(result, null, 2));
+        console.log('result.data:', result.data);
+        console.log('result.success:', result.success);
 
-        if (response.ok && result.data) {
+        if (response.ok && result.success && result.data) {
           const data = result.data;
+          console.log('SUCCESS - entering data application block');
 
           // Apply ALL parsed data to state
 
@@ -3198,15 +3202,22 @@
 
           state.parsedFromPdf = true;
 
-          console.log('State after parsing:', state);
+          console.log('State after parsing:', JSON.stringify(state, null, 2));
 
-          // Jump directly to Review screen (index 8 in screensWithUpload)
+          // Jump directly to Review screen
           const reviewIndex = activeScreens.indexOf('screen-review');
+          console.log('activeScreens:', activeScreens);
+          console.log('reviewIndex:', reviewIndex);
+          console.log('Current screen before jump:', state.currentScreen);
+
           if (reviewIndex !== -1) {
             state.currentScreen = reviewIndex;
+            console.log('Set currentScreen to:', state.currentScreen);
             renderScreen();
             updateProgress();
+            console.log('Rendered review screen');
           } else {
+            console.log('Review screen not found, going to next');
             goNext();
           }
         } else {
