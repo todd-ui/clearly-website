@@ -8,7 +8,8 @@
   <link rel="icon" type="image/png" href="/favicon.png">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; overflow-x: hidden; }
+    html, body { overflow-x: hidden; max-width: 100vw; }
+    html { scroll-behavior: smooth; }
     :root {
       --primary: #0D8268;
       --primary-light: #14b89a;
@@ -26,7 +27,6 @@
       background: var(--bg);
       color: var(--text);
       transition: background 0.1s ease-out;
-      overflow-x: hidden;
     }
 
     /* HEADER */
@@ -379,6 +379,7 @@
       padding: 120px 24px;
       text-align: center;
       position: relative;
+      overflow: hidden;
     }
     .features::before {
       content: "";
@@ -499,6 +500,7 @@
       padding: 120px 24px;
       text-align: center;
       position: relative;
+      overflow: hidden;
     }
     .final-cta::before {
       content: "";
