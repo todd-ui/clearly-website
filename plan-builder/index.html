@@ -581,8 +581,27 @@
       right: 2px;
       width: 6px;
       height: 6px;
-      border-radius: 50%;
-      background: #F5A623;
+    }
+
+    .calendar-day.summer {
+      border: 2px dashed #f59e0b;
+      box-sizing: border-box;
+    }
+
+    .calendar-day.summer.you {
+      background: linear-gradient(135deg, var(--primary) 0%, #0ea5e9 100%);
+    }
+
+    .calendar-day.summer.coparent {
+      background: linear-gradient(135deg, var(--coparent) 0%, #fef3c7 100%);
+    }
+
+    .calendar-day .holiday-indicator {
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 8px;
     }
 
     .calendar-legend {
@@ -1861,6 +1880,8 @@
         categories: ['medical', 'education', 'activities'],
         reimbursementMethod: null,
         reimbursementHandle: null,
+        needsInput: false,
+        excerpt: null,
       },
       email: null,
       firstName: null,
@@ -1868,6 +1889,7 @@
       parsedSummary: null, // AI-generated summary from PDF parsing
       parsedFromPdf: false, // Track if plan was parsed from PDF
       userParentRole: null, // 'mother', 'father', 'petitioner', 'respondent'
+      editingFromReview: false, // Track if user is editing from review screen
     };
 
     const screens = [
@@ -2089,6 +2111,16 @@
     }
 
     function goBack() {
+      // If editing from review, return to review screen (cancel edit)
+      if (state.editingFromReview) {
+        state.editingFromReview = false;
+        const reviewIndex = activeScreens.indexOf('screen-review');
+        if (reviewIndex !== -1) {
+          goToScreen(reviewIndex);
+          return;
+        }
+      }
+
       if (state.currentScreen > 0) {
         state.currentScreen--;
         renderScreen();
@@ -2097,6 +2129,16 @@
     }
 
     function goNext() {
+      // If editing from review, return to review screen
+      if (state.editingFromReview) {
+        state.editingFromReview = false;
+        const reviewIndex = activeScreens.indexOf('screen-review');
+        if (reviewIndex !== -1) {
+          goToScreen(reviewIndex);
+          return;
+        }
+      }
+
       if (state.currentScreen < activeScreens.length - 1) {
         state.currentScreen++;
         renderScreen();
@@ -2581,17 +2623,91 @@
         const date = new Date(year, month, day);
         const custody = getCustodyForDate(date);
         const isToday = date.getTime() === today.getTime();
+        const isSummer = state.summer.enabled && isInSummerPeriod(date);
+        const holidayForDate = getHolidayForDate(date);
 
-        html += `<div class="calendar-day ${custody} ${isToday ? 'today' : ''}">${day}</div>`;
+        let classes = ['calendar-day', custody];
+        if (isToday) classes.push('today');
+        if (isSummer) classes.push('summer');
+
+        let content = `${day}`;
+        if (holidayForDate) {
+          content += `<span class="holiday-indicator" title="${holidayForDate.name}">${holidayForDate.emoji || ''}</span>`;
+        }
+
+        html += `<div class="${classes.join(' ')}">${content}</div>`;
       }
 
       container.innerHTML = html;
+    }
+
+    function getHolidayForDate(date) {
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      const day = date.getDate();
+      const dayOfWeek = date.getDay();
+
+      // Check for fixed-date holidays
+      const holidayEmojis = {
+        'new_years_day': { check: (m, d) => m === 0 && d === 1, emoji: '🎆', name: "New Year's Day" },
+        'new_years_eve': { check: (m, d) => m === 11 && d === 31, emoji: '🎉', name: "New Year's Eve" },
+        'valentines_day': { check: (m, d) => m === 1 && d === 14, emoji: '💕', name: "Valentine's Day" },
+        'july_4th': { check: (m, d) => m === 6 && d === 4, emoji: '🎆', name: 'July 4th' },
+        'halloween': { check: (m, d) => m === 9 && d === 31, emoji: '🎃', name: 'Halloween' },
+        'christmas_eve': { check: (m, d) => m === 11 && d === 24, emoji: '🎄', name: 'Christmas Eve' },
+        'christmas_day': { check: (m, d) => m === 11 && d === 25, emoji: '🎁', name: 'Christmas Day' },
+        'thanksgiving': { check: (m, d, y, dow) => m === 10 && dow === 4 && d >= 22 && d <= 28, emoji: '🦃', name: 'Thanksgiving' },
+        'mothers_day': { check: (m, d, y, dow) => m === 4 && dow === 0 && d >= 8 && d <= 14, emoji: '💐', name: "Mother's Day" },
+        'fathers_day': { check: (m, d, y, dow) => m === 5 && dow === 0 && d >= 15 && d <= 21, emoji: '👔', name: "Father's Day" },
+        'memorial_day': { check: (m, d, y, dow) => m === 4 && dow === 1 && d >= 25, emoji: '🇺🇸', name: 'Memorial Day' },
+        'labor_day': { check: (m, d, y, dow) => m === 8 && dow === 1 && d <= 7, emoji: '🔧', name: 'Labor Day' },
+      };
+
+      // Easter is complex - compute separately
+      const easter = getEasterDate(year);
+      if (easter.getMonth() === month && easter.getDate() === day) {
+        if (state.holidays['easter']) {
+          return { emoji: '🐰', name: 'Easter' };
+        }
+      }
+
+      for (const [holidayId, holidayDef] of Object.entries(holidayEmojis)) {
+        if (state.holidays[holidayId] && holidayDef.check(month, day, year, dayOfWeek)) {
+          return { emoji: holidayDef.emoji, name: holidayDef.name };
+        }
+      }
+
+      return null;
+    }
+
+    function getEasterDate(year) {
+      // Computus algorithm for Easter
+      const a = year % 19;
+      const b = Math.floor(year / 100);
+      const c = year % 100;
+      const d = Math.floor(b / 4);
+      const e = b % 4;
+      const f = Math.floor((b + 8) / 25);
+      const g = Math.floor((b - f + 1) / 3);
+      const h = (19 * a + b - d - g + 15) % 30;
+      const i = Math.floor(c / 4);
+      const k = c % 4;
+      const l = (32 + 2 * e + 2 * i - h - k) % 7;
+      const m = Math.floor((a + 11 * h + 22 * l) / 451);
+      const month = Math.floor((h + l - 7 * m + 114) / 31) - 1;
+      const day = ((h + l - 7 * m + 114) % 31) + 1;
+      return new Date(year, month, day);
     }
 
     // ============================================
     // CUSTODY CALCULATION
     // ============================================
     function getCustodyForDate(date) {
+      // Check if it's a summer schedule day
+      if (state.summer.enabled && isInSummerPeriod(date)) {
+        return getSummerCustody(date);
+      }
+
       const pattern = CUSTODY_PATTERNS[state.schedule.type];
       if (!pattern) return 'you';
 
@@ -2604,6 +2720,75 @@
       }
 
       return getRollingScheduleCustody(date);
+    }
+
+    function isInSummerPeriod(date) {
+      if (!state.summer.enabled) return false;
+
+      const year = date.getFullYear();
+      const summerStart = getNthWeekdayOfMonth(year, state.summer.startMonth, state.summer.startWeek, state.summer.startWeekday);
+      const summerEnd = getNthWeekdayOfMonth(year, state.summer.endMonth, state.summer.endWeek, state.summer.endWeekday);
+
+      if (!summerStart || !summerEnd) return false;
+
+      const checkDate = new Date(date);
+      checkDate.setHours(0, 0, 0, 0);
+
+      return checkDate >= summerStart && checkDate <= summerEnd;
+    }
+
+    function getNthWeekdayOfMonth(year, month, weekNum, weekday) {
+      // month is 1-12, weekday is 0=Sun through 6=Sat
+      const firstOfMonth = new Date(year, month - 1, 1);
+      const firstWeekday = firstOfMonth.getDay();
+
+      // Find first occurrence of the weekday
+      let firstOccurrence = 1 + ((weekday - firstWeekday + 7) % 7);
+
+      // Add weeks
+      const day = firstOccurrence + (weekNum - 1) * 7;
+
+      const result = new Date(year, month - 1, day);
+      // Make sure we're still in the right month
+      if (result.getMonth() !== month - 1) return null;
+
+      result.setHours(0, 0, 0, 0);
+      return result;
+    }
+
+    function getSummerCustody(date) {
+      const year = date.getFullYear();
+      const summerStart = getNthWeekdayOfMonth(year, state.summer.startMonth, state.summer.startWeek, state.summer.startWeekday);
+
+      if (!summerStart) return 'you';
+
+      const pattern = state.summer.pattern || 'alternating-weeks';
+
+      if (pattern === 'alternating-weeks') {
+        // Calculate weeks since summer start
+        const msPerDay = 24 * 60 * 60 * 1000;
+        const daysDiff = Math.floor((date - summerStart) / msPerDay);
+        const weekNum = Math.floor(daysDiff / 7);
+
+        const isEvenWeek = weekNum % 2 === 0;
+        return state.summer.startsWithYou ?
+          (isEvenWeek ? 'you' : 'coparent') :
+          (isEvenWeek ? 'coparent' : 'you');
+      }
+
+      if (pattern === 'alternating-2weeks') {
+        const msPerDay = 24 * 60 * 60 * 1000;
+        const daysDiff = Math.floor((date - summerStart) / msPerDay);
+        const twoWeekNum = Math.floor(daysDiff / 14);
+
+        const isEvenBlock = twoWeekNum % 2 === 0;
+        return state.summer.startsWithYou ?
+          (isEvenBlock ? 'you' : 'coparent') :
+          (isEvenBlock ? 'coparent' : 'you');
+      }
+
+      // Default to regular schedule if unknown pattern
+      return state.summer.startsWithYou ? 'you' : 'coparent';
     }
 
     function getFixedScheduleCustody(date) {
@@ -2972,7 +3157,7 @@
         <div class="review-section">
           <div class="review-section-header">
             <h3>Children</h3>
-            <span class="edit-link" data-screen="1">Edit</span>
+            <span class="edit-link" data-screen-id="screen-children">Edit</span>
           </div>
           <div class="review-item">
             <span class="review-item-label">Names</span>
@@ -2988,7 +3173,7 @@
           <div class="review-section-header">
             <h3>Regular Schedule</h3>
             ${state.parsedFromPdf ? '<span class="ai-badge">AI Parsed</span>' : ''}
-            <span class="edit-link" data-screen="2">Edit</span>
+            <span class="edit-link" data-screen-id="screen-schedule">Edit</span>
           </div>
           ${renderCategorySummary('schedule')}
           <div class="review-item">
@@ -3010,7 +3195,7 @@
           <div class="review-section-header">
             <h3>Holidays</h3>
             ${state.parsedFromPdf ? '<span class="ai-badge">AI Parsed</span>' : ''}
-            <span class="edit-link" data-screen="4">Edit</span>
+            <span class="edit-link" data-screen-id="screen-holidays">Edit</span>
           </div>
           ${renderCategorySummary('holidays')}
           ${holidayDetails}
@@ -3021,7 +3206,7 @@
             <div class="review-section-header">
               <h3>Summer Schedule</h3>
               ${state.parsedFromPdf ? '<span class="ai-badge">AI Parsed</span>' : ''}
-              <span class="edit-link" data-screen="5">Edit</span>
+              <span class="edit-link" data-screen-id="screen-summer">Edit</span>
             </div>
             ${renderCategorySummary('summer')}
             <div class="review-item">
@@ -3048,7 +3233,7 @@
           <div class="review-section-header">
             <h3>Expenses</h3>
             ${state.expenses.needsInput ? '<span class="needs-input-badge">Needs Input</span>' : (state.parsedFromPdf ? '<span class="ai-badge">AI Parsed</span>' : '')}
-            <span class="edit-link" data-screen="6">Edit</span>
+            <span class="edit-link" data-screen-id="screen-expenses">Edit</span>
           </div>
           ${state.expenses.needsInput ? `
             <div class="needs-input-message">
@@ -3076,8 +3261,13 @@
 
       $$('.edit-link').forEach(link => {
         link.addEventListener('click', () => {
-          const screenIndex = parseInt(link.dataset.screen);
-          goToScreen(screenIndex);
+          const screenId = link.dataset.screenId;
+          const screenIndex = activeScreens.indexOf(screenId);
+          if (screenIndex !== -1) {
+            // Store that we're editing from review, so we can return
+            state.editingFromReview = true;
+            goToScreen(screenIndex);
+          }
         });
       });
     }
