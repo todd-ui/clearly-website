@@ -2111,8 +2111,20 @@
     }
 
     function goBack() {
-      // If editing from review, return to review screen (cancel edit)
+      // If editing from review, handle back logic
       if (state.editingFromReview) {
+        const currentScreenId = activeScreens[state.currentScreen];
+
+        // If on configure screen during edit, go back to schedule screen
+        if (currentScreenId === 'screen-configure') {
+          const scheduleIndex = activeScreens.indexOf('screen-schedule');
+          if (scheduleIndex !== -1) {
+            goToScreen(scheduleIndex);
+            return;
+          }
+        }
+
+        // For all other screens, cancel edit and return to review
         state.editingFromReview = false;
         const reviewIndex = activeScreens.indexOf('screen-review');
         if (reviewIndex !== -1) {
@@ -2129,8 +2141,21 @@
     }
 
     function goNext() {
-      // If editing from review, return to review screen
+      // If editing from review, handle return logic
       if (state.editingFromReview) {
+        const currentScreenId = activeScreens[state.currentScreen];
+
+        // Schedule editing needs to continue through configure screen
+        if (currentScreenId === 'screen-schedule') {
+          // Continue to configure screen, keep editingFromReview true
+          const configureIndex = activeScreens.indexOf('screen-configure');
+          if (configureIndex !== -1) {
+            goToScreen(configureIndex);
+            return;
+          }
+        }
+
+        // For all other screens (including configure), return to review
         state.editingFromReview = false;
         const reviewIndex = activeScreens.indexOf('screen-review');
         if (reviewIndex !== -1) {
