@@ -271,7 +271,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
             <h4>Support</h4>
             <ul>
               <li><a href="/help.html">Help Center</a></li>
-              <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
+              <li><a href="mailto:hello@getclearly.app">Contact Us</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -670,7 +670,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
             <h4>Support</h4>
             <ul>
               <li><a href="/help.html">Help Center</a></li>
-              <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
+              <li><a href="mailto:hello@getclearly.app">Contact Us</a></li>
             </ul>
           </div>
           <div class="footer-col">
