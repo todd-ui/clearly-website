@@ -396,7 +396,7 @@
             <h4>Company</h4>
             <ul>
               <li><a href="/professionals.html">For Professionals</a></li>
-              <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
+              <li><a href="mailto:hello@getclearly.app">Contact Us</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -409,224 +409,22 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 Clearly LLC. All rights reserved.</p>
+        <p>&copy; 2026 Clearly LLC. All rights reserved.</p>
         <p>Proudly designed and developed in the USA.</p>
       </div>
     </div>
   </footer>
 
   <script>
-    // Texas Configuration
-    const TX_CONFIG = {
-      incomeCap: 11700, // Monthly cap as of Sept 2025
-      // Standard percentages (no other children)
-      standardPercentages: {
-        1: 0.20,
-        2: 0.25,
-        3: 0.30,
-        4: 0.35,
-        5: 0.40
-      },
-      // Multiple family percentages - [children before court][other children]
-      multipleFamily: {
-        1: { 0: 0.20, 1: 0.175, 2: 0.16, 3: 0.1475, 4: 0.136, 5: 0.1333 },
-        2: { 0: 0.25, 1: 0.225, 2: 0.2063, 3: 0.19, 4: 0.1838, 5: 0.1786 },
-        3: { 0: 0.30, 1: 0.2738, 2: 0.252, 3: 0.24, 4: 0.2314, 5: 0.225 },
-        4: { 0: 0.35, 1: 0.3222, 2: 0.30, 3: 0.2867, 4: 0.28, 5: 0.2722 },
-        5: { 0: 0.40, 1: 0.3733, 2: 0.35, 3: 0.3367, 4: 0.3271, 5: 0.32 }
-      }
-    };
-
     // Mobile menu toggle
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-
-    // Section toggle
-    function toggleSection(header) {
-      const group = header.parentElement;
-      group.classList.toggle('collapsed');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
     }
-
-    // Format currency
-    function formatCurrency(amount) {
-      return '$' + Math.round(amount).toLocaleString();
-    }
-
-    // Get input value
-    function getVal(id) {
-      return parseFloat(document.getElementById(id).value) || 0;
-    }
-
-    // Calculate net resources
-    function calculateNet() {
-      const gross = getVal('grossIncome') + getVal('otherIncome');
-      const deductions = getVal('taxes') + getVal('socialSecurity') + getVal('unionDues') + getVal('healthInsurance');
-      const net = Math.max(0, gross - deductions);
-      document.getElementById('netResources').textContent = formatCurrency(net);
-    }
-
-    // Main calculation
-    function calculateSupport() {
-      const netText = document.getElementById('netResources').textContent;
-      let netResources = parseFloat(netText.replace(/[$,]/g, '')) || 0;
-
-      const numChildren = parseInt(document.getElementById('numChildren').value);
-      const otherChildren = parseInt(document.getElementById('otherChildren').value);
-
-      // Apply income cap
-      const cappedNet = Math.min(netResources, TX_CONFIG.incomeCap);
-      const wasCapped = netResources > TX_CONFIG.incomeCap;
-
-      // Get percentage based on multiple family table
-      const percentage = TX_CONFIG.multipleFamily[numChildren][Math.min(otherChildren, 5)];
-
-      // Calculate support
-      const monthlySupport = cappedNet * percentage;
-      const annualSupport = monthlySupport * 12;
-
-      // Display results
-      document.getElementById('resultsSection').classList.add('visible');
-      document.getElementById('monthlySupport').textContent = formatCurrency(monthlySupport);
-      document.getElementById('annualSupport').textContent = formatCurrency(annualSupport);
-      document.getElementById('percentageApplied').textContent = (percentage * 100).toFixed(2) + '%';
-      document.getElementById('netResourcesUsed').textContent = formatCurrency(cappedNet);
-
-      // Show cap note if applicable
-      document.getElementById('capNote').style.display = wasCapped ? 'flex' : 'none';
-
-      // Scroll to results
-      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    // Reset calculator
-    function resetCalculator() {
-      document.querySelectorAll('.calc-input').forEach(input => input.value = '');
-      document.querySelectorAll('.calc-select').forEach(select => select.selectedIndex = 0);
-      document.getElementById('netResources').textContent = '$0';
-      document.getElementById('resultsSection').classList.remove('visible');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function downloadPDF() {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      const primaryColor = [13, 130, 104]; // Teal #0D8268
-      const primaryLight = [230, 245, 241];
-      const textColor = [26, 25, 23];
-      const mutedColor = [140, 135, 128];
-
-      // Header
-      doc.setFillColor(...primaryColor);
-      doc.rect(0, 0, 210, 32, 'F');
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(20);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Clearly', 20, 20);
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      doc.text('Child Support Estimate  |  Texas', 52, 20);
-      doc.setFontSize(8);
-      doc.text(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }), 20, 28);
-
-      let yPos = 42;
-
-      // Income Details
-      doc.setFillColor(...primaryLight);
-      doc.roundedRect(15, yPos - 3, 180, 45, 2, 2, 'F');
-      doc.setTextColor(...primaryColor);
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Income Details (Obligor)', 20, yPos + 5);
-
-      doc.setTextColor(...textColor);
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'normal');
-
-      const grossIncome = formatCurrency(getVal('grossIncome'));
-      const federalTax = formatCurrency(getVal('federalTax'));
-      const stateTax = formatCurrency(getVal('stateTax'));
-      const socialSecurity = formatCurrency(getVal('socialSecurity'));
-      const healthIns = formatCurrency(getVal('healthIns'));
-      const unionDues = formatCurrency(getVal('unionDues'));
-      const netResources = document.getElementById('netResources').textContent;
-
-      doc.text('Gross Monthly Income: ' + grossIncome, 20, yPos + 14);
-      doc.text('Deductions:', 20, yPos + 22);
-      doc.text('Federal Tax: ' + federalTax + '  |  State Tax: ' + stateTax + '  |  Social Security: ' + socialSecurity, 50, yPos + 22);
-      doc.text('Health Insurance: ' + healthIns + '  |  Union Dues: ' + unionDues, 50, yPos + 29);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Net Monthly Resources: ' + netResources, 20, yPos + 38);
-
-      yPos += 52;
-
-      // Children info
-      const numChildren = document.getElementById('numChildren').value;
-      const otherChildren = document.getElementById('otherChildren').value;
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(8);
-      doc.text('Children Before Court: ' + numChildren + '  |  Other Children Obligor Supports: ' + otherChildren, 20, yPos);
-      yPos += 10;
-
-      // Results
-      const monthlySupport = document.getElementById('monthlySupport').textContent;
-      const annualSupport = document.getElementById('annualSupport').textContent;
-      const percentage = document.getElementById('percentageApplied').textContent;
-      const netUsed = document.getElementById('netResourcesUsed').textContent;
-
-      doc.setFillColor(...primaryColor);
-      doc.roundedRect(15, yPos - 3, 180, 38, 2, 2, 'F');
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Guideline Child Support', 20, yPos + 6);
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'normal');
-      doc.text('Net Resources Used: ' + netUsed + '  |  Percentage Applied: ' + percentage, 20, yPos + 14);
-      doc.setFontSize(14);
-      doc.setFont('helvetica', 'bold');
-      doc.text('TOTAL: ' + monthlySupport + '/month  (' + annualSupport + '/year)', 20, yPos + 28);
-
-      yPos += 48;
-
-      // Guidelines
-      doc.setTextColor(...textColor);
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Guidelines Applied:', 20, yPos);
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(...mutedColor);
-      yPos += 5;
-      doc.text('Income Cap: $11,700/month (Sept 2025)  |  Percentages: 20%/25%/30%/35%/40% for 1-5 children', 20, yPos);
-
-      yPos += 12;
-
-      // Disclaimer
-      doc.setFontSize(7);
-      const disclaimer = 'DISCLAIMER: This estimate is based on Texas Family Code §154.125. Actual amounts may differ based on judicial discretion and circumstances. This is not legal advice.';
-      const splitDisclaimer = doc.splitTextToSize(disclaimer, 175);
-      doc.text(splitDisclaimer, 20, yPos);
-
-      yPos += splitDisclaimer.length * 3 + 8;
-
-      // Footer
-      doc.setDrawColor(...primaryColor);
-      doc.setLineWidth(0.5);
-      doc.line(20, yPos, 190, yPos);
-      doc.setFontSize(8);
-      doc.setTextColor(...primaryColor);
-      doc.text('Generated by Clearly  |  getclearly.app', 20, yPos + 5);
-      doc.setTextColor(...mutedColor);
-      doc.text('Guidelines: September 2025', 140, yPos + 5);
-
-      doc.save('TX-Child-Support-Estimate-' + new Date().toISOString().split('T')[0] + '.pdf');
-    }
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', calculateNet);
   </script>
 
   <!-- Structured Data -->

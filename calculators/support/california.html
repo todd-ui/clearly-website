@@ -446,7 +446,7 @@
             <h4>Company</h4>
             <ul>
               <li><a href="/professionals.html">For Professionals</a></li>
-              <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
+              <li><a href="mailto:hello@getclearly.app">Contact Us</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -459,287 +459,22 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 Clearly LLC. All rights reserved.</p>
+        <p>&copy; 2026 Clearly LLC. All rights reserved.</p>
         <p>Proudly designed and developed in the USA.</p>
       </div>
     </div>
   </footer>
 
   <script>
-    // California Configuration - Family Code Section 4055
-    // K factor multipliers by number of children (approximate)
-    const CA_CONFIG = {
-      kMultipliers: { 1: 1.0, 2: 1.6, 3: 2.0, 4: 2.3, 5: 2.5 }
-    };
-
     // Mobile menu toggle
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-
-    // Section toggle
-    function toggleSection(header) {
-      header.parentElement.classList.toggle('collapsed');
-    }
-
-    // Format currency
-    function formatCurrency(amount) {
-      return '$' + Math.round(Math.abs(amount)).toLocaleString();
-    }
-
-    // Get input value
-    function getVal(id) {
-      return parseFloat(document.getElementById(id).value) || 0;
-    }
-
-    // Calculate net incomes
-    function calculateTotals() {
-      const p1Net = getVal('p1Gross') - getVal('p1Taxes') - getVal('p1Health') - getVal('p1Retirement');
-      const p2Net = getVal('p2Gross') - getVal('p2Taxes') - getVal('p2Health') - getVal('p2Retirement');
-      document.getElementById('p1Net').textContent = formatCurrency(Math.max(0, p1Net));
-      document.getElementById('p2Net').textContent = formatCurrency(Math.max(0, p2Net));
-    }
-
-    // Update time share (ensure they total 100)
-    function updateTimeShare(parent) {
-      const p1Time = getVal('p1Time');
-      const p2Time = getVal('p2Time');
-      if (parent === 1) {
-        document.getElementById('p2Time').value = Math.max(0, 100 - p1Time);
-      } else {
-        document.getElementById('p1Time').value = Math.max(0, 100 - p2Time);
-      }
-    }
-
-    // Calculate K factor per Family Code 4055
-    // K = (1 + H%) × [income bracket fraction] when H% ≤ 50%
-    // K = (2 - H%) × [income bracket fraction] when H% > 50%
-    function calculateKFactor(totalNet, higherTimePercent) {
-      // Get the income bracket fraction
-      let bracketFraction;
-      if (totalNet <= 2900) {
-        bracketFraction = 0.165 + (totalNet / 82857);
-      } else if (totalNet <= 5000) {
-        bracketFraction = 0.131 + (totalNet / 42149);
-      } else if (totalNet <= 10000) {
-        bracketFraction = 0.250;
-      } else if (totalNet <= 15000) {
-        bracketFraction = 0.10 + (1499 / totalNet);
-      } else {
-        bracketFraction = 0.12 + (1200 / totalNet);
-      }
-
-      // Apply the H% adjustment
-      let k;
-      if (higherTimePercent <= 0.50) {
-        k = (1 + higherTimePercent) * bracketFraction;
-      } else {
-        k = (2 - higherTimePercent) * bracketFraction;
-      }
-
-      return k;
-    }
-
-    // Main calculation
-    function calculateSupport() {
-      // Get net incomes
-      const p1Net = Math.max(0, getVal('p1Gross') - getVal('p1Taxes') - getVal('p1Health') - getVal('p1Retirement'));
-      const p2Net = Math.max(0, getVal('p2Gross') - getVal('p2Taxes') - getVal('p2Health') - getVal('p2Retirement'));
-      const totalNet = p1Net + p2Net;
-
-      // Get time shares
-      const p1Time = getVal('p1Time') / 100;
-      const p2Time = getVal('p2Time') / 100;
-
-      // Determine higher earner
-      const p1IsHigher = p1Net >= p2Net;
-      const higherNet = p1IsHigher ? p1Net : p2Net;
-      const higherTime = p1IsHigher ? p1Time : p2Time;
-
-      // Get children and add-ons
-      const numChildren = parseInt(document.getElementById('numChildren').value);
-      const childcare = getVal('childcare');
-      const childHealth = getVal('childHealth');
-      const uninsured = getVal('uninsured');
-      const totalAddOns = childcare + childHealth + uninsured;
-
-      // Calculate K factor using official Family Code 4055 formula
-      let k = calculateKFactor(totalNet, higherTime);
-
-      // Apply children multiplier
-      k = k * CA_CONFIG.kMultipliers[numChildren];
-
-      // California formula: CS = K × [HN - (H% × TN)]
-      let baseSupport = k * (higherNet - (higherTime * totalNet));
-
-      // Ensure support is positive and reasonable
-      baseSupport = Math.max(0, baseSupport);
-
-      // Add-on expenses split proportionally by income
-      const higherIncomeShare = totalNet > 0 ? higherNet / totalNet : 0.5;
-      const addOnShare = totalAddOns * higherIncomeShare;
-
-      // Total support from higher earner
-      const totalSupport = baseSupport + (p1IsHigher ? addOnShare : -addOnShare);
-
-      // Determine actual payor (could flip if lower earner has more time)
-      let monthlySupport = Math.abs(totalSupport);
-      let payor = totalSupport > 0 ? (p1IsHigher ? 'Parent 1' : 'Parent 2') : (p1IsHigher ? 'Parent 2' : 'Parent 1');
-
-      // If very low or equal, no support
-      if (monthlySupport < 50 || Math.abs(p1Net - p2Net) < 100) {
-        monthlySupport = 0;
-        payor = 'Neither (equal or near-equal)';
-      }
-
-      // Display results
-      document.getElementById('resultsSection').classList.add('visible');
-      document.getElementById('monthlySupport').textContent = formatCurrency(monthlySupport);
-      document.getElementById('annualSupport').textContent = formatCurrency(monthlySupport * 12);
-      document.getElementById('payorParent').textContent = payor;
-      document.getElementById('combinedIncome').textContent = formatCurrency(totalNet);
-
-      if (totalAddOns > 0) {
-        document.getElementById('addOnRow').style.display = 'flex';
-        document.getElementById('addOnAmount').textContent = formatCurrency(addOnShare) + '/month';
-      } else {
-        document.getElementById('addOnRow').style.display = 'none';
-      }
-
-      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-
-    // Reset calculator
-    function resetCalculator() {
-      document.querySelectorAll('.calc-input').forEach(input => {
-        if (input.id === 'p1Time' || input.id === 'p2Time') {
-          input.value = '50';
-        } else {
-          input.value = '';
-        }
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('open');
+        navLinks.classList.toggle('open');
       });
-      document.querySelectorAll('.calc-select').forEach(select => select.selectedIndex = 0);
-      calculateTotals();
-      document.getElementById('resultsSection').classList.remove('visible');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
-
-    // Download PDF
-    function downloadPDF() {
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-      const primaryColor = [13, 130, 104]; // Teal #0D8268
-      const primaryLight = [230, 245, 241];
-      const textColor = [26, 25, 23];
-      const mutedColor = [140, 135, 128];
-
-      // Header
-      doc.setFillColor(...primaryColor);
-      doc.rect(0, 0, 210, 32, 'F');
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(20);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Clearly', 20, 20);
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      doc.text('Child Support Estimate  |  California', 52, 20);
-      doc.setFontSize(8);
-      doc.text(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }), 20, 28);
-
-      let yPos = 42;
-
-      // Income Details
-      doc.setFillColor(...primaryLight);
-      doc.roundedRect(15, yPos - 3, 180, 55, 2, 2, 'F');
-      doc.setTextColor(...primaryColor);
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Income Details', 20, yPos + 5);
-
-      doc.setTextColor(...textColor);
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'normal');
-
-      const p1Gross = formatCurrency(getVal('p1Gross'));
-      const p1Taxes = formatCurrency(getVal('p1Taxes'));
-      const p1Net = document.getElementById('p1Net')?.textContent || '$0';
-      const p2Gross = formatCurrency(getVal('p2Gross'));
-      const p2Taxes = formatCurrency(getVal('p2Taxes'));
-      const p2Net = document.getElementById('p2Net')?.textContent || '$0';
-
-      doc.text('Parent 1: Gross: ' + p1Gross + '  |  Taxes: ' + p1Taxes + '  |  Net: ' + p1Net, 20, yPos + 14);
-      doc.text('Parent 2: Gross: ' + p2Gross + '  |  Taxes: ' + p2Taxes + '  |  Net: ' + p2Net, 20, yPos + 22);
-
-      const p1TimeShare = getVal('p1TimeShare') || 50;
-      const p2TimeShare = 100 - p1TimeShare;
-      doc.text('Time Share: Parent 1: ' + p1TimeShare + '%  |  Parent 2: ' + p2TimeShare + '%', 20, yPos + 32);
-
-      const numChildren = document.getElementById('numChildren')?.value || '1';
-      doc.text('Number of Children: ' + numChildren, 20, yPos + 40);
-
-      doc.setFont('helvetica', 'bold');
-      doc.text('Combined Net Income: ' + document.getElementById('combinedIncome').textContent, 20, yPos + 48);
-
-      yPos += 62;
-
-      // Results
-      const monthlySupport = document.getElementById('monthlySupport').textContent;
-      const annualSupport = document.getElementById('annualSupport').textContent;
-      const payorParent = document.getElementById('payorParent').textContent;
-
-      doc.setFillColor(...primaryColor);
-      doc.roundedRect(15, yPos - 3, 180, 35, 2, 2, 'F');
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Guideline Child Support', 20, yPos + 6);
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'normal');
-      doc.text('Payor: ' + payorParent, 20, yPos + 14);
-      doc.setFontSize(14);
-      doc.setFont('helvetica', 'bold');
-      doc.text('TOTAL: ' + monthlySupport + '/month  (' + annualSupport + '/year)', 20, yPos + 26);
-
-      yPos += 45;
-
-      // Guidelines
-      doc.setTextColor(...textColor);
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Guidelines Applied:', 20, yPos);
-      doc.setFont('helvetica', 'normal');
-      doc.setTextColor(...mutedColor);
-      yPos += 5;
-      doc.text('Formula: CS = K × [HN - (H% × TN)]  |  CA Family Code §4055', 20, yPos);
-
-      yPos += 12;
-
-      // Disclaimer
-      doc.setFontSize(7);
-      const disclaimer = 'DISCLAIMER: This estimate is based on CA Family Code §4055. Actual amounts may differ based on judicial discretion, hardship deductions, and circumstances. This is not legal advice.';
-      const splitDisclaimer = doc.splitTextToSize(disclaimer, 175);
-      doc.text(splitDisclaimer, 20, yPos);
-
-      yPos += splitDisclaimer.length * 3 + 8;
-
-      // Footer
-      doc.setDrawColor(...primaryColor);
-      doc.setLineWidth(0.5);
-      doc.line(20, yPos, 190, yPos);
-      doc.setFontSize(8);
-      doc.setTextColor(...primaryColor);
-      doc.text('Generated by Clearly  |  getclearly.app', 20, yPos + 5);
-      doc.setTextColor(...mutedColor);
-      doc.text('Guidelines: 2024 (SB 343)', 145, yPos + 5);
-
-      doc.save('CA-Child-Support-Estimate-' + new Date().toISOString().split('T')[0] + '.pdf');
-    }
-
-    // Initialize
-    document.addEventListener('DOMContentLoaded', calculateTotals);
   </script>
 
   <!-- Structured Data -->

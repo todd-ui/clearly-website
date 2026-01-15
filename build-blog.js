@@ -5,6 +5,10 @@ const path = require('path');
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const DATABASE_ID = '2df435a853a58014b9e9dc6ac1cbba09';
 
+// Load partials
+const headerPartial = fs.readFileSync(path.join(__dirname, '_partials/header.html'), 'utf-8').trim();
+const footerPartial = fs.readFileSync(path.join(__dirname, '_partials/footer.html'), 'utf-8').trim();
+
 async function fetchPosts() {
   const response = await notion.databases.query({
     database_id: DATABASE_ID,
@@ -197,26 +201,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
 </head>
 <body>
 
-  <nav class="nav">
-    <div class="container">
-      <a href="/" class="nav-brand">
-        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
-        Clearly
-      </a>
-      <ul class="nav-links">
-        <li><a href="/#features">Features</a></li>
-        <li><a href="/#pricing">Pricing</a></li>
-        <li><a href="/faq.html">FAQ</a></li>
-        <li><a href="/blog.html">Blog</a></li>
-        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </nav>
+  ${headerPartial}
 
   <article class="blog-post">
     <a href="/blog.html" class="back-link">&larr; Back to Blog</a>
@@ -246,59 +231,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   </section>
   ` : ''}
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand-section">
-          <div class="footer-brand">
-            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
-            <span>Clearly</span>
-          </div>
-          <p class="footer-tagline">Co-parenting made clear.</p>
-        </div>
-        <div class="footer-nav">
-          <div class="footer-col">
-            <h4>Product</h4>
-            <ul>
-              <li><a href="/#features">Features</a></li>
-              <li><a href="/#pricing">Pricing</a></li>
-              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Support</h4>
-            <ul>
-              <li><a href="/faq.html">FAQ</a></li>
-              <li><a href="/help.html">Help Center</a></li>
-              <li><a href="/professionals.html">For Legal & Family Professionals</a></li>
-              <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Legal</h4>
-            <ul>
-              <li><a href="/privacy.html">Privacy Policy</a></li>
-              <li><a href="/terms.html">Terms of Service</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2025 Clearly LLC. All rights reserved.</p>
-        <p>Proudly designed and developed in the USA.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Mobile menu toggle
-    const navToggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-  </script>
+  ${footerPartial}
 
   <!-- Article Structured Data -->
   <script type="application/ld+json">
@@ -584,26 +517,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
 </head>
 <body>
 
-  <nav class="nav">
-    <div class="container">
-      <a href="/" class="nav-brand">
-        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
-        Clearly
-      </a>
-      <ul class="nav-links">
-        <li><a href="/#features">Features</a></li>
-        <li><a href="/#pricing">Pricing</a></li>
-        <li><a href="/faq.html">FAQ</a></li>
-        <li><a href="/blog.html">Blog</a></li>
-        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </nav>
+  ${headerPartial}
 
   <header class="blog-hero">
     <div class="container">
@@ -648,59 +562,9 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
     </div>
   </section>
 
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand-section">
-          <div class="footer-brand">
-            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
-            <span>Clearly</span>
-          </div>
-          <p class="footer-tagline">Co-parenting made clear.</p>
-        </div>
-        <div class="footer-nav">
-          <div class="footer-col">
-            <h4>Product</h4>
-            <ul>
-              <li><a href="/#features">Features</a></li>
-              <li><a href="/#pricing">Pricing</a></li>
-              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Support</h4>
-            <ul>
-              <li><a href="/faq.html">FAQ</a></li>
-              <li><a href="/help.html">Help Center</a></li>
-              <li><a href="/professionals.html">For Legal & Family Professionals</a></li>
-              <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Legal</h4>
-            <ul>
-              <li><a href="/privacy.html">Privacy Policy</a></li>
-              <li><a href="/terms.html">Terms of Service</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© 2025 Clearly LLC. All rights reserved.</p>
-        <p>Proudly designed and developed in the USA.</p>
-      </div>
-    </div>
-  </footer>
+  ${footerPartial}
 
   <script>
-    // Mobile menu toggle
-    const navToggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-
     // Category filtering
     document.querySelectorAll('.filter-btn').forEach(btn => {
       btn.addEventListener('click', () => {

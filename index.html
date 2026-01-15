@@ -50,8 +50,8 @@
         Clearly
       </a>
       <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="/#features">Features</a></li>
+        <li><a href="/#pricing">Pricing</a></li>
         <li><a href="/faq.html">FAQ</a></li>
         <li><a href="/blog.html">Blog</a></li>
         <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
@@ -446,8 +446,8 @@
           <div class="footer-col">
             <h4>Product</h4>
             <ul>
-              <li><a href="#features">Features</a></li>
-              <li><a href="#pricing">Pricing</a></li>
+              <li><a href="/#features">Features</a></li>
+              <li><a href="/#pricing">Pricing</a></li>
               <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
             </ul>
           </div>
@@ -464,7 +464,7 @@
             <h4>Company</h4>
             <ul>
               <li><a href="/professionals.html">For Professionals</a></li>
-              <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
+              <li><a href="mailto:hello@getclearly.app">Contact Us</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -477,7 +477,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2025 Clearly LLC. All rights reserved.</p>
+        <p>&copy; 2026 Clearly LLC. All rights reserved.</p>
         <p>Proudly designed and developed in the USA.</p>
       </div>
     </div>
@@ -487,41 +487,12 @@
     // Mobile menu toggle
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-
-    // Scroll animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('open');
+        navLinks.classList.toggle('open');
       });
-    }, observerOptions);
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // Feature tabs
-    document.querySelectorAll('.feature-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        const tabId = tab.dataset.tab;
-
-        // Update active tab
-        document.querySelectorAll('.feature-tab').forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-
-        // Update active panel
-        document.querySelectorAll('.feature-panel').forEach(p => p.classList.remove('active'));
-        document.querySelector(`[data-panel="${tabId}"]`).classList.add('active');
-      });
-    });
+    }
   </script>
 
   <!-- Structured Data -->
