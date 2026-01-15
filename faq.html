@@ -194,18 +194,11 @@
         </div>
         <div class="footer-nav">
           <div class="footer-col">
-            <h4>Resources</h4>
+            <h4>Product</h4>
             <ul>
-              <li><a href="/calculators/">Support Calculators</a></li>
-              <li><a href="/faq.html">FAQ</a></li>
               <li><a href="/blog.html">Blog</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Company</h4>
-            <ul>
               <li><a href="/professionals.html">For Professionals</a></li>
-              <li><a href="mailto:hello@getclearly.app">Contact Us</a></li>
+              <li><a href="/#notify">Join Waitlist</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -218,13 +211,23 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2025 Clearly LLC. All rights reserved.</p>
+        <p>&copy; 2026 Clearly LLC. All rights reserved.</p>
         <p>Proudly designed and developed in the USA.</p>
       </div>
     </div>
   </footer>
 
-  <!-- FAQ Structured Data -->
+  <script>
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+    }
+  </script><!-- FAQ Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",

@@ -288,44 +288,12 @@
     // Mobile menu toggle
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-
-    // Form handling - Supabase Edge Function
-    const WAITLIST_ENDPOINT = 'https://dwncravjhkbclbuzijra.supabase.co/functions/v1/waitlist-signup';
-
-    document.querySelectorAll('form.waitlist-form').forEach(form => {
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const emailInput = form.querySelector('input[type="email"]');
-        const button = form.querySelector('button[type="submit"]');
-        const originalText = button.textContent;
-        const source = form.dataset.source || 'professionals';
-
-        button.textContent = 'Joining...';
-        button.disabled = true;
-
-        try {
-          const response = await fetch(WAITLIST_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email: emailInput.value, source })
-          });
-          const data = await response.json();
-          if (response.ok) {
-            form.innerHTML = '<p style="color: var(--primary); font-weight: 600; font-size: 16px; text-align: center; padding: 16px 24px;">✓ You\'re on the list! We\'ll be in touch.</p>';
-          } else {
-            throw new Error(data.error || 'Something went wrong');
-          }
-        } catch (error) {
-          button.textContent = originalText;
-          button.disabled = false;
-          alert(error.message || 'Something went wrong. Please try again.');
-        }
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('open');
+        navLinks.classList.toggle('open');
       });
-    });
+    }
   </script>
 
 </body>

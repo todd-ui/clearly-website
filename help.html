@@ -184,13 +184,23 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 Clearly LLC. All rights reserved.</p>
+        <p>&copy; 2026 Clearly LLC. All rights reserved.</p>
         <p>Proudly designed and developed in the USA.</p>
       </div>
     </div>
   </footer>
 
-  <!-- FAQ Structured Data -->
+  <script>
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+    }
+  </script><!-- FAQ Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
