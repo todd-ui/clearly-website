@@ -262,16 +262,15 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
           <div class="footer-col">
             <h4>Product</h4>
             <ul>
-              <li><a href="/#features">Features</a></li>
-              <li><a href="/#pricing">Pricing</a></li>
-              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
+              <li><a href="/blog.html">Blog</a></li>
+              <li><a href="/professionals.html">For Professionals</a></li>
+              <li><a href="/#notify">Join Waitlist</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h4>Support</h4>
             <ul>
               <li><a href="/help.html">Help Center</a></li>
-              <li><a href="/professionals.html">For Legal & Family Professionals</a></li>
               <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
             </ul>
           </div>
@@ -662,16 +661,15 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
           <div class="footer-col">
             <h4>Product</h4>
             <ul>
-              <li><a href="/#features">Features</a></li>
-              <li><a href="/#pricing">Pricing</a></li>
-              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
+              <li><a href="/blog.html">Blog</a></li>
+              <li><a href="/professionals.html">For Professionals</a></li>
+              <li><a href="/#notify">Join Waitlist</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h4>Support</h4>
             <ul>
               <li><a href="/help.html">Help Center</a></li>
-              <li><a href="/professionals.html">For Legal & Family Professionals</a></li>
               <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
             </ul>
           </div>
