@@ -91,9 +91,22 @@ img {
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
   padding: 20px 40px;
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
+}
+
+/* Compensate for fixed nav */
+body {
+  padding-top: 81px; /* nav height: 40px logo + 20px*2 padding + 1px border */
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 65px; /* nav height: 40px logo + 16px*2 padding + 1px border - adjusted */
+  }
 }
 
 .nav .container {
