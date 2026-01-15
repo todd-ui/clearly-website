@@ -270,7 +270,6 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
           <div class="footer-col">
             <h4>Support</h4>
             <ul>
-              <li><a href="/faq.html">FAQ</a></li>
               <li><a href="/help.html">Help Center</a></li>
               <li><a href="/professionals.html">For Legal & Family Professionals</a></li>
               <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
@@ -286,7 +285,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2025 Clearly LLC. All rights reserved.</p>
+        <p>© 2026 Clearly LLC. All rights reserved.</p>
         <p>Proudly designed and developed in the USA.</p>
       </div>
     </div>
@@ -671,7 +670,6 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
           <div class="footer-col">
             <h4>Support</h4>
             <ul>
-              <li><a href="/faq.html">FAQ</a></li>
               <li><a href="/help.html">Help Center</a></li>
               <li><a href="/professionals.html">For Legal & Family Professionals</a></li>
               <li><a href="mailto:care@getclearly.app">Contact Us</a></li>
@@ -687,7 +685,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2025 Clearly LLC. All rights reserved.</p>
+        <p>© 2026 Clearly LLC. All rights reserved.</p>
         <p>Proudly designed and developed in the USA.</p>
       </div>
     </div>
