@@ -2820,11 +2820,15 @@
                       'July', 'August', 'September', 'October', 'November', 'December'];
 
       container.innerHTML = state.children.map((child, index) => {
-        // Parse existing birthdate if present
+        // Get birthdate parts - use stored partial values if available
         let selectedMonth = '';
         let selectedDay = '';
         let selectedYear = '';
-        if (child.birthdate) {
+        if (child.birthdateParts) {
+          selectedMonth = child.birthdateParts.month ? parseInt(child.birthdateParts.month, 10).toString() : '';
+          selectedDay = child.birthdateParts.day ? parseInt(child.birthdateParts.day, 10).toString() : '';
+          selectedYear = child.birthdateParts.year || '';
+        } else if (child.birthdate) {
           const parts = child.birthdate.split('-');
           if (parts.length === 3) {
             selectedYear = parts[0];
@@ -2877,23 +2881,27 @@
     }
 
     function updateChildBirthdatePart(index, part, value) {
-      // Get current birthdate parts
-      let month = '', day = '', year = '';
-      if (state.children[index].birthdate) {
-        const parts = state.children[index].birthdate.split('-');
-        if (parts.length === 3) {
-          year = parts[0];
-          month = parts[1];
-          day = parts[2];
+      // Initialize partial birthdate storage if needed
+      if (!state.children[index].birthdateParts) {
+        state.children[index].birthdateParts = { month: '', day: '', year: '' };
+        // Parse existing birthdate if present
+        if (state.children[index].birthdate) {
+          const parts = state.children[index].birthdate.split('-');
+          if (parts.length === 3) {
+            state.children[index].birthdateParts.year = parts[0];
+            state.children[index].birthdateParts.month = parts[1];
+            state.children[index].birthdateParts.day = parts[2];
+          }
         }
       }
 
       // Update the changed part
-      if (part === 'month') month = value.padStart(2, '0');
-      if (part === 'day') day = value.padStart(2, '0');
-      if (part === 'year') year = value;
+      if (part === 'month') state.children[index].birthdateParts.month = value ? value.padStart(2, '0') : '';
+      if (part === 'day') state.children[index].birthdateParts.day = value ? value.padStart(2, '0') : '';
+      if (part === 'year') state.children[index].birthdateParts.year = value || '';
 
-      // Only set birthdate if all parts are present
+      // Set birthdate if all parts are present
+      const { month, day, year } = state.children[index].birthdateParts;
       if (month && day && year) {
         state.children[index].birthdate = `${year}-${month}-${day}`;
       } else {
