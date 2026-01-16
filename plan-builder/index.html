@@ -12,7 +12,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Build Your Custody Plan - Free Plan Builder | Clearly</title>
-  <meta name="description" content="Create a professional custody schedule in minutes. Free tool to build your co-parenting plan with schedule patterns, holidays, and expenses.">
+  <meta name="description" content="Create a professional custody schedule in minutes. Free tool to build your co-parenting plan with schedule patterns, holidays, and summer schedules.">
   <link rel="canonical" href="https://getclearly.app/plan-builder/">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app/plan-builder/">
@@ -40,12 +40,18 @@
       --error: #DC2626;
     }
 
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      overflow-x: hidden;
     }
 
     /* Progress Bar */
@@ -116,10 +122,7 @@
     /* Main Container */
     .wizard-container {
       min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 100px 24px 120px;
+      padding: 80px 24px 100px;
     }
     .wizard-content {
       max-width: 640px;
@@ -217,6 +220,122 @@
       color: var(--primary);
     }
 
+    /* Plan Code Section */
+    .plan-code-section {
+      margin-top: 32px;
+    }
+    .plan-code-divider {
+      display: flex;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+    .plan-code-divider::before,
+    .plan-code-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .plan-code-divider span {
+      padding: 0 16px;
+      font-size: 13px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .plan-code-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .plan-code-box.expanded {
+      border-color: var(--primary);
+    }
+    .plan-code-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .plan-code-header:hover {
+      background: var(--bg);
+    }
+    .plan-code-header span {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+    .plan-code-chevron {
+      color: var(--text-muted);
+      transition: transform 0.2s ease;
+    }
+    .plan-code-box.expanded .plan-code-chevron {
+      transform: rotate(180deg);
+    }
+    .plan-code-input-area {
+      display: none;
+      padding: 0 16px 16px;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .plan-code-box.expanded .plan-code-input-area {
+      display: flex;
+    }
+    .plan-code-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 16px;
+      font-family: inherit;
+      text-align: center;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      background: var(--surface);
+      color: var(--text);
+    }
+    .plan-code-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .plan-code-input::placeholder {
+      letter-spacing: normal;
+      text-transform: none;
+    }
+    .plan-code-load-btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--primary);
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .plan-code-load-btn:hover {
+      background: var(--primary-light);
+    }
+    .plan-code-load-btn:disabled {
+      background: var(--border);
+      color: var(--text-muted);
+      cursor: not-allowed;
+    }
+    .plan-code-error {
+      font-size: 13px;
+      color: var(--error);
+      text-align: center;
+      margin: 0;
+      display: none;
+    }
+    .plan-code-error.visible {
+      display: block;
+    }
+
     /* Chips */
     .chip-group {
       display: flex;
@@ -261,6 +380,8 @@
       border-radius: 12px;
       font-size: 16px;
       transition: border-color 0.2s;
+      background: var(--surface);
+      color: var(--text);
     }
     .text-input:focus {
       outline: none;
@@ -268,6 +389,20 @@
     }
     .text-input::placeholder {
       color: var(--text-muted);
+    }
+    /* Select styling - override browser defaults */
+    select.text-input {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235C5856' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 40px;
+      cursor: pointer;
+    }
+    select.text-input:focus {
+      border-color: var(--primary);
     }
 
     /* Children Cards */
@@ -288,6 +423,19 @@
       align-items: center;
       gap: 12px;
       margin-bottom: 16px;
+    }
+    .child-fields {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .child-birthdate-row {
+      display: flex;
+      gap: 8px;
+    }
+    .child-birthdate-row select {
+      flex: 1;
+      min-width: 0;
     }
     .child-avatar {
       width: 40px;
@@ -318,53 +466,108 @@
     .schedule-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-top: 24px;
+      gap: 20px;
+      margin-top: 32px;
     }
-    @media (max-width: 600px) {
+    @media (max-width: 700px) {
       .schedule-grid { grid-template-columns: 1fr; }
     }
     .schedule-card {
       background: var(--surface);
       border: 2px solid var(--border);
-      border-radius: 16px;
-      padding: 20px;
+      border-radius: 20px;
+      padding: 24px;
       cursor: pointer;
       transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
     }
     .schedule-card:hover {
       border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
     }
     .schedule-card.selected {
       border-color: var(--primary);
       background: var(--primary-soft);
     }
+    .schedule-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 20px;
+    }
     .schedule-card h4 {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 600;
-      margin-bottom: 4px;
+      margin: 0;
+      line-height: 1.3;
     }
     .schedule-card .split {
-      font-size: 13px;
+      font-size: 14px;
       color: var(--primary);
-      font-weight: 500;
-      margin-bottom: 12px;
+      font-weight: 600;
+      background: var(--primary-soft);
+      padding: 4px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
     }
-    .mini-calendar {
+    .mini-calendar-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+    .mini-calendar-header {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 2px;
+      gap: 6px;
+      margin-bottom: 4px;
+    }
+    .mini-calendar-header span {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-align: center;
+    }
+    .mini-week {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
     }
     .mini-day {
       aspect-ratio: 1;
-      border-radius: 4px;
-      font-size: 10px;
+      border-radius: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
+      position: relative;
+      overflow: hidden;
     }
-    .mini-day.you { background: var(--you-color); color: white; }
+    .mini-day.you { background: var(--you-color); }
     .mini-day.coparent { background: var(--coparent-color); }
+    .mini-day.exchange {
+      background: transparent;
+    }
+    .mini-day.exchange .exchange-top,
+    .mini-day.exchange .exchange-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 50%;
+    }
+    .mini-day.exchange .exchange-top { top: 0; }
+    .mini-day.exchange .exchange-bottom { bottom: 0; }
+    .mini-day.exchange .exchange-top.you { background: var(--you-color); }
+    .mini-day.exchange .exchange-top.coparent { background: var(--coparent-color); }
+    .mini-day.exchange .exchange-bottom.you { background: var(--you-color); }
+    .mini-day.exchange .exchange-bottom.coparent { background: var(--coparent-color); }
+    .schedule-card-description {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-top: auto;
+    }
 
     /* Calendar Preview */
     .calendar-preview {
@@ -442,6 +645,42 @@
     .calendar-day.today {
       box-shadow: inset 0 0 0 2px var(--primary);
     }
+    .calendar-day.clickable {
+      cursor: pointer;
+    }
+    .calendar-day.clickable:hover {
+      opacity: 0.8;
+      transform: scale(1.05);
+    }
+    .calendar-day.exchange {
+      position: relative;
+      overflow: hidden;
+    }
+    .calendar-day.exchange .exchange-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+    }
+    .calendar-day.exchange .exchange-bottom {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50%;
+    }
+    .calendar-day.exchange .exchange-top.you { background: var(--you-color); }
+    .calendar-day.exchange .exchange-top.coparent { background: var(--coparent-color); }
+    .calendar-day.exchange .exchange-bottom.you { background: var(--you-color); }
+    .calendar-day.exchange .exchange-bottom.coparent { background: var(--coparent-color); }
+    .calendar-day.exchange .day-number {
+      position: relative;
+      z-index: 1;
+      color: var(--text);
+      font-weight: 500;
+      text-shadow: 0 0 2px rgba(255,255,255,0.8);
+    }
     .calendar-day.holiday::after {
       content: '';
       position: absolute;
@@ -449,6 +688,32 @@
       width: 4px;
       height: 4px;
       background: var(--primary);
+      border-radius: 50%;
+    }
+    .calendar-day.summer {
+      box-shadow: inset 0 0 0 2px rgba(255, 180, 0, 0.5);
+    }
+    .calendar-day.summer.today {
+      box-shadow: inset 0 0 0 2px var(--primary), inset 0 0 0 4px rgba(255, 180, 0, 0.5);
+    }
+    .calendar-day.holiday {
+      position: relative;
+      box-shadow: inset 0 0 0 2px #E53935;
+    }
+    .calendar-day.holiday.summer {
+      box-shadow: inset 0 0 0 2px #E53935, inset 0 0 0 4px rgba(255, 180, 0, 0.5);
+    }
+    .calendar-day.holiday.today {
+      box-shadow: inset 0 0 0 2px var(--primary), inset 0 0 0 4px #E53935;
+    }
+    .holiday-dot {
+      position: absolute;
+      bottom: 3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 6px;
+      height: 6px;
+      background: #E53935;
       border-radius: 50%;
     }
     .calendar-legend {
@@ -473,72 +738,631 @@
     .legend-dot.you { background: var(--you-color); }
     .legend-dot.coparent { background: var(--coparent-color); }
 
-    /* Holiday List */
-    .holiday-section {
-      margin-top: 24px;
+    /* Year Picker */
+    .year-picker {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 16px;
+      margin-bottom: 16px;
     }
-    .holiday-group {
-      margin-bottom: 24px;
-    }
-    .holiday-group-title {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text-secondary);
-      margin-bottom: 12px;
+    .year-nav {
+      width: 36px;
+      height: 36px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      gap: 8px;
-      cursor: pointer;
+      justify-content: center;
+      border-radius: 8px;
+      color: var(--text-muted);
+      transition: all 0.15s;
     }
-    .holiday-group-title svg {
-      transition: transform 0.2s;
+    .year-nav:hover {
+      background: var(--bg);
+      color: var(--text);
     }
-    .holiday-group.collapsed .holiday-group-title svg {
-      transform: rotate(-90deg);
+    .year-display {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
     }
-    .holiday-group.collapsed .holiday-items {
-      display: none;
+    .holiday-hint {
+      font-size: 13px;
+      color: var(--primary);
+      background: var(--primary-soft);
+      padding: 10px 14px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 16px;
     }
-    .holiday-items {
+
+    /* Holiday List */
+    .holiday-section {
       display: flex;
       flex-direction: column;
       gap: 8px;
     }
+    .holiday-group-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-top: 16px;
+      margin-bottom: 8px;
+    }
+    .holiday-group-label:first-child {
+      margin-top: 0;
+    }
     .holiday-row {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      gap: 12px;
       padding: 12px 16px;
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 12px;
     }
+    .holiday-row.not-tracked {
+      opacity: 0.6;
+      background: var(--bg);
+    }
+    .holiday-emoji {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    .holiday-emoji.you {
+      background: var(--primary-soft);
+    }
+    .holiday-emoji.coparent {
+      background: var(--coparent-color);
+    }
+    .holiday-info {
+      flex: 1;
+      min-width: 0;
+    }
     .holiday-name {
       font-size: 15px;
       font-weight: 500;
     }
-    .holiday-chips {
-      display: flex;
-      gap: 6px;
-    }
-    .holiday-chip {
-      padding: 6px 12px;
-      border-radius: 100px;
+    .holiday-date {
       font-size: 12px;
-      font-weight: 500;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .holiday-custody-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .holiday-custody-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .holiday-custody-dot.you {
+      background: var(--you-color);
+    }
+    .holiday-custody-dot.coparent {
+      background: var(--text-muted);
+    }
+    .holiday-custody-label {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .holiday-swap-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
       border: 1px solid var(--border);
+      background: var(--bg);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+    .holiday-swap-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+    .holiday-swap-btn svg {
+      width: 18px;
+      height: 18px;
+      color: var(--text);
+    }
+    .holiday-remove-btn {
+      width: 28px;
+      height: 28px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    .holiday-remove-btn:hover {
+      color: var(--error);
+    }
+    .holiday-weekend-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      margin-top: 8px;
+      background: var(--bg);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .holiday-weekend-toggle:hover {
+      background: var(--border);
+    }
+    .holiday-weekend-checkbox {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.15s;
+    }
+    .holiday-weekend-checkbox.checked {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+    .holiday-weekend-checkbox svg {
+      width: 12px;
+      height: 12px;
+      color: white;
+      opacity: 0;
+    }
+    .holiday-weekend-checkbox.checked svg {
+      opacity: 1;
+    }
+    .holiday-weekend-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    .holiday-row-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .add-holiday-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px;
       background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--primary);
+      cursor: pointer;
+      margin-bottom: 16px;
+      transition: all 0.15s;
+    }
+    .add-holiday-btn:hover {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+    }
+    .add-holiday-btn svg {
+      color: var(--primary);
+    }
+    .add-holiday-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+    .add-holiday-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+    .add-holiday-header span {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+    .add-holiday-close {
+      padding: 6px 12px;
+      background: var(--primary);
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: white;
+      cursor: pointer;
+    }
+    .add-holiday-list {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .add-holiday-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: background 0.1s;
+    }
+    .add-holiday-item:hover {
+      background: var(--bg);
+    }
+    .add-holiday-item + .add-holiday-item {
+      border-top: 1px solid var(--border);
+    }
+    .add-holiday-item .holiday-emoji {
+      width: 36px;
+      height: 36px;
+      font-size: 18px;
+    }
+    .add-holiday-item .holiday-name {
+      flex: 1;
+    }
+    .add-holiday-item svg {
+      color: var(--primary);
+    }
+    .holiday-divider {
+      display: flex;
+      align-items: center;
+      margin: 20px 0 12px;
+    }
+    .holiday-divider::before,
+    .holiday-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .holiday-divider span {
+      padding: 0 12px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    /* Custom Holiday Card */
+    .custom-holiday-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 16px;
+    }
+    .custom-holiday-card.expanded {
+      border-color: var(--primary);
+    }
+    .custom-holiday-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .custom-holiday-header:hover {
+      background: var(--bg);
+    }
+    .custom-holiday-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .custom-holiday-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--bg);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+    .custom-holiday-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .custom-holiday-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .custom-holiday-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .custom-holiday-chevron {
+      color: var(--text-muted);
+      transition: transform 0.2s ease;
+    }
+    .custom-holiday-card.expanded .custom-holiday-chevron {
+      transform: rotate(180deg);
+    }
+    .custom-holiday-fields {
+      display: none;
+      padding: 0 16px 16px;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .custom-holiday-card.expanded .custom-holiday-fields {
+      display: flex;
+    }
+    .custom-holiday-input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: inherit;
+      background: var(--surface);
+      color: var(--text);
+      transition: border-color 0.15s;
+    }
+    .custom-holiday-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .custom-holiday-input::placeholder {
+      color: var(--text-muted);
+    }
+    .custom-holiday-dates {
+      display: flex;
+      gap: 12px;
+    }
+    .custom-holiday-date-field {
+      flex: 1;
+    }
+    .custom-holiday-date-field label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+    .optional-label {
+      font-weight: 400;
+      color: var(--text-muted);
+    }
+    .custom-holiday-save-btn {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .custom-holiday-save-btn:hover {
+      background: var(--primary-light);
+    }
+
+    /* Available Holidays Section */
+    .available-holidays-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .available-holiday-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
       cursor: pointer;
       transition: all 0.15s;
     }
-    .holiday-chip:hover {
+    .available-holiday-row:hover {
       border-color: var(--primary);
+      background: var(--primary-soft);
     }
-    .holiday-chip.selected {
-      background: var(--primary);
-      border-color: var(--primary);
+    .available-holiday-emoji {
+      width: 36px;
+      height: 36px;
+      background: var(--bg);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+    .available-holiday-name {
+      flex: 1;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .available-holiday-add {
+      color: var(--primary);
+    }
+    .holiday-empty {
+      text-align: center;
+      padding: 32px 16px;
+      color: var(--text-muted);
+    }
+    .holiday-empty-icon {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    /* Custom Schedule Builder */
+    .custom-builder {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-top: 24px;
+    }
+    .custom-week {
+      margin-bottom: 16px;
+    }
+    .custom-week-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .custom-week-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .custom-week-remove {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+    }
+    .custom-week-remove:hover {
+      color: var(--error);
+    }
+    .custom-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+    .custom-day {
+      aspect-ratio: 1;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+    .custom-day:hover {
+      transform: scale(1.05);
+    }
+    .custom-day.you {
+      background: var(--you-color);
       color: white;
     }
+    .custom-day.coparent {
+      background: var(--coparent-color);
+      color: var(--text-secondary);
+    }
+    .custom-day.exchange {
+      background: transparent;
+    }
+    .custom-day .exchange-top,
+    .custom-day .exchange-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 50%;
+    }
+    .custom-day .exchange-top {
+      top: 0;
+    }
+    .custom-day .exchange-bottom {
+      bottom: 0;
+    }
+    .custom-day .exchange-top.you { background: var(--you-color); }
+    .custom-day .exchange-top.coparent { background: var(--coparent-color); }
+    .custom-day .exchange-bottom.you { background: var(--you-color); }
+    .custom-day .exchange-bottom.coparent { background: var(--coparent-color); }
+    .custom-day .day-letter {
+      position: relative;
+      z-index: 1;
+    }
+    .add-week-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 14px;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--primary);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .add-week-btn:hover {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+    }
+    .custom-summary {
+      margin-top: 16px;
+      padding: 12px;
+      background: var(--bg);
+      border-radius: 8px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    .custom-legend {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 12px;
+    }
+    .custom-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+    .custom-legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 3px;
+    }
+    .custom-legend-dot.you { background: var(--you-color); }
+    .custom-legend-dot.coparent { background: var(--coparent-color); }
+    .custom-legend-dot.exchange {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .custom-legend-dot.exchange span {
+      flex: 1;
+    }
+    .custom-legend-dot.exchange span:first-child { background: var(--coparent-color); }
+    .custom-legend-dot.exchange span:last-child { background: var(--you-color); }
 
     /* Expense Split */
     .split-bar {
@@ -640,6 +1464,62 @@
       background: var(--primary-light);
     }
 
+    /* Complete Screen */
+    .complete-actions {
+      display: flex;
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .complete-actions .btn {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .complete-actions .btn svg {
+      flex-shrink: 0;
+    }
+    .complete-info {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .complete-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px;
+    }
+    .complete-info-item + .complete-info-item {
+      border-top: 1px solid var(--border);
+    }
+    .complete-info-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-soft);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    .complete-info-item strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+    .complete-info-item p {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.4;
+    }
+
     /* Footer Actions */
     .wizard-footer {
       position: fixed;
@@ -647,9 +1527,10 @@
       left: 0;
       right: 0;
       padding: 16px 24px;
-      background: var(--bg);
+      background: #FAFAF9;
       border-top: 1px solid var(--border);
-      z-index: 99;
+      box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.08);
+      z-index: 1000;
     }
     .footer-content {
       max-width: 640px;
@@ -694,7 +1575,7 @@
     @media (max-width: 600px) {
       h1 { font-size: 28px; }
       h2 { font-size: 24px; }
-      .wizard-container { padding: 80px 16px 100px; }
+      .wizard-container { padding: 70px 16px 90px; }
       .wizard-header { padding: 12px 16px; }
       .wizard-footer { padding: 12px 16px; }
     }
@@ -702,12 +1583,12 @@
 </head>
 <body>
   <!-- Progress Bar -->
-  <div class="progress-bar">
+  <div class="progress-bar" style="position: fixed; top: 0; left: 0; right: 0; z-index: 10000;">
     <div class="progress-fill" id="progressFill" style="width: 10%"></div>
   </div>
 
   <!-- Header -->
-  <header class="wizard-header">
+  <header class="wizard-header" style="position: fixed; top: 4px; left: 0; right: 0; z-index: 9999; background: #FAFAF9;">
     <button class="back-btn hidden" id="backBtn" onclick="goBack()">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Back
@@ -745,12 +1626,35 @@
             <p>Enter your existing custody terms to create your plan</p>
           </div>
         </div>
+
+        <!-- Load existing plan -->
+        <div class="plan-code-section">
+          <div class="plan-code-divider"><span>or</span></div>
+          <div class="plan-code-box" id="planCodeBox">
+            <div class="plan-code-header" onclick="togglePlanCodeInput()">
+              <span>Have a family code?</span>
+              <svg class="plan-code-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+            </div>
+            <div class="plan-code-input-area" id="planCodeInputArea">
+              <input type="text" id="planCodeInput" class="plan-code-input" placeholder="Enter your family code" maxlength="10">
+              <button class="plan-code-load-btn" onclick="loadPlanFromCode()">Load Plan</button>
+              <p class="plan-code-error" id="planCodeError"></p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Screen 2: Children -->
       <div class="screen" id="screen-children">
-        <h2>Tell us about your children</h2>
-        <p class="subtitle">This helps us personalize schedule recommendations.</p>
+        <h2>Your children</h2>
+        <p class="subtitle">How many children do you co-parent? Names and details are optional.</p>
+
+        <div class="input-group" style="margin-bottom: 24px;">
+          <label class="input-label">Family name <span style="color: var(--text-muted); font-weight: 400;">(optional)</span></label>
+          <input type="text" class="text-input" id="familyNameInput" placeholder="e.g., Smith Family"
+            value="" onchange="updateFamilyName(this.value)">
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">This is how your family will appear in the app</p>
+        </div>
 
         <p class="input-label">How many children?</p>
         <div class="chip-group" id="childCountChips">
@@ -810,6 +1714,10 @@
               <div class="legend-dot coparent"></div>
               <span>Co-parent's time</span>
             </div>
+            <div class="legend-item" id="summerLegend" style="display: none;">
+              <div class="legend-dot" style="box-shadow: inset 0 0 0 2px rgba(255, 180, 0, 0.8); background: transparent;"></div>
+              <span>Summer</span>
+            </div>
           </div>
         </div>
       </div>
@@ -817,16 +1725,95 @@
       <!-- Screen 5: Holidays -->
       <div class="screen" id="screen-holidays">
         <h2>Holiday schedule</h2>
-        <p class="subtitle">Assign custody for major holidays.</p>
+        <p class="subtitle">Which holidays do you alternate?</p>
 
-        <p class="input-label">Quick setup</p>
-        <div class="chip-group">
-          <button class="chip selected" onclick="setHolidayPreset('alternate')">Alternate all</button>
-          <button class="chip" onclick="setHolidayPreset('split')">Fixed split</button>
-          <button class="chip" onclick="setHolidayPreset('custom')">Customize each</button>
+        <!-- Year picker -->
+        <div class="year-picker">
+          <button class="year-nav" onclick="changePreviewYear(-1)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <span class="year-display" id="previewYearDisplay"></span>
+          <button class="year-nav" onclick="changePreviewYear(1)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
         </div>
 
+        <p class="holiday-hint">Holidays rotate each year. Tap the swap button to change who has each holiday.</p>
+
+        <!-- Tracked holidays -->
         <div class="holiday-section" id="holidaySection"></div>
+
+        <!-- Custom Holiday Creator -->
+        <div class="custom-holiday-card" id="customHolidayCard">
+          <div class="custom-holiday-header" onclick="toggleCustomHolidayForm()">
+            <div class="custom-holiday-left">
+              <div class="custom-holiday-icon">⭐</div>
+              <div class="custom-holiday-text">
+                <div class="custom-holiday-title">Create custom holiday</div>
+                <div class="custom-holiday-subtitle">Spring Break, birthdays, etc.</div>
+              </div>
+            </div>
+            <svg class="custom-holiday-chevron" id="customFormChevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+          </div>
+          <div class="custom-holiday-fields" id="customHolidayFields">
+            <input type="text" id="customHolidayName" placeholder="Holiday name (e.g., Spring Break)" class="custom-holiday-input">
+            <div class="custom-holiday-date-field">
+              <label>Start date</label>
+              <div style="display: flex; gap: 8px;">
+                <select class="text-input" id="customHolidayStartMonth" style="flex: 1;">
+                  <option value="">Month</option>
+                  <option value="1">January</option>
+                  <option value="2">February</option>
+                  <option value="3">March</option>
+                  <option value="4">April</option>
+                  <option value="5">May</option>
+                  <option value="6">June</option>
+                  <option value="7">July</option>
+                  <option value="8">August</option>
+                  <option value="9">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+                <select class="text-input" id="customHolidayStartDay" style="width: 80px;">
+                  <option value="">Day</option>
+                  <script>for(let i=1;i<=31;i++)document.write(`<option value="${i}">${i}</option>`)</script>
+                </select>
+              </div>
+            </div>
+            <div class="custom-holiday-date-field">
+              <label>End date <span class="optional-label">(optional)</span></label>
+              <div style="display: flex; gap: 8px;">
+                <select class="text-input" id="customHolidayEndMonth" style="flex: 1;">
+                  <option value="">Month</option>
+                  <option value="1">January</option>
+                  <option value="2">February</option>
+                  <option value="3">March</option>
+                  <option value="4">April</option>
+                  <option value="5">May</option>
+                  <option value="6">June</option>
+                  <option value="7">July</option>
+                  <option value="8">August</option>
+                  <option value="9">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+                </select>
+                <select class="text-input" id="customHolidayEndDay" style="width: 80px;">
+                  <option value="">Day</option>
+                  <script>for(let i=1;i<=31;i++)document.write(`<option value="${i}">${i}</option>`)</script>
+                </select>
+              </div>
+            </div>
+            <button class="custom-holiday-save-btn" onclick="saveCustomHoliday()">Add Holiday</button>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="holiday-divider"><span>Add more holidays</span></div>
+
+        <!-- Available holidays (always visible) -->
+        <div class="available-holidays-section" id="availableHolidaysList"></div>
       </div>
 
       <!-- Screen 6: Summer -->
@@ -835,65 +1822,81 @@
         <p class="subtitle">Do you have a different schedule during summer?</p>
 
         <div class="chip-group">
-          <button class="chip" onclick="setSummerSchedule(false)">No, same schedule</button>
+          <button class="chip selected" onclick="setSummerSchedule(false)">No, same schedule</button>
           <button class="chip" onclick="setSummerSchedule(true)">Yes, different schedule</button>
         </div>
 
         <div id="summerOptions" style="display: none;">
           <div class="input-group" style="margin-top: 24px;">
             <label class="input-label">Summer starts</label>
-            <input type="date" class="text-input" id="summerStart">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <select class="text-input" id="summerStartWeek" style="flex: 1; min-width: 120px;" onchange="updateSummerStart()">
+                <option value="1">First</option>
+                <option value="2" selected>Second</option>
+                <option value="3">Third</option>
+                <option value="4">Fourth</option>
+                <option value="5">Last</option>
+              </select>
+              <select class="text-input" id="summerStartWeekday" style="flex: 1; min-width: 120px;" onchange="updateSummerStart()">
+                <option value="0">Sunday</option>
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5" selected>Friday</option>
+                <option value="6">Saturday</option>
+              </select>
+              <select class="text-input" id="summerStartMonth" style="flex: 1; min-width: 120px;" onchange="updateSummerStart()">
+                <option value="5">May</option>
+                <option value="6" selected>June</option>
+                <option value="7">July</option>
+              </select>
+            </div>
           </div>
           <div class="input-group">
             <label class="input-label">Summer ends</label>
-            <input type="date" class="text-input" id="summerEnd">
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              <select class="text-input" id="summerEndWeek" style="flex: 1; min-width: 120px;" onchange="updateSummerEnd()">
+                <option value="1">First</option>
+                <option value="2">Second</option>
+                <option value="3" selected>Third</option>
+                <option value="4">Fourth</option>
+                <option value="5">Last</option>
+              </select>
+              <select class="text-input" id="summerEndWeekday" style="flex: 1; min-width: 120px;" onchange="updateSummerEnd()">
+                <option value="0" selected>Sunday</option>
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+              </select>
+              <select class="text-input" id="summerEndMonth" style="flex: 1; min-width: 120px;" onchange="updateSummerEnd()">
+                <option value="7">July</option>
+                <option value="8" selected>August</option>
+                <option value="9">September</option>
+              </select>
+            </div>
           </div>
           <p class="input-label">Summer pattern</p>
+          <div class="chip-group" id="summerPatternChips">
+            <button class="chip selected" onclick="setSummerPattern('week-on-week-off')">Alternating weeks</button>
+            <button class="chip" onclick="setSummerPattern('2-week-on-2-week-off')">Alternating 2 weeks</button>
+          </div>
+          <p class="input-label" style="margin-top: 16px;">Who starts summer?</p>
           <div class="chip-group">
-            <button class="chip selected" onclick="setSummerPattern('same')">Same as regular</button>
-            <button class="chip" onclick="setSummerPattern('alternating-weeks')">Alternating weeks</button>
-            <button class="chip" onclick="setSummerPattern('alternating-2weeks')">Alternating 2 weeks</button>
+            <button class="chip selected" onclick="setSummerStartsWith('you')">You</button>
+            <button class="chip" onclick="setSummerStartsWith('coparent')">Co-parent</button>
           </div>
         </div>
       </div>
 
-      <!-- Screen 7: Expenses -->
-      <div class="screen" id="screen-expenses">
-        <h2>Expense sharing</h2>
-        <p class="subtitle">How do you split shared expenses?</p>
-
-        <p class="input-label">Split ratio</p>
-        <div class="chip-group" id="expenseChips">
-          <button class="chip selected" onclick="setExpenseSplit(50)">50/50</button>
-          <button class="chip" onclick="setExpenseSplit(60)">60/40</button>
-          <button class="chip" onclick="setExpenseSplit(70)">70/30</button>
-          <button class="chip" onclick="setExpenseSplit(0)">Custom</button>
-        </div>
-
-        <div class="split-bar">
-          <div class="split-fill" id="splitFill" style="width: 50%"></div>
-        </div>
-        <div class="split-labels">
-          <span>You: <strong id="yourSplit">50%</strong></span>
-          <span>Co-parent: <strong id="coparentSplit">50%</strong></span>
-        </div>
-
-        <div class="input-group" style="margin-top: 32px;">
-          <p class="input-label">Categories to track (optional)</p>
-          <div class="chip-group">
-            <button class="chip selected" onclick="toggleCategory(this, 'medical')">Medical</button>
-            <button class="chip selected" onclick="toggleCategory(this, 'education')">Education</button>
-            <button class="chip" onclick="toggleCategory(this, 'activities')">Activities</button>
-            <button class="chip" onclick="toggleCategory(this, 'clothing')">Clothing</button>
-            <button class="chip" onclick="toggleCategory(this, 'childcare')">Childcare</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Screen 8: Review -->
+      <!-- Screen 7: Review -->
       <div class="screen" id="screen-review">
-        <h2>Review your plan</h2>
-        <p class="subtitle">Make sure everything looks right before saving.</p>
+        <p class="section-label">Your Custody Plan</p>
+        <h2>Plan Summary</h2>
+        <p class="subtitle">Review your details below. Tap Edit to make changes.</p>
 
         <div id="reviewContent"></div>
 
@@ -928,6 +1931,14 @@
               <div class="legend-dot coparent"></div>
               <span>Co-parent's time</span>
             </div>
+            <div class="legend-item" id="reviewSummerLegend" style="display: none;">
+              <div class="legend-dot" style="box-shadow: inset 0 0 0 2px rgba(255, 180, 0, 0.8); background: transparent;"></div>
+              <span>Summer</span>
+            </div>
+            <div class="legend-item" id="reviewHolidayLegend" style="display: none;">
+              <div class="legend-dot" style="box-shadow: inset 0 0 0 2px #E53935; background: transparent;"></div>
+              <span>Holiday</span>
+            </div>
           </div>
         </div>
       </div>
@@ -935,7 +1946,7 @@
       <!-- Screen 9: Email Capture -->
       <div class="screen" id="screen-email">
         <h2>Save your plan</h2>
-        <p class="subtitle">Enter your email to get your Plan Code and a copy of your plan.</p>
+        <p class="subtitle">Enter your email to get your Family Code and a copy of your plan.</p>
 
         <div class="input-group">
           <label class="input-label">Email address</label>
@@ -947,41 +1958,64 @@
         </div>
       </div>
 
-      <!-- Screen 10: Plan Code -->
+      <!-- Screen 10: Family Code -->
       <div class="screen" id="screen-complete">
         <h2>Your plan is ready!</h2>
-        <p class="subtitle">Use this code to import your plan into the Clearly app.</p>
+        <p class="subtitle">We've emailed your plan. Save your family code to make changes anytime.</p>
 
         <div class="plan-code-card">
-          <p class="plan-code-label">Your Plan Code</p>
+          <p class="plan-code-label">Your Family Code</p>
           <p class="plan-code" id="planCode">ABC12345</p>
           <button class="copy-btn" onclick="copyPlanCode()">Copy Code</button>
         </div>
 
-        <div class="summary-section">
-          <h3 style="margin-bottom: 16px;">Next steps</h3>
-          <ol style="padding-left: 20px; line-height: 2;">
-            <li>Download Clearly from the App Store</li>
-            <li>Create your account</li>
-            <li>Enter your Plan Code during setup</li>
-            <li>Your schedule is automatically configured!</li>
-          </ol>
+        <div class="complete-actions">
+          <button class="btn btn-secondary" onclick="downloadPDF()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </button>
+          <a href="https://apps.apple.com/app/clearly" target="_blank" class="btn btn-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Get the App
+          </a>
         </div>
 
-        <a href="https://apps.apple.com/app/clearly" target="_blank" class="btn btn-primary" style="display: block; margin-top: 24px;">
-          Download Clearly
-        </a>
-
-        <p style="text-align: center; margin-top: 16px; font-size: 14px; color: var(--text-secondary);">
-          Share this code with your co-parent so you both have the same schedule.
-        </p>
+        <div class="complete-info">
+          <div class="complete-info-item">
+            <div class="complete-info-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12" y2="18"/></svg>
+            </div>
+            <div>
+              <strong>Get started</strong>
+              <p>Download the Clearly app and enter this code to set up your family</p>
+            </div>
+          </div>
+          <div class="complete-info-item">
+            <div class="complete-info-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <div>
+              <strong>Share with co-parent</strong>
+              <p>They use the same code to join your family with matching settings</p>
+            </div>
+          </div>
+          <div class="complete-info-item">
+            <div class="complete-info-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div>
+              <strong>One code, everything synced</strong>
+              <p>Schedule, holidays, summer — all configured and ready to go</p>
+            </div>
+          </div>
+        </div>
       </div>
 
     </div>
   </main>
 
   <!-- Footer -->
-  <footer class="wizard-footer" id="wizardFooter">
+  <footer class="wizard-footer" id="wizardFooter" style="position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; background: #FAFAF9;">
     <div class="footer-content">
       <button class="btn btn-primary" id="continueBtn" onclick="nextScreen()">Continue</button>
     </div>
@@ -991,131 +2025,485 @@
     // ==========================================
     // STATE MANAGEMENT
     // ==========================================
+    // State structure matches plan_templates schema
     const state = {
       currentScreen: 0,
       pathway: null, // 'explore' or 'agreement'
+
+      // Family
+      familyName: '',
+
+      // Children: [{name: string, birthdate: string}]
       children: [],
-      schedule: null,
+
+      // Schedule
+      schedule: null, // custody_schedule: "5-2-2-5", "week-on-week-off", etc.
       scheduleConfig: {
-        startsWith: 'you',
-        referenceDate: null,
-        exchangeTime: '18:00'
+        // For fixed schedules (2-2-3, 5-2-2-5, 3-4-4-3)
+        week1Parent: 'you',       // week1_parent: who is "A" in Week 1
+        week1IsoParity: 'odd',    // week1_iso_parity: which ISO parity is Week 1
+
+        // For rolling schedules (week-on-week-off, 4-3, etc.)
+        anchorDate: null,         // custody_anchor_date: YYYY-MM-DD
+        anchorPosition: 0,        // custody_anchor_position: day in cycle
+        anchorParent: 'you',      // custody_anchor_parent: who has custody on anchor
+
+        // Common
+        exchangeTime: '15:00',    // exchange_time: "HH:MM"
+        customPattern: null,      // custom_pattern: [1, 0, 1, ...] for custom schedules
+        customWeeks: [[1, 1, 1, 1, 1, 0, 0]] // For custom builder UI: weekdays you, weekends coparent
       },
-      holidays: {},
+
+      // Holidays - matches app structure exactly
+      // Each holiday has myYears: 'odd' or 'even' - which years YOU get it
+      trackedHolidays: ['thanksgiving', 'christmas-eve', 'christmas-day', 'new-years'], // Default tracked (matches app)
+      holidayCustody: {}, // { "holiday-id": "odd" | "even" } - which years YOU get this holiday
+      holidayScopes: {}, // { "holiday-id": "day_only" | "weekend_attached" } - whether holiday includes weekend
+      customHolidays: [], // [{ id, name, myYears }] - user-created holidays
+
+      // Summer schedule
       summer: {
-        enabled: false,
-        startDate: null,
-        endDate: null,
-        pattern: 'same'
+        enabled: false,           // summer_schedule_enabled
+        startMonth: 6,            // summer_start_month (1-12)
+        startWeek: 2,             // summer_start_week (1-5)
+        startWeekday: 5,          // summer_start_weekday (0-6, 0=Sunday)
+        endMonth: 8,              // summer_end_month
+        endWeek: 3,               // summer_end_week
+        endWeekday: 0,            // summer_end_weekday
+        pattern: 'week-on-week-off', // summer_custody_pattern
+        startsWith: 'you'         // summer_starts_with
       },
+
+      // Expenses
       expenses: {
-        split: 50,
-        categories: ['medical', 'education']
+        splitYou: 50,             // expense_split_you (0-100)
+        splitCoparent: 50,        // expense_split_coparent
+        categories: ['medical', 'education'], // expense_categories
+        reimbursementMethod: null,  // reimbursement_method
+        reimbursementHandle: null   // reimbursement_handle
       },
-      email: '',
-      name: '',
-      planCode: null
+
+      // Contact info
+      email: '',                  // email
+      firstName: '',              // first_name
+
+      // Result
+      planCode: null              // share_code (returned from server)
     };
 
     const screens = [
       'welcome', 'children', 'schedule', 'configure',
-      'holidays', 'summer', 'expenses', 'review', 'email', 'complete'
+      'holidays', 'summer', 'review', 'email', 'complete'
     ];
 
+    // Track if user is editing from review screen
+    let editingFromReview = false;
+
     // ==========================================
-    // SCHEDULE PATTERNS
+    // SCHEDULE PATTERNS (from app's patterns.js)
     // ==========================================
+    // Two systems: Fixed-exchange (ISO week parity) and Rolling (anchor date)
+
+    // Fixed-exchange schedules use ISO week parity lookup
+    const FIXED_SCHEDULE_LOOKUP = {
+      '2-2-3': {
+        // Index: 0=Mon, 1=Tue, 2=Wed, 3=Thu, 4=Fri, 5=Sat, 6=Sun
+        week1: ['A', 'A', 'B', 'B', 'A', 'A', 'A'],  // Odd ISO weeks
+        week2: ['B', 'B', 'A', 'A', 'B', 'B', 'B'],  // Even ISO weeks
+        exchangeDays: [0, 2, 4], // Mon, Wed, Fri
+      },
+      '5-2-2-5': {
+        week1: ['A', 'A', 'B', 'B', 'A', 'A', 'A'],
+        week2: ['A', 'A', 'B', 'B', 'B', 'B', 'B'],
+        exchangeDays: [0, 2, 4], // Mon, Wed, Fri
+      },
+      '3-4-4-3': {
+        week1: ['A', 'A', 'A', 'B', 'B', 'B', 'B'],
+        week2: ['A', 'A', 'A', 'A', 'B', 'B', 'B'],
+        exchangeDays: [2, 3], // Wed, Thu
+      },
+    };
+
+    const FIXED_PATTERNS = ['2-2-3', '5-2-2-5', '3-4-4-3'];
+    const ROLLING_PATTERNS = ['week-on-week-off', '4-3', 'primary-every-other-weekend', 'every-other-weekend-only'];
+
+    // Rolling patterns use anchor date + position
+    const ROLLING_PATTERN_ARRAYS = {
+      'week-on-week-off': [1,1,1,1,1,1,1, 0,0,0,0,0,0,0], // 14 days
+      '4-3': [1,1,1,1,0,0,0], // 7 days
+      'primary-every-other-weekend': [1,1,1,1,1,0,0, 1,1,1,1,1,1,1], // 14 days
+      'every-other-weekend-only': [0,0,0,0,0,1,1, 0,0,0,0,0,0,0], // 14 days
+    };
+
     const schedulePatterns = [
       {
-        id: 'week-on-week-off',
-        name: 'Week On / Week Off',
+        id: '2-2-3',
+        name: '2-2-3',
         split: '50/50',
-        pattern: [1,1,1,1,1,1,1,0,0,0,0,0,0,0], // 1 = you, 0 = coparent
-        description: 'Alternating full weeks. Great for older kids who benefit from stability.',
-        forAges: ['6-12', '13-17']
+        type: 'fixed',
+        description: 'Mon-Tue with you, Wed-Thu with co-parent, Fri-Sun alternates. Frequent exchanges.',
+        forAges: ['under-2', '2-5'],
+        miniPattern: ['A','A','B','B','A','A','A', 'B','B','A','A','B','B','B']
       },
       {
         id: '5-2-2-5',
         name: '5-2-2-5',
         split: '50/50',
-        pattern: [1,1,1,1,1,0,0,0,0,1,1,0,0,0],
-        description: 'You have Mon-Fri one week, then just the weekend the next.',
-        forAges: ['2-5', '6-12']
-      },
-      {
-        id: '2-2-3',
-        name: '2-2-3',
-        split: '50/50',
-        pattern: [1,1,0,0,1,1,1,0,0,1,1,0,0,0],
-        description: 'Shorter rotations mean more frequent contact with both parents.',
-        forAges: ['under-2', '2-5']
+        type: 'fixed',
+        description: 'Longer stretches: 5 days, then 2, then 2, then 5. Fixed exchange days.',
+        forAges: ['2-5', '6-12'],
+        miniPattern: ['A','A','B','B','A','A','A', 'A','A','B','B','B','B','B']
       },
       {
         id: '3-4-4-3',
         name: '3-4-4-3',
         split: '50/50',
-        pattern: [1,1,1,0,0,0,0,0,0,0,0,1,1,1],
-        description: 'Balanced mid-week and weekend time for both parents.',
-        forAges: ['2-5', '6-12']
+        type: 'fixed',
+        description: 'Split mid-week: 3 days, then 4 days. Predictable exchanges.',
+        forAges: ['2-5', '6-12'],
+        miniPattern: ['A','A','A','B','B','B','B', 'A','A','A','A','B','B','B']
+      },
+      {
+        id: 'week-on-week-off',
+        name: 'Week On / Week Off',
+        split: '50/50',
+        type: 'rolling',
+        description: 'Alternating full weeks. Great for older kids who benefit from stability.',
+        forAges: ['6-12', '13-17'],
+        miniPattern: [1,1,1,1,1,1,1, 0,0,0,0,0,0,0]
       },
       {
         id: '4-3',
         name: '4-3',
         split: '57/43',
-        pattern: [1,1,1,1,0,0,0],
-        description: 'One parent has 4 days, the other has 3. Repeats weekly.',
-        forAges: ['6-12', '13-17']
+        type: 'rolling',
+        description: 'One parent has Mon-Thu, the other Fri-Sun. Repeats weekly.',
+        forAges: ['6-12', '13-17'],
+        miniPattern: [1,1,1,1,0,0,0]
       },
       {
-        id: 'every-other-weekend',
-        name: 'Every Other Weekend',
-        split: '70/30',
-        pattern: [0,0,0,0,0,1,1,0,0,0,0,0,0,0],
-        description: 'Primary parent has weekdays, other parent has every other weekend.',
-        forAges: ['under-2', '2-5']
+        id: 'primary-every-other-weekend',
+        name: 'Primary + Every Other Weekend',
+        split: '79/21',
+        type: 'rolling',
+        description: 'Primary parent has most time, other parent gets every other weekend.',
+        forAges: ['under-2', '2-5'],
+        miniPattern: [1,1,1,1,1,0,0, 1,1,1,1,1,1,1]
       },
       {
-        id: 'every-weekend',
-        name: 'Every Weekend',
-        split: '71/29',
-        pattern: [0,0,0,0,0,1,1],
-        description: 'Primary parent has weekdays, other parent has every weekend.',
-        forAges: ['6-12', '13-17']
+        id: 'every-other-weekend-only',
+        name: 'Every Other Weekend Only',
+        split: '21/79',
+        type: 'rolling',
+        description: 'You get every other weekend (Fri-Sun). Co-parent has primary custody.',
+        forAges: ['6-12', '13-17'],
+        miniPattern: [0,0,0,0,0,1,1, 0,0,0,0,0,0,0]
       },
       {
         id: 'custom',
         name: 'Custom Schedule',
         split: 'Varies',
-        pattern: [],
+        type: 'custom',
         description: 'Build your own pattern day by day.',
-        forAges: []
+        forAges: [],
+        miniPattern: []
       }
     ];
 
+    // ISO Week Number calculation
+    function getISOWeekNumber(date) {
+      const d = new Date(date);
+      d.setHours(0, 0, 0, 0);
+      d.setDate(d.getDate() + 4 - (d.getDay() || 7));
+      const yearStart = new Date(d.getFullYear(), 0, 1);
+      return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
+    }
+
+    function getISOWeekParity(date) {
+      return getISOWeekNumber(date) % 2 === 1 ? 'odd' : 'even';
+    }
+
+    // Day of week: 0=Mon, 1=Tue, ..., 6=Sun (ISO style, not JS style)
+    function getISODayOfWeek(date) {
+      const jsDay = date.getDay(); // 0=Sun, 1=Mon, ..., 6=Sat
+      return jsDay === 0 ? 6 : jsDay - 1; // Convert to 0=Mon, 6=Sun
+    }
+
     // ==========================================
-    // HOLIDAYS DATA
+    // HOLIDAYS DATA (matches app's holidays.js exactly)
     // ==========================================
-    const holidays = {
-      major: [
-        { id: 'thanksgiving', name: 'Thanksgiving' },
-        { id: 'christmas-eve', name: 'Christmas Eve' },
-        { id: 'christmas-day', name: 'Christmas Day' },
-        { id: 'new-years-eve', name: "New Year's Eve" },
-        { id: 'new-years-day', name: "New Year's Day" }
+    const HOLIDAY_CATALOG = {
+      // Custody holidays - families typically alternate these
+      custody: [
+        { id: 'new-years', name: "New Year's Day", emoji: '🎊', defaultScope: 'day_only' },
+        { id: 'easter', name: 'Easter', emoji: '🐣', defaultScope: 'weekend_attached' },
+        { id: 'memorial-day', name: 'Memorial Day', emoji: '🎖️', defaultScope: 'weekend_attached' },
+        { id: 'july-4th', name: 'July 4th', emoji: '🎆', defaultScope: 'weekend_attached' },
+        { id: 'labor-day', name: 'Labor Day', emoji: '⚒️', defaultScope: 'weekend_attached' },
+        { id: 'halloween', name: 'Halloween', emoji: '🎃', defaultScope: 'day_only' },
+        { id: 'thanksgiving', name: 'Thanksgiving', emoji: '🦃', defaultScope: 'weekend_attached' },
+        { id: 'christmas-eve', name: 'Christmas Eve', emoji: '🎄', defaultScope: 'day_only' },
+        { id: 'christmas-day', name: 'Christmas Day', emoji: '🎁', defaultScope: 'day_only' },
+        { id: 'new-years-eve', name: "New Year's Eve", emoji: '🎆', defaultScope: 'day_only' },
       ],
-      spring: [
-        { id: 'easter', name: 'Easter' },
-        { id: 'memorial-day', name: 'Memorial Day' },
-        { id: 'july-4th', name: 'July 4th' },
-        { id: 'labor-day', name: 'Labor Day' }
+      // School holidays - display only by default
+      school: [
+        { id: 'mlk-day', name: 'MLK Day', emoji: '🕊️', defaultScope: 'weekend_attached' },
+        { id: 'presidents-day', name: "Presidents' Day", emoji: '🇺🇸', defaultScope: 'weekend_attached' },
+        { id: 'juneteenth', name: 'Juneteenth', emoji: '⭐', defaultScope: 'day_only' },
+        { id: 'indigenous-peoples-day', name: 'Indigenous Peoples Day', emoji: '🪶', defaultScope: 'weekend_attached' },
+        { id: 'veterans-day', name: 'Veterans Day', emoji: '🎖️', defaultScope: 'day_only' },
       ],
-      other: [
-        { id: 'halloween', name: 'Halloween' },
-        { id: 'mothers-day', name: "Mother's Day" },
-        { id: 'fathers-day', name: "Father's Day" },
-        { id: 'spring-break', name: 'Spring Break' }
-      ]
     };
+
+    // Get all holidays as flat array
+    function getAllHolidays() {
+      return [...HOLIDAY_CATALOG.custody, ...HOLIDAY_CATALOG.school];
+    }
+
+    // Get custody holidays only (ones families typically alternate)
+    function getCustodyHolidays() {
+      return HOLIDAY_CATALOG.custody;
+    }
+
+    // Get school holidays only
+    function getSchoolHolidays() {
+      return HOLIDAY_CATALOG.school;
+    }
+
+    // Preview year for holidays
+    let previewYear = new Date().getFullYear();
+
+    // Get which years "you" get this holiday (default to 'odd')
+    function getMyYearsForHoliday(holidayId) {
+      return state.holidayCustody[holidayId] || 'odd';
+    }
+
+    // Get custody for a holiday in a specific year
+    function getCustodyForHolidayInYear(holidayId, year) {
+      const myYears = getMyYearsForHoliday(holidayId);
+      const isOddYear = year % 2 === 1;
+      if (myYears === 'odd') {
+        return isOddYear ? 'you' : 'coparent';
+      } else {
+        return isOddYear ? 'coparent' : 'you';
+      }
+    }
+
+    // Helper: Get nth weekday of month (matches app's holidays.js)
+    function getNthWeekdayOfMonthDate(year, month, dayOfWeek, n) {
+      const firstDay = new Date(year, month, 1);
+      const firstDayOfWeek = firstDay.getDay();
+      let firstOccurrence = 1 + ((dayOfWeek - firstDayOfWeek + 7) % 7);
+      const date = firstOccurrence + (n - 1) * 7;
+      return new Date(year, month, date);
+    }
+
+    // Helper: Get last weekday of month
+    function getLastWeekdayOfMonthDate(year, month, dayOfWeek) {
+      const lastDay = new Date(year, month + 1, 0);
+      const lastDayOfWeek = lastDay.getDay();
+      const daysBack = (lastDayOfWeek - dayOfWeek + 7) % 7;
+      return new Date(year, month + 1, -daysBack);
+    }
+
+    // Helper: Get Easter Sunday (Computus algorithm - matches app)
+    function getEasterSunday(year) {
+      const a = year % 19;
+      const b = Math.floor(year / 100);
+      const c = year % 100;
+      const d = Math.floor(b / 4);
+      const e = b % 4;
+      const f = Math.floor((b + 8) / 25);
+      const g = Math.floor((b - f + 1) / 3);
+      const h = (19 * a + b - d - g + 15) % 30;
+      const i = Math.floor(c / 4);
+      const k = c % 4;
+      const l = (32 + 2 * e + 2 * i - h - k) % 7;
+      const m = Math.floor((a + 11 * h + 22 * l) / 451);
+      const month = Math.floor((h + l - 7 * m + 114) / 31) - 1;
+      const day = ((h + l - 7 * m + 114) % 31) + 1;
+      return new Date(year, month, day);
+    }
+
+    // Get actual holiday date for a year (matches app's getHolidayDate)
+    function getHolidayDate(holidayId, year) {
+      switch (holidayId) {
+        case 'new-years': return new Date(year, 0, 1);
+        case 'mlk-day': return getNthWeekdayOfMonthDate(year, 0, 1, 3); // 3rd Monday Jan
+        case 'presidents-day': return getNthWeekdayOfMonthDate(year, 1, 1, 3); // 3rd Monday Feb
+        case 'easter': return getEasterSunday(year);
+        case 'memorial-day': return getLastWeekdayOfMonthDate(year, 4, 1); // Last Monday May
+        case 'juneteenth': return new Date(year, 5, 19);
+        case 'july-4th': return new Date(year, 6, 4);
+        case 'labor-day': return getNthWeekdayOfMonthDate(year, 8, 1, 1); // 1st Monday Sep
+        case 'indigenous-peoples-day': return getNthWeekdayOfMonthDate(year, 9, 1, 2); // 2nd Monday Oct
+        case 'halloween': return new Date(year, 9, 31);
+        case 'veterans-day': return new Date(year, 10, 11);
+        case 'thanksgiving': return getNthWeekdayOfMonthDate(year, 10, 4, 4); // 4th Thursday Nov
+        case 'christmas-eve': return new Date(year, 11, 24);
+        case 'christmas-day': return new Date(year, 11, 25);
+        case 'new-years-eve': return new Date(year, 11, 31);
+        default: return null;
+      }
+    }
+
+    // Format holiday date for display
+    function getHolidayDateStr(holidayId, year) {
+      const date = getHolidayDate(holidayId, year);
+      if (!date) return '';
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return `${months[date.getMonth()]} ${date.getDate()}`;
+    }
+
+    function changePreviewYear(delta) {
+      previewYear += delta;
+      document.getElementById('previewYearDisplay').textContent = previewYear;
+      renderHolidays();
+    }
+
+    // Get holiday scope (day_only or weekend_attached) for a holiday
+    function getHolidayScope(holidayId) {
+      // Check user override first
+      if (state.holidayScopes[holidayId]) {
+        return state.holidayScopes[holidayId];
+      }
+      // Fall back to catalog default
+      const holiday = getAllHolidays().find(h => h.id === holidayId);
+      return holiday?.defaultScope || 'day_only';
+    }
+
+    // Check if a holiday can include weekend (not already on weekend, not school-only)
+    function canHolidayIncludeWeekend(holidayId, year) {
+      const date = getHolidayDate(holidayId, year);
+      if (!date) return false;
+      const dayOfWeek = date.getDay();
+      // If holiday falls on Sat (6) or Sun (0), it's already a weekend
+      if (dayOfWeek === 0 || dayOfWeek === 6) return false;
+      return true;
+    }
+
+    // Expand a holiday date to include weekend if scope is weekend_attached
+    function expandHolidayDates(holidayDate, scope) {
+      const dates = [new Date(holidayDate)];
+      if (scope !== 'weekend_attached') return dates;
+
+      const dayOfWeek = holidayDate.getDay();
+      // If already weekend, just return the day
+      if (dayOfWeek === 0 || dayOfWeek === 6) return dates;
+
+      // Find the nearest weekend
+      // For Mon/Tue, attach to previous weekend (Sat-Sun before)
+      // For Wed, no weekend attached (could go either way)
+      // For Thu/Fri, attach to following weekend (Sat-Sun after)
+      if (dayOfWeek === 1) { // Monday - attach previous Sat-Sun
+        const sat = new Date(holidayDate);
+        sat.setDate(sat.getDate() - 2);
+        const sun = new Date(holidayDate);
+        sun.setDate(sun.getDate() - 1);
+        dates.push(sat, sun);
+      } else if (dayOfWeek === 2) { // Tuesday - attach previous Sat-Sun
+        const sat = new Date(holidayDate);
+        sat.setDate(sat.getDate() - 3);
+        const sun = new Date(holidayDate);
+        sun.setDate(sun.getDate() - 2);
+        dates.push(sat, sun);
+      } else if (dayOfWeek === 4) { // Thursday - attach following Sat-Sun
+        const sat = new Date(holidayDate);
+        sat.setDate(sat.getDate() + 2);
+        const sun = new Date(holidayDate);
+        sun.setDate(sun.getDate() + 3);
+        dates.push(sat, sun);
+      } else if (dayOfWeek === 5) { // Friday - attach following Sat-Sun
+        const sat = new Date(holidayDate);
+        sat.setDate(sat.getDate() + 1);
+        const sun = new Date(holidayDate);
+        sun.setDate(sun.getDate() + 2);
+        dates.push(sat, sun);
+      }
+      return dates;
+    }
+
+    // Check if a specific date is a holiday (returns holiday info or null)
+    function getHolidayForDate(date) {
+      const year = date.getFullYear();
+      const month = date.getMonth();
+      const day = date.getDate();
+
+      // Check tracked standard holidays - check current and adjacent years for year boundary holidays
+      const yearsToCheck = [year];
+      // For January, also check previous year (for holidays like New Year's Eve)
+      if (month === 0) yearsToCheck.push(year - 1);
+      // For December, also check next year (for holidays like New Year's Day)
+      if (month === 11) yearsToCheck.push(year + 1);
+
+      for (const holidayId of state.trackedHolidays) {
+        const holiday = getAllHolidays().find(h => h.id === holidayId);
+        if (!holiday) continue;
+
+        for (const checkYear of yearsToCheck) {
+          const holidayDate = getHolidayDate(holidayId, checkYear);
+          if (!holidayDate) continue;
+
+          const scope = getHolidayScope(holidayId);
+          const expandedDates = expandHolidayDates(holidayDate, scope);
+
+          for (const d of expandedDates) {
+            if (d.getFullYear() === year && d.getMonth() === month && d.getDate() === day) {
+              const custody = getCustodyForHolidayInYear(holidayId, checkYear);
+              return {
+                id: holidayId,
+                name: holiday.name,
+                emoji: holiday.emoji,
+                custody: custody,
+                isPrimaryDate: holidayDate.getMonth() === month && holidayDate.getDate() === day
+              };
+            }
+          }
+        }
+      }
+
+      // Check custom holidays - check multiple years
+      if (state.customHolidays && state.customHolidays.length > 0) {
+        for (const customHoliday of state.customHolidays) {
+          // Check all years stored in the custom holiday
+          const yearsInHoliday = customHoliday.years ? Object.keys(customHoliday.years) : [];
+
+          for (const storedYear of yearsInHoliday) {
+            const yearData = customHoliday.years[storedYear];
+            if (!yearData || !yearData.startMonth || !yearData.startDay) continue;
+
+            const startDate = new Date(parseInt(storedYear), yearData.startMonth - 1, yearData.startDay);
+            const endDate = yearData.endMonth && yearData.endDay
+              ? new Date(parseInt(storedYear), yearData.endMonth - 1, yearData.endDay)
+              : startDate;
+
+            // Normalize dates for comparison
+            startDate.setHours(0, 0, 0, 0);
+            endDate.setHours(23, 59, 59, 999);
+            const checkDate = new Date(date);
+            checkDate.setHours(12, 0, 0, 0);
+
+            if (checkDate >= startDate && checkDate <= endDate) {
+              const myYears = customHoliday.myYears || 'odd';
+              const custodyYear = parseInt(storedYear);
+              const custody = (myYears === 'odd' && custodyYear % 2 === 1) || (myYears === 'even' && custodyYear % 2 === 0)
+                ? 'you' : 'coparent';
+              return {
+                id: customHoliday.id,
+                name: customHoliday.name,
+                emoji: '⭐',
+                custody: custody,
+                isCustom: true,
+                isPrimaryDate: startDate.getMonth() === month && startDate.getDate() === day
+              };
+            }
+          }
+        }
+      }
+
+      return null;
+    }
 
     // ==========================================
     // NAVIGATION
@@ -1146,7 +2534,7 @@
         footer.style.display = 'none';
       } else {
         footer.style.display = 'block';
-        continueBtn.textContent = state.currentScreen === screens.length - 2 ? 'Get Plan Code' : 'Continue';
+        continueBtn.textContent = state.currentScreen === screens.length - 2 ? 'Get Family Code' : 'Continue';
       }
 
       // Update continue button state
@@ -1162,6 +2550,7 @@
           enabled = state.pathway !== null;
           break;
         case 'children':
+          // Only require at least one child - names/birthdates/family name are optional
           enabled = state.children.length > 0;
           break;
         case 'schedule':
@@ -1181,8 +2570,16 @@
         // Handle special cases before advancing
         if (screens[state.currentScreen] === 'email') {
           state.email = document.getElementById('emailInput').value;
-          state.name = document.getElementById('nameInput').value;
-          generatePlanCode();
+          state.firstName = document.getElementById('nameInput').value;
+          submitPlan();
+          return; // submitPlan will advance the screen after success
+        }
+
+        // If editing from review, go back to review instead of next screen
+        if (editingFromReview) {
+          editingFromReview = false;
+          goToScreen('review');
+          return;
         }
 
         state.currentScreen++;
@@ -1194,15 +2591,19 @@
 
     function goBack() {
       if (state.currentScreen > 0) {
+        // Clear edit mode if user goes back manually
+        editingFromReview = false;
         state.currentScreen--;
         updateUI();
         window.scrollTo(0, 0);
       }
     }
 
-    function goToScreen(screenName) {
+    function goToScreen(screenName, fromReview = false) {
       const index = screens.indexOf(screenName);
       if (index !== -1) {
+        // Track if we're editing from review so Continue returns there
+        editingFromReview = fromReview;
         state.currentScreen = index;
         initScreen(screenName);
         updateUI();
@@ -1224,6 +2625,7 @@
           break;
         case 'holidays':
           renderHolidays();
+          renderAvailableHolidays();
           break;
         case 'review':
           renderReview();
@@ -1242,9 +2644,152 @@
       });
       event.currentTarget.classList.add('selected');
       updateContinueButton();
+    }
 
-      // Auto-advance after selection
-      setTimeout(() => nextScreen(), 300);
+    function togglePlanCodeInput() {
+      const box = document.getElementById('planCodeBox');
+      box.classList.toggle('expanded');
+      if (box.classList.contains('expanded')) {
+        document.getElementById('planCodeInput').focus();
+      }
+    }
+
+    async function loadPlanFromCode() {
+      const code = document.getElementById('planCodeInput').value.trim().toUpperCase();
+      const errorEl = document.getElementById('planCodeError');
+      const btn = event.target;
+
+      if (!code) {
+        errorEl.textContent = 'Please enter a family code';
+        errorEl.classList.add('visible');
+        return;
+      }
+
+      errorEl.classList.remove('visible');
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+
+      try {
+        const response = await fetch(`https://dwncravjhkbclbuzijra.supabase.co/functions/v1/get-plan-template?code=${code}`);
+
+        if (!response.ok) {
+          throw new Error('Plan not found');
+        }
+
+        const data = await response.json();
+
+        if (!data || !data.plan_data) {
+          throw new Error('Invalid plan data');
+        }
+
+        // Load plan data into state
+        loadPlanIntoState(data.plan_data);
+
+        // Store the plan code so we can update instead of create new
+        state.planCode = code;
+
+        // Go to review screen
+        goToScreen('review');
+
+      } catch (error) {
+        errorEl.textContent = 'Plan not found. Please check your code.';
+        errorEl.classList.add('visible');
+        btn.disabled = false;
+        btn.textContent = 'Load Plan';
+      }
+    }
+
+    function loadPlanIntoState(planData) {
+      // Family name
+      if (planData.family_name) {
+        state.familyName = planData.family_name;
+        const familyNameInput = document.getElementById('familyNameInput');
+        if (familyNameInput) {
+          familyNameInput.value = planData.family_name;
+        }
+      }
+
+      // Children
+      if (planData.children) {
+        state.children = planData.children;
+      }
+
+      // Schedule
+      if (planData.custody_schedule) {
+        state.schedule = planData.custody_schedule;
+      }
+
+      // Schedule config
+      if (planData.week1_parent) {
+        state.scheduleConfig.week1Parent = planData.week1_parent;
+      }
+      if (planData.week1_iso_parity) {
+        state.scheduleConfig.week1IsoParity = planData.week1_iso_parity;
+      }
+      if (planData.custody_anchor_date) {
+        state.scheduleConfig.anchorDate = planData.custody_anchor_date;
+      }
+      if (planData.custody_anchor_position !== undefined) {
+        state.scheduleConfig.anchorPosition = planData.custody_anchor_position;
+      }
+      if (planData.custody_anchor_parent) {
+        state.scheduleConfig.anchorParent = planData.custody_anchor_parent;
+      }
+      if (planData.exchange_time) {
+        state.scheduleConfig.exchangeTime = planData.exchange_time;
+      }
+      if (planData.custom_pattern) {
+        state.scheduleConfig.customPattern = planData.custom_pattern;
+      }
+
+      // Holidays
+      if (planData.holidays) {
+        state.trackedHolidays = planData.holidays.map(h => h.id).filter(id => !id.startsWith('custom-'));
+        state.customHolidays = planData.holidays.filter(h => h.id.startsWith('custom-'));
+        // Set holiday custody from myYears
+        planData.holidays.forEach(h => {
+          if (h.myYears) {
+            state.holidayCustody[h.id] = h.myYears;
+          }
+        });
+      }
+
+      // Summer
+      if (planData.summer_enabled !== undefined) {
+        state.summer.enabled = planData.summer_enabled;
+      }
+      if (planData.summer_start) {
+        state.summer.startWeek = planData.summer_start.week;
+        state.summer.startDay = planData.summer_start.day;
+      }
+      if (planData.summer_end) {
+        state.summer.endWeek = planData.summer_end.week;
+        state.summer.endDay = planData.summer_end.day;
+      }
+      if (planData.summer_pattern) {
+        state.summer.pattern = planData.summer_pattern;
+      }
+      if (planData.summer_start_parent) {
+        state.summer.startParent = planData.summer_start_parent;
+      }
+
+      // Expenses
+      if (planData.expense_split_you !== undefined) {
+        state.expenses.splitYou = planData.expense_split_you;
+        state.expenses.splitCoparent = 100 - planData.expense_split_you;
+      }
+      if (planData.expense_categories) {
+        state.expenses.categories = planData.expense_categories;
+      }
+      if (planData.payment_method) {
+        state.expenses.paymentMethod = planData.payment_method;
+      }
+      if (planData.payment_handle) {
+        state.expenses.paymentHandle = planData.payment_handle;
+      }
+
+      // Set pathway to agreement since they have a plan
+      state.pathway = 'agreement';
     }
 
     // ==========================================
@@ -1258,7 +2803,7 @@
 
       // Adjust children array
       while (state.children.length < count) {
-        state.children.push({ name: '', age: null });
+        state.children.push({ name: '', birthdate: '' });
       }
       while (state.children.length > count) {
         state.children.pop();
@@ -1270,10 +2815,28 @@
 
     function renderChildrenList() {
       const container = document.getElementById('childrenList');
-      container.innerHTML = state.children.map((child, index) => `
+      const currentYear = new Date().getFullYear();
+      const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                      'July', 'August', 'September', 'October', 'November', 'December'];
+
+      container.innerHTML = state.children.map((child, index) => {
+        // Parse existing birthdate if present
+        let selectedMonth = '';
+        let selectedDay = '';
+        let selectedYear = '';
+        if (child.birthdate) {
+          const parts = child.birthdate.split('-');
+          if (parts.length === 3) {
+            selectedYear = parts[0];
+            selectedMonth = parseInt(parts[1], 10).toString();
+            selectedDay = parseInt(parts[2], 10).toString();
+          }
+        }
+
+        return `
         <div class="child-card">
           <div class="child-card-header">
-            <div class="child-avatar">${index + 1}</div>
+            <div class="child-avatar">${child.name ? child.name.charAt(0).toUpperCase() : index + 1}</div>
             <span class="child-number">Child ${index + 1}</span>
             ${state.children.length > 1 ? `
               <button class="remove-child" onclick="removeChild(${index})">
@@ -1281,30 +2844,77 @@
               </button>
             ` : ''}
           </div>
-          <div class="input-group" style="margin-bottom: 16px;">
-            <label class="input-label">Name (optional)</label>
-            <input type="text" class="text-input" placeholder="Child's name"
-              value="${child.name}"
-              onchange="updateChildName(${index}, this.value)">
-          </div>
-          <p class="input-label">Age</p>
-          <div class="chip-group">
-            <button class="chip ${child.age === 'under-2' ? 'selected' : ''}" onclick="setChildAge(${index}, 'under-2')">Under 2</button>
-            <button class="chip ${child.age === '2-5' ? 'selected' : ''}" onclick="setChildAge(${index}, '2-5')">2-5</button>
-            <button class="chip ${child.age === '6-12' ? 'selected' : ''}" onclick="setChildAge(${index}, '6-12')">6-12</button>
-            <button class="chip ${child.age === '13-17' ? 'selected' : ''}" onclick="setChildAge(${index}, '13-17')">13-17</button>
+          <div class="child-fields">
+            <div class="input-group">
+              <label class="input-label">Name <span style="color: var(--text-muted); font-weight: 400;">(optional)</span></label>
+              <input type="text" class="text-input" placeholder="Child's first name"
+                value="${child.name || ''}"
+                onchange="updateChildName(${index}, this.value)">
+            </div>
+            <div class="input-group">
+              <label class="input-label">Birthdate <span style="color: var(--text-muted); font-weight: 400;">(optional)</span></label>
+              <div class="child-birthdate-row">
+                <select class="text-input" onchange="updateChildBirthdatePart(${index}, 'month', this.value)">
+                  <option value="">Month</option>
+                  ${months.map((m, i) => `<option value="${i + 1}" ${selectedMonth === (i + 1).toString() ? 'selected' : ''}>${m}</option>`).join('')}
+                </select>
+                <select class="text-input" onchange="updateChildBirthdatePart(${index}, 'day', this.value)">
+                  <option value="">Day</option>
+                  ${Array.from({length: 31}, (_, i) => `<option value="${i + 1}" ${selectedDay === (i + 1).toString() ? 'selected' : ''}>${i + 1}</option>`).join('')}
+                </select>
+                <select class="text-input" onchange="updateChildBirthdatePart(${index}, 'year', this.value)">
+                  <option value="">Year</option>
+                  ${Array.from({length: 25}, (_, i) => {
+                    const year = currentYear - i;
+                    return `<option value="${year}" ${selectedYear === year.toString() ? 'selected' : ''}>${year}</option>`;
+                  }).join('')}
+                </select>
+              </div>
+            </div>
           </div>
         </div>
-      `).join('');
+      `}).join('');
+    }
+
+    function updateChildBirthdatePart(index, part, value) {
+      // Get current birthdate parts
+      let month = '', day = '', year = '';
+      if (state.children[index].birthdate) {
+        const parts = state.children[index].birthdate.split('-');
+        if (parts.length === 3) {
+          year = parts[0];
+          month = parts[1];
+          day = parts[2];
+        }
+      }
+
+      // Update the changed part
+      if (part === 'month') month = value.padStart(2, '0');
+      if (part === 'day') day = value.padStart(2, '0');
+      if (part === 'year') year = value;
+
+      // Only set birthdate if all parts are present
+      if (month && day && year) {
+        state.children[index].birthdate = `${year}-${month}-${day}`;
+      } else {
+        state.children[index].birthdate = '';
+      }
+
+      updateContinueButton();
+    }
+
+    function updateFamilyName(name) {
+      state.familyName = name;
     }
 
     function updateChildName(index, name) {
       state.children[index].name = name;
+      renderChildrenList(); // Update avatar
+      updateContinueButton();
     }
 
-    function setChildAge(index, age) {
-      state.children[index].age = age;
-      renderChildrenList();
+    function updateChildBirthdate(index, birthdate) {
+      state.children[index].birthdate = birthdate;
       updateContinueButton();
     }
 
@@ -1312,6 +2922,28 @@
       state.children.splice(index, 1);
       renderChildrenList();
       updateContinueButton();
+    }
+
+    function getChildAge(birthdate) {
+      if (!birthdate) return null;
+      const birth = new Date(birthdate);
+      const today = new Date();
+      let age = today.getFullYear() - birth.getFullYear();
+      const monthDiff = today.getMonth() - birth.getMonth();
+      if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birth.getDate())) {
+        age--;
+      }
+      return age;
+    }
+
+    function getAgeGroupFromBirthdate(birthdate) {
+      const age = getChildAge(birthdate);
+      if (age === null) return null;
+      if (age < 2) return 'under-2';
+      if (age <= 5) return '2-5';
+      if (age <= 12) return '6-12';
+      if (age <= 17) return '13-17';
+      return '18+';
     }
 
     // ==========================================
@@ -1327,44 +2959,84 @@
           'Based on your family, here are some options that work well.';
       }
 
-      // Filter/sort patterns based on children ages if exploring
+      // Filter/sort patterns based on children age groups if exploring
       let patterns = [...schedulePatterns];
       if (state.pathway === 'explore' && state.children.length > 0) {
-        const ages = state.children.map(c => c.age).filter(Boolean);
+        const ageGroups = state.children.map(c => getAgeGroupFromBirthdate(c.birthdate)).filter(Boolean);
         // Sort to show recommended patterns first
         patterns.sort((a, b) => {
-          const aMatch = ages.some(age => a.forAges.includes(age));
-          const bMatch = ages.some(age => b.forAges.includes(age));
+          const aMatch = ageGroups.some(ag => a.forAges.includes(ag));
+          const bMatch = ageGroups.some(ag => b.forAges.includes(ag));
           if (aMatch && !bMatch) return -1;
           if (!aMatch && bMatch) return 1;
           return 0;
         });
       }
 
-      container.innerHTML = patterns.map(pattern => `
-        <div class="schedule-card ${state.schedule === pattern.id ? 'selected' : ''}"
-          onclick="selectSchedule('${pattern.id}')">
-          <h4>${pattern.name}</h4>
-          <p class="split">${pattern.split}</p>
-          ${pattern.pattern.length > 0 ? `
-            <div class="mini-calendar">
-              ${pattern.pattern.slice(0, 14).map(day => `
-                <div class="mini-day ${day === 1 ? 'you' : 'coparent'}"></div>
-              `).join('')}
+      container.innerHTML = patterns.map(pattern => {
+        // Build mini calendar with split exchange day visualization
+        let miniCalHtml = '';
+        if (pattern.miniPattern && pattern.miniPattern.length > 0) {
+          const dayLabels = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+
+          // Helper to render a day cell with split exchange visualization
+          const renderDay = (val, prevVal) => {
+            const isYou = val === 1 || val === 'A';
+            const prevIsYou = prevVal === 1 || prevVal === 'A';
+            const isExchange = val !== prevVal;
+
+            if (isExchange) {
+              return `<div class="mini-day exchange">
+                <div class="exchange-top ${prevIsYou ? 'you' : 'coparent'}"></div>
+                <div class="exchange-bottom ${isYou ? 'you' : 'coparent'}"></div>
+              </div>`;
+            }
+            return `<div class="mini-day ${isYou ? 'you' : 'coparent'}"></div>`;
+          };
+
+          miniCalHtml = `
+            <div class="mini-calendar-container">
+              <div class="mini-calendar-header">
+                ${dayLabels.map(label => `<span>${label}</span>`).join('')}
+              </div>
+              <div class="mini-week">
+                ${[0,1,2,3,4,5,6].map(i => {
+                  const val = pattern.miniPattern[i];
+                  const prevVal = i > 0 ? pattern.miniPattern[i - 1] : pattern.miniPattern[pattern.miniPattern.length - 1];
+                  return renderDay(val, prevVal);
+                }).join('')}
+              </div>
+              ${pattern.miniPattern.length > 7 ? `
+                <div class="mini-week">
+                  ${[0,1,2,3,4,5,6].map(i => {
+                    const val = pattern.miniPattern[i + 7];
+                    const prevVal = pattern.miniPattern[i + 6];
+                    return renderDay(val, prevVal);
+                  }).join('')}
+                </div>
+              ` : ''}
             </div>
-          ` : ''}
-          <p style="font-size: 13px; color: var(--text-secondary); margin-top: 12px;">${pattern.description}</p>
-        </div>
-      `).join('');
+          `;
+        }
+
+        return `
+          <div class="schedule-card ${state.schedule === pattern.id ? 'selected' : ''}"
+            onclick="selectSchedule('${pattern.id}')">
+            <div class="schedule-card-header">
+              <h4>${pattern.name}</h4>
+              <span class="split">${pattern.split}</span>
+            </div>
+            ${miniCalHtml}
+            <p class="schedule-card-description">${pattern.description}</p>
+          </div>
+        `;
+      }).join('');
     }
 
     function selectSchedule(scheduleId) {
       state.schedule = scheduleId;
       renderScheduleGrid();
       updateContinueButton();
-
-      // Auto-advance after selection
-      setTimeout(() => nextScreen(), 300);
     }
 
     // ==========================================
@@ -1377,44 +3049,262 @@
       const container = document.getElementById('configureOptions');
       const pattern = schedulePatterns.find(p => p.id === state.schedule);
 
-      if (!pattern || pattern.id === 'custom') {
-        container.innerHTML = `
-          <p style="color: var(--text-secondary);">Custom schedule builder coming soon. For now, select a preset pattern.</p>
-        `;
+      if (!pattern) {
+        container.innerHTML = '';
         return;
       }
 
-      container.innerHTML = `
-        <div class="input-group">
-          <p class="input-label">Who has the children first?</p>
-          <div class="chip-group">
-            <button class="chip ${state.scheduleConfig.startsWith === 'you' ? 'selected' : ''}"
-              onclick="setStartsWith('you')">You</button>
-            <button class="chip ${state.scheduleConfig.startsWith === 'coparent' ? 'selected' : ''}"
-              onclick="setStartsWith('coparent')">Co-parent</button>
+      // CUSTOM SCHEDULE: Show week-based builder
+      if (pattern.type === 'custom') {
+        renderCustomScheduleBuilder(container);
+        return;
+      }
+
+      const isFixed = FIXED_PATTERNS.includes(state.schedule);
+      const isRolling = ROLLING_PATTERNS.includes(state.schedule);
+
+      if (isFixed) {
+        // FIXED SCHEDULES: Toggle week parity, set who is "A" in Week 1
+        container.innerHTML = `
+          <div class="input-group">
+            <p class="input-label">Who has custody at the start of Week 1 (Mon-Tue)?</p>
+            <div class="chip-group">
+              <button class="chip ${state.scheduleConfig.week1Parent === 'you' ? 'selected' : ''}"
+                onclick="setWeek1Parent('you')">You</button>
+              <button class="chip ${state.scheduleConfig.week1Parent === 'coparent' ? 'selected' : ''}"
+                onclick="setWeek1Parent('coparent')">Co-parent</button>
+            </div>
           </div>
-        </div>
-        <div class="input-group">
-          <label class="input-label">Exchange time</label>
-          <input type="time" class="text-input" value="${state.scheduleConfig.exchangeTime}"
-            onchange="setExchangeTime(this.value)" style="max-width: 200px;">
-        </div>
-      `;
+          <div class="input-group">
+            <p class="input-label" style="margin-bottom: 4px;">Shift the schedule</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
+              If the pattern doesn't match your current schedule, click to swap weeks.
+            </p>
+            <button class="chip" onclick="toggleWeekParity()">
+              Swap Week 1 ↔ Week 2
+            </button>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Exchange time</label>
+            <input type="time" class="text-input" value="${state.scheduleConfig.exchangeTime}"
+              onchange="setExchangeTime(this.value)" style="max-width: 200px;">
+          </div>
+        `;
+      } else if (isRolling) {
+        // ROLLING SCHEDULES: Click a day in the calendar to set anchor
+        const anchorDateStr = state.scheduleConfig.anchorDate || 'not set';
+        container.innerHTML = `
+          <div class="input-group">
+            <p class="input-label">Who has the children on your start date?</p>
+            <div class="chip-group">
+              <button class="chip ${state.scheduleConfig.anchorParent === 'you' ? 'selected' : ''}"
+                onclick="setRollingAnchorParent('you')">You</button>
+              <button class="chip ${state.scheduleConfig.anchorParent === 'coparent' ? 'selected' : ''}"
+                onclick="setRollingAnchorParent('coparent')">Co-parent</button>
+            </div>
+          </div>
+          <div class="input-group">
+            <p class="input-label" style="margin-bottom: 4px;">Set your start date</p>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">
+              Click any day in the calendar below to set when your schedule starts.
+              ${state.scheduleConfig.anchorDate ? `<br><strong>Currently set to: ${formatDateNice(state.scheduleConfig.anchorDate)}</strong>` : ''}
+            </p>
+          </div>
+          <div class="input-group">
+            <label class="input-label">Exchange time</label>
+            <input type="time" class="text-input" value="${state.scheduleConfig.exchangeTime}"
+              onchange="setExchangeTime(this.value)" style="max-width: 200px;">
+          </div>
+        `;
+      }
     }
 
-    function setStartsWith(who) {
-      state.scheduleConfig.startsWith = who;
+    function setWeek1Parent(who) {
+      state.scheduleConfig.week1Parent = who;
       renderConfigureOptions();
       renderCalendar();
+    }
+
+    function toggleWeekParity() {
+      state.scheduleConfig.week1IsoParity = state.scheduleConfig.week1IsoParity === 'odd' ? 'even' : 'odd';
+      renderCalendar();
+    }
+
+    function setRollingAnchorParent(who) {
+      state.scheduleConfig.anchorParent = who;
+      renderConfigureOptions();
+      renderCalendar();
+    }
+
+    function formatDateNice(dateStr) {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
     }
 
     function setExchangeTime(time) {
       state.scheduleConfig.exchangeTime = time;
     }
 
+    // ==========================================
+    // CUSTOM SCHEDULE BUILDER
+    // ==========================================
+    const DAY_LABELS = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+    const MAX_CUSTOM_WEEKS = 4;
+
+    function renderCustomScheduleBuilder(container) {
+      const weeks = state.scheduleConfig.customWeeks;
+
+      let weeksHtml = weeks.map((week, weekIndex) => {
+        const daysHtml = week.map((custody, dayIndex) => {
+          const isYou = custody === 1;
+          // Determine if this is an exchange day (custody changes from previous day)
+          const prevDay = dayIndex === 0
+            ? (weekIndex === 0 ? weeks[weeks.length - 1][6] : weeks[weekIndex - 1][6])
+            : week[dayIndex - 1];
+          const isExchange = prevDay !== custody;
+          const prevIsYou = prevDay === 1;
+
+          if (isExchange) {
+            // Exchange day - split color
+            return `
+              <div class="custom-day exchange" onclick="toggleCustomDay(${weekIndex}, ${dayIndex})">
+                <div class="exchange-top ${prevIsYou ? 'you' : 'coparent'}"></div>
+                <div class="exchange-bottom ${isYou ? 'you' : 'coparent'}"></div>
+                <span class="day-letter" style="color: var(--text);">${DAY_LABELS[dayIndex]}</span>
+              </div>
+            `;
+          }
+
+          // Regular day
+          return `
+            <div class="custom-day ${isYou ? 'you' : 'coparent'}" onclick="toggleCustomDay(${weekIndex}, ${dayIndex})">
+              <span class="day-letter">${DAY_LABELS[dayIndex]}</span>
+            </div>
+          `;
+        }).join('');
+
+        return `
+          <div class="custom-week">
+            <div class="custom-week-header">
+              <span class="custom-week-label">Week ${weekIndex + 1}</span>
+              ${weeks.length > 1 ? `
+                <button class="custom-week-remove" onclick="removeCustomWeek(${weekIndex})">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                </button>
+              ` : ''}
+            </div>
+            <div class="custom-days">${daysHtml}</div>
+          </div>
+        `;
+      }).join('');
+
+      // Add week button
+      const addWeekBtn = weeks.length < MAX_CUSTOM_WEEKS ? `
+        <button class="add-week-btn" onclick="addCustomWeek()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          Add Week ${weeks.length + 1}
+        </button>
+      ` : '';
+
+      // Build anchor date info
+      const anchorInfo = state.scheduleConfig.anchorDate
+        ? `<strong>Starting: ${formatDateNice(state.scheduleConfig.anchorDate)}</strong>`
+        : '<strong>Click a day in the calendar below to set when this pattern starts</strong>';
+
+      container.innerHTML = `
+        <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 16px;">
+          Build your pattern week by week. Tap any day to toggle between you and co-parent.
+        </p>
+
+        <div class="custom-builder">
+          ${weeksHtml}
+          ${addWeekBtn}
+
+          <div class="custom-summary">
+            This ${weeks.length * 7}-day pattern repeats continuously
+          </div>
+
+          <div class="custom-legend">
+            <div class="custom-legend-item">
+              <div class="custom-legend-dot you"></div>
+              <span>You</span>
+            </div>
+            <div class="custom-legend-item">
+              <div class="custom-legend-dot coparent"></div>
+              <span>Co-parent</span>
+            </div>
+            <div class="custom-legend-item">
+              <div class="custom-legend-dot exchange"><span></span><span></span></div>
+              <span>Exchange</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group" style="margin-top: 24px;">
+          <p class="input-label" style="margin-bottom: 4px;">Set your start date</p>
+          <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">
+            ${anchorInfo}
+          </p>
+        </div>
+
+        <div class="input-group" style="margin-top: 16px;">
+          <label class="input-label">Exchange time</label>
+          <input type="time" class="text-input" value="${state.scheduleConfig.exchangeTime}"
+            onchange="setExchangeTime(this.value)" style="max-width: 200px;">
+        </div>
+      `;
+
+      // Update the pattern for calendar preview
+      updateCustomPattern();
+    }
+
+    function toggleCustomDay(weekIndex, dayIndex) {
+      const weeks = state.scheduleConfig.customWeeks;
+      weeks[weekIndex][dayIndex] = weeks[weekIndex][dayIndex] === 1 ? 0 : 1;
+      renderCustomScheduleBuilder(document.getElementById('configureOptions'));
+      renderCalendar();
+    }
+
+    function addCustomWeek() {
+      const weeks = state.scheduleConfig.customWeeks;
+      if (weeks.length < MAX_CUSTOM_WEEKS) {
+        // New week starts as opposite of last day of previous week
+        const lastWeek = weeks[weeks.length - 1];
+        const lastDay = lastWeek[6];
+        const newWeek = Array(7).fill(lastDay === 1 ? 0 : 1);
+        weeks.push(newWeek);
+        renderCustomScheduleBuilder(document.getElementById('configureOptions'));
+        renderCalendar();
+      }
+    }
+
+    function removeCustomWeek(weekIndex) {
+      const weeks = state.scheduleConfig.customWeeks;
+      if (weeks.length > 1) {
+        weeks.splice(weekIndex, 1);
+        renderCustomScheduleBuilder(document.getElementById('configureOptions'));
+        renderCalendar();
+      }
+    }
+
+    function updateCustomPattern() {
+      // Flatten weeks into pattern array
+      state.scheduleConfig.customPattern = state.scheduleConfig.customWeeks.flat();
+    }
+
     function renderCalendar() {
       const container = document.getElementById('calendarDays');
       const monthLabel = document.getElementById('calendarMonth');
+      const pattern = schedulePatterns.find(p => p.id === state.schedule);
+      const isFixed = pattern && FIXED_PATTERNS.includes(state.schedule);
+      const isRolling = pattern && ROLLING_PATTERNS.includes(state.schedule);
+      const isCustom = pattern && pattern.type === 'custom';
+
+      // Show/hide summer legend
+      const summerLegend = document.getElementById('summerLegend');
+      if (summerLegend) {
+        summerLegend.style.display = state.summer.enabled ? 'flex' : 'none';
+      }
 
       const date = new Date(calendarYear, calendarMonth, 1);
       monthLabel.textContent = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
@@ -1433,30 +3323,284 @@
       // Days of the month
       for (let day = 1; day <= daysInMonth; day++) {
         const currentDate = new Date(calendarYear, calendarMonth, day);
-        const custody = getCustodyForDate(currentDate);
+        const result = getCustodyForDate(currentDate);
+        const custody = result.custody;
+        const isExchange = result.isExchange;
+        const isSummer = result.isSummer || false;
         const isToday = currentDate.toDateString() === today.toDateString();
 
-        html += `<div class="calendar-day ${custody} ${isToday ? 'today' : ''}">${day}</div>`;
+        // For rolling and custom schedules, clicking a day sets it as anchor
+        const needsAnchor = isRolling || isCustom;
+        const clickHandler = needsAnchor ? `onclick="setAnchorDate('${currentDate.toISOString().split('T')[0]}')"` : '';
+        const clickable = needsAnchor ? 'clickable' : '';
+        const summerClass = isSummer ? 'summer' : '';
+
+        if (isExchange) {
+          // Exchange day: show split cell
+          const prevDate = new Date(currentDate);
+          prevDate.setDate(prevDate.getDate() - 1);
+          const prevResult = getCustodyForDate(prevDate);
+          const prevCustody = prevResult.custody;
+
+          html += `<div class="calendar-day exchange ${isToday ? 'today' : ''} ${clickable} ${summerClass}" ${clickHandler}>
+            <div class="exchange-top ${prevCustody}"></div>
+            <div class="exchange-bottom ${custody}"></div>
+            <span class="day-number">${day}</span>
+          </div>`;
+        } else {
+          html += `<div class="calendar-day ${custody} ${isToday ? 'today' : ''} ${clickable} ${summerClass}" ${clickHandler}>${day}</div>`;
+        }
       }
 
       container.innerHTML = html;
     }
 
+    function setAnchorDate(dateStr) {
+      const date = new Date(dateStr);
+      state.scheduleConfig.anchorDate = dateStr;
+
+      // Calculate anchor position based on day of week
+      const dayOfWeek = date.getDay(); // 0=Sun, 1=Mon
+      // For week patterns starting Monday: Sun=6, Mon=0, Tue=1, etc.
+      state.scheduleConfig.anchorPosition = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+
+      // Re-render the configure options to show updated anchor date
+      renderConfigureOptions();
+      renderCalendar();
+    }
+
+    // Helper: Get the Nth weekday of a month (e.g., 2nd Friday of June)
+    // week: 1-4 for first through fourth, 5 for last
+    // weekday: 0=Sunday, 1=Monday, ..., 6=Saturday
+    function getNthWeekdayOfMonth(year, month, week, weekday) {
+      if (week === 5) {
+        // Last occurrence of weekday in month
+        const lastDay = new Date(year, month + 1, 0); // Last day of month
+        const lastDayOfWeek = lastDay.getDay();
+        let diff = lastDayOfWeek - weekday;
+        if (diff < 0) diff += 7;
+        return new Date(year, month, lastDay.getDate() - diff);
+      } else {
+        // Nth occurrence
+        const firstDay = new Date(year, month, 1);
+        const firstDayOfWeek = firstDay.getDay();
+        let diff = weekday - firstDayOfWeek;
+        if (diff < 0) diff += 7;
+        const firstOccurrence = 1 + diff;
+        const nthOccurrence = firstOccurrence + (week - 1) * 7;
+        return new Date(year, month, nthOccurrence);
+      }
+    }
+
+    // Check if a date is within the summer schedule period
+    function isInSummerPeriod(date) {
+      if (!state.summer.enabled) return false;
+
+      const year = date.getFullYear();
+
+      // Calculate summer start date (e.g., 2nd Friday of June)
+      const summerStart = getNthWeekdayOfMonth(
+        year,
+        state.summer.startMonth - 1, // Convert to 0-indexed
+        state.summer.startWeek,
+        state.summer.startWeekday
+      );
+
+      // Calculate summer end date
+      const summerEnd = getNthWeekdayOfMonth(
+        year,
+        state.summer.endMonth - 1,
+        state.summer.endWeek,
+        state.summer.endWeekday
+      );
+
+      // Normalize dates for comparison (strip time)
+      const checkDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      const startDate = new Date(summerStart.getFullYear(), summerStart.getMonth(), summerStart.getDate());
+      const endDate = new Date(summerEnd.getFullYear(), summerEnd.getMonth(), summerEnd.getDate());
+
+      return checkDate >= startDate && checkDate <= endDate;
+    }
+
+    // Summer pattern arrays
+    const SUMMER_PATTERN_ARRAYS = {
+      'week-on-week-off': [1,1,1,1,1,1,1, 0,0,0,0,0,0,0], // 14 days
+      '2-week-on-2-week-off': [1,1,1,1,1,1,1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0,0,0,0,0,0,0], // 28 days
+    };
+
+    // Get custody for summer schedule
+    function getSummerCustodyForDate(date) {
+      const summerPattern = state.summer.pattern;
+      const patternArray = SUMMER_PATTERN_ARRAYS[summerPattern];
+      if (!patternArray) return { custody: 'coparent', isExchange: false };
+
+      const year = date.getFullYear();
+
+      // Get summer start date as anchor
+      const summerStart = getNthWeekdayOfMonth(
+        year,
+        state.summer.startMonth - 1,
+        state.summer.startWeek,
+        state.summer.startWeekday
+      );
+
+      // Calculate days from summer start
+      const msPerDay = 24 * 60 * 60 * 1000;
+      const targetUTC = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+      const anchorUTC = Date.UTC(summerStart.getFullYear(), summerStart.getMonth(), summerStart.getDate());
+      const daysDiff = Math.round((targetUTC - anchorUTC) / msPerDay);
+
+      // Find position in pattern
+      const patternLength = patternArray.length;
+      const targetPosition = ((daysDiff % patternLength) + patternLength) % patternLength;
+      const patternValue = patternArray[targetPosition];
+
+      // Map to actual parents based on who starts summer
+      const firstParentHasCustody = patternValue === 1;
+      const custody = (state.summer.startsWith === 'you')
+        ? (firstParentHasCustody ? 'you' : 'coparent')
+        : (firstParentHasCustody ? 'coparent' : 'you');
+
+      // Check if exchange day
+      const prevPosition = ((daysDiff - 1) % patternLength + patternLength) % patternLength;
+      const prevPatternValue = patternArray[prevPosition];
+      const isExchange = patternValue !== prevPatternValue;
+
+      return { custody, isExchange, isSummer: true };
+    }
+
+    // Get custody for a specific date - handles both fixed and rolling schedules
     function getCustodyForDate(date) {
-      const pattern = schedulePatterns.find(p => p.id === state.schedule);
-      if (!pattern || pattern.pattern.length === 0) return 'coparent';
-
-      // Calculate day index based on a reference date
-      const referenceDate = new Date(2026, 0, 1); // Jan 1, 2026
-      const daysDiff = Math.floor((date - referenceDate) / (1000 * 60 * 60 * 24));
-      const patternIndex = ((daysDiff % pattern.pattern.length) + pattern.pattern.length) % pattern.pattern.length;
-
-      let isYou = pattern.pattern[patternIndex] === 1;
-      if (state.scheduleConfig.startsWith === 'coparent') {
-        isYou = !isYou;
+      // Priority 1: Check for holidays first (holidays override everything)
+      const holiday = getHolidayForDate(date);
+      if (holiday) {
+        // Check if this is an exchange from the previous day
+        const prevDate = new Date(date);
+        prevDate.setDate(prevDate.getDate() - 1);
+        const prevHoliday = getHolidayForDate(prevDate);
+        const isExchange = !prevHoliday || prevHoliday.custody !== holiday.custody;
+        return {
+          custody: holiday.custody,
+          isExchange: isExchange,
+          isHoliday: true,
+          holiday: holiday
+        };
       }
 
-      return isYou ? 'you' : 'coparent';
+      // Priority 2: Check for summer schedule
+      if (state.summer.enabled && isInSummerPeriod(date)) {
+        return getSummerCustodyForDate(date);
+      }
+
+      const scheduleId = state.schedule;
+      if (!scheduleId) return { custody: 'coparent', isExchange: false };
+
+      const pattern = schedulePatterns.find(p => p.id === scheduleId);
+      if (!pattern) return { custody: 'coparent', isExchange: false };
+
+      let custody, isExchange = false;
+
+      if (FIXED_PATTERNS.includes(scheduleId)) {
+        // FIXED SCHEDULE: Use ISO week parity lookup
+        const lookup = FIXED_SCHEDULE_LOOKUP[scheduleId];
+        const parity = getISOWeekParity(date);
+        const dayIndex = getISODayOfWeek(date); // 0=Mon, 6=Sun
+
+        // Determine which week pattern to use based on parity setting
+        const useWeek1 = (parity === state.scheduleConfig.week1IsoParity);
+        const weekPattern = useWeek1 ? lookup.week1 : lookup.week2;
+        const parentCode = weekPattern[dayIndex]; // 'A' or 'B'
+
+        // Map 'A'/'B' to actual parents
+        const isA = parentCode === 'A';
+        custody = (state.scheduleConfig.week1Parent === 'you')
+          ? (isA ? 'you' : 'coparent')
+          : (isA ? 'coparent' : 'you');
+
+        // Check if this is an exchange day
+        isExchange = lookup.exchangeDays.includes(dayIndex);
+
+      } else if (ROLLING_PATTERNS.includes(scheduleId)) {
+        // ROLLING SCHEDULE: Use anchor date + position
+        const patternArray = ROLLING_PATTERN_ARRAYS[scheduleId];
+        if (!patternArray) return { custody: 'coparent', isExchange: false };
+
+        // Default anchor to today if not set
+        const anchorDate = state.scheduleConfig.anchorDate
+          ? new Date(state.scheduleConfig.anchorDate)
+          : new Date();
+        const anchorPosition = state.scheduleConfig.anchorPosition || 0;
+
+        // Calculate days difference
+        const msPerDay = 24 * 60 * 60 * 1000;
+        const targetUTC = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+        const anchorUTC = Date.UTC(anchorDate.getFullYear(), anchorDate.getMonth(), anchorDate.getDate());
+        const daysDiff = Math.round((targetUTC - anchorUTC) / msPerDay);
+
+        // Find position in pattern
+        const patternLength = patternArray.length;
+        const targetPosition = ((anchorPosition + daysDiff) % patternLength + patternLength) % patternLength;
+        const patternValue = patternArray[targetPosition];
+
+        // Map to actual parents
+        const firstParentHasCustody = patternValue === 1;
+        custody = (state.scheduleConfig.anchorParent === 'you')
+          ? (firstParentHasCustody ? 'you' : 'coparent')
+          : (firstParentHasCustody ? 'coparent' : 'you');
+
+        // Check if exchange day (custody differs from previous day)
+        const prevDate = new Date(date);
+        prevDate.setDate(prevDate.getDate() - 1);
+        const prevDaysDiff = daysDiff - 1;
+        const prevPosition = ((anchorPosition + prevDaysDiff) % patternLength + patternLength) % patternLength;
+        const prevPatternValue = patternArray[prevPosition];
+        isExchange = patternValue !== prevPatternValue;
+
+      } else if (scheduleId === 'custom' && state.scheduleConfig.customPattern) {
+        // CUSTOM SCHEDULE: Use custom pattern like rolling schedules
+        const patternArray = state.scheduleConfig.customPattern;
+        const patternLength = patternArray.length;
+
+        // Use anchor date if set, otherwise use today as reference
+        let anchorDate;
+        if (state.scheduleConfig.anchorDate) {
+          anchorDate = new Date(state.scheduleConfig.anchorDate);
+        } else {
+          // Default: pattern starts today
+          anchorDate = new Date();
+          anchorDate.setHours(0, 0, 0, 0);
+        }
+
+        // Calculate days from anchor
+        const msPerDay = 24 * 60 * 60 * 1000;
+        const targetUTC = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate());
+        const anchorUTC = Date.UTC(anchorDate.getFullYear(), anchorDate.getMonth(), anchorDate.getDate());
+        const daysDiff = Math.round((targetUTC - anchorUTC) / msPerDay);
+
+        // Find position in pattern (0 = Sunday, so map to pattern starting Sunday)
+        const targetPosition = ((daysDiff % patternLength) + patternLength) % patternLength;
+        const patternValue = patternArray[targetPosition];
+
+        // Map pattern value to custody (1 = you, 0 = coparent)
+        custody = patternValue === 1 ? 'you' : 'coparent';
+
+        // Check if exchange day
+        const prevPosition = ((daysDiff - 1) % patternLength + patternLength) % patternLength;
+        const prevPatternValue = patternArray[prevPosition];
+        isExchange = patternValue !== prevPatternValue;
+
+      } else {
+        // Unknown - default
+        custody = 'coparent';
+      }
+
+      return { custody, isExchange };
+    }
+
+    // Helper to check if a day is an exchange day
+    function isExchangeDay(date) {
+      const result = getCustodyForDate(date);
+      return result.isExchange;
     }
 
     function prevMonth() {
@@ -1480,65 +3624,225 @@
     // ==========================================
     // HOLIDAYS SCREEN
     // ==========================================
-    function setHolidayPreset(preset) {
-      document.querySelectorAll('#screen-holidays .chip-group .chip').forEach(chip => {
-        chip.classList.remove('selected');
-      });
-      event.currentTarget.classList.add('selected');
-
-      // Set defaults based on preset
-      const allHolidays = [...holidays.major, ...holidays.spring, ...holidays.other];
-      allHolidays.forEach((h, index) => {
-        if (preset === 'alternate') {
-          state.holidays[h.id] = index % 2 === 0 ? 'you-odd' : 'coparent-odd';
-        } else if (preset === 'split') {
-          state.holidays[h.id] = index % 2 === 0 ? 'you' : 'coparent';
-        }
-      });
-
-      renderHolidays();
-    }
-
     function renderHolidays() {
       const container = document.getElementById('holidaySection');
 
-      const renderGroup = (title, items, collapsed = false) => `
-        <div class="holiday-group ${collapsed ? 'collapsed' : ''}">
-          <div class="holiday-group-title" onclick="toggleHolidayGroup(this)">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            ${title}
-          </div>
-          <div class="holiday-items">
-            ${items.map(h => `
-              <div class="holiday-row">
-                <span class="holiday-name">${h.name}</span>
-                <div class="holiday-chips">
-                  <button class="holiday-chip ${state.holidays[h.id] === 'you' ? 'selected' : ''}"
-                    onclick="setHoliday('${h.id}', 'you')">You</button>
-                  <button class="holiday-chip ${state.holidays[h.id] === 'coparent' ? 'selected' : ''}"
-                    onclick="setHoliday('${h.id}', 'coparent')">Co-parent</button>
-                  <button class="holiday-chip ${state.holidays[h.id]?.includes('odd') ? 'selected' : ''}"
-                    onclick="setHoliday('${h.id}', 'you-odd')">Alternate</button>
-                </div>
+      // Update year display
+      const yearDisplay = document.getElementById('previewYearDisplay');
+      if (yearDisplay) yearDisplay.textContent = previewYear;
+
+      const trackedHolidays = getAllHolidays().filter(h => state.trackedHolidays.includes(h.id));
+
+      let html = '';
+
+      // Custom holidays first (at top like app)
+      if (state.customHolidays && state.customHolidays.length > 0) {
+        html += state.customHolidays.map(h => {
+          const custody = h.myYears === 'odd' ? (previewYear % 2 === 1 ? 'you' : 'coparent') : (previewYear % 2 === 0 ? 'you' : 'coparent');
+          const dateStr = formatCustomHolidayDate(h, previewYear);
+          return `
+            <div class="holiday-row">
+              <div class="holiday-emoji ${custody}">⭐</div>
+              <div class="holiday-info">
+                <div class="holiday-name">${h.name}</div>
+                <div class="holiday-date">${dateStr || 'No dates set'}</div>
               </div>
-            `).join('')}
+              <div class="holiday-custody-indicator">
+                <div class="holiday-custody-dot ${custody}"></div>
+                <span class="holiday-custody-label">${custody === 'you' ? 'You' : 'Co-parent'}</span>
+              </div>
+              <button class="holiday-swap-btn" onclick="swapCustomHolidayCustody('${h.id}')" title="Swap years">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 16V4M7 4L3 8M7 4L11 8M17 8v12M17 20l4-4M17 20l-4-4"/></svg>
+              </button>
+              <button class="holiday-remove-btn" onclick="removeCustomHoliday('${h.id}')" title="Remove">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              </button>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Tracked standard holidays
+      html += trackedHolidays.map(h => {
+        const custody = getCustodyForHolidayInYear(h.id, previewYear);
+        const dateStr = getHolidayDateStr(h.id, previewYear);
+        const canIncludeWeekend = canHolidayIncludeWeekend(h.id, previewYear);
+        const scope = getHolidayScope(h.id);
+        const includesWeekend = scope === 'weekend_attached';
+
+        // Weekend toggle (only for holidays that can include weekend)
+        const weekendToggle = canIncludeWeekend ? `
+          <div class="holiday-weekend-toggle" onclick="toggleHolidayWeekend('${h.id}')">
+            <div class="holiday-weekend-checkbox ${includesWeekend ? 'checked' : ''}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <span class="holiday-weekend-label">Include weekend</span>
           </div>
+        ` : '';
+
+        return `
+          <div class="holiday-row-wrapper">
+            <div class="holiday-row">
+              <div class="holiday-emoji ${custody}">${h.emoji}</div>
+              <div class="holiday-info">
+                <div class="holiday-name">${h.name}</div>
+                <div class="holiday-date">${dateStr}${includesWeekend ? ' + weekend' : ''}</div>
+              </div>
+              <div class="holiday-custody-indicator">
+                <div class="holiday-custody-dot ${custody}"></div>
+                <span class="holiday-custody-label">${custody === 'you' ? 'You' : 'Co-parent'}</span>
+              </div>
+              <button class="holiday-swap-btn" onclick="swapHolidayCustody('${h.id}')" title="Swap years">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 16V4M7 4L3 8M7 4L11 8M17 8v12M17 20l4-4M17 20l-4-4"/></svg>
+              </button>
+              <button class="holiday-remove-btn" onclick="removeHoliday('${h.id}')" title="Remove">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              </button>
+            </div>
+            ${weekendToggle}
+          </div>
+        `;
+      }).join('');
+
+      // Empty state
+      if (trackedHolidays.length === 0 && (!state.customHolidays || state.customHolidays.length === 0)) {
+        html = `
+          <div class="holiday-empty">
+            <div class="holiday-empty-icon">📅</div>
+            <p>No holidays added yet</p>
+            <p style="font-size: 13px; margin-top: 4px;">Tap "Add Holiday" above to get started</p>
+          </div>
+        `;
+      }
+
+      container.innerHTML = html;
+    }
+
+    function renderAvailableHolidays() {
+      const container = document.getElementById('availableHolidaysList');
+      const untrackedHolidays = getAllHolidays().filter(h => !state.trackedHolidays.includes(h.id));
+
+      if (untrackedHolidays.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: var(--text-muted); padding: 16px;">All holidays added</p>';
+        return;
+      }
+
+      container.innerHTML = untrackedHolidays.map(h => `
+        <div class="available-holiday-row" onclick="addHoliday('${h.id}')">
+          <div class="available-holiday-emoji">${h.emoji}</div>
+          <div class="available-holiday-name">${h.name}</div>
+          <svg class="available-holiday-add" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
         </div>
-      `;
-
-      container.innerHTML = `
-        ${renderGroup('Major Holidays', holidays.major)}
-        ${renderGroup('Spring & Summer', holidays.spring, true)}
-        ${renderGroup('Other', holidays.other, true)}
-      `;
+      `).join('');
     }
 
-    function toggleHolidayGroup(el) {
-      el.parentElement.classList.toggle('collapsed');
+    function toggleCustomHolidayForm() {
+      const card = document.getElementById('customHolidayCard');
+      card.classList.toggle('expanded');
     }
 
-    function setHoliday(holidayId, value) {
-      state.holidays[holidayId] = value;
+    function saveCustomHoliday() {
+      const name = document.getElementById('customHolidayName').value.trim();
+      const startMonth = document.getElementById('customHolidayStartMonth').value;
+      const startDay = document.getElementById('customHolidayStartDay').value;
+      const endMonth = document.getElementById('customHolidayEndMonth').value;
+      const endDay = document.getElementById('customHolidayEndDay').value;
+
+      if (!name) {
+        alert('Please enter a holiday name');
+        return;
+      }
+
+      if (!state.customHolidays) state.customHolidays = [];
+
+      const newHoliday = {
+        id: 'custom-' + Date.now(),
+        name: name,
+        myYears: 'odd',
+        years: {}
+      };
+
+      // Store dates for the preview year (custom holidays use month/day, applied to current year)
+      if (startMonth && startDay) {
+        const year = previewYear;
+        newHoliday.years[year] = {
+          startMonth: parseInt(startMonth),
+          startDay: parseInt(startDay),
+        };
+        if (endMonth && endDay) {
+          newHoliday.years[year].endMonth = parseInt(endMonth);
+          newHoliday.years[year].endDay = parseInt(endDay);
+        }
+      }
+
+      state.customHolidays.push(newHoliday);
+
+      // Clear form
+      document.getElementById('customHolidayName').value = '';
+      document.getElementById('customHolidayStartMonth').value = '';
+      document.getElementById('customHolidayStartDay').value = '';
+      document.getElementById('customHolidayEndMonth').value = '';
+      document.getElementById('customHolidayEndDay').value = '';
+
+      // Collapse the form and refresh
+      document.getElementById('customHolidayCard').classList.remove('expanded');
+      renderHolidays();
+    }
+
+    function formatCustomHolidayDate(holiday, year) {
+      const yearData = holiday.years && holiday.years[year];
+      if (!yearData) return '';
+
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const startStr = `${months[yearData.startMonth - 1]} ${yearData.startDay}`;
+
+      if (yearData.endMonth && yearData.endDay) {
+        const endStr = `${months[yearData.endMonth - 1]} ${yearData.endDay}`;
+        return `${startStr} - ${endStr}`;
+      }
+      return startStr;
+    }
+
+    function addHoliday(holidayId) {
+      if (!state.trackedHolidays.includes(holidayId)) {
+        state.trackedHolidays.push(holidayId);
+      }
+      renderHolidays();
+      renderAvailableHolidays();
+    }
+
+    function removeHoliday(holidayId) {
+      const index = state.trackedHolidays.indexOf(holidayId);
+      if (index > -1) {
+        state.trackedHolidays.splice(index, 1);
+      }
+      renderHolidays();
+      renderAvailableHolidays();
+    }
+
+    function swapHolidayCustody(holidayId) {
+      const current = getMyYearsForHoliday(holidayId);
+      state.holidayCustody[holidayId] = current === 'odd' ? 'even' : 'odd';
+      renderHolidays();
+    }
+
+    function swapCustomHolidayCustody(holidayId) {
+      const holiday = state.customHolidays.find(h => h.id === holidayId);
+      if (holiday) {
+        holiday.myYears = holiday.myYears === 'odd' ? 'even' : 'odd';
+        renderHolidays();
+      }
+    }
+
+    function removeCustomHoliday(holidayId) {
+      state.customHolidays = state.customHolidays.filter(h => h.id !== holidayId);
+      renderHolidays();
+    }
+
+    function toggleHolidayWeekend(holidayId) {
+      const currentScope = getHolidayScope(holidayId);
+      const newScope = currentScope === 'weekend_attached' ? 'day_only' : 'weekend_attached';
+      state.holidayScopes[holidayId] = newScope;
       renderHolidays();
     }
 
@@ -1553,12 +3857,31 @@
       document.getElementById('summerOptions').style.display = enabled ? 'block' : 'none';
     }
 
+    function updateSummerStart() {
+      state.summer.startMonth = parseInt(document.getElementById('summerStartMonth').value);
+      state.summer.startWeek = parseInt(document.getElementById('summerStartWeek').value);
+      state.summer.startWeekday = parseInt(document.getElementById('summerStartWeekday').value);
+    }
+
+    function updateSummerEnd() {
+      state.summer.endMonth = parseInt(document.getElementById('summerEndMonth').value);
+      state.summer.endWeek = parseInt(document.getElementById('summerEndWeek').value);
+      state.summer.endWeekday = parseInt(document.getElementById('summerEndWeekday').value);
+    }
+
     function setSummerPattern(pattern) {
       state.summer.pattern = pattern;
-      document.querySelectorAll('#summerOptions .chip-group .chip').forEach(chip => {
+      document.querySelectorAll('#summerPatternChips .chip').forEach(chip => {
         chip.classList.remove('selected');
       });
       event.currentTarget.classList.add('selected');
+    }
+
+    function setSummerStartsWith(who) {
+      state.summer.startsWith = who;
+      document.querySelectorAll('#screen-summer > div:last-child .chip-group:last-child .chip').forEach((chip, index) => {
+        chip.classList.toggle('selected', (index === 0 && who === 'you') || (index === 1 && who === 'coparent'));
+      });
     }
 
     // ==========================================
@@ -1575,7 +3898,8 @@
         }
       }
 
-      state.expenses.split = split;
+      state.expenses.splitYou = split;
+      state.expenses.splitCoparent = 100 - split;
       document.getElementById('splitFill').style.width = `${split}%`;
       document.getElementById('yourSplit').textContent = `${split}%`;
       document.getElementById('coparentSplit').textContent = `${100 - split}%`;
@@ -1604,39 +3928,94 @@
     let reviewCalendarMonth = new Date().getMonth();
     let reviewCalendarYear = new Date().getFullYear();
 
+    function getScheduleDescription(pattern) {
+      if (!pattern) return '';
+
+      if (pattern.type === 'custom') {
+        const weeks = state.scheduleConfig.customWeeks;
+        const cycleLength = weeks.length * 7;
+        return `${cycleLength}-day custom pattern`;
+      }
+
+      if (FIXED_PATTERNS.includes(pattern.id)) {
+        const who = state.scheduleConfig.week1Parent === 'you' ? 'You' : 'Co-parent';
+        return `${who} starts Week 1`;
+      }
+
+      if (ROLLING_PATTERNS.includes(pattern.id)) {
+        const who = state.scheduleConfig.anchorParent === 'you' ? 'You' : 'Co-parent';
+        return `${who} starts the pattern`;
+      }
+
+      return '';
+    }
+
+    function getSummerSummary(forPdf = false) {
+      if (!state.summer.enabled) {
+        return forPdf ? '<p>Same as regular schedule</p>' : 'Same as regular schedule';
+      }
+
+      const weekNames = ['', '1st', '2nd', '3rd', '4th', 'Last'];
+      const dayNames = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const monthNames = ['', 'January', 'February', 'March', 'April', 'May', 'June',
+                          'July', 'August', 'September', 'October', 'November', 'December'];
+
+      const startDate = `${weekNames[state.summer.startWeek]} ${dayNames[state.summer.startWeekday]} of ${monthNames[state.summer.startMonth]}`;
+      const endDate = `${weekNames[state.summer.endWeek]} ${dayNames[state.summer.endWeekday]} of ${monthNames[state.summer.endMonth]}`;
+
+      const patternNames = {
+        'week-on-week-off': 'Alternating weeks',
+        '2-week-rotation': 'Alternating 2-week blocks',
+        'same-as-regular': 'Same as regular schedule'
+      };
+      const patternName = patternNames[state.summer.pattern] || state.summer.pattern;
+
+      const startsWithText = state.summer.startsWith === 'you' ? 'You start' : 'Co-parent starts';
+
+      if (forPdf) {
+        return `<p><strong>Dates:</strong> ${startDate} through ${endDate}</p>
+                <p><strong>Pattern:</strong> ${patternName}</p>
+                <p><strong>Starts with:</strong> ${startsWithText}</p>`;
+      }
+
+      return `${startDate} through ${endDate}<br>${patternName} • ${startsWithText}`;
+    }
+
     function renderReview() {
       const container = document.getElementById('reviewContent');
       const pattern = schedulePatterns.find(p => p.id === state.schedule);
 
-      const childrenNames = state.children
-        .map((c, i) => c.name || `Child ${i + 1}`)
+      const childrenInfo = state.children
+        .map((c, i) => {
+          const name = c.name || `Child ${i + 1}`;
+          const age = getChildAge(c.birthdate);
+          return age !== null ? `${name} (${age})` : name;
+        })
         .join(', ');
 
-      const childrenAges = state.children
-        .map(c => c.age || 'Age not set')
-        .join(', ');
+      const summerInfo = getSummerSummary();
 
       container.innerHTML = `
         <div class="summary-section">
           <div class="summary-header">
-            <span class="summary-title">Children</span>
-            <button class="summary-edit" onclick="goToScreen('children')">Edit</button>
+            <span class="summary-title">Family</span>
+            <button class="summary-edit" onclick="goToScreen('children', true)">Edit</button>
           </div>
           <div class="summary-content">
-            <p><strong>${childrenNames}</strong></p>
-            <p style="color: var(--text-secondary); font-size: 14px;">Ages: ${childrenAges}</p>
+            <p><strong>${state.familyName || 'Family'}</strong></p>
+            <p style="color: var(--text-secondary); font-size: 14px;">${childrenInfo}</p>
           </div>
         </div>
 
         <div class="summary-section">
           <div class="summary-header">
             <span class="summary-title">Custody Schedule</span>
-            <button class="summary-edit" onclick="goToScreen('schedule')">Edit</button>
+            <button class="summary-edit" onclick="goToScreen('schedule', true)">Edit</button>
           </div>
           <div class="summary-content">
-            <p><strong>${pattern?.name || 'Not selected'}</strong> (${pattern?.split || ''})</p>
+            <p><strong>${pattern?.name || 'Not selected'}</strong>${pattern?.split ? ` (${pattern.split})` : ''}</p>
             <p style="color: var(--text-secondary); font-size: 14px;">
-              ${state.scheduleConfig.startsWith === 'you' ? 'You start' : 'Co-parent starts'}
+              ${getScheduleDescription(pattern)}
               • Exchanges at ${formatTime(state.scheduleConfig.exchangeTime)}
             </p>
           </div>
@@ -1645,28 +4024,44 @@
         <div class="summary-section">
           <div class="summary-header">
             <span class="summary-title">Holidays</span>
-            <button class="summary-edit" onclick="goToScreen('holidays')">Edit</button>
+            <button class="summary-edit" onclick="goToScreen('holidays', true)">Edit</button>
           </div>
           <div class="summary-content">
             <p style="color: var(--text-secondary); font-size: 14px;">
-              ${Object.keys(state.holidays).length} holidays configured
+              ${state.trackedHolidays.length + (state.customHolidays?.length || 0)} holidays tracked
             </p>
+            <ul style="margin-top: 8px; padding-left: 0; font-size: 14px; color: var(--text-secondary); list-style: none;">
+              ${(state.customHolidays || []).slice(0, 2).map(h => {
+                return `<li style="margin-bottom: 4px;">⭐ ${h.name}: You in ${h.myYears || 'odd'} years</li>`;
+              }).join('')}
+              ${state.trackedHolidays.slice(0, 4 - (state.customHolidays?.slice(0, 2).length || 0)).map(id => {
+                const holiday = getAllHolidays().find(h => h.id === id);
+                const myYears = getMyYearsForHoliday(id);
+                return `<li style="margin-bottom: 4px;">${holiday?.emoji || '📅'} ${holiday?.name || id}: You in ${myYears} years</li>`;
+              }).join('')}
+              ${(state.trackedHolidays.length + (state.customHolidays?.length || 0)) > 4
+                ? `<li>+ ${state.trackedHolidays.length + (state.customHolidays?.length || 0) - 4} more</li>`
+                : ''}
+            </ul>
           </div>
         </div>
 
         <div class="summary-section">
           <div class="summary-header">
-            <span class="summary-title">Expenses</span>
-            <button class="summary-edit" onclick="goToScreen('expenses')">Edit</button>
+            <span class="summary-title">Summer Schedule</span>
+            <button class="summary-edit" onclick="goToScreen('summer', true)">Edit</button>
           </div>
           <div class="summary-content">
-            <p><strong>${state.expenses.split}/${100-state.expenses.split} split</strong></p>
-            <p style="color: var(--text-secondary); font-size: 14px;">
-              Categories: ${state.expenses.categories.join(', ') || 'None selected'}
-            </p>
+            <p style="color: var(--text-secondary); font-size: 14px;">${summerInfo}</p>
           </div>
         </div>
+
       `;
+    }
+
+    function getMonthName(month) {
+      const months = ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      return months[month] || '';
     }
 
     function formatTime(time) {
@@ -1681,6 +4076,19 @@
     function renderReviewCalendar() {
       const container = document.getElementById('reviewCalendarDays');
       const monthLabel = document.getElementById('reviewCalendarMonth');
+
+      // Show/hide summer legend
+      const summerLegend = document.getElementById('reviewSummerLegend');
+      if (summerLegend) {
+        summerLegend.style.display = state.summer.enabled ? 'flex' : 'none';
+      }
+
+      // Show/hide holiday legend
+      const holidayLegend = document.getElementById('reviewHolidayLegend');
+      if (holidayLegend) {
+        const hasHolidays = state.trackedHolidays.length > 0 || (state.customHolidays && state.customHolidays.length > 0);
+        holidayLegend.style.display = hasHolidays ? 'flex' : 'none';
+      }
 
       const date = new Date(reviewCalendarYear, reviewCalendarMonth, 1);
       monthLabel.textContent = date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
@@ -1697,10 +4105,39 @@
 
       for (let day = 1; day <= daysInMonth; day++) {
         const currentDate = new Date(reviewCalendarYear, reviewCalendarMonth, day);
-        const custody = getCustodyForDate(currentDate);
+        const result = getCustodyForDate(currentDate);
+        const custody = result.custody;
+        const isExchange = result.isExchange;
+        const isSummer = result.isSummer || false;
+        const isHoliday = result.isHoliday || false;
+        const holiday = result.holiday;
         const isToday = currentDate.toDateString() === today.toDateString();
+        const summerClass = isSummer ? 'summer' : '';
+        const holidayClass = isHoliday ? 'holiday' : '';
 
-        html += `<div class="calendar-day ${custody} ${isToday ? 'today' : ''}">${day}</div>`;
+        // Holiday indicator dot
+        const holidayDot = isHoliday ? `<span class="holiday-dot" title="${holiday.name}"></span>` : '';
+
+        // For holidays, always show solid color (no exchange split)
+        // Only show exchange split for non-holiday regular/summer days
+        if (isExchange && !isHoliday) {
+          // Exchange day: show split cell
+          const prevDate = new Date(currentDate);
+          prevDate.setDate(prevDate.getDate() - 1);
+          const prevResult = getCustodyForDate(prevDate);
+          const prevCustody = prevResult.custody;
+
+          html += `<div class="calendar-day exchange ${isToday ? 'today' : ''} ${summerClass}">
+            <div class="exchange-top ${prevCustody}"></div>
+            <div class="exchange-bottom ${custody}"></div>
+            <span class="day-number">${day}</span>
+          </div>`;
+        } else {
+          html += `<div class="calendar-day ${custody} ${isToday ? 'today' : ''} ${summerClass} ${holidayClass}">
+            ${day}
+            ${holidayDot}
+          </div>`;
+        }
       }
 
       container.innerHTML = html;
@@ -1725,39 +4162,109 @@
     }
 
     // ==========================================
-    // PLAN CODE GENERATION
+    // PLAN SUBMISSION
     // ==========================================
-    function generatePlanCode() {
-      // Generate a random 8-character code
-      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-      let code = '';
-      for (let i = 0; i < 8; i++) {
-        code += chars.charAt(Math.floor(Math.random() * chars.length));
-      }
-      state.planCode = code;
-      document.getElementById('planCode').textContent = code;
+    const SUPABASE_URL = 'https://dwncravjhkbclbuzijra.supabase.co';
 
-      // TODO: Save to Supabase and send email
-      savePlanToServer();
-    }
+    async function submitPlan() {
+      const btn = document.getElementById('continueBtn');
+      btn.disabled = true;
+      btn.textContent = 'Creating plan...';
 
-    async function savePlanToServer() {
-      // This would call your Supabase edge function
-      console.log('Saving plan:', {
-        code: state.planCode,
-        email: state.email,
-        name: state.name,
-        plan: {
-          children: state.children,
-          schedule: state.schedule,
-          scheduleConfig: state.scheduleConfig,
-          holidays: state.holidays,
-          summer: state.summer,
-          expenses: state.expenses
+      try {
+        // Build the payload matching plan_templates schema
+        const isFixed = FIXED_PATTERNS.includes(state.schedule);
+        const isRolling = ROLLING_PATTERNS.includes(state.schedule);
+        const isCustom = state.schedule === 'custom';
+
+        const payload = {
+          email: state.email,
+          first_name: state.firstName || null,
+          family_name: state.familyName || null,
+
+          // Children
+          children: state.children.map(c => ({
+            name: c.name || '',
+            birthdate: c.birthdate || null,
+            ageGroup: getAgeGroupFromBirthdate(c.birthdate) || ''
+          })),
+
+          // Schedule - common
+          custody_schedule: state.schedule,
+          exchange_time: state.scheduleConfig.exchangeTime,
+
+          // Schedule - fixed (2-2-3, 5-2-2-5, 3-4-4-3)
+          week1_parent: isFixed ? state.scheduleConfig.week1Parent : null,
+          week1_iso_parity: isFixed ? state.scheduleConfig.week1IsoParity : null,
+
+          // Schedule - rolling (week-on-week-off, 4-3, etc.) and custom
+          custody_anchor_date: (isRolling || isCustom) ? state.scheduleConfig.anchorDate : null,
+          custody_anchor_position: (isRolling || isCustom) ? state.scheduleConfig.anchorPosition : null,
+          custody_anchor_parent: isRolling ? state.scheduleConfig.anchorParent : null,
+
+          // Custom pattern (if applicable)
+          custom_pattern: isCustom ? state.scheduleConfig.customPattern : null,
+
+          // Holidays
+          tracked_holidays: state.trackedHolidays,
+          holiday_custody: state.holidayCustody,
+          holiday_scopes: state.holidayScopes,
+          custom_holidays: state.customHolidays,
+
+          // Summer
+          summer_schedule_enabled: state.summer.enabled,
+          summer_start_month: state.summer.enabled ? state.summer.startMonth : null,
+          summer_start_week: state.summer.enabled ? state.summer.startWeek : null,
+          summer_start_weekday: state.summer.enabled ? state.summer.startWeekday : null,
+          summer_end_month: state.summer.enabled ? state.summer.endMonth : null,
+          summer_end_week: state.summer.enabled ? state.summer.endWeek : null,
+          summer_end_weekday: state.summer.enabled ? state.summer.endWeekday : null,
+          summer_custody_pattern: state.summer.enabled ? state.summer.pattern : null,
+          summer_starts_with: state.summer.enabled ? state.summer.startsWith : null,
+
+          // Expenses
+          expense_split_you: state.expenses.splitYou,
+          expense_split_coparent: state.expenses.splitCoparent,
+          expense_categories: state.expenses.categories,
+          reimbursement_method: state.expenses.reimbursementMethod,
+          reimbursement_handle: state.expenses.reimbursementHandle,
+
+          // Metadata
+          pathway: state.pathway,
+          source: 'web-plan-builder'
+        };
+
+        console.log('Submitting plan:', payload);
+
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/create-plan-template`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          throw new Error(error.message || 'Failed to create plan');
         }
-      });
 
-      // For now, just log it - implement actual API call later
+        const result = await response.json();
+        state.planCode = result.share_code;
+        document.getElementById('planCode').textContent = result.share_code;
+
+        // Advance to complete screen
+        state.currentScreen++;
+        initScreen(screens[state.currentScreen]);
+        updateUI();
+        window.scrollTo(0, 0);
+
+      } catch (error) {
+        console.error('Error submitting plan:', error);
+        alert('There was an error saving your plan. Please try again.');
+        btn.disabled = false;
+        btn.textContent = 'Get Family Code';
+      }
     }
 
     function copyPlanCode() {
@@ -1769,6 +4276,165 @@
       }, 2000);
     }
 
+    function downloadPDF() {
+      const pattern = schedulePatterns.find(p => p.id === state.schedule);
+      const childrenList = state.children.map(c => {
+        const name = c.name || 'Child';
+        const age = getChildAge(c.birthdate);
+        return age !== null ? `${name} (${age})` : name;
+      }).join(', ');
+
+      // Format exchange time
+      const [hours, mins] = (state.scheduleConfig.exchangeTime || '15:00').split(':');
+      const hour = parseInt(hours);
+      const ampm = hour >= 12 ? 'PM' : 'AM';
+      const hour12 = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
+      const exchangeTimeFormatted = `${hour12}:${mins} ${ampm}`;
+
+      // Build holidays list
+      const holidaysList = state.trackedHolidays.map(id => {
+        const h = getAllHolidays().find(holiday => holiday.id === id);
+        const custody = getMyYearsForHoliday(id);
+        return h ? `${h.name}: You in ${custody} years` : '';
+      }).filter(Boolean);
+
+      // Add custom holidays
+      if (state.customHolidays) {
+        state.customHolidays.forEach(h => {
+          holidaysList.push(`${h.name}: You in ${h.myYears} years`);
+        });
+      }
+
+      // Summer info
+      const summerInfo = getSummerSummary(true);
+
+      // Build PDF HTML
+      const pdfHtml = `
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Custody Plan - ${state.planCode}</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      padding: 40px;
+      color: #1A1917;
+      line-height: 1.6;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #0D8268;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 600;
+      color: #0D8268;
+    }
+    .logo img { width: 36px; height: 36px; border-radius: 8px; }
+    .plan-code {
+      background: #E6F5F1;
+      border: 1px solid #0D8268;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 16px;
+      font-weight: 600;
+      color: #0D8268;
+      letter-spacing: 2px;
+    }
+    h1 { font-size: 28px; margin-bottom: 24px; }
+    .section {
+      margin-bottom: 24px;
+      padding: 20px;
+      background: #FAFAF9;
+      border-radius: 12px;
+    }
+    .section h2 {
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #0D8268;
+      margin-bottom: 12px;
+    }
+    .section p, .section li { font-size: 15px; margin-bottom: 6px; }
+    .section ul { padding-left: 20px; }
+    .footer {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #E8E7E4;
+      font-size: 12px;
+      color: #5C5856;
+      text-align: center;
+    }
+    @media print {
+      body { padding: 20px; }
+      .section { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+      Clearly
+    </div>
+    <div class="plan-code">${state.planCode || 'DRAFT'}</div>
+  </div>
+
+  <h1>Custody Plan</h1>
+
+  <div class="section">
+    <h2>Family</h2>
+    <p><strong>${state.familyName || 'Family'}</strong></p>
+    <p>${childrenList}</p>
+  </div>
+
+  <div class="section">
+    <h2>Custody Schedule</h2>
+    <p><strong>${pattern?.name || state.schedule}</strong> (${pattern?.split || ''})</p>
+    <p>Exchange time: ${exchangeTimeFormatted}</p>
+  </div>
+
+  <div class="section">
+    <h2>Holidays</h2>
+    <ul>
+      ${holidaysList.map(h => `<li>${h}</li>`).join('')}
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Summer Schedule</h2>
+    ${summerInfo}
+  </div>
+
+  <div class="footer">
+    <p>Generated with Clearly | getclearly.app</p>
+    <p>This is a planning tool, not legal advice. Consult an attorney for legal matters.</p>
+  </div>
+</body>
+</html>`;
+
+      // Open in new window for print/save
+      const printWindow = window.open('', '_blank');
+      printWindow.document.write(pdfHtml);
+      printWindow.document.close();
+      printWindow.focus();
+
+      // Trigger print dialog after a short delay
+      setTimeout(() => {
+        printWindow.print();
+      }, 250);
+    }
+
     // ==========================================
     // EMAIL VALIDATION
     // ==========================================
@@ -1776,6 +4442,12 @@
       const emailInput = document.getElementById('emailInput');
       if (emailInput) {
         emailInput.addEventListener('input', updateContinueButton);
+      }
+
+      // Set the preview year display to current year
+      const yearDisplay = document.getElementById('previewYearDisplay');
+      if (yearDisplay) {
+        yearDisplay.textContent = previewYear;
       }
     });
 
