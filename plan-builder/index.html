@@ -3998,7 +3998,7 @@
       container.innerHTML = `
         <div class="summary-section">
           <div class="summary-header">
-            <span class="summary-title">Family</span>
+            <span class="summary-title">👨‍👩‍👧‍👦 Family</span>
             <button class="summary-edit" onclick="goToScreen('children', true)">Edit</button>
           </div>
           <div class="summary-content">
@@ -4009,7 +4009,7 @@
 
         <div class="summary-section">
           <div class="summary-header">
-            <span class="summary-title">Custody Schedule</span>
+            <span class="summary-title">📆 Custody Schedule</span>
             <button class="summary-edit" onclick="goToScreen('schedule', true)">Edit</button>
           </div>
           <div class="summary-content">
@@ -4023,7 +4023,7 @@
 
         <div class="summary-section">
           <div class="summary-header">
-            <span class="summary-title">Holidays</span>
+            <span class="summary-title">📅 Holidays</span>
             <button class="summary-edit" onclick="goToScreen('holidays', true)">Edit</button>
           </div>
           <div class="summary-content">
@@ -4031,24 +4031,23 @@
               ${state.trackedHolidays.length + (state.customHolidays?.length || 0)} holidays tracked
             </p>
             <ul style="margin-top: 8px; padding-left: 0; font-size: 14px; color: var(--text-secondary); list-style: none;">
-              ${(state.customHolidays || []).slice(0, 2).map(h => {
-                return `<li style="margin-bottom: 4px;">⭐ ${h.name}: You in ${h.myYears || 'odd'} years</li>`;
+              ${(state.customHolidays || []).map(h => {
+                return '<li style="margin-bottom: 6px;"><span style="margin-right: 6px;">⭐</span>' + h.name + ': You in ' + (h.myYears || 'odd') + ' years</li>';
               }).join('')}
-              ${state.trackedHolidays.slice(0, 4 - (state.customHolidays?.slice(0, 2).length || 0)).map(id => {
+              ${state.trackedHolidays.map(id => {
                 const holiday = getAllHolidays().find(h => h.id === id);
                 const myYears = getMyYearsForHoliday(id);
-                return `<li style="margin-bottom: 4px;">${holiday?.emoji || '📅'} ${holiday?.name || id}: You in ${myYears} years</li>`;
+                const emoji = holiday ? holiday.emoji : '📅';
+                const name = holiday ? holiday.name : id;
+                return '<li style="margin-bottom: 6px;"><span style="margin-right: 6px;">' + emoji + '</span>' + name + ': You in ' + myYears + ' years</li>';
               }).join('')}
-              ${(state.trackedHolidays.length + (state.customHolidays?.length || 0)) > 4
-                ? `<li>+ ${state.trackedHolidays.length + (state.customHolidays?.length || 0) - 4} more</li>`
-                : ''}
             </ul>
           </div>
         </div>
 
         <div class="summary-section">
           <div class="summary-header">
-            <span class="summary-title">Summer Schedule</span>
+            <span class="summary-title">☀️ Summer Schedule</span>
             <button class="summary-edit" onclick="goToScreen('summer', true)">Edit</button>
           </div>
           <div class="summary-content">
