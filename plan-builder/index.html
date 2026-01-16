@@ -362,6 +362,39 @@
       color: white;
     }
 
+    /* Email Benefits */
+    .email-benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .email-benefit {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .benefit-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+    .email-benefit strong {
+      display: block;
+      color: var(--text);
+      font-size: 15px;
+      margin-bottom: 2px;
+    }
+    .email-benefit p {
+      color: var(--text-secondary);
+      font-size: 14px;
+      line-height: 1.4;
+      margin: 0;
+    }
+
     /* Inputs */
     .input-group {
       margin-bottom: 24px;
@@ -1927,9 +1960,40 @@
       <!-- Screen 9: Email Capture -->
       <div class="screen" id="screen-email">
         <h2>Save your plan</h2>
-        <p class="subtitle">Enter your email to get your Family Code and a copy of your plan.</p>
+        <p class="subtitle">Enter your email to get your Family Code — it's like a save file for your custody plan.</p>
 
-        <div class="input-group">
+        <div class="email-benefits">
+          <div class="email-benefit">
+            <span class="benefit-icon">📱</span>
+            <div>
+              <strong>Instant app setup</strong>
+              <p>Enter your code in the Clearly app to configure your schedule, holidays, and summer — automatically</p>
+            </div>
+          </div>
+          <div class="email-benefit">
+            <span class="benefit-icon">📄</span>
+            <div>
+              <strong>PDF for your lawyer</strong>
+              <p>Download a professional summary to share with your attorney or mediator</p>
+            </div>
+          </div>
+          <div class="email-benefit">
+            <span class="benefit-icon">✉️</span>
+            <div>
+              <strong>Emailed to you</strong>
+              <p>We'll send your code and plan summary so you never lose it</p>
+            </div>
+          </div>
+          <div class="email-benefit">
+            <span class="benefit-icon">✏️</span>
+            <div>
+              <strong>Edit anytime</strong>
+              <p>Come back and update your plan whenever things change</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="input-group" style="margin-top: 24px;">
           <label class="input-label">Email address</label>
           <input type="email" class="text-input" id="emailInput" placeholder="you@example.com">
         </div>
