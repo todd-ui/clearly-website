@@ -235,13 +235,13 @@
       <!-- Stay informed -->
       <div class="pro-section">
         <h2>Stay informed</h2>
-        <p>We'll share more details about Clearly's features and documentation capabilities as we approach launch. If you'd like to be notified when we have professional resources available, join our mailing list.</p>
+        <p>We're building tools specifically for legal and family professionals. Be the first to know when we launch and receive early access to professional resources.</p>
         <div class="signup-inline">
-          <form class="waitlist-form" data-source="professionals">
-            <input type="email" placeholder="Enter your email" required>
-            <button type="submit" class="btn btn-primary">Join Waitlist</button>
+          <form class="professional-form" id="professional-signup">
+            <input type="email" placeholder="Enter your work email" required>
+            <button type="submit" class="btn btn-primary">Get Notified</button>
           </form>
-          <p class="signup-note">We'll only email you about the launch and professional resources.</p>
+          <p class="signup-note">We'll notify you at launch with tools to help your clients and streamline your record review process.</p>
         </div>
       </div>
 
@@ -291,6 +291,40 @@
       navToggle.addEventListener('click', () => {
         navToggle.classList.toggle('open');
         navLinks.classList.toggle('open');
+      });
+    }
+
+    // Professional signup form
+    const PROFESSIONAL_ENDPOINT = 'https://dwncravjhkbclbuzijra.supabase.co/functions/v1/professional-signup';
+
+    const professionalForm = document.getElementById('professional-signup');
+    if (professionalForm) {
+      professionalForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const emailInput = professionalForm.querySelector('input[type="email"]');
+        const button = professionalForm.querySelector('button[type="submit"]');
+        const originalText = button.textContent;
+
+        button.textContent = 'Signing up...';
+        button.disabled = true;
+
+        try {
+          const response = await fetch(PROFESSIONAL_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: emailInput.value })
+          });
+          const data = await response.json();
+          if (response.ok) {
+            professionalForm.innerHTML = '<p style="color: var(--primary); font-weight: 600; font-size: 16px; text-align: center; padding: 16px 0;">We\'ll be in touch when we launch.</p>';
+          } else {
+            throw new Error(data.error || 'Something went wrong');
+          }
+        } catch (error) {
+          button.textContent = originalText;
+          button.disabled = false;
+          alert(error.message || 'Something went wrong. Please try again.');
+        }
       });
     }
   </script>
