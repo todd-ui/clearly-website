@@ -2583,7 +2583,15 @@
         footer.style.display = 'none';
       } else {
         footer.style.display = 'block';
-        continueBtn.textContent = state.currentScreen === screens.length - 2 ? 'Get Family Code' : 'Continue';
+        // Button text depends on context
+        if (screens[state.currentScreen] === 'review' && state.familyId) {
+          // Editing existing family - just save changes
+          continueBtn.textContent = 'Save Changes';
+        } else if (state.currentScreen === screens.length - 2) {
+          continueBtn.textContent = 'Get Family Code';
+        } else {
+          continueBtn.textContent = 'Continue';
+        }
       }
 
       // Update continue button state
@@ -2636,6 +2644,12 @@
           state.firstName = document.getElementById('nameInput').value;
           submitPlan();
           return; // submitPlan will advance the screen after success
+        }
+
+        // If on review screen and editing an existing family, save directly
+        if (screens[state.currentScreen] === 'review' && state.familyId) {
+          submitPlanUpdate();
+          return;
         }
 
         // If editing from review, go back to review instead of next screen
@@ -4419,6 +4433,143 @@
         btn.disabled = false;
         btn.textContent = 'Get Family Code';
       }
+    }
+
+    // Update existing family plan (no email needed, just save)
+    async function submitPlanUpdate() {
+      const btn = document.getElementById('continueBtn');
+      btn.disabled = true;
+      btn.textContent = 'Saving...';
+
+      try {
+        // Build the same payload as submitPlan
+        const isFixed = FIXED_PATTERNS.includes(state.schedule);
+        const isRolling = ROLLING_PATTERNS.includes(state.schedule);
+        const isCustom = state.schedule === 'custom';
+
+        const payload = {
+          // family_id is required for update
+          family_id: state.familyId,
+          family_name: state.familyName || null,
+
+          // Children
+          children: state.children.map(c => ({
+            id: c.id || null, // Include ID for existing children
+            name: c.name || '',
+            birthdate: c.birthdate || null,
+            ageGroup: getAgeGroupFromBirthdate(c.birthdate) || ''
+          })),
+
+          // Schedule - common
+          custody_schedule: state.schedule,
+          exchange_time: state.scheduleConfig.exchangeTime,
+
+          // Schedule - fixed
+          week1_parent: isFixed ? state.scheduleConfig.week1Parent : null,
+          week1_iso_parity: isFixed ? state.scheduleConfig.week1IsoParity : null,
+
+          // Schedule - rolling and custom
+          custody_anchor_date: (isRolling || isCustom) ? state.scheduleConfig.anchorDate : null,
+          custody_anchor_position: (isRolling || isCustom) ? state.scheduleConfig.anchorPosition : null,
+          custody_anchor_parent: isRolling ? state.scheduleConfig.anchorParent : null,
+
+          // Custom pattern
+          custom_pattern: isCustom ? state.scheduleConfig.customPattern : null,
+
+          // Holidays
+          tracked_holidays: state.trackedHolidays,
+          holiday_custody: state.holidayCustody,
+          holiday_scopes: state.holidayScopes,
+          custom_holidays: state.customHolidays,
+
+          // Summer
+          summer_schedule_enabled: state.summer.enabled,
+          summer_start_month: state.summer.enabled ? state.summer.startMonth : null,
+          summer_start_week: state.summer.enabled ? state.summer.startWeek : null,
+          summer_start_weekday: state.summer.enabled ? state.summer.startWeekday : null,
+          summer_end_month: state.summer.enabled ? state.summer.endMonth : null,
+          summer_end_week: state.summer.enabled ? state.summer.endWeek : null,
+          summer_end_weekday: state.summer.enabled ? state.summer.endWeekday : null,
+          summer_custody_pattern: state.summer.enabled ? state.summer.pattern : null,
+          summer_starts_with: state.summer.enabled ? state.summer.startsWith : null,
+
+          // Expenses
+          expense_split_you: state.expenses.splitYou,
+          expense_split_coparent: state.expenses.splitCoparent,
+          expense_categories: state.expenses.categories,
+          reimbursement_method: state.expenses.reimbursementMethod,
+          reimbursement_handle: state.expenses.reimbursementHandle,
+
+          // Metadata
+          source: 'web-plan-builder-update'
+        };
+
+        console.log('Updating plan:', payload);
+
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/create-plan-template`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          const error = await response.json();
+          console.error('Server error:', error);
+          throw new Error(error.details || error.error || error.message || 'Failed to update plan');
+        }
+
+        // Show success message
+        btn.textContent = 'Saved!';
+        btn.style.backgroundColor = '#059669'; // Green
+
+        // Show a toast/notification
+        showToast('Plan updated successfully! Changes will sync to the app.');
+
+        // Reset button after delay
+        setTimeout(() => {
+          btn.disabled = false;
+          btn.textContent = 'Save Changes';
+          btn.style.backgroundColor = '';
+        }, 2000);
+
+      } catch (error) {
+        console.error('Error updating plan:', error);
+        alert('Error: ' + error.message);
+        btn.disabled = false;
+        btn.textContent = 'Save Changes';
+      }
+    }
+
+    // Simple toast notification
+    function showToast(message) {
+      // Remove existing toast if any
+      const existing = document.getElementById('toast');
+      if (existing) existing.remove();
+
+      const toast = document.createElement('div');
+      toast.id = 'toast';
+      toast.textContent = message;
+      toast.style.cssText = `
+        position: fixed;
+        bottom: 100px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #1A1917;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 14px;
+        z-index: 1000;
+        animation: fadeIn 0.3s ease;
+      `;
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
     }
 
     function copyPlanCode() {
