@@ -2548,6 +2548,20 @@
         case 'schedule':
           enabled = state.schedule !== null;
           break;
+        case 'configure':
+          // Require proper schedule configuration
+          if (FIXED_PATTERNS.includes(state.schedule)) {
+            // Fixed schedules need week1Parent selected
+            enabled = state.scheduleConfig.week1Parent !== null;
+          } else if (ROLLING_PATTERNS.includes(state.schedule)) {
+            // Rolling schedules need anchor date
+            enabled = state.scheduleConfig.anchorDate !== null;
+          } else if (state.schedule === 'custom') {
+            // Custom needs a pattern with at least one day assigned
+            enabled = state.scheduleConfig.customPattern &&
+                      state.scheduleConfig.customPattern.some(v => v === 1);
+          }
+          break;
         case 'email':
           const email = document.getElementById('emailInput')?.value || '';
           enabled = email.includes('@') && email.includes('.');
@@ -3123,6 +3137,7 @@
       state.scheduleConfig.week1Parent = who;
       renderConfigureOptions();
       renderCalendar();
+      updateContinueButton();
     }
 
     function toggleWeekParity() {
@@ -3263,6 +3278,7 @@
       weeks[weekIndex][dayIndex] = weeks[weekIndex][dayIndex] === 1 ? 0 : 1;
       renderCustomScheduleBuilder(document.getElementById('configureOptions'));
       renderCalendar();
+      updateContinueButton();
     }
 
     function addCustomWeek() {
@@ -3367,6 +3383,7 @@
       // Re-render the configure options to show updated anchor date
       renderConfigureOptions();
       renderCalendar();
+      updateContinueButton();
     }
 
     // Helper: Get the Nth weekday of a month (e.g., 2nd Friday of June)
