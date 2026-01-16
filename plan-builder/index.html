@@ -4248,7 +4248,8 @@
 
         if (!response.ok) {
           const error = await response.json();
-          throw new Error(error.message || 'Failed to create plan');
+          console.error('Server error:', error);
+          throw new Error(error.details || error.error || error.message || 'Failed to create plan');
         }
 
         const result = await response.json();
@@ -4263,7 +4264,7 @@
 
       } catch (error) {
         console.error('Error submitting plan:', error);
-        alert('There was an error saving your plan. Please try again.');
+        alert('Error: ' + error.message);
         btn.disabled = false;
         btn.textContent = 'Get Family Code';
       }
