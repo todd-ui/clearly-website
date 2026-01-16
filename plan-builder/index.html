@@ -1895,8 +1895,11 @@
           </div>
           <p class="input-label">Summer pattern</p>
           <div class="chip-group" id="summerPatternChips">
-            <button class="chip selected" onclick="setSummerPattern('week-on-week-off')">Alternating weeks</button>
-            <button class="chip" onclick="setSummerPattern('2-week-on-2-week-off')">Alternating 2 weeks</button>
+            <button class="chip" onclick="setSummerPattern('same-as-regular')">Same as regular</button>
+            <button class="chip selected" onclick="setSummerPattern('alternating-weeks')">Alternating weeks</button>
+            <button class="chip" onclick="setSummerPattern('alternating-two-weeks')">Alternating 2 weeks</button>
+            <button class="chip" onclick="setSummerPattern('extended-you')">All with you</button>
+            <button class="chip" onclick="setSummerPattern('extended-coparent')">All with co-parent</button>
           </div>
           <p class="input-label" style="margin-top: 16px;">Who starts summer?</p>
           <div class="chip-group">
@@ -2115,7 +2118,7 @@
         endMonth: 8,              // summer_end_month
         endWeek: 3,               // summer_end_week
         endWeekday: 0,            // summer_end_weekday
-        pattern: 'week-on-week-off', // summer_custody_pattern
+        pattern: 'alternating-weeks', // summer_custody_pattern
         startsWith: 'you'         // summer_starts_with
       },
 
@@ -2687,11 +2690,56 @@
           renderHolidays();
           renderAvailableHolidays();
           break;
+        case 'summer':
+          initSummerScreen();
+          break;
         case 'review':
           renderReview();
           renderReviewCalendar();
           break;
       }
+    }
+
+    // Initialize summer screen UI based on current state
+    function initSummerScreen() {
+      // Set summer enabled toggle
+      const summerToggle = document.getElementById('summerToggle');
+      if (summerToggle) summerToggle.checked = state.summer.enabled;
+
+      // Show/hide options
+      const summerOptions = document.getElementById('summerOptions');
+      if (summerOptions) summerOptions.style.display = state.summer.enabled ? 'block' : 'none';
+
+      // Set date selectors
+      const startMonth = document.getElementById('summerStartMonth');
+      const startWeek = document.getElementById('summerStartWeek');
+      const startWeekday = document.getElementById('summerStartWeekday');
+      const endMonth = document.getElementById('summerEndMonth');
+      const endWeek = document.getElementById('summerEndWeek');
+      const endWeekday = document.getElementById('summerEndWeekday');
+
+      if (startMonth) startMonth.value = state.summer.startMonth;
+      if (startWeek) startWeek.value = state.summer.startWeek;
+      if (startWeekday) startWeekday.value = state.summer.startWeekday;
+      if (endMonth) endMonth.value = state.summer.endMonth;
+      if (endWeek) endWeek.value = state.summer.endWeek;
+      if (endWeekday) endWeekday.value = state.summer.endWeekday;
+
+      // Set pattern chip selection
+      document.querySelectorAll('#summerPatternChips .chip').forEach(chip => {
+        const pattern = chip.getAttribute('onclick')?.match(/'([^']+)'/)?.[1];
+        chip.classList.toggle('selected', pattern === state.summer.pattern);
+      });
+
+      // Set starts-with chip selection
+      const startsWithChips = document.querySelectorAll('#screen-summer .chip-group:last-of-type .chip');
+      startsWithChips.forEach((chip, index) => {
+        const isYou = index === 0;
+        chip.classList.toggle('selected',
+          (isYou && state.summer.startsWith === 'you') ||
+          (!isYou && state.summer.startsWith === 'coparent')
+        );
+      });
     }
 
     // ==========================================
@@ -2731,28 +2779,35 @@
 
       try {
         const response = await fetch(`https://dwncravjhkbclbuzijra.supabase.co/functions/v1/get-plan-template?code=${code}`);
-
-        if (!response.ok) {
-          throw new Error('Plan not found');
-        }
-
         const data = await response.json();
 
+        if (!response.ok) {
+          console.error('Plan lookup error:', data);
+          let errorMsg = data.error || 'Plan not found. Please check your code.';
+          if (data.is_family_code) {
+            errorMsg = 'This is a family code from the app, not a plan code. Plan codes are created using this Plan Builder.';
+          }
+          throw new Error(errorMsg);
+        }
+
         if (!data || !data.plan_data) {
-          throw new Error('Invalid plan data');
+          throw new Error('Invalid plan data received');
         }
 
         // Load plan data into state
         loadPlanIntoState(data.plan_data);
 
-        // Store the plan code so we can update instead of create new
+        // Store the plan code and family_id (if this is an existing family)
         state.planCode = code;
+        state.familyId = data.family_id || null; // Will be set if loading from existing family
+        state.planSource = data.source || 'template'; // 'family' or 'template'
 
         // Go to review screen
         goToScreen('review');
 
       } catch (error) {
-        errorEl.textContent = 'Plan not found. Please check your code.';
+        console.error('Plan load error:', error);
+        errorEl.textContent = error.message || 'Plan not found. Please check your code.';
         errorEl.classList.add('visible');
         btn.disabled = false;
         btn.textContent = 'Load Plan';
@@ -2827,7 +2882,13 @@
         state.summer.endDay = planData.summer_end.day;
       }
       if (planData.summer_pattern) {
-        state.summer.pattern = planData.summer_pattern;
+        // Map old pattern names to new ones (for backwards compatibility)
+        const patternMap = {
+          'week-on-week-off': 'alternating-weeks',
+          '2-week-on-2-week-off': 'alternating-two-weeks',
+          '2-week-rotation': 'alternating-two-weeks'
+        };
+        state.summer.pattern = patternMap[planData.summer_pattern] || planData.summer_pattern;
       }
       if (planData.summer_start_parent) {
         state.summer.startParent = planData.summer_start_parent;
@@ -3493,17 +3554,35 @@
       return checkDate >= startDate && checkDate <= endDate;
     }
 
-    // Summer pattern arrays
+    // Summer pattern arrays - must match IDs in app's src/lib/patterns.js SUMMER_PATTERNS
     const SUMMER_PATTERN_ARRAYS = {
-      'week-on-week-off': [1,1,1,1,1,1,1, 0,0,0,0,0,0,0], // 14 days
-      '2-week-on-2-week-off': [1,1,1,1,1,1,1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0,0,0,0,0,0,0], // 28 days
+      'same-as-regular': null, // Use base schedule
+      'alternating-weeks': [1,1,1,1,1,1,1, 0,0,0,0,0,0,0], // 14 days
+      'alternating-two-weeks': [1,1,1,1,1,1,1,1,1,1,1,1,1,1, 0,0,0,0,0,0,0,0,0,0,0,0,0,0], // 28 days
+      'extended-you': 'extended-you', // All days with you
+      'extended-coparent': 'extended-coparent', // All days with co-parent
     };
 
     // Get custody for summer schedule
     function getSummerCustodyForDate(date) {
       const summerPattern = state.summer.pattern;
-      const patternArray = SUMMER_PATTERN_ARRAYS[summerPattern];
-      if (!patternArray) return { custody: 'coparent', isExchange: false };
+      const patternValue = SUMMER_PATTERN_ARRAYS[summerPattern];
+
+      // same-as-regular: return null to fall back to base schedule
+      if (patternValue === null || patternValue === undefined) {
+        return null;
+      }
+
+      // extended-you or extended-coparent: entire summer with one parent
+      if (patternValue === 'extended-you') {
+        return { custody: 'you', isExchange: false, isSummer: true };
+      }
+      if (patternValue === 'extended-coparent') {
+        return { custody: 'coparent', isExchange: false, isSummer: true };
+      }
+
+      // patternValue is an array for alternating patterns
+      const patternArray = patternValue;
 
       const year = date.getFullYear();
 
@@ -3524,10 +3603,10 @@
       // Find position in pattern
       const patternLength = patternArray.length;
       const targetPosition = ((daysDiff % patternLength) + patternLength) % patternLength;
-      const patternValue = patternArray[targetPosition];
+      const patternVal = patternArray[targetPosition];
 
       // Map to actual parents based on who starts summer
-      const firstParentHasCustody = patternValue === 1;
+      const firstParentHasCustody = patternVal === 1;
       const custody = (state.summer.startsWith === 'you')
         ? (firstParentHasCustody ? 'you' : 'coparent')
         : (firstParentHasCustody ? 'coparent' : 'you');
@@ -3535,7 +3614,7 @@
       // Check if exchange day
       const prevPosition = ((daysDiff - 1) % patternLength + patternLength) % patternLength;
       const prevPatternValue = patternArray[prevPosition];
-      const isExchange = patternValue !== prevPatternValue;
+      const isExchange = patternVal !== prevPatternValue;
 
       return { custody, isExchange, isSummer: true };
     }
@@ -3560,7 +3639,11 @@
 
       // Priority 2: Check for summer schedule
       if (state.summer.enabled && isInSummerPeriod(date)) {
-        return getSummerCustodyForDate(date);
+        const summerCustody = getSummerCustodyForDate(date);
+        // If summerCustody is null (same-as-regular), fall through to base schedule
+        if (summerCustody !== null) {
+          return summerCustody;
+        }
       }
 
       const scheduleId = state.schedule;
@@ -4035,9 +4118,11 @@
       const endDate = `${weekNames[state.summer.endWeek]} ${dayNames[state.summer.endWeekday]} of ${monthNames[state.summer.endMonth]}`;
 
       const patternNames = {
-        'week-on-week-off': 'Alternating weeks',
-        '2-week-rotation': 'Alternating 2-week blocks',
-        'same-as-regular': 'Same as regular schedule'
+        'same-as-regular': 'Same as regular schedule',
+        'alternating-weeks': 'Alternating weeks',
+        'alternating-two-weeks': 'Alternating 2-week blocks',
+        'extended-you': 'All time with you',
+        'extended-coparent': 'All time with co-parent'
       };
       const patternName = patternNames[state.summer.pattern] || state.summer.pattern;
 
@@ -4235,7 +4320,7 @@
     async function submitPlan() {
       const btn = document.getElementById('continueBtn');
       btn.disabled = true;
-      btn.textContent = 'Creating plan...';
+      btn.textContent = state.familyId ? 'Updating plan...' : 'Creating plan...';
 
       try {
         // Build the payload matching plan_templates schema
@@ -4247,6 +4332,8 @@
           email: state.email,
           first_name: state.firstName || null,
           family_name: state.familyName || null,
+          // Include family_id if updating an existing family (not creating new template)
+          family_id: state.familyId || null,
 
           // Children
           children: state.children.map(c => ({
