@@ -697,16 +697,6 @@
     .calendar-day.holiday.today {
       box-shadow: inset 0 0 0 2px var(--primary), inset 0 0 0 4px #E53935;
     }
-    .holiday-dot {
-      position: absolute;
-      bottom: 14px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 6px;
-      height: 6px;
-      background: #E53935;
-      border-radius: 50%;
-    }
     .calendar-legend {
       display: flex;
       gap: 20px;
@@ -4131,9 +4121,6 @@
         const summerClass = isSummer ? 'summer' : '';
         const holidayClass = isHoliday ? 'holiday' : '';
 
-        // Holiday indicator dot
-        const holidayDot = isHoliday ? `<span class="holiday-dot" title="${holiday.name}"></span>` : '';
-
         // For holidays, always show solid color (no exchange split)
         // Only show exchange split for non-holiday regular/summer days
         if (isExchange && !isHoliday) {
@@ -4151,7 +4138,6 @@
         } else {
           html += `<div class="calendar-day ${custody} ${isToday ? 'today' : ''} ${summerClass} ${holidayClass}">
             ${day}
-            ${holidayDot}
           </div>`;
         }
       }
