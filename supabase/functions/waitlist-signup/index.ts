@@ -85,7 +85,7 @@ serve(async (req) => {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1A1917; margin: 0; padding: 0; background-color: #0a0a0a;">
+<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1A1917; margin: 0; padding: 0; background-color: #FAFAF9;">
   <div style="max-width: 560px; margin: 0 auto; padding: 48px 24px;">
 
     <!-- Logo -->
@@ -139,6 +139,9 @@ serve(async (req) => {
     <!-- Footer -->
     <p style="text-align: center; font-size: 13px; color: #5C5856; margin: 32px 0 0 0;">
       <a href="https://getclearly.app" style="color: #0D8268; text-decoration: none; font-weight: 500;">getclearly.app</a>
+    </p>
+    <p style="text-align: center; font-size: 12px; color: #8C8780; margin: 16px 0 0 0;">
+      <a href="mailto:hello@getclearly.app?subject=Unsubscribe&body=Please%20remove%20me%20from%20the%20waitlist." style="color: #8C8780; text-decoration: underline;">Unsubscribe</a>
     </p>
 
   </div>

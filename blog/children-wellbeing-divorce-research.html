@@ -45,6 +45,7 @@
     .blog-post-content a { color: var(--primary); }
     .back-link { display: inline-block; margin-bottom: 32px; color: var(--primary); font-weight: 500; }
     .back-link:hover { text-decoration: none; }
+
     /* Related Articles */
     .related-articles { background: var(--surface); padding: 80px 0; border-top: 1px solid var(--border); }
     .related-articles h2 { font-size: 28px; font-weight: 700; margin-bottom: 32px; text-align: center; }
@@ -64,6 +65,7 @@
   </style>
 </head>
 <body>
+
   <nav class="nav">
     <div class="container">
       <a href="/" class="nav-brand">
@@ -82,6 +84,7 @@
       </button>
     </div>
   </nav>
+
   <article class="blog-post">
     <a href="/blog.html" class="back-link">&larr; Back to Blog</a>
     <header class="blog-post-header">
@@ -136,28 +139,36 @@
 <li><strong>It's never too late to change course.</strong> Children benefit immediately when parents reduce conflict, regardless of how long negative patterns have been in place or how old the children are.</li></ul>
     </div>
   </article>
+
+  
   <section class="related-articles">
     <div class="container">
       <h2>Related Articles</h2>
       <div class="related-grid">
+        
         <a href="/blog/children-fear-abandonment-divorce.html" class="related-card">
           <span class="related-category" data-cat="Your Children">Your Children</span>
           <h3>Fear of Abandonment: What Your Child Won't Say But Is Feeling</h3>
           <p>Children of divorced parents often develop abandonment fears when exposed to parental conflict. Learn the signs.</p>
         </a>
+        
         <a href="/blog/co-parenting-communication-channels.html" class="related-card">
           <span class="related-category" data-cat="Your Children">Your Children</span>
           <h3>Beyond Text: Choosing the Right Communication Channel</h3>
           <p>Email, text, apps, phone calls—each has its place. Learn when to use which channel for different conversations.</p>
         </a>
+        
         <a href="/blog/handling-co-parenting-schedule-changes-without-conflict.html" class="related-card">
           <span class="related-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <h3>How to Handle Schedule Changes Without Conflict or Confusion</h3>
           <p>Learn practical strategies for managing inevitable schedule changes in co-parenting while maintaining stability and redu...</p>
         </a>
+        
       </div>
     </div>
   </section>
+  
+
   <footer class="footer">
     <div class="container">
       <div class="footer-top">
@@ -170,13 +181,13 @@
         </div>
         <div class="footer-nav">
           <div class="footer-col">
-            <h4>Product</h4>
+            <h4>Explore</h4>
             <ul>
-              <li><a href="/blog.html">Blog</a></li>
+              <li><a href="/blog.html">Common Ground</a></li>
               <li><a href="/professionals.html">For Professionals</a></li>
-              <li><a href="/#notify">Join Waitlist</a></li>
             </ul>
           </div>
+          <div class="footer-col">
             <h4>Legal</h4>
             <ul>
               <li><a href="/privacy.html">Privacy Policy</a></li>
@@ -186,20 +197,24 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2026 Clearly LLC. All rights reserved.</p>
+        <p>&copy; 2026 Clearly LLC. All rights reserved.</p>
         <p>Proudly designed and developed in the USA.</p>
       </div>
     </div>
   </footer>
+
   <script>
     // Mobile menu toggle
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+    }
   </script>
+
   <!-- Article Structured Data -->
   <script type="application/ld+json">
   {
@@ -229,5 +244,6 @@
     "image": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png"
   }
   </script>
+
 </body>
 </html>
