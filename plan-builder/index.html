@@ -708,7 +708,7 @@
     }
     .holiday-dot {
       position: absolute;
-      bottom: 3px;
+      bottom: 14px;
       left: 50%;
       transform: translateX(-50%);
       width: 6px;
@@ -2463,41 +2463,42 @@
         }
       }
 
-      // Check custom holidays - check multiple years
+      // Check custom holidays - apply to ALL years based on month/day pattern
       if (state.customHolidays && state.customHolidays.length > 0) {
         for (const customHoliday of state.customHolidays) {
-          // Check all years stored in the custom holiday
+          // Get the date pattern from any stored year (they're the same month/day for each year)
           const yearsInHoliday = customHoliday.years ? Object.keys(customHoliday.years) : [];
+          if (yearsInHoliday.length === 0) continue;
 
-          for (const storedYear of yearsInHoliday) {
-            const yearData = customHoliday.years[storedYear];
-            if (!yearData || !yearData.startMonth || !yearData.startDay) continue;
+          // Use the first stored year to get the month/day pattern
+          const templateYear = yearsInHoliday[0];
+          const yearData = customHoliday.years[templateYear];
+          if (!yearData || !yearData.startMonth || !yearData.startDay) continue;
 
-            const startDate = new Date(parseInt(storedYear), yearData.startMonth - 1, yearData.startDay);
-            const endDate = yearData.endMonth && yearData.endDay
-              ? new Date(parseInt(storedYear), yearData.endMonth - 1, yearData.endDay)
-              : startDate;
+          // Apply the pattern to the year we're checking
+          const startDate = new Date(year, yearData.startMonth - 1, yearData.startDay);
+          const endDate = yearData.endMonth && yearData.endDay
+            ? new Date(year, yearData.endMonth - 1, yearData.endDay)
+            : startDate;
 
-            // Normalize dates for comparison
-            startDate.setHours(0, 0, 0, 0);
-            endDate.setHours(23, 59, 59, 999);
-            const checkDate = new Date(date);
-            checkDate.setHours(12, 0, 0, 0);
+          // Normalize dates for comparison
+          startDate.setHours(0, 0, 0, 0);
+          endDate.setHours(23, 59, 59, 999);
+          const checkDate = new Date(date);
+          checkDate.setHours(12, 0, 0, 0);
 
-            if (checkDate >= startDate && checkDate <= endDate) {
-              const myYears = customHoliday.myYears || 'odd';
-              const custodyYear = parseInt(storedYear);
-              const custody = (myYears === 'odd' && custodyYear % 2 === 1) || (myYears === 'even' && custodyYear % 2 === 0)
-                ? 'you' : 'coparent';
-              return {
-                id: customHoliday.id,
-                name: customHoliday.name,
-                emoji: '⭐',
-                custody: custody,
-                isCustom: true,
-                isPrimaryDate: startDate.getMonth() === month && startDate.getDate() === day
-              };
-            }
+          if (checkDate >= startDate && checkDate <= endDate) {
+            const myYears = customHoliday.myYears || 'odd';
+            const custody = (myYears === 'odd' && year % 2 === 1) || (myYears === 'even' && year % 2 === 0)
+              ? 'you' : 'coparent';
+            return {
+              id: customHoliday.id,
+              name: customHoliday.name,
+              emoji: '⭐',
+              custody: custody,
+              isCustom: true,
+              isPrimaryDate: startDate.getMonth() === month && startDate.getDate() === day
+            };
           }
         }
       }
