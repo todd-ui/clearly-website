@@ -11,8 +11,8 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clearly - Structure for separated parents | Parenting Plan Builder</title>
-  <meta name="description" content="When separation changes how you communicate, Clearly provides structure. Start with a free parenting plan builder, then continue with ongoing coordination tools.">
+  <title>Clearly - Co-parenting made clear | Parenting Plan Builder</title>
+  <meta name="description" content="Clearly is a co-parenting app that helps separated parents coordinate schedules, share expenses, and make decisions together. Start with a free parenting plan builder.">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://getclearly.app/">
@@ -20,15 +20,15 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app/">
-  <meta property="og:title" content="Clearly - Structure for separated parents">
-  <meta property="og:description" content="When separation changes how you communicate, Clearly provides structure. Start with a free parenting plan builder.">
+  <meta property="og:title" content="Clearly - Co-parenting made clear">
+  <meta property="og:description" content="Clearly helps separated parents coordinate schedules, share expenses, and make decisions together. Start free.">
   <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
   <meta property="og:site_name" content="Clearly">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Clearly - Structure for separated parents">
-  <meta name="twitter:description" content="When separation changes how you communicate, Clearly provides structure.">
+  <meta name="twitter:title" content="Clearly - Co-parenting made clear">
+  <meta name="twitter:description" content="Clearly helps separated parents coordinate schedules, share expenses, and make decisions together.">
   <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
 
   <!-- Additional SEO -->
@@ -39,161 +39,410 @@
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
   <link rel="apple-touch-icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
   <style>
-    /* Homepage-specific styles */
+    /* Homepage Redesign Styles */
+
+    /* Hero Section */
     .hero-home {
-      padding: 120px 0 80px;
-      background: linear-gradient(135deg, #f8fdfb 0%, #f0faf7 100%);
+      padding: 140px 0 100px;
+      background: linear-gradient(160deg, #f8fdfb 0%, #e8f5f0 50%, #f0faf7 100%);
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-home::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      right: -200px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(13, 130, 104, 0.08) 0%, transparent 70%);
+      border-radius: 50%;
+    }
+    .hero-home::after {
+      content: '';
+      position: absolute;
+      bottom: -150px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(13, 130, 104, 0.06) 0%, transparent 70%);
+      border-radius: 50%;
     }
     .hero-home .container {
-      max-width: 680px;
+      max-width: 720px;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      background: rgba(13, 130, 104, 0.1);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      border-radius: 100px;
+      margin-bottom: 24px;
     }
     .hero-home h1 {
-      font-size: 42px;
-      font-weight: 600;
-      line-height: 1.2;
+      font-size: 52px;
+      font-weight: 700;
+      line-height: 1.1;
       color: var(--text);
-      margin-bottom: 20px;
-      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      letter-spacing: -0.03em;
     }
-    .hero-home p {
-      font-size: 19px;
+    .hero-home .hero-subtitle {
+      font-size: 20px;
       color: var(--text-secondary);
-      line-height: 1.7;
-      margin: 0;
+      line-height: 1.6;
+      margin: 0 0 36px 0;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: var(--gradient);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      transition: all 0.25s;
+      box-shadow: 0 4px 20px rgba(13, 130, 104, 0.25);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 28px rgba(13, 130, 104, 0.35);
+      text-decoration: none;
+    }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 28px;
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+    .btn-secondary:hover {
+      border-color: var(--primary);
+      color: var(--primary);
+      text-decoration: none;
     }
 
-    /* Recognition section */
-    .recognition {
-      padding: 80px 0;
+    @media (max-width: 768px) {
+      .hero-home {
+        padding: 100px 0 72px;
+      }
+      .hero-home h1 {
+        font-size: 36px;
+      }
+      .hero-home .hero-subtitle {
+        font-size: 18px;
+      }
+    }
+
+    /* Three Pillars Strip */
+    .pillars {
+      padding: 56px 0;
       background: white;
       border-bottom: 1px solid var(--border);
     }
-    .recognition .container {
-      max-width: 600px;
+    .pillars .container {
+      max-width: 960px;
+    }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
       text-align: center;
     }
-    .recognition p {
-      font-size: 18px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin: 0 0 16px 0;
+    .pillar-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
-    .recognition p:first-child {
-      font-size: 21px;
+    .pillar-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--primary-soft);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+    .pillar-item h3 {
+      font-size: 17px;
+      font-weight: 600;
       color: var(--text);
-      font-weight: 500;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
     }
-    .recognition p:last-child {
-      margin-bottom: 0;
+    .pillar-item p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin: 0;
+      line-height: 1.5;
+    }
+    @media (max-width: 600px) {
+      .pillars-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
     }
 
-    /* Reframe section */
-    .reframe {
+    /* Journey Section - Meet You Where You Are */
+    .journey {
       padding: 88px 0;
       background: var(--bg);
     }
-    .reframe .container {
-      max-width: 640px;
-      text-align: center;
+    .journey .container {
+      max-width: 960px;
     }
-    .reframe h2 {
-      font-size: 26px;
+    .journey-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .journey-header h2 {
+      font-size: 32px;
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 24px;
+      margin-bottom: 12px;
     }
-    .reframe p {
-      font-size: 17px;
+    .journey-header p {
+      font-size: 18px;
       color: var(--text-secondary);
-      line-height: 1.8;
-      margin: 0 0 16px 0;
     }
-    .reframe p:last-child {
-      margin-bottom: 0;
+    .journey-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-bottom: 40px;
+    }
+    .journey-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+    .journey-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+    .journey-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 12px;
+    }
+    .journey-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .journey-cta {
+      text-align: center;
+    }
+    .journey-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       color: var(--primary);
       font-weight: 600;
-      font-size: 18px;
+      font-size: 16px;
+    }
+    .journey-cta a:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+      .journey-cards {
+        grid-template-columns: 1fr;
+      }
     }
 
-    /* Identity section */
-    .identity {
-      padding: 80px 0;
-      background: white;
-      border-top: 1px solid var(--border);
+    /* Methodology Section */
+    .methodology {
+      padding: 88px 0;
+      background: linear-gradient(135deg, var(--primary) 0%, #14a085 100%);
     }
-    .identity .container {
-      max-width: 640px;
+    .methodology .container {
+      max-width: 900px;
+    }
+    .methodology-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .methodology-header h2 {
+      font-size: 32px;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 12px;
+    }
+    .methodology-header p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.85);
+    }
+    .methodology-steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .method-step {
       text-align: center;
     }
-    .identity h2 {
-      font-size: 26px;
-      font-weight: 600;
-      color: var(--text);
+    .method-step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      background: white;
+      color: var(--primary);
+      font-size: 18px;
+      font-weight: 700;
+      border-radius: 50%;
       margin-bottom: 20px;
     }
-    .identity p {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.75;
-      margin: 0 0 16px 0;
+    .method-step h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
     }
-    .identity p:last-child {
-      margin-bottom: 0;
+    .method-step p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+      margin: 0;
+    }
+    @media (max-width: 600px) {
+      .methodology-steps {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
     }
 
-    /* Starting point (Builder CTA) */
-    .starting-point {
+    /* Difference Section */
+    .difference {
+      padding: 88px 0;
+      background: white;
+    }
+    .difference .container {
+      max-width: 700px;
+      text-align: center;
+    }
+    .difference h2 {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 40px;
+    }
+    .difference-list {
+      text-align: left;
+      max-width: 480px;
+      margin: 0 auto 40px;
+    }
+    .difference-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .difference-item:last-child {
+      border-bottom: none;
+    }
+    .difference-item svg {
+      color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .difference-item span {
+      font-size: 17px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+    .difference-tagline {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* Plan Builder CTA */
+    .plan-cta {
       padding: 88px 0;
       background: var(--primary-soft);
     }
-    .starting-point .container {
+    .plan-cta .container {
       max-width: 680px;
       text-align: center;
     }
-    .starting-point h2 {
+    .plan-cta h2 {
       font-size: 28px;
       font-weight: 600;
       color: var(--text);
       margin-bottom: 16px;
     }
-    .starting-point > .container > p {
+    .plan-cta > .container > p {
       font-size: 17px;
       color: var(--text-secondary);
-      line-height: 1.75;
+      line-height: 1.7;
       margin: 0 0 32px 0;
     }
-    .starting-point-card {
+    .plan-cta-card {
       background: white;
       border-radius: 20px;
       padding: 40px;
-      text-align: left;
       box-shadow: 0 4px 24px rgba(0,0,0,0.06);
     }
-    .starting-point-card h3 {
+    .plan-cta-card h3 {
       font-size: 22px;
       font-weight: 600;
       color: var(--text);
       margin-bottom: 12px;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 12px;
     }
-    .starting-point-card h3 svg {
+    .plan-cta-card h3 svg {
       color: var(--primary);
-      flex-shrink: 0;
     }
-    .starting-point-card p {
+    .plan-cta-card p {
       font-size: 16px;
       color: var(--text-secondary);
       line-height: 1.7;
-      margin: 0 0 24px 0;
+      margin: 0 0 28px 0;
     }
     .btn-start {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 16px 28px;
+      padding: 16px 32px;
       background: var(--gradient);
       color: white;
       font-size: 16px;
@@ -208,219 +457,46 @@
       text-decoration: none;
     }
 
-    /* 3-step strip */
-    .how-strip {
-      padding: 64px 0;
-      background: linear-gradient(135deg, var(--primary) 0%, #14a085 100%);
+    /* Beta Access CTA */
+    .beta-cta {
+      padding: 72px 0;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
     }
-    .how-strip .container {
-      max-width: 900px;
-    }
-    .how-strip-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+    .beta-cta .container {
+      max-width: 560px;
       text-align: center;
-      position: relative;
     }
-    .how-strip-grid::before {
-      content: '';
-      position: absolute;
-      top: 24px;
-      left: calc(16.67% + 24px);
-      right: calc(16.67% + 24px);
-      height: 2px;
-      background: rgba(255,255,255,0.25);
-    }
-    .how-strip-step {
-      position: relative;
-    }
-    .how-strip-num {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
-      background: white;
-      color: var(--primary);
-      font-size: 18px;
-      font-weight: 700;
-      border-radius: 50%;
-      margin-bottom: 16px;
-      position: relative;
-      z-index: 1;
-    }
-    .how-strip-step h3 {
-      font-size: 16px;
-      font-weight: 600;
-      color: white;
-      margin-bottom: 6px;
-    }
-    .how-strip-step p {
-      font-size: 14px;
-      color: rgba(255,255,255,0.8);
-      margin: 0;
-      line-height: 1.5;
-    }
-    @media (max-width: 600px) {
-      .how-strip-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-      .how-strip-grid::before {
-        display: none;
-      }
-    }
-
-    /* Outcomes section */
-    .outcomes {
-      padding: 100px 0;
-      background: white;
-    }
-    .outcomes .container {
-      max-width: 900px;
-    }
-    .outcomes-header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-    .outcomes-header h2 {
-      font-size: 28px;
+    .beta-cta h3 {
+      font-size: 22px;
       font-weight: 600;
       color: var(--text);
       margin-bottom: 12px;
     }
-    .outcomes-header p {
-      font-size: 17px;
+    .beta-cta > .container > p {
+      font-size: 16px;
       color: var(--text-secondary);
-    }
-    .outcomes-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-    }
-    .outcome-card {
-      padding: 28px;
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-    }
-    .outcome-card-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--primary-soft);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-      color: var(--primary);
-    }
-    .outcome-card h3 {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-    .outcome-card p {
-      font-size: 15px;
-      color: var(--text-secondary);
+      margin: 0 0 8px 0;
       line-height: 1.6;
-      margin: 0;
     }
-    @media (max-width: 768px) {
-      .outcomes-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    /* Situations section */
-    .situations {
-      padding: 80px 0;
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-    }
-    .situations .container {
-      max-width: 800px;
-    }
-    .situations h2 {
-      font-size: 24px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 32px;
-      text-align: center;
-    }
-    .situations-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-    }
-    .situation-item {
+    .beta-features {
       display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 20px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      text-decoration: none;
-      transition: all 0.2s;
+      justify-content: center;
+      gap: 24px;
+      margin: 20px 0 28px;
+      flex-wrap: wrap;
     }
-    .situation-item:hover {
-      border-color: var(--primary);
-      text-decoration: none;
-    }
-    .situation-icon {
-      width: 36px;
-      height: 36px;
-      background: var(--primary-soft);
-      border-radius: 8px;
+    .beta-feature {
       display: flex;
       align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      flex-shrink: 0;
-    }
-    .situation-text h3 {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-    .situation-text p {
+      gap: 8px;
       font-size: 14px;
       color: var(--text-secondary);
-      margin: 0;
-      line-height: 1.5;
     }
-    @media (max-width: 600px) {
-      .situations-grid {
-        grid-template-columns: 1fr;
-      }
+    .beta-feature svg {
+      color: var(--primary);
     }
-
-    /* Beta CTA */
-    .beta-cta {
-      padding: 72px 0;
-      background: var(--primary-soft);
-      text-align: center;
-    }
-    .beta-cta .container {
-      max-width: 500px;
-    }
-    .beta-cta p {
-      font-size: 17px;
-      color: var(--text);
-      margin: 0 0 8px 0;
-      font-weight: 500;
-    }
-    .beta-cta .beta-subtext {
-      font-size: 15px;
-      color: var(--text-secondary);
-      font-weight: 400;
-      margin-bottom: 24px;
-    }
-    .btn-beta-cta {
+    .btn-beta {
       display: inline-flex;
       align-items: center;
       padding: 14px 28px;
@@ -432,10 +508,21 @@
       border-radius: 10px;
       transition: all 0.2s;
     }
-    .btn-beta-cta:hover {
+    .btn-beta:hover {
       border-color: var(--primary);
       color: var(--primary);
       text-decoration: none;
+    }
+
+    /* Fade-in animations */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
@@ -466,166 +553,169 @@
   <!-- Hero -->
   <section class="hero-home">
     <div class="container">
-      <h1>You're not sure<br>what to do next.</h1>
-      <p>Things are different now, but the conversations haven't changed. Every discussion feels like the last one. You're exhausted, overwhelmed, and wondering if there's a better way.</p>
+      <span class="hero-badge">Co-parenting App</span>
+      <h1>Co-parenting,<br>made clear.</h1>
+      <p class="hero-subtitle">Separation changes everything — including how you communicate. Clearly gives you the structure to coordinate schedules, share expenses, and make decisions together.</p>
+      <div class="hero-ctas">
+        <a href="/plan-builder/" class="btn-primary">
+          Start free
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+        <a href="#how-it-works" class="btn-secondary">See how it works</a>
+      </div>
     </div>
   </section>
 
-  <!-- Recognition -->
-  <section class="recognition">
+  <!-- Three Pillars -->
+  <section class="pillars fade-in">
     <div class="container">
-      <p>The same conversation, again.</p>
-      <p>You thought you'd agreed. But here you are, back at the beginning.</p>
-      <p>It's not that either of you wants to fight.</p>
-      <p>It's that nothing is settled — and every small decision becomes a negotiation.</p>
+      <div class="pillars-grid">
+        <div class="pillar-item">
+          <div class="pillar-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </div>
+          <h3>Scheduling</h3>
+          <p>One calendar. Both parents.<br>Always in sync.</p>
+        </div>
+        <div class="pillar-item">
+          <div class="pillar-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <h3>Communication</h3>
+          <p>Conversations that<br>actually resolve.</p>
+        </div>
+        <div class="pillar-item">
+          <div class="pillar-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <h3>Expenses</h3>
+          <p>Track, split, done.<br>No more ambiguity.</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Reframing -->
-  <section class="reframe">
+  <!-- Journey Section -->
+  <section class="journey fade-in">
     <div class="container">
-      <h2>This isn't a communication problem</h2>
-      <p>The ways you used to talk — the shortcuts, the assumptions, the patterns that formed over years — those don't work anymore. The context has changed.</p>
-      <p>It's not that you're doing it wrong. It's that there's no shared framework for making decisions together now that the relationship is different.</p>
-      <p>There's a difference between talking and deciding.</p>
-    </div>
-  </section>
-
-  <!-- Identity -->
-  <section class="identity">
-    <div class="container">
-      <h2>What Clearly does</h2>
-      <p>Clearly is a coordination system for separated parents. It gives you a shared structure for schedules, expenses, and decisions — so you spend less time going back and forth, and more time moving forward.</p>
-      <p>Conversations that used to loop now resolve. Decisions stick. Everyone knows what's expected.</p>
-    </div>
-  </section>
-
-  <!-- Starting Point -->
-  <section class="starting-point">
-    <div class="container">
-      <h2>A place to start</h2>
-      <p>Before you can stop circling the same conversations, you need clarity on the basics: schedules, expenses, decisions. Not forever — just a starting point you can both reference.</p>
-      <div class="starting-point-card">
-        <h3>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-          Parenting Plan Builder
-        </h3>
-        <p>Work through the practical questions on your own — custody schedules, holidays, shared expenses — and create a structured summary. Then share it with the other parent, an attorney, or a mediator. No account needed.</p>
-        <a href="/plan-builder/" class="btn-start">
-          Start building
+      <div class="journey-header">
+        <h2>Whether you're...</h2>
+      </div>
+      <div class="journey-cards">
+        <div class="journey-card">
+          <h3>Newly separated</h3>
+          <p>Just starting to figure out the logistics? Build a foundation you can both reference.</p>
+        </div>
+        <div class="journey-card">
+          <h3>Dealing with conflict</h3>
+          <p>Tired of circular conversations? Structure helps keep things on track.</p>
+        </div>
+        <div class="journey-card">
+          <h3>Making it work</h3>
+          <p>Already co-parenting but want less friction? Simplify the coordination.</p>
+        </div>
+      </div>
+      <div class="journey-cta">
+        <a href="/plan-builder/">
+          Start with our free Parenting Plan Builder
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- How It Works Strip -->
-  <section class="how-strip">
+  <!-- Methodology -->
+  <section class="methodology fade-in" id="how-it-works">
     <div class="container">
-      <div class="how-strip-grid">
-        <div class="how-strip-step">
-          <span class="how-strip-num">1</span>
-          <h3>Build a parenting plan</h3>
-          <p>Work through schedules, holidays, and expenses on your own.</p>
+      <div class="methodology-header">
+        <h2>Built on proven techniques</h2>
+        <p>The same approaches mediators and family therapists use — built into the tools.</p>
+      </div>
+      <div class="methodology-steps">
+        <div class="method-step">
+          <span class="method-step-num">1</span>
+          <h3>Structure</h3>
+          <p>Clear expectations reduce conflict. When the basics are documented, there's less to negotiate.</p>
         </div>
-        <div class="how-strip-step">
-          <span class="how-strip-num">2</span>
-          <h3>Share and align</h3>
-          <p>Review with the other parent, attorney, or mediator.</p>
+        <div class="method-step">
+          <span class="method-step-num">2</span>
+          <h3>Resolution</h3>
+          <p>Guided conversations reach decisions. No more endless back-and-forth that goes nowhere.</p>
         </div>
-        <div class="how-strip-step">
-          <span class="how-strip-num">3</span>
-          <h3>Continue in Clearly</h3>
-          <p>Optional: use it for ongoing coordination (private beta).</p>
+        <div class="method-step">
+          <span class="method-step-num">3</span>
+          <h3>Records</h3>
+          <p>Everyone has the same source of truth. Agreements stick because they're written down.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Outcomes -->
-  <section class="outcomes">
+  <!-- Difference Section -->
+  <section class="difference fade-in">
     <div class="container">
-      <div class="outcomes-header">
-        <h2>What clarity looks like</h2>
-        <p>When the basics are settled, conversations change. Here's what becomes possible.</p>
-      </div>
-      <div class="outcomes-grid">
-        <div class="outcome-card">
-          <div class="outcome-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-          </div>
-          <h3>Fewer surprises</h3>
-          <p>Schedules are documented and shared. Both parents see the same calendar.</p>
+      <h2>The Clearly difference</h2>
+      <div class="difference-list">
+        <div class="difference-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <span>No more "I thought you said..."</span>
         </div>
-        <div class="outcome-card">
-          <div class="outcome-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-          </div>
-          <h3>Less financial friction</h3>
-          <p>Expenses are tracked, splits are clear, and there's a record.</p>
+        <div class="difference-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <span>No more screenshots as evidence</span>
         </div>
-        <div class="outcome-card">
-          <div class="outcome-card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-          </div>
-          <h3>Decisions that stick</h3>
-          <p>When expectations are written down, you stop renegotiating the basics.</p>
+        <div class="difference-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <span>No more guessing whose weekend it is</span>
+        </div>
+        <div class="difference-item">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          <span>No more fights over $20 expenses</span>
         </div>
       </div>
+      <p class="difference-tagline">Just clarity.</p>
     </div>
   </section>
 
-  <!-- Situations -->
-  <section class="situations">
+  <!-- Plan Builder CTA -->
+  <section class="plan-cta fade-in">
     <div class="container">
-      <h2>Common situations we're built for</h2>
-      <div class="situations-grid">
-        <a href="/blog/handling-co-parenting-schedule-changes-without-conflict.html" class="situation-item">
-          <div class="situation-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-          </div>
-          <div class="situation-text">
-            <h3>Frequent schedule changes</h3>
-            <p>When plans shift often and you need a clear record.</p>
-          </div>
-        </a>
-        <a href="/blog/co-parenting-communication-boundaries.html" class="situation-item">
-          <div class="situation-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-          </div>
-          <div class="situation-text">
-            <h3>Tense communication</h3>
-            <p>When messages escalate and boundaries help.</p>
-          </div>
-        </a>
-        <a href="/blog/co-parenting-documentation-guide.html" class="situation-item">
-          <div class="situation-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-          </div>
-          <div class="situation-text">
-            <h3>Expense ambiguity</h3>
-            <p>When who-pays-for-what isn't clear.</p>
-          </div>
-        </a>
-        <a href="/blog/creating-first-co-parenting-plan-essential-elements.html" class="situation-item">
-          <div class="situation-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-          </div>
-          <div class="situation-text">
-            <h3>Newly separated</h3>
-            <p>When you're starting fresh and need a baseline.</p>
-          </div>
+      <h2>Start with a plan</h2>
+      <p>Before you can coordinate day-to-day, you need the basics sorted: schedules, expenses, decisions. Start here — it's free, no account needed.</p>
+      <div class="plan-cta-card">
+        <h3>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          Parenting Plan Builder
+        </h3>
+        <p>Work through custody schedules, holidays, and shared expenses. Create a structured summary you can share with your co-parent, attorney, or mediator.</p>
+        <a href="/plan-builder/" class="btn-start">
+          Build your plan
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
       </div>
     </div>
   </section>
 
-  <!-- Beta CTA -->
-  <section class="beta-cta">
+  <!-- Beta Access CTA -->
+  <section class="beta-cta fade-in">
     <div class="container">
-      <p>Clearly is currently in private beta.</p>
-      <p class="beta-subtext">Looking for ongoing coordination tools after you've created your plan?</p>
-      <button class="btn-beta-cta" data-access-modal>Request private access</button>
+      <h3>Want ongoing coordination tools?</h3>
+      <p>Clearly is in private beta. Request access to get the full co-parenting toolkit.</p>
+      <div class="beta-features">
+        <span class="beta-feature">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          Shared calendar
+        </span>
+        <span class="beta-feature">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          Structured messaging
+        </span>
+        <span class="beta-feature">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          Expense tracking
+        </span>
+      </div>
+      <button class="btn-beta" data-access-modal>Request private access</button>
     </div>
   </section>
 
@@ -721,7 +811,7 @@
     "legalName": "Clearly LLC",
     "url": "https://getclearly.app",
     "logo": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png",
-    "description": "Clearly is a coordination system for separated parents. Free Parenting Plan Builder, support calculators, and ongoing coordination tools.",
+    "description": "Clearly is a co-parenting app that helps separated parents coordinate schedules, share expenses, and make decisions together. Free Parenting Plan Builder and ongoing coordination tools.",
     "email": "hello@getclearly.app",
     "sameAs": []
   }
