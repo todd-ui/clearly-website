@@ -181,6 +181,36 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
     .back-link { display: inline-block; margin-bottom: 32px; color: var(--primary); font-weight: 500; }
     .back-link:hover { text-decoration: none; }
 
+    /* Post CTA */
+    .post-cta {
+      margin-top: 56px;
+      padding: 32px;
+      background: var(--primary-soft);
+      border-radius: 16px;
+      border-left: 4px solid var(--primary);
+    }
+    .post-cta h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .post-cta p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin: 0 0 16px 0;
+      line-height: 1.6;
+    }
+    .post-cta a.cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--primary);
+    }
+    .post-cta a.cta-link:hover { text-decoration: none; }
+
     /* Related Articles */
     .related-articles { background: var(--surface); padding: 80px 0; border-top: 1px solid var(--border); }
     .related-articles h2 { font-size: 28px; font-weight: 700; margin-bottom: 32px; text-align: center; }
@@ -211,6 +241,14 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
     </header>
     <div class="blog-post-content">
       ${post.content}
+    </div>
+    <div class="post-cta">
+      <h3>Ready to reset expectations?</h3>
+      <p>The Parenting Plan Builder helps you organize schedules, holidays, and expenses in one place — free, no account required.</p>
+      <a href="/plan-builder/" class="cta-link">
+        Start your parenting plan
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
     </div>
   </article>
 
@@ -513,6 +551,25 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
     .blog-card.hidden {
       display: none;
     }
+    /* CTA Banner */
+    .blog-cta-banner {
+      padding: 20px 0;
+      background: rgba(13, 147, 115, 0.08);
+      border-bottom: 1px solid var(--border);
+    }
+    .blog-cta-banner .container {
+      max-width: 900px;
+      text-align: center;
+    }
+    .blog-cta-banner p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    .blog-cta-banner a {
+      color: #0d9373;
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
@@ -530,6 +587,12 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
       <p>Co-parenting brings enough complexity on its own. Common Ground is here to make the communication part a little easier — with real topics, practical advice, and perspectives from people who get it. Whether you're figuring out schedules, navigating tricky conversations, or just looking for a calmer way forward, you're in the right place.</p>
     </div>
   </header>
+
+  <section class="blog-cta-banner">
+    <div class="container">
+      <p>Looking for a place to start? The <a href="/plan-builder/">Parenting Plan Builder</a> helps you organize schedules, holidays, and expenses — free, no account required.</p>
+    </div>
+  </section>
 
   <section class="blog-section">
     <div class="container">
@@ -652,22 +715,40 @@ async function build() {
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://getclearly.app/plan-builder/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://getclearly.app/blog.html</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/calculators/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/professionals.html</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
   <url>
     <loc>https://getclearly.app/faq.html</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://getclearly.app/help.html</loc>
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://getclearly.app/privacy.html</loc>
@@ -680,12 +761,6 @@ async function build() {
     <lastmod>${today}</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/professionals.html</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
   </url>
 ${processedPosts.map(post => `  <url>
     <loc>https://getclearly.app/blog/${post.slug}.html</loc>

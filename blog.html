@@ -245,6 +245,25 @@
     .blog-card.hidden {
       display: none;
     }
+    /* CTA Banner */
+    .blog-cta-banner {
+      padding: 20px 0;
+      background: var(--primary-soft);
+      border-bottom: 1px solid var(--border);
+    }
+    .blog-cta-banner .container {
+      max-width: 900px;
+      text-align: center;
+    }
+    .blog-cta-banner p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    .blog-cta-banner a {
+      color: var(--primary);
+      font-weight: 500;
+    }
   </style>
 </head>
 <body>
@@ -283,9 +302,16 @@
     </div>
   </header>
 
+  <!-- Starting point banner -->
+  <section class="blog-cta-banner">
+    <div class="container">
+      <p>Looking for a place to start? The <a href="/plan-builder/">Parenting Plan Builder</a> helps you organize schedules, holidays, and expenses — free, no account required.</p>
+    </div>
+  </section>
+
   <section class="blog-section">
     <div class="container">
-      
+
       <div class="blog-filters">
         <button class="filter-btn active" data-category="all">All</button>
         
