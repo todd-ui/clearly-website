@@ -162,36 +162,82 @@
       text-decoration: none;
     }
 
-    /* Truth block */
-    .truth-block {
-      padding: 64px 0;
+    /* Recognition block */
+    .recognition-block {
+      padding: 72px 0;
       background: white;
       border-bottom: 1px solid var(--border);
     }
-    .truth-block .container {
-      max-width: 580px;
+    .recognition-block .container {
+      max-width: 620px;
       text-align: center;
     }
-    .truth-block p {
+    .recognition-block h2 {
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .recognition-block p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    /* Reset block */
+    .reset-block {
+      padding: 80px 0;
+      background: var(--primary-soft);
+    }
+    .reset-block .container {
+      max-width: 640px;
+    }
+    .reset-content {
+      text-align: center;
+    }
+    .reset-content h2 {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 20px;
+    }
+    .reset-content p {
       font-size: 17px;
       color: var(--text-secondary);
       line-height: 1.8;
-      margin: 0 0 12px 0;
+      margin: 0 0 16px 0;
     }
-    .truth-block p:last-child {
+    .reset-content p:last-child {
       margin-bottom: 0;
       color: var(--primary);
-      font-weight: 600;
-      font-size: 18px;
+      font-weight: 500;
     }
 
-    /* What Clearly helps with */
+    /* New mode section */
     .helps-section {
       padding: 100px 0;
       background: var(--bg);
     }
     .helps-section .container {
       max-width: 1000px;
+    }
+    .helps-header {
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto 56px auto;
+    }
+    .helps-header h2 {
+      font-size: 30px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+    .helps-header p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin: 0;
     }
     .helps-grid {
       display: grid;
@@ -256,6 +302,11 @@
       font-size: 28px;
       font-weight: 600;
       color: white;
+      margin: 0 0 12px 0;
+    }
+    .how-strip-subhead {
+      font-size: 17px;
+      color: rgba(255,255,255,0.85);
       margin: 0;
     }
     .how-strip-grid {
@@ -480,15 +531,11 @@
     <div class="hero-decoration hero-decoration-3"></div>
 
     <div class="container">
-      <div class="hero-badge">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
-        Free Parenting Plan Builder
-      </div>
-      <h1>When every message<br>becomes a negotiation.</h1>
-      <p>You're not looking for another place to argue. You need a way to make decisions and move on. Start with a parenting plan you can complete on your own — then share it with your co-parent, lawyer, or mediator.</p>
+      <h1>When the relationship changes,<br>so does everything else.</h1>
+      <p>Separation changes how you communicate. The patterns that worked before — or didn't — don't apply anymore. You need a new way to make decisions together, without the old dynamics getting in the way.</p>
       <div class="hero-buttons">
         <a href="/plan-builder/" class="btn-hero-primary">
-          Build your parenting plan
+          Start with a parenting plan
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
         <a href="mailto:hello@getclearly.app?subject=Request%20private%20beta%20access" class="btn-hero-secondary">
@@ -498,39 +545,53 @@
     </div>
   </section>
 
-  <!-- Truth block -->
-  <section class="truth-block">
+  <!-- Pattern recognition -->
+  <section class="recognition-block">
     <div class="container">
-      <p>Most tools make it easy to keep messaging.</p>
-      <p>But when things are tense, more messages rarely help.</p>
-      <p>Clearly adds structure — so conversations move toward resolution, not in circles.</p>
+      <h2>If conversations keep circling back</h2>
+      <p>Repeating the same discussions isn't a sign of bad intentions. It's a sign that the old structure is gone — and nothing has replaced it yet.</p>
     </div>
   </section>
 
-  <!-- What Clearly helps with -->
+  <!-- Pattern reset -->
+  <section class="reset-block">
+    <div class="container">
+      <div class="reset-content">
+        <h2>A reset, not a fix</h2>
+        <p>This isn't about communicating better. It's about establishing new ground rules — clear expectations for schedules, expenses, and decisions — so you're not renegotiating the basics every time.</p>
+        <p>When the structure is clear, the conversations get simpler.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- New mode introduction -->
   <section class="helps-section">
     <div class="container">
+      <div class="helps-header">
+        <h2>Co-parenting is a different mode</h2>
+        <p>You're not trying to save a relationship — you're building a new one. One focused on coordination, not connection. The rules are different.</p>
+      </div>
       <div class="helps-grid">
         <div class="helps-card">
           <div class="helps-card-icon">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path></svg>
           </div>
-          <h3>Fewer surprises</h3>
-          <p>Shared schedules with holidays, swaps, and handoff times — so you're not negotiating every week.</p>
+          <h3>Predictable schedules</h3>
+          <p>Know who has the kids, when, and what happens on holidays — without weekly negotiations.</p>
         </div>
         <div class="helps-card">
           <div class="helps-card-icon">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
           </div>
-          <h3>Less financial friction</h3>
-          <p>Logged expenses with receipts and automatic splits. No more "did you pay me back?" conversations.</p>
+          <h3>Clear expense splits</h3>
+          <p>Documented costs with receipts and agreed percentages. No more ambiguity about who pays for what.</p>
         </div>
         <div class="helps-card">
           <div class="helps-card-icon">
             <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
           </div>
-          <h3>Conversations that resolve</h3>
-          <p>Structured topics that move toward decisions — not threads that go in circles.</p>
+          <h3>Decisions that stick</h3>
+          <p>Topics with clear resolutions, not endless threads. Agree once, move on.</p>
         </div>
       </div>
     </div>
@@ -540,41 +601,42 @@
   <section class="how-strip">
     <div class="container">
       <div class="how-strip-header">
-        <h2>How it works</h2>
+        <h2>Start fresh with a parenting plan</h2>
+        <p class="how-strip-subhead">Separate the practical decisions from the emotional history.</p>
       </div>
       <div class="how-strip-grid">
         <div class="how-strip-step">
           <span class="how-strip-num">1</span>
-          <h3>Build your parenting plan</h3>
-          <p>Answer questions about custody schedules, holidays, and expenses.</p>
+          <h3>Define the basics</h3>
+          <p>Work through custody schedules, holidays, and expenses on your own terms.</p>
         </div>
         <div class="how-strip-step">
           <span class="how-strip-num">2</span>
-          <h3>Get a shareable summary</h3>
-          <p>Download or share with your lawyer, mediator, or co-parent.</p>
+          <h3>Create a starting point</h3>
+          <p>Get a structured summary you can share with the other parent, a lawyer, or mediator.</p>
         </div>
         <div class="how-strip-step">
           <span class="how-strip-num">3</span>
-          <h3>Continue with a family code</h3>
-          <p>Optional: use it to set up ongoing coordination in Clearly.</p>
+          <h3>Continue from there</h3>
+          <p>Optional: use the plan to set up ongoing coordination in Clearly.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Start where people actually are -->
+  <!-- Tools section -->
   <section class="entry-section">
     <div class="container">
-      <h2>Start where you are</h2>
+      <h2>Free tools to help you get started</h2>
       <div class="entry-grid">
         <a href="/plan-builder/" class="entry-card">
           <div class="entry-card-icon">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
           </div>
           <h3>Parenting Plan Builder</h3>
-          <p>Create a structured custody plan covering schedules, holidays, and shared expenses. Complete it independently, then share with your co-parent or attorney. No account required.</p>
+          <p>Answer questions about schedules, holidays, and expenses to create a starting point. Complete it on your own, then share with the other parent or an attorney. No account required.</p>
           <span class="entry-arrow">
-            Start building — free
+            Build your plan — free
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </span>
         </a>
@@ -583,7 +645,7 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="10" x2="10" y2="10"></line><line x1="14" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="10" y2="14"></line><line x1="14" y1="14" x2="16" y2="14"></line><line x1="8" y1="18" x2="10" y2="18"></line><line x1="14" y1="18" x2="16" y2="18"></line></svg>
           </div>
           <h3>Support Calculators</h3>
-          <p>State-specific tools to estimate child support. Helpful context before negotiations.</p>
+          <p>State-specific tools to estimate child support. Useful context before discussions.</p>
           <span class="entry-arrow">
             View calculators
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -594,7 +656,7 @@
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
           </div>
           <h3>Blog</h3>
-          <p>Practical guidance on communication, boundaries, and what actually works.</p>
+          <p>Practical guidance for navigating the transition — communication, boundaries, and what actually helps.</p>
           <span class="entry-arrow">
             Read articles
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
