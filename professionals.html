@@ -11,8 +11,8 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For Legal & Family Professionals | Clearly</title>
-  <meta name="description" content="Overview of how Clearly generates neutral, time-stamped communication records for co-parents, and how exports support legal, mediation, and professional review without analysis or interpretation.">
+  <title>For Professionals | Clearly</title>
+  <meta name="description" content="A calmer coordination system for families — plus a plan prep tool that helps clients align faster. For family law attorneys, mediators, and parenting coordinators.">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://getclearly.app/professionals.html">
@@ -23,46 +23,58 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app/professionals.html">
-  <meta property="og:title" content="For Legal & Family Professionals | Clearly">
-  <meta property="og:description" content="Overview of how Clearly generates neutral, time-stamped communication records for co-parents, and how exports support legal, mediation, and professional review without analysis or interpretation.">
+  <meta property="og:title" content="For Professionals | Clearly">
+  <meta property="og:description" content="A calmer coordination system for families — plus a plan prep tool that helps clients align faster.">
   <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
   <meta property="og:site_name" content="Clearly">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="For Legal & Family Professionals | Clearly">
-  <meta name="twitter:description" content="Overview of how Clearly generates neutral, time-stamped communication records for co-parents, and how exports support legal, mediation, and professional review without analysis or interpretation.">
+  <meta name="twitter:title" content="For Professionals | Clearly">
+  <meta name="twitter:description" content="A calmer coordination system for families — plus a plan prep tool that helps clients align faster.">
   <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
 
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
   <link rel="apple-touch-icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
   <style>
-    /* Professional page specific styles - editorial, restrained */
-    .pro-page {
-      padding: 60px 0 80px;
+    /* Professional page styles */
+    .pro-header {
+      padding: 80px 0 60px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
     }
-    .pro-page .container {
+    .pro-header .container {
       max-width: 680px;
     }
-    .pro-intro {
-      margin-bottom: 48px;
-    }
-    .pro-intro p {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.8;
+    .pro-header h1 {
+      font-size: 36px;
+      font-weight: 600;
       margin-bottom: 16px;
+      letter-spacing: -0.02em;
+      color: var(--text);
     }
+    .pro-header p {
+      font-size: 18px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .pro-content {
+      padding: 60px 0 80px;
+    }
+    .pro-content .container {
+      max-width: 680px;
+    }
+
     .pro-section {
-      margin-bottom: 48px;
+      margin-bottom: 56px;
     }
     .pro-section h2 {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 600;
       color: var(--text);
       margin-bottom: 20px;
-      letter-spacing: -0.01em;
     }
     .pro-section p {
       font-size: 16px;
@@ -70,135 +82,113 @@
       line-height: 1.7;
       margin-bottom: 16px;
     }
+
+    /* Steps */
+    .pro-steps {
+      margin: 24px 0;
+    }
+    .pro-step {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+    .pro-step-num {
+      width: 28px;
+      height: 28px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .pro-step-text {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      padding-top: 3px;
+    }
+    .pro-step-text strong {
+      color: var(--text);
+    }
+
+    /* Bullet list */
     .pro-list {
       list-style: none;
       padding: 0;
-      margin: 0 0 16px 0;
+      margin: 16px 0;
     }
     .pro-list li {
       font-size: 16px;
       color: var(--text-secondary);
       line-height: 1.6;
-      padding: 8px 0;
-      padding-left: 20px;
+      padding: 8px 0 8px 24px;
       position: relative;
     }
     .pro-list li::before {
-      content: "✓";
+      content: "";
       position: absolute;
       left: 0;
-      color: var(--primary);
-      font-weight: 600;
+      top: 16px;
+      width: 6px;
+      height: 6px;
+      background: var(--primary);
+      border-radius: 50%;
     }
-    .pro-list-no li::before {
-      content: "✕";
-      color: var(--text-muted);
-    }
-    .pro-list-plain {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 16px 0;
-    }
-    .pro-list-plain li {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      padding: 6px 0;
-      padding-left: 20px;
-      position: relative;
-    }
-    .pro-list-plain li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--primary);
-      font-weight: 600;
-    }
-    .pro-note {
-      font-size: 15px;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-top: 12px;
-    }
-    .pro-divider {
-      height: 1px;
-      background: var(--border);
+
+    /* CTA card */
+    .pro-cta-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
       margin: 48px 0;
     }
-    .pro-closing {
-      font-size: 15px;
-      color: var(--text-muted);
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-    }
-    /* Flow diagram */
-    .pro-flow {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin: 32px 0 48px;
-      padding: 32px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-    .pro-flow-step {
-      flex: 1;
-      text-align: center;
-    }
-    .pro-flow-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--primary-soft);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 12px;
-      color: var(--primary);
-    }
-    .pro-flow-icon svg {
-      width: 24px;
-      height: 24px;
-    }
-    .pro-flow-label {
-      font-size: 14px;
-      font-weight: 500;
+    .pro-cta-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
       color: var(--text);
     }
-    .pro-flow-arrow {
-      color: var(--text-muted);
-      flex-shrink: 0;
+    .pro-cta-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
     }
-    .pro-flow-arrow svg {
-      width: 20px;
-      height: 20px;
+    .pro-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 24px;
+      background: var(--primary);
+      color: white;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 10px;
+      transition: all 0.2s;
     }
-    @media (max-width: 600px) {
-      .pro-flow {
-        flex-direction: column;
-        gap: 24px;
-      }
-      .pro-flow-arrow {
-        transform: rotate(90deg);
-      }
+    .pro-cta-btn:hover {
+      background: var(--primary-dark);
+      text-decoration: none;
     }
-    /* FAQ section */
+
+    /* FAQ */
     .pro-faq {
       margin-top: 48px;
       padding-top: 48px;
       border-top: 1px solid var(--border);
     }
     .pro-faq h2 {
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
     .pro-faq-item {
-      margin-bottom: 24px;
+      margin-bottom: 28px;
     }
     .pro-faq-item h3 {
       font-size: 16px;
@@ -212,26 +202,14 @@
       line-height: 1.7;
       margin: 0;
     }
-    .page-header-pro {
-      padding: 60px 0 40px;
-      text-align: left;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-    }
-    .page-header-pro .container {
-      max-width: 680px;
-    }
-    .page-header-pro h1 {
-      font-size: 32px;
-      font-weight: 600;
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-      color: var(--text);
-    }
-    .page-header-pro p {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.6;
+
+    /* Note */
+    .pro-note {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-top: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
     }
   </style>
 </head>
@@ -245,11 +223,12 @@
         Clearly
       </a>
       <ul class="nav-links">
-        <li><a href="/#features">Features</a></li>
-        <li><a href="/#pricing">Pricing</a></li>
-        <li><a href="/plan-builder/">Plan Builder</a></li>
+        <li><a href="/plan-builder/">Plan Prep Tool</a></li>
+        <li><a href="/calculators/">Support Calculators</a></li>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="/professionals.html">Professionals</a></li>
         <li><a href="/faq.html">FAQ</a></li>
-        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
+        <li><a href="mailto:hello@getclearly.app?subject=Request%20private%20beta%20access" class="nav-cta">Request private access</a></li>
       </ul>
       <button class="nav-toggle" aria-label="Menu">
         <span></span>
@@ -259,115 +238,66 @@
     </div>
   </nav>
 
-  <!-- Page Header -->
-  <header class="page-header-pro">
+  <!-- Header -->
+  <header class="pro-header">
     <div class="container">
-      <h1>For Legal & Family Professionals</h1>
-      <p>Clear, neutral communication records designed to support review, mediation, and court processes.</p>
+      <h1>For Professionals</h1>
+      <p>A calmer coordination system for families — plus a plan prep tool that helps clients align faster.</p>
     </div>
   </header>
 
   <!-- Main Content -->
-  <section class="pro-page">
+  <section class="pro-content">
     <div class="container">
 
-      <!-- Intro -->
-      <div class="pro-intro">
-        <p>Clearly provides structured communication records for co-parents that are time-stamped, neutral, and auditable.</p>
-        <p>The platform does not analyze behavior or draw conclusions. It captures factual records of communication and system actions so professionals can review complete, unaltered context when needed.</p>
+      <!-- Who it's for -->
+      <div class="pro-section">
+        <h2>Who uses Clearly</h2>
+        <p>Clearly is designed for separated and divorcing parents who need a structured way to coordinate schedules, expenses, and communication. Professionals who work with these families — attorneys, mediators, parenting coordinators, and therapists — can use our tools to help clients get organized before and during the process.</p>
       </div>
 
-      <!-- How it works flow -->
-      <div class="pro-flow">
-        <div class="pro-flow-step">
-          <div class="pro-flow-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+      <!-- How professionals use it -->
+      <div class="pro-section">
+        <h2>How professionals use it</h2>
+        <div class="pro-steps">
+          <div class="pro-step">
+            <span class="pro-step-num">1</span>
+            <span class="pro-step-text"><strong>Send clients to the Plan Prep Tool.</strong> It's free, no account required. Clients answer structured questions about custody schedules, holidays, and expense splits.</span>
           </div>
-          <div class="pro-flow-label">Communication captured</div>
-        </div>
-        <div class="pro-flow-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </div>
-        <div class="pro-flow-step">
-          <div class="pro-flow-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+          <div class="pro-step">
+            <span class="pro-step-num">2</span>
+            <span class="pro-step-text"><strong>Client generates a structured summary + family code.</strong> They can share this with you or their co-parent to ensure alignment on key decisions.</span>
           </div>
-          <div class="pro-flow-label">Structured record</div>
-        </div>
-        <div class="pro-flow-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </div>
-        <div class="pro-flow-step">
-          <div class="pro-flow-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <div class="pro-step">
+            <span class="pro-step-num">3</span>
+            <span class="pro-step-text"><strong>Use the summary to reduce back-and-forth.</strong> Having a structured baseline makes it easier to identify gaps and clarify decisions during mediation or negotiation.</span>
           </div>
-          <div class="pro-flow-label">Export PDF</div>
+          <div class="pro-step">
+            <span class="pro-step-num">4</span>
+            <span class="pro-step-text"><strong>Clients can request private beta access</strong> to the full Clearly app for ongoing coordination after agreements are in place.</span>
+          </div>
         </div>
       </div>
 
-      <!-- What the platform produces -->
+      <!-- What clients get -->
       <div class="pro-section">
-        <h2>What the platform produces</h2>
-        <p>Clearly generates:</p>
+        <h2>What clients get</h2>
         <ul class="pro-list">
-          <li>Chronological records of parent-to-parent communication</li>
-          <li>Original user-authored messages (preserved as the canonical record)</li>
-          <li>System-generated topic summaries (clearly labeled and separated)</li>
-          <li>Resolution attempts, confirmations, and outcomes</li>
-        </ul>
-        <p>Each record includes clear distinction between:</p>
-        <ul class="pro-list-plain">
-          <li>Mutual agreement</li>
-          <li>Resolution attempts without response</li>
-          <li>Inactivity-based archiving</li>
-        </ul>
-        <p>All exports include provenance information and disclaimers.</p>
-      </div>
-
-      <!-- How records are exported -->
-      <div class="pro-section">
-        <h2>How records are exported</h2>
-        <p>Records can be exported as a single, comprehensive PDF covering all topics within a selected time range (default: last 90 days; optional: all time).</p>
-        <p>Exports include an index of topics followed by full message timelines for each topic. Message bodies are included by default.</p>
-        <p class="pro-note">A raw CSV export is also available for advanced or forensic review.</p>
-      </div>
-
-      <!-- Neutrality & integrity -->
-      <div class="pro-section">
-        <h2>Neutrality and integrity</h2>
-        <p>Clearly is designed to preserve neutrality.</p>
-        <ul class="pro-list">
-          <li>The platform does not score, rank, or evaluate behavior</li>
-          <li>Silence is not treated as agreement</li>
-          <li>System actions (such as closure due to inactivity) are explicitly labeled</li>
-          <li>All records are time-stamped and immutable after submission</li>
-          <li>System-generated content is clearly distinguished from user-authored content</li>
+          <li>Clarity on schedules, expenses, and expectations before meetings</li>
+          <li>Fewer messages and less back-and-forth with their co-parent</li>
+          <li>Structured records that support professional review</li>
+          <li>A decision-oriented flow that moves toward resolution</li>
         </ul>
       </div>
 
-      <!-- Why professionals use it -->
-      <div class="pro-section">
-        <h2>For attorneys, mediators, and evaluators</h2>
-        <ul class="pro-list">
-          <li>Reduces ambiguity around "what happened when"</li>
-          <li>Preserves full context instead of excerpts or screenshots</li>
-          <li>Minimizes interpretive framing by the platform</li>
-          <li>Supports faster review and preparation</li>
-          <li>Produces records that are consistent across exports</li>
-        </ul>
-      </div>
-
-      <!-- What the platform does not do -->
-      <div class="pro-section">
-        <h2>What the platform does not do</h2>
-        <p>Clearly does not:</p>
-        <ul class="pro-list pro-list-no">
-          <li>Provide legal advice</li>
-          <li>Make recommendations</li>
-          <li>Determine fault or intent</li>
-          <li>Replace professional judgment</li>
-          <li>Interpret communications on behalf of the reader</li>
-        </ul>
+      <!-- CTA -->
+      <div class="pro-cta-card">
+        <h3>Request a professional invite link</h3>
+        <p>If you'd like to share Clearly with clients or receive a professional invite link, reach out and we'll get you set up.</p>
+        <a href="mailto:hello@getclearly.app?subject=Professional%20invite%20link%20request" class="pro-cta-btn">
+          Contact us
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
       </div>
 
       <!-- FAQ -->
@@ -375,28 +305,33 @@
         <h2>Common questions</h2>
 
         <div class="pro-faq-item">
-          <h3>Can these records be used as evidence?</h3>
-          <p>Clearly produces time-stamped, unaltered records of communication. Whether any document is admissible depends on jurisdiction, case type, and judicial discretion. The platform provides factual records; evidentiary determinations remain with the court and counsel.</p>
+          <h3>Does Clearly provide legal advice?</h3>
+          <p>No. Clearly is a coordination tool, not a legal service. It helps families organize information and communicate more effectively, but all legal decisions should be made with the guidance of qualified professionals.</p>
         </div>
 
         <div class="pro-faq-item">
-          <h3>Does the platform interpret or analyze behavior?</h3>
-          <p>No. Clearly captures what was communicated and when. It does not score, rank, or evaluate either parent's behavior. System-generated summaries are clearly labeled and separated from original user content.</p>
+          <h3>Can Clearly records be used in court?</h3>
+          <p>Clearly produces time-stamped, unaltered records of communication and agreements. Whether any document is admissible depends on jurisdiction, case type, and judicial discretion. We provide factual records; evidentiary determinations remain with the court and counsel.</p>
         </div>
 
         <div class="pro-faq-item">
-          <h3>What if one parent doesn't respond?</h3>
-          <p>Silence is never treated as agreement. Records explicitly distinguish between mutual agreement, resolution attempts without response, and topics archived due to inactivity. Each outcome is labeled clearly in exports.</p>
+          <h3>Is there a cost for the Plan Prep Tool?</h3>
+          <p>The Plan Prep Tool is free for anyone to use. The full Clearly app is currently in private beta with limited access.</p>
         </div>
 
         <div class="pro-faq-item">
-          <h3>Are records tamper-proof?</h3>
-          <p>All records are time-stamped and immutable after submission. Users cannot edit or delete messages once sent. Exports include provenance information and system disclaimers.</p>
+          <h3>How does the app handle data privacy?</h3>
+          <p>We take privacy seriously. User data is stored securely and is not shared with third parties. Each parent has their own account with access only to shared family information. For details, see our <a href="/privacy.html">Privacy Policy</a>.</p>
+        </div>
+
+        <div class="pro-faq-item">
+          <h3>Can I recommend Clearly to clients?</h3>
+          <p>Yes. Many professionals direct clients to the free Plan Prep Tool as a starting point for organizing their parenting plan. For the full app, clients can request private beta access.</p>
         </div>
       </div>
 
-      <!-- Closing -->
-      <p class="pro-closing">For questions about records or export formats, professionals may contact clients directly or request documentation through standard channels.</p>
+      <!-- Note -->
+      <p class="pro-note">Questions? Contact us at <a href="mailto:hello@getclearly.app">hello@getclearly.app</a>.</p>
 
     </div>
   </section>
@@ -411,24 +346,23 @@
             <span>Clearly</span>
           </div>
           <p class="footer-tagline">Co-parenting made clear.</p>
+          <p class="footer-beta">Currently in private beta. Access is limited.</p>
+          <a href="mailto:hello@getclearly.app?subject=Request%20private%20beta%20access" class="footer-cta">Request private access</a>
         </div>
         <div class="footer-nav">
           <div class="footer-col">
-            <h4>Product</h4>
+            <h4>Tools</h4>
             <ul>
-              <li><a href="/#features">Features</a></li>
-              <li><a href="/#pricing">Pricing</a></li>
-              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
+              <li><a href="/plan-builder/">Plan Prep Tool</a></li>
+              <li><a href="/calculators/">Support Calculators</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h4>Resources</h4>
             <ul>
-              <li><a href="/plan-builder/">Plan Builder</a></li>
-              <li><a href="/calculators/">Support Calculator</a></li>
+              <li><a href="/blog.html">Blog</a></li>
               <li><a href="/faq.html">FAQ</a></li>
               <li><a href="/help.html">Help Center</a></li>
-              <li><a href="/blog.html">Blog</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -449,7 +383,6 @@
       </div>
       <div class="footer-bottom">
         <p>&copy; 2026 Clearly LLC. All rights reserved.</p>
-        <p>Proudly designed and developed in the USA.</p>
       </div>
     </div>
   </footer>
