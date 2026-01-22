@@ -241,6 +241,76 @@
       margin: 0;
     }
 
+    /* Truth block */
+    .truth-block {
+      padding: 48px 0;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+    .truth-block .container {
+      max-width: 560px;
+      text-align: center;
+    }
+    .truth-block p {
+      font-size: 16px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin: 0 0 8px 0;
+    }
+    .truth-block p:last-child {
+      margin-bottom: 0;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    /* How it works strip */
+    .how-strip {
+      padding: 48px 0;
+      background: var(--primary-soft);
+    }
+    .how-strip .container {
+      max-width: 800px;
+    }
+    .how-strip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+    .how-strip-step {
+      position: relative;
+    }
+    .how-strip-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 50%;
+      margin-bottom: 12px;
+    }
+    .how-strip-step h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+    .how-strip-step p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+    @media (max-width: 600px) {
+      .how-strip-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+    }
+
     @media (max-width: 768px) {
       .hero-home {
         padding: 80px 0 60px;
@@ -282,8 +352,8 @@
   <!-- Hero Section -->
   <section class="hero-home">
     <div class="container">
-      <h1>Less back-and-forth.<br>More clarity.</h1>
-      <p>A calm system for co-parenting decisions — designed to reduce friction so you can focus on your kids.</p>
+      <h1>When every message<br>becomes a negotiation.</h1>
+      <p>You're not looking for another place to argue. You need a way to make decisions and move on. Clearly gives structure to co-parenting — so the same topics don't come up again and again.</p>
       <div class="hero-buttons">
         <a href="/plan-builder/" class="btn-hero-primary">
           Prepare your parenting plan
@@ -296,33 +366,55 @@
     </div>
   </section>
 
+  <!-- Truth block -->
+  <section class="truth-block">
+    <div class="container">
+      <p>Most tools make it easy to keep messaging.</p>
+      <p>But when things are tense, more messages rarely help.</p>
+      <p>Clearly adds structure — so conversations move toward resolution, not in circles.</p>
+    </div>
+  </section>
+
   <!-- What Clearly helps with -->
   <section class="helps-section">
     <div class="container">
       <div class="helps-grid">
         <div class="helps-card">
-          <h3>Schedules</h3>
-          <p>Clear, shared expectations — without ongoing negotiation.</p>
+          <h3>Fewer surprises</h3>
+          <p>Shared schedules with holidays, swaps, and handoff times — so you're not negotiating every week.</p>
         </div>
         <div class="helps-card">
-          <h3>Expenses</h3>
-          <p>Structured records that reduce confusion and re-litigation.</p>
+          <h3>Less financial friction</h3>
+          <p>Logged expenses with receipts and automatic splits. No more "did you pay me back?" conversations.</p>
         </div>
         <div class="helps-card">
-          <h3>Communication</h3>
-          <p>Designed to move topics toward decisions, not endless exchange.</p>
+          <h3>Conversations that resolve</h3>
+          <p>Structured topics that move toward decisions — not threads that go in circles.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Why this approach matters -->
-  <section class="approach-section">
+  <!-- How it works strip -->
+  <section class="how-strip">
     <div class="container">
-      <h2>Why this approach matters</h2>
-      <p>Many tools make it easy to keep talking.</p>
-      <p>But when things are tense, more messages often make things worse.</p>
-      <p>Clearly is designed to reduce unnecessary back-and-forth and help parents reach resolution — quietly, without escalation.</p>
+      <div class="how-strip-grid">
+        <div class="how-strip-step">
+          <span class="how-strip-num">1</span>
+          <h3>Prepare your plan</h3>
+          <p>Answer structured questions about schedules, holidays, expenses.</p>
+        </div>
+        <div class="how-strip-step">
+          <span class="how-strip-num">2</span>
+          <h3>Generate a family code</h3>
+          <p>Get a summary you can share with a lawyer, mediator, or co-parent.</p>
+        </div>
+        <div class="how-strip-step">
+          <span class="how-strip-num">3</span>
+          <h3>Continue in Clearly</h3>
+          <p>Use the family code to set up ongoing coordination (private beta).</p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -333,15 +425,15 @@
       <div class="entry-grid">
         <a href="/plan-builder/" class="entry-card">
           <h3>Plan Prep Tool</h3>
-          <p>A structured summary you can share with your lawyer or mediator.</p>
+          <p>Build a structured parenting plan summary. Share it with your lawyer, mediator, or co-parent — no account required. When you're ready, generate a family code to continue in Clearly.</p>
           <span class="entry-arrow">
-            Get started
+            Get started — free
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </span>
         </a>
         <a href="/calculators/" class="entry-card">
           <h3>Support Calculators</h3>
-          <p>State-specific tools to help you understand expectations.</p>
+          <p>State-specific tools to estimate child support. Helpful context before negotiations.</p>
           <span class="entry-arrow">
             View calculators
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -349,7 +441,7 @@
         </a>
         <a href="/blog.html" class="entry-card">
           <h3>Blog</h3>
-          <p>Practical guidance on boundaries, tone, and coordination.</p>
+          <p>Practical guidance on communication, boundaries, and what actually works.</p>
           <span class="entry-arrow">
             Read articles
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
