@@ -12,7 +12,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Clearly - Co-parenting made clear</title>
-  <meta name="description" content="The co-parenting app for shared custody schedules, expense tracking, and conflict-free communication. Focus on your kids, not the logistics.">
+  <meta name="description" content="A calm system for co-parenting decisions. Structured tools for schedules, expenses, and communication — designed to reduce friction so you can focus on your kids.">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://getclearly.app/">
@@ -21,24 +21,238 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app/">
   <meta property="og:title" content="Clearly - Co-parenting made clear">
-  <meta property="og:description" content="The co-parenting app for shared custody schedules, expense tracking, and conflict-free communication. Focus on your kids, not the logistics.">
+  <meta property="og:description" content="A calm system for co-parenting decisions. Structured tools for schedules, expenses, and communication.">
   <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
   <meta property="og:site_name" content="Clearly">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Clearly - Co-parenting made clear">
-  <meta name="twitter:description" content="The co-parenting app for shared custody schedules, expense tracking, and conflict-free communication.">
+  <meta name="twitter:description" content="A calm system for co-parenting decisions. Structured tools for schedules, expenses, and communication.">
   <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
 
   <!-- Additional SEO -->
   <meta name="robots" content="index, follow">
-  <meta name="keywords" content="co-parenting app, custody schedule, shared parenting, divorce app, child custody, expense tracking, co-parent communication">
+  <meta name="keywords" content="co-parenting, custody schedule, shared parenting, parenting plan, co-parent communication, expense tracking">
   <meta name="author" content="Clearly LLC">
 
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
   <link rel="apple-touch-icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+
+  <style>
+    /* Homepage-specific styles */
+    .hero-home {
+      padding: 120px 0 100px;
+      background: linear-gradient(180deg, var(--bg) 0%, #f5f5f4 100%);
+    }
+    .hero-home .container {
+      max-width: 720px;
+      text-align: center;
+    }
+    .hero-home h1 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+      color: var(--text);
+    }
+    .hero-home p {
+      font-size: 19px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .hero-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-hero-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 28px;
+      background: var(--primary);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+    .btn-hero-primary:hover {
+      background: var(--primary-dark);
+      text-decoration: none;
+      transform: translateY(-1px);
+    }
+    .btn-hero-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 28px;
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+    .btn-hero-secondary:hover {
+      border-color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    /* What Clearly helps with */
+    .helps-section {
+      padding: 80px 0;
+      background: white;
+    }
+    .helps-section .container {
+      max-width: 960px;
+    }
+    .helps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .helps-card {
+      padding: 32px;
+      background: var(--bg);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+    .helps-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--text);
+    }
+    .helps-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin: 0;
+    }
+    @media (max-width: 768px) {
+      .helps-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Why this approach */
+    .approach-section {
+      padding: 80px 0;
+      background: var(--bg);
+    }
+    .approach-section .container {
+      max-width: 640px;
+      text-align: center;
+    }
+    .approach-section h2 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+    .approach-section p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+    .approach-section p:last-of-type {
+      margin-bottom: 0;
+    }
+
+    /* Entry points */
+    .entry-section {
+      padding: 80px 0;
+      background: white;
+    }
+    .entry-section .container {
+      max-width: 960px;
+    }
+    .entry-section h2 {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 40px;
+      text-align: center;
+      color: var(--text);
+    }
+    .entry-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .entry-card {
+      padding: 28px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .entry-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      text-decoration: none;
+    }
+    .entry-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .entry-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+    .entry-card .entry-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--primary);
+    }
+    @media (max-width: 768px) {
+      .entry-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Beta notice */
+    .beta-notice {
+      padding: 48px 0;
+      background: var(--bg);
+      text-align: center;
+      border-top: 1px solid var(--border);
+    }
+    .beta-notice p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .hero-home {
+        padding: 80px 0 60px;
+      }
+      .hero-home h1 {
+        font-size: 36px;
+      }
+      .hero-home p {
+        font-size: 17px;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -50,11 +264,12 @@
         Clearly
       </a>
       <ul class="nav-links">
-        <li><a href="/#features">Features</a></li>
-        <li><a href="/#pricing">Pricing</a></li>
-        <li><a href="/plan-builder/">Plan Builder</a></li>
+        <li><a href="/plan-builder/">Plan Prep Tool</a></li>
+        <li><a href="/calculators/">Support Calculators</a></li>
+        <li><a href="/blog.html">Blog</a></li>
+        <li><a href="/professionals.html">Professionals</a></li>
         <li><a href="/faq.html">FAQ</a></li>
-        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
+        <li><a href="mailto:hello@getclearly.app?subject=Request%20private%20beta%20access" class="nav-cta">Request private access</a></li>
       </ul>
       <button class="nav-toggle" aria-label="Menu">
         <span></span>
@@ -65,369 +280,89 @@
   </nav>
 
   <!-- Hero Section -->
-  <section class="hero">
-    <div class="container hero-container">
-      <div class="hero-content fade-in">
-        <h1>Co-parenting<br>made clear.</h1>
-        <p>One app for schedules, expenses, and communication — so you can focus on what matters most.</p>
-        <div class="hero-buttons">
-          <a href="https://apps.apple.com/app/clearly" target="_blank" class="app-store-badge">
-            <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
-          </a>
-        </div>
-        <p class="hero-note">Free to download. Available on iOS.</p>
-      </div>
-      <div class="hero-phone fade-in fade-in-delay">
-        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Screenshots/today%20screen.jpeg" alt="Clearly App Screenshot">
-      </div>
-    </div>
-  </section>
-
-  <!-- Features Overview -->
-  <section class="features" id="features">
+  <section class="hero-home">
     <div class="container">
-      <h2 class="section-title fade-in">Everything you need, in one place</h2>
-      <div class="features-grid">
-        <div class="feature-card fade-in">
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-          </div>
-          <h3>Shared Schedule</h3>
-          <p>Custody patterns, holidays, swaps, and summer plans — always up to date for both parents.</p>
-        </div>
-        <div class="feature-card fade-in">
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-          </div>
-          <h3>Structured Communication</h3>
-          <p>A proven framework moves topics to resolution. AI keeps the tone neutral so conversations actually get somewhere.</p>
-        </div>
-        <div class="feature-card fade-in">
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
-          </div>
-          <h3>Expense Tracking</h3>
-          <p>Log expenses, split costs automatically based on your agreement, and track reimbursements.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Showcase: Communication -->
-  <section class="showcase">
-    <div class="container">
-      <div class="showcase-image fade-in">
-        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Screenshots/Resolution%20screen.jpeg" alt="Clearly Topic Resolution">
-      </div>
-      <div class="showcase-content fade-in">
-        <span class="showcase-label">Communication</span>
-        <h2>From issue to resolution — without the back-and-forth.</h2>
-        <p>Co-parent conversations often spiral. That's why Clearly uses a structured approach inspired by the Harvard Negotiation Framework to move "Topics" through to resolution.</p>
-        <p>You focus on the issue. AI helps keep the tone neutral. And conversations actually reach a conclusion.</p>
-        <ul class="showcase-list">
-          <li>Structured topics that guide you toward resolution</li>
-          <li>AI rewrites your message in a neutral tone</li>
-          <li>Your original words stay private — only the summary is shared</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Showcase: Schedule -->
-  <section class="showcase showcase-alt">
-    <div class="container">
-      <div class="showcase-content fade-in">
-        <span class="showcase-label">Schedule</span>
-        <h2>Your custody calendar, simplified.</h2>
-        <p>See your custody schedule, holidays, events, and swaps all in one place. Both parents always see the same calendar — no more confusion.</p>
-        <ul class="showcase-list">
-          <li>Pre-loaded custody patterns (50/50, 2-2-3, and more)</li>
-          <li>Holiday custody with odd/even year swaps</li>
-          <li>Sync to Apple Calendar or Google Calendar</li>
-        </ul>
-      </div>
-      <div class="showcase-image fade-in">
-        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Screenshots/Schedule%20screen.jpeg" alt="Clearly Schedule">
-      </div>
-    </div>
-  </section>
-
-  <!-- Showcase: Expenses -->
-  <section class="showcase">
-    <div class="container">
-      <div class="showcase-image fade-in">
-        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Screenshots/expense%20settings.jpeg" alt="Clearly Expense Settings">
-      </div>
-      <div class="showcase-content fade-in">
-        <span class="showcase-label">Expenses</span>
-        <h2>Splits calculated automatically.</h2>
-        <p>Set your expense split ratio once — based on your agreement — and Clearly does the math for every expense. No spreadsheets required.</p>
-        <ul class="showcase-list">
-          <li>Flexible split ratios (50/50, 60/40, etc.)</li>
-          <li>Attach receipts for documentation</li>
-          <li>Track who owes what at a glance</li>
-        </ul>
-      </div>
-    </div>
-  </section>
-
-  <!-- Showcase: Setup -->
-  <section class="showcase showcase-alt">
-    <div class="container">
-      <div class="showcase-content fade-in">
-        <span class="showcase-label">Easy Setup</span>
-        <h2>Get started in minutes.</h2>
-        <p>Choose from common custody patterns or create your own. Set up holidays, invite your co-parent, and you're ready to go.</p>
-        <ul class="showcase-list">
-          <li>Pre-loaded schedules for quick setup</li>
-          <li>Share a family code to connect</li>
-          <li>Changes sync instantly for both parents</li>
-        </ul>
-      </div>
-      <div class="showcase-image fade-in">
-        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Screenshots/ON%20boarding%20custody%20schedule.jpeg" alt="Clearly Custody Schedule Setup">
-      </div>
-    </div>
-  </section>
-
-  <!-- More Features Carousel -->
-  <section class="more-features">
-    <div class="container">
-      <h2 class="section-title fade-in">And so much more</h2>
-
-      <div class="feature-tabs fade-in">
-        <button class="feature-tab active" data-tab="ai">AI Summaries</button>
-        <button class="feature-tab" data-tab="holidays">Holiday Planner</button>
-        <button class="feature-tab" data-tab="sync">Calendar Sync</button>
-        <button class="feature-tab" data-tab="expenses">Expense Tracking</button>
-      </div>
-
-      <div class="feature-panels">
-        <div class="feature-panel active" data-panel="ai">
-          <div class="feature-panel-content">
-            <h3>Emotion stays out of it</h3>
-            <p>Write what you feel. Clearly's AI rewrites it in a neutral tone — so your co-parent hears the message, not the frustration. Your original words stay private.</p>
-          </div>
-          <div class="feature-panel-image">
-            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Screenshots/Resolution%20screen.jpeg" alt="AI Summary">
-          </div>
-        </div>
-
-        <div class="feature-panel" data-panel="holidays">
-          <div class="feature-panel-content">
-            <h3>Holidays handled automatically</h3>
-            <p>Set up holiday custody once — including odd/even year swaps — and Clearly handles it forever. No more last-minute texts about who has the kids for Thanksgiving.</p>
-          </div>
-          <div class="feature-panel-image">
-            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Screenshots/Holiday%20planner.jpeg" alt="Holiday Planner">
-          </div>
-        </div>
-
-        <div class="feature-panel" data-panel="sync">
-          <div class="feature-panel-content">
-            <h3>Sync with any calendar</h3>
-            <p>Subscribe to your custody calendar in Apple Calendar, Google Calendar, or Outlook. Share the link with grandparents, babysitters — anyone who needs to know.</p>
-          </div>
-          <div class="feature-panel-image">
-            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Screenshots/Cal%20sync.jpeg" alt="Calendar Sync">
-          </div>
-        </div>
-
-        <div class="feature-panel" data-panel="expenses">
-          <div class="feature-panel-content">
-            <h3>Track every shared expense</h3>
-            <p>Log expenses, attach receipts, and see who owes what at a glance. Splits are calculated automatically based on your agreement.</p>
-          </div>
-          <div class="feature-panel-image">
-            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Screenshots/Expense.jpeg" alt="Expense Tracking">
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pricing -->
-  <section class="pricing" id="pricing">
-    <div class="container">
-      <h2 class="section-title fade-in">Simple, transparent pricing</h2>
-      <p class="pricing-subtitle fade-in">Start with a free trial. Subscribe when you're ready.</p>
-
-      <div class="pricing-cards">
-        <div class="pricing-card fade-in">
-          <div class="pricing-badge">Most Popular</div>
-          <h3>Annual</h3>
-          <div class="pricing-amount">
-            <span class="price">$10</span>
-            <span class="period">/month</span>
-          </div>
-          <p class="pricing-billed">$120 billed yearly</p>
-          <ul class="pricing-features">
-            <li>Shared custody calendar</li>
-            <li>Structured communication with AI</li>
-            <li>Expense tracking & splitting</li>
-            <li>Schedule swaps</li>
-            <li>Calendar sync (Apple, Google)</li>
-          </ul>
-          <a href="https://apps.apple.com/app/clearly" class="btn btn-primary" target="_blank">Start Free Trial</a>
-        </div>
-
-        <div class="pricing-card pricing-card-alt fade-in">
-          <h3>3-Year</h3>
-          <div class="pricing-amount">
-            <span class="price">$8</span>
-            <span class="period">/month</span>
-          </div>
-          <p class="pricing-billed">$288 one-time payment</p>
-          <ul class="pricing-features">
-            <li>Everything in Annual</li>
-            <li>Best long-term value</li>
-            <li>Lock in your rate</li>
-          </ul>
-          <a href="https://apps.apple.com/app/clearly" class="btn btn-secondary" target="_blank">Start Free Trial</a>
-        </div>
-      </div>
-
-      <p class="pricing-note fade-in">Each parent subscribes separately. Cancel anytime.</p>
-    </div>
-  </section>
-
-  <!-- Reviews -->
-  <section class="reviews">
-    <div class="container">
-      <h2 class="section-title fade-in">What parents are saying</h2>
-    </div>
-    <div class="reviews-scroll">
-      <div class="reviews-track">
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"Finally, a beautiful app for co-parents."</p>
-          <div class="review-author">
-            <span class="review-name">Sarah M.</span>
-            <span class="review-location">Austin, TX</span>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"The shared calendar alone is worth it. We finally know who has the kids without endless texts back and forth. Holiday scheduling used to cause so much stress. Now it's just handled."</p>
-          <div class="review-author">
-            <span class="review-name">James K.</span>
-            <span class="review-location">Denver, CO</span>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"Setup took less than 10 minutes."</p>
-          <div class="review-author">
-            <span class="review-name">Michelle R.</span>
-            <span class="review-location">Seattle, WA</span>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"The expense tracking has eliminated so many awkward conversations. Everything is documented and fair."</p>
-          <div class="review-author">
-            <span class="review-name">David L.</span>
-            <span class="review-location">Chicago, IL</span>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"We actually communicate better now. The AI helps me say what I need to say without starting a fight. I wish we had this years ago."</p>
-          <div class="review-author">
-            <span class="review-name">Jennifer H.</span>
-            <span class="review-location">Portland, OR</span>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"No more arguments over text."</p>
-          <div class="review-author">
-            <span class="review-name">Michael T.</span>
-            <span class="review-location">Atlanta, GA</span>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"I was skeptical at first, but this app genuinely changed how my co-parent and I work together. The kids are happier because we're not fighting over logistics anymore."</p>
-          <div class="review-author">
-            <span class="review-name">Amanda C.</span>
-            <span class="review-location">Phoenix, AZ</span>
-          </div>
-        </div>
-        <!-- Duplicate all cards for seamless loop -->
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"Finally, a beautiful app for co-parents."</p>
-          <div class="review-author">
-            <span class="review-name">Sarah M.</span>
-            <span class="review-location">Austin, TX</span>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"The shared calendar alone is worth it. We finally know who has the kids without endless texts back and forth. Holiday scheduling used to cause so much stress. Now it's just handled."</p>
-          <div class="review-author">
-            <span class="review-name">James K.</span>
-            <span class="review-location">Denver, CO</span>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"Setup took less than 10 minutes."</p>
-          <div class="review-author">
-            <span class="review-name">Michelle R.</span>
-            <span class="review-location">Seattle, WA</span>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"The expense tracking has eliminated so many awkward conversations. Everything is documented and fair."</p>
-          <div class="review-author">
-            <span class="review-name">David L.</span>
-            <span class="review-location">Chicago, IL</span>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"We actually communicate better now. The AI helps me say what I need to say without starting a fight. I wish we had this years ago."</p>
-          <div class="review-author">
-            <span class="review-name">Jennifer H.</span>
-            <span class="review-location">Portland, OR</span>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"No more arguments over text."</p>
-          <div class="review-author">
-            <span class="review-name">Michael T.</span>
-            <span class="review-location">Atlanta, GA</span>
-          </div>
-        </div>
-        <div class="review-card">
-          <div class="review-stars">★★★★★</div>
-          <p>"I was skeptical at first, but this app genuinely changed how my co-parent and I work together. The kids are happier because we're not fighting over logistics anymore."</p>
-          <div class="review-author">
-            <span class="review-name">Amanda C.</span>
-            <span class="review-location">Phoenix, AZ</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CTA Section -->
-  <section class="cta">
-    <div class="cta-pattern"></div>
-    <div class="container fade-in">
-      <div class="cta-content">
-        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="cta-icon">
-        <h2>Ready for clarity?</h2>
-        <p>Join thousands of co-parents who've found a better way to communicate, coordinate, and co-parent.</p>
-        <a href="https://apps.apple.com/app/clearly" target="_blank" class="app-store-badge">
-          <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83" alt="Download on the App Store">
+      <h1>Less back-and-forth.<br>More clarity.</h1>
+      <p>A calm system for co-parenting decisions — designed to reduce friction so you can focus on your kids.</p>
+      <div class="hero-buttons">
+        <a href="/plan-builder/" class="btn-hero-primary">
+          Prepare your parenting plan
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a>
-        <p class="cta-note">Free trial included. No credit card required.</p>
+        <a href="mailto:hello@getclearly.app?subject=Request%20private%20beta%20access" class="btn-hero-secondary">
+          Request private access
+        </a>
       </div>
+    </div>
+  </section>
+
+  <!-- What Clearly helps with -->
+  <section class="helps-section">
+    <div class="container">
+      <div class="helps-grid">
+        <div class="helps-card">
+          <h3>Schedules</h3>
+          <p>Clear, shared expectations — without ongoing negotiation.</p>
+        </div>
+        <div class="helps-card">
+          <h3>Expenses</h3>
+          <p>Structured records that reduce confusion and re-litigation.</p>
+        </div>
+        <div class="helps-card">
+          <h3>Communication</h3>
+          <p>Designed to move topics toward decisions, not endless exchange.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why this approach matters -->
+  <section class="approach-section">
+    <div class="container">
+      <h2>Why this approach matters</h2>
+      <p>Many tools make it easy to keep talking.</p>
+      <p>But when things are tense, more messages often make things worse.</p>
+      <p>Clearly is designed to reduce unnecessary back-and-forth and help parents reach resolution — quietly, without escalation.</p>
+    </div>
+  </section>
+
+  <!-- Start where people actually are -->
+  <section class="entry-section">
+    <div class="container">
+      <h2>Start where you are</h2>
+      <div class="entry-grid">
+        <a href="/plan-builder/" class="entry-card">
+          <h3>Plan Prep Tool</h3>
+          <p>A structured summary you can share with your lawyer or mediator.</p>
+          <span class="entry-arrow">
+            Get started
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
+        <a href="/calculators/" class="entry-card">
+          <h3>Support Calculators</h3>
+          <p>State-specific tools to help you understand expectations.</p>
+          <span class="entry-arrow">
+            View calculators
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
+        <a href="/blog.html" class="entry-card">
+          <h3>Blog</h3>
+          <p>Practical guidance on boundaries, tone, and coordination.</p>
+          <span class="entry-arrow">
+            Read articles
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beta Notice -->
+  <section class="beta-notice">
+    <div class="container">
+      <p>Currently in private beta. Access is limited.</p>
     </div>
   </section>
 
@@ -441,24 +376,23 @@
             <span>Clearly</span>
           </div>
           <p class="footer-tagline">Co-parenting made clear.</p>
+          <p class="footer-beta">Currently in private beta. Access is limited.</p>
+          <a href="mailto:hello@getclearly.app?subject=Request%20private%20beta%20access" class="footer-cta">Request private access</a>
         </div>
         <div class="footer-nav">
           <div class="footer-col">
-            <h4>Product</h4>
+            <h4>Tools</h4>
             <ul>
-              <li><a href="/#features">Features</a></li>
-              <li><a href="/#pricing">Pricing</a></li>
-              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
+              <li><a href="/plan-builder/">Plan Prep Tool</a></li>
+              <li><a href="/calculators/">Support Calculators</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h4>Resources</h4>
             <ul>
-              <li><a href="/plan-builder/">Plan Builder</a></li>
-              <li><a href="/calculators/">Support Calculator</a></li>
+              <li><a href="/blog.html">Blog</a></li>
               <li><a href="/faq.html">FAQ</a></li>
               <li><a href="/help.html">Help Center</a></li>
-              <li><a href="/blog.html">Blog</a></li>
             </ul>
           </div>
           <div class="footer-col">
@@ -479,7 +413,6 @@
       </div>
       <div class="footer-bottom">
         <p>&copy; 2026 Clearly LLC. All rights reserved.</p>
-        <p>Proudly designed and developed in the USA.</p>
       </div>
     </div>
   </footer>
@@ -494,38 +427,6 @@
         navLinks.classList.toggle('open');
       });
     }
-
-    // Fade-in animation on scroll
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // Feature tabs
-    const tabs = document.querySelectorAll('.feature-tab');
-    const panels = document.querySelectorAll('.feature-panel');
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        const targetPanel = tab.dataset.tab;
-
-        tabs.forEach(t => t.classList.remove('active'));
-        panels.forEach(p => p.classList.remove('active'));
-
-        tab.classList.add('active');
-        document.querySelector(`[data-panel="${targetPanel}"]`).classList.add('active');
-      });
-    });
   </script>
 
   <!-- Structured Data -->
@@ -536,19 +437,8 @@
     "name": "Clearly",
     "applicationCategory": "LifestyleApplication",
     "operatingSystem": "iOS",
-    "description": "The co-parenting app for shared custody schedules, expense tracking, and conflict-free communication.",
+    "description": "A calm system for co-parenting decisions. Structured tools for schedules, expenses, and communication.",
     "url": "https://getclearly.app",
-    "downloadUrl": "https://apps.apple.com/app/clearly",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5",
-      "ratingCount": "50"
-    },
     "author": {
       "@type": "Organization",
       "name": "Clearly LLC",
