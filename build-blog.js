@@ -181,6 +181,37 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
     .back-link { display: inline-block; margin-bottom: 32px; color: var(--primary); font-weight: 500; }
     .back-link:hover { text-decoration: none; }
 
+    /* Blog CTA Module */
+    .blog-cta {
+      background: var(--primary-soft);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 48px 0;
+      text-align: center;
+    }
+    .blog-cta p {
+      font-size: 17px;
+      color: var(--text);
+      margin: 0 0 16px 0;
+      font-weight: 500;
+    }
+    .blog-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: white;
+      padding: 14px 24px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+    .blog-cta a:hover {
+      background: var(--primary-dark, #0a6b55);
+      text-decoration: none;
+    }
+
     /* Related Articles */
     .related-articles { background: var(--surface); padding: 80px 0; border-top: 1px solid var(--border); }
     .related-articles h2 { font-size: 28px; font-weight: 700; margin-bottom: 32px; text-align: center; }
@@ -211,6 +242,13 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
     </header>
     <div class="blog-post-content">
       ${post.content}
+    </div>
+    <div class="blog-cta">
+      <p>Ready to put this into practice?</p>
+      <a href="/plan-builder/">
+        Start building your parenting plan
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      </a>
     </div>
   </article>
 
@@ -513,6 +551,27 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
     .blog-card.hidden {
       display: none;
     }
+    /* Blog Banner CTA */
+    .blog-banner {
+      background: linear-gradient(135deg, var(--primary) 0%, #14a085 100%);
+      padding: 20px;
+      text-align: center;
+    }
+    .blog-banner p {
+      color: rgba(255,255,255,0.9);
+      font-size: 15px;
+      margin: 0;
+      display: inline;
+    }
+    .blog-banner a {
+      color: white;
+      font-weight: 600;
+      text-decoration: underline;
+      margin-left: 8px;
+    }
+    .blog-banner a:hover {
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -530,6 +589,11 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
       <p>Co-parenting brings enough complexity on its own. Common Ground is here to make the communication part a little easier — with real topics, practical advice, and perspectives from people who get it. Whether you're figuring out schedules, navigating tricky conversations, or just looking for a calmer way forward, you're in the right place.</p>
     </div>
   </header>
+
+  <div class="blog-banner">
+    <p>Need structure for schedules, expenses, and decisions?</p>
+    <a href="/plan-builder/">Try the free Parenting Plan Builder →</a>
+  </div>
 
   <section class="blog-section">
     <div class="container">
