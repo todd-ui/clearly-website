@@ -716,6 +716,18 @@ async function build() {
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://getclearly.app/plan-builder/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/calculators/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://getclearly.app/blog.html</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
