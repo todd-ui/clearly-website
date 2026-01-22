@@ -245,30 +245,64 @@
     .blog-card.hidden {
       display: none;
     }
+    /* Blog Banner CTA */
+    .blog-banner {
+      background: linear-gradient(135deg, var(--primary) 0%, #14a085 100%);
+      padding: 20px;
+      text-align: center;
+    }
+    .blog-banner p {
+      color: rgba(255,255,255,0.9);
+      font-size: 15px;
+      margin: 0;
+      display: inline;
+    }
+    .blog-banner a {
+      color: white;
+      font-weight: 600;
+      text-decoration: underline;
+      margin-left: 8px;
+    }
+    .blog-banner a:hover {
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
 
   <nav class="nav">
-    <div class="container">
-      <a href="/" class="nav-brand">
-        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
-        Clearly
-      </a>
-      <ul class="nav-links">
-        <li><a href="/#features">Features</a></li>
-        <li><a href="/#pricing">Pricing</a></li>
-        <li><a href="/plan-builder/">Plan Builder</a></li>
-        <li><a href="/faq.html">FAQ</a></li>
-        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </nav>
+  <div class="container">
+    <a href="/" class="nav-brand">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+      Clearly
+    </a>
+    <ul class="nav-links">
+      <li><a href="/plan-builder/">Parenting Plan Builder</a></li>
+      <li><a href="/calculators/">Support Calculators</a></li>
+      <li><a href="/blog.html">Blog</a></li>
+      <li><a href="/professionals.html">Professionals</a></li>
+      <li><a href="/faq.html">FAQ</a></li>
+      <li><a href="mailto:hello@getclearly.app?subject=Request%20private%20beta%20access" class="nav-cta">Request private access</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+  }
+</script>
 
   <header class="blog-hero">
     <div class="container">
@@ -282,11 +316,18 @@
     </div>
   </header>
 
+  <div class="blog-banner">
+    <p>Need structure for schedules, expenses, and decisions?</p>
+    <a href="/plan-builder/">Try the free Parenting Plan Builder →</a>
+  </div>
+
   <section class="blog-section">
     <div class="container">
       
       <div class="blog-filters">
         <button class="filter-btn active" data-category="all">All</button>
+        
+        <button class="filter-btn" data-category="Schedules &amp; Custody">Schedules &amp; Custody</button>
         
         <button class="filter-btn" data-category="Co-Parenting Basics">Co-Parenting Basics</button>
         
@@ -296,6 +337,17 @@
         
       </div>
       <div class="blog-grid">
+        
+        <article class="blog-card" data-category="Schedules &amp; Custody">
+          <span class="blog-card-category" data-cat="Schedules &amp; Custody">Schedules &amp; Custody</span>
+          <div class="blog-card-date">January 19, 2026</div>
+          <h3><a href="/blog/holiday-custody-schedules-fair-traditions-both-homes.html">Holiday Custody Schedules: Creating Fair Traditions for Both Homes</a></h3>
+          <p>Learn how to create balanced holiday custody arrangements that honor traditions while building new memories in both co-parenting households.</p>
+          <a href="/blog/holiday-custody-schedules-fair-traditions-both-homes.html" class="blog-card-link">
+            Read article
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </article>
         
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
@@ -457,68 +509,54 @@
   </section>
 
   <footer class="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand-section">
-          <div class="footer-brand">
-            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
-            <span>Clearly</span>
-          </div>
-          <p class="footer-tagline">Co-parenting made clear.</p>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand-section">
+        <div class="footer-brand">
+          <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+          <span>Clearly</span>
         </div>
-        <div class="footer-nav">
-          <div class="footer-col">
-            <h4>Product</h4>
-            <ul>
-              <li><a href="/#features">Features</a></li>
-              <li><a href="/#pricing">Pricing</a></li>
-              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Resources</h4>
-            <ul>
-              <li><a href="/plan-builder/">Plan Builder</a></li>
-              <li><a href="/calculators/">Support Calculator</a></li>
-              <li><a href="/faq.html">FAQ</a></li>
-              <li><a href="/help.html">Help Center</a></li>
-              <li><a href="/blog.html">Blog</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Company</h4>
-            <ul>
-              <li><a href="/professionals.html">For Professionals</a></li>
-              <li><a href="mailto:hello@getclearly.app">Contact Us</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Legal</h4>
-            <ul>
-              <li><a href="/privacy.html">Privacy Policy</a></li>
-              <li><a href="/terms.html">Terms of Service</a></li>
-            </ul>
-          </div>
-        </div>
+        <p class="footer-tagline">Co-parenting made clear.</p>
+        <p class="footer-beta">Currently in private beta. Access is limited.</p>
+        <a href="mailto:hello@getclearly.app?subject=Request%20private%20beta%20access" class="footer-cta">Request private access</a>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Clearly LLC. All rights reserved.</p>
-        <p>Proudly designed and developed in the USA.</p>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <h4>Tools</h4>
+          <ul>
+            <li><a href="/plan-builder/">Parenting Plan Builder</a></li>
+            <li><a href="/calculators/">Support Calculators</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Resources</h4>
+          <ul>
+            <li><a href="/blog.html">Blog</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+            <li><a href="/help.html">Help Center</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/professionals.html">For Professionals</a></li>
+            <li><a href="mailto:hello@getclearly.app">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="/privacy.html">Privacy Policy</a></li>
+            <li><a href="/terms.html">Terms of Service</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-  </footer>
-
-  <script>
-    // Mobile menu toggle
-    const navToggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    if (navToggle && navLinks) {
-      navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('open');
-        navLinks.classList.toggle('open');
-      });
-    }
-  </script>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Clearly LLC. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
 
   <script>
     // Category filtering
