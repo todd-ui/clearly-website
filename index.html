@@ -42,27 +42,82 @@
 
   <style>
     /* Homepage-specific styles */
+
+    /* Hero Section */
     .hero-home {
-      padding: 120px 0 100px;
-      background: linear-gradient(180deg, var(--bg) 0%, #f5f5f4 100%);
+      padding: 140px 0 120px;
+      background: linear-gradient(180deg, var(--bg) 0%, #f0f5f3 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-decoration {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    .hero-decoration-1 {
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--primary-soft) 0%, transparent 70%);
+      top: -200px;
+      right: -150px;
+      opacity: 0.8;
+    }
+    .hero-decoration-2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+      bottom: -150px;
+      left: -100px;
+      opacity: 0.08;
+    }
+    .hero-decoration-3 {
+      width: 200px;
+      height: 200px;
+      background: radial-gradient(circle, var(--primary-soft) 0%, transparent 70%);
+      top: 40%;
+      left: 5%;
+      opacity: 0.5;
     }
     .hero-home .container {
-      max-width: 720px;
+      max-width: 760px;
       text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: white;
+      border: 1px solid var(--primary-border);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--primary);
+      margin-bottom: 24px;
+      box-shadow: 0 2px 12px rgba(13, 130, 104, 0.08);
+    }
+    .hero-badge svg {
+      flex-shrink: 0;
     }
     .hero-home h1 {
-      font-size: 48px;
+      font-size: 54px;
       font-weight: 700;
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      margin-bottom: 20px;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 24px;
       color: var(--text);
     }
     .hero-home p {
-      font-size: 19px;
+      font-size: 20px;
       color: var(--text-secondary);
       line-height: 1.7;
-      margin-bottom: 36px;
+      margin-bottom: 40px;
+      max-width: 620px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .hero-buttons {
       display: flex;
@@ -73,59 +128,101 @@
     .btn-hero-primary {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      padding: 16px 28px;
-      background: var(--primary);
+      gap: 10px;
+      padding: 18px 32px;
+      background: var(--gradient);
       color: white;
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 600;
-      border-radius: 12px;
-      transition: all 0.2s;
+      border-radius: 14px;
+      transition: all 0.25s;
+      box-shadow: 0 4px 16px rgba(13, 130, 104, 0.25);
     }
     .btn-hero-primary:hover {
-      background: var(--primary-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 24px rgba(13, 130, 104, 0.35);
       text-decoration: none;
-      transform: translateY(-1px);
     }
     .btn-hero-secondary {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 16px 28px;
-      background: transparent;
+      padding: 18px 32px;
+      background: white;
       border: 1px solid var(--border);
       color: var(--text);
-      font-size: 16px;
+      font-size: 17px;
       font-weight: 500;
-      border-radius: 12px;
-      transition: all 0.2s;
+      border-radius: 14px;
+      transition: all 0.25s;
     }
     .btn-hero-secondary:hover {
-      border-color: var(--text-muted);
+      border-color: var(--primary);
+      color: var(--primary);
       text-decoration: none;
+    }
+
+    /* Truth block */
+    .truth-block {
+      padding: 64px 0;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+    .truth-block .container {
+      max-width: 580px;
+      text-align: center;
+    }
+    .truth-block p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin: 0 0 12px 0;
+    }
+    .truth-block p:last-child {
+      margin-bottom: 0;
+      color: var(--primary);
+      font-weight: 600;
+      font-size: 18px;
     }
 
     /* What Clearly helps with */
     .helps-section {
-      padding: 80px 0;
-      background: white;
+      padding: 100px 0;
+      background: var(--bg);
     }
     .helps-section .container {
-      max-width: 960px;
+      max-width: 1000px;
     }
     .helps-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 32px;
+      gap: 28px;
     }
     .helps-card {
-      padding: 32px;
-      background: var(--bg);
-      border-radius: 16px;
+      padding: 36px 32px;
+      background: white;
+      border-radius: 20px;
       border: 1px solid var(--border);
+      transition: all 0.25s;
+    }
+    .helps-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.06);
+      border-color: var(--primary-border);
+    }
+    .helps-card-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--primary-soft);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: var(--primary);
     }
     .helps-card h3 {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 600;
       margin-bottom: 12px;
       color: var(--text);
@@ -142,85 +239,168 @@
       }
     }
 
-    /* Why this approach */
-    .approach-section {
-      padding: 80px 0;
-      background: var(--bg);
+    /* How it works strip */
+    .how-strip {
+      padding: 72px 0;
+      background: linear-gradient(135deg, var(--primary) 0%, #14a085 100%);
+      position: relative;
     }
-    .approach-section .container {
-      max-width: 640px;
+    .how-strip .container {
+      max-width: 900px;
+    }
+    .how-strip-header {
       text-align: center;
+      margin-bottom: 48px;
     }
-    .approach-section h2 {
+    .how-strip-header h2 {
       font-size: 28px;
       font-weight: 600;
-      margin-bottom: 24px;
-      color: var(--text);
+      color: white;
+      margin: 0;
     }
-    .approach-section p {
+    .how-strip-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      text-align: center;
+      position: relative;
+    }
+    /* Connector line */
+    .how-strip-grid::before {
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(16.67% + 28px);
+      right: calc(16.67% + 28px);
+      height: 2px;
+      background: rgba(255,255,255,0.3);
+    }
+    .how-strip-step {
+      position: relative;
+    }
+    .how-strip-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 56px;
+      height: 56px;
+      background: white;
+      color: var(--primary);
+      font-size: 20px;
+      font-weight: 700;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      position: relative;
+      z-index: 1;
+    }
+    .how-strip-step h3 {
       font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: 16px;
+      font-weight: 600;
+      color: white;
+      margin-bottom: 8px;
     }
-    .approach-section p:last-of-type {
-      margin-bottom: 0;
+    .how-strip-step p {
+      font-size: 14px;
+      color: rgba(255,255,255,0.85);
+      margin: 0;
+      line-height: 1.6;
+    }
+    @media (max-width: 600px) {
+      .how-strip-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      .how-strip-grid::before {
+        display: none;
+      }
     }
 
     /* Entry points */
     .entry-section {
-      padding: 80px 0;
+      padding: 100px 0;
       background: white;
     }
     .entry-section .container {
-      max-width: 960px;
+      max-width: 1000px;
     }
     .entry-section h2 {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 600;
-      margin-bottom: 40px;
+      margin-bottom: 48px;
       text-align: center;
       color: var(--text);
     }
     .entry-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 28px;
     }
     .entry-card {
-      padding: 28px;
+      padding: 32px 28px;
       background: var(--bg);
       border: 1px solid var(--border);
-      border-radius: 16px;
+      border-radius: 20px;
       text-decoration: none;
-      transition: all 0.2s;
+      transition: all 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .entry-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient);
+      opacity: 0;
+      transition: opacity 0.25s;
     }
     .entry-card:hover {
-      border-color: var(--primary);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      border-color: var(--primary-border);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.06);
       text-decoration: none;
     }
+    .entry-card:hover::before {
+      opacity: 1;
+    }
+    .entry-card-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--primary-soft);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: var(--primary);
+    }
     .entry-card h3 {
-      font-size: 17px;
+      font-size: 19px;
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
     .entry-card p {
-      font-size: 14px;
+      font-size: 15px;
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.65;
       margin: 0;
     }
     .entry-card .entry-arrow {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      margin-top: 16px;
-      font-size: 14px;
-      font-weight: 500;
+      gap: 8px;
+      margin-top: 20px;
+      font-size: 15px;
+      font-weight: 600;
       color: var(--primary);
+      transition: gap 0.2s;
+    }
+    .entry-card:hover .entry-arrow {
+      gap: 12px;
     }
     @media (max-width: 768px) {
       .entry-grid {
@@ -230,7 +410,7 @@
 
     /* Beta notice */
     .beta-notice {
-      padding: 48px 0;
+      padding: 56px 0;
       background: var(--bg);
       text-align: center;
       border-top: 1px solid var(--border);
@@ -241,85 +421,28 @@
       margin: 0;
     }
 
-    /* Truth block */
-    .truth-block {
-      padding: 48px 0;
-      background: white;
-      border-bottom: 1px solid var(--border);
-    }
-    .truth-block .container {
-      max-width: 560px;
-      text-align: center;
-    }
-    .truth-block p {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin: 0 0 8px 0;
-    }
-    .truth-block p:last-child {
-      margin-bottom: 0;
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    /* How it works strip */
-    .how-strip {
-      padding: 48px 0;
-      background: var(--primary-soft);
-    }
-    .how-strip .container {
-      max-width: 800px;
-    }
-    .how-strip-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      text-align: center;
-    }
-    .how-strip-step {
-      position: relative;
-    }
-    .how-strip-num {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      background: var(--primary);
-      color: white;
-      font-size: 14px;
-      font-weight: 600;
-      border-radius: 50%;
-      margin-bottom: 12px;
-    }
-    .how-strip-step h3 {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-    .how-strip-step p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      margin: 0;
-    }
-    @media (max-width: 600px) {
-      .how-strip-grid {
-        grid-template-columns: 1fr;
-        gap: 32px;
-      }
-    }
-
+    /* Mobile adjustments */
     @media (max-width: 768px) {
       .hero-home {
-        padding: 80px 0 60px;
+        padding: 100px 0 80px;
       }
       .hero-home h1 {
-        font-size: 36px;
+        font-size: 38px;
       }
       .hero-home p {
         font-size: 17px;
+      }
+      .hero-decoration-1,
+      .hero-decoration-2,
+      .hero-decoration-3 {
+        display: none;
+      }
+      .helps-section,
+      .entry-section {
+        padding: 72px 0;
+      }
+      .entry-section h2 {
+        font-size: 26px;
       }
     }
   </style>
@@ -351,7 +474,16 @@
 
   <!-- Hero Section -->
   <section class="hero-home">
+    <!-- Decorative elements -->
+    <div class="hero-decoration hero-decoration-1"></div>
+    <div class="hero-decoration hero-decoration-2"></div>
+    <div class="hero-decoration hero-decoration-3"></div>
+
     <div class="container">
+      <div class="hero-badge">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        Free Parenting Plan Builder
+      </div>
       <h1>When every message<br>becomes a negotiation.</h1>
       <p>You're not looking for another place to argue. You need a way to make decisions and move on. Start with a parenting plan you can complete on your own — then share it with your co-parent, lawyer, or mediator.</p>
       <div class="hero-buttons">
@@ -380,14 +512,23 @@
     <div class="container">
       <div class="helps-grid">
         <div class="helps-card">
+          <div class="helps-card-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path></svg>
+          </div>
           <h3>Fewer surprises</h3>
           <p>Shared schedules with holidays, swaps, and handoff times — so you're not negotiating every week.</p>
         </div>
         <div class="helps-card">
+          <div class="helps-card-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
           <h3>Less financial friction</h3>
           <p>Logged expenses with receipts and automatic splits. No more "did you pay me back?" conversations.</p>
         </div>
         <div class="helps-card">
+          <div class="helps-card-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          </div>
           <h3>Conversations that resolve</h3>
           <p>Structured topics that move toward decisions — not threads that go in circles.</p>
         </div>
@@ -398,6 +539,9 @@
   <!-- How it works strip -->
   <section class="how-strip">
     <div class="container">
+      <div class="how-strip-header">
+        <h2>How it works</h2>
+      </div>
       <div class="how-strip-grid">
         <div class="how-strip-step">
           <span class="how-strip-num">1</span>
@@ -424,6 +568,9 @@
       <h2>Start where you are</h2>
       <div class="entry-grid">
         <a href="/plan-builder/" class="entry-card">
+          <div class="entry-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+          </div>
           <h3>Parenting Plan Builder</h3>
           <p>Create a structured custody plan covering schedules, holidays, and shared expenses. Complete it independently, then share with your co-parent or attorney. No account required.</p>
           <span class="entry-arrow">
@@ -432,6 +579,9 @@
           </span>
         </a>
         <a href="/calculators/" class="entry-card">
+          <div class="entry-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"></rect><line x1="8" y1="6" x2="16" y2="6"></line><line x1="8" y1="10" x2="10" y2="10"></line><line x1="14" y1="10" x2="16" y2="10"></line><line x1="8" y1="14" x2="10" y2="14"></line><line x1="14" y1="14" x2="16" y2="14"></line><line x1="8" y1="18" x2="10" y2="18"></line><line x1="14" y1="18" x2="16" y2="18"></line></svg>
+          </div>
           <h3>Support Calculators</h3>
           <p>State-specific tools to estimate child support. Helpful context before negotiations.</p>
           <span class="entry-arrow">
@@ -440,6 +590,9 @@
           </span>
         </a>
         <a href="/blog.html" class="entry-card">
+          <div class="entry-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+          </div>
           <h3>Blog</h3>
           <p>Practical guidance on communication, boundaries, and what actually works.</p>
           <span class="entry-arrow">
