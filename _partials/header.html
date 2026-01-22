@@ -29,15 +29,5 @@
       navLinks.classList.toggle('open');
     });
   }
-
-  // Add page context to access request mailto links
-  document.querySelectorAll('a[href^="mailto:hello@getclearly.app"]').forEach(link => {
-    link.addEventListener('click', (e) => {
-      const pageUrl = window.location.href;
-      const pageTitle = document.title || 'Clearly';
-      const subject = encodeURIComponent('Request private beta access');
-      const body = encodeURIComponent(`Hi Clearly team,\n\nI'd like to request access to the private beta.\n\n---\nRequested from: ${pageTitle}\n${pageUrl}`);
-      link.href = `mailto:hello@getclearly.app?subject=${subject}&body=${body}`;
-    });
-  });
 </script>
+<script src="/js/access-modal.js"></script>

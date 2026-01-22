@@ -1231,3 +1231,210 @@ img {
   border-color: var(--primary);
   text-decoration: none;
 }
+
+/* Access Request Modal */
+.access-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.access-modal.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.access-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.access-modal-content {
+  position: relative;
+  background: var(--surface);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 480px;
+  width: calc(100% - 32px);
+  max-height: calc(100vh - 32px);
+  overflow-y: auto;
+  transform: translateY(20px);
+  transition: transform 0.3s;
+}
+
+.access-modal.open .access-modal-content {
+  transform: translateY(0);
+}
+
+.access-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: none;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  color: var(--text-muted);
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s;
+}
+
+.access-modal-close:hover {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.access-modal-content h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  padding-right: 40px;
+}
+
+.access-modal-subtitle {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.access-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.access-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.access-form-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.access-form-group label .optional {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.access-form-group input,
+.access-form-group textarea {
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 16px;
+  font-family: inherit;
+  background: var(--surface);
+  transition: border-color 0.2s;
+}
+
+.access-form-group input:focus,
+.access-form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.access-form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.access-reason-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.access-reason-chip {
+  padding: 8px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text-secondary);
+}
+
+.access-reason-chip:hover {
+  border-color: var(--primary);
+  color: var(--text);
+}
+
+.access-reason-chip.selected {
+  background: var(--primary-soft);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.access-submit-btn {
+  padding: 14px 24px;
+  background: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.access-submit-btn:hover:not(:disabled) {
+  background: var(--primary-dark);
+}
+
+.access-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.access-privacy-note {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.access-success {
+  text-align: center;
+  padding: 24px 0;
+}
+
+.access-success-icon {
+  color: var(--primary);
+  margin-bottom: 16px;
+}
+
+.access-success h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.access-success p {
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+.access-done-btn {
+  padding: 12px 32px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.access-done-btn:hover {
+  border-color: var(--primary);
+}
