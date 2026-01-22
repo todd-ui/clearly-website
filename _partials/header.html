@@ -6,7 +6,6 @@
     </a>
     <ul class="nav-links">
       <li><a href="/plan-builder/">Parenting Plan Builder</a></li>
-      <li><a href="/calculators/">Support Calculators</a></li>
       <li><a href="/blog.html">Blog</a></li>
       <li><a href="/professionals.html">Professionals</a></li>
       <li><a href="/faq.html">FAQ</a></li>
@@ -30,4 +29,15 @@
       navLinks.classList.toggle('open');
     });
   }
+
+  // Add page context to access request mailto links
+  document.querySelectorAll('a[href^="mailto:hello@getclearly.app"]').forEach(link => {
+    link.addEventListener('click', (e) => {
+      const pageUrl = window.location.href;
+      const pageTitle = document.title || 'Clearly';
+      const subject = encodeURIComponent('Request private beta access');
+      const body = encodeURIComponent(`Hi Clearly team,\n\nI'd like to request access to the private beta.\n\n---\nRequested from: ${pageTitle}\n${pageUrl}`);
+      link.href = `mailto:hello@getclearly.app?subject=${subject}&body=${body}`;
+    });
+  });
 </script>
