@@ -143,24 +143,27 @@
       submitBtn.disabled = true;
       submitBtn.textContent = 'Submitting...';
 
+      // Build source string with context
+      const sourceParts = ['access-modal'];
+      if (selectedReason) sourceParts.push(selectedReason);
+      const pagePath = window.location.pathname || '/';
+      sourceParts.push(pagePath);
+
       const data = {
         email: email,
-        reason: selectedReason || null,
-        notes: notes || null,
-        page_url: window.location.href,
-        referrer: document.referrer || null,
-        submitted_at: new Date().toISOString()
+        source: sourceParts.join('|')
       };
 
       try {
-        const response = await fetch(`${SUPABASE_URL}/functions/v1/access-request`, {
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/waitlist-signup`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(data)
         });
 
         if (!response.ok) {
-          throw new Error('Request failed');
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.error || 'Request failed');
         }
 
         // Show success
@@ -169,17 +172,13 @@
 
       } catch (error) {
         console.error('Access request error:', error);
-        // Fallback: open mailto with context
-        const subject = encodeURIComponent('Request private beta access');
-        const body = encodeURIComponent(
-          `Email: ${email}\n` +
-          `Reason: ${selectedReason || 'Not specified'}\n` +
-          `Notes: ${notes || 'None'}\n` +
-          `Page: ${window.location.href}\n` +
-          `Referrer: ${document.referrer || 'Direct'}`
-        );
-        window.location.href = `mailto:hello@getclearly.app?subject=${subject}&body=${body}`;
-        closeModal();
+        // Show success anyway if it's a duplicate email error
+        if (error.message && error.message.includes('already')) {
+          form.style.display = 'none';
+          successView.style.display = 'block';
+        } else {
+          alert('Something went wrong. Please try again.');
+        }
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Request access';
