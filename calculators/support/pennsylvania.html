@@ -13,7 +13,7 @@
   <meta property="og:title" content="Pennsylvania Child Support Calculator 2025 | Free & Private">
   <meta property="og:description" content="Calculate PA child support using the income shares model. Free, private - no data stored.">
   <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="noindex, follow">
   <meta name="keywords" content="pennsylvania child support calculator, PA child support, 231 Pa Code 1910.16, pennsylvania child support guidelines 2025, income shares pennsylvania">
   <link rel="stylesheet" href="/styles.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
@@ -92,6 +92,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
+  <!-- Navigation (Utility) -->
   <nav class="nav">
     <div class="container">
       <a href="/" class="nav-brand">
@@ -99,17 +100,8 @@
         Clearly
       </a>
       <ul class="nav-links">
-        <li><a href="/#features">Features</a></li>
-        <li><a href="/#pricing">Pricing</a></li>
-        <li><a href="/plan-builder/">Plan Builder</a></li>
-        <li><a href="/faq.html">FAQ</a></li>
-        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
+        <li><a href="/calculators/">← All Calculators</a></li>
       </ul>
-      <button class="nav-toggle" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
     </div>
   </nav>
 
@@ -276,65 +268,15 @@
     </div>
   </section>
 
-  <section class="cta">
-    <div class="cta-pattern"></div>
-    <div class="container"><div class="cta-content">
-      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" class="cta-icon">
-      <h2>Managing co-parenting?</h2>
-      <p>Clearly helps co-parents coordinate schedules, track expenses, and communicate without conflict.</p>
-      <a href="https://apps.apple.com/app/clearly" target="_blank" class="app-store-badge"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-us?size=250x83" alt="Download on the App Store"></a>
-    </div></div>
-  </section>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand-section">
-          <div class="footer-brand">
-            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
-            <span>Clearly</span>
-          </div>
-          <p class="footer-tagline">Co-parenting made clear.</p>
-        </div>
-        <div class="footer-nav">
-          <div class="footer-col">
-            <h4>Product</h4>
-            <ul>
-              <li><a href="/#features">Features</a></li>
-              <li><a href="/#pricing">Pricing</a></li>
-              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Resources</h4>
-            <ul>
-              <li><a href="/plan-builder/">Plan Builder</a></li>
-              <li><a href="/calculators/">Support Calculator</a></li>
-              <li><a href="/faq.html">FAQ</a></li>
-              <li><a href="/help.html">Help Center</a></li>
-              <li><a href="/blog.html">Blog</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Company</h4>
-            <ul>
-              <li><a href="/professionals.html">For Professionals</a></li>
-              <li><a href="mailto:hello@getclearly.app">Contact Us</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Legal</h4>
-            <ul>
-              <li><a href="/privacy.html">Privacy Policy</a></li>
-              <li><a href="/terms.html">Terms of Service</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Clearly LLC. All rights reserved.</p>
-        <p>Proudly designed and developed in the USA.</p>
-      </div>
+  <!-- Footer (Utility) -->
+  <footer class="footer" style="padding: 40px 0; background: var(--surface); border-top: 1px solid var(--border);">
+    <div class="container" style="text-align: center;">
+      <p style="margin: 0 0 8px 0; font-size: 14px; color: var(--text-secondary);">
+        A free tool from <a href="/" style="color: var(--primary); font-weight: 500;">Clearly</a>
+      </p>
+      <p style="margin: 0; font-size: 13px; color: var(--text-muted);">
+        &copy; 2026 Clearly LLC. <a href="/privacy.html" style="color: var(--text-muted);">Privacy</a> · <a href="/terms.html" style="color: var(--text-muted);">Terms</a>
+      </p>
     </div>
   </footer>
 
