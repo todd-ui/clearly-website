@@ -11,8 +11,8 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Clearly — Co-parenting communication, redesigned</title>
-  <meta name="description" content="Every co-parenting app assumes the problem is calendars and checklists. But the real problem is broken communication patterns. Clearly resets the conversation.">
+  <title>Clearly — Co-parenting App for Conversations That Actually Resolve</title>
+  <meta name="description" content="Clearly is a co-parenting app built around resolution, not conflict. Topic-based discussions, AI-assisted clarity, and shared rules—so you can coordinate without the drama.">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://getclearly.app/">
@@ -20,15 +20,15 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app/">
-  <meta property="og:title" content="Clearly — Co-parenting communication, redesigned">
-  <meta property="og:description" content="Every co-parenting app assumes the problem is calendars and checklists. The real problem is broken communication patterns. Clearly resets the conversation.">
+  <meta property="og:title" content="Clearly — Co-parenting App for Conversations That Actually Resolve">
+  <meta property="og:description" content="Clearly is a co-parenting app built around resolution, not conflict. Topic-based discussions, AI-assisted clarity, and shared rules.">
   <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
   <meta property="og:site_name" content="Clearly">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Clearly — Co-parenting communication, redesigned">
-  <meta name="twitter:description" content="Every co-parenting app assumes the problem is calendars and checklists. The real problem is broken communication patterns.">
+  <meta name="twitter:title" content="Clearly — Conversations That Actually Resolve">
+  <meta name="twitter:description" content="A co-parenting app built around resolution, not conflict.">
   <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
 
   <!-- Additional SEO -->
@@ -50,15 +50,6 @@
       max-width: 800px;
     }
 
-    .hero-eyebrow {
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--primary);
-      margin-bottom: 20px;
-    }
-
     .hero h1 {
       font-size: 48px;
       font-weight: 600;
@@ -66,11 +57,6 @@
       color: var(--text);
       margin-bottom: 24px;
       letter-spacing: -0.02em;
-    }
-
-    .hero h1 em {
-      font-style: italic;
-      color: var(--primary);
     }
 
     .hero-subtitle {
@@ -99,15 +85,13 @@
       border-radius: 12px;
       border: none;
       transition: all 0.25s;
-      box-shadow: none;
       cursor: pointer;
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: none;
-      text-decoration: none;
       opacity: 0.9;
+      text-decoration: none;
     }
 
     .btn-secondary {
@@ -142,15 +126,16 @@
       }
     }
 
-    /* Problem Section */
-    .problem {
+    /* Why Apps Don't Work Section */
+    .why-fail {
       padding: 100px 0;
       background: white;
       border-bottom: 1px solid var(--border);
     }
 
-    .problem .container {
-      max-width: 1000px;
+    .why-fail .container {
+      max-width: 720px;
+      text-align: center;
     }
 
     .section-label {
@@ -162,97 +147,37 @@
       margin-bottom: 16px;
     }
 
-    .problem-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
-
-    .problem-text h2 {
+    .why-fail h2 {
       font-size: 32px;
       font-weight: 600;
       line-height: 1.25;
       color: var(--text);
-      margin-bottom: 20px;
+      margin-bottom: 24px;
       letter-spacing: -0.01em;
     }
 
-    .problem-text > p {
-      font-size: 17px;
-      line-height: 1.7;
+    .why-fail p {
+      font-size: 18px;
+      line-height: 1.8;
       color: var(--text-secondary);
-      margin-bottom: 0;
     }
 
-    .problem-visual {
-      position: relative;
-    }
-
-    .problem-cards {
-      display: grid;
-      gap: 16px;
-    }
-
-    .problem-card {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px 24px;
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-    }
-
-    .problem-card-icon {
-      width: 40px;
-      height: 40px;
-      background: #FEE2E2;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #DC2626;
-      flex-shrink: 0;
-    }
-
-    .problem-card h4 {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .problem-card p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.5;
-      margin: 0;
-    }
-
-    @media (max-width: 768px) {
-      .problem-layout {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-    }
-
-    /* Different Section */
-    .different {
+    /* How It Works Section */
+    .how-it-works {
       padding: 100px 0;
       background: var(--bg);
     }
 
-    .different .container {
-      max-width: 960px;
+    .how-it-works .container {
+      max-width: 1000px;
     }
 
-    .different-header {
+    .how-header {
       max-width: 640px;
       margin-bottom: 64px;
     }
 
-    .different h2 {
+    .how-header h2 {
       font-size: 32px;
       font-weight: 600;
       line-height: 1.25;
@@ -261,94 +186,63 @@
       letter-spacing: -0.01em;
     }
 
-    .different-header p {
+    .how-header p {
       font-size: 17px;
       color: var(--text-secondary);
       line-height: 1.7;
     }
 
-    .behaviors {
+    .differentiators {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 40px 56px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
     }
 
-    .behavior {
-      position: relative;
+    .differentiator {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
     }
 
-    .behavior-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--primary-soft);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      margin-bottom: 16px;
-    }
-
-    .behavior h3 {
-      font-size: 18px;
+    .differentiator h3 {
+      font-size: 20px;
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
 
-    .behavior p {
+    .differentiator p {
       font-size: 15px;
       color: var(--text-secondary);
       line-height: 1.7;
     }
 
-    @media (max-width: 768px) {
-      .behaviors {
+    @media (max-width: 900px) {
+      .differentiators {
         grid-template-columns: 1fr;
-        gap: 32px;
+        gap: 20px;
       }
     }
 
-    /* Credibility */
-    .credibility {
-      padding: 72px 0;
-      background: linear-gradient(135deg, var(--primary) 0%, #14a085 100%);
-    }
-
-    .credibility .container {
-      max-width: 720px;
-      text-align: center;
-    }
-
-    .credibility p {
-      font-size: 20px;
-      font-weight: 400;
-      color: white;
-      line-height: 1.7;
-    }
-
-    .credibility p strong {
-      font-weight: 600;
-    }
-
-    /* Lead Magnet */
-    .lead-magnet {
+    /* Logistics Section */
+    .logistics {
       padding: 100px 0;
       background: white;
+      border-bottom: 1px solid var(--border);
     }
 
-    .lead-magnet .container {
+    .logistics .container {
       max-width: 900px;
     }
 
-    .lead-magnet-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
+    .logistics-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto 48px;
     }
 
-    .lead-magnet-text h2 {
+    .logistics h2 {
       font-size: 28px;
       font-weight: 600;
       line-height: 1.25;
@@ -356,74 +250,210 @@
       margin-bottom: 16px;
     }
 
-    .lead-magnet-text > p {
-      font-size: 16px;
+    .logistics-header > p {
+      font-size: 17px;
       color: var(--text-secondary);
       line-height: 1.7;
-      margin-bottom: 28px;
     }
 
-    .lead-magnet-features {
-      list-style: none;
+    .logistics-items {
       display: grid;
-      gap: 12px;
-      margin-bottom: 28px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
     }
 
-    .lead-magnet-features li {
+    .logistics-item {
+      text-align: center;
+      padding: 24px;
+    }
+
+    .logistics-item-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--primary-soft);
+      border-radius: 14px;
       display: flex;
       align-items: center;
-      gap: 12px;
-      font-size: 15px;
-      color: var(--text-secondary);
-    }
-
-    .lead-magnet-features li svg {
+      justify-content: center;
       color: var(--primary);
-      flex-shrink: 0;
+      margin: 0 auto 16px;
     }
 
-    .lead-magnet-card {
-      background: var(--primary-soft);
-      border-radius: 20px;
-      padding: 40px;
+    .logistics-item h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .logistics-item p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .logistics-items {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+
+    /* Difference Section */
+    .difference {
+      padding: 100px 0;
+      background: var(--bg);
+    }
+
+    .difference .container {
+      max-width: 720px;
       text-align: center;
     }
 
-    .lead-magnet-card svg {
+    .difference h2 {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 40px;
+    }
+
+    .difference-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 32px;
+      text-align: left;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .difference-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      font-size: 17px;
+      color: var(--text);
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .difference-list li:last-child {
+      border-bottom: none;
+    }
+
+    .difference-list li svg {
       color: var(--primary);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .difference-tagline {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--primary);
+      font-style: italic;
+    }
+
+    /* Founder Section */
+    .founder {
+      padding: 100px 0;
+      background: white;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .founder .container {
+      max-width: 680px;
+    }
+
+    .founder h2 {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .founder p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.8;
       margin-bottom: 20px;
     }
 
-    .lead-magnet-card h3 {
+    .founder p:last-of-type {
+      font-weight: 500;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    /* Two Tools Section */
+    .two-tools {
+      padding: 100px 0;
+      background: var(--bg);
+    }
+
+    .two-tools .container {
+      max-width: 900px;
+    }
+
+    .two-tools-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .two-tools-header p {
+      font-size: 18px;
+      color: var(--text-secondary);
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+
+    .tool-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 40px;
+    }
+
+    .tool-card h3 {
       font-size: 22px;
       font-weight: 600;
       color: var(--text);
       margin-bottom: 12px;
     }
 
-    .lead-magnet-card p {
-      font-size: 15px;
+    .tool-card > p {
+      font-size: 16px;
       color: var(--text-secondary);
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .tool-card .tool-meta {
+      font-size: 14px;
+      color: var(--text-muted);
       margin-bottom: 24px;
-      line-height: 1.6;
+    }
+
+    .tool-card .btn-primary {
+      width: 100%;
+      justify-content: center;
     }
 
     @media (max-width: 768px) {
-      .lead-magnet-content {
+      .tools-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
-      }
-
-      .lead-magnet-card {
-        order: -1;
       }
     }
 
     /* Beta Section */
     .beta {
       padding: 88px 0;
-      background: var(--bg);
+      background: white;
       border-top: 1px solid var(--border);
     }
 
@@ -446,71 +476,10 @@
       margin-bottom: 32px;
     }
 
-    .beta-form {
-      display: flex;
-      gap: 12px;
-      max-width: 420px;
-      margin: 0 auto;
-    }
-
-    .beta-form input {
-      flex: 1;
-      padding: 14px 18px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 16px;
-      font-family: inherit;
-    }
-
-    .beta-form input:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-
-    .beta-form button {
-      padding: 14px 24px;
-      background: var(--gradient);
-      color: white;
-      border: none;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 600;
-      font-family: inherit;
-      cursor: pointer;
-      transition: all 0.2s;
-      white-space: nowrap;
-    }
-
-    .beta-form button:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(13, 130, 104, 0.25);
-    }
-
-    .beta-form button:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-
-    .beta-success {
-      display: none;
-      padding: 20px;
-      background: var(--primary-soft);
-      border-radius: 10px;
-      color: var(--primary);
-      font-weight: 500;
-    }
-
     .beta-privacy {
       font-size: 13px;
       color: var(--text-muted);
       margin-top: 16px;
-    }
-
-    @media (max-width: 500px) {
-      .beta-form {
-        flex-direction: column;
-      }
     }
 
     /* Fade animations */
@@ -537,6 +506,7 @@
         Clearly
       </a>
       <ul class="nav-links">
+        <li><a href="/communication-styles/">Communication Styles</a></li>
         <li><a href="/plan-builder/">Plan Builder</a></li>
         <li><a href="/blog.html">Blog</a></li>
         <li><a href="/professionals.html">Professionals</a></li>
@@ -554,143 +524,145 @@
   <!-- Hero -->
   <section class="hero">
     <div class="container">
-      <p class="hero-eyebrow fade-in">Co-parenting, clearly.</p>
-      <h1 class="fade-in">The problem isn't logistics.<br>It's <em>communication.</em></h1>
-      <p class="hero-subtitle fade-in">Most co-parenting apps focus on calendars and expense trackers. Clearly focuses on what actually matters—helping conversations resolve instead of escalate.</p>
+      <h1 class="fade-in">Finally, conversations that resolve.</h1>
+      <p class="hero-subtitle fade-in">Co-parenting means communicating with someone when communication already got hard. Clearly is built to change that dynamic—not just give you another place to argue.</p>
       <div class="hero-ctas fade-in">
-        <a href="/plan-builder/" class="btn-primary">
-          Start with a free plan
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        <a href="#how-it-works" class="btn-primary">
+          See how it works
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
         </a>
-        <a href="#different" class="btn-secondary">See how it works</a>
+        <a href="/communication-styles/" class="btn-secondary">Take the free assessment</a>
       </div>
     </div>
   </section>
 
-  <!-- Problem Section -->
-  <section class="problem">
+  <!-- Why Apps Don't Work -->
+  <section class="why-fail">
     <div class="container">
-      <div class="problem-layout">
-        <div class="problem-text">
-          <p class="section-label fade-in">The insight</p>
-          <h2 class="fade-in">Logistics tools solve logistics problems.</h2>
-          <p class="fade-in">Communication is different. It needs structure, not just features. That's what Clearly is built for.</p>
-        </div>
-        <div class="problem-visual fade-in">
-          <div class="problem-cards">
-            <div class="problem-card">
-              <div class="problem-card-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
-              </div>
-              <div>
-                <h4>Calendar apps</h4>
-                <p>Don't fix the fight when someone requests a swap</p>
-              </div>
-            </div>
-            <div class="problem-card">
-              <div class="problem-card-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-              </div>
-              <div>
-                <h4>Expense trackers</h4>
-                <p>Don't prevent the passive-aggressive receipt commentary</p>
-              </div>
-            </div>
-            <div class="problem-card">
-              <div class="problem-card-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-              </div>
-              <div>
-                <h4>Messaging apps</h4>
-                <p>Don't stop the 11pm spiral that ruins everyone's week</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <h2 class="fade-in">Why co-parenting apps don't work</h2>
+      <p class="fade-in">Most co-parenting tools are just messaging apps with a shared calendar. They give you a place to talk—but they don't change how you talk. The same patterns that made communication hard? They follow you right into the app. One misread text, one defensive reply, and you're right back where you started.</p>
     </div>
   </section>
 
-  <!-- How Clearly is Different -->
-  <section class="different" id="different">
+  <!-- How Clearly Is Different -->
+  <section class="how-it-works" id="how-it-works">
     <div class="container">
-      <div class="different-header">
+      <div class="how-header">
         <p class="section-label fade-in">How it works</p>
-        <h2 class="fade-in">Built to change conversations, not just host them.</h2>
-        <p class="fade-in">Four principles that make co-parenting communication actually work.</p>
+        <h2 class="fade-in">Structure that actually changes things</h2>
+        <p class="fade-in">Clearly isn't a messaging app. It's a resolution system—designed to keep conversations focused on decisions, not drama.</p>
       </div>
-      <div class="behaviors">
-        <div class="behavior fade-in">
-          <div class="behavior-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-          </div>
-          <h3>Slows you down</h3>
-          <p>AI rewrites your message in neutral language before you send. Most escalation happens in the first draft.</p>
+      <div class="differentiators">
+        <div class="differentiator fade-in">
+          <h3>Topics, not threads</h3>
+          <p>Every conversation has a clear subject—"Soccer registration" or "Spring break plans"—and moves toward a decision. No endless threads. No relitigating old issues. Topics resolve, then close.</p>
         </div>
-        <div class="behavior fade-in">
-          <div class="behavior-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-          </div>
-          <h3>Narrows the scope</h3>
-          <p>Topics, not threads. One issue stays open until resolved. No message avalanches or subject changes.</p>
+        <div class="differentiator fade-in">
+          <h3>Say what you mean, without the edge</h3>
+          <p>Before you send, Clearly can suggest a calmer way to say the same thing. You stay in control—but you get a second opinion when emotions are running high.</p>
         </div>
-        <div class="behavior fade-in">
-          <div class="behavior-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg>
-          </div>
-          <h3>Removes the subtext</h3>
-          <p>Strips out phrases that trigger defensiveness—the "as usual," the "once again." Just the facts.</p>
-        </div>
-        <div class="behavior fade-in">
-          <div class="behavior-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-          </div>
-          <h3>Enforces structure</h3>
-          <p>You define rules in advance—response windows, topic categories. The system enforces them consistently.</p>
+        <div class="differentiator fade-in">
+          <h3>Your rules, always visible</h3>
+          <p>Custody schedule, expense splits, response expectations—you enter them once, and they're referenced everywhere. No more "I thought we agreed..." because it's all written down.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Credibility -->
-  <section class="credibility">
+  <!-- Logistics Section -->
+  <section class="logistics">
     <div class="container">
-      <p class="fade-in">Built on principles from the <strong>Harvard Negotiation Project</strong>—the same framework used in international diplomacy and high-conflict mediation. Adapted for the most difficult negotiation of all: co-parenting with someone you'd rather not talk to.</p>
+      <div class="logistics-header">
+        <h2 class="fade-in">Yes, it handles the logistics too</h2>
+        <p class="fade-in">Shared calendar with your custody schedule built in. Expense tracking that knows who owes what. A place for documents, contacts, and everything else you need to share.</p>
+      </div>
+      <div class="logistics-items">
+        <div class="logistics-item fade-in">
+          <div class="logistics-item-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </div>
+          <h3>Schedule</h3>
+          <p>Your custody calendar, holidays, and swap requests</p>
+        </div>
+        <div class="logistics-item fade-in">
+          <div class="logistics-item-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <h3>Expenses</h3>
+          <p>Log, split, settle up</p>
+        </div>
+        <div class="logistics-item fade-in">
+          <div class="logistics-item-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          </div>
+          <h3>Shared</h3>
+          <p>Documents, contacts, the info you both need</p>
+        </div>
+      </div>
     </div>
   </section>
 
-  <!-- Lead Magnet -->
-  <section class="lead-magnet">
+  <!-- The Clearly Difference -->
+  <section class="difference">
     <div class="container">
-      <div class="lead-magnet-content">
-        <div class="lead-magnet-text">
-          <p class="section-label fade-in">Free tool</p>
-          <h2 class="fade-in">Start with your parenting plan.</h2>
-          <p class="fade-in">Before you can change how you communicate, you need clarity on the basics. Our Parenting Plan Builder walks you through schedules, expenses, and decision-making—then gives you a document you can actually use.</p>
-          <ul class="lead-magnet-features fade-in">
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              No account required
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Share with attorneys or mediators
-            </li>
-            <li>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              Export as PDF
-            </li>
-          </ul>
-          <a href="/plan-builder/" class="btn-primary fade-in">
-            Build your plan
+      <h2 class="fade-in">The Clearly difference</h2>
+      <ul class="difference-list">
+        <li class="fade-in">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          No more "I thought you said..."
+        </li>
+        <li class="fade-in">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          No more screenshots as evidence
+        </li>
+        <li class="fade-in">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          No more guessing whose weekend it is
+        </li>
+        <li class="fade-in">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          No more fights over $20 expenses
+        </li>
+      </ul>
+      <p class="difference-tagline fade-in">Just clarity.</p>
+    </div>
+  </section>
+
+  <!-- Built By Someone Who Needed It -->
+  <section class="founder">
+    <div class="container">
+      <h2 class="fade-in">Built by someone who needed it</h2>
+      <p class="fade-in">Clearly started because the existing tools didn't work. Calendar apps don't understand custody. Messaging apps make things worse. And the "co-parenting platforms" out there felt like they were built for courtrooms, not real life.</p>
+      <p class="fade-in">This was built by a co-parent who's been in the middle of it—figuring out schedules, splitting costs, trying to keep communication from going sideways. Not a big company. Just a better way to handle the day-to-day.</p>
+      <p class="fade-in">Because when communication works, everything else gets easier.</p>
+    </div>
+  </section>
+
+  <!-- Two Free Tools -->
+  <section class="two-tools">
+    <div class="container">
+      <div class="two-tools-header">
+        <p class="section-label fade-in">Free tools</p>
+        <p class="fade-in">Not sure if you need an app yet? Start here—free, no account required.</p>
+      </div>
+      <div class="tools-grid">
+        <div class="tool-card fade-in">
+          <h3>Communication Style Assessment</h3>
+          <p>Discover your default patterns when co-parent conversations get hard—and learn what actually helps.</p>
+          <p class="tool-meta">2 minutes. 7 questions. Practical tips.</p>
+          <a href="/communication-styles/" class="btn-primary">
+            Take the assessment
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
         </div>
-        <div class="lead-magnet-card fade-in">
-          <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+        <div class="tool-card fade-in">
           <h3>Parenting Plan Builder</h3>
-          <p>Custody schedules, holidays, expenses, decision-making—structured and ready to share.</p>
-          <a href="/plan-builder/" class="btn-secondary">Get started free</a>
+          <p>Work through custody schedules, holidays, and expense splits. Get a clear summary to share with your co-parent, attorney, or mediator.</p>
+          <p class="tool-meta">5 minutes. Upload existing agreements or start fresh.</p>
+          <a href="/plan-builder/" class="btn-primary">
+            Build your plan
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
         </div>
       </div>
     </div>
@@ -699,10 +671,10 @@
   <!-- Beta Section -->
   <section class="beta" id="beta">
     <div class="container">
-      <h2 class="fade-in">Ready to change the conversation?</h2>
-      <p class="fade-in">Clearly is in private beta. Request early access and be first to try a different approach to co-parenting communication.</p>
+      <h2 class="fade-in">Ready for the full toolkit?</h2>
+      <p class="fade-in">Clearly is currently in private beta. Request access to get structured messaging, shared scheduling, expense tracking, and everything else—all designed around resolution, not conflict.</p>
       <button class="btn-primary fade-in" data-access-modal>
-        Request access
+        Request private access
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
       </button>
       <p class="beta-privacy fade-in">No spam. Just updates on access.</p>
@@ -718,12 +690,13 @@
             <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
             <span>Clearly</span>
           </div>
-          <p class="footer-tagline">Most apps digitize the chaos. Clearly resets the conversation.</p>
+          <p class="footer-tagline">Built by a co-parent, for co-parents.</p>
         </div>
         <div class="footer-nav">
           <div class="footer-col">
             <h4>Tools</h4>
             <ul>
+              <li><a href="/communication-styles/">Communication Styles</a></li>
               <li><a href="/plan-builder/">Parenting Plan Builder</a></li>
               <li><a href="/calculators/">Support Calculators</a></li>
             </ul>
@@ -785,8 +758,19 @@
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-    // Beta form submission
-    const SUPABASE_URL = 'https://dwncravjhkbclbuzijra.supabase.co';
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
   </script>
 
   <!-- Structured Data -->
@@ -798,7 +782,7 @@
     "legalName": "Clearly LLC",
     "url": "https://getclearly.app",
     "logo": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png",
-    "description": "Clearly is a co-parenting communication app that resets the conversation. Built on Harvard Negotiation Project principles.",
+    "description": "Clearly is a co-parenting app built around resolution, not conflict. Topic-based discussions, AI-assisted clarity, and shared rules.",
     "email": "hello@getclearly.app",
     "sameAs": []
   }
