@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DYZ1XEXPMT');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What's Your Co-Parenting Communication Style? | Free Assessment</title>
+  <meta name="description" content="Take this free 2-minute assessment to discover your co-parenting communication style. Learn your patterns and get practical tips for conversations that actually work.">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://getclearly.app/communication-styles/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getclearly.app/communication-styles/">
+  <meta property="og:title" content="What's Your Co-Parenting Communication Style? | Free Assessment">
+  <meta property="og:description" content="Take this free 2-minute assessment to discover your co-parenting communication style. Learn your patterns and get practical tips.">
+  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+  <meta property="og:site_name" content="Clearly">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What's Your Co-Parenting Communication Style?">
+  <meta name="twitter:description" content="Free 2-minute assessment. Discover your patterns and get practical tips.">
+  <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+
+  <!-- Additional SEO -->
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Clearly LLC">
+  <meta name="keywords" content="co-parenting communication, how to communicate with co-parent, co-parenting communication tips, communicating with difficult co-parent, co-parenting conflict">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
+  <link rel="apple-touch-icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+
+  <style>
+    /* Assessment-specific styles */
+    .assessment-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .assessment-nav {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+      background: white;
+    }
+
+    .assessment-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .assessment-nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--text);
+    }
+
+    .assessment-nav-brand img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .assessment-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+
+    .assessment-content {
+      max-width: 600px;
+      width: 100%;
+    }
+
+    /* Landing screen */
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .landing-screen {
+      text-align: center;
+    }
+
+    .landing-screen h1 {
+      font-size: 40px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .landing-screen .subhead {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-start {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 36px;
+      background: var(--gradient);
+      color: white;
+      font-size: 17px;
+      font-weight: 600;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .btn-start:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    .trust-line {
+      margin-top: 24px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* Progress indicator */
+    .progress-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-bottom: 40px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    /* Question screen */
+    .question-screen h2 {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .answers {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .answer-btn {
+      display: block;
+      width: 100%;
+      padding: 20px 24px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-align: left;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .answer-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .answer-btn.selected {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    /* Email capture screen */
+    .email-screen {
+      text-align: center;
+    }
+
+    .email-screen h2 {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .email-screen p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 440px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .email-form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .email-form input {
+      width: 100%;
+      padding: 16px 20px;
+      font-size: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .email-form input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .email-form button {
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--gradient);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .email-form button:hover {
+      opacity: 0.9;
+    }
+
+    .email-form button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .skip-link {
+      display: inline-block;
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .skip-link:hover {
+      color: var(--primary);
+    }
+
+    /* Results screen */
+    .results-screen {
+      text-align: center;
+    }
+
+    .result-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .results-screen h2 {
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .result-tagline {
+      font-size: 20px;
+      color: var(--primary);
+      font-style: italic;
+      margin-bottom: 32px;
+    }
+
+    .result-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+      text-align: left;
+      margin-bottom: 24px;
+    }
+
+    .result-card h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .result-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+    }
+
+    .result-card.highlight {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+    }
+
+    .result-card.highlight h3 {
+      color: var(--primary);
+    }
+
+    .secondary-style {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    /* Principle section */
+    .principle-section {
+      background: linear-gradient(135deg, #f8fdfb 0%, #e8f5f0 100%);
+      border-radius: 16px;
+      padding: 32px;
+      margin: 40px 0;
+      text-align: left;
+    }
+
+    .principle-section h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .principle-section p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .principle-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .principle-example {
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      margin: 20px 0;
+    }
+
+    .principle-example p {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+
+    .principle-example p:last-child {
+      margin-bottom: 0;
+    }
+
+    .principle-example strong {
+      color: var(--text);
+    }
+
+    /* Final CTA */
+    .final-cta {
+      text-align: center;
+      padding: 40px 0;
+    }
+
+    .final-cta h3 {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .final-cta p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-cta .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      background: var(--gradient);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .final-cta .btn-primary:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+      text-decoration: none;
+    }
+
+    .final-cta .btn-secondary {
+      display: block;
+      margin-top: 16px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .final-cta .btn-secondary:hover {
+      color: var(--primary);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .landing-screen h1 {
+        font-size: 32px;
+      }
+
+      .results-screen h2 {
+        font-size: 28px;
+      }
+
+      .result-tagline {
+        font-size: 18px;
+      }
+
+      .assessment-main {
+        padding: 40px 20px;
+      }
+    }
+  </style>
+  <script src="/js/access-modal.js" defer></script>
+</head>
+<body>
+  <div class="assessment-container">
+    <!-- Navigation -->
+    <nav class="assessment-nav">
+      <div class="container">
+        <a href="/" class="assessment-nav-brand">
+          <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+          Clearly
+        </a>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="assessment-main">
+      <div class="assessment-content">
+
+        <!-- Landing Screen -->
+        <div id="landing" class="screen landing-screen active">
+          <h1>What's your co-parenting communication style?</h1>
+          <p class="subhead">When conversations with your co-parent get hard, we all default to patterns—some helpful, some not. This 2-minute assessment helps you see yours, and offers a better way forward.</p>
+          <button class="btn-start" onclick="startAssessment()">
+            Start the assessment
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+          <p class="trust-line">7 questions. No account required. Free.</p>
+        </div>
+
+        <!-- Question Screens -->
+        <div id="questions" class="screen question-screen">
+          <p class="progress-text">Question <span id="currentQ">1</span> of 7</p>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 14.28%"></div>
+          </div>
+          <h2 id="questionText"></h2>
+          <div class="answers" id="answers"></div>
+        </div>
+
+        <!-- Email Capture Screen -->
+        <div id="emailCapture" class="screen email-screen">
+          <h2>Get your results + practical tips</h2>
+          <p>Enter your email to get your communication style results, plus tips you can use in your next conversation. We'll also let you know when Clearly is ready.</p>
+          <form class="email-form" id="emailForm">
+            <input type="email" id="emailInput" placeholder="you@example.com" required>
+            <button type="submit" id="emailSubmitBtn">Send my results</button>
+          </form>
+          <span class="skip-link" onclick="showResults()">Skip and see results</span>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results" class="screen results-screen">
+          <span class="result-badge">Your style</span>
+          <h2 id="resultTitle">The Defender</h2>
+          <p class="result-tagline" id="resultTagline">"You're always ready to explain your side."</p>
+
+          <p class="secondary-style" id="secondaryStyle" style="display: none;"></p>
+
+          <div class="result-card">
+            <h3>The pattern</h3>
+            <p id="resultPattern"></p>
+          </div>
+
+          <div class="result-card">
+            <h3>How it shows up</h3>
+            <ul id="resultBehaviors" style="margin: 0; padding-left: 20px; color: var(--text-secondary); line-height: 1.8;"></ul>
+          </div>
+
+          <div class="result-card highlight">
+            <h3>What helps</h3>
+            <p id="resultHelps"></p>
+          </div>
+
+          <!-- The Principle Section -->
+          <div class="principle-section">
+            <h3>One thing that helps every style</h3>
+            <p>When conversations get stuck, it's usually because both people are defending their position instead of talking about what actually matters.</p>
+            <div class="principle-example">
+              <p><strong>Positions</strong> sound like: "I need this weekend."</p>
+              <p><strong>Interests</strong> sound like: "I want to be there for her soccer game."</p>
+            </div>
+            <p>When you focus on the why behind the ask—yours and theirs—solutions get easier to find.</p>
+            <p><strong>Try this next time:</strong> Before you respond, ask yourself—"What do I actually need here? What do they actually need?"</p>
+          </div>
+
+          <!-- Final CTA -->
+          <div class="final-cta">
+            <h3>A tool built around these principles</h3>
+            <p>Clearly is a co-parenting app designed to keep conversations focused on what matters—not who's right. Topic-based discussions that resolve. Structure that makes the day-to-day easier.</p>
+            <a href="/" class="btn-primary">
+              Learn more about Clearly
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+            <a href="#" class="btn-secondary" data-access-modal>Request private beta access</a>
+          </div>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://dwncravjhkbclbuzijra.supabase.co';
+
+    // Style definitions
+    const STYLES = {
+      defender: {
+        name: 'The Defender',
+        tagline: "You're always ready to explain your side.",
+        pattern: "When a message comes in, your first instinct is to protect yourself. You explain, justify, or clarify—often before you've fully heard what they're asking. Conversations can feel like you're always on the back foot, even when you don't need to be.",
+        behaviors: [
+          "Long responses that explain your reasoning",
+          "Starting with \"I only did that because...\"",
+          "Anticipating criticism before it comes",
+          "Feeling misunderstood, often"
+        ],
+        helps: "Pause before responding. Read their message again and ask: \"What do they actually need here?\" Often, they're not attacking—they're just asking. You don't have to defend a position they're not questioning."
+      },
+      fixer: {
+        name: 'The Fixer',
+        tagline: "You want to solve it and move on.",
+        pattern: "You see a problem, you want to fix it. Fast. You jump to solutions—sometimes before the other person feels heard. This efficiency is a strength, but it can feel steamrolling to someone who needs to process before deciding.",
+        behaviors: [
+          "Offering solutions in your first response",
+          "Frustration when things drag on",
+          "\"Let's just decide and move on\"",
+          "Feeling like you're always the one driving things forward"
+        ],
+        helps: "Slow down by one beat. Before offering your solution, acknowledge what they said: \"I hear you—that's tricky.\" Then offer options instead of answers: \"Would it work if we...?\" Collaboration lands better than direction."
+      },
+      avoider: {
+        name: 'The Avoider',
+        tagline: "You'd rather keep the peace than push back.",
+        pattern: "Conflict is exhausting, so you avoid it. You say \"fine\" when it's not fine. You let things slide to prevent a fight. But unresolved issues pile up, and resentment builds quietly—until it doesn't.",
+        behaviors: [
+          "Agreeing to things you don't really mean",
+          "Letting small issues become big ones",
+          "\"It's not worth the fight\"",
+          "Occasional blowups after long periods of silence"
+        ],
+        helps: "Name the small stuff early, before it grows. A quick \"Hey, can we figure out X?\" now is easier than an explosion later. You don't have to fight—you just have to ask. Small asks, made early, prevent big conflicts."
+      },
+      scorekeeper: {
+        name: 'The Scorekeeper',
+        tagline: "You track what's fair—and what's not.",
+        pattern: "Fairness matters to you. You notice when things are uneven—who did the extra pickup, who paid for the cleats, who got the holiday last year. Tracking isn't wrong, but it can keep you anchored to the past instead of solving the present.",
+        behaviors: [
+          "Keeping mental tallies",
+          "Bringing up past imbalances in current discussions",
+          "\"But last time, you...\"",
+          "Feeling like you're always giving more"
+        ],
+        helps: "Ask yourself: \"What works for the kids this time?\" instead of \"What's fair based on last time?\" Fairness over time matters—but individual decisions work better when they focus on the current situation, not the historical ledger."
+      }
+    };
+
+    // Questions with answer mappings
+    const QUESTIONS = [
+      {
+        text: "Your co-parent texts you asking to swap weekends. Your first instinct is to:",
+        answers: [
+          { text: "Explain why this weekend doesn't work for you before hearing why they're asking", style: "defender" },
+          { text: "Quickly suggest an alternative that works for everyone", style: "fixer" },
+          { text: "Say yes to avoid a conflict, even if it's inconvenient", style: "avoider" },
+          { text: "Think about whether they accommodated you last time", style: "scorekeeper" }
+        ]
+      },
+      {
+        text: "You get a message that feels critical of something you did. You:",
+        answers: [
+          { text: "Immediately start drafting an explanation", style: "defender" },
+          { text: "Focus on fixing the issue so it doesn't happen again", style: "fixer" },
+          { text: "Let it go rather than escalate", style: "avoider" },
+          { text: "Think about times they've done the same thing", style: "scorekeeper" }
+        ]
+      },
+      {
+        text: "A decision needs to be made about the kids' schedule, but you disagree. You:",
+        answers: [
+          { text: "Make sure your reasoning is fully understood", style: "defender" },
+          { text: "Propose a compromise to get it resolved", style: "fixer" },
+          { text: "Go along with their preference to avoid a drawn-out discussion", style: "avoider" },
+          { text: "Point out that you've compromised more in the past", style: "scorekeeper" }
+        ]
+      },
+      {
+        text: "After a tense exchange, you find yourself:",
+        answers: [
+          { text: "Replaying what you should have said to make your point clearer", style: "defender" },
+          { text: "Thinking about how to prevent this from happening next time", style: "fixer" },
+          { text: "Wishing you hadn't engaged at all", style: "avoider" },
+          { text: "Mentally cataloging this for future reference", style: "scorekeeper" }
+        ]
+      },
+      {
+        text: "Your co-parent brings up an issue you thought was already settled. You:",
+        answers: [
+          { text: "Remind them of what was already agreed and why", style: "defender" },
+          { text: "Try to find a new solution that works", style: "fixer" },
+          { text: "Agree to revisit it to keep things smooth", style: "avoider" },
+          { text: "Feel frustrated that they're changing things again", style: "scorekeeper" }
+        ]
+      },
+      {
+        text: "There's an expense you didn't expect. You:",
+        answers: [
+          { text: "Explain why you shouldn't have to cover it", style: "defender" },
+          { text: "Suggest how to split it and move on", style: "fixer" },
+          { text: "Just pay it to avoid the conversation", style: "avoider" },
+          { text: "Think about all the other expenses you've covered", style: "scorekeeper" }
+        ]
+      },
+      {
+        text: "If you could change one thing about how you and your co-parent communicate, it would be:",
+        answers: [
+          { text: "Feeling like they actually understand where I'm coming from", style: "defender" },
+          { text: "Making decisions faster without all the back-and-forth", style: "fixer" },
+          { text: "Having fewer tense conversations overall", style: "avoider" },
+          { text: "Things being more balanced between us", style: "scorekeeper" }
+        ]
+      }
+    ];
+
+    // State
+    let currentQuestion = 0;
+    let answers = [];
+    let userEmail = null;
+
+    // Screen management
+    function showScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(screenId).classList.add('active');
+    }
+
+    // Start assessment
+    function startAssessment() {
+      currentQuestion = 0;
+      answers = [];
+      showScreen('questions');
+      renderQuestion();
+
+      // Track start
+      gtag('event', 'assessment_start', { event_category: 'engagement' });
+    }
+
+    // Render current question
+    function renderQuestion() {
+      const q = QUESTIONS[currentQuestion];
+      document.getElementById('currentQ').textContent = currentQuestion + 1;
+      document.getElementById('progressFill').style.width = ((currentQuestion + 1) / 7 * 100) + '%';
+      document.getElementById('questionText').textContent = q.text;
+
+      const answersEl = document.getElementById('answers');
+      answersEl.innerHTML = '';
+
+      // Shuffle answers for this question
+      const shuffledAnswers = [...q.answers].sort(() => Math.random() - 0.5);
+
+      shuffledAnswers.forEach((answer, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'answer-btn';
+        btn.textContent = answer.text;
+        btn.onclick = () => selectAnswer(answer.style);
+        answersEl.appendChild(btn);
+      });
+    }
+
+    // Select answer and advance
+    function selectAnswer(style) {
+      answers.push(style);
+
+      // Track question completion
+      gtag('event', 'assessment_question', {
+        event_category: 'engagement',
+        event_label: `question_${currentQuestion + 1}`,
+        value: currentQuestion + 1
+      });
+
+      if (currentQuestion < QUESTIONS.length - 1) {
+        currentQuestion++;
+        renderQuestion();
+      } else {
+        // Assessment complete - show email capture
+        showScreen('emailCapture');
+        gtag('event', 'assessment_complete', { event_category: 'engagement' });
+      }
+    }
+
+    // Calculate results
+    function calculateResults() {
+      const counts = { defender: 0, fixer: 0, avoider: 0, scorekeeper: 0 };
+      answers.forEach(a => counts[a]++);
+
+      // Find primary style (tie-breaker: last answered style wins)
+      let primary = null;
+      let maxCount = 0;
+
+      // Reverse through answers to find last style in case of tie
+      const styleOrder = [];
+      answers.forEach(a => {
+        if (!styleOrder.includes(a)) styleOrder.push(a);
+      });
+      styleOrder.reverse();
+
+      Object.keys(counts).forEach(style => {
+        if (counts[style] > maxCount) {
+          maxCount = counts[style];
+          primary = style;
+        } else if (counts[style] === maxCount && styleOrder.indexOf(style) < styleOrder.indexOf(primary)) {
+          primary = style;
+        }
+      });
+
+      // Find secondary style (2+ selections, not primary)
+      let secondary = null;
+      Object.keys(counts).forEach(style => {
+        if (style !== primary && counts[style] >= 2) {
+          if (!secondary || counts[style] > counts[secondary]) {
+            secondary = style;
+          }
+        }
+      });
+
+      return { primary, secondary, counts };
+    }
+
+    // Show results
+    function showResults() {
+      const { primary, secondary, counts } = calculateResults();
+      const style = STYLES[primary];
+
+      document.getElementById('resultTitle').textContent = style.name;
+      document.getElementById('resultTagline').textContent = `"${style.tagline}"`;
+      document.getElementById('resultPattern').textContent = style.pattern;
+      document.getElementById('resultHelps').textContent = style.helps;
+
+      const behaviorsEl = document.getElementById('resultBehaviors');
+      behaviorsEl.innerHTML = '';
+      style.behaviors.forEach(b => {
+        const li = document.createElement('li');
+        li.textContent = b;
+        behaviorsEl.appendChild(li);
+      });
+
+      // Show secondary style if applicable
+      const secondaryEl = document.getElementById('secondaryStyle');
+      if (secondary) {
+        secondaryEl.textContent = `You also show tendencies toward ${STYLES[secondary].name}.`;
+        secondaryEl.style.display = 'block';
+      } else {
+        secondaryEl.style.display = 'none';
+      }
+
+      showScreen('results');
+
+      // Track results view
+      gtag('event', 'assessment_results', {
+        event_category: 'engagement',
+        event_label: primary
+      });
+    }
+
+    // Email form submission
+    document.getElementById('emailForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('emailInput').value.trim();
+      const submitBtn = document.getElementById('emailSubmitBtn');
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      const { primary, secondary, counts } = calculateResults();
+
+      try {
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/assessment-signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            style_result: primary,
+            secondary_style: secondary,
+            answers: answers,
+            source: 'assessment'
+          })
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.error || 'Request failed');
+        }
+
+        userEmail = email;
+
+        // Track email capture
+        gtag('event', 'assessment_email_capture', {
+          event_category: 'conversion',
+          event_label: primary
+        });
+
+        showResults();
+
+      } catch (error) {
+        console.error('Email capture error:', error);
+        // Show results anyway even if email fails
+        if (error.message && error.message.includes('already')) {
+          showResults();
+        } else {
+          alert('Something went wrong. Please try again or skip to see your results.');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send my results';
+        }
+      }
+    });
+  </script>
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Co-Parenting Communication Style Assessment",
+    "description": "A free self-assessment that helps people identify their default communication patterns when co-parenting.",
+    "url": "https://getclearly.app/communication-styles/",
+    "applicationCategory": "LifestyleApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Organization",
+      "name": "Clearly",
+      "url": "https://getclearly.app"
+    }
+  }
+  </script>
+</body>
+</html>
