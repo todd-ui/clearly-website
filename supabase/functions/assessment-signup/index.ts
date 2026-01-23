@@ -38,9 +38,9 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     )
 
-    // Insert into assessment_leads table
+    // Insert into z_assessment_leads table
     const { data, error } = await supabaseClient
-      .from('assessment_leads')
+      .from('z_assessment_leads')
       .insert({
         email: email.toLowerCase().trim(),
         style_result,
@@ -64,10 +64,10 @@ serve(async (req) => {
       )
     }
 
-    // Also add to waitlist table for nurture sequence (don't fail if this errors)
+    // Also add to z_waitlist table for nurture sequence (don't fail if this errors)
     try {
       await supabaseClient
-        .from('waitlist')
+        .from('z_waitlist')
         .upsert({
           email: email.toLowerCase().trim(),
           source: `assessment-${style_result}`
@@ -249,7 +249,7 @@ async function sendResultsEmail(email: string, styleResult: string, secondarySty
         Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
       )
       await supabaseClient
-        .from('assessment_leads')
+        .from('z_assessment_leads')
         .update({ email_sent: true })
         .eq('email', email.toLowerCase().trim())
     }

@@ -11,8 +11,8 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Communication Patterns Assessment | Free Tool for Co-Parents</title>
-  <meta name="description" content="You can't control how your co-parent communicates—but you can change the dynamic. Take this free 2-minute assessment to see your patterns and learn what actually works.">
+  <title>Relationship Patterns Assessment | Free Tool for Co-Parents</title>
+  <meta name="description" content="You can't control how your co-parent communicates—but you can change the dynamic. Take this free 2-minute assessment to see your relationship patterns and learn what actually works.">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://getclearly.app/communication-styles/">
@@ -20,14 +20,14 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app/communication-styles/">
-  <meta property="og:title" content="Communication Patterns Assessment | Free Tool for Co-Parents">
-  <meta property="og:description" content="You can't control how your co-parent communicates—but you can change the dynamic. See your patterns and learn what actually works.">
+  <meta property="og:title" content="Relationship Patterns Assessment | Free Tool for Co-Parents">
+  <meta property="og:description" content="You can't control how your co-parent communicates—but you can change the dynamic. See your relationship patterns and learn what actually works.">
   <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
   <meta property="og:site_name" content="Clearly">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Communication Patterns Assessment | Free Tool for Co-Parents">
+  <meta name="twitter:title" content="Relationship Patterns Assessment | Free Tool for Co-Parents">
   <meta name="twitter:description" content="You can't control how your co-parent communicates—but you can change the dynamic.">
   <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
 
@@ -106,10 +106,28 @@
       text-align: center;
     }
 
-    .landing-screen h1 {
-      font-size: 40px;
+    .landing-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 13px;
       font-weight: 600;
-      line-height: 1.2;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .landing-badge svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .landing-screen h1 {
+      font-size: 42px;
+      font-weight: 600;
+      line-height: 1.15;
       color: var(--text);
       margin-bottom: 20px;
       letter-spacing: -0.02em;
@@ -120,16 +138,56 @@
       line-height: 1.7;
       color: var(--text-secondary);
       margin-bottom: 40px;
-      max-width: 500px;
+      max-width: 520px;
       margin-left: auto;
       margin-right: auto;
+    }
+
+    /* Style preview cards */
+    .style-preview {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .style-preview-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+
+    .style-preview-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-soft);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      margin: 0 auto 10px;
+    }
+
+    .style-preview-card span {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      display: block;
     }
 
     .btn-start {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      padding: 18px 36px;
+      padding: 18px 40px;
       background: var(--gradient);
       color: white;
       font-size: 17px;
@@ -145,10 +203,41 @@
       opacity: 0.9;
     }
 
-    .trust-line {
-      margin-top: 24px;
+    /* Trust features */
+    .trust-features {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .trust-feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       font-size: 14px;
       color: var(--text-secondary);
+    }
+
+    .trust-feature svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary);
+    }
+
+    @media (max-width: 600px) {
+      .style-preview {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .style-preview-card span {
+        font-size: 10px;
+      }
+      .trust-features {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
     }
 
     /* Progress indicator */
@@ -500,13 +589,66 @@
 
         <!-- Landing Screen -->
         <div id="landing" class="screen landing-screen active">
+          <div class="landing-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            Free Assessment
+          </div>
           <h1>You can't control how they communicate.<br>But you can change the dynamic.</h1>
-          <p class="subhead">This 2-minute assessment helps you see your default patterns in hard conversations—and what actually works when the other person won't budge.</p>
+          <p class="subhead">This 2-minute assessment helps you see your relationship patterns when things get tense—and what actually works when the other person won't budge.</p>
+
+          <!-- Style Preview Cards -->
+          <div class="style-preview">
+            <div class="style-preview-card">
+              <div class="style-preview-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              </div>
+              <span>Defender</span>
+            </div>
+            <div class="style-preview-card">
+              <div class="style-preview-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <span>Fixer</span>
+            </div>
+            <div class="style-preview-card">
+              <div class="style-preview-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+              </div>
+              <span>Avoider</span>
+            </div>
+            <div class="style-preview-card">
+              <div class="style-preview-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10M18 20V4M6 20v-4"/></svg>
+              </div>
+              <span>Scorekeeper</span>
+            </div>
+            <div class="style-preview-card">
+              <div class="style-preview-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <span>Collaborator</span>
+            </div>
+          </div>
+
           <button class="btn-start" onclick="startAssessment()">
             See your patterns
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </button>
-          <p class="trust-line">7 questions. No account required. Free.</p>
+
+          <div class="trust-features">
+            <div class="trust-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              2 minutes
+            </div>
+            <div class="trust-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+              No account needed
+            </div>
+            <div class="trust-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Free forever
+            </div>
+          </div>
         </div>
 
         <!-- Question Screens -->
@@ -522,7 +664,7 @@
         <!-- Email Capture Screen -->
         <div id="emailCapture" class="screen email-screen">
           <h2>Get your results + practical tips</h2>
-          <p>Enter your email to get your communication style results, plus tips you can use in your next conversation. We'll also let you know when Clearly is ready.</p>
+          <p>Enter your email to get your relationship pattern results, plus tips you can use in your next conversation. We'll also let you know when Clearly is ready.</p>
           <form class="email-form" id="emailForm">
             <input type="email" id="emailInput" placeholder="you@example.com" required>
             <button type="submit" id="emailSubmitBtn">Send my results</button>
@@ -532,15 +674,20 @@
 
         <!-- Results Screen -->
         <div id="results" class="screen results-screen">
-          <span class="result-badge">Your style</span>
+          <span class="result-badge">Your pattern</span>
           <h2 id="resultTitle">The Defender</h2>
-          <p class="result-tagline" id="resultTagline">"You're always ready to explain your side."</p>
+          <p class="result-tagline" id="resultTagline">"You value being understood."</p>
 
           <p class="secondary-style" id="secondaryStyle" style="display: none;"></p>
 
           <div class="result-card">
-            <h3>The pattern</h3>
-            <p id="resultPattern"></p>
+            <h3>The strength</h3>
+            <p id="resultStrength"></p>
+          </div>
+
+          <div class="result-card">
+            <h3>The shadow</h3>
+            <p id="resultShadow"></p>
           </div>
 
           <div class="result-card">
@@ -555,7 +702,7 @@
 
           <!-- The Principle Section -->
           <div class="principle-section">
-            <h3>One thing that helps every style</h3>
+            <h3>One thing that helps every pattern</h3>
             <p>When conversations get stuck, it's usually because both people are defending their position instead of talking about what actually matters.</p>
             <div class="principle-example">
               <p><strong>Positions</strong> sound like: "I need this weekend."</p>
@@ -586,12 +733,13 @@
   <script>
     const SUPABASE_URL = 'https://dwncravjhkbclbuzijra.supabase.co';
 
-    // Style definitions
+    // Style definitions with strength/shadow framing
     const STYLES = {
       defender: {
         name: 'The Defender',
-        tagline: "You're always ready to explain your side.",
-        pattern: "When a message comes in, your first instinct is to protect yourself. You explain, justify, or clarify—often before you've fully heard what they're asking. Conversations can feel like you're always on the back foot, even when you don't need to be.",
+        tagline: "You value being understood.",
+        strength: "You want to make sure your perspective is heard. You care about being seen accurately, and you're willing to put in the effort to explain where you're coming from. That matters—especially when decisions affect your kids.",
+        shadow: "When you lead with explanation, it can feel defensive—even when no one's attacking. Long responses that justify your reasoning can overwhelm the other person or make them feel like you're not listening to them.",
         behaviors: [
           "Long responses that explain your reasoning",
           "Starting with \"I only did that because...\"",
@@ -602,8 +750,9 @@
       },
       fixer: {
         name: 'The Fixer',
-        tagline: "You want to solve it and move on.",
-        pattern: "You see a problem, you want to fix it. Fast. You jump to solutions—sometimes before the other person feels heard. This efficiency is a strength, but it can feel steamrolling to someone who needs to process before deciding.",
+        tagline: "You value resolution.",
+        strength: "You see a problem, you want to solve it. You're action-oriented and efficient—you don't let things linger. That drive to move forward keeps things from stalling out indefinitely.",
+        shadow: "Jumping to solutions before the other person feels heard can feel like steamrolling. Some people need to process before they can decide—and pushing for resolution too fast can create new friction.",
         behaviors: [
           "Offering solutions in your first response",
           "Frustration when things drag on",
@@ -614,8 +763,9 @@
       },
       avoider: {
         name: 'The Avoider',
-        tagline: "You'd rather keep the peace than push back.",
-        pattern: "Conflict is exhausting, so you avoid it. You say \"fine\" when it's not fine. You let things slide to prevent a fight. But unresolved issues pile up, and resentment builds quietly—until it doesn't.",
+        tagline: "You value peace.",
+        strength: "You know that not every battle is worth fighting. You pick your moments, and you don't escalate unnecessarily. That restraint can keep small disagreements from becoming big ones.",
+        shadow: "Avoiding conflict doesn't make it go away—it just postpones it. Saying \"fine\" when it's not fine lets resentment build. And when it finally surfaces, it's often bigger than it needed to be.",
         behaviors: [
           "Agreeing to things you don't really mean",
           "Letting small issues become big ones",
@@ -626,8 +776,9 @@
       },
       scorekeeper: {
         name: 'The Scorekeeper',
-        tagline: "You track what's fair—and what's not.",
-        pattern: "Fairness matters to you. You notice when things are uneven—who did the extra pickup, who paid for the cleats, who got the holiday last year. Tracking isn't wrong, but it can keep you anchored to the past instead of solving the present.",
+        tagline: "You value fairness.",
+        strength: "Fairness matters—especially when you're sharing responsibilities for your kids. You notice imbalances that others might miss, and you're willing to name them. That accountability keeps things from drifting too far in one direction.",
+        shadow: "Keeping score can anchor you to the past. When every current decision gets weighed against a mental ledger, it's hard to find solutions that work for right now. And the other person may feel like they can never get out of debt.",
         behaviors: [
           "Keeping mental tallies",
           "Bringing up past imbalances in current discussions",
@@ -635,18 +786,32 @@
           "Feeling like you're always giving more"
         ],
         helps: "Ask yourself: \"What works for the kids this time?\" instead of \"What's fair based on last time?\" Fairness over time matters—but individual decisions work better when they focus on the current situation, not the historical ledger."
+      },
+      collaborator: {
+        name: 'The Collaborator',
+        tagline: "You focus on what matters.",
+        strength: "When things get tense, you stay curious instead of reactive. You ask what they need, share what you need, and look for a way forward that works for both of you—and most importantly, for the kids. That doesn't mean it's easy. It means you've learned that staying focused on what matters gets better results than winning the argument.",
+        shadow: "Even collaborators have moments when stress pulls them toward other patterns. You might slip into defending, fixing, avoiding, or scorekeeping when you're tired, triggered, or dealing with someone who won't meet you halfway. The goal isn't perfection—it's noticing when you slip, and finding your way back.",
+        behaviors: [
+          "Asking \"What do you need here?\" before reacting",
+          "Separating the problem from the person",
+          "Looking for options instead of defending positions",
+          "Staying calm even when they don't"
+        ],
+        helps: "Keep doing what you're doing—and be patient with yourself when you fall short. Collaboration is a practice, not a personality trait. The more you do it, the more natural it becomes. And when the other person sees you staying steady, sometimes they start to shift too."
       }
     };
 
-    // Questions with answer mappings
+    // Questions with answer mappings (5 answers each including Collaborator)
     const QUESTIONS = [
       {
         text: "Your co-parent texts you asking to swap weekends. Your first instinct is to:",
         answers: [
-          { text: "Explain why this weekend doesn't work for you before hearing why they're asking", style: "defender" },
+          { text: "Explain why this weekend doesn't work before hearing why they're asking", style: "defender" },
           { text: "Quickly suggest an alternative that works for everyone", style: "fixer" },
           { text: "Say yes to avoid a conflict, even if it's inconvenient", style: "avoider" },
-          { text: "Think about whether they accommodated you last time", style: "scorekeeper" }
+          { text: "Think about whether they accommodated you last time", style: "scorekeeper" },
+          { text: "Ask why they need to swap before deciding", style: "collaborator" }
         ]
       },
       {
@@ -655,7 +820,8 @@
           { text: "Immediately start drafting an explanation", style: "defender" },
           { text: "Focus on fixing the issue so it doesn't happen again", style: "fixer" },
           { text: "Let it go rather than escalate", style: "avoider" },
-          { text: "Think about times they've done the same thing", style: "scorekeeper" }
+          { text: "Think about times they've done the same thing", style: "scorekeeper" },
+          { text: "Ask yourself what they actually need, then respond to that", style: "collaborator" }
         ]
       },
       {
@@ -664,7 +830,8 @@
           { text: "Make sure your reasoning is fully understood", style: "defender" },
           { text: "Propose a compromise to get it resolved", style: "fixer" },
           { text: "Go along with their preference to avoid a drawn-out discussion", style: "avoider" },
-          { text: "Point out that you've compromised more in the past", style: "scorekeeper" }
+          { text: "Point out that you've compromised more in the past", style: "scorekeeper" },
+          { text: "Try to understand why they want what they want", style: "collaborator" }
         ]
       },
       {
@@ -673,7 +840,8 @@
           { text: "Replaying what you should have said to make your point clearer", style: "defender" },
           { text: "Thinking about how to prevent this from happening next time", style: "fixer" },
           { text: "Wishing you hadn't engaged at all", style: "avoider" },
-          { text: "Mentally cataloging this for future reference", style: "scorekeeper" }
+          { text: "Mentally cataloging this for future reference", style: "scorekeeper" },
+          { text: "Reflecting on what you both could have done differently", style: "collaborator" }
         ]
       },
       {
@@ -682,16 +850,18 @@
           { text: "Remind them of what was already agreed and why", style: "defender" },
           { text: "Try to find a new solution that works", style: "fixer" },
           { text: "Agree to revisit it to keep things smooth", style: "avoider" },
-          { text: "Feel frustrated that they're changing things again", style: "scorekeeper" }
+          { text: "Feel frustrated that they're changing things again", style: "scorekeeper" },
+          { text: "Ask what's changed that makes them want to revisit it", style: "collaborator" }
         ]
       },
       {
-        text: "There's an expense you didn't expect. You:",
+        text: "There's an unexpected expense for the kids. You:",
         answers: [
           { text: "Explain why you shouldn't have to cover it", style: "defender" },
           { text: "Suggest how to split it and move on", style: "fixer" },
           { text: "Just pay it to avoid the conversation", style: "avoider" },
-          { text: "Think about all the other expenses you've covered", style: "scorekeeper" }
+          { text: "Think about all the other expenses you've already covered", style: "scorekeeper" },
+          { text: "Discuss what makes sense given both your situations", style: "collaborator" }
         ]
       },
       {
@@ -700,7 +870,8 @@
           { text: "Feeling like they actually understand where I'm coming from", style: "defender" },
           { text: "Making decisions faster without all the back-and-forth", style: "fixer" },
           { text: "Having fewer tense conversations overall", style: "avoider" },
-          { text: "Things being more balanced between us", style: "scorekeeper" }
+          { text: "Things being more balanced between us", style: "scorekeeper" },
+          { text: "Both of us focusing on what's best for the kids", style: "collaborator" }
         ]
       }
     ];
@@ -772,7 +943,7 @@
 
     // Calculate results
     function calculateResults() {
-      const counts = { defender: 0, fixer: 0, avoider: 0, scorekeeper: 0 };
+      const counts = { defender: 0, fixer: 0, avoider: 0, scorekeeper: 0, collaborator: 0 };
       answers.forEach(a => counts[a]++);
 
       // Find primary style (tie-breaker: last answered style wins)
@@ -815,7 +986,8 @@
 
       document.getElementById('resultTitle').textContent = style.name;
       document.getElementById('resultTagline').textContent = `"${style.tagline}"`;
-      document.getElementById('resultPattern').textContent = style.pattern;
+      document.getElementById('resultStrength').textContent = style.strength;
+      document.getElementById('resultShadow').textContent = style.shadow;
       document.getElementById('resultHelps').textContent = style.helps;
 
       const behaviorsEl = document.getElementById('resultBehaviors');
