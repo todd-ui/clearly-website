@@ -51,11 +51,9 @@
         Clearly
       </a>
       <ul class="nav-links">
-        <li><a href="/#features">Features</a></li>
-        <li><a href="/#pricing">Pricing</a></li>
-        <li><a href="/plan-builder/">Plan Builder</a></li>
-        <li><a href="/faq.html">FAQ</a></li>
-        <li><a href="https://apps.apple.com/app/clearly" class="nav-cta" target="_blank">Try for Free</a></li>
+        <li><a href="/blog.html">Common Ground</a></li>
+        <li><a href="/professionals.html">For Professionals</a></li>
+        <li><a href="#" class="nav-cta" data-access-modal>Request Access</a></li>
       </ul>
       <button class="nav-toggle" aria-label="Menu">
         <span></span>
@@ -131,16 +129,11 @@
         <p>Yes. You can export communication records, schedules, and expenses as PDF or CSV files. Exports include timestamps and are suitable for personal records or sharing with attorneys and mediators if needed.</p>
       </div>
 
-      <h2 style="margin-top: 48px;">Pricing & Getting Started</h2>
+      <h2 style="margin-top: 48px;">Getting Started</h2>
 
       <div class="faq-item">
-        <h3>How much does Clearly cost?</h3>
-        <p>Clearly offers annual ($10/month, billed yearly) and 3-year ($8/month, one-time payment) subscription options. Each parent subscribes separately. A free trial is included so you can try before you commit.</p>
-      </div>
-
-      <div class="faq-item">
-        <h3>Do both parents need to pay?</h3>
-        <p>Yes, each parent has their own subscription. This ensures both parents have equal access to all features and their own secure account.</p>
+        <h3>How do I get access to Clearly?</h3>
+        <p>Clearly is currently in private beta. You can request early access through our website, and we'll reach out as spots become available. Beta users help shape the product and will be the first to experience new features.</p>
       </div>
 
       <div class="faq-item">
@@ -156,8 +149,8 @@
       <!-- CTA -->
       <div class="contact-card">
         <h3>Ready to try Clearly?</h3>
-        <p>Start your free trial today. No credit card required.</p>
-        <a href="https://apps.apple.com/app/clearly" class="btn btn-primary" target="_blank">Download on the App Store</a>
+        <p>Join our private beta and be among the first to experience a calmer way to co-parent.</p>
+        <a href="#" class="btn btn-primary" data-access-modal>Request Access</a>
       </div>
 
     </div>
@@ -172,46 +165,43 @@
             <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
             <span>Clearly</span>
           </div>
-          <p class="footer-tagline">Co-parenting made clear.</p>
+          <p class="footer-tagline">Built by a co-parent who gets it.</p>
         </div>
         <div class="footer-nav">
           <div class="footer-col">
-            <h4>Product</h4>
+            <h4>Tools</h4>
             <ul>
-              <li><a href="/#features">Features</a></li>
-              <li><a href="/#pricing">Pricing</a></li>
-              <li><a href="https://apps.apple.com/app/clearly" target="_blank">Try for Free</a></li>
+              <li><a href="/plan-builder/">Plan Builder</a></li>
+              <li><a href="/communication-styles/">Comm Styles</a></li>
+              <li><a href="/calculators/">Calculators</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h4>Resources</h4>
             <ul>
-              <li><a href="/plan-builder/">Plan Builder</a></li>
-              <li><a href="/calculators/">Support Calculator</a></li>
-              <li><a href="/faq.html">FAQ</a></li>
-              <li><a href="/help.html">Help Center</a></li>
               <li><a href="/blog.html">Blog</a></li>
+              <li><a href="/faq.html">FAQ</a></li>
+              <li><a href="/help.html">Help</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h4>Company</h4>
             <ul>
-              <li><a href="/professionals.html">For Professionals</a></li>
-              <li><a href="mailto:hello@getclearly.app">Contact Us</a></li>
+              <li><a href="/professionals.html">Professionals</a></li>
+              <li><a href="mailto:hello@getclearly.app">Contact</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <h4>Legal</h4>
             <ul>
-              <li><a href="/privacy.html">Privacy Policy</a></li>
-              <li><a href="/terms.html">Terms of Service</a></li>
+              <li><a href="/privacy.html">Privacy</a></li>
+              <li><a href="/terms.html">Terms</a></li>
             </ul>
           </div>
         </div>
       </div>
       <div class="footer-bottom">
         <p>&copy; 2026 Clearly LLC. All rights reserved.</p>
-        <p>Proudly designed and developed in the USA.</p>
       </div>
     </div>
   </footer>
@@ -226,7 +216,10 @@
         navLinks.classList.toggle('open');
       });
     }
-  </script><!-- FAQ Structured Data -->
+  </script>
+  <script src="/js/access-modal.js" defer></script>
+
+  <!-- FAQ Structured Data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -300,15 +293,6 @@
   }
   </script>
 
-  <script>
-    // Mobile menu toggle
-    const navToggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-  </script>
 
 </body>
 </html>
