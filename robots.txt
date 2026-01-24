@@ -3,8 +3,14 @@
 User-agent: *
 Allow: /
 
+# Disallow non-public paths
+Disallow: /_partials/
+Disallow: /node_modules/
+Disallow: /.netlify/
+
 # Sitemap location
 Sitemap: https://getclearly.app/sitemap.xml
 
-# Crawl-delay (optional, be nice to crawlers)
-Crawl-delay: 1
+# Google-specific (faster crawling)
+User-agent: Googlebot
+Allow: /
