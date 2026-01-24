@@ -1272,8 +1272,8 @@ img {
   position: relative;
   background: var(--surface);
   border-radius: 16px;
-  padding: 32px;
-  max-width: 480px;
+  padding: 40px;
+  max-width: 500px;
   width: calc(100% - 32px);
   max-height: calc(100vh - 32px);
   overflow-y: auto;
@@ -1312,19 +1312,20 @@ img {
 
 .access-modal-subtitle {
   color: var(--text-secondary);
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+  line-height: 1.5;
 }
 
 .access-modal-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 28px;
 }
 
 .access-form-group {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .access-form-group label {
@@ -1363,11 +1364,11 @@ img {
 .access-reason-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
 
 .access-reason-chip {
-  padding: 8px 14px;
+  padding: 10px 16px;
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: 20px;
@@ -1389,7 +1390,7 @@ img {
 }
 
 .access-submit-btn {
-  padding: 14px 24px;
+  padding: 16px 24px;
   background: var(--primary);
   color: white;
   border: none;
@@ -1398,6 +1399,7 @@ img {
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
+  margin-top: 8px;
 }
 
 .access-submit-btn:hover:not(:disabled) {

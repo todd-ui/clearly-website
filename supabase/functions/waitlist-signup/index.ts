@@ -10,6 +10,7 @@ const corsHeaders = {
 interface WaitlistRequest {
   email: string;
   source?: string;
+  notes?: string;
 }
 
 serve(async (req) => {
@@ -28,7 +29,7 @@ serve(async (req) => {
     }
 
     // Parse request body
-    const { email, source = "website" }: WaitlistRequest = await req.json();
+    const { email, source = "website", notes }: WaitlistRequest = await req.json();
 
     // Validate email
     if (!email || !email.includes("@")) {
@@ -46,7 +47,11 @@ serve(async (req) => {
     // Insert into waitlist
     const { data, error: dbError } = await supabase
       .from("z_waitlist")
-      .insert({ email: email.toLowerCase().trim(), source })
+      .insert({
+        email: email.toLowerCase().trim(),
+        source,
+        notes: notes?.trim() || null
+      })
       .select()
       .single();
 

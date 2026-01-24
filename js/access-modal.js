@@ -151,7 +151,8 @@
 
       const data = {
         email: email,
-        source: sourceParts.join('|')
+        source: sourceParts.join('|'),
+        notes: notes || null
       };
 
       try {
