@@ -16,19 +16,23 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '20'
 
       - name: Install dependencies
-        run: npm install @notionhq/client openai
+        run: |
+          cd automation
+          npm install
 
-      - name: Generate and publish blog post
+      - name: Generate blog post from topic
         env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
-          NOTION_DATABASE_ID: ${{ secrets.NOTION_DATABASE_ID }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
           ISSUE_TITLE: ${{ github.event.issue.title }}
           ISSUE_BODY: ${{ github.event.issue.body }}
-        run: node automation/generate-and-publish-post.js
+        run: |
+          cd automation
+          node generate-post-from-topic.js
 
       - name: Comment on issue
         uses: actions/github-script@v7
