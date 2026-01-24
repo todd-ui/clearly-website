@@ -3,6 +3,7 @@
 :root {
   --primary: #0D8268;
   --primary-dark: #0a6b56;
+  --primary-light: #14b89a;
   --primary-soft: #E6F5F1;
   --primary-border: #A8DFD0;
   --bg: #FAFAF9;
@@ -1255,6 +1256,7 @@ img {
 
 .btn-primary:hover {
   background: var(--primary-dark);
+  color: white;
   text-decoration: none;
 }
 
