@@ -1,13 +1,13 @@
-name: Blog Post Topic
-description: Submit a topic - AI will write and publish it automatically
-title: "[Blog] "
-labels: ["blog"]
+name: Custom Blog Post
+description: Submit a detailed topic with specific title, category, and key points
+title: "[Blog-Custom] "
+labels: ["blog-custom"]
 body:
   - type: markdown
     attributes:
       value: |
-        ## New Blog Post Topic
-        Just submit a topic. AI will write the full post and add it to the blog with a backdated date.
+        ## Custom Blog Post
+        Use this form when you want control over the title, category, and key points. For quick posts where you just have an idea, use the "Quick Blog Post" template instead.
 
   - type: input
     id: title

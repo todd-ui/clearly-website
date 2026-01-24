@@ -6,7 +6,8 @@
   "scripts": {
     "new": "node generate-post.js new",
     "backfill": "node generate-post.js backfill",
-    "from-topic": "node generate-post-from-topic.js"
+    "from-topic": "node generate-post-from-topic.js",
+    "from-subject": "node generate-post-from-subject.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.52.0",

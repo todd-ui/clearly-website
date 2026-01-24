@@ -1,0 +1,19 @@
+name: Quick Blog Post
+description: Just give a subject - AI handles everything else
+title: "[Blog] "
+labels: ["blog"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Quick Blog Post
+        Just describe what you want the post to be about. Claude will generate the title, pick a category, write the full article, and publish it with a backdated date.
+
+  - type: textarea
+    id: subject
+    attributes:
+      label: Subject
+      description: What should the blog post be about? (1-2 sentences is perfect)
+      placeholder: "e.g., How to handle it when your ex cancels plans at the last minute and your kids are disappointed"
+    validations:
+      required: true
