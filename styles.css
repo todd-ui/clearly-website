@@ -1332,7 +1332,8 @@ img {
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 8px;
-  padding-right: 40px;
+  text-align: center;
+  padding: 0 40px;
 }
 
 .access-modal-subtitle {
@@ -1546,7 +1547,8 @@ img {
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 28px;
-  padding-right: 40px;
+  text-align: center;
+  padding: 0 40px;
 }
 
 .pro-modal-form {
