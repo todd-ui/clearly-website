@@ -41,23 +41,39 @@
   <link rel="apple-touch-icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
 
   <style>
+    /* Full width fix */
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
     /* Assessment-specific styles */
     .assessment-container {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
+      padding-top: 80px;
     }
 
     .assessment-nav {
-      padding: 20px 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 40px;
       border-bottom: 1px solid var(--border);
-      background: white;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     .assessment-nav .container {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      max-width: none;
+      padding: 0;
     }
 
     .assessment-nav-brand {
