@@ -98,82 +98,69 @@ serve(async (req) => {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="supported-color-schemes" content="light">
 </head>
-<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1A1917; margin: 0; padding: 0; background-color: #FAFAF9;">
-  <div style="max-width: 560px; margin: 0 auto; padding: 48px 24px;">
+<body style="margin: 0; padding: 0; background-color: #FAFAF9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <div style="max-width: 560px; margin: 0 auto; padding: 40px 20px;">
 
     <!-- Logo -->
-    <div style="text-align: center; margin-bottom: 40px;">
-      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" width="56" height="56" style="width: 56px; height: 56px; border-radius: 14px;">
+    <div style="text-align: center; margin-bottom: 32px;">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" width="48" height="48">
     </div>
 
+    <!-- Opening -->
+    <p style="color: #5C5856; font-size: 16px; line-height: 1.7;">
+      Thank you for your interest in Clearly. We're building with legal and family professionals in mind.
+    </p>
+
     <!-- Main Card -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="background: #FFFFFF; border-radius: 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
-      <tr>
-        <td style="padding: 48px 40px;">
+    <div style="background: white; border: 1px solid #E8E6E4; border-radius: 12px; padding: 28px; margin: 28px 0;">
+      <p style="font-size: 13px; color: #0D8268; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 8px 0;">For Professionals</p>
+      <h2 style="font-size: 24px; color: #1A1917; margin: 0 0 16px 0;">Clear, time-stamped, professionally reviewable records.</h2>
+      <p style="font-size: 15px; color: #5C5856; margin: 0;">We'll notify you when we launch so you can see how Clearly can help your clients.</p>
+    </div>
 
-          <h1 style="font-size: 26px; font-weight: 700; margin: 0 0 24px 0; color: #1A1917; letter-spacing: -0.02em; text-align: center;">
-            Thank you for your interest in Clearly
-          </h1>
+    <!-- What's coming -->
+    <h3 style="font-size: 16px; color: #1A1917; margin: 28px 0 12px 0;">What we're building</h3>
+    <p style="color: #5C5856; font-size: 15px; line-height: 1.8;">
+      • Streamlined record review and export tools<br>
+      • Complete communication history with timestamps<br>
+      • Custody calendar documentation<br>
+      • Expense tracking with receipt attachments<br>
+      • Professional resources and best practices
+    </p>
 
-          <p style="color: #5C5856; margin: 0 0 20px 0; font-size: 16px; line-height: 1.8;">
-            We're building Clearly with legal and family professionals in mind. Our goal is to create a co-parenting platform that produces <strong style="color: #0D8268;">clear, time-stamped, and professionally reviewable records</strong>.
-          </p>
+    <!-- CTA -->
+    <div style="background: #E6F5F1; border-radius: 12px; padding: 24px; margin: 28px 0;">
+      <h3 style="font-size: 16px; color: #0D8268; margin: 0 0 12px 0; text-align: center;">Learn more</h3>
+      <p style="color: #1A1917; font-size: 15px; line-height: 1.8; margin: 0 0 16px 0; text-align: center;">
+        See what we're building for legal and family professionals.
+      </p>
+      <div style="text-align: center;">
+        <a href="https://getclearly.app/professionals.html" style="display: inline-block; background: #0D8268; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 24px; border-radius: 8px;">
+          For Professionals
+        </a>
+      </div>
+    </div>
 
-          <p style="color: #5C5856; margin: 0 0 20px 0; font-size: 16px; line-height: 1.8;">
-            We'll notify you when we launch so you can see how Clearly can help your clients. Here's what we're building for professionals:
-          </p>
-
-          <!-- What's coming list -->
-          <div style="background: #F8F8F7; border-radius: 12px; padding: 24px; margin: 24px 0;">
-            <p style="color: #1A1917; margin: 0 0 12px 0; font-size: 15px; font-weight: 600;">Coming for Professionals:</p>
-            <ul style="color: #5C5856; margin: 0; padding-left: 20px; font-size: 15px; line-height: 2;">
-              <li>Streamlined record review and export tools</li>
-              <li>Complete communication history with timestamps</li>
-              <li>Custody calendar documentation</li>
-              <li>Expense tracking with receipt attachments</li>
-              <li>Professional resources and best practices</li>
-            </ul>
-          </div>
-
-          <p style="color: #5C5856; margin: 0 0 32px 0; font-size: 16px; line-height: 1.8;">
-            We'll be adding new professional resources and tools in the coming months. You'll be the first to know.
-          </p>
-
-          <!-- Divider -->
-          <div style="height: 1px; background: #E8E7E4; margin: 0 0 32px 0;"></div>
-
-          <!-- Blog CTA -->
-          <p style="color: #8C8780; margin: 0 0 16px 0; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; text-align: center; font-weight: 500;">
-            Learn more
-          </p>
-
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td style="text-align: center;">
-                <a href="https://getclearly.app/professionals.html" style="display: inline-block; background: #0D8268; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 14px 28px; border-radius: 10px;">
-                  For Professionals
-                </a>
-              </td>
-            </tr>
-          </table>
-
-          <p style="color: #8C8780; margin: 20px 0 0 0; font-size: 14px; text-align: center;">
-            See what we're building for legal and family professionals
-          </p>
-
-        </td>
-      </tr>
-    </table>
+    <!-- Sign-off -->
+    <div style="margin-top: 36px;">
+      <p style="color: #5C5856; font-size: 15px; line-height: 1.7; margin: 0;">
+        Wishing you clarity,<br>
+        <strong style="color: #1A1917;">The Clearly Team</strong>
+      </p>
+    </div>
 
     <!-- Footer -->
-    <p style="text-align: center; font-size: 13px; color: #5C5856; margin: 32px 0 0 0;">
-      <a href="https://getclearly.app" style="color: #0D8268; text-decoration: none; font-weight: 500;">getclearly.app</a>
-    </p>
-    <p style="text-align: center; font-size: 12px; color: #8C8780; margin: 16px 0 0 0;">
-      <a href="mailto:hello@getclearly.app?subject=Unsubscribe&body=Please%20remove%20me%20from%20the%20professional%20mailing%20list." style="color: #8C8780; text-decoration: underline;">Unsubscribe</a>
-    </p>
-
+    <div style="border-top: 1px solid #E8E6E4; margin-top: 40px; padding-top: 20px; text-align: center;">
+      <p style="color: #9A9896; font-size: 12px; margin: 0;">
+        © 2026 Clearly · <a href="https://getclearly.app" style="color: #9A9896;">getclearly.app</a>
+      </p>
+      <p style="margin-top: 8px;">
+        <a href="mailto:hello@getclearly.app?subject=Unsubscribe&body=Please%20remove%20me%20from%20the%20professional%20mailing%20list." style="color: #9A9896; font-size: 12px;">Unsubscribe</a>
+      </p>
+    </div>
   </div>
 </body>
 </html>

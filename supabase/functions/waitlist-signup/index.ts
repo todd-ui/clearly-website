@@ -91,66 +91,63 @@ serve(async (req) => {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <meta name="supported-color-schemes" content="light">
 </head>
-<body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #1A1917; margin: 0; padding: 0; background-color: #FAFAF9;">
-  <div style="max-width: 560px; margin: 0 auto; padding: 48px 24px;">
+<body style="margin: 0; padding: 0; background-color: #FAFAF9; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <div style="max-width: 560px; margin: 0 auto; padding: 40px 20px;">
 
     <!-- Logo -->
-    <div style="text-align: center; margin-bottom: 40px;">
-      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" width="56" height="56" style="width: 56px; height: 56px; border-radius: 14px;">
+    <div style="text-align: center; margin-bottom: 32px;">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" width="48" height="48">
     </div>
 
+    <!-- Opening -->
+    <p style="color: #5C5856; font-size: 16px; line-height: 1.7; text-align: center;">
+      Thanks for joining the Clearly waitlist. We're building a co-parenting app for how modern families actually live.
+    </p>
+
     <!-- Main Card -->
-    <table width="100%" cellpadding="0" cellspacing="0" style="background: #FFFFFF; border-radius: 20px; box-shadow: 0 4px 24px rgba(0,0,0,0.08);">
-      <tr>
-        <td style="padding: 48px 40px;">
+    <div style="background: white; border: 1px solid #E8E6E4; border-radius: 12px; padding: 28px; margin: 28px 0;">
+      <h1 style="font-size: 28px; color: #1A1917; margin: 0 0 8px 0; text-align: center;">You're in.</h1>
+      <p style="font-size: 18px; color: #0D8268; font-style: italic; margin: 0; text-align: center;">"Simple, intuitive, and finally beautiful."</p>
+    </div>
 
-          <h1 style="font-size: 28px; font-weight: 700; margin: 0 0 24px 0; color: #1A1917; letter-spacing: -0.02em; text-align: center;">
-            You're in.
-          </h1>
+    <!-- Launch info -->
+    <p style="color: #5C5856; font-size: 15px; line-height: 1.8; text-align: center;">
+      Launching Spring 2026. We'll be in touch when it's your turn.
+    </p>
 
-          <p style="color: #5C5856; margin: 0 0 20px 0; font-size: 16px; line-height: 1.8; text-align: center;">
-            Thanks for joining the Clearly waitlist. We're launching a co-parenting app for how modern families actually live — <strong style="color: #0D8268;">simple, intuitive, and finally beautiful</strong>.
-          </p>
+    <!-- Blog CTA -->
+    <div style="background: #E6F5F1; border-radius: 12px; padding: 24px; margin: 28px 0;">
+      <h3 style="font-size: 16px; color: #0D8268; margin: 0 0 12px 0; text-align: center;">In the meantime</h3>
+      <p style="color: #1A1917; font-size: 15px; line-height: 1.8; margin: 0; text-align: center;">
+        Check out our blog for practical advice on navigating co-parenting.
+      </p>
+      <div style="text-align: center; margin-top: 16px;">
+        <a href="https://getclearly.app/blog.html" style="display: inline-block; background: #0D8268; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 24px; border-radius: 8px;">
+          Read Common Ground
+        </a>
+      </div>
+    </div>
 
-          <p style="color: #5C5856; margin: 0 0 32px 0; font-size: 16px; line-height: 1.8; text-align: center;">
-            Launching Spring 2026. We'll be in touch.
-          </p>
-
-          <!-- Divider -->
-          <div style="height: 1px; background: #E8E7E4; margin: 0 0 32px 0;"></div>
-
-          <!-- Blog CTA -->
-          <p style="color: #8C8780; margin: 0 0 16px 0; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; text-align: center; font-weight: 500;">
-            In the meantime
-          </p>
-
-          <table width="100%" cellpadding="0" cellspacing="0">
-            <tr>
-              <td style="text-align: center;">
-                <a href="https://getclearly.app/blog.html" style="display: inline-block; background: #0D8268; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 14px 28px; border-radius: 10px;">
-                  Read Our Blog
-                </a>
-              </td>
-            </tr>
-          </table>
-
-          <p style="color: #8C8780; margin: 20px 0 0 0; font-size: 14px; text-align: center;">
-            Practical advice for navigating co-parenting
-          </p>
-
-        </td>
-      </tr>
-    </table>
+    <!-- Sign-off -->
+    <div style="margin-top: 36px; text-align: center;">
+      <p style="color: #5C5856; font-size: 15px; line-height: 1.7; margin: 0;">
+        Wishing you clarity,<br>
+        <strong style="color: #1A1917;">The Clearly Team</strong>
+      </p>
+    </div>
 
     <!-- Footer -->
-    <p style="text-align: center; font-size: 13px; color: #5C5856; margin: 32px 0 0 0;">
-      <a href="https://getclearly.app" style="color: #0D8268; text-decoration: none; font-weight: 500;">getclearly.app</a>
-    </p>
-    <p style="text-align: center; font-size: 12px; color: #8C8780; margin: 16px 0 0 0;">
-      <a href="mailto:hello@getclearly.app?subject=Unsubscribe&body=Please%20remove%20me%20from%20the%20waitlist." style="color: #8C8780; text-decoration: underline;">Unsubscribe</a>
-    </p>
-
+    <div style="border-top: 1px solid #E8E6E4; margin-top: 40px; padding-top: 20px; text-align: center;">
+      <p style="color: #9A9896; font-size: 12px; margin: 0;">
+        © 2026 Clearly · <a href="https://getclearly.app" style="color: #9A9896;">getclearly.app</a>
+      </p>
+      <p style="margin-top: 8px;">
+        <a href="mailto:hello@getclearly.app?subject=Unsubscribe&body=Please%20remove%20me%20from%20the%20waitlist." style="color: #9A9896; font-size: 12px;">Unsubscribe</a>
+      </p>
+    </div>
   </div>
 </body>
 </html>
