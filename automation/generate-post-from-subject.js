@@ -33,14 +33,21 @@ const CATEGORIES = [
   'Legal Basics'
 ];
 
-// Parse GitHub Issue body to extract subject
+// Parse GitHub Issue body to extract topic
 function parseIssueBody(body) {
-  const pattern = /### Subject\s*\n\s*([\s\S]*?)(?=\n###|$)/i;
-  const match = body.match(pattern);
-  if (match) {
-    return match[1].trim();
+  // Try "Topic" first, then "Subject" as fallback
+  const patterns = [
+    /### Topic\s*\n\s*([\s\S]*?)(?=\n###|$)/i,
+    /### Subject\s*\n\s*([\s\S]*?)(?=\n###|$)/i
+  ];
+
+  for (const pattern of patterns) {
+    const match = body.match(pattern);
+    if (match && match[1].trim()) {
+      return match[1].trim();
+    }
   }
-  // Fallback: use the entire body as the subject
+  // Fallback: use the entire body as the topic
   return body.trim();
 }
 
@@ -79,14 +86,14 @@ async function getExistingPosts() {
   return posts;
 }
 
-// Generate topic metadata from subject using Claude
-async function generateTopicFromSubject(subject, existingTitles) {
-  console.log('Generating topic from subject...');
+// Generate topic metadata from user's topic idea using Claude
+async function generateTopicMetadata(topicIdea, existingTitles) {
+  console.log('Generating article details from topic...');
 
   const prompt = `You are a content strategist for a co-parenting blog called "Common Ground" by Clearly.
 
-The user wants a blog post about this subject:
-"${subject}"
+The user wants a blog post about this topic:
+"${topicIdea}"
 
 EXISTING ARTICLES (do not duplicate these topics):
 ${existingTitles.slice(0, 20).map(t => `- ${t}`).join('\n')}
@@ -387,30 +394,30 @@ async function main() {
   const issueTitle = process.env.ISSUE_TITLE || '';
   const issueBody = process.env.ISSUE_BODY || '';
 
-  // Extract subject from issue
-  let subject = parseIssueBody(issueBody);
+  // Extract topic from issue
+  let topic = parseIssueBody(issueBody);
 
-  // Fallback to issue title if no subject in body
-  if (!subject || subject === '_No response_') {
-    subject = issueTitle.replace(/^\[Blog\]\s*/i, '').trim();
+  // Fallback to issue title if no topic in body
+  if (!topic || topic === '_No response_') {
+    topic = issueTitle.replace(/^\[Blog\]\s*/i, '').trim();
   }
 
-  if (!subject) {
-    console.error('No subject found in issue');
+  if (!topic) {
+    console.error('No topic found in issue');
     process.exit(1);
   }
 
-  console.log(`Subject: ${subject}\n`);
+  console.log(`Topic: ${topic}\n`);
 
   // Get existing posts to avoid duplicates
   const existingTitles = await getExistingPosts();
   console.log(`Found ${existingTitles.length} existing posts\n`);
 
-  // Generate topic metadata from subject
-  const topic = await generateTopicFromSubject(subject, existingTitles);
-  console.log(`Generated title: ${topic.title}`);
-  console.log(`Category: ${topic.category}`);
-  console.log(`Slug: ${topic.slug}\n`);
+  // Generate article metadata from topic
+  const articleMeta = await generateTopicMetadata(topic, existingTitles);
+  console.log(`Generated title: ${articleMeta.title}`);
+  console.log(`Category: ${articleMeta.category}`);
+  console.log(`Slug: ${articleMeta.slug}\n`);
 
   // Generate backdated date
   const publishDate = generateBackdate();
@@ -418,22 +425,22 @@ async function main() {
 
   // Generate full article
   console.log('Generating article...');
-  const article = await generateArticle(topic);
+  const article = await generateArticle(articleMeta);
   console.log(`Generated ${article.sections.length} sections\n`);
 
   // Create in Notion
   console.log('Publishing to Notion...');
-  const page = await createNotionPage(topic, article, publishDate);
+  const page = await createNotionPage(articleMeta, article, publishDate);
 
   // Trigger Netlify rebuild
   await triggerNetlifyBuild();
 
   console.log('\nBlog post generated and published!');
-  console.log(`   Subject: ${subject}`);
-  console.log(`   Title: ${topic.title}`);
-  console.log(`   Category: ${topic.category}`);
+  console.log(`   Topic: ${topic}`);
+  console.log(`   Title: ${articleMeta.title}`);
+  console.log(`   Category: ${articleMeta.category}`);
   console.log(`   Date: ${publishDate}`);
-  console.log(`   URL: https://getclearly.app/blog/${topic.slug}.html`);
+  console.log(`   URL: https://getclearly.app/blog/${articleMeta.slug}.html`);
 }
 
 main().catch(err => {

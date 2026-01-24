@@ -1,5 +1,5 @@
 name: Quick Blog Post
-description: Just give a subject - AI handles everything else
+description: Just give a topic - AI generates the title and everything else
 title: "[Blog] "
 labels: ["blog"]
 body:
@@ -7,13 +7,13 @@ body:
     attributes:
       value: |
         ## Quick Blog Post
-        Just describe what you want the post to be about. Claude will generate the title, pick a category, write the full article, and publish it with a backdated date.
+        Just give a topic idea. Claude will generate the title, pick a category, write the full article, and publish it with a backdated date.
 
   - type: textarea
-    id: subject
+    id: topic
     attributes:
-      label: Subject
-      description: What should the blog post be about? (1-2 sentences is perfect)
-      placeholder: "e.g., How to handle it when your ex cancels plans at the last minute and your kids are disappointed"
+      label: Topic
+      description: What should the blog post be about? Just a sentence or two is fine.
+      placeholder: "e.g., dealing with last-minute schedule changes from your co-parent"
     validations:
       required: true
