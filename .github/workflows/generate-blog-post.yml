@@ -2,11 +2,11 @@ name: Generate Blog Post from Topic
 
 on:
   issues:
-    types: [labeled]
+    types: [opened]
 
 jobs:
   generate-post:
-    if: github.event.label.name == 'generate'
+    if: contains(github.event.issue.labels.*.name, 'blog')
     runs-on: ubuntu-latest
 
     steps:

@@ -1,15 +1,13 @@
 name: Blog Post Topic
-description: Submit a new blog post topic idea
+description: Submit a topic - AI will write and publish it automatically
 title: "[Blog] "
-labels: ["blog", "content"]
+labels: ["blog"]
 body:
   - type: markdown
     attributes:
       value: |
         ## New Blog Post Topic
-        Submit a blog post idea for Common Ground.
-
-        **To generate the post:** After submitting, add the `generate` label to trigger AI writing.
+        Just submit a topic. AI will write the full post and add it to the blog with a backdated date.
 
   - type: input
     id: title
