@@ -283,37 +283,58 @@
       color: var(--text-secondary);
     }
 
-    /* Clearly features for soft CTA */
-    .lp-clearly-features {
-      list-style: none;
-      padding: 0;
-      margin: 24px auto 32px;
+    /* Clearly feature cards */
+    .lp-feature-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin: 40px auto 40px;
+      max-width: 640px;
+    }
+
+    .lp-feature-card {
+      background: white;
+      border-radius: 16px;
+      padding: 28px 24px;
       text-align: left;
-      max-width: 440px;
     }
 
-    .lp-clearly-features li {
+    .lp-feature-card-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--primary-soft);
+      border-radius: 12px;
       display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      padding: 14px 0;
-      font-size: 17px;
-      color: var(--text);
-      line-height: 1.5;
-    }
-
-    .lp-clearly-features li svg {
+      align-items: center;
+      justify-content: center;
       color: var(--primary);
-      flex-shrink: 0;
-      margin-top: 2px;
+      margin-bottom: 16px;
     }
 
-    .lp-clearly-features li strong {
+    .lp-feature-card-icon svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .lp-feature-card h3 {
+      font-size: 17px;
+      font-weight: 600;
       color: var(--text);
+      margin-bottom: 6px;
     }
 
-    .lp-clearly-features li span {
+    .lp-feature-card p {
+      font-size: 15px;
       color: var(--text-secondary);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    @media (max-width: 600px) {
+      .lp-feature-cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
     }
 
     /* Secondary link */
@@ -558,27 +579,39 @@
 
   <!-- Soft CTA for Clearly -->
   <section class="lp-section lp-section-alt">
-    <div class="container">
+    <div class="container" style="max-width: 720px;">
       <h2 class="fade-in">When you need more than a schedule</h2>
       <p class="fade-in">Clearly is a co-parenting app built for what comes after the plan:</p>
-      <ul class="lp-clearly-features">
-        <li class="fade-in">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span><strong>Shared calendar</strong> — your custody schedule, always visible to both</span>
-        </li>
-        <li class="fade-in">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span><strong>Topics, not threads</strong> — conversations that actually resolve</span>
-        </li>
-        <li class="fade-in">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span><strong>Expense tracking</strong> — log, split, settle up</span>
-        </li>
-        <li class="fade-in">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-          <span><strong>Swap requests</strong> — ask, approve, done</span>
-        </li>
-      </ul>
+      <div class="lp-feature-cards">
+        <div class="lp-feature-card fade-in">
+          <div class="lp-feature-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          </div>
+          <h3>Shared calendar</h3>
+          <p>Your custody schedule, always visible to both parents</p>
+        </div>
+        <div class="lp-feature-card fade-in">
+          <div class="lp-feature-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+          </div>
+          <h3>Topics, not threads</h3>
+          <p>Conversations that actually resolve, then close</p>
+        </div>
+        <div class="lp-feature-card fade-in">
+          <div class="lp-feature-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+          </div>
+          <h3>Expense tracking</h3>
+          <p>Log costs, split them fairly, settle up</p>
+        </div>
+        <div class="lp-feature-card fade-in">
+          <div class="lp-feature-card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"></polyline><path d="M3 11V9a4 4 0 0 1 4-4h14"></path><polyline points="7 23 3 19 7 15"></polyline><path d="M21 13v2a4 4 0 0 1-4 4H3"></path></svg>
+          </div>
+          <h3>Swap requests</h3>
+          <p>Ask, approve, done — no more back-and-forth</p>
+        </div>
+      </div>
       <p class="fade-in">It's currently in early access. If getting organized feels good, Clearly helps you stay that way.</p>
       <div style="margin-top: 32px;">
         <a href="/" class="btn-link fade-in">
