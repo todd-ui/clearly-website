@@ -1443,8 +1443,13 @@ img {
 }
 
 .access-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 24px 0;
+  padding: 48px 24px;
+  min-height: 280px;
 }
 
 .access-success-icon {
@@ -1650,8 +1655,13 @@ img {
 }
 
 .pro-modal-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 24px 0;
+  padding: 48px 24px;
+  min-height: 280px;
 }
 
 .pro-success-icon {
