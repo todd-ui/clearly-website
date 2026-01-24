@@ -1,13 +1,13 @@
 name: Quick Blog Post
 description: Just give a topic - AI generates the title and everything else
-title: "[Blog] "
+title: "[Blog] New Post"
 labels: ["blog"]
 body:
   - type: markdown
     attributes:
       value: |
         ## Quick Blog Post
-        Just give a topic idea. Claude will generate the title, pick a category, write the full article, and publish it with a backdated date.
+        Just fill in the Topic below and click Create. Ignore the title field above - Claude generates the actual blog title.
 
   - type: textarea
     id: topic
