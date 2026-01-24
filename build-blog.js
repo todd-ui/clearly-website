@@ -224,6 +224,12 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
     .related-category[data-cat="Communication"] { background: rgba(59, 130, 246, 0.1); color: #2563eb; }
     .related-category[data-cat="Co-Parenting Basics"] { background: rgba(13, 147, 115, 0.1); color: #0d9373; }
     .related-category[data-cat="Your Children"] { background: rgba(168, 85, 247, 0.1); color: #9333ea; }
+    .related-category[data-cat="Schedules & Custody"] { background: rgba(245, 158, 11, 0.1); color: #d97706; }
+    .related-category[data-cat="High-Conflict Situations"] { background: rgba(239, 68, 68, 0.1); color: #dc2626; }
+    .related-category[data-cat="Money & Expenses"] { background: rgba(16, 185, 129, 0.1); color: #059669; }
+    .related-category[data-cat="Blended Families"] { background: rgba(236, 72, 153, 0.1); color: #db2777; }
+    .related-category[data-cat="Self-Care & Support"] { background: rgba(99, 102, 241, 0.1); color: #4f46e5; }
+    .related-category[data-cat="Legal Basics"] { background: rgba(107, 114, 128, 0.1); color: #4b5563; }
     @media (max-width: 768px) {
       .related-grid { grid-template-columns: 1fr; }
       .related-articles { padding: 60px 24px; }
@@ -547,6 +553,30 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
     .blog-card-category[data-cat="Your Children"] {
       background: rgba(168, 85, 247, 0.1);
       color: #9333ea;
+    }
+    .blog-card-category[data-cat="Schedules & Custody"] {
+      background: rgba(245, 158, 11, 0.1);
+      color: #d97706;
+    }
+    .blog-card-category[data-cat="High-Conflict Situations"] {
+      background: rgba(239, 68, 68, 0.1);
+      color: #dc2626;
+    }
+    .blog-card-category[data-cat="Money & Expenses"] {
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+    }
+    .blog-card-category[data-cat="Blended Families"] {
+      background: rgba(236, 72, 153, 0.1);
+      color: #db2777;
+    }
+    .blog-card-category[data-cat="Self-Care & Support"] {
+      background: rgba(99, 102, 241, 0.1);
+      color: #4f46e5;
+    }
+    .blog-card-category[data-cat="Legal Basics"] {
+      background: rgba(107, 114, 128, 0.1);
+      color: #4b5563;
     }
     .blog-card.hidden {
       display: none;
