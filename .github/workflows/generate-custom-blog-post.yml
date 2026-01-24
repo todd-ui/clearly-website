@@ -2,7 +2,7 @@ name: Custom Blog Post
 
 on:
   issues:
-    types: [opened]
+    types: [opened, labeled]
 
 jobs:
   generate-post:
