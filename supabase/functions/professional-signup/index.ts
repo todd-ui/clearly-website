@@ -12,6 +12,9 @@ interface ProfessionalRequest {
   name?: string;
   profession_type?: string;
   organization?: string;
+  role_type?: string;
+  feature_interests?: string[];
+  notes?: string;
 }
 
 serve(async (req) => {
@@ -30,7 +33,7 @@ serve(async (req) => {
     }
 
     // Parse request body
-    const { email, name, profession_type, organization }: ProfessionalRequest = await req.json();
+    const { email, name, profession_type, organization, role_type, feature_interests, notes }: ProfessionalRequest = await req.json();
 
     // Validate email
     if (!email || !email.includes("@")) {
@@ -52,7 +55,10 @@ serve(async (req) => {
         email: email.toLowerCase().trim(),
         name: name?.trim() || null,
         profession_type: profession_type?.trim() || null,
-        organization: organization?.trim() || null
+        organization: organization?.trim() || null,
+        role_type: role_type?.trim() || null,
+        feature_interests: feature_interests || null,
+        notes: notes?.trim() || null
       })
       .select()
       .single();
