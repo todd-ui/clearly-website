@@ -170,12 +170,26 @@
         form.style.display = 'none';
         successView.style.display = 'block';
 
+        // GA4 event tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'form_submit',
+          'form_name': 'waitlist_signup'
+        });
+
       } catch (error) {
         console.error('Access request error:', error);
         // Show success anyway if it's a duplicate email error
         if (error.message && error.message.includes('already')) {
           form.style.display = 'none';
           successView.style.display = 'block';
+
+          // GA4 event tracking (duplicate counts as success)
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            'event': 'form_submit',
+            'form_name': 'waitlist_signup'
+          });
         } else {
           alert('Something went wrong. Please try again.');
         }

@@ -1066,12 +1066,25 @@
           event_label: primary
         });
 
+        // GA4 dataLayer event tracking
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'form_submit',
+          'form_name': 'assessment_signup'
+        });
+
         showResults();
 
       } catch (error) {
         console.error('Email capture error:', error);
         // Show results anyway even if email fails
         if (error.message && error.message.includes('already')) {
+          // GA4 dataLayer event tracking (duplicate counts as success)
+          window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            'event': 'form_submit',
+            'form_name': 'assessment_signup'
+          });
           showResults();
         } else {
           alert('Something went wrong. Please try again or skip to see your results.');
