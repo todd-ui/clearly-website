@@ -7,7 +7,9 @@ body:
     attributes:
       value: |
         ## New Blog Post Topic
-        Use this form to submit a blog post idea for Common Ground.
+        Submit a blog post idea for Common Ground.
+
+        **To generate the post:** After submitting, add the `generate` label to trigger AI writing.
 
   - type: input
     id: title
