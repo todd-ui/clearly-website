@@ -151,23 +151,48 @@
       margin-bottom: 0;
     }
 
-    /* Question list - italicized */
-    .lp-question-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 32px;
-      text-align: left;
-      max-width: 480px;
-      margin-left: auto;
-      margin-right: auto;
+    /* Thought bubbles - overwhelming questions */
+    .lp-thought-bubbles {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin: 32px auto 40px;
+      max-width: 600px;
     }
 
-    .lp-question-list li {
-      padding: 12px 0;
-      font-size: 17px;
+    .lp-thought-bubble {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 12px 20px;
+      font-size: 15px;
       color: var(--text-secondary);
-      line-height: 1.5;
       font-style: italic;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transform: rotate(var(--rotate, 0deg));
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .lp-thought-bubble:nth-child(1) { --rotate: -2deg; }
+    .lp-thought-bubble:nth-child(2) { --rotate: 1deg; }
+    .lp-thought-bubble:nth-child(3) { --rotate: -1deg; }
+    .lp-thought-bubble:nth-child(4) { --rotate: 2deg; }
+    .lp-thought-bubble:nth-child(5) { --rotate: -1.5deg; }
+
+    .lp-thought-bubble:hover {
+      transform: rotate(0deg) scale(1.02);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+
+    @media (max-width: 600px) {
+      .lp-thought-bubbles {
+        gap: 10px;
+      }
+      .lp-thought-bubble {
+        padding: 10px 16px;
+        font-size: 14px;
+      }
     }
 
     /* CTA Box - matching homepage tool cards */
@@ -399,13 +424,13 @@
     <div class="container">
       <h2 class="fade-in">It's a lot to sort out</h2>
       <p class="fade-in">Custody schedules sound simple until you actually try to make one. Then it's:</p>
-      <ul class="lp-question-list">
-        <li class="fade-in">What does "every other weekend" actually mean?</li>
-        <li class="fade-in">Who gets Thanksgiving this year?</li>
-        <li class="fade-in">What time do handoffs happen?</li>
-        <li class="fade-in">What if the schedule doesn't fit our work lives?</li>
-        <li class="fade-in">How do we handle summer break?</li>
-      </ul>
+      <div class="lp-thought-bubbles">
+        <div class="lp-thought-bubble fade-in">What does "every other weekend" actually mean?</div>
+        <div class="lp-thought-bubble fade-in">Who gets Thanksgiving this year?</div>
+        <div class="lp-thought-bubble fade-in">What time do handoffs happen?</div>
+        <div class="lp-thought-bubble fade-in">What if the schedule doesn't fit our work lives?</div>
+        <div class="lp-thought-bubble fade-in">How do we handle summer break?</div>
+      </div>
       <p class="fade-in">And that's before you even get to expenses, medical decisions, and everything else.</p>
       <p class="fade-in" style="font-weight: 500; color: var(--text);">No wonder it feels overwhelming.</p>
     </div>
