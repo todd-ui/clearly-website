@@ -584,6 +584,7 @@
     }
     .mini-day.you { background: var(--you-color); }
     .mini-day.coparent { background: var(--coparent-color); }
+    .mini-day.grey { background: #e5e7eb; }
     .mini-day.exchange {
       background: transparent;
     }
@@ -2232,7 +2233,7 @@
         type: 'rolling',
         description: 'One parent gets weekdays, the other gets every weekend. Good when one parent travels for work or has a non-traditional schedule. Kids always know where they\'ll be.',
         forAges: ['6-12', '13-17'],
-        miniPattern: [1,1,1,1,0,0,0]
+        miniPattern: [1,1,1,1,0,0,0, 1,1,1,1,0,0,0]
       },
       {
         id: 'primary-every-other-weekend',
@@ -2259,7 +2260,7 @@
         type: 'custom',
         description: 'Build your own pattern day by day. Use this when standard schedules don\'t fit your situation—shift work, travel, or unique family needs.',
         forAges: [],
-        miniPattern: []
+        miniPattern: ['G','G','G','G','G','G','G', 'G','G','G','G','G','G','G']
       }
     ];
 
@@ -3129,9 +3130,14 @@
 
           // Helper to render a day cell with split exchange visualization
           const renderDay = (val, prevVal) => {
+            // Grey placeholder for custom schedule
+            if (val === 'G') {
+              return `<div class="mini-day grey"></div>`;
+            }
+
             const isYou = val === 1 || val === 'A';
             const prevIsYou = prevVal === 1 || prevVal === 'A';
-            const isExchange = val !== prevVal;
+            const isExchange = val !== prevVal && prevVal !== 'G';
 
             if (isExchange) {
               return `<div class="mini-day exchange">
