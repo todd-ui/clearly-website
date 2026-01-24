@@ -1522,13 +1522,13 @@ img {
 .pro-modal-form {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
 }
 
 .pro-form-group {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
 }
 
 .pro-form-group label {
@@ -1568,7 +1568,7 @@ img {
 .pro-feature-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
 }
 
 .pro-role-chip,
