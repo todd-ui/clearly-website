@@ -273,6 +273,12 @@
       font-weight: 500;
       color: var(--text-secondary);
     }
+    .plan-code-helper {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin: 0;
+      padding: 0 16px 12px;
+    }
     .plan-code-chevron {
       color: var(--text-muted);
       transition: transform 0.2s ease;
@@ -1655,6 +1661,7 @@
               <span>Have a family code?</span>
               <svg class="plan-code-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
             </div>
+            <p class="plan-code-helper">Already created a plan? Enter your code to load and edit it.</p>
             <div class="plan-code-input-area" id="planCodeInputArea">
               <input type="text" id="planCodeInput" class="plan-code-input" placeholder="Enter your family code" maxlength="10">
               <button class="plan-code-load-btn" onclick="loadPlanFromCode()">Load Plan</button>
