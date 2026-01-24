@@ -1044,21 +1044,46 @@ img {
 }
 
 @media (max-width: 900px) {
+  .footer {
+    padding: 48px 24px 32px;
+  }
   .footer-top {
     flex-direction: column;
-    gap: 48px;
+    gap: 40px;
   }
   .footer-brand-section {
     flex: none;
+    text-align: center;
+  }
+  .footer-brand {
+    justify-content: center;
   }
   .footer-nav {
-    gap: 40px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 24px;
+    width: 100%;
+  }
+  .footer-col {
+    text-align: center;
   }
   .footer-bottom {
     flex-direction: column;
     gap: 8px;
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer {
+    padding: 40px 20px 28px;
+  }
+  .footer-nav {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .footer-col h4 {
+    margin-bottom: 14px;
   }
 }
 
