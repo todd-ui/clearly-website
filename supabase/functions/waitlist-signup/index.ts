@@ -51,10 +51,17 @@ serve(async (req) => {
       .single();
 
     // Handle duplicate emails gracefully
+    let shouldSendEmail = !!data; // New signup
     if (dbError) {
       if (dbError.code === "23505") {
-        // Duplicate email - that's fine, they're already on the list
+        // Duplicate email - check if we should send welcome email
         console.log("Duplicate email:", email);
+        const { data: existing } = await supabase
+          .from("z_waitlist")
+          .select("welcome_email_sent")
+          .eq("email", email.toLowerCase().trim())
+          .single();
+        shouldSendEmail = existing && !existing.welcome_email_sent;
       } else {
         console.error("Database error:", dbError);
         return new Response(JSON.stringify({ error: "Failed to save email", details: dbError.message }), {
@@ -66,7 +73,7 @@ serve(async (req) => {
 
     // Send welcome email via Resend
     const resendApiKey = Deno.env.get("RESEND_API_KEY");
-    if (resendApiKey && data) {
+    if (resendApiKey && shouldSendEmail) {
       try {
         const emailResponse = await fetch("https://api.resend.com/emails", {
           method: "POST",
