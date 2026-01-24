@@ -1,0 +1,98 @@
+name: Blog Post Topic
+description: Submit a new blog post topic idea
+title: "[Blog] "
+labels: ["blog", "content"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## New Blog Post Topic
+        Use this form to submit a blog post idea for Common Ground.
+
+  - type: input
+    id: title
+    attributes:
+      label: Post Title
+      description: What should the blog post be called?
+      placeholder: "e.g., How to Handle Last-Minute Schedule Changes"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Category
+      description: Which category best fits this topic?
+      options:
+        - Communication
+        - Co-Parenting Basics
+        - Your Children
+        - Scheduling
+        - Legal & Documentation
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Topic Description
+      description: Brief description of what the post should cover
+      placeholder: "This post should cover..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: key-points
+    attributes:
+      label: Key Points to Cover
+      description: List the main points or sections (one per line)
+      placeholder: |
+        - Point 1
+        - Point 2
+        - Point 3
+    validations:
+      required: false
+
+  - type: input
+    id: target-keywords
+    attributes:
+      label: Target Keywords (SEO)
+      description: Comma-separated keywords to target
+      placeholder: "co-parenting, schedule changes, custody"
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How soon should this be published?
+      options:
+        - Low - When there's time
+        - Medium - Within a month
+        - High - This week
+      default: 0
+    validations:
+      required: false
+
+  - type: dropdown
+    id: date-range
+    attributes:
+      label: Publish Date Range
+      description: When should this post appear to have been published?
+      options:
+        - Random (last 3 months)
+        - Recent (last 2 weeks)
+        - Backdate (3-6 months ago)
+        - Specific date (add in notes)
+      default: 0
+    validations:
+      required: false
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Notes
+      description: Any other context, links, or references
+    validations:
+      required: false
