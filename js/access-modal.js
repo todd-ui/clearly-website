@@ -34,7 +34,6 @@
         </button>
 
         <h2>Request private beta access</h2>
-        <p class="access-modal-subtitle">We're gradually opening access. Tell us a bit about your situation.</p>
 
         <form id="accessForm" class="access-modal-form">
           <div class="access-form-group">
