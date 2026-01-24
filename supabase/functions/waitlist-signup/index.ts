@@ -89,7 +89,7 @@ serve(async (req) => {
           body: JSON.stringify({
             from: "Clearly <hello@getclearly.app>",
             to: email,
-            subject: "Welcome to Clearly — You're in!",
+            subject: "You're on the list — We'll be in touch",
             html: `
 <!DOCTYPE html>
 <html>
@@ -107,33 +107,39 @@ serve(async (req) => {
       <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" width="48" height="48">
     </div>
 
-    <!-- Opening -->
-    <p style="color: #5C5856; font-size: 16px; line-height: 1.7; text-align: center;">
-      Thanks for joining the Clearly waitlist. We're building a co-parenting app for how modern families actually live.
-    </p>
-
     <!-- Main Card -->
-    <div style="background: white; border: 1px solid #E8E6E4; border-radius: 12px; padding: 28px; margin: 28px 0;">
-      <h1 style="font-size: 28px; color: #1A1917; margin: 0 0 8px 0; text-align: center;">You're in.</h1>
-      <p style="font-size: 18px; color: #0D8268; font-style: italic; margin: 0; text-align: center;">"Simple, intuitive, and finally beautiful."</p>
+    <div style="background: white; border: 1px solid #E8E6E4; border-radius: 12px; padding: 28px; margin: 0 0 28px 0;">
+      <h1 style="font-size: 26px; color: #1A1917; margin: 0 0 16px 0; text-align: center;">You're on the list.</h1>
+      <p style="color: #5C5856; font-size: 16px; line-height: 1.7; margin: 0; text-align: center;">
+        We're opening access gradually and will send you an invite when it's your turn.
+      </p>
     </div>
 
-    <!-- Launch info -->
-    <p style="color: #5C5856; font-size: 15px; line-height: 1.8; text-align: center;">
-      Launching Spring 2026. We'll be in touch when it's your turn.
+    <!-- What Clearly Is -->
+    <h3 style="font-size: 16px; color: #1A1917; margin: 0 0 12px 0;">A calmer way to co-parent</h3>
+    <p style="color: #5C5856; font-size: 15px; line-height: 1.8; margin: 0 0 20px 0;">
+      You're not together anymore. But you still have to communicate—about pickups, expenses, holidays, and every decision about your kids. And every message can feel loaded.
+    </p>
+    <p style="color: #5C5856; font-size: 15px; line-height: 1.8; margin: 0 0 28px 0;">
+      Clearly gives those conversations structure, so co-parenting doesn't have to be so hard.
     </p>
 
-    <!-- Blog CTA -->
-    <div style="background: #E6F5F1; border-radius: 12px; padding: 24px; margin: 28px 0;">
-      <h3 style="font-size: 16px; color: #0D8268; margin: 0 0 12px 0; text-align: center;">In the meantime</h3>
-      <p style="color: #1A1917; font-size: 15px; line-height: 1.8; margin: 0; text-align: center;">
-        Check out our blog for practical advice on navigating co-parenting.
+    <!-- What's Different -->
+    <div style="background: #E6F5F1; border-radius: 12px; padding: 24px; margin: 0 0 28px 0;">
+      <h3 style="font-size: 16px; color: #0D8268; margin: 0 0 12px 0;">Structure that actually helps</h3>
+      <p style="color: #1A1917; font-size: 15px; line-height: 1.8; margin: 0;">
+        Topic-based conversations that resolve. A shared calendar you both can trust. Expense tracking that's fair and transparent. All in one place.
       </p>
-      <div style="text-align: center; margin-top: 16px;">
-        <a href="https://getclearly.app/blog.html" style="display: inline-block; background: #0D8268; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 24px; border-radius: 8px;">
-          Read Common Ground
-        </a>
-      </div>
+    </div>
+
+    <!-- Blog CTA -->
+    <p style="color: #5C5856; font-size: 15px; line-height: 1.8; margin: 0 0 16px 0; text-align: center;">
+      While you wait, our blog has practical advice for navigating co-parenting.
+    </p>
+    <div style="text-align: center;">
+      <a href="https://getclearly.app/blog.html" style="display: inline-block; background: #0D8268; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 24px; border-radius: 8px;">
+        Read Common Ground
+      </a>
     </div>
 
     <!-- Sign-off -->
