@@ -551,27 +551,6 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
     .blog-card.hidden {
       display: none;
     }
-    /* Blog Banner CTA */
-    .blog-banner {
-      background: linear-gradient(135deg, var(--primary) 0%, #14a085 100%);
-      padding: 20px;
-      text-align: center;
-    }
-    .blog-banner p {
-      color: rgba(255,255,255,0.9);
-      font-size: 15px;
-      margin: 0;
-      display: inline;
-    }
-    .blog-banner a {
-      color: white;
-      font-weight: 600;
-      text-decoration: underline;
-      margin-left: 8px;
-    }
-    .blog-banner a:hover {
-      text-decoration: none;
-    }
   </style>
 </head>
 <body>
@@ -589,11 +568,6 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
       <p>Co-parenting brings enough complexity on its own. Common Ground is here to make the communication part a little easier — with real topics, practical advice, and perspectives from people who get it. Whether you're figuring out schedules, navigating tricky conversations, or just looking for a calmer way forward, you're in the right place.</p>
     </div>
   </header>
-
-  <div class="blog-banner">
-    <p>Need structure for schedules, expenses, and decisions?</p>
-    <a href="/plan-builder/">Try the free Parenting Plan Builder →</a>
-  </div>
 
   <section class="blog-section">
     <div class="container">
