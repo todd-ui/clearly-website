@@ -12,6 +12,7 @@ interface PlanTemplateRequest {
   first_name?: string;
   family_name?: string;
   family_id?: string; // If provided, update existing family instead of creating template
+  template_code?: string; // If provided, update existing plan template
   children: Array<{ name: string; birthdate?: string; ageGroup?: string }>;
   custody_schedule: string;
   custody_anchor_date?: string;
@@ -63,8 +64,8 @@ serve(async (req) => {
     // Parse request body
     const data: PlanTemplateRequest = await req.json();
 
-    // Validate email
-    if (!data.email || !data.email.includes("@")) {
+    // Validate email (not required for updates)
+    if (!data.family_id && !data.template_code && (!data.email || !data.email.includes("@"))) {
       return new Response(JSON.stringify({ error: "Valid email required" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
@@ -198,6 +199,81 @@ serve(async (req) => {
           success: true,
           share_code: family.join_code,
           family_id: data.family_id,
+          message: "Plan updated successfully!",
+        }),
+        {
+          status: 200,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        }
+      );
+    }
+
+    // ===== UPDATE EXISTING PLAN TEMPLATE =====
+    if (data.template_code) {
+      // Verify template exists
+      const { data: existingTemplate, error: templateError } = await supabase
+        .from("plan_templates")
+        .select("id, share_code")
+        .eq("share_code", data.template_code.toUpperCase())
+        .single();
+
+      if (templateError || !existingTemplate) {
+        return new Response(JSON.stringify({ error: "Plan template not found" }), {
+          status: 404,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      // Update the template
+      const { error: updateError } = await supabase
+        .from("plan_templates")
+        .update({
+          family_name: data.family_name,
+          children: data.children,
+          custody_schedule: data.custody_schedule,
+          custody_anchor_date: data.custody_anchor_date,
+          custody_anchor_parent: data.custody_anchor_parent,
+          custody_anchor_position: data.custody_anchor_position,
+          week1_parent: data.week1_parent,
+          week1_iso_parity: data.week1_iso_parity,
+          exchange_time: data.exchange_time,
+          custom_pattern: data.custom_pattern,
+          holiday_preset: data.holiday_preset,
+          holidays: data.holidays,
+          holiday_custody: data.holiday_custody,
+          holiday_scopes: data.holiday_scopes,
+          tracked_holidays: data.tracked_holidays,
+          custom_holidays: data.custom_holidays,
+          summer_schedule_enabled: data.summer_schedule_enabled,
+          summer_start_month: data.summer_start_month,
+          summer_start_week: data.summer_start_week,
+          summer_start_weekday: data.summer_start_weekday,
+          summer_end_month: data.summer_end_month,
+          summer_end_week: data.summer_end_week,
+          summer_end_weekday: data.summer_end_weekday,
+          summer_custody_pattern: data.summer_custody_pattern,
+          summer_starts_with: data.summer_starts_with,
+          expense_split_you: data.expense_split_you,
+          expense_split_coparent: data.expense_split_coparent,
+          expense_categories: data.expense_categories,
+          reimbursement_method: data.reimbursement_method,
+          reimbursement_handle: data.reimbursement_handle,
+          updated_at: new Date().toISOString(),
+        })
+        .eq("share_code", data.template_code.toUpperCase());
+
+      if (updateError) {
+        console.error("Error updating template:", updateError);
+        return new Response(JSON.stringify({ error: "Failed to update plan", details: updateError.message }), {
+          status: 500,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      return new Response(
+        JSON.stringify({
+          success: true,
+          share_code: existingTemplate.share_code,
           message: "Plan updated successfully!",
         }),
         {
