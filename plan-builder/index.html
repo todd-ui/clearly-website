@@ -227,6 +227,112 @@
       color: var(--primary);
     }
 
+    /* Agreement Upload */
+    .upload-zone {
+      border: 2px dashed var(--border);
+      border-radius: 16px;
+      padding: 48px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: var(--surface);
+    }
+    .upload-zone:hover {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+    .upload-zone.dragover {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+    .upload-icon {
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+    .upload-text {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .upload-hint {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+    .upload-status {
+      margin-top: 16px;
+    }
+    .file-preview {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--primary-soft);
+      border: 1px solid var(--primary-border);
+      border-radius: 12px;
+      padding: 12px 16px;
+    }
+    .file-preview svg {
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    .file-preview span {
+      flex: 1;
+      font-size: 14px;
+      font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .remove-file {
+      background: none;
+      border: none;
+      font-size: 20px;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 0 4px;
+    }
+    .remove-file:hover {
+      color: var(--text);
+    }
+    .parsing-status {
+      text-align: center;
+      padding: 32px;
+    }
+    .parsing-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 16px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    .parsing-status p {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .parsing-hint {
+      font-size: 13px !important;
+      color: var(--text-muted) !important;
+      margin-top: 8px;
+    }
+    .parsing-error {
+      text-align: center;
+      padding: 24px;
+      background: #FEF2F2;
+      border-radius: 12px;
+      margin-top: 16px;
+    }
+    .parsing-error p {
+      color: #DC2626;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
     /* Plan Code Section */
     .plan-code-section {
       margin-top: 32px;
@@ -1679,6 +1785,60 @@
         </div>
       </div>
 
+      <!-- Screen: Agreement Upload (shown when 'agreement' pathway selected) -->
+      <div class="screen" id="screen-agreement-upload">
+        <h2>Upload your agreement</h2>
+        <p class="subtitle">We'll extract your custody details automatically. You can review and edit before saving.</p>
+
+        <div class="input-group" style="margin-bottom: 24px;">
+          <label class="input-label">Which parent are you?</label>
+          <div class="chip-group" id="parentRoleChips">
+            <button class="chip" onclick="selectParentRole('mother')">Mother</button>
+            <button class="chip" onclick="selectParentRole('father')">Father</button>
+            <button class="chip" onclick="selectParentRole('petitioner')">Petitioner</button>
+            <button class="chip" onclick="selectParentRole('respondent')">Respondent</button>
+          </div>
+          <p style="font-size: 12px; color: var(--text-muted); margin-top: 6px;">This helps us understand "you" vs "co-parent" in your agreement</p>
+        </div>
+
+        <div class="upload-zone" id="uploadZone" onclick="document.getElementById('agreementFile').click()">
+          <input type="file" id="agreementFile" accept=".pdf" style="display: none;" onchange="handleFileSelect(event)">
+          <div class="upload-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="12" y1="18" x2="12" y2="12"/>
+              <line x1="9" y1="15" x2="12" y2="12"/>
+              <line x1="15" y1="15" x2="12" y2="12"/>
+            </svg>
+          </div>
+          <p class="upload-text">Click to upload your custody agreement</p>
+          <p class="upload-hint">PDF files only (max 10MB)</p>
+        </div>
+
+        <div class="upload-status" id="uploadStatus" style="display: none;">
+          <div class="file-preview">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+            <span id="fileName">document.pdf</span>
+            <button class="remove-file" onclick="removeFile(event)">&times;</button>
+          </div>
+        </div>
+
+        <div class="parsing-status" id="parsingStatus" style="display: none;">
+          <div class="parsing-spinner"></div>
+          <p>Analyzing your agreement...</p>
+          <p class="parsing-hint">This usually takes 10-20 seconds</p>
+        </div>
+
+        <div class="parsing-error" id="parsingError" style="display: none;">
+          <p id="parsingErrorText">Something went wrong</p>
+          <button class="btn btn-secondary" onclick="retryParsing()">Try Again</button>
+        </div>
+      </div>
+
       <!-- Screen 2: Children -->
       <div class="screen" id="screen-children">
         <h2>Your children</h2>
@@ -2169,7 +2329,7 @@
     };
 
     const screens = [
-      'welcome', 'children', 'schedule', 'configure',
+      'welcome', 'agreement-upload', 'children', 'schedule', 'configure',
       'holidays', 'summer', 'review', 'email', 'complete'
     ];
 
@@ -2592,13 +2752,25 @@
         screen.classList.toggle('active', index === state.currentScreen);
       });
 
+      // Calculate effective step for display (skip agreement-upload for 'explore' pathway)
+      let displayStep = state.currentScreen + 1;
+      let totalSteps = screens.length;
+
+      if (state.pathway === 'explore') {
+        // For 'explore' pathway, don't count the agreement-upload screen
+        totalSteps = screens.length - 1;
+        if (state.currentScreen > screens.indexOf('agreement-upload')) {
+          displayStep = state.currentScreen; // -1 for skipped screen, +1 for 1-indexed
+        }
+      }
+
       // Update progress
-      const progress = ((state.currentScreen + 1) / screens.length) * 100;
+      const progress = (displayStep / totalSteps) * 100;
       document.getElementById('progressFill').style.width = `${progress}%`;
 
       // Update step counter
       document.getElementById('stepCounter').textContent =
-        `Step ${state.currentScreen + 1} of ${screens.length}`;
+        `Step ${displayStep} of ${totalSteps}`;
 
       // Update back button
       const backBtn = document.getElementById('backBtn');
@@ -2616,6 +2788,8 @@
         if (screens[state.currentScreen] === 'review' && state.familyId) {
           // Editing existing family - just save changes
           continueBtn.textContent = 'Save Changes';
+        } else if (screens[state.currentScreen] === 'agreement-upload') {
+          continueBtn.textContent = 'Analyze Agreement';
         } else if (state.currentScreen === screens.length - 2) {
           continueBtn.textContent = 'Get Family Code';
         } else {
@@ -2634,6 +2808,9 @@
       switch (screens[state.currentScreen]) {
         case 'welcome':
           enabled = state.pathway !== null;
+          break;
+        case 'agreement-upload':
+          enabled = agreementState.parentRole !== null && agreementState.uploadedFile !== null;
           break;
         case 'children':
           // Only require at least one child - names/birthdates/family name are optional
@@ -2675,6 +2852,21 @@
           return; // submitPlan will advance the screen after success
         }
 
+        // If on welcome and pathway is 'explore', skip agreement-upload
+        if (screens[state.currentScreen] === 'welcome' && state.pathway === 'explore') {
+          state.currentScreen = screens.indexOf('children');
+          initScreen('children');
+          updateUI();
+          window.scrollTo(0, 0);
+          return;
+        }
+
+        // If on agreement-upload, trigger parsing (which will go to review on success)
+        if (screens[state.currentScreen] === 'agreement-upload') {
+          parseAgreement();
+          return;
+        }
+
         // If on review screen and editing an existing family, save directly
         if (screens[state.currentScreen] === 'review' && state.familyId) {
           submitPlanUpdate();
@@ -2699,6 +2891,15 @@
       if (state.currentScreen > 0) {
         // Clear edit mode if user goes back manually
         editingFromReview = false;
+
+        // If going back from children and pathway was 'explore', skip agreement-upload
+        if (screens[state.currentScreen] === 'children' && state.pathway === 'explore') {
+          state.currentScreen = screens.indexOf('welcome');
+          updateUI();
+          window.scrollTo(0, 0);
+          return;
+        }
+
         state.currentScreen--;
         updateUI();
         window.scrollTo(0, 0);
@@ -2796,6 +2997,213 @@
       event.currentTarget.classList.add('selected');
       updateContinueButton();
     }
+
+    // ==========================================
+    // AGREEMENT UPLOAD
+    // ==========================================
+    let agreementState = {
+      parentRole: null,
+      uploadedFile: null,
+      fileBase64: null
+    };
+
+    function selectParentRole(role) {
+      agreementState.parentRole = role;
+      document.querySelectorAll('#parentRoleChips .chip').forEach(chip => {
+        chip.classList.remove('selected');
+      });
+      event.currentTarget.classList.add('selected');
+      updateContinueButton();
+    }
+
+    function handleFileSelect(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      // Validate file type
+      if (file.type !== 'application/pdf') {
+        alert('Please upload a PDF file');
+        return;
+      }
+
+      // Validate file size (10MB)
+      if (file.size > 10 * 1024 * 1024) {
+        alert('File is too large. Maximum size is 10MB.');
+        return;
+      }
+
+      agreementState.uploadedFile = file;
+
+      // Convert to base64
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64 = e.target.result.split(',')[1]; // Remove data:application/pdf;base64, prefix
+        agreementState.fileBase64 = base64;
+      };
+      reader.readAsDataURL(file);
+
+      // Update UI
+      document.getElementById('uploadZone').style.display = 'none';
+      document.getElementById('uploadStatus').style.display = 'block';
+      document.getElementById('fileName').textContent = file.name;
+      updateContinueButton();
+    }
+
+    function removeFile(event) {
+      event.stopPropagation();
+      agreementState.uploadedFile = null;
+      agreementState.fileBase64 = null;
+      document.getElementById('agreementFile').value = '';
+      document.getElementById('uploadZone').style.display = 'block';
+      document.getElementById('uploadStatus').style.display = 'none';
+      document.getElementById('parsingError').style.display = 'none';
+      updateContinueButton();
+    }
+
+    async function parseAgreement() {
+      if (!agreementState.fileBase64 || !agreementState.parentRole) {
+        return false;
+      }
+
+      // Show parsing status
+      document.getElementById('uploadZone').style.display = 'none';
+      document.getElementById('uploadStatus').style.display = 'none';
+      document.getElementById('parsingStatus').style.display = 'block';
+      document.getElementById('parsingError').style.display = 'none';
+
+      // Hide continue button during parsing
+      document.querySelector('.wizard-footer').style.display = 'none';
+
+      try {
+        const response = await fetch('https://dwncravjhkbclbuzijra.supabase.co/functions/v1/parse-agreement', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            document: agreementState.fileBase64,
+            userParentRole: agreementState.parentRole
+          })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+          throw new Error(result.error || 'Failed to parse agreement');
+        }
+
+        // Load parsed data into state
+        loadParsedAgreementIntoState(result.data);
+
+        // Show footer again
+        document.querySelector('.wizard-footer').style.display = 'flex';
+
+        // Go to review screen
+        goToScreen('review');
+        return true;
+
+      } catch (error) {
+        console.error('Parse error:', error);
+        document.getElementById('parsingStatus').style.display = 'none';
+        document.getElementById('parsingError').style.display = 'block';
+        document.getElementById('parsingErrorText').textContent = error.message || 'Failed to analyze your agreement. Please try again.';
+        document.querySelector('.wizard-footer').style.display = 'flex';
+        return false;
+      }
+    }
+
+    function loadParsedAgreementIntoState(data) {
+      console.log('Parsed agreement data:', data);
+
+      // Children
+      if (data.children && data.children.length > 0) {
+        state.children = data.children.map(child => ({
+          name: child.name || '',
+          birthdate: child.birthdate || ''
+        }));
+      }
+
+      // Schedule
+      if (data.schedule && data.schedule.type) {
+        const scheduleTypeMap = {
+          '5-2-2-5': '5-2-2-5',
+          '2-2-3': '2-2-3',
+          '4-3': '4-3',
+          'week-on-week-off': 'week-on-week-off',
+          'primary-every-other-weekend': 'primary-eow'
+        };
+        state.schedule = scheduleTypeMap[data.schedule.type] || data.schedule.type;
+      }
+
+      // Exchange time
+      if (data.exchangeTime) {
+        state.exchangeTime = data.exchangeTime;
+      }
+
+      // Holidays
+      if (data.holidays) {
+        const holidayMap = {
+          'you': 'you',
+          'coparent': 'coparent',
+          'alternate_you': 'alternate',
+          'alternate_coparent': 'alternate'
+        };
+
+        Object.keys(data.holidays).forEach(holiday => {
+          const holidayData = data.holidays[holiday];
+          if (holidayData && holidayData.assignment) {
+            const normalizedHoliday = holiday.replace(/_/g, '-');
+            if (state.holidays[normalizedHoliday] !== undefined) {
+              state.holidays[normalizedHoliday] = holidayMap[holidayData.assignment] || holidayData.assignment;
+            }
+          }
+        });
+      }
+
+      // Summer
+      if (data.summer) {
+        state.summer.enabled = data.summer.enabled || false;
+        if (data.summer.pattern) {
+          state.summer.pattern = data.summer.pattern;
+        }
+      }
+
+      // Expenses
+      if (data.expenses && data.expenses.splitYou !== null) {
+        state.expenses.split = data.expenses.splitYou;
+      }
+
+      // Mark as coming from agreement
+      state.pathway = 'agreement';
+    }
+
+    function retryParsing() {
+      document.getElementById('parsingError').style.display = 'none';
+      document.getElementById('uploadStatus').style.display = 'block';
+    }
+
+    // Setup drag and drop
+    document.addEventListener('DOMContentLoaded', function() {
+      const uploadZone = document.getElementById('uploadZone');
+      if (uploadZone) {
+        uploadZone.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          uploadZone.classList.add('dragover');
+        });
+        uploadZone.addEventListener('dragleave', () => {
+          uploadZone.classList.remove('dragover');
+        });
+        uploadZone.addEventListener('drop', (e) => {
+          e.preventDefault();
+          uploadZone.classList.remove('dragover');
+          const file = e.dataTransfer.files[0];
+          if (file) {
+            document.getElementById('agreementFile').files = e.dataTransfer.files;
+            handleFileSelect({ target: { files: [file] } });
+          }
+        });
+      }
+    });
 
     function togglePlanCodeInput() {
       const box = document.getElementById('planCodeBox');
