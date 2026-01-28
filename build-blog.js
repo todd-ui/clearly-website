@@ -169,6 +169,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   <link rel="alternate" type="application/rss+xml" title="Clearly Blog RSS Feed" href="https://getclearly.app/feed.xml">
   <link rel="stylesheet" href="../styles.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
+  <link rel="manifest" href="/manifest.json">
   <style>
     .blog-post { max-width: 720px; margin: 0 auto; padding: 120px 24px 80px; }
     .blog-post-header { margin-bottom: 48px; }
@@ -391,6 +392,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
   <link rel="alternate" type="application/rss+xml" title="Clearly Blog RSS Feed" href="https://getclearly.app/feed.xml">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
+  <link rel="manifest" href="/manifest.json">
   <style>
     .blog-hero {
       padding: 100px 0 80px;

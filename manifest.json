@@ -1,0 +1,21 @@
+{
+  "name": "Clearly - Co-Parenting Made Clear",
+  "short_name": "Clearly",
+  "description": "Tools and resources for calmer co-parenting. Build custody plans, improve communication, and find common ground.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0D8268",
+  "icons": [
+    {
+      "src": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
