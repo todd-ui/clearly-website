@@ -152,6 +152,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0D8268">
   <title>${escapeHtml(post.title)} | Clearly Blog</title>
   <meta name="description" content="${escapeHtml(post.description)}">
   <link rel="canonical" href="https://getclearly.app/blog/${post.slug}.html">
@@ -374,6 +375,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0D8268">
   <title>Common Ground - Co-Parenting Tips & Advice | Clearly</title>
   <meta name="description" content="Real topics, practical advice, and perspectives for co-parents. Custody schedules, communication strategies, and tips for calmer co-parenting.">
   <link rel="canonical" href="https://getclearly.app/blog.html">
