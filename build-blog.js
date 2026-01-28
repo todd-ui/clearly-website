@@ -138,6 +138,10 @@ function generateSlug(title, existingSlug) {
 const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Preconnect hints for performance -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://dwncravjhkbclbuzijra.supabase.co">
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
   <script>
@@ -354,6 +358,10 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
 const blogListTemplate = (posts) => `<!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Preconnect hints for performance -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://dwncravjhkbclbuzijra.supabase.co">
+
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
   <script>
