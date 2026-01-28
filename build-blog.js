@@ -65,7 +65,7 @@ function blocksToHtml(blocks) {
           ? block.image.external.url
           : block.image.file.url;
         const caption = block.image.caption?.map(c => c.plain_text).join('') || '';
-        return `<figure><img src="${url}" alt="${escapeHtml(caption)}"><figcaption>${escapeHtml(caption)}</figcaption></figure>`;
+        return `<figure><img src="${url}" alt="${escapeHtml(caption)}" loading="lazy"><figcaption>${escapeHtml(caption)}</figcaption></figure>`;
 
       default:
         return '';
@@ -166,6 +166,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   <meta name="twitter:description" content="${escapeHtml(post.description)}">
   <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
   <meta name="robots" content="index, follow">
+  <link rel="alternate" type="application/rss+xml" title="Clearly Blog RSS Feed" href="https://getclearly.app/feed.xml">
   <link rel="stylesheet" href="../styles.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
   <style>
@@ -387,6 +388,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
   <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
   <meta name="robots" content="index, follow">
   <meta name="keywords" content="co-parenting tips, custody advice, shared parenting, divorce resources, co-parent communication">
+  <link rel="alternate" type="application/rss+xml" title="Clearly Blog RSS Feed" href="https://getclearly.app/feed.xml">
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
   <style>
@@ -843,6 +845,35 @@ ${processedPosts.map(post => `  <url>
 </urlset>`;
   fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemap);
   console.log('-> sitemap.xml');
+
+  // Generate RSS feed
+  const rssDate = new Date().toUTCString();
+  const rssFeed = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Common Ground - Clearly Blog</title>
+    <description>Real topics, practical advice, and perspectives for co-parents. Custody schedules, communication strategies, and tips for calmer co-parenting.</description>
+    <link>https://getclearly.app/blog.html</link>
+    <atom:link href="https://getclearly.app/feed.xml" rel="self" type="application/rss+xml"/>
+    <language>en-us</language>
+    <lastBuildDate>${rssDate}</lastBuildDate>
+    <image>
+      <url>https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png</url>
+      <title>Common Ground - Clearly Blog</title>
+      <link>https://getclearly.app/blog.html</link>
+    </image>
+${processedPosts.map(post => `    <item>
+      <title>${escapeHtml(post.title)}</title>
+      <description>${escapeHtml(post.description)}</description>
+      <link>https://getclearly.app/blog/${post.slug}.html</link>
+      <guid isPermaLink="true">https://getclearly.app/blog/${post.slug}.html</guid>
+      <pubDate>${new Date(post.dateISO).toUTCString()}</pubDate>
+      ${post.category ? `<category>${escapeHtml(post.category)}</category>` : ''}
+    </item>`).join('\n')}
+  </channel>
+</rss>`;
+  fs.writeFileSync(path.join(__dirname, 'feed.xml'), rssFeed);
+  console.log('-> feed.xml');
 
   console.log('Blog build complete!');
 }
