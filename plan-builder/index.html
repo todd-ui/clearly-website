@@ -5052,8 +5052,8 @@
         btn.textContent = 'Saved!';
         btn.style.backgroundColor = '#059669'; // Green
 
-        // Show a toast/notification
-        showToast('Plan updated successfully! Changes will sync to the app.');
+        // Show success modal with download option
+        showSaveSuccessModal();
 
         // Reset button after delay
         setTimeout(() => {
@@ -5098,6 +5098,116 @@
         toast.style.animation = 'fadeOut 0.3s ease';
         setTimeout(() => toast.remove(), 300);
       }, 3000);
+    }
+
+    // Success modal after saving existing plan
+    function showSaveSuccessModal() {
+      // Remove existing modal if any
+      const existing = document.getElementById('saveSuccessModal');
+      if (existing) existing.remove();
+
+      const modal = document.createElement('div');
+      modal.id = 'saveSuccessModal';
+      modal.innerHTML = `
+        <div class="save-success-backdrop" onclick="closeSaveSuccessModal()"></div>
+        <div class="save-success-content">
+          <div class="save-success-icon">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+          </div>
+          <h3>Plan Updated!</h3>
+          <p>Your changes have been saved and will sync to the Clearly app.</p>
+          <div class="save-success-actions">
+            <button class="btn btn-secondary" onclick="downloadPDF(); closeSaveSuccessModal();">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download Updated PDF
+            </button>
+            <button class="btn btn-text" onclick="closeSaveSuccessModal()">Done</button>
+          </div>
+        </div>
+      `;
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 2000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      `;
+      document.body.appendChild(modal);
+
+      // Add styles if not already present
+      if (!document.getElementById('saveSuccessStyles')) {
+        const styles = document.createElement('style');
+        styles.id = 'saveSuccessStyles';
+        styles.textContent = `
+          .save-success-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+          }
+          .save-success-content {
+            position: relative;
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            animation: modalSlideIn 0.3s ease;
+          }
+          @keyframes modalSlideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+          }
+          .save-success-icon {
+            margin-bottom: 16px;
+          }
+          .save-success-content h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 8px;
+          }
+          .save-success-content p {
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin-bottom: 24px;
+          }
+          .save-success-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+          }
+          .save-success-actions .btn {
+            width: 100%;
+            justify-content: center;
+          }
+          .btn-text {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            cursor: pointer;
+          }
+          .btn-text:hover {
+            color: var(--text);
+          }
+        `;
+        document.head.appendChild(styles);
+      }
+    }
+
+    function closeSaveSuccessModal() {
+      const modal = document.getElementById('saveSuccessModal');
+      if (modal) modal.remove();
     }
 
     function copyPlanCode() {
