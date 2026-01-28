@@ -1,5 +1,24 @@
 /* Clearly Website - Brand Styles */
 
+/* Skip to content link (accessibility) */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--primary);
+  color: white;
+  padding: 8px 16px;
+  z-index: 10000;
+  font-weight: 600;
+  font-size: 14px;
+  border-radius: 0 0 8px 0;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+  text-decoration: none;
+}
+
 :root {
   --primary: #0D8268;
   --primary-dark: #0a6b56;

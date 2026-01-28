@@ -141,6 +141,8 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   <!-- Preconnect hints for performance -->
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://dwncravjhkbclbuzijra.supabase.co">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://dwncravjhkbclbuzijra.supabase.co">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
@@ -253,10 +255,11 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to content</a>
 
   ${headerPartial}
 
-  <article class="blog-post">
+  <article class="blog-post" id="main-content">
     <a href="/blog.html" class="back-link">&larr; Back to Blog</a>
     <header class="blog-post-header">
       <h1 class="blog-post-title">${escapeHtml(post.title)}</h1>
@@ -364,6 +367,8 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
   <!-- Preconnect hints for performance -->
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://dwncravjhkbclbuzijra.supabase.co">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://dwncravjhkbclbuzijra.supabase.co">
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
@@ -639,10 +644,11 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
   </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to content</a>
 
   ${headerPartial}
 
-  <header class="blog-hero">
+  <header class="blog-hero" id="main-content">
     <div class="container">
       <div class="blog-hero-badge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
