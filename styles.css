@@ -1002,7 +1002,8 @@ img {
 
 .footer-nav {
   display: flex;
-  gap: 48px;
+  justify-content: space-between;
+  flex: 1;
 }
 
 .footer-col h4 {
