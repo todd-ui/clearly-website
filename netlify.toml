@@ -4,3 +4,35 @@
 
 [build.environment]
   NODE_VERSION = "18"
+
+# Redirect non-trailing-slash URLs to trailing-slash versions (301 permanent)
+[[redirects]]
+  from = "/plan-builder"
+  to = "/plan-builder/"
+  status = 301
+
+[[redirects]]
+  from = "/calculators"
+  to = "/calculators/"
+  status = 301
+
+[[redirects]]
+  from = "/communication-styles"
+  to = "/communication-styles/"
+  status = 301
+
+[[redirects]]
+  from = "/co-parent-communication"
+  to = "/co-parent-communication/"
+  status = 301
+
+[[redirects]]
+  from = "/custody-schedule-help"
+  to = "/custody-schedule-help/"
+  status = 301
+
+# Custom 404 page
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
