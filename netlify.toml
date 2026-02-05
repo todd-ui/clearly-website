@@ -31,6 +31,37 @@
   to = "/custody-schedule-help/"
   status = 301
 
+# Redirect pretty URLs to .html versions for pages served as files
+[[redirects]]
+  from = "/blog"
+  to = "/blog.html"
+  status = 301
+
+[[redirects]]
+  from = "/faq"
+  to = "/faq.html"
+  status = 301
+
+[[redirects]]
+  from = "/help"
+  to = "/help.html"
+  status = 301
+
+[[redirects]]
+  from = "/privacy"
+  to = "/privacy.html"
+  status = 301
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 301
+
+[[redirects]]
+  from = "/professionals"
+  to = "/professionals.html"
+  status = 301
+
 # Custom 404 page
 [[redirects]]
   from = "/*"
