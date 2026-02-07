@@ -1022,7 +1022,7 @@ img {
 .footer-nav {
   display: flex;
   justify-content: flex-end;
-  flex: 0;
+  flex: none;
   gap: 48px;
 }
 
@@ -1083,7 +1083,8 @@ img {
   }
   .footer-nav {
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
+    flex: none;
     gap: 48px;
   }
   .footer-bottom {
