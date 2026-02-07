@@ -1080,24 +1080,14 @@ img {
   }
   .footer-brand-section {
     flex: none;
-    text-align: center;
-  }
-  .footer-brand {
-    justify-content: center;
   }
   .footer-nav {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px 24px;
-    width: 100%;
-  }
-  .footer-col {
-    text-align: center;
+    display: flex;
+    justify-content: flex-start;
+    gap: 48px;
   }
   .footer-bottom {
-    flex-direction: column;
-    gap: 8px;
-    text-align: center;
+    text-align: left;
   }
 }
 
@@ -1106,8 +1096,8 @@ img {
     padding: 40px 20px 28px;
   }
   .footer-nav {
-    grid-template-columns: 1fr;
-    gap: 28px;
+    flex-direction: column;
+    gap: 32px;
   }
   .footer-col h4 {
     margin-bottom: 14px;
