@@ -1,7 +1,7 @@
 {
-  "name": "Clearly - Co-Parenting Made Clear",
+  "name": "Clearly - Co-Parenting Communication That Works",
   "short_name": "Clearly",
-  "description": "Tools and resources for calmer co-parenting. Build custody plans, improve communication, and find common ground.",
+  "description": "Co-parenting app using interest-based communication to shift patterns and find common ground. Shared calendar, expense tracking, and resolution tools.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
