@@ -492,24 +492,38 @@
 <a href="#main-content" class="skip-link">Skip to content</a>
 
   <!-- Navigation -->
-  <nav class="nav">
-    <div class="container">
-      <a href="/" class="nav-brand">
-        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
-        Clearly
-      </a>
-      <ul class="nav-links">
-        <li><a href="/blog.html">Common Ground</a></li>
-        <li><a href="/professionals.html">For Professionals</a></li>
-        <li><a href="#" class="nav-cta" data-access-modal>Request Access</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </nav>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+<nav class="nav">
+  <div class="container">
+    <a href="/" class="nav-brand">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+      Clearly
+    </a>
+    <ul class="nav-links">
+      <li><a href="/blog.html">Common Ground</a></li>
+      <li><a href="/professionals.html">For Professionals</a></li>
+      <li><a href="#" class="nav-cta" data-access-modal>Request Access</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+  }
+</script>
+<script src="/js/access-modal.js" defer></script>
 
   <!-- Hero -->
   <main id="main-content">
@@ -687,91 +701,49 @@
 
   <!-- Footer -->
   <footer class="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div class="footer-brand-section">
-          <div class="footer-brand">
-            <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" loading="lazy">
-            <span>Clearly</span>
-          </div>
-          <p class="footer-tagline">Co-parenting made clear.</p>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand-section">
+        <div class="footer-brand">
+          <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" loading="lazy">
+          <span>Clearly</span>
         </div>
-        <div class="footer-nav">
-          <div class="footer-col">
-            <h4>Tools & Resources</h4>
-            <ul>
-              <li><a href="/plan-builder/">Custody Plan Builder</a></li>
-              <li><a href="/communication-styles/">Learn Your Communication Style</a></li>
-              <li><a href="/calculators/">Support Calculator</a></li>
-              <li><a href="/blog.html">Common Ground Blog</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Guides</h4>
-            <ul>
-              <li><a href="/custody-schedule-help/">Custody Schedule</a></li>
-              <li><a href="/co-parent-communication/">Co-Parent Communication</a></li>
-            </ul>
-          </div>
-          <div class="footer-col">
-            <h4>Company</h4>
-            <ul>
-              <li><a href="/professionals.html">For Family & Legal Professionals</a></li>
-              <li><a href="mailto:hello@getclearly.app">Contact</a></li>
-              <li><a href="/faq.html">FAQ</a></li>
-              <li><a href="/privacy.html">Privacy</a></li>
-              <li><a href="/terms.html">Terms</a></li>
-            </ul>
-          </div>
-        </div>
+        <p class="footer-tagline">Co-parenting made clear.</p>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Clearly LLC</p>
+      <div class="footer-nav">
+        <div class="footer-col">
+          <h4>Tools & Resources</h4>
+          <ul>
+            <li><a href="/plan-builder/">Custody Plan Builder</a></li>
+            <li><a href="/communication-styles/">Learn Your Communication Style</a></li>
+            <li><a href="/calculators/">Support Calculator</a></li>
+            <li><a href="/blog.html">Common Ground Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Guides</h4>
+          <ul>
+            <li><a href="/custody-schedule-help/">Custody Schedule</a></li>
+            <li><a href="/co-parent-communication/">Co-Parent Communication</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="/professionals.html">For Family & Legal Professionals</a></li>
+            <li><a href="mailto:hello@getclearly.app">Contact</a></li>
+            <li><a href="/faq.html">FAQ</a></li>
+            <li><a href="/privacy.html">Privacy</a></li>
+            <li><a href="/terms.html">Terms</a></li>
+          </ul>
+        </div>
       </div>
     </div>
-  </footer>
-
-  <script>
-    // Mobile menu toggle
-    const navToggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    if (navToggle && navLinks) {
-      navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('open');
-        navLinks.classList.toggle('open');
-      });
-    }
-
-    // Scroll reveal animation
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href !== '#') {
-          e.preventDefault();
-          const target = document.querySelector(href);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }
-      });
-    });
-  </script>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Clearly LLC</p>
+    </div>
+  </div>
+</footer>
 
   <!-- Structured Data -->
   <script type="application/ld+json">

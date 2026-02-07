@@ -1021,8 +1021,14 @@ img {
 
 .footer-nav {
   display: flex;
-  justify-content: space-between;
-  flex: 1;
+  justify-content: flex-end;
+  flex: 0;
+  gap: 48px;
+}
+
+.footer-col a,
+.footer-col h4 {
+  white-space: nowrap;
 }
 
 .footer-col h4 {
