@@ -475,12 +475,17 @@
        ANIMATIONS
        =========================================== */
     .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
+      opacity: 1;
+      transform: translateY(0);
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    .fade-in.visible {
+    .js-loaded .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .js-loaded .fade-in.visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -744,6 +749,41 @@
     </div>
   </div>
 </footer>
+
+  <script>
+    // Add js-loaded class to enable animations
+    document.body.classList.add('js-loaded');
+
+    // Scroll reveal animation
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href !== '#') {
+          e.preventDefault();
+          const target = document.querySelector(href);
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      });
+    });
+  </script>
 
   <!-- Structured Data -->
   <script type="application/ld+json">
