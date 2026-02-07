@@ -42,6 +42,7 @@
 
   <!-- Navigation -->
   <a href="#main-content" class="skip-link">Skip to content</a>
+<a href="#main-content" class="skip-link">Skip to content</a>
 <nav class="nav">
   <div class="container">
     <a href="/" class="nav-brand">
@@ -60,6 +61,19 @@
     </button>
   </div>
 </nav>
+
+<script>
+  // Mobile menu toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+  }
+</script>
+<script src="/js/access-modal.js" defer></script>
 
 <script>
   // Mobile menu toggle
