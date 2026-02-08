@@ -5,6 +5,20 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# Canonical domain redirect: www → non-www (301 permanent)
+# This consolidates SEO and prevents duplicate content issues
+[[redirects]]
+  from = "https://www.getclearly.app/*"
+  to = "https://getclearly.app/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://www.getclearly.app/*"
+  to = "https://getclearly.app/:splat"
+  status = 301
+  force = true
+
 # Redirect non-trailing-slash URLs to trailing-slash versions (301 permanent)
 [[redirects]]
   from = "/plan-builder"
