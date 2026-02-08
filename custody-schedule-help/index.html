@@ -376,12 +376,17 @@
 
     /* Fade animations - matching homepage */
     .fade-in {
-      opacity: 0;
-      transform: translateY(20px);
+      opacity: 1;
+      transform: translateY(0);
       transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
-    .fade-in.visible {
+    .js-loaded .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .js-loaded .fade-in.visible {
       opacity: 1;
       transform: translateY(0);
     }
@@ -743,6 +748,22 @@
       }
     }
   }
+  </script>
+
+  <script>
+    // Add js-loaded class to enable animations
+    document.body.classList.add('js-loaded');
+
+    // Scroll reveal animation
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
 
 </body>
