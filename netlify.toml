@@ -45,6 +45,21 @@
   to = "/custody-schedule-help/"
   status = 301
 
+[[redirects]]
+  from = "/alignment"
+  to = "/alignment/"
+  status = 301
+
+[[redirects]]
+  from = "/alignment/view"
+  to = "/alignment/view/"
+  status = 301
+
+[[redirects]]
+  from = "/alignment/compare"
+  to = "/alignment/compare/"
+  status = 301
+
 # Redirect pretty URLs to .html versions for pages served as files
 [[redirects]]
   from = "/blog"

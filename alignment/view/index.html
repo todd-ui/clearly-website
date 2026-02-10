@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Co-Parenting Alignment Plan | Clearly</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="/styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    :root {
+      --primary: #0D8268;
+      --primary-dark: #0a6b56;
+      --text: #1A1917;
+      --text-secondary: #5C5856;
+      --bg: #FAFAF9;
+      --border: #E8E6E4;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 80px 20px;
+      color: var(--text-secondary);
+    }
+
+    .error {
+      text-align: center;
+      padding: 80px 20px;
+      color: #dc2626;
+    }
+
+    .plan-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .plan-header h1 {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .plan-header .subtitle {
+      color: var(--text-secondary);
+      font-size: 18px;
+    }
+
+    .section {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 16px;
+    }
+
+    .response-item {
+      margin-bottom: 24px;
+    }
+
+    .response-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .question-text {
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .answer-text {
+      color: var(--text-secondary);
+      padding-left: 16px;
+      border-left: 3px solid var(--primary);
+    }
+
+    .answer-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .answer-list li {
+      padding: 4px 0 4px 16px;
+      border-left: 3px solid var(--primary);
+      color: var(--text-secondary);
+    }
+
+    .code-section {
+      background: #E6F5F1;
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      margin-top: 32px;
+    }
+
+    .code-section h3 {
+      font-size: 16px;
+      color: var(--primary);
+      margin: 0 0 12px 0;
+    }
+
+    .code-section p {
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .alignment-code {
+      display: inline-block;
+      font-size: 24px;
+      font-weight: 600;
+      font-family: monospace;
+      letter-spacing: 0.15em;
+      color: var(--primary);
+      background: white;
+      border: 2px dashed var(--primary);
+      padding: 12px 24px;
+      border-radius: 8px;
+    }
+
+    .cta-section {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 16px 32px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: white;
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      border-radius: 8px;
+      border: 2px solid var(--primary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-secondary svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .header-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="loading" class="loading">
+      <p>Loading your alignment plan...</p>
+    </div>
+
+    <div id="error" class="error" style="display: none;">
+      <h2>Plan Not Found</h2>
+      <p id="errorMessage">We couldn't find this alignment plan. The link may have expired or be incorrect.</p>
+      <a href="/alignment/" class="btn-primary">Create Your Own Plan</a>
+    </div>
+
+    <div id="content" style="display: none;">
+      <div class="plan-header">
+        <h1>Co-Parenting Alignment Plan</h1>
+        <p class="subtitle">For <span id="parentName"></span> | <span id="childInfo"></span></p>
+        <div class="header-actions">
+          <button class="btn-secondary" onclick="downloadPDF()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </button>
+        </div>
+      </div>
+
+      <div id="responsesContainer"></div>
+
+      <div class="code-section" id="codeSection">
+        <h3>Invite Your Co-Parent</h3>
+        <p>Share this code so they can complete their own plan and compare results.</p>
+        <div class="alignment-code" id="alignmentCode"></div>
+      </div>
+
+      <div class="cta-section">
+        <p style="color: var(--text-secondary); margin-bottom: 16px;">Want to improve your co-parenting communication?</p>
+        <a href="/" class="btn-primary">Learn About Clearly</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://dwncravjhkbclbuzijra.supabase.co';
+
+    const QUESTION_LABELS = {
+      's1-p1': 'Core qualities you hope for your child',
+      's1-p2a': 'What you want to carry forward from your upbringing',
+      's1-p2b': 'What you want to do differently',
+      's1-p3': 'Non-negotiable values',
+      's2-p4': 'Approach when child is upset',
+      's2-p5': 'Handling difficult emotions about the other home',
+      's2-p6a': 'How you talk about your co-parent',
+      's2-p6b': "Child's perspective on household talk",
+      's2-p7a': 'Importance of emotional consistency',
+      's2-p7b': 'Emotional consistency specifics',
+      // Add more as needed
+    };
+
+    async function loadPlan() {
+      const params = new URLSearchParams(window.location.search);
+      const token = params.get('token');
+
+      if (!token) {
+        showError('No plan token provided.');
+        return;
+      }
+
+      try {
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/alignment-view?token=${token}`);
+        const data = await response.json();
+
+        if (!response.ok) {
+          showError(data.error || 'Failed to load plan');
+          return;
+        }
+
+        displayPlan(data.plan, data.has_comparison);
+      } catch (error) {
+        console.error('Error loading plan:', error);
+        showError('Failed to load plan. Please try again.');
+      }
+    }
+
+    function showError(message) {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('errorMessage').textContent = message;
+      document.getElementById('error').style.display = 'block';
+    }
+
+    function displayPlan(plan, hasComparison) {
+      currentPlan = plan;
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('content').style.display = 'block';
+
+      // Set header info
+      document.getElementById('parentName').textContent = plan.parent_name || 'Parent';
+      const children = plan.children || [];
+      const childInfo = children.map(c => `${c.name}, age ${c.age}`).join(' & ') || 'Your children';
+      document.getElementById('childInfo').textContent = childInfo;
+
+      // Set alignment code
+      document.getElementById('alignmentCode').textContent = plan.alignment_plan_code;
+
+      // If already compared, update the code section
+      if (hasComparison) {
+        document.getElementById('codeSection').innerHTML = `
+          <h3>Comparison Available</h3>
+          <p>Your co-parent has completed their plan!</p>
+          <a href="/alignment/compare/?code=${plan.alignment_plan_code}" class="btn-primary">View Comparison</a>
+        `;
+      }
+
+      // Display responses
+      const container = document.getElementById('responsesContainer');
+      const responses = plan.responses || {};
+
+      // Group by section
+      const sections = {
+        'Your Vision': ['s1-p1', 's1-p2a', 's1-p2b', 's1-p3'],
+        'Emotional Life': ['s2-p4', 's2-p5', 's2-p6a', 's2-p6b', 's2-p7a', 's2-p7b'],
+        'Structure & Daily Life': ['s3-p8', 's3-p9a', 's3-p9b', 's3-p10a', 's3-p10b', 's3-p11a', 's3-p11b', 's3-p12a', 's3-p12b', 's3-p12c'],
+        'Education & Development': ['s4-p13', 's4-p14a', 's4-p14b', 's4-p15a', 's4-p15b'],
+        'Health & Wellness': ['s5-p16', 's5-p17a', 's5-p17b', 's5-p18a', 's5-p18b'],
+        'Your Partnership': ['s6-p19a', 's6-p19b', 's6-p20a', 's6-p20b', 's6-p21a', 's6-p21b', 's6-p22a', 's6-p22b', 's6-p23', 's6-p24a', 's6-p24b'],
+        'Development': ['s7-support', 's7-empowerment', 's7-boundaries', 's7-time', 's7-learning', 's7-values', 's7-social', 's7-identity'],
+        'Looking Forward': ['s8-p33', 's8-p34', 's8-p35', 's8-p36']
+      };
+
+      for (const [sectionTitle, keys] of Object.entries(sections)) {
+        const sectionResponses = keys.filter(k => responses[k] !== undefined);
+        if (sectionResponses.length === 0) continue;
+
+        const section = document.createElement('div');
+        section.className = 'section';
+        section.innerHTML = `<div class="section-title">${sectionTitle}</div>`;
+
+        for (const key of sectionResponses) {
+          const value = responses[key];
+          const item = document.createElement('div');
+          item.className = 'response-item';
+
+          const label = QUESTION_LABELS[key] || key;
+          item.innerHTML = `<div class="question-text">${label}</div>`;
+
+          if (Array.isArray(value)) {
+            const list = document.createElement('ul');
+            list.className = 'answer-list';
+            value.forEach(v => {
+              const li = document.createElement('li');
+              li.textContent = v;
+              list.appendChild(li);
+            });
+            item.appendChild(list);
+          } else if (typeof value === 'object') {
+            const list = document.createElement('ul');
+            list.className = 'answer-list';
+            for (const [k, v] of Object.entries(value)) {
+              const li = document.createElement('li');
+              li.textContent = `${k}: ${v}`;
+              list.appendChild(li);
+            }
+            item.appendChild(list);
+          } else {
+            const answer = document.createElement('div');
+            answer.className = 'answer-text';
+            answer.textContent = value;
+            item.appendChild(answer);
+          }
+
+          section.appendChild(item);
+        }
+
+        container.appendChild(section);
+      }
+    }
+
+    let currentPlan = null;
+
+    function downloadPDF() {
+      if (!currentPlan) return;
+
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+
+      const pageWidth = doc.internal.pageSize.getWidth();
+      const margin = 20;
+      const contentWidth = pageWidth - (margin * 2);
+      let y = 20;
+
+      // Helper to add text with word wrap
+      function addText(text, fontSize, isBold, color = [26, 25, 23]) {
+        doc.setFontSize(fontSize);
+        doc.setFont('helvetica', isBold ? 'bold' : 'normal');
+        doc.setTextColor(...color);
+        const lines = doc.splitTextToSize(text, contentWidth);
+
+        // Check if we need a new page
+        if (y + (lines.length * fontSize * 0.5) > 280) {
+          doc.addPage();
+          y = 20;
+        }
+
+        doc.text(lines, margin, y);
+        y += lines.length * fontSize * 0.5 + 4;
+      }
+
+      // Header
+      doc.setFillColor(13, 130, 104);
+      doc.rect(0, 0, pageWidth, 40, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(24);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Co-Parenting Alignment Plan', margin, 28);
+
+      y = 55;
+
+      // Subtitle
+      const children = currentPlan.children || [];
+      const childInfo = children.map(c => `${c.name}, age ${c.age}`).join(' & ') || 'Your children';
+      addText(`For ${currentPlan.parent_name || 'Parent'} | ${childInfo}`, 12, false, [92, 88, 86]);
+      y += 10;
+
+      // Responses
+      const responses = currentPlan.responses || {};
+      const sections = {
+        'Your Vision': ['s1-p1', 's1-p2a', 's1-p2b', 's1-p3'],
+        'Emotional Life': ['s2-p4', 's2-p5', 's2-p6a', 's2-p6b', 's2-p7a', 's2-p7b'],
+        'Structure & Daily Life': ['s3-p8', 's3-p9a', 's3-p9b', 's3-p10a', 's3-p10b', 's3-p11a', 's3-p11b', 's3-p12a', 's3-p12b', 's3-p12c'],
+        'Education & Development': ['s4-p13', 's4-p14a', 's4-p14b', 's4-p15a', 's4-p15b'],
+        'Health & Wellness': ['s5-p16', 's5-p17a', 's5-p17b', 's5-p18a', 's5-p18b'],
+        'Your Partnership': ['s6-p19a', 's6-p19b', 's6-p20a', 's6-p20b', 's6-p21a', 's6-p21b', 's6-p22a', 's6-p22b', 's6-p23', 's6-p24a', 's6-p24b'],
+        'Development': ['s7-support', 's7-empowerment', 's7-boundaries', 's7-time', 's7-learning', 's7-values', 's7-social', 's7-identity'],
+        'Looking Forward': ['s8-p33', 's8-p34', 's8-p35', 's8-p36']
+      };
+
+      for (const [sectionTitle, keys] of Object.entries(sections)) {
+        const sectionResponses = keys.filter(k => responses[k] !== undefined);
+        if (sectionResponses.length === 0) continue;
+
+        // Section header
+        y += 6;
+        addText(sectionTitle.toUpperCase(), 11, true, [13, 130, 104]);
+
+        // Draw line
+        doc.setDrawColor(232, 230, 228);
+        doc.line(margin, y - 2, pageWidth - margin, y - 2);
+        y += 4;
+
+        for (const key of sectionResponses) {
+          const value = responses[key];
+          const label = QUESTION_LABELS[key] || key;
+
+          addText(label, 10, true);
+
+          let answerText;
+          if (Array.isArray(value)) {
+            answerText = '• ' + value.join('\n• ');
+          } else if (typeof value === 'object') {
+            answerText = Object.entries(value).map(([k, v]) => `${k}: ${v}`).join('\n');
+          } else {
+            answerText = String(value);
+          }
+
+          addText(answerText, 10, false, [92, 88, 86]);
+          y += 4;
+        }
+      }
+
+      // Footer with alignment plan code
+      if (y > 240) {
+        doc.addPage();
+        y = 20;
+      }
+      y += 10;
+      doc.setFillColor(230, 245, 241);
+      doc.roundedRect(margin, y, contentWidth, 30, 3, 3, 'F');
+      doc.setTextColor(13, 130, 104);
+      doc.setFontSize(10);
+      doc.text('Alignment Plan Code: ' + (currentPlan.alignment_plan_code || ''), margin + 10, y + 12);
+      doc.setFontSize(8);
+      doc.setTextColor(92, 88, 86);
+      doc.text('Share this code with your co-parent so they can complete their plan and compare.', margin + 10, y + 22);
+
+      // Save
+      const filename = `alignment-plan-${currentPlan.parent_name || 'plan'}.pdf`.toLowerCase().replace(/\s+/g, '-');
+      doc.save(filename);
+    }
+
+    loadPlan();
+  </script>
+</body>
+</html>

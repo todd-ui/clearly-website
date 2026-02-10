@@ -1,0 +1,3191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DYZ1XEXPMT');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0D8268">
+  <title>Co-Parenting Alignment Plan | Free Tool for Separated Parents | Clearly</title>
+  <meta name="description" content="Build your co-parenting alignment plan with this free, research-backed tool. Clarify your parenting values, assess your child's needs, and create a shared vision — grounded in the Feinberg coparenting framework and Search Institute's Developmental Assets.">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://getclearly.app/alignment/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getclearly.app/alignment/">
+  <meta property="og:title" content="Co-Parenting Alignment Plan | Free Research-Based Tool">
+  <meta property="og:description" content="Clarify your parenting values and build a shared vision for raising your child across two homes. Free, research-backed, no account needed.">
+  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+  <meta property="og:site_name" content="Clearly">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Co-Parenting Alignment Plan | Free Research-Based Tool">
+  <meta name="twitter:description" content="Clarify your parenting values and build a shared vision for raising your child across two homes.">
+  <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+
+  <!-- Additional SEO -->
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="Clearly LLC">
+  <meta name="keywords" content="co-parenting alignment plan, co-parenting plan tool, co-parenting values assessment, co-parenting agreement template free, parenting plan for divorced parents">
+
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+
+  <!-- FAQ Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a Co-Parenting Alignment Plan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "A Co-Parenting Alignment Plan is a structured document that helps separated or divorced parents clarify their shared parenting values, assess their child's developmental needs, and establish a vision for how they'll raise their child together across two homes. Unlike a custody schedule or legal parenting plan, it focuses on alignment around what matters most for the child's well-being."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this tool based on research?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The Co-Parenting Alignment Plan is built on two validated frameworks: Feinberg's Ecological Model of Coparenting (2003), which is the most widely cited coparenting framework in developmental psychology, and Search Institute's 40 Developmental Assets, studied across millions of young people in over 30 countries."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do both parents need to complete it?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The tool is designed so that one parent can complete it independently and receive a valuable, personalized alignment plan. If the second parent also completes it, the tool generates a comparison view showing where you naturally align and where conversations might help."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does it take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Most parents complete the assessment in 15-20 minutes. There are 36 prompts across 8 sections. You can take your time — this is a reflective exercise, not a quiz."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is this the same as a legal parenting plan?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. A legal parenting plan covers custody schedules, decision-making authority, and logistical arrangements. The Co-Parenting Alignment Plan focuses on the values, priorities, and developmental goals that shape how you parent together day to day. Think of it as the foundation beneath the legal framework."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    /* Full width fix */
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+
+    /* Assessment container */
+    .assessment-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-top: 80px;
+    }
+
+    .assessment-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 40px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+    }
+
+    .assessment-nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: none;
+      padding: 0;
+    }
+
+    .assessment-nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--text);
+    }
+
+    .assessment-nav-brand img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .nav-progress {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .assessment-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 60px 20px;
+    }
+
+    .assessment-content {
+      max-width: 640px;
+      width: 100%;
+    }
+
+    /* Screen management */
+    .screen {
+      display: none;
+    }
+
+    .screen.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Landing screen */
+    .landing-screen {
+      text-align: center;
+    }
+
+    .landing-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 20px;
+      margin-bottom: 24px;
+    }
+
+    .landing-badge svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .landing-screen h1 {
+      font-size: 38px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .landing-screen .subhead {
+      font-size: 18px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 40px;
+      max-width: 560px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Section preview cards */
+    .section-preview {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-preview-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 12px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    .section-preview-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--primary-soft);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      margin: 0 auto 10px;
+    }
+
+    .section-preview-card span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text);
+      display: block;
+      line-height: 1.3;
+    }
+
+    .btn-start {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 18px 40px;
+      background: var(--gradient);
+      color: white;
+      font-size: 17px;
+      font-weight: 600;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .btn-start:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    /* Trust features */
+    .trust-features {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .trust-feature {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .trust-feature svg {
+      width: 18px;
+      height: 18px;
+      color: var(--primary);
+    }
+
+    /* Have code section */
+    .have-code-section {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .have-code-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .code-input-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .code-input {
+      width: 180px;
+      padding: 14px 16px;
+      font-size: 16px;
+      font-family: monospace;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      text-align: center;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      background: white;
+    }
+
+    .code-input::placeholder {
+      font-size: 13px;
+      letter-spacing: 0.05em;
+      color: #9A9896;
+    }
+
+    .code-input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .btn-link-code {
+      padding: 14px 28px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-link-code:hover {
+      background: var(--primary-dark);
+    }
+
+    .link-text {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      padding: 10px 18px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+
+    .link-text:hover {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .code-error {
+      color: #dc2626;
+      font-size: 14px;
+      margin-top: 12px;
+    }
+
+    /* Research section */
+    .research-section {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .research-section h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+      text-align: center;
+    }
+
+    .research-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .research-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .research-card h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    .research-card p {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    @media (max-width: 600px) {
+      .section-preview {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .research-cards {
+        grid-template-columns: 1fr;
+      }
+      .trust-features {
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+      }
+      .landing-screen h1 {
+        font-size: 28px;
+      }
+    }
+
+    /* Progress indicator */
+    .progress-bar {
+      height: 4px;
+      background: var(--border);
+      border-radius: 2px;
+      margin-bottom: 32px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-text {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+
+    /* Setup screens */
+    .setup-screen h2 {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .setup-screen .subtitle {
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="number"],
+    .form-group select {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: white;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 500px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Child entry */
+    .child-entry {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .child-entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .child-entry-header h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .btn-remove {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 4px;
+      font-size: 13px;
+    }
+
+    .btn-remove:hover {
+      color: #dc2626;
+    }
+
+    .btn-add-child {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 16px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      border: 1px dashed var(--primary);
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      width: 100%;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .btn-add-child:hover {
+      background: white;
+    }
+
+    /* Option chips for custody arrangement */
+    .option-chips {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-chip {
+      display: block;
+      width: 100%;
+      padding: 16px 20px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-align: left;
+      font-size: 15px;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .option-chip:hover {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .option-chip.selected {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    /* Continue button */
+    .btn-continue {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 32px;
+      background: var(--gradient);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 10px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-continue:hover {
+      opacity: 0.9;
+    }
+
+    .btn-continue:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 16px 24px;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 16px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .btn-back:hover {
+      color: var(--text);
+    }
+
+    .button-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    /* Question screen */
+    .question-screen h2 {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--text);
+      margin-bottom: 32px;
+    }
+
+    .answers {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .answer-btn {
+      display: block;
+      width: 100%;
+      padding: 18px 22px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-align: left;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .answer-btn:hover {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .answer-btn.selected {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    /* Multi-select */
+    .multi-select-info {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .multi-select-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 500px) {
+      .multi-select-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .multi-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 14px;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .multi-option:hover {
+      border-color: var(--primary);
+    }
+
+    .multi-option.selected {
+      border-color: var(--primary);
+      background: var(--primary-soft);
+    }
+
+    .multi-option .checkbox {
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--border);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .multi-option.selected .checkbox {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
+
+    .multi-option.selected .checkbox svg {
+      display: block;
+    }
+
+    .multi-option .checkbox svg {
+      display: none;
+      width: 12px;
+      height: 12px;
+      color: white;
+    }
+
+    /* Free text input */
+    .text-input-group {
+      margin-bottom: 24px;
+    }
+
+    .text-input-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .text-input-group textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 16px;
+      font-size: 15px;
+      line-height: 1.6;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      resize: vertical;
+      font-family: inherit;
+      transition: border-color 0.2s;
+    }
+
+    .text-input-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .text-input-group .hint {
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 8px;
+    }
+
+    /* Matrix input */
+    .matrix-container {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .matrix-header {
+      display: grid;
+      grid-template-columns: 1fr repeat(4, 80px);
+      gap: 8px;
+      padding: 16px 20px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .matrix-header span {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .matrix-header span:first-child {
+      text-align: left;
+    }
+
+    .matrix-row {
+      display: grid;
+      grid-template-columns: 1fr repeat(4, 80px);
+      gap: 8px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+    }
+
+    .matrix-row:last-child {
+      border-bottom: none;
+    }
+
+    .matrix-row-label {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .matrix-option {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .matrix-option input[type="radio"] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: var(--primary);
+    }
+
+    @media (max-width: 600px) {
+      .matrix-header {
+        grid-template-columns: 1fr;
+        display: none;
+      }
+      .matrix-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .matrix-row-label {
+        font-weight: 600;
+        margin-bottom: 8px;
+      }
+      .matrix-option {
+        justify-content: flex-start;
+        gap: 8px;
+      }
+      .matrix-option::before {
+        content: attr(data-label);
+        font-size: 13px;
+        color: var(--text-secondary);
+      }
+    }
+
+    /* Email capture screen */
+    .email-screen {
+      text-align: center;
+    }
+
+    .email-screen h2 {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .email-screen p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .email-form {
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .email-form input {
+      width: 100%;
+      padding: 16px 20px;
+      font-size: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+    }
+
+    .email-form input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .email-form button {
+      width: 100%;
+      padding: 16px 24px;
+      background: var(--gradient);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .email-form button:hover {
+      opacity: 0.9;
+    }
+
+    .email-form button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .skip-link {
+      display: inline-block;
+      margin-top: 20px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .skip-link:hover {
+      color: var(--primary);
+    }
+
+    /* Results screen */
+    .results-screen {
+      max-width: 720px;
+    }
+
+    .result-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .result-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .result-header h2 {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .result-header p {
+      font-size: 16px;
+      color: var(--text-secondary);
+    }
+
+    .result-section {
+      margin-bottom: 40px;
+    }
+
+    .result-section h3 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--primary);
+    }
+
+    .result-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .result-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .result-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    .result-card.highlight {
+      background: var(--primary-soft);
+      border-color: var(--primary);
+    }
+
+    .result-card.highlight h4 {
+      color: var(--primary);
+    }
+
+    .qualities-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .quality-tag {
+      padding: 8px 14px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 20px;
+    }
+
+    /* Developmental snapshot */
+    .asset-category {
+      margin-bottom: 24px;
+    }
+
+    .asset-category h5 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .asset-items {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .asset-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: white;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+
+    .asset-status {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .asset-status.strong { background: #22c55e; }
+    .asset-status.adequate { background: #eab308; }
+    .asset-status.needs-attention { background: #ef4444; }
+
+    .asset-item span {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    /* Final CTA */
+    .final-cta {
+      text-align: center;
+      padding: 48px 32px;
+      background: linear-gradient(135deg, #f8fdfb 0%, #e8f5f0 100%);
+      border-radius: 16px;
+      margin-top: 40px;
+    }
+
+    .final-cta h3 {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .final-cta p {
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-cta .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      background: var(--gradient);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .final-cta .btn-primary:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+      text-decoration: none;
+    }
+
+    /* Invite section */
+    .invite-section {
+      background: linear-gradient(135deg, #E6F5F1 0%, #d4ede6 100%);
+      border: 2px solid var(--primary);
+      border-radius: 16px;
+      padding: 40px 32px;
+      text-align: center;
+      margin-top: 32px;
+    }
+
+    .invite-icon {
+      width: 64px;
+      height: 64px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      color: var(--primary);
+    }
+
+    .invite-section h4 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .invite-section p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .code-label {
+      font-size: 12px !important;
+      color: var(--primary) !important;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+      margin-bottom: 16px !important;
+    }
+
+    .share-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-share {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-share:hover {
+      background: var(--primary-dark);
+    }
+
+    .alignment-plan-code {
+      display: inline-block;
+      padding: 12px 24px;
+      background: var(--bg);
+      border: 2px dashed var(--border);
+      border-radius: 8px;
+      font-family: monospace;
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .btn-copy {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 24px;
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-copy:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .assessment-main {
+        padding: 40px 20px;
+      }
+      .result-header h2 {
+        font-size: 26px;
+      }
+    }
+  </style>
+  <script src="/js/access-modal.js" defer></script>
+</head>
+<body>
+  <div class="assessment-container">
+    <!-- Navigation -->
+    <nav class="assessment-nav">
+      <div class="container">
+        <a href="/" class="assessment-nav-brand">
+          <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+          Clearly
+        </a>
+        <span class="nav-progress" id="navProgress"></span>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <main class="assessment-main">
+      <div class="assessment-content">
+
+        <!-- Landing Screen -->
+        <div id="landing" class="screen landing-screen active">
+          <div class="landing-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            Free Assessment
+          </div>
+          <h1>You're not just sharing a schedule.<br>You're raising a human together.</h1>
+          <p class="subhead">This guided tool helps you clarify what matters most — your values, your priorities, and your vision for your child's future. Built on decades of research into what helps children thrive when their parents live in two homes.</p>
+
+          <!-- Section Preview Cards -->
+          <div class="section-preview">
+            <div class="section-preview-card">
+              <div class="section-preview-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              </div>
+              <span>Your Vision</span>
+            </div>
+            <div class="section-preview-card">
+              <div class="section-preview-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+              </div>
+              <span>Emotional Life</span>
+            </div>
+            <div class="section-preview-card">
+              <div class="section-preview-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              </div>
+              <span>Daily Life</span>
+            </div>
+            <div class="section-preview-card">
+              <div class="section-preview-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              </div>
+              <span>Partnership</span>
+            </div>
+          </div>
+
+          <button class="btn-start" onclick="startAssessment()">
+            Start your alignment plan
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </button>
+
+          <div class="trust-features">
+            <div class="trust-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              15-20 minutes
+            </div>
+            <div class="trust-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+              No account needed
+            </div>
+            <div class="trust-feature">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Research-backed
+            </div>
+          </div>
+
+          <div class="have-code-section" id="haveCodeSection">
+            <p class="have-code-text">Have an alignment plan code from your co-parent?</p>
+            <div class="code-input-row" id="codeInputRow" style="display: none;">
+              <input type="text" id="linkCodeInput" placeholder="ABC123" maxlength="8" class="code-input">
+              <button class="btn-link-code" onclick="validateAndStartWithCode()">Continue</button>
+            </div>
+            <button class="link-text" id="showCodeInput" onclick="toggleCodeInput()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+              Enter code
+            </button>
+            <p class="code-error" id="codeError" style="display: none;"></p>
+          </div>
+
+          <div class="research-section">
+            <h3>Built on proven frameworks</h3>
+            <div class="research-cards">
+              <div class="research-card">
+                <h4>Feinberg Coparenting Framework</h4>
+                <p>The most cited coparenting model in developmental psychology. Identifies four dimensions that predict how well co-parents work together and how children adjust.</p>
+              </div>
+              <div class="research-card">
+                <h4>Search Institute's Developmental Assets</h4>
+                <p>A 30-year research program across 30+ countries that identified 40 building blocks children need to thrive.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Setup: Names -->
+        <div id="setupNames" class="screen setup-screen">
+          <p class="section-label">Getting Started</p>
+          <h2>Let's start with some basics</h2>
+          <p class="subtitle">This helps us personalize your alignment plan.</p>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="parentName">Your first name</label>
+              <input type="text" id="parentName" placeholder="Your name" autocomplete="given-name">
+            </div>
+            <div class="form-group">
+              <label for="coParentName">Co-parent's first name</label>
+              <input type="text" id="coParentName" placeholder="Their name">
+            </div>
+          </div>
+
+          <div class="button-row">
+            <button class="btn-back" onclick="showScreen('landing')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Back
+            </button>
+            <button class="btn-continue" id="btnToChildren" onclick="goToChildren()" disabled>
+              Continue
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Setup: Children -->
+        <div id="setupChildren" class="screen setup-screen">
+          <p class="section-label">Getting Started</p>
+          <h2>Tell us about your child</h2>
+          <p class="subtitle">This helps us tailor the developmental questions to their age.</p>
+
+          <div id="childrenContainer">
+            <!-- Children entries will be added here dynamically -->
+          </div>
+
+          <button class="btn-add-child" onclick="addChild()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add another child
+          </button>
+
+          <div class="button-row">
+            <button class="btn-back" onclick="showScreen('setupNames')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Back
+            </button>
+            <button class="btn-continue" id="btnToCustody" onclick="goToCustody()" disabled>
+              Continue
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Setup: Custody Arrangement -->
+        <div id="setupCustody" class="screen setup-screen">
+          <p class="section-label">Getting Started</p>
+          <h2>What's your general custody arrangement?</h2>
+          <p class="subtitle">This gives context to some of our questions.</p>
+
+          <div class="option-chips" id="custodyOptions">
+            <button class="option-chip" data-value="equal" onclick="selectCustody(this)">
+              Roughly equal time in both homes
+            </button>
+            <button class="option-chip" data-value="primary-me" onclick="selectCustody(this)">
+              Primarily with me, regular time with co-parent
+            </button>
+            <button class="option-chip" data-value="primary-them" onclick="selectCustody(this)">
+              Primarily with co-parent, regular time with me
+            </button>
+            <button class="option-chip" data-value="other" onclick="selectCustody(this)">
+              Other arrangement
+            </button>
+          </div>
+
+          <div class="button-row">
+            <button class="btn-back" onclick="showScreen('setupChildren')">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Back
+            </button>
+            <button class="btn-continue" id="btnToIntro" onclick="goToIntro()" disabled>
+              Continue
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Intro before prompts -->
+        <div id="introScreen" class="screen setup-screen" style="text-align: center;">
+          <div style="max-width: 520px; margin: 0 auto;">
+            <h2 style="margin-bottom: 20px;">Before we begin</h2>
+            <p style="font-size: 16px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 24px;">
+              This isn't a test. There are no right answers.
+            </p>
+            <p style="font-size: 16px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 24px;">
+              This is a structured exercise to help you clarify what matters most to you as a parent — your values, your priorities, and your vision for <strong id="introChildName" style="color: var(--text);">[child's]</strong> future.
+            </p>
+            <p style="font-size: 16px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 40px;">
+              It's built on decades of research into what helps children thrive, especially when their parents live in two homes.
+            </p>
+            <button class="btn-start" onclick="startPrompts()">
+              Let's begin
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Questions Screen (will be populated dynamically) -->
+        <div id="questions" class="screen question-screen">
+          <p class="section-label" id="sectionLabel">Section 1: Your Vision</p>
+          <p class="progress-text">Question <span id="currentQ">1</span> of <span id="totalQ">36</span></p>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progressFill" style="width: 2.78%"></div>
+          </div>
+          <h2 id="questionText"></h2>
+          <div id="questionContent">
+            <!-- Dynamic content based on question type -->
+          </div>
+          <div class="button-row" id="questionButtons" style="display: none;">
+            <button class="btn-back" id="btnQuestionBack" onclick="previousQuestion()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Back
+            </button>
+            <button class="btn-continue" id="btnQuestionNext" onclick="nextQuestion()" disabled>
+              Continue
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Email Capture Screen -->
+        <div id="emailCapture" class="screen email-screen">
+          <h2>Get your Co-Parenting Alignment Plan</h2>
+          <p>Enter your email to receive your personalized plan as a PDF, plus a link to invite <span id="emailCoParentName">[co-parent]</span> to complete their own version.</p>
+          <form class="email-form" id="emailForm">
+            <input type="email" id="emailInput" placeholder="you@example.com" required>
+            <button type="submit" id="emailSubmitBtn">Send my plan</button>
+          </form>
+          <span class="skip-link" onclick="showResults()">Skip and see results</span>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results" class="screen results-screen">
+          <!-- Results will be populated dynamically -->
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://dwncravjhkbclbuzijra.supabase.co';
+
+    // ==========================================
+    // STATE MANAGEMENT
+    // ==========================================
+    const state = {
+      currentScreen: 'landing',
+      currentSection: 0,
+      currentPromptIndex: 0,
+      setup: {
+        parentName: '',
+        coParentName: '',
+        children: [{ name: '', age: null, gender: 'they' }],
+        custodyArrangement: ''
+      },
+      responses: {},
+      email: null,
+      alignmentPlanCode: null,
+      linkCode: null,
+      viewToken: null
+    };
+
+    // Load state from localStorage
+    function loadState() {
+      const saved = localStorage.getItem('clearly_alignment_state');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          Object.assign(state, parsed);
+        } catch (e) {
+          console.error('Error loading state:', e);
+        }
+      }
+    }
+
+    // Save state to localStorage
+    function saveState() {
+      localStorage.setItem('clearly_alignment_state', JSON.stringify(state));
+    }
+
+    // ==========================================
+    // SCREEN MANAGEMENT
+    // ==========================================
+    function showScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(screenId).classList.add('active');
+      state.currentScreen = screenId;
+      saveState();
+      updateNavProgress();
+    }
+
+    function updateNavProgress() {
+      const navProgress = document.getElementById('navProgress');
+      if (state.currentScreen === 'questions') {
+        const totalPrompts = getTotalPromptCount();
+        const currentPrompt = getCurrentPromptNumber();
+        navProgress.textContent = `${currentPrompt} of ${totalPrompts}`;
+      } else if (state.currentScreen.startsWith('setup') || state.currentScreen === 'introScreen') {
+        navProgress.textContent = 'Getting started';
+      } else if (state.currentScreen === 'emailCapture') {
+        navProgress.textContent = 'Almost done';
+      } else if (state.currentScreen === 'results') {
+        navProgress.textContent = 'Your plan';
+      } else {
+        navProgress.textContent = '';
+      }
+    }
+
+    // ==========================================
+    // SETUP SCREENS
+    // ==========================================
+    function startAssessment() {
+      gtag('event', 'alignment_start', { event_category: 'engagement' });
+      showScreen('setupNames');
+    }
+
+    function toggleCodeInput() {
+      const row = document.getElementById('codeInputRow');
+      const btn = document.getElementById('showCodeInput');
+      if (row.style.display === 'none') {
+        row.style.display = 'flex';
+        btn.style.display = 'none';
+        document.getElementById('linkCodeInput').focus();
+      } else {
+        row.style.display = 'none';
+        btn.style.display = 'inline';
+      }
+    }
+
+    function validateAndStartWithCode() {
+      const code = document.getElementById('linkCodeInput').value.trim().toUpperCase();
+      const errorEl = document.getElementById('codeError');
+
+      if (code.length < 6) {
+        errorEl.textContent = 'Please enter a valid alignment plan code';
+        errorEl.style.display = 'block';
+        return;
+      }
+
+      // Store the code and start the assessment
+      state.linkCode = code;
+      saveState();
+      errorEl.style.display = 'none';
+      gtag('event', 'alignment_start_with_code', { event_category: 'engagement' });
+      showScreen('setupNames');
+    }
+
+    // Names validation
+    document.getElementById('parentName').addEventListener('input', validateNames);
+    document.getElementById('coParentName').addEventListener('input', validateNames);
+
+    function validateNames() {
+      const parentName = document.getElementById('parentName').value.trim();
+      const coParentName = document.getElementById('coParentName').value.trim();
+      state.setup.parentName = parentName;
+      state.setup.coParentName = coParentName;
+      document.getElementById('btnToChildren').disabled = !(parentName && coParentName);
+      saveState();
+    }
+
+    function goToChildren() {
+      renderChildren();
+      showScreen('setupChildren');
+    }
+
+    // Children management
+    function renderChildren() {
+      const container = document.getElementById('childrenContainer');
+      container.innerHTML = '';
+
+      state.setup.children.forEach((child, index) => {
+        const div = document.createElement('div');
+        div.className = 'child-entry';
+        div.innerHTML = `
+          <div class="child-entry-header">
+            <h4>Child ${index + 1}</h4>
+            ${index > 0 ? `<button class="btn-remove" onclick="removeChild(${index})">Remove</button>` : ''}
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Child's first name</label>
+              <input type="text" value="${child.name}" placeholder="Name" onchange="updateChild(${index}, 'name', this.value)">
+            </div>
+            <div class="form-group">
+              <label>Age</label>
+              <select onchange="updateChild(${index}, 'age', this.value)">
+                <option value="">Select age</option>
+                ${Array.from({length: 18}, (_, i) => i + 1).map(age =>
+                  `<option value="${age}" ${child.age == age ? 'selected' : ''}>${age}</option>`
+                ).join('')}
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Pronoun</label>
+            <select onchange="updateChild(${index}, 'gender', this.value)">
+              <option value="they" ${child.gender === 'they' ? 'selected' : ''}>They/Them</option>
+              <option value="he" ${child.gender === 'he' ? 'selected' : ''}>He/Him</option>
+              <option value="she" ${child.gender === 'she' ? 'selected' : ''}>She/Her</option>
+            </select>
+          </div>
+        `;
+        container.appendChild(div);
+      });
+
+      validateChildren();
+    }
+
+    function updateChild(index, field, value) {
+      state.setup.children[index][field] = field === 'age' ? parseInt(value) || null : value;
+      validateChildren();
+      saveState();
+    }
+
+    function addChild() {
+      state.setup.children.push({ name: '', age: null, gender: 'they' });
+      renderChildren();
+      saveState();
+    }
+
+    function removeChild(index) {
+      state.setup.children.splice(index, 1);
+      renderChildren();
+      saveState();
+    }
+
+    function validateChildren() {
+      const valid = state.setup.children.some(c => c.name && c.age);
+      document.getElementById('btnToCustody').disabled = !valid;
+    }
+
+    function goToCustody() {
+      showScreen('setupCustody');
+    }
+
+    // Custody selection
+    function selectCustody(button) {
+      document.querySelectorAll('#custodyOptions .option-chip').forEach(b => b.classList.remove('selected'));
+      button.classList.add('selected');
+      state.setup.custodyArrangement = button.dataset.value;
+      document.getElementById('btnToIntro').disabled = false;
+      saveState();
+    }
+
+    function goToIntro() {
+      // Set child name in intro
+      const firstChild = state.setup.children.find(c => c.name);
+      document.getElementById('introChildName').textContent = firstChild ? firstChild.name + "'s" : "your child's";
+      showScreen('introScreen');
+    }
+
+    function startPrompts() {
+      state.currentSection = 0;
+      state.currentPromptIndex = 0;
+      renderCurrentPrompt();
+      showScreen('questions');
+      gtag('event', 'alignment_prompts_start', { event_category: 'engagement' });
+    }
+
+    // ==========================================
+    // PROMPTS DATA
+    // ==========================================
+    const SECTIONS = [
+      {
+        id: 'section-1',
+        title: 'Your Vision',
+        prompts: [
+          {
+            id: 's1-p1',
+            text: 'When {childName} is 25 years old, what qualities do you most hope {pronoun} will have? Choose five.',
+            type: 'multi-select',
+            limit: 5,
+            exactLimit: true,
+            options: [
+              'Kindness', 'Resilience', 'Independence', 'Curiosity', 'Integrity / Honesty',
+              'Empathy', 'Self-discipline', 'Creativity', 'Confidence', 'Emotional intelligence',
+              'Courage', 'Gratitude', 'Responsibility', 'Adaptability', 'Sense of humor',
+              'Work ethic', 'Generosity', 'Critical thinking', 'Patience', 'Authenticity'
+            ]
+          },
+          {
+            id: 's1-p2a',
+            text: "What's one thing from your own upbringing that you want to carry forward with {childName}?",
+            type: 'text',
+            placeholder: 'Something positive you want to continue...'
+          },
+          {
+            id: 's1-p2b',
+            text: "What's one thing from your own upbringing that you're consciously trying to do differently?",
+            type: 'text',
+            placeholder: 'Something you want to change...'
+          },
+          {
+            id: 's1-p3',
+            text: "Is there a value or principle you consider non-negotiable in how {childName} is raised — something that must be consistent regardless of which home {pronoun}'s in?",
+            type: 'multi-text',
+            maxEntries: 3,
+            placeholder: 'A non-negotiable value or principle...'
+          }
+        ]
+      },
+      {
+        id: 'section-2',
+        title: 'Emotional Life',
+        prompts: [
+          {
+            id: 's2-p4',
+            text: "When {childName} is upset, anxious, or struggling emotionally, what's your instinct as a parent?",
+            type: 'single-select',
+            options: [
+              'I focus on listening and being present with their feelings before anything else',
+              'I acknowledge their feelings but try to help them find solutions',
+              'I give them space and time to process on their own',
+              'I try to offer perspective and help them see the bigger picture',
+              "It depends entirely on the situation — I read their cues and respond accordingly"
+            ]
+          },
+          {
+            id: 's2-p5',
+            text: "How do you handle it when {childName} expresses difficult emotions about the other household — missing {coParentName}, feeling upset about something that happened there, or not wanting to transition?",
+            type: 'single-select',
+            options: [
+              'I listen without judgment and validate their feelings',
+              'I try to help them see the positive side',
+              "I use it as an opportunity to talk through what's bothering them",
+              "I'm honestly not sure I handle it well — this is hard for me too",
+              "This doesn't come up often"
+            ]
+          },
+          {
+            id: 's2-p6a',
+            text: "How would you describe the way you talk about {coParentName} in your household?",
+            type: 'single-select',
+            options: [
+              'I consistently speak positively or neutrally about them',
+              'I try to keep it neutral but my frustration sometimes shows',
+              "I'm honest with {childName} about the challenges, which sometimes means being critical",
+              'I mostly avoid talking about them',
+              'I actively highlight their strengths as a parent to {childName}'
+            ]
+          },
+          {
+            id: 's2-p6b',
+            text: "How do you think {childName} would describe the way each household talks about the other parent?",
+            type: 'text',
+            placeholder: "Reflect on your child's perspective..."
+          },
+          {
+            id: 's2-p7a',
+            text: "How important is it to you that both households approach {childName}'s emotional life in a similar way?",
+            type: 'single-select',
+            options: [
+              'Very important — consistency helps them feel secure',
+              'Somewhat important — the core approach should be similar but differences are okay',
+              "Not very important — kids can adapt to different styles",
+              "I haven't thought about this much"
+            ]
+          },
+          {
+            id: 's2-p7b',
+            text: "Are there specific emotional situations where you think a consistent approach across homes is essential?",
+            type: 'text',
+            placeholder: 'Describe specific situations...'
+          }
+        ]
+      },
+      {
+        id: 'section-3',
+        title: 'Structure & Daily Life',
+        prompts: [
+          {
+            id: 's3-p8',
+            text: "Which description best captures your general approach to parenting?",
+            type: 'single-select',
+            options: [
+              'Structured — I believe clear routines and consistent boundaries help {childName} feel secure',
+              'Balanced — I have expectations but I\'m flexible depending on context',
+              'Relaxed — I trust {childName} to develop good habits with guidance rather than rigid rules',
+              'Responsive — I adjust my approach based on what {childName} seems to need in the moment'
+            ]
+          },
+          {
+            id: 's3-p9a',
+            text: "Across both households, which areas do you believe need the most consistency for {childName}? Select up to five.",
+            type: 'multi-select',
+            limit: 5,
+            options: [
+              'Bedtime and sleep routines',
+              'Screen time and device rules',
+              'Homework expectations and routines',
+              'Discipline approach and consequences',
+              'Mealtime and nutrition',
+              'Morning routines',
+              'Chores and responsibilities',
+              'Rules about friends and socializing',
+              'Physical activity expectations',
+              'Religious or spiritual practices',
+              'Language expectations (politeness, tone)'
+            ]
+          },
+          {
+            id: 's3-p9b',
+            text: "Which areas are you comfortable with each household handling in its own way?",
+            type: 'text',
+            placeholder: 'Areas where different approaches are okay...'
+          },
+          {
+            id: 's3-p10a',
+            text: "When {childName} breaks a rule or crosses a boundary, what's your typical approach?",
+            type: 'single-select',
+            options: [
+              'Clear, pre-established consequences that are applied consistently',
+              'A conversation about what happened and why, with consequences when appropriate',
+              'Natural consequences — I let the situation teach the lesson',
+              "It depends on the severity — small things I let go, bigger things get addressed",
+              "I'll be honest — I struggle with consistency in this area"
+            ]
+          },
+          {
+            id: 's3-p10b',
+            text: "When you and {coParentName} disagree about how to handle a discipline situation, what typically happens?",
+            type: 'single-select',
+            options: [
+              'We discuss it privately and find a compromise',
+              'One of us usually defers to the other',
+              'We each handle it our own way in our own home',
+              'It often becomes a source of conflict',
+              'We avoid these conversations'
+            ]
+          },
+          {
+            id: 's3-p11a',
+            text: "How do you approach screen time and technology in your household?",
+            type: 'single-select',
+            options: [
+              'Strict limits — specific amounts and types of content',
+              'Moderate boundaries — I set guidelines but flex when needed',
+              'Minimal restrictions — I trust {childName} to self-regulate with guidance',
+              "I'm still figuring out what works"
+            ]
+          },
+          {
+            id: 's3-p11b',
+            text: "Is this an area where you think both households need to be aligned, or is it okay for each home to have its own approach?",
+            type: 'single-select',
+            options: [
+              'Both homes should be aligned',
+              'General alignment is ideal but some flexibility is fine',
+              'Each home can have its own approach',
+              "I'm not sure"
+            ]
+          },
+          {
+            id: 's3-p12a',
+            text: "How would you describe the transitions when {childName} moves between homes?",
+            type: 'single-select',
+            options: [
+              'Generally smooth — {childName} adjusts well',
+              "Sometimes rocky — there's usually an adjustment period",
+              'Often difficult — there are tears, resistance, or behavioral shifts',
+              "It varies a lot and I can't predict it"
+            ]
+          },
+          {
+            id: 's3-p12b',
+            text: "What do you do to help {childName} during transitions?",
+            type: 'text',
+            placeholder: 'Describe what helps...'
+          },
+          {
+            id: 's3-p12c',
+            text: "Is there anything about the transition process you wish worked differently?",
+            type: 'text',
+            placeholder: 'What would you change...'
+          }
+        ]
+      },
+      {
+        id: 'section-4',
+        title: 'Education & Development',
+        prompts: [
+          {
+            id: 's4-p13',
+            text: "How would you describe your approach to {childName}'s education?",
+            type: 'single-select',
+            options: [
+              'Academic achievement is a high priority — strong habits and performance matter',
+              'Learning matters but I value balance with play, creativity, and social development',
+              'I focus on fostering intrinsic curiosity rather than external measures of success',
+              "I'm more focused on social-emotional development at this stage than academic performance",
+              "I follow {childName}'s lead and support what interests them"
+            ]
+          },
+          {
+            id: 's4-p14a',
+            text: "How are school-related decisions and responsibilities handled between you and {coParentName}?",
+            type: 'single-select',
+            options: [
+              "We're both actively involved and share decisions equally",
+              'One of us takes the lead and keeps the other informed',
+              'We tend to handle school stuff independently in our own homes',
+              "This is an area of tension — we don't agree on how involved each parent should be",
+              'I wish we had a clearer system for this'
+            ]
+          },
+          {
+            id: 's4-p14b',
+            text: "Who typically handles each of these school responsibilities?",
+            type: 'matrix',
+            rows: [
+              'Parent-teacher conferences',
+              'Homework help',
+              'School communication (emails, apps, forms)',
+              'Activity and event sign-ups',
+              'School events attendance'
+            ],
+            columns: ['Me', '{coParentName}', 'Both equally', 'Varies']
+          },
+          {
+            id: 's4-p15a',
+            text: "How do you approach {childName}'s activities outside of school?",
+            type: 'single-select',
+            options: [
+              'I think structured activities are important for development',
+              'I want them involved but not over-scheduled',
+              'I prioritize free time and unstructured play',
+              'I let {childName} decide what they want to do'
+            ]
+          },
+          {
+            id: 's4-p15b',
+            text: "How should decisions about new activities, commitments, or schedule changes be made between you and {coParentName}?",
+            type: 'text',
+            placeholder: 'Describe your ideal process...'
+          }
+        ]
+      },
+      {
+        id: 'section-5',
+        title: 'Health & Wellness',
+        prompts: [
+          {
+            id: 's5-p16',
+            text: "How do you approach {childName}'s physical health — nutrition, activity, sleep?",
+            type: 'single-select',
+            options: [
+              "I'm very intentional about healthy eating, regular activity, and consistent sleep",
+              "I aim for healthy habits but I'm flexible and don't stress about it",
+              'I focus on making health feel positive rather than restrictive',
+              "I'm working on building better habits in this area"
+            ]
+          },
+          {
+            id: 's5-p17a',
+            text: "When a health-related decision needs to be made for {childName}, what does your ideal process look like?",
+            type: 'single-select',
+            options: [
+              'Both parents discuss and decide together',
+              "The parent who's with {childName} at the time makes the call and informs the other",
+              'One parent takes the lead on medical decisions',
+              'It depends on how significant the decision is'
+            ]
+          },
+          {
+            id: 's5-p17b',
+            text: "Are there specific health topics where you feel both parents absolutely need to be involved in decision-making?",
+            type: 'text',
+            placeholder: 'List specific health areas...'
+          },
+          {
+            id: 's5-p18a',
+            text: "How do you think about {childName}'s mental health?",
+            type: 'single-select',
+            options: [
+              'I actively monitor it and would seek professional support without hesitation',
+              "I'm attentive to it but prefer to address things within the family first",
+              'I think kids are resilient and most things work themselves out',
+              "I'm not sure what to look for honestly"
+            ]
+          },
+          {
+            id: 's5-p18b',
+            text: "If {childName} were struggling emotionally or behaviorally, how would you want that handled between you and {coParentName}?",
+            type: 'text',
+            placeholder: 'Describe your ideal approach...'
+          }
+        ]
+      },
+      {
+        id: 'section-6',
+        title: 'Your Co-Parenting Partnership',
+        prompts: [
+          {
+            id: 's6-p19a',
+            text: "How would you rate the overall quality of communication between you and {coParentName} about parenting?",
+            type: 'single-select',
+            options: [
+              'Strong — we communicate openly and respectfully',
+              "Adequate — we cover what needs to be covered but it's not always easy",
+              'Strained — communication is difficult and often leads to tension',
+              'Minimal — we communicate as little as possible',
+              "Broken — we're not really communicating effectively at all"
+            ]
+          },
+          {
+            id: 's6-p19b',
+            text: "What would improve communication between you?",
+            type: 'multi-select',
+            limit: 7,
+            options: [
+              'A more structured way to discuss important topics',
+              'Less emotional reactivity from both of us',
+              'More regular check-ins about {childName}',
+              "Clearer boundaries about what's worth discussing vs. what each parent can handle alone",
+              'A neutral third party or tool to help us communicate',
+              "More acknowledgment from my co-parent that I'm doing my best",
+              "I'm not sure what would help"
+            ]
+          },
+          {
+            id: 's6-p20a',
+            text: "When an important parenting decision needs to be made, what happens?",
+            type: 'single-select',
+            options: [
+              'We discuss it together and try to reach agreement',
+              'One of us usually makes the decision and informs the other',
+              'We make decisions independently in our own households',
+              "It depends on the topic — some things we decide together, others we don't",
+              'Decisions often become power struggles'
+            ]
+          },
+          {
+            id: 's6-p20b',
+            text: "For which types of decisions do you believe both parents must be involved?",
+            type: 'multi-select',
+            limit: 10,
+            options: [
+              'Medical and health decisions',
+              'School and education choices',
+              'Extracurricular commitments',
+              'Discipline approach',
+              'Religious or spiritual upbringing',
+              'Introducing new partners to {childName}',
+              'Travel or vacation plans',
+              'Changes to the custody schedule',
+              'Financial decisions about {childName}',
+              'Conversations about the separation with {childName}'
+            ]
+          },
+          {
+            id: 's6-p21a',
+            text: "Do you feel that {coParentName} respects and supports your role as a parent?",
+            type: 'single-select',
+            options: [
+              'Yes, consistently',
+              'Most of the time',
+              'Sometimes, but I often feel undermined or questioned',
+              'Rarely',
+              "I'm not sure how they see me as a parent"
+            ]
+          },
+          {
+            id: 's6-p21b',
+            text: "What does feeling supported as a co-parent look like to you? What would make the biggest difference?",
+            type: 'text',
+            placeholder: 'Describe what support means to you...'
+          },
+          {
+            id: 's6-p22a',
+            text: "When you and {coParentName} disagree about something related to {childName}, what's the typical pattern?",
+            type: 'single-select',
+            options: [
+              'We talk it through and usually find a resolution',
+              'One of us gives in to avoid conflict',
+              'We avoid the topic and each do our own thing',
+              'It escalates quickly and becomes personal',
+              'We cycle through the same disagreements without resolution',
+              'We involve others (family, friends, professionals) to help'
+            ]
+          },
+          {
+            id: 's6-p22b',
+            text: "What's the one recurring disagreement you wish you could resolve?",
+            type: 'text',
+            placeholder: 'Describe the recurring issue...'
+          },
+          {
+            id: 's6-p23',
+            text: "To what extent do you think {childName} is aware of disagreements or tension between you and {coParentName}?",
+            type: 'single-select',
+            options: [
+              "They're largely shielded from it — we handle things privately",
+              "They probably sense some tension but aren't exposed to direct conflict",
+              "They're more aware than I'd like them to be",
+              "They've witnessed open conflict between us",
+              "I honestly don't know what they perceive"
+            ]
+          },
+          {
+            id: 's6-p24a',
+            text: "Do you feel that both parents are meaningfully and appropriately involved in {childName}'s life?",
+            type: 'single-select',
+            options: [
+              "Yes — we're both present, engaged, and valued by {childName}",
+              'I wish {coParentName} were more involved',
+              'I sometimes feel my involvement is limited or not supported',
+              'The involvement is uneven but we make it work',
+              'One of us is significantly more involved than the other'
+            ]
+          },
+          {
+            id: 's6-p24b',
+            text: "Is there anything about how parenting involvement is balanced that you'd like to change?",
+            type: 'text',
+            placeholder: 'What would you change...'
+          }
+        ]
+      },
+      {
+        id: 'section-7',
+        title: "{childName}'s Development",
+        prompts: [] // Will be populated based on age
+      },
+      {
+        id: 'section-8',
+        title: 'Looking Forward',
+        prompts: [
+          {
+            id: 's8-p33',
+            text: "Based on everything you've reflected on, what are three commitments you want to make as a parent and co-parent?",
+            type: 'multi-text',
+            maxEntries: 3,
+            required: 3,
+            placeholder: "Be specific — not 'be a better parent' but a concrete commitment...",
+            hint: "Be specific. Not 'be a better parent' but 'have a device-free dinner at least four nights a week' or 'never speak negatively about {coParentName} in front of {childName}.'"
+          },
+          {
+            id: 's8-p34',
+            text: "What's the one thing that would most improve your co-parenting partnership?",
+            type: 'text',
+            placeholder: 'The single biggest improvement...'
+          },
+          {
+            id: 's8-p35',
+            text: "What's one thing {coParentName} does well as a parent?",
+            type: 'text',
+            placeholder: 'Acknowledge a strength...'
+          },
+          {
+            id: 's8-p36',
+            text: "If you could share one thought with {coParentName} about your shared vision for {childName}, what would it be?",
+            type: 'text',
+            placeholder: 'A message for your co-parent...',
+            optional: true
+          }
+        ]
+      }
+    ];
+
+    // Developmental Assets prompts by age
+    const DEVELOPMENTAL_ASSETS = {
+      '3-5': {
+        intro: "Research by Search Institute has identified building blocks that help children grow up healthy, caring, and capable. Based on {childName}'s age, here are the areas that matter most right now.",
+        prompts: [
+          {
+            id: 's7-support',
+            text: "How well are these support needs being met for {childName}?",
+            type: 'matrix',
+            rows: [
+              '{childName} feels loved and supported in both homes',
+              'Open, warm, frequent communication happens with adults',
+              'Other caring adults are involved (grandparents, teachers, caregivers)',
+              '{childName} feels safe and secure in their environments'
+            ],
+            columns: ['Strong', 'Adequate', 'Needs attention', "I'm not sure"]
+          },
+          {
+            id: 's7-empowerment',
+            text: "Does {childName} feel valued and safe?",
+            type: 'matrix',
+            rows: [
+              "Adults in {childName}'s life value them and show it",
+              '{childName} feels physically and emotionally safe in both homes',
+              '{childName} has opportunities to help and contribute',
+              'The community and neighborhood feel safe'
+            ],
+            columns: ['Strong', 'Adequate', 'Needs attention', "I'm not sure"]
+          },
+          {
+            id: 's7-boundaries',
+            text: "Are the boundaries and expectations in {childName}'s life clear and consistent?",
+            type: 'matrix',
+            rows: [
+              'Family rules are fair and consistently applied',
+              'Adults model positive, responsible behavior',
+              'Clear expectations exist for behavior',
+              '{childName} understands right from wrong'
+            ],
+            columns: ['Strong', 'Adequate', 'Needs attention', "I'm not sure"]
+          },
+          {
+            id: 's7-time',
+            text: "Is {childName} engaged in a healthy mix of activities?",
+            type: 'matrix',
+            rows: [
+              'Creative activities (art, music, imaginative play)',
+              'Structured playtime and activities',
+              'Quality time at home with family',
+              'Time outdoors and active play'
+            ],
+            columns: ['Strong', 'Adequate', 'Needs attention', 'Not applicable']
+          }
+        ]
+      },
+      '5-9': {
+        intro: "Research by Search Institute has identified 40 building blocks that help children grow up healthy, caring, and capable. Based on {childName}'s age, here are the areas that matter most right now. This isn't about perfection — it's about seeing where things are strong and where attention might help.",
+        prompts: [
+          {
+            id: 's7-support',
+            text: "How well are these support needs being met for {childName}?",
+            type: 'matrix',
+            rows: [
+              'Family support: {childName} feels loved and supported in both homes',
+              'Positive family communication: open, respectful, frequent conversations',
+              'Other caring adults: meaningful relationships with adults beyond parents',
+              'A caring neighborhood or community: {childName} feels safe and known'
+            ],
+            columns: ['Strong', 'Adequate', 'Needs attention', "I'm not sure"]
+          },
+          {
+            id: 's7-empowerment',
+            text: "Does {childName} feel valued and safe?",
+            type: 'matrix',
+            rows: [
+              "Adults in {childName}'s life value them and their contributions",
+              '{childName} feels physically and emotionally safe in both homes',
+              '{childName} has opportunities to contribute and be useful to others',
+              'Community and school environments feel safe'
+            ],
+            columns: ['Strong', 'Adequate', 'Needs attention', "I'm not sure"]
+          },
+          {
+            id: 's7-boundaries',
+            text: "Are the boundaries and expectations in {childName}'s life clear and consistent?",
+            type: 'matrix',
+            rows: [
+              'Family boundaries: fair, clear rules with consistent follow-through',
+              'School boundaries: clear expectations and accountability',
+              'Adult role models: {childName} sees positive, responsible behavior modeled',
+              "Positive peer influence: {childName}'s close friends model healthy behavior",
+              'High expectations: adults encourage {childName} to do their best'
+            ],
+            columns: ['Strong', 'Adequate', 'Needs attention', "I'm not sure"]
+          },
+          {
+            id: 's7-time',
+            text: "Is {childName} engaged in a healthy mix of activities?",
+            type: 'matrix',
+            rows: [
+              'Creative activities: music, art, drama, or other creative outlets',
+              'Youth programs: sports, clubs, or organized activities',
+              'Religious or spiritual community (if applicable)',
+              'Quality time at home: positive, unstructured time with family'
+            ],
+            columns: ['Strong', 'Adequate', 'Needs attention', 'Not applicable']
+          },
+          {
+            id: 's7-learning',
+            text: "How is {childName}'s commitment to learning?",
+            type: 'matrix',
+            rows: [
+              'Motivation to learn and do well',
+              'Engaged and attentive in school',
+              'Completes homework and follows through on commitments',
+              'Enjoys reading or learning outside of school',
+              'Feels connected to school and the people there'
+            ],
+            columns: ['Strong', 'Adequate', 'Needs attention', "I'm not sure"]
+          },
+          {
+            id: 's7-values',
+            text: "How are {childName}'s positive values developing?",
+            type: 'matrix',
+            rows: [
+              'Caring: places value on helping others',
+              'Equality and fairness: believes in treating people justly',
+              'Integrity: acts on convictions, stands up for beliefs',
+              'Honesty: tells the truth even when it\'s not easy',
+              'Responsibility: accepts personal accountability'
+            ],
+            columns: ['Strong', 'Developing', 'Needs attention', 'Too young to assess']
+          },
+          {
+            id: 's7-social',
+            text: "How are {childName}'s social skills developing?",
+            type: 'matrix',
+            rows: [
+              'Planning and decision-making: knows how to plan ahead and make choices',
+              'Interpersonal skills: makes friends and handles social situations',
+              'Cultural competence: comfortable with people of different backgrounds',
+              'Resistance skills: can say no to negative peer pressure',
+              'Peaceful conflict resolution: handles disagreements without aggression'
+            ],
+            columns: ['Strong', 'Developing', 'Needs attention', 'Too young to assess']
+          },
+          {
+            id: 's7-identity',
+            text: "How is {childName}'s sense of identity developing?",
+            type: 'matrix',
+            rows: [
+              'Personal power: feels they have control over things that happen to them',
+              'Self-esteem: feels good about who they are',
+              'Sense of purpose: thinks about what life means and what they want to contribute',
+              'Positive view of the future: optimistic about their future'
+            ],
+            columns: ['Strong', 'Developing', 'Needs attention', "I'm not sure"]
+          }
+        ]
+      },
+      '8-12': {
+        intro: "Research by Search Institute has identified 40 building blocks that help children grow up healthy, caring, and capable. Based on {childName}'s age, here are the areas that matter most right now. This isn't about perfection — it's about seeing where things are strong and where attention might help.",
+        prompts: [] // Would be populated with age-appropriate prompts
+      },
+      '12-18': {
+        intro: "Research by Search Institute has identified 40 building blocks that help young people grow up healthy, caring, and capable. Based on {childName}'s age, here are the areas that matter most during adolescence. This isn't about perfection — it's about seeing where things are strong and where attention might help.",
+        prompts: [] // Would be populated with age-appropriate prompts
+      }
+    };
+
+    // Copy 5-9 prompts to 8-12 and 12-18 for now (these would be customized in full implementation)
+    DEVELOPMENTAL_ASSETS['8-12'].prompts = DEVELOPMENTAL_ASSETS['5-9'].prompts;
+    DEVELOPMENTAL_ASSETS['12-18'].prompts = DEVELOPMENTAL_ASSETS['5-9'].prompts;
+
+    // ==========================================
+    // PROMPT RENDERING
+    // ==========================================
+
+    function getAgeVariant(age) {
+      if (age >= 3 && age < 5) return '3-5';
+      if (age >= 5 && age < 8) return '5-9';
+      if (age >= 8 && age < 12) return '8-12';
+      if (age >= 12 && age <= 18) return '12-18';
+      return '5-9';
+    }
+
+    function getFirstChild() {
+      return state.setup.children.find(c => c.name && c.age) || { name: 'your child', age: 7, gender: 'they' };
+    }
+
+    function getChildrenInfo() {
+      const children = state.setup.children.filter(c => c.name && c.age);
+
+      if (children.length === 0) {
+        return { name: 'your child', pronoun: 'they', pronounObj: 'them', pronounPoss: 'their' };
+      }
+
+      if (children.length === 1) {
+        const child = children[0];
+        return {
+          name: child.name,
+          pronoun: child.gender === 'he' ? 'he' : child.gender === 'she' ? 'she' : 'they',
+          pronounObj: child.gender === 'he' ? 'him' : child.gender === 'she' ? 'her' : 'them',
+          pronounPoss: child.gender === 'he' ? 'his' : child.gender === 'she' ? 'her' : 'their'
+        };
+      }
+
+      // Multiple children
+      const genders = children.map(c => c.gender);
+      const allBoys = genders.every(g => g === 'he');
+      const allGirls = genders.every(g => g === 'she');
+
+      let name;
+      if (allBoys) {
+        name = 'the boys';
+      } else if (allGirls) {
+        name = 'the girls';
+      } else {
+        name = 'the kids';
+      }
+
+      return {
+        name,
+        pronoun: 'they',
+        pronounObj: 'them',
+        pronounPoss: 'their'
+      };
+    }
+
+    function replaceVariables(text) {
+      const info = getChildrenInfo();
+
+      return text
+        .replace(/{childName}/g, info.name)
+        .replace(/{coParentName}/g, state.setup.coParentName)
+        .replace(/{pronoun}/g, info.pronoun)
+        .replace(/{pronounObj}/g, info.pronounObj)
+        .replace(/{pronounPoss}/g, info.pronounPoss);
+    }
+
+    function getSection7Prompts() {
+      const child = getFirstChild();
+      const variant = getAgeVariant(child.age);
+      return DEVELOPMENTAL_ASSETS[variant].prompts;
+    }
+
+    function getAllPrompts() {
+      const allPrompts = [];
+      SECTIONS.forEach((section, sectionIndex) => {
+        let prompts = section.prompts;
+        if (sectionIndex === 6) { // Section 7 - Developmental Assets
+          prompts = getSection7Prompts();
+        }
+        prompts.forEach(prompt => {
+          allPrompts.push({ ...prompt, sectionIndex, sectionTitle: section.title });
+        });
+      });
+      return allPrompts;
+    }
+
+    function getTotalPromptCount() {
+      return getAllPrompts().length;
+    }
+
+    function getCurrentPromptNumber() {
+      let count = 0;
+      for (let i = 0; i < state.currentSection; i++) {
+        if (i === 6) {
+          count += getSection7Prompts().length;
+        } else {
+          count += SECTIONS[i].prompts.length;
+        }
+      }
+      return count + state.currentPromptIndex + 1;
+    }
+
+    function getCurrentPrompt() {
+      let prompts = SECTIONS[state.currentSection].prompts;
+      if (state.currentSection === 6) {
+        prompts = getSection7Prompts();
+      }
+      return prompts[state.currentPromptIndex];
+    }
+
+    function renderCurrentPrompt() {
+      const prompt = getCurrentPrompt();
+      if (!prompt) {
+        // Move to email capture
+        showScreen('emailCapture');
+        document.getElementById('emailCoParentName').textContent = state.setup.coParentName;
+        return;
+      }
+
+      const section = SECTIONS[state.currentSection];
+      const sectionTitle = replaceVariables(section.title);
+      document.getElementById('sectionLabel').textContent = `Section ${state.currentSection + 1}: ${sectionTitle}`;
+
+      const currentNum = getCurrentPromptNumber();
+      const totalNum = getTotalPromptCount();
+      document.getElementById('currentQ').textContent = currentNum;
+      document.getElementById('totalQ').textContent = totalNum;
+      document.getElementById('progressFill').style.width = `${(currentNum / totalNum) * 100}%`;
+
+      document.getElementById('questionText').textContent = replaceVariables(prompt.text);
+
+      const contentDiv = document.getElementById('questionContent');
+      contentDiv.innerHTML = '';
+
+      const buttonsDiv = document.getElementById('questionButtons');
+
+      switch (prompt.type) {
+        case 'single-select':
+          renderSingleSelect(contentDiv, prompt);
+          buttonsDiv.style.display = 'none';
+          break;
+        case 'multi-select':
+          renderMultiSelect(contentDiv, prompt);
+          buttonsDiv.style.display = 'flex';
+          break;
+        case 'text':
+          renderTextInput(contentDiv, prompt);
+          buttonsDiv.style.display = 'flex';
+          break;
+        case 'multi-text':
+          renderMultiText(contentDiv, prompt);
+          buttonsDiv.style.display = 'flex';
+          break;
+        case 'matrix':
+          renderMatrix(contentDiv, prompt);
+          buttonsDiv.style.display = 'flex';
+          break;
+      }
+
+      updateContinueButton();
+      updateNavProgress();
+    }
+
+    function renderSingleSelect(container, prompt) {
+      const div = document.createElement('div');
+      div.className = 'answers';
+
+      const currentValue = state.responses[prompt.id]?.value;
+
+      prompt.options.forEach(option => {
+        const btn = document.createElement('button');
+        btn.className = 'answer-btn' + (currentValue === option ? ' selected' : '');
+        btn.textContent = replaceVariables(option);
+        btn.onclick = () => selectSingleOption(prompt.id, option);
+        div.appendChild(btn);
+      });
+
+      container.appendChild(div);
+    }
+
+    function selectSingleOption(promptId, value) {
+      state.responses[promptId] = { type: 'single', value };
+      saveState();
+
+      // Auto-advance for single select
+      setTimeout(() => {
+        advanceToNextPrompt();
+      }, 200);
+    }
+
+    function renderMultiSelect(container, prompt) {
+      const info = document.createElement('p');
+      info.className = 'multi-select-info';
+      const limitText = prompt.exactLimit ? `Select exactly ${prompt.limit}` : `Select up to ${prompt.limit}`;
+      info.innerHTML = `${limitText} <span id="multiCount${prompt.id}">(0 selected)</span>`;
+      container.appendChild(info);
+
+      const grid = document.createElement('div');
+      grid.className = 'multi-select-grid';
+
+      const currentValues = state.responses[prompt.id]?.values || [];
+
+      prompt.options.forEach(option => {
+        const btn = document.createElement('button');
+        btn.className = 'multi-option' + (currentValues.includes(option) ? ' selected' : '');
+        btn.innerHTML = `
+          <span class="checkbox">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </span>
+          ${replaceVariables(option)}
+        `;
+        btn.onclick = () => toggleMultiOption(prompt.id, option, prompt.limit);
+        grid.appendChild(btn);
+      });
+
+      container.appendChild(grid);
+      updateMultiCount(prompt.id);
+    }
+
+    function toggleMultiOption(promptId, value, limit) {
+      if (!state.responses[promptId]) {
+        state.responses[promptId] = { type: 'multi', values: [] };
+      }
+
+      const values = state.responses[promptId].values;
+      const index = values.indexOf(value);
+
+      if (index > -1) {
+        values.splice(index, 1);
+      } else if (values.length < limit) {
+        values.push(value);
+      }
+
+      saveState();
+      renderCurrentPrompt();
+    }
+
+    function updateMultiCount(promptId) {
+      const count = state.responses[promptId]?.values?.length || 0;
+      const span = document.getElementById(`multiCount${promptId}`);
+      if (span) span.textContent = `(${count} selected)`;
+    }
+
+    function renderTextInput(container, prompt) {
+      const div = document.createElement('div');
+      div.className = 'text-input-group';
+
+      const textarea = document.createElement('textarea');
+      textarea.id = `text-${prompt.id}`;
+      textarea.placeholder = replaceVariables(prompt.placeholder || '');
+      textarea.value = state.responses[prompt.id]?.value || '';
+      textarea.oninput = (e) => {
+        state.responses[prompt.id] = { type: 'text', value: e.target.value };
+        saveState();
+        updateContinueButton();
+      };
+
+      div.appendChild(textarea);
+
+      if (prompt.hint) {
+        const hint = document.createElement('p');
+        hint.className = 'hint';
+        hint.textContent = replaceVariables(prompt.hint);
+        div.appendChild(hint);
+      }
+
+      container.appendChild(div);
+    }
+
+    function renderMultiText(container, prompt) {
+      const currentEntries = state.responses[prompt.id]?.values || [''];
+
+      if (prompt.hint) {
+        const hint = document.createElement('p');
+        hint.className = 'multi-select-info';
+        hint.textContent = replaceVariables(prompt.hint);
+        container.appendChild(hint);
+      }
+
+      currentEntries.forEach((entry, index) => {
+        const div = document.createElement('div');
+        div.className = 'text-input-group';
+        div.style.marginBottom = '16px';
+
+        const label = document.createElement('label');
+        label.textContent = `${index + 1}.`;
+        div.appendChild(label);
+
+        const textarea = document.createElement('textarea');
+        textarea.style.minHeight = '80px';
+        textarea.placeholder = replaceVariables(prompt.placeholder || '');
+        textarea.value = entry;
+        textarea.oninput = (e) => {
+          if (!state.responses[prompt.id]) {
+            state.responses[prompt.id] = { type: 'multi-text', values: [''] };
+          }
+          state.responses[prompt.id].values[index] = e.target.value;
+          saveState();
+          updateContinueButton();
+        };
+
+        div.appendChild(textarea);
+        container.appendChild(div);
+      });
+
+      if (currentEntries.length < (prompt.maxEntries || 3)) {
+        const addBtn = document.createElement('button');
+        addBtn.className = 'btn-add-child';
+        addBtn.style.marginTop = '8px';
+        addBtn.innerHTML = `
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          Add another
+        `;
+        addBtn.onclick = () => {
+          if (!state.responses[prompt.id]) {
+            state.responses[prompt.id] = { type: 'multi-text', values: [''] };
+          }
+          state.responses[prompt.id].values.push('');
+          saveState();
+          renderCurrentPrompt();
+        };
+        container.appendChild(addBtn);
+      }
+    }
+
+    function renderMatrix(container, prompt) {
+      const div = document.createElement('div');
+      div.className = 'matrix-container';
+
+      // Header
+      const header = document.createElement('div');
+      header.className = 'matrix-header';
+      header.innerHTML = '<span></span>' + prompt.columns.map(col =>
+        `<span>${replaceVariables(col)}</span>`
+      ).join('');
+      div.appendChild(header);
+
+      // Rows
+      const currentValues = state.responses[prompt.id]?.values || {};
+
+      prompt.rows.forEach((row, rowIndex) => {
+        const rowDiv = document.createElement('div');
+        rowDiv.className = 'matrix-row';
+
+        const label = document.createElement('div');
+        label.className = 'matrix-row-label';
+        label.textContent = replaceVariables(row);
+        rowDiv.appendChild(label);
+
+        prompt.columns.forEach((col, colIndex) => {
+          const optionDiv = document.createElement('div');
+          optionDiv.className = 'matrix-option';
+          optionDiv.setAttribute('data-label', replaceVariables(col));
+
+          const radio = document.createElement('input');
+          radio.type = 'radio';
+          radio.name = `matrix-${prompt.id}-${rowIndex}`;
+          radio.value = col;
+          radio.checked = currentValues[rowIndex] === col;
+          radio.onchange = () => {
+            if (!state.responses[prompt.id]) {
+              state.responses[prompt.id] = { type: 'matrix', values: {} };
+            }
+            state.responses[prompt.id].values[rowIndex] = col;
+            saveState();
+            updateContinueButton();
+          };
+
+          optionDiv.appendChild(radio);
+          rowDiv.appendChild(optionDiv);
+        });
+
+        div.appendChild(rowDiv);
+      });
+
+      container.appendChild(div);
+    }
+
+    function updateContinueButton() {
+      const prompt = getCurrentPrompt();
+      if (!prompt) return;
+
+      const btn = document.getElementById('btnQuestionNext');
+      let valid = false;
+
+      switch (prompt.type) {
+        case 'single-select':
+          valid = !!state.responses[prompt.id]?.value;
+          break;
+        case 'multi-select':
+          const count = state.responses[prompt.id]?.values?.length || 0;
+          if (prompt.exactLimit) {
+            valid = count === prompt.limit;
+          } else {
+            valid = count > 0;
+          }
+          break;
+        case 'text':
+          valid = prompt.optional || (state.responses[prompt.id]?.value?.trim().length > 0);
+          break;
+        case 'multi-text':
+          const entries = state.responses[prompt.id]?.values || [];
+          const filledCount = entries.filter(e => e.trim().length > 0).length;
+          valid = prompt.required ? filledCount >= prompt.required : filledCount > 0;
+          break;
+        case 'matrix':
+          const values = state.responses[prompt.id]?.values || {};
+          valid = Object.keys(values).length === prompt.rows.length;
+          break;
+      }
+
+      btn.disabled = !valid;
+    }
+
+    function advanceToNextPrompt() {
+      let prompts = SECTIONS[state.currentSection].prompts;
+      if (state.currentSection === 6) {
+        prompts = getSection7Prompts();
+      }
+
+      if (state.currentPromptIndex < prompts.length - 1) {
+        state.currentPromptIndex++;
+      } else if (state.currentSection < SECTIONS.length - 1) {
+        state.currentSection++;
+        state.currentPromptIndex = 0;
+      } else {
+        // Done with all prompts
+        showScreen('emailCapture');
+        document.getElementById('emailCoParentName').textContent = state.setup.coParentName;
+        gtag('event', 'alignment_complete', { event_category: 'engagement' });
+        return;
+      }
+
+      saveState();
+      renderCurrentPrompt();
+    }
+
+    function nextQuestion() {
+      advanceToNextPrompt();
+    }
+
+    function previousQuestion() {
+      if (state.currentPromptIndex > 0) {
+        state.currentPromptIndex--;
+      } else if (state.currentSection > 0) {
+        state.currentSection--;
+        let prompts = SECTIONS[state.currentSection].prompts;
+        if (state.currentSection === 6) {
+          prompts = getSection7Prompts();
+        }
+        state.currentPromptIndex = prompts.length - 1;
+      } else {
+        showScreen('introScreen');
+        return;
+      }
+
+      saveState();
+      renderCurrentPrompt();
+    }
+
+    // ==========================================
+    // EMAIL & RESULTS
+    // ==========================================
+
+    document.getElementById('emailForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('emailInput').value.trim();
+      const submitBtn = document.getElementById('emailSubmitBtn');
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      try {
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/alignment-signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            setup: state.setup,
+            responses: state.responses,
+            source: 'alignment-tool',
+            link_code: state.linkCode || undefined
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          state.email = email;
+          state.alignmentPlanCode = data.alignment_plan_code || generateAlignmentPlanCode();
+          state.viewToken = data.view_token;
+          state.isLinked = data.is_linked || false;
+          saveState();
+
+          gtag('event', 'alignment_email_capture', { event_category: 'conversion' });
+          window.dataLayer.push({ 'event': 'form_submit', 'form_name': 'alignment_signup' });
+        }
+      } catch (error) {
+        console.error('Email submission error:', error);
+      }
+
+      showResults();
+    });
+
+    function generateAlignmentPlanCode() {
+      return Math.random().toString(36).substring(2, 10).toUpperCase();
+    }
+
+    function showResults() {
+      if (!state.alignmentPlanCode) {
+        state.alignmentPlanCode = generateAlignmentPlanCode();
+        saveState();
+      }
+
+      const resultsDiv = document.getElementById('results');
+      const child = getFirstChild();
+
+      // Build results HTML
+      let html = `
+        <div class="result-header">
+          <span class="result-badge">Your Alignment Plan</span>
+          <h2>Co-Parenting Alignment Plan</h2>
+          <p>For ${state.setup.parentName} and ${state.setup.coParentName} | ${child.name}, age ${child.age}</p>
+        </div>
+
+        <!-- Part 1: Your Vision -->
+        <div class="result-section">
+          <h3>Part 1: Your Vision for ${child.name}</h3>
+
+          <div class="result-card">
+            <h4>Core Qualities You Hope to Nurture</h4>
+            <div class="qualities-grid">
+              ${(state.responses['s1-p1']?.values || []).map(q => `<span class="quality-tag">${q}</span>`).join('')}
+            </div>
+          </div>
+
+          ${state.responses['s1-p2a']?.value ? `
+          <div class="result-card">
+            <h4>From Your Own Upbringing — Carrying Forward</h4>
+            <p>${state.responses['s1-p2a'].value}</p>
+          </div>
+          ` : ''}
+
+          ${state.responses['s1-p2b']?.value ? `
+          <div class="result-card">
+            <h4>From Your Own Upbringing — Doing Differently</h4>
+            <p>${state.responses['s1-p2b'].value}</p>
+          </div>
+          ` : ''}
+
+          ${(state.responses['s1-p3']?.values?.filter(v => v.trim()).length > 0) ? `
+          <div class="result-card highlight">
+            <h4>Your Non-Negotiables</h4>
+            <ul style="margin: 0; padding-left: 20px; color: var(--text-secondary);">
+              ${state.responses['s1-p3'].values.filter(v => v.trim()).map(v => `<li>${v}</li>`).join('')}
+            </ul>
+          </div>
+          ` : ''}
+        </div>
+
+        <!-- Part 2: Developmental Snapshot -->
+        <div class="result-section">
+          <h3>Part 2: ${child.name}'s Developmental Snapshot</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 24px;">Based on the Search Institute's Developmental Assets framework for ages ${getAgeVariant(child.age)}.</p>
+          ${renderDevelopmentalResults()}
+        </div>
+
+        <!-- Part 3: Partnership Assessment -->
+        <div class="result-section">
+          <h3>Part 3: Your Co-Parenting Partnership</h3>
+
+          ${state.responses['s6-p19a']?.value ? `
+          <div class="result-card">
+            <h4>Communication Quality</h4>
+            <p>${state.responses['s6-p19a'].value}</p>
+          </div>
+          ` : ''}
+
+          ${(state.responses['s6-p19b']?.values?.length > 0) ? `
+          <div class="result-card">
+            <h4>What Would Help Communication</h4>
+            <ul style="margin: 0; padding-left: 20px; color: var(--text-secondary);">
+              ${state.responses['s6-p19b'].values.map(v => `<li>${v}</li>`).join('')}
+            </ul>
+          </div>
+          ` : ''}
+
+          ${(state.responses['s8-p33']?.values?.filter(v => v.trim()).length > 0) ? `
+          <div class="result-card highlight">
+            <h4>Your Commitments</h4>
+            <ol style="margin: 0; padding-left: 20px; color: var(--text-secondary);">
+              ${state.responses['s8-p33'].values.filter(v => v.trim()).map(v => `<li style="margin-bottom: 8px;">${v}</li>`).join('')}
+            </ol>
+          </div>
+          ` : ''}
+
+          ${state.responses['s8-p35']?.value ? `
+          <div class="result-card">
+            <h4>What ${state.setup.coParentName} Does Well</h4>
+            <p>${state.responses['s8-p35'].value}</p>
+          </div>
+          ` : ''}
+        </div>
+
+        <!-- Research Attribution -->
+        <div class="result-card" style="margin-top: 40px;">
+          <h4>Built on Research</h4>
+          <p style="margin-bottom: 12px;"><strong>Feinberg's Ecological Model of Coparenting</strong> identifies four dimensions that predict co-parenting quality and child outcomes. Your plan assesses alignment across all four.</p>
+          <p><strong>Search Institute's 40 Developmental Assets</strong> identify the building blocks children need to thrive. ${child.name}'s developmental snapshot is adapted for their age group based on this research.</p>
+        </div>
+
+        <!-- Invite Co-Parent -->
+        <div class="invite-section">
+          <div class="invite-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+          </div>
+          <h4>Invite ${state.setup.coParentName} to Complete Their Plan</h4>
+          <p>When both parents complete the alignment plan, you'll see where you naturally agree — and where a conversation might help.</p>
+          <div class="alignment-plan-code">${state.alignmentPlanCode}</div>
+          <p class="code-label">Your Alignment Plan Code</p>
+          <div class="share-buttons">
+            <button class="btn-share" onclick="shareWithCoParent()">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              Share with ${state.setup.coParentName}
+            </button>
+            <button class="btn-copy" onclick="copyAlignmentCode()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copy Code
+            </button>
+          </div>
+        </div>
+
+        <!-- Final CTA -->
+        <div class="final-cta">
+          <h3>This is what Clearly is built on</h3>
+          <p>The alignment you just explored? Clearly is designed to help you maintain it — every conversation, not just this assessment.</p>
+          <p>Topic-based discussions that move toward decisions. AI-assisted rewrites when emotions run high. Structure that keeps things focused on what matters — not who's right.</p>
+          <a href="/" class="btn-primary">
+            See how Clearly works
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#" class="btn-text" data-access-modal style="display: block; margin-top: 16px; color: var(--text-secondary); font-size: 14px;">Request early access</a>
+        </div>
+      `;
+
+      resultsDiv.innerHTML = html;
+      showScreen('results');
+      gtag('event', 'alignment_results', { event_category: 'engagement' });
+    }
+
+    function renderDevelopmentalResults() {
+      const assets = getSection7Prompts();
+      let html = '';
+
+      assets.forEach(asset => {
+        const values = state.responses[asset.id]?.values || {};
+        if (Object.keys(values).length === 0) return;
+
+        html += `<div class="asset-category">`;
+        html += `<h5>${replaceVariables(asset.text.replace('?', ''))}</h5>`;
+        html += `<div class="asset-items">`;
+
+        asset.rows.forEach((row, index) => {
+          const status = values[index];
+          if (!status) return;
+
+          let statusClass = 'adequate';
+          if (status === 'Strong') statusClass = 'strong';
+          else if (status === 'Needs attention') statusClass = 'needs-attention';
+
+          html += `
+            <div class="asset-item">
+              <span class="asset-status ${statusClass}"></span>
+              <span>${replaceVariables(row)}</span>
+            </div>
+          `;
+        });
+
+        html += `</div></div>`;
+      });
+
+      return html || '<p style="color: var(--text-muted);">Complete Section 7 to see your developmental snapshot.</p>';
+    }
+
+    function copyAlignmentCode() {
+      navigator.clipboard.writeText(state.alignmentPlanCode);
+      const btn = event.target.closest('.btn-copy');
+      const originalText = btn.innerHTML;
+      btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+      }, 2000);
+    }
+
+    async function shareWithCoParent() {
+      const coParentName = state.setup.coParentName || 'your co-parent';
+      const code = state.alignmentPlanCode;
+      const shareUrl = 'https://getclearly.app/alignment/';
+
+      const shareText = `I just completed my Co-Parenting Alignment Plan on Clearly. I'd love for you to complete yours so we can see where we align.
+
+Your alignment plan code: ${code}
+
+Go to ${shareUrl} and enter the code when you start.`;
+
+      // Try native share API first (mobile)
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: 'Co-Parenting Alignment Plan',
+            text: shareText,
+          });
+          gtag('event', 'alignment_share', { method: 'native' });
+          return;
+        } catch (err) {
+          // User cancelled or share failed, fall through to clipboard
+          if (err.name === 'AbortError') return;
+        }
+      }
+
+      // Fallback: copy to clipboard with a more helpful message
+      try {
+        await navigator.clipboard.writeText(shareText);
+        const btn = event.target.closest('.btn-share');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Message Copied!';
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+        }, 3000);
+        gtag('event', 'alignment_share', { method: 'clipboard' });
+      } catch (err) {
+        console.error('Share failed:', err);
+      }
+    }
+
+    // ==========================================
+    // INITIALIZATION
+    // ==========================================
+
+    loadState();
+
+    // If there's saved state, could offer to resume
+    // For now, always start fresh on landing
+    if (state.currentScreen === 'landing') {
+      // Fresh start
+    }
+
+    // Initialize first child if needed
+    if (state.setup.children.length === 0) {
+      state.setup.children = [{ name: '', age: null, gender: 'they' }];
+    }
+  </script>
+</body>
+</html>
