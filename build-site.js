@@ -16,7 +16,8 @@ const PAGES = [
   'alignment/view/index.html',
   'alignment/compare/index.html',
   'co-parent-communication/index.html',
-  'custody-schedule-help/index.html'
+  'custody-schedule-help/index.html',
+  'coparenting-alignment-guide/index.html'
   // Note: Calculator pages excluded - they have their own isolated nav
 ];
 

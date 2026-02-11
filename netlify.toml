@@ -60,6 +60,11 @@
   to = "/alignment/compare/"
   status = 301
 
+[[redirects]]
+  from = "/coparenting-alignment-guide"
+  to = "/coparenting-alignment-guide/"
+  status = 301
+
 # Redirect pretty URLs to .html versions for pages served as files
 [[redirects]]
   from = "/blog"
