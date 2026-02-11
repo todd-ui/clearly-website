@@ -6,19 +6,26 @@
   <title>Co-Parenting Alignment Comparison | Clearly</title>
   <meta name="robots" content="noindex, nofollow">
   <link rel="stylesheet" href="/styles.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
   <style>
     :root {
       --primary: #0D8268;
       --primary-dark: #0a6b56;
+      --primary-soft: #E6F5F1;
       --text: #1A1917;
       --text-secondary: #5C5856;
+      --text-muted: #9A9896;
       --bg: #FAFAF9;
       --border: #E8E6E4;
       --aligned: #10b981;
+      --aligned-bg: #d1fae5;
       --close: #f59e0b;
+      --close-bg: #fef3c7;
       --divergent: #ef4444;
+      --divergent-bg: #fee2e2;
     }
+
+    * { box-sizing: border-box; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -30,52 +37,145 @@
     }
 
     .container {
-      max-width: 900px;
+      max-width: 800px;
       margin: 0 auto;
       padding: 40px 20px 80px;
     }
 
-    .loading, .error {
+    .loading, .error, .waiting {
       text-align: center;
       padding: 80px 20px;
     }
 
-    .error { color: #dc2626; }
+    .error h2 { color: var(--divergent); }
+    .waiting h2 { color: var(--primary); }
 
+    /* Header */
     .header {
       text-align: center;
-      margin-bottom: 48px;
+      margin-bottom: 40px;
+    }
+
+    .header-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 600;
+      border-radius: 20px;
+      margin-bottom: 16px;
     }
 
     .header h1 {
-      font-size: 32px;
+      font-size: 28px;
       font-weight: 600;
-      margin-bottom: 8px;
+      margin: 0 0 8px;
     }
 
     .header .subtitle {
       color: var(--text-secondary);
-      font-size: 18px;
+      font-size: 16px;
+      margin: 0;
     }
 
-    .summary {
+    /* Overall Score */
+    .score-section {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .score-circle {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 24px;
+    }
+
+    .score-circle svg {
+      transform: rotate(-90deg);
+    }
+
+    .score-circle .bg {
+      fill: none;
+      stroke: var(--border);
+      stroke-width: 12;
+    }
+
+    .score-circle .progress {
+      fill: none;
+      stroke: var(--primary);
+      stroke-width: 12;
+      stroke-linecap: round;
+      transition: stroke-dashoffset 1s ease-out;
+    }
+
+    .score-value {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .score-value .number {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+    }
+
+    .score-value .label {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .score-description {
+      font-size: 16px;
+      color: var(--text-secondary);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    /* Summary Cards */
+    .summary-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 48px;
+      gap: 12px;
+      margin-bottom: 32px;
     }
 
     .summary-card {
       background: white;
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 24px;
+      padding: 20px;
       text-align: center;
     }
 
+    .summary-card .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+    }
+
+    .summary-card.aligned .icon { background: var(--aligned-bg); color: var(--aligned); }
+    .summary-card.close .icon { background: var(--close-bg); color: var(--close); }
+    .summary-card.divergent .icon { background: var(--divergent-bg); color: var(--divergent); }
+
     .summary-card .count {
-      font-size: 36px;
+      font-size: 28px;
       font-weight: 700;
+      line-height: 1;
       margin-bottom: 4px;
     }
 
@@ -84,115 +184,194 @@
     .summary-card.divergent .count { color: var(--divergent); }
 
     .summary-card .label {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-secondary);
     }
 
-    .section {
+    /* Section Breakdown */
+    .breakdown-section {
       background: white;
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .breakdown-section h3 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .breakdown-section h3 svg {
+      color: var(--primary);
+    }
+
+    .breakdown-item {
+      margin-bottom: 16px;
+    }
+
+    .breakdown-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .breakdown-item .row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .breakdown-item .name {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .breakdown-item .percent {
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .breakdown-bar {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .breakdown-bar .fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.8s ease-out;
+    }
+
+    .breakdown-bar .fill.high { background: var(--aligned); }
+    .breakdown-bar .fill.medium { background: var(--close); }
+    .breakdown-bar .fill.low { background: var(--divergent); }
+
+    /* Detail Sections */
+    .detail-section {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
       margin-bottom: 24px;
       overflow: hidden;
     }
 
-    .section-header {
+    .detail-header {
       padding: 16px 24px;
       background: var(--bg);
       border-bottom: 1px solid var(--border);
       display: flex;
       align-items: center;
-      gap: 12px;
+      justify-content: space-between;
+      cursor: pointer;
     }
 
-    .section-header h2 {
-      font-size: 16px;
+    .detail-header h3 {
+      font-size: 15px;
       font-weight: 600;
       margin: 0;
-      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .status-badge {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
-      padding: 4px 12px;
-      border-radius: 20px;
+      padding: 4px 10px;
+      border-radius: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.03em;
     }
 
-    .status-badge.aligned {
-      background: #d1fae5;
-      color: var(--aligned);
+    .status-badge.aligned { background: var(--aligned-bg); color: var(--aligned); }
+    .status-badge.close { background: var(--close-bg); color: var(--close); }
+    .status-badge.divergent { background: var(--divergent-bg); color: var(--divergent); }
+
+    .detail-content {
+      display: none;
     }
 
-    .status-badge.close {
-      background: #fef3c7;
-      color: var(--close);
+    .detail-content.open {
+      display: block;
     }
 
-    .status-badge.divergent {
-      background: #fee2e2;
-      color: var(--divergent);
-    }
-
-    .comparison-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+    .comparison-item {
       border-bottom: 1px solid var(--border);
     }
 
-    .comparison-row:last-child {
+    .comparison-item:last-child {
       border-bottom: none;
     }
 
-    .comparison-cell {
-      padding: 20px 24px;
+    .comparison-question {
+      padding: 12px 24px;
+      background: #fafafa;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
     }
 
-    .comparison-cell:first-child {
+    .comparison-answers {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .comparison-answer {
+      padding: 16px 24px;
+    }
+
+    .comparison-answer:first-child {
       border-right: 1px solid var(--border);
     }
 
-    .comparison-cell .parent-label {
-      font-size: 12px;
+    .comparison-answer .parent-name {
+      font-size: 11px;
       font-weight: 600;
       color: var(--primary);
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
-    .comparison-cell .response {
+    .comparison-answer .response {
+      font-size: 14px;
       color: var(--text-secondary);
     }
 
-    .question-header {
-      padding: 16px 24px;
-      background: #f8f8f7;
-      border-bottom: 1px solid var(--border);
-      font-weight: 500;
-    }
-
+    /* CTA Section */
     .cta-section {
       text-align: center;
       margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
+      padding: 32px;
+      background: var(--primary-soft);
+      border-radius: 16px;
+    }
+
+    .cta-section h3 {
+      font-size: 20px;
+      margin: 0 0 8px;
     }
 
     .cta-section p {
       color: var(--text-secondary);
-      margin-bottom: 16px;
+      margin: 0 0 20px;
     }
 
     .btn-primary {
-      display: inline-block;
-      padding: 16px 32px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: white;
       text-decoration: none;
-      font-size: 16px;
+      font-size: 15px;
       font-weight: 600;
       border-radius: 10px;
       border: none;
@@ -203,7 +382,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 12px 24px;
+      padding: 12px 20px;
       background: white;
       color: var(--primary);
       text-decoration: none;
@@ -212,34 +391,17 @@
       border-radius: 8px;
       border: 2px solid var(--primary);
       cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .btn-secondary:hover {
-      background: var(--primary);
-      color: white;
-    }
-
-    .btn-secondary svg {
-      width: 18px;
-      height: 18px;
-    }
-
-    .header-actions {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      margin-top: 24px;
+      margin-left: 12px;
     }
 
     @media (max-width: 600px) {
-      .summary {
+      .summary-row {
         grid-template-columns: 1fr;
       }
-      .comparison-row {
+      .comparison-answers {
         grid-template-columns: 1fr;
       }
-      .comparison-cell:first-child {
+      .comparison-answer:first-child {
         border-right: none;
         border-bottom: 1px solid var(--border);
       }
@@ -249,53 +411,105 @@
 <body>
   <div class="container">
     <div id="loading" class="loading">
-      <p>Loading your comparison...</p>
+      <p>Loading your alignment...</p>
+    </div>
+
+    <div id="waiting" class="waiting" style="display: none;">
+      <h2>Waiting for Your Co-Parent</h2>
+      <p id="waitingMessage">Once they complete their alignment plan, you'll see how your views compare.</p>
+      <a href="/alignment/" class="btn-primary" style="margin-top: 20px;">Back to Alignment Tool</a>
     </div>
 
     <div id="error" class="error" style="display: none;">
-      <h2>Comparison Not Available</h2>
+      <h2>Oops!</h2>
       <p id="errorMessage"></p>
-      <a href="/alignment/" class="btn-primary">Create Your Own Plan</a>
+      <a href="/alignment/" class="btn-primary" style="margin-top: 20px;">Create Your Alignment Plan</a>
     </div>
 
     <div id="content" style="display: none;">
+      <!-- Header -->
       <div class="header">
-        <h1>Your Co-Parenting Alignment</h1>
+        <span class="header-badge">Your Alignment Results</span>
+        <h1>Co-Parenting Alignment</h1>
         <p class="subtitle"><span id="parent1Name"></span> & <span id="parent2Name"></span></p>
-        <div class="header-actions">
-          <button class="btn-secondary" onclick="downloadPDF()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download Comparison PDF
-          </button>
-        </div>
       </div>
 
-      <div class="summary">
+      <!-- Overall Score -->
+      <div class="score-section">
+        <div class="score-circle">
+          <svg width="180" height="180" viewBox="0 0 180 180">
+            <circle class="bg" cx="90" cy="90" r="78"/>
+            <circle class="progress" id="scoreProgress" cx="90" cy="90" r="78"
+              stroke-dasharray="490" stroke-dashoffset="490"/>
+          </svg>
+          <div class="score-value">
+            <div class="number" id="scoreNumber">0</div>
+            <div class="label">aligned</div>
+          </div>
+        </div>
+        <p class="score-description" id="scoreDescription">Calculating your alignment...</p>
+      </div>
+
+      <!-- Summary Cards -->
+      <div class="summary-row">
         <div class="summary-card aligned">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
           <div class="count" id="alignedCount">0</div>
           <div class="label">Aligned</div>
         </div>
         <div class="summary-card close">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
           <div class="count" id="closeCount">0</div>
           <div class="label">Close</div>
         </div>
         <div class="summary-card divergent">
+          <div class="icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+          </div>
           <div class="count" id="divergentCount">0</div>
           <div class="label">Worth Discussing</div>
         </div>
       </div>
 
-      <div id="comparisonsContainer"></div>
+      <!-- Section Breakdown -->
+      <div class="breakdown-section">
+        <h3>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M18 17V9"/><path d="M13 17V5"/><path d="M8 17v-3"/></svg>
+          Alignment by Category
+        </h3>
+        <div id="breakdownContainer"></div>
+      </div>
 
+      <!-- Detail Sections -->
+      <div id="detailsContainer"></div>
+
+      <!-- CTA -->
       <div class="cta-section">
-        <p>Ready to put your alignment into practice?</p>
-        <a href="/" class="btn-primary">Explore Clearly</a>
+        <h3>Put Your Alignment Into Practice</h3>
+        <p>Clearly helps you maintain this alignment in every conversation.</p>
+        <a href="/" class="btn-primary">
+          Learn About Clearly
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
       </div>
     </div>
   </div>
 
   <script>
     const SUPABASE_URL = 'https://dwncravjhkbclbuzijra.supabase.co';
+
+    const SECTIONS = {
+      'vision': { name: 'Your Vision', keys: ['s1-p1', 's1-p2a', 's1-p2b', 's1-p3'] },
+      'emotional': { name: 'Emotional Life', keys: ['s2-p4', 's2-p5', 's2-p6a', 's2-p6b', 's2-p7a'] },
+      'structure': { name: 'Structure & Daily Life', keys: ['s3-p8', 's3-p9a', 's3-p10a', 's3-p10b', 's3-p11a', 's3-p11b', 's3-p12a', 's3-p12b'] },
+      'education': { name: 'Education & Development', keys: ['s4-p13', 's4-p14a', 's4-p14b', 's4-p15a', 's4-p15b'] },
+      'health': { name: 'Health & Wellness', keys: ['s5-p16', 's5-p17a', 's5-p18a'] },
+      'partnership': { name: 'Co-Parenting Partnership', keys: ['s6-p19a', 's6-p19b', 's6-p20a', 's6-p20b', 's6-p21a', 's6-p22a', 's6-p23', 's6-p24a'] }
+    };
 
     const QUESTION_LABELS = {
       's1-p1': 'Core qualities you hope for',
@@ -305,33 +519,35 @@
       's2-p4': 'When child is upset',
       's2-p5': 'Difficult emotions about other home',
       's2-p6a': 'How you talk about co-parent',
+      's2-p6b': "Child's perspective",
       's2-p7a': 'Emotional consistency importance',
       's3-p8': 'Parenting style',
       's3-p9a': 'Where consistency matters',
       's3-p10a': 'Discipline approach',
+      's3-p10b': 'Discipline disagreements',
       's3-p11a': 'Screen time approach',
+      's3-p11b': 'Screen time alignment',
       's3-p12a': 'Transition handling',
+      's3-p12b': 'What helps transitions',
       's4-p13': 'Academic philosophy',
       's4-p14a': 'Educational involvement',
+      's4-p14b': 'School responsibilities',
       's4-p15a': 'Extracurricular philosophy',
+      's4-p15b': 'Activity decisions',
       's5-p16': 'Physical health approach',
       's5-p17a': 'Medical decisions',
       's5-p18a': 'Mental health approach',
       's6-p19a': 'Communication quality',
+      's6-p19b': 'What would help communication',
       's6-p20a': 'Decision-making process',
+      's6-p20b': 'Decisions requiring both parents',
       's6-p21a': 'Feeling supported',
       's6-p22a': 'Conflict patterns',
       's6-p23': 'Exposure to conflict',
-      's6-p24a': 'Balance of involvement',
-      's7-support': 'Support needs',
-      's7-empowerment': 'Empowerment needs',
-      's7-boundaries': 'Boundaries & expectations',
-      's7-time': 'Constructive time use',
-      's8-p33': 'Commitments',
-      's8-p34': 'What would improve partnership',
-      's8-p35': 'Co-parent strengths',
-      's8-p36': 'Message for co-parent'
+      's6-p24a': 'Balance of involvement'
     };
+
+    let comparisonData = null;
 
     async function loadComparison() {
       const params = new URLSearchParams(window.location.search);
@@ -347,10 +563,15 @@
         const data = await response.json();
 
         if (!response.ok) {
-          showError(data.error || 'Failed to load comparison');
+          if (data.code === 'not_paired') {
+            showWaiting();
+          } else {
+            showError(data.error || 'Failed to load comparison');
+          }
           return;
         }
 
+        comparisonData = data;
         displayComparison(data);
       } catch (error) {
         console.error('Error loading comparison:', error);
@@ -364,8 +585,12 @@
       document.getElementById('error').style.display = 'block';
     }
 
+    function showWaiting() {
+      document.getElementById('loading').style.display = 'none';
+      document.getElementById('waiting').style.display = 'block';
+    }
+
     function displayComparison(data) {
-      comparisonData = data;
       document.getElementById('loading').style.display = 'none';
       document.getElementById('content').style.display = 'block';
 
@@ -374,232 +599,192 @@
       document.getElementById('parent1Name').textContent = plan1.parent_name || 'Parent 1';
       document.getElementById('parent2Name').textContent = plan2.parent_name || 'Parent 2';
 
+      // Calculate overall score
+      const total = comparison.aligned.length + comparison.close.length + comparison.divergent.length;
+      const alignedScore = total > 0
+        ? Math.round(((comparison.aligned.length + comparison.close.length * 0.5) / total) * 100)
+        : 0;
+
+      // Animate score
+      animateScore(alignedScore);
+
+      // Update summary cards
       document.getElementById('alignedCount').textContent = comparison.aligned.length;
       document.getElementById('closeCount').textContent = comparison.close.length;
       document.getElementById('divergentCount').textContent = comparison.divergent.length;
 
-      const container = document.getElementById('comparisonsContainer');
+      // Score description
+      const descriptions = {
+        high: "You're strongly aligned on most parenting topics. Keep building on this foundation!",
+        medium: "You share common ground on many topics, with some areas worth discussing together.",
+        low: "You have different perspectives on several topics. This is an opportunity for important conversations."
+      };
+      const level = alignedScore >= 70 ? 'high' : alignedScore >= 40 ? 'medium' : 'low';
+      document.getElementById('scoreDescription').textContent = descriptions[level];
 
-      // Show aligned items
-      if (comparison.aligned.length > 0) {
-        container.appendChild(createSection('Aligned', 'aligned', comparison.aligned, plan1, plan2));
+      // Section breakdown
+      renderBreakdown(comparison, plan1, plan2);
+
+      // Detail sections
+      renderDetails(comparison, plan1, plan2);
+    }
+
+    function animateScore(targetScore) {
+      const circumference = 2 * Math.PI * 78;
+      const progress = document.getElementById('scoreProgress');
+      const number = document.getElementById('scoreNumber');
+
+      progress.style.strokeDasharray = circumference;
+
+      let current = 0;
+      const duration = 1500;
+      const startTime = performance.now();
+
+      function animate(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress_pct = Math.min(elapsed / duration, 1);
+
+        current = Math.round(progress_pct * targetScore);
+        number.textContent = current + '%';
+
+        const offset = circumference - (progress_pct * targetScore / 100 * circumference);
+        document.getElementById('scoreProgress').style.strokeDashoffset = offset;
+
+        if (progress_pct < 1) {
+          requestAnimationFrame(animate);
+        }
       }
 
-      // Show close items
-      if (comparison.close.length > 0) {
-        container.appendChild(createSection('Close', 'close', comparison.close, plan1, plan2));
-      }
+      requestAnimationFrame(animate);
+    }
 
-      // Show divergent items
-      if (comparison.divergent.length > 0) {
-        container.appendChild(createSection('Worth Discussing', 'divergent', comparison.divergent, plan1, plan2));
+    function renderBreakdown(comparison, plan1, plan2) {
+      const container = document.getElementById('breakdownContainer');
+      container.innerHTML = '';
+
+      for (const [sectionId, section] of Object.entries(SECTIONS)) {
+        const sectionKeys = section.keys;
+        const aligned = sectionKeys.filter(k => comparison.aligned.includes(k)).length;
+        const close = sectionKeys.filter(k => comparison.close.includes(k)).length;
+        const divergent = sectionKeys.filter(k => comparison.divergent.includes(k)).length;
+        const total = aligned + close + divergent;
+
+        if (total === 0) continue;
+
+        const percent = Math.round(((aligned + close * 0.5) / total) * 100);
+        const level = percent >= 70 ? 'high' : percent >= 40 ? 'medium' : 'low';
+
+        const item = document.createElement('div');
+        item.className = 'breakdown-item';
+        item.innerHTML = `
+          <div class="row">
+            <span class="name">${section.name}</span>
+            <span class="percent" style="color: var(--${level === 'high' ? 'aligned' : level === 'medium' ? 'close' : 'divergent'})">${percent}%</span>
+          </div>
+          <div class="breakdown-bar">
+            <div class="fill ${level}" style="width: ${percent}%"></div>
+          </div>
+        `;
+        container.appendChild(item);
       }
     }
 
-    function createSection(title, status, keys, plan1, plan2) {
-      const section = document.createElement('div');
-      section.className = 'section';
+    function renderDetails(comparison, plan1, plan2) {
+      const container = document.getElementById('detailsContainer');
+      container.innerHTML = '';
 
-      section.innerHTML = `
-        <div class="section-header">
-          <h2>${title}</h2>
-          <span class="status-badge ${status}">${keys.length} areas</span>
-        </div>
+      // Divergent first (most important)
+      if (comparison.divergent.length > 0) {
+        container.appendChild(createDetailSection('Worth Discussing', 'divergent', comparison.divergent, plan1, plan2, true));
+      }
+
+      // Then close
+      if (comparison.close.length > 0) {
+        container.appendChild(createDetailSection('Close', 'close', comparison.close, plan1, plan2, false));
+      }
+
+      // Then aligned
+      if (comparison.aligned.length > 0) {
+        container.appendChild(createDetailSection('Aligned', 'aligned', comparison.aligned, plan1, plan2, false));
+      }
+    }
+
+    function createDetailSection(title, status, keys, plan1, plan2, openByDefault) {
+      const section = document.createElement('div');
+      section.className = 'detail-section';
+
+      const header = document.createElement('div');
+      header.className = 'detail-header';
+      header.innerHTML = `
+        <h3>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          ${title}
+        </h3>
+        <span class="status-badge ${status}">${keys.length} ${keys.length === 1 ? 'area' : 'areas'}</span>
       `;
+
+      const content = document.createElement('div');
+      content.className = 'detail-content' + (openByDefault ? ' open' : '');
+
+      header.onclick = () => {
+        content.classList.toggle('open');
+        const arrow = header.querySelector('svg');
+        arrow.style.transform = content.classList.contains('open') ? 'rotate(180deg)' : '';
+      };
+
+      if (openByDefault) {
+        header.querySelector('svg').style.transform = 'rotate(180deg)';
+      }
 
       for (const key of keys) {
         const label = QUESTION_LABELS[key] || key;
-        const val1 = plan1.responses[key];
-        const val2 = plan2.responses[key];
+        const r1 = plan1.responses[key];
+        const r2 = plan2.responses[key];
 
-        const questionHeader = document.createElement('div');
-        questionHeader.className = 'question-header';
-        questionHeader.textContent = label;
-        section.appendChild(questionHeader);
-
-        const row = document.createElement('div');
-        row.className = 'comparison-row';
-        row.innerHTML = `
-          <div class="comparison-cell">
-            <div class="parent-label">${plan1.parent_name || 'Parent 1'}</div>
-            <div class="response">${formatValue(val1)}</div>
-          </div>
-          <div class="comparison-cell">
-            <div class="parent-label">${plan2.parent_name || 'Parent 2'}</div>
-            <div class="response">${formatValue(val2)}</div>
+        const item = document.createElement('div');
+        item.className = 'comparison-item';
+        item.innerHTML = `
+          <div class="comparison-question">${label}</div>
+          <div class="comparison-answers">
+            <div class="comparison-answer">
+              <div class="parent-name">${plan1.parent_name || 'Parent 1'}</div>
+              <div class="response">${formatResponse(r1)}</div>
+            </div>
+            <div class="comparison-answer">
+              <div class="parent-name">${plan2.parent_name || 'Parent 2'}</div>
+              <div class="response">${formatResponse(r2)}</div>
+            </div>
           </div>
         `;
-        section.appendChild(row);
+        content.appendChild(item);
       }
 
+      section.appendChild(header);
+      section.appendChild(content);
       return section;
     }
 
-    function formatValue(value) {
-      if (value === undefined || value === null) return '<em>No response</em>';
-      if (Array.isArray(value)) return value.join(', ');
+    function formatResponse(value) {
+      if (value === undefined || value === null) return '<em style="color: var(--text-muted);">No response</em>';
+
+      // Handle response objects with type/value structure
+      if (typeof value === 'object' && value.value !== undefined) {
+        return formatResponse(value.value);
+      }
+      if (typeof value === 'object' && value.values !== undefined) {
+        return formatResponse(value.values);
+      }
+
+      if (Array.isArray(value)) {
+        if (value.length === 0) return '<em style="color: var(--text-muted);">No response</em>';
+        return value.filter(v => v).join(', ');
+      }
       if (typeof value === 'object') {
-        return Object.entries(value).map(([k, v]) => `${k}: ${v}`).join('<br>');
+        const entries = Object.entries(value).filter(([k, v]) => v);
+        if (entries.length === 0) return '<em style="color: var(--text-muted);">No response</em>';
+        return entries.map(([k, v]) => v).join(', ');
       }
-      return value;
-    }
-
-    let comparisonData = null;
-
-    function downloadPDF() {
-      if (!comparisonData) return;
-
-      const { jsPDF } = window.jspdf;
-      const doc = new jsPDF();
-
-      const pageWidth = doc.internal.pageSize.getWidth();
-      const margin = 20;
-      const contentWidth = pageWidth - (margin * 2);
-      let y = 20;
-
-      const { plan1, plan2, comparison } = comparisonData;
-
-      // Header
-      doc.setFillColor(13, 130, 104);
-      doc.rect(0, 0, pageWidth, 40, 'F');
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(22);
-      doc.setFont('helvetica', 'bold');
-      doc.text('Co-Parenting Alignment Comparison', margin, 28);
-
-      y = 55;
-
-      // Parents
-      doc.setTextColor(92, 88, 86);
-      doc.setFontSize(12);
-      doc.setFont('helvetica', 'normal');
-      doc.text(`${plan1.parent_name || 'Parent 1'} & ${plan2.parent_name || 'Parent 2'}`, margin, y);
-      y += 15;
-
-      // Summary boxes
-      const boxWidth = (contentWidth - 20) / 3;
-
-      // Aligned box
-      doc.setFillColor(209, 250, 229);
-      doc.roundedRect(margin, y, boxWidth, 35, 3, 3, 'F');
-      doc.setTextColor(16, 185, 129);
-      doc.setFontSize(24);
-      doc.setFont('helvetica', 'bold');
-      doc.text(String(comparison.aligned.length), margin + boxWidth/2, y + 18, { align: 'center' });
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      doc.text('Aligned', margin + boxWidth/2, y + 28, { align: 'center' });
-
-      // Close box
-      doc.setFillColor(254, 243, 199);
-      doc.roundedRect(margin + boxWidth + 10, y, boxWidth, 35, 3, 3, 'F');
-      doc.setTextColor(245, 158, 11);
-      doc.setFontSize(24);
-      doc.setFont('helvetica', 'bold');
-      doc.text(String(comparison.close.length), margin + boxWidth + 10 + boxWidth/2, y + 18, { align: 'center' });
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      doc.text('Close', margin + boxWidth + 10 + boxWidth/2, y + 28, { align: 'center' });
-
-      // Divergent box
-      doc.setFillColor(254, 226, 226);
-      doc.roundedRect(margin + (boxWidth + 10) * 2, y, boxWidth, 35, 3, 3, 'F');
-      doc.setTextColor(239, 68, 68);
-      doc.setFontSize(24);
-      doc.setFont('helvetica', 'bold');
-      doc.text(String(comparison.divergent.length), margin + (boxWidth + 10) * 2 + boxWidth/2, y + 18, { align: 'center' });
-      doc.setFontSize(10);
-      doc.setFont('helvetica', 'normal');
-      doc.text('Worth Discussing', margin + (boxWidth + 10) * 2 + boxWidth/2, y + 28, { align: 'center' });
-
-      y += 50;
-
-      // Helper function
-      function addComparisonSection(title, keys, color) {
-        if (keys.length === 0) return;
-
-        // Check for new page
-        if (y > 250) {
-          doc.addPage();
-          y = 20;
-        }
-
-        doc.setTextColor(...color);
-        doc.setFontSize(14);
-        doc.setFont('helvetica', 'bold');
-        doc.text(`${title} (${keys.length})`, margin, y);
-        y += 8;
-
-        doc.setDrawColor(232, 230, 228);
-        doc.line(margin, y, pageWidth - margin, y);
-        y += 8;
-
-        for (const key of keys) {
-          if (y > 270) {
-            doc.addPage();
-            y = 20;
-          }
-
-          const label = QUESTION_LABELS[key] || key;
-          doc.setTextColor(26, 25, 23);
-          doc.setFontSize(10);
-          doc.setFont('helvetica', 'bold');
-          doc.text(label, margin, y);
-          y += 6;
-
-          // Two columns for responses
-          const colWidth = (contentWidth - 10) / 2;
-
-          doc.setFont('helvetica', 'normal');
-          doc.setFontSize(9);
-
-          // Parent 1
-          doc.setTextColor(13, 130, 104);
-          doc.text(plan1.parent_name || 'Parent 1', margin, y);
-          doc.setTextColor(92, 88, 86);
-          const val1 = formatValueForPDF(plan1.responses[key]);
-          const lines1 = doc.splitTextToSize(val1, colWidth - 5);
-          doc.text(lines1, margin, y + 5);
-
-          // Parent 2
-          doc.setTextColor(13, 130, 104);
-          doc.text(plan2.parent_name || 'Parent 2', margin + colWidth + 10, y);
-          doc.setTextColor(92, 88, 86);
-          const val2 = formatValueForPDF(plan2.responses[key]);
-          const lines2 = doc.splitTextToSize(val2, colWidth - 5);
-          doc.text(lines2, margin + colWidth + 10, y + 5);
-
-          y += Math.max(lines1.length, lines2.length) * 4 + 12;
-        }
-
-        y += 5;
-      }
-
-      function formatValueForPDF(value) {
-        if (value === undefined || value === null) return 'No response';
-        if (Array.isArray(value)) return value.join(', ');
-        if (typeof value === 'object') {
-          return Object.entries(value).map(([k, v]) => `${k}: ${v}`).join(', ');
-        }
-        return String(value);
-      }
-
-      addComparisonSection('Aligned', comparison.aligned, [16, 185, 129]);
-      addComparisonSection('Close', comparison.close, [245, 158, 11]);
-      addComparisonSection('Worth Discussing', comparison.divergent, [239, 68, 68]);
-
-      // Footer
-      if (y > 260) {
-        doc.addPage();
-        y = 20;
-      }
-      y += 10;
-      doc.setTextColor(92, 88, 86);
-      doc.setFontSize(9);
-      doc.text('Generated by Clearly - getclearly.app', margin, y);
-
-      // Save
-      doc.save('co-parenting-alignment-comparison.pdf');
+      return String(value);
     }
 
     loadComparison();
