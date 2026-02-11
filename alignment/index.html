@@ -3198,6 +3198,24 @@ Go to ${shareUrl} and enter the code when you start.`;
     if (state.setup.children.length === 0) {
       state.setup.children = [{ name: '', age: null, gender: 'he' }];
     }
+
+    // Keyboard navigation - Enter triggers Continue
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        const questionsScreen = document.getElementById('questions');
+        const continueBtn = document.getElementById('btnQuestionNext');
+
+        // Only trigger if on questions screen and button is enabled
+        if (questionsScreen && questionsScreen.classList.contains('active') &&
+            continueBtn && !continueBtn.disabled) {
+          // Don't trigger if user is in a textarea
+          if (document.activeElement.tagName !== 'TEXTAREA') {
+            e.preventDefault();
+            nextQuestion();
+          }
+        }
+      }
+    });
   </script>
 </body>
 </html>
