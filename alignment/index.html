@@ -3201,18 +3201,16 @@ Go to ${shareUrl} and enter the code when you start.`;
 
     // Keyboard navigation - Enter triggers Continue
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        const questionsScreen = document.getElementById('questions');
+      // Skip if in textarea (allow multi-line input)
+      if (document.activeElement.tagName === 'TEXTAREA') return;
+
+      if (e.key === 'Enter') {
         const continueBtn = document.getElementById('btnQuestionNext');
 
-        // Only trigger if on questions screen and button is enabled
-        if (questionsScreen && questionsScreen.classList.contains('active') &&
-            continueBtn && !continueBtn.disabled) {
-          // Don't trigger if user is in a textarea
-          if (document.activeElement.tagName !== 'TEXTAREA') {
-            e.preventDefault();
-            nextQuestion();
-          }
+        // Trigger Continue if button exists, is visible, and is enabled
+        if (continueBtn && continueBtn.offsetParent !== null && !continueBtn.disabled) {
+          e.preventDefault();
+          continueBtn.click();
         }
       }
     });
