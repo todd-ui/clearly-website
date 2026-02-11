@@ -1241,7 +1241,7 @@
       background: var(--primary-dark);
     }
 
-    .alignment-plan-code {
+    .family-code {
       display: inline-block;
       padding: 12px 24px;
       background: var(--bg);
@@ -1362,7 +1362,7 @@
           </div>
 
           <div class="have-code-section" id="haveCodeSection">
-            <p class="have-code-text">Have an alignment plan code from your co-parent?</p>
+            <p class="have-code-text">Have a family code from your co-parent?</p>
             <div class="code-input-row" id="codeInputRow" style="display: none;">
               <input type="text" id="linkCodeInput" placeholder="ABC123" maxlength="8" class="code-input">
               <button class="btn-link-code" onclick="validateAndStartWithCode()">Continue</button>
@@ -1559,7 +1559,7 @@
       },
       responses: {},
       email: null,
-      alignmentPlanCode: null,
+      familyCode: null,
       linkCode: null,
       viewToken: null
     };
@@ -1636,7 +1636,7 @@
       const errorEl = document.getElementById('codeError');
 
       if (code.length < 6) {
-        errorEl.textContent = 'Please enter a valid alignment plan code';
+        errorEl.textContent = 'Please enter a valid family code';
         errorEl.style.display = 'block';
         return;
       }
@@ -2924,7 +2924,7 @@
         if (response.ok) {
           const data = await response.json();
           state.email = email;
-          state.alignmentPlanCode = data.alignment_plan_code || generateAlignmentPlanCode();
+          state.familyCode = data.family_code || generateFamilyCode();
           state.viewToken = data.view_token;
           state.isLinked = data.is_linked || false;
           saveState();
@@ -2939,13 +2939,13 @@
       showResults();
     });
 
-    function generateAlignmentPlanCode() {
+    function generateFamilyCode() {
       return Math.random().toString(36).substring(2, 10).toUpperCase();
     }
 
     function showResults() {
-      if (!state.alignmentPlanCode) {
-        state.alignmentPlanCode = generateAlignmentPlanCode();
+      if (!state.familyCode) {
+        state.familyCode = generateFamilyCode();
         saveState();
       }
 
@@ -3053,14 +3053,14 @@
           </div>
           <h4>Invite ${state.setup.coParentName} to Complete Their Plan</h4>
           <p>When both parents complete the alignment plan, you'll see where you naturally agree — and where a conversation might help.</p>
-          <div class="alignment-plan-code">${state.alignmentPlanCode}</div>
-          <p class="code-label">Your Alignment Plan Code</p>
+          <div class="family-code">${state.familyCode}</div>
+          <p class="code-label">Your Family Code</p>
           <div class="share-buttons">
             <button class="btn-share" onclick="shareWithCoParent()">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
               Share with ${state.setup.coParentName}
             </button>
-            <button class="btn-copy" onclick="copyAlignmentCode()">
+            <button class="btn-copy" onclick="copyFamilyCode()">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
               Copy Code
             </button>
@@ -3119,8 +3119,8 @@
       return html || '<p style="color: var(--text-muted);">Complete Section 7 to see your developmental snapshot.</p>';
     }
 
-    function copyAlignmentCode() {
-      navigator.clipboard.writeText(state.alignmentPlanCode);
+    function copyFamilyCode() {
+      navigator.clipboard.writeText(state.familyCode);
       const btn = event.target.closest('.btn-copy');
       const originalText = btn.innerHTML;
       btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Copied!';
@@ -3131,12 +3131,12 @@
 
     async function shareWithCoParent() {
       const coParentName = state.setup.coParentName || 'your co-parent';
-      const code = state.alignmentPlanCode;
+      const code = state.familyCode;
       const shareUrl = 'https://getclearly.app/alignment/';
 
       const shareText = `I just completed my Co-Parenting Alignment Plan on Clearly. I'd love for you to complete yours so we can see where we align.
 
-Your alignment plan code: ${code}
+Your family code: ${code}
 
 Go to ${shareUrl} and enter the code when you start.`;
 

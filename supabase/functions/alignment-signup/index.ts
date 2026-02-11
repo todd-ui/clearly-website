@@ -26,7 +26,7 @@ interface AlignmentPayload {
   setup?: Setup
   responses: Record<string, unknown>
   source?: string
-  link_code?: string // Optional: alignment plan code to link with existing plan
+  link_code?: string // Optional: family code to link with existing plan
 }
 
 interface NormalizedData {
@@ -49,6 +49,16 @@ function getAgeVariant(children: Child[]): string | null {
   if (maxAge <= 9) return 'children'
   if (maxAge <= 12) return 'middle-childhood'
   return 'adolescents'
+}
+
+// Generate a random 8-character code (same format as plan_templates)
+function generateCode(): string {
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789' // Avoiding confusing chars like 0/O, 1/I
+  let code = ''
+  for (let i = 0; i < 8; i++) {
+    code += chars.charAt(Math.floor(Math.random() * chars.length))
+  }
+  return code
 }
 
 serve(async (req) => {
@@ -76,8 +86,10 @@ serve(async (req) => {
 
     const setup = payload.setup || {}
     const children = setup.children || []
+    const normalizedEmail = payload.email.toLowerCase().trim()
+
     const normalized: NormalizedData = {
-      email: payload.email.toLowerCase().trim(),
+      email: normalizedEmail,
       parent_name: setup.parentName || null,
       coparent_name: setup.coParentName || null,
       children: children,
@@ -92,34 +104,69 @@ serve(async (req) => {
       Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
     )
 
-    // Check if linking to an existing plan
+    // Determine the family code to use
+    let familyCode: string | null = null
     let linkedPlan = null
+
+    // If linking to an existing plan via code
     if (payload.link_code) {
+      const linkCode = payload.link_code.toUpperCase().trim()
+
+      // Look for existing alignment plan with this family code
       const { data: existingPlan } = await supabaseClient
         .from('z_alignment_plans')
-        .select('id, email, parent_name, view_token')
-        .eq('alignment_plan_code', payload.link_code.toUpperCase())
+        .select('id, email, parent_name, view_token, family_code')
+        .eq('family_code', linkCode)
         .is('paired_with', null)
         .single()
 
-      if (!existingPlan) {
-        return new Response(
-          JSON.stringify({ error: 'Invalid or already used alignment plan code', code: 'invalid_code' }),
-          { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-        )
+      if (existingPlan) {
+        linkedPlan = existingPlan
+        familyCode = linkCode
+      } else {
+        // Also check plan_templates and families for the code
+        const { data: planTemplate } = await supabaseClient
+          .from('plan_templates')
+          .select('share_code')
+          .eq('share_code', linkCode)
+          .single()
+
+        if (planTemplate) {
+          familyCode = linkCode
+        } else {
+          const { data: family } = await supabaseClient
+            .from('families')
+            .select('join_code')
+            .eq('join_code', linkCode)
+            .single()
+
+          if (family) {
+            familyCode = linkCode
+          } else {
+            return new Response(
+              JSON.stringify({ error: 'Invalid family code. Please check the code and try again.', code: 'invalid_code' }),
+              { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+            )
+          }
+        }
       }
-      linkedPlan = existingPlan
     }
 
-    // Insert new plan
+    // If not linking, find or create a family code for this user
+    if (!familyCode) {
+      familyCode = await getOrCreateFamilyCode(supabaseClient, normalizedEmail, normalized)
+    }
+
+    // Insert new alignment plan
     const { data, error } = await supabaseClient
       .from('z_alignment_plans')
       .insert({
         ...normalized,
+        family_code: familyCode,
         completed_at: new Date().toISOString(),
         paired_with: linkedPlan?.id || null
       })
-      .select('id, alignment_plan_code, view_token')
+      .select('id, family_code, view_token')
       .single()
 
     if (error) {
@@ -149,7 +196,7 @@ serve(async (req) => {
       await supabaseClient
         .from('z_waitlist')
         .upsert({
-          email: payload.email.toLowerCase().trim(),
+          email: normalizedEmail,
           source: 'alignment-tool'
         }, { onConflict: 'email' })
     } catch (waitlistError) {
@@ -159,17 +206,17 @@ serve(async (req) => {
     // Send appropriate email(s)
     if (linkedPlan) {
       // Both plans are now linked - send comparison emails to both
-      sendComparisonEmail(normalized, data.alignment_plan_code, linkedPlan).catch(console.error)
-      sendComparisonEmailToFirstParent(linkedPlan, data.alignment_plan_code, normalized).catch(console.error)
+      sendComparisonEmail(normalized, familyCode, linkedPlan).catch(console.error)
+      sendComparisonEmailToFirstParent(linkedPlan, familyCode, normalized).catch(console.error)
     } else {
       // First parent - send plan view email
-      sendPlanEmail(normalized, data.view_token, data.alignment_plan_code).catch(console.error)
+      sendPlanEmail(normalized, data.view_token, familyCode).catch(console.error)
     }
 
     return new Response(
       JSON.stringify({
         success: true,
-        alignment_plan_code: data.alignment_plan_code,
+        family_code: familyCode,
         view_token: data.view_token,
         is_linked: !!linkedPlan
       }),
@@ -185,7 +232,77 @@ serve(async (req) => {
   }
 })
 
-async function sendPlanEmail(data: NormalizedData, viewToken: string, alignmentPlanCode: string) {
+// Get existing family code or create a new one via plan_templates
+async function getOrCreateFamilyCode(
+  supabase: ReturnType<typeof createClient>,
+  email: string,
+  data: NormalizedData
+): Promise<string> {
+
+  // 1. Check if user has an existing plan_template
+  const { data: planTemplate } = await supabase
+    .from('plan_templates')
+    .select('share_code')
+    .eq('email', email)
+    .order('created_at', { ascending: false })
+    .limit(1)
+    .single()
+
+  if (planTemplate?.share_code) {
+    console.log('Using existing plan_template share_code:', planTemplate.share_code)
+    return planTemplate.share_code
+  }
+
+  // 2. Check if user has a family via profiles
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('family_id')
+    .eq('email', email)
+    .single()
+
+  if (profile?.family_id) {
+    const { data: family } = await supabase
+      .from('families')
+      .select('join_code')
+      .eq('id', profile.family_id)
+      .single()
+
+    if (family?.join_code) {
+      console.log('Using existing family join_code:', family.join_code)
+      return family.join_code
+    }
+  }
+
+  // 3. Create a new plan_template to get a share_code
+  // This keeps the code system unified - alignment creates a plan_template
+  // which can later be used in plan-builder or when signing up for the app
+  const newCode = generateCode()
+
+  const { data: newTemplate, error } = await supabase
+    .from('plan_templates')
+    .insert({
+      email: email,
+      share_code: newCode,
+      source: 'alignment-tool',
+      // Store minimal child info if available
+      children: data.children?.map(c => ({ name: c.name, birthdate: null })) || [],
+      family_name: null
+    })
+    .select('share_code')
+    .single()
+
+  if (error) {
+    console.error('Error creating plan_template:', error)
+    // If insert failed (e.g., code collision), generate and try again
+    // For now, just use the generated code
+    return newCode
+  }
+
+  console.log('Created new plan_template with share_code:', newTemplate.share_code)
+  return newTemplate.share_code
+}
+
+async function sendPlanEmail(data: NormalizedData, viewToken: string, familyCode: string) {
   const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
   if (!RESEND_API_KEY) {
     console.log('RESEND_API_KEY not set, skipping email')
@@ -222,15 +339,18 @@ async function sendPlanEmail(data: NormalizedData, viewToken: string, alignmentP
       <a href="${viewUrl}" style="display: inline-block; padding: 16px 32px; background: linear-gradient(135deg, #0D8268 0%, #0a6b56 100%); color: white; text-decoration: none; font-size: 16px; font-weight: 600; border-radius: 10px;">View Your Alignment Plan</a>
     </div>
 
-    <!-- Alignment Plan Code -->
+    <!-- Family Code -->
     <div style="background: #E6F5F1; border-radius: 12px; padding: 24px; margin: 28px 0;">
       <h3 style="font-size: 16px; color: #0D8268; margin: 0 0 12px 0;">Invite ${data.coparent_name || 'Your Co-Parent'}</h3>
       <p style="color: #1A1917; font-size: 15px; line-height: 1.8; margin: 0 0 16px 0;">
-        Share this alignment plan code so they can complete their own plan. Once they do, you'll both receive a comparison showing where you align and where you might want to talk.
+        Share your family code so they can complete their own plan. Once they do, you'll both receive a comparison showing where you align and where you might want to talk.
       </p>
       <div style="background: white; border: 2px dashed #0D8268; border-radius: 8px; padding: 16px; text-align: center;">
-        <span style="font-size: 24px; font-weight: 600; color: #0D8268; letter-spacing: 0.15em; font-family: monospace;">${alignmentPlanCode}</span>
+        <span style="font-size: 24px; font-weight: 600; color: #0D8268; letter-spacing: 0.15em; font-family: monospace;">${familyCode}</span>
       </div>
+      <p style="color: #5C5856; font-size: 13px; margin: 12px 0 0 0; text-align: center;">
+        This is your family code — use it across all Clearly tools.
+      </p>
     </div>
 
     <div style="border-top: 1px solid #E8E6E4; margin-top: 36px; padding-top: 28px;">
@@ -289,13 +409,13 @@ async function sendPlanEmail(data: NormalizedData, viewToken: string, alignmentP
   }
 }
 
-async function sendComparisonEmail(data: NormalizedData, alignmentPlanCode: string, linkedPlan: { email: string; parent_name: string }) {
+async function sendComparisonEmail(data: NormalizedData, familyCode: string, linkedPlan: { email: string; parent_name: string }) {
   const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
   if (!RESEND_API_KEY) return
 
   const parentName = data.parent_name || 'there'
   const otherParentName = linkedPlan.parent_name || 'your co-parent'
-  const compareUrl = `${BASE_URL}/alignment/compare/?code=${alignmentPlanCode}`
+  const compareUrl = `${BASE_URL}/alignment/compare/?code=${familyCode}`
 
   const emailHtml = `
 <!DOCTYPE html>
@@ -368,13 +488,13 @@ async function sendComparisonEmail(data: NormalizedData, alignmentPlanCode: stri
   }
 }
 
-async function sendComparisonEmailToFirstParent(firstParent: { email: string; parent_name: string; view_token: string }, alignmentPlanCode: string, secondParent: NormalizedData) {
+async function sendComparisonEmailToFirstParent(firstParent: { email: string; parent_name: string; view_token: string }, familyCode: string, secondParent: NormalizedData) {
   const RESEND_API_KEY = Deno.env.get('RESEND_API_KEY')
   if (!RESEND_API_KEY) return
 
   const parentName = firstParent.parent_name || 'there'
   const otherParentName = secondParent.parent_name || 'Your co-parent'
-  const compareUrl = `${BASE_URL}/alignment/compare/?code=${alignmentPlanCode}`
+  const compareUrl = `${BASE_URL}/alignment/compare/?code=${familyCode}`
 
   const emailHtml = `
 <!DOCTYPE html>

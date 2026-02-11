@@ -25,7 +25,7 @@ serve(async (req) => {
     if (token) {
       const { data: plan, error } = await supabaseClient
         .from('z_alignment_plans')
-        .select('parent_name, coparent_name, children, custody_arrangement, responses, alignment_plan_code, paired_with')
+        .select('parent_name, coparent_name, children, custody_arrangement, responses, family_code, paired_with')
         .eq('view_token', token)
         .single()
 
@@ -42,13 +42,13 @@ serve(async (req) => {
       )
     }
 
-    // Compare plans by alignment plan code
+    // Compare plans by family code
     if (code) {
       // Find the first plan with this code
       const { data: plan1, error: error1 } = await supabaseClient
         .from('z_alignment_plans')
         .select('id, parent_name, coparent_name, children, custody_arrangement, responses, paired_with')
-        .eq('alignment_plan_code', code.toUpperCase())
+        .eq('family_code', code.toUpperCase())
         .single()
 
       if (error1 || !plan1) {

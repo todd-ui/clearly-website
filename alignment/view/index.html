@@ -128,7 +128,7 @@
       margin-bottom: 16px;
     }
 
-    .alignment-code {
+    .family-code {
       display: inline-block;
       font-size: 24px;
       font-weight: 600;
@@ -227,8 +227,8 @@
 
       <div class="code-section" id="codeSection">
         <h3>Invite Your Co-Parent</h3>
-        <p>Share this code so they can complete their own plan and compare results.</p>
-        <div class="alignment-code" id="alignmentCode"></div>
+        <p>Share your family code so they can complete their own plan and compare results.</p>
+        <div class="family-code" id="familyCode"></div>
       </div>
 
       <div class="cta-section">
@@ -297,15 +297,15 @@
       const childInfo = children.map(c => `${c.name}, age ${c.age}`).join(' & ') || 'Your children';
       document.getElementById('childInfo').textContent = childInfo;
 
-      // Set alignment code
-      document.getElementById('alignmentCode').textContent = plan.alignment_plan_code;
+      // Set family code
+      document.getElementById('familyCode').textContent = plan.family_code;
 
       // If already compared, update the code section
       if (hasComparison) {
         document.getElementById('codeSection').innerHTML = `
           <h3>Comparison Available</h3>
           <p>Your co-parent has completed their plan!</p>
-          <a href="/alignment/compare/?code=${plan.alignment_plan_code}" class="btn-primary">View Comparison</a>
+          <a href="/alignment/compare/?code=${plan.family_code}" class="btn-primary">View Comparison</a>
         `;
       }
 
@@ -465,7 +465,7 @@
         }
       }
 
-      // Footer with alignment plan code
+      // Footer with family code
       if (y > 240) {
         doc.addPage();
         y = 20;
@@ -475,7 +475,7 @@
       doc.roundedRect(margin, y, contentWidth, 30, 3, 3, 'F');
       doc.setTextColor(13, 130, 104);
       doc.setFontSize(10);
-      doc.text('Alignment Plan Code: ' + (currentPlan.alignment_plan_code || ''), margin + 10, y + 12);
+      doc.text('Family Code: ' + (currentPlan.family_code || ''), margin + 10, y + 12);
       doc.setFontSize(8);
       doc.setTextColor(92, 88, 86);
       doc.text('Share this code with your co-parent so they can complete their plan and compare.', margin + 10, y + 22);
