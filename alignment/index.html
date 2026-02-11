@@ -1554,7 +1554,7 @@
       setup: {
         parentName: '',
         coParentName: '',
-        children: [{ name: '', age: null, gender: 'they' }],
+        children: [{ name: '', age: null, gender: 'he' }],
         custodyArrangement: ''
       },
       responses: {},
@@ -1698,9 +1698,9 @@
           <div class="form-group">
             <label>Pronoun</label>
             <select onchange="updateChild(${index}, 'gender', this.value)">
-              <option value="they" ${child.gender === 'they' ? 'selected' : ''}>They/Them</option>
               <option value="he" ${child.gender === 'he' ? 'selected' : ''}>He/Him</option>
               <option value="she" ${child.gender === 'she' ? 'selected' : ''}>She/Her</option>
+              <option value="they" ${child.gender === 'they' ? 'selected' : ''}>They/Them</option>
             </select>
           </div>
         `;
@@ -1717,7 +1717,7 @@
     }
 
     function addChild() {
-      state.setup.children.push({ name: '', age: null, gender: 'they' });
+      state.setup.children.push({ name: '', age: null, gender: 'he' });
       renderChildren();
       saveState();
     }
@@ -2448,7 +2448,7 @@
     }
 
     function getFirstChild() {
-      return state.setup.children.find(c => c.name && c.age) || { name: 'your child', age: 7, gender: 'they' };
+      return state.setup.children.find(c => c.name && c.age) || { name: 'your child', age: 7, gender: 'he' };
     }
 
     function getChildrenInfo() {
@@ -3184,7 +3184,7 @@ Go to ${shareUrl} and enter the code when you start.`;
 
     // Initialize first child if needed
     if (state.setup.children.length === 0) {
-      state.setup.children = [{ name: '', age: null, gender: 'they' }];
+      state.setup.children = [{ name: '', age: null, gender: 'he' }];
     }
   </script>
 </body>
