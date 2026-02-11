@@ -2936,18 +2936,23 @@
 
       const resultsDiv = document.getElementById('results');
       const child = getFirstChild();
+      const childrenInfo = getChildrenInfo();
+
+      // Format all children for display
+      const allChildren = state.setup.children.filter(c => c.name && c.age);
+      const childrenDisplay = allChildren.map(c => `${c.name}, age ${c.age}`).join(' and ');
 
       // Build results HTML
       let html = `
         <div class="result-header">
           <span class="result-badge">Your Alignment Plan</span>
           <h2>Co-Parenting Alignment Plan</h2>
-          <p>For ${state.setup.parentName} and ${state.setup.coParentName} | ${child.name}, age ${child.age}</p>
+          <p>For ${state.setup.parentName} and ${state.setup.coParentName} | ${childrenDisplay}</p>
         </div>
 
         <!-- Part 1: Your Vision -->
         <div class="result-section">
-          <h3>Part 1: Your Vision for ${child.name}</h3>
+          <h3>Part 1: Your Vision for ${childrenInfo.name}</h3>
 
           <div class="result-card">
             <h4>Core Qualities You Hope to Nurture</h4>
@@ -2982,7 +2987,7 @@
 
         <!-- Part 2: Developmental Snapshot -->
         <div class="result-section">
-          <h3>Part 2: ${child.name}'s Developmental Snapshot</h3>
+          <h3>Part 2: Developmental Snapshot for ${childrenInfo.name}</h3>
           <p style="color: var(--text-secondary); margin-bottom: 24px;">Based on the Search Institute's Developmental Assets framework for ages ${getAgeVariant(child.age)}.</p>
           ${renderDevelopmentalResults()}
         </div>
@@ -3028,7 +3033,7 @@
         <div class="result-card" style="margin-top: 40px;">
           <h4>Built on Research</h4>
           <p style="margin-bottom: 12px;"><strong>Feinberg's Ecological Model of Coparenting</strong> identifies four dimensions that predict co-parenting quality and child outcomes. Your plan assesses alignment across all four.</p>
-          <p><strong>Search Institute's 40 Developmental Assets</strong> identify the building blocks children need to thrive. ${child.name}'s developmental snapshot is adapted for their age group based on this research.</p>
+          <p><strong>Search Institute's 40 Developmental Assets</strong> identify the building blocks children need to thrive. The developmental snapshot for ${childrenInfo.name} is adapted for their age group based on this research.</p>
         </div>
 
         <!-- Compare with Co-Parent -->
