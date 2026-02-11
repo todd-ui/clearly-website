@@ -2698,6 +2698,7 @@
       textarea.id = `text-${prompt.id}`;
       textarea.placeholder = replaceVariables(prompt.placeholder || '');
       textarea.value = state.responses[prompt.id]?.value || '';
+      textarea.spellcheck = true;
       textarea.oninput = (e) => {
         state.responses[prompt.id] = { type: 'text', value: e.target.value };
         saveState();
@@ -2739,6 +2740,7 @@
         textarea.style.minHeight = '80px';
         textarea.placeholder = replaceVariables(prompt.placeholder || '');
         textarea.value = entry;
+        textarea.spellcheck = true;
         textarea.oninput = (e) => {
           if (!state.responses[prompt.id]) {
             state.responses[prompt.id] = { type: 'multi-text', values: [''] };
