@@ -1,5 +1,6 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
+import { jsPDF } from 'https://esm.sh/jspdf@2.5.1'
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -59,6 +60,227 @@ function generateCode(): string {
     code += chars.charAt(Math.floor(Math.random() * chars.length))
   }
   return code
+}
+
+// Section titles for the PDF
+const SECTION_TITLES: Record<string, string> = {
+  's1': 'Your Vision',
+  's2': 'Emotional Life',
+  's3': 'Structure & Daily Life',
+  's4': 'Education & Development',
+  's5': 'Health & Wellness',
+  's6': 'Your Co-Parenting Partnership',
+  's7': 'Development',
+  's8': 'Looking Forward'
+}
+
+// Question labels for readability
+const QUESTION_LABELS: Record<string, string> = {
+  's1-p1': 'Qualities you hope for at 25',
+  's1-p2a': 'What to carry forward from your upbringing',
+  's1-p2b': 'What to do differently',
+  's1-p3': 'Non-negotiable values',
+  's2-p4': 'When child is upset',
+  's2-p5': 'Handling difficult emotions about other household',
+  's2-p6a': 'How you talk about co-parent',
+  's2-p6b': "Child's perspective on how households talk",
+  's2-p7a': 'Importance of emotional consistency',
+  's3-p8': 'Parenting approach',
+  's3-p9a': 'Areas needing consistency',
+  's3-p10a': 'Discipline approach',
+  's3-p10b': 'When you disagree on discipline',
+  's3-p11a': 'Screen time approach',
+  's3-p11b': 'Screen time alignment',
+  's3-p12a': 'How transitions go',
+  's3-p12b': 'What helps during transitions',
+  's4-p13': 'Education approach',
+  's4-p14a': 'School decision handling',
+  's4-p14b': 'School responsibilities',
+  's4-p15a': 'Activities approach',
+  's4-p15b': 'Activity decisions process',
+  's5-p16': 'Physical health approach',
+  's5-p17a': 'Medical decision process',
+  's5-p17b': 'Health topics requiring both parents',
+  's5-p18a': 'Mental health approach',
+  's5-p18b': 'Handling struggles together',
+  's6-p19a': 'Communication quality',
+  's6-p19b': 'What would improve communication',
+  's6-p20a': 'Decision-making process',
+  's6-p20b': 'Decisions requiring both parents',
+  's6-p21a': 'Feeling supported',
+  's6-p21b': 'What support looks like',
+  's6-p22a': 'Disagreement patterns',
+  's6-p22b': 'Recurring disagreement',
+  's6-p23': 'Child awareness of tension',
+  's6-p24a': 'Balance of involvement',
+  's6-p24b': 'What to change about involvement',
+  's8-p33': 'Your commitments',
+  's8-p34': 'What you need from co-parent',
+  's8-p35': 'Acknowledgment for co-parent',
+  's8-p36': 'A message'
+}
+
+function generateAlignmentPDF(data: NormalizedData, familyCode: string): string {
+  const doc = new jsPDF()
+  const pageWidth = doc.internal.pageSize.getWidth()
+  const margin = 20
+  const contentWidth = pageWidth - (margin * 2)
+  let y = 20
+
+  // Helper to add text with word wrap
+  const addWrappedText = (text: string, x: number, startY: number, maxWidth: number, lineHeight: number = 6): number => {
+    const lines = doc.splitTextToSize(text, maxWidth)
+    lines.forEach((line: string) => {
+      if (startY > 270) {
+        doc.addPage()
+        startY = 20
+      }
+      doc.text(line, x, startY)
+      startY += lineHeight
+    })
+    return startY
+  }
+
+  // Helper to check and add new page if needed
+  const checkNewPage = (requiredSpace: number = 30): void => {
+    if (y > 280 - requiredSpace) {
+      doc.addPage()
+      y = 20
+    }
+  }
+
+  // Header
+  doc.setFontSize(24)
+  doc.setFont('helvetica', 'bold')
+  doc.setTextColor(13, 130, 104) // Clearly green
+  doc.text('Co-Parenting Alignment Plan', margin, y)
+  y += 12
+
+  // Subtitle with parent name and date
+  doc.setFontSize(11)
+  doc.setFont('helvetica', 'normal')
+  doc.setTextColor(92, 88, 86)
+  const dateStr = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+  doc.text(`Prepared for ${data.parent_name || 'Parent'} · ${dateStr}`, margin, y)
+  y += 15
+
+  // Children info
+  if (data.children && data.children.length > 0) {
+    doc.setFontSize(10)
+    doc.setTextColor(92, 88, 86)
+    const childNames = data.children.map(c => c.name).filter(Boolean).join(', ')
+    if (childNames) {
+      doc.text(`Children: ${childNames}`, margin, y)
+      y += 8
+    }
+  }
+
+  // Family code box
+  doc.setFillColor(230, 245, 241)
+  doc.roundedRect(margin, y, contentWidth, 20, 3, 3, 'F')
+  doc.setFontSize(10)
+  doc.setTextColor(13, 130, 104)
+  doc.text('Your Family Code:', margin + 5, y + 8)
+  doc.setFontSize(14)
+  doc.setFont('helvetica', 'bold')
+  doc.text(familyCode, margin + 5, y + 16)
+  doc.setFont('helvetica', 'normal')
+  doc.setFontSize(9)
+  doc.setTextColor(92, 88, 86)
+  doc.text('Share this code with your co-parent so they can complete their plan', margin + 50, y + 12)
+  y += 30
+
+  // Organize responses by section
+  const responsesBySection: Record<string, Array<{ id: string; response: unknown }>> = {}
+
+  for (const [key, value] of Object.entries(data.responses)) {
+    const sectionKey = key.split('-')[0]
+    if (!responsesBySection[sectionKey]) {
+      responsesBySection[sectionKey] = []
+    }
+    responsesBySection[sectionKey].push({ id: key, response: value })
+  }
+
+  // Render each section
+  for (const [sectionKey, responses] of Object.entries(responsesBySection)) {
+    checkNewPage(40)
+
+    // Section header
+    doc.setFontSize(14)
+    doc.setFont('helvetica', 'bold')
+    doc.setTextColor(26, 25, 23)
+    const sectionTitle = SECTION_TITLES[sectionKey] || sectionKey
+    doc.text(sectionTitle, margin, y)
+    y += 2
+
+    // Underline
+    doc.setDrawColor(13, 130, 104)
+    doc.setLineWidth(0.5)
+    doc.line(margin, y, margin + 60, y)
+    y += 10
+
+    // Render each response
+    for (const { id, response } of responses) {
+      checkNewPage(25)
+
+      const label = QUESTION_LABELS[id] || id
+
+      doc.setFontSize(10)
+      doc.setFont('helvetica', 'bold')
+      doc.setTextColor(26, 25, 23)
+      doc.text(label, margin, y)
+      y += 6
+
+      doc.setFont('helvetica', 'normal')
+      doc.setTextColor(92, 88, 86)
+
+      // Format the response based on type
+      const resp = response as Record<string, unknown>
+      let responseText = ''
+
+      if (resp.type === 'single-select' && resp.value) {
+        responseText = String(resp.value)
+      } else if (resp.type === 'multi-select' && Array.isArray(resp.values)) {
+        responseText = resp.values.join(', ')
+      } else if (resp.type === 'text' && resp.value) {
+        responseText = String(resp.value)
+      } else if (resp.type === 'multi-text' && Array.isArray(resp.values)) {
+        responseText = resp.values.filter(v => v).join('\n• ')
+        if (responseText) responseText = '• ' + responseText
+      } else if (resp.type === 'matrix' && resp.values) {
+        const matrixValues = resp.values as Record<string, string>
+        responseText = Object.entries(matrixValues)
+          .map(([_, val]) => val)
+          .join(', ')
+      }
+
+      if (responseText) {
+        y = addWrappedText(responseText, margin, y, contentWidth, 5)
+      } else {
+        doc.text('(No response)', margin, y)
+        y += 5
+      }
+
+      y += 6
+    }
+
+    y += 5
+  }
+
+  // Footer on last page
+  checkNewPage(30)
+  y = Math.max(y, 250)
+  doc.setDrawColor(232, 230, 228)
+  doc.line(margin, y, pageWidth - margin, y)
+  y += 10
+
+  doc.setFontSize(9)
+  doc.setTextColor(154, 152, 150)
+  doc.text('Generated by Clearly · getclearly.app', margin, y)
+  doc.text('This plan is meant to facilitate conversation, not replace professional guidance.', margin, y + 5)
+
+  // Return base64 encoded PDF
+  return doc.output('datauristring').split(',')[1]
 }
 
 serve(async (req) => {
@@ -331,7 +553,7 @@ async function sendPlanEmail(data: NormalizedData, viewToken: string, familyCode
       Hi ${parentName},
     </p>
     <p style="color: #5C5856; font-size: 16px; line-height: 1.7;">
-      Thank you for completing your Co-Parenting Alignment Plan. Your responses capture your values, intentions, and vision for raising ${childNames}.
+      Thank you for completing your Co-Parenting Alignment Plan. Your responses capture your values, intentions, and vision for raising ${childNames}. We've attached a PDF copy for your records.
     </p>
 
     <!-- View Plan Button -->
@@ -377,31 +599,54 @@ async function sendPlanEmail(data: NormalizedData, viewToken: string, familyCode
 `
 
   try {
+    // Generate PDF
+    let pdfBase64: string | null = null
+    try {
+      pdfBase64 = generateAlignmentPDF(data, familyCode)
+      console.log('PDF generated successfully')
+    } catch (pdfError) {
+      console.error('PDF generation error:', pdfError)
+      // Continue without PDF if generation fails
+    }
+
+    const emailPayload: Record<string, unknown> = {
+      from: 'Clearly <hello@getclearly.app>',
+      to: [data.email],
+      subject: 'Your Co-Parenting Alignment Plan',
+      html: emailHtml
+    }
+
+    // Attach PDF if generated successfully
+    if (pdfBase64) {
+      emailPayload.attachments = [{
+        filename: 'Co-Parenting-Alignment-Plan.pdf',
+        content: pdfBase64
+      }]
+    }
+
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'Authorization': `Bearer ${RESEND_API_KEY}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        from: 'Clearly <hello@getclearly.app>',
-        to: [data.email],
-        subject: 'Your Co-Parenting Alignment Plan',
-        html: emailHtml
-      })
+      body: JSON.stringify(emailPayload)
     })
 
     if (!response.ok) {
       console.error('Resend error:', await response.text())
     } else {
-      console.log('Plan email sent to:', data.email)
+      console.log('Plan email sent to:', data.email, pdfBase64 ? '(with PDF)' : '(no PDF)')
       const supabaseClient = createClient(
         Deno.env.get('SUPABASE_URL') ?? '',
         Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? ''
       )
       await supabaseClient
         .from('z_alignment_plans')
-        .update({ email_sent: true })
+        .update({
+          email_sent: true,
+          pdf_generated: !!pdfBase64
+        })
         .eq('email', data.email)
     }
   } catch (error) {
