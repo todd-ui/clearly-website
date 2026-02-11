@@ -1747,9 +1747,18 @@
     }
 
     function goToIntro() {
-      // Set child name in intro
-      const firstChild = state.setup.children.find(c => c.name);
-      document.getElementById('introChildName').textContent = firstChild ? firstChild.name + "'s" : "your child's";
+      // Set child name(s) in intro
+      const children = state.setup.children.filter(c => c.name);
+      let introText = "your child's";
+      if (children.length === 1) {
+        introText = children[0].name + "'s";
+      } else if (children.length === 2) {
+        introText = children[0].name + " and " + children[1].name + "'s";
+      } else if (children.length > 2) {
+        const names = children.map(c => c.name);
+        introText = names.slice(0, -1).join(', ') + ', and ' + names[names.length - 1] + "'s";
+      }
+      document.getElementById('introChildName').textContent = introText;
       showScreen('introScreen');
     }
 
@@ -1771,7 +1780,7 @@
         prompts: [
           {
             id: 's1-p1',
-            text: 'When {childName} is 25 years old, what qualities do you most hope {pronoun} will have? Choose five.',
+            text: 'When {childName} {verb} 25 years old, what qualities do you most hope {pronoun} will have? Choose five.',
             type: 'multi-select',
             limit: 5,
             exactLimit: true,
@@ -1796,7 +1805,7 @@
           },
           {
             id: 's1-p3',
-            text: "Is there a value or principle you consider non-negotiable in how {childName} is raised — something that must be consistent regardless of which home {pronoun}'s in?",
+            text: "Is there a value or principle you consider non-negotiable in how {childName} {verb} raised — something that must be consistent regardless of which home {pronoun}'s in?",
             type: 'multi-text',
             maxEntries: 3,
             placeholder: 'A non-negotiable value or principle...'
@@ -1809,7 +1818,7 @@
         prompts: [
           {
             id: 's2-p4',
-            text: "When {childName} is upset, anxious, or struggling emotionally, what's your instinct as a parent?",
+            text: "When {childName} {verb} upset, anxious, or struggling emotionally, what's your instinct as a parent?",
             type: 'single-select',
             options: [
               'I focus on listening and being present with their feelings before anything else',
@@ -2190,7 +2199,7 @@
           },
           {
             id: 's6-p23',
-            text: "To what extent do you think {childName} is aware of disagreements or tension between you and {coParentName}?",
+            text: "To what extent do you think {childName} {verb} aware of disagreements or tension between you and {coParentName}?",
             type: 'single-select',
             options: [
               "They're largely shielded from it — we handle things privately",
@@ -2455,7 +2464,7 @@
       const children = state.setup.children.filter(c => c.name && c.age);
 
       if (children.length === 0) {
-        return { name: 'your child', pronoun: 'they', pronounObj: 'them', pronounPoss: 'their' };
+        return { name: 'your child', pronoun: 'they', pronounObj: 'them', pronounPoss: 'their', verb: 'is' };
       }
 
       if (children.length === 1) {
@@ -2464,7 +2473,8 @@
           name: child.name,
           pronoun: child.gender === 'he' ? 'he' : child.gender === 'she' ? 'she' : 'they',
           pronounObj: child.gender === 'he' ? 'him' : child.gender === 'she' ? 'her' : 'them',
-          pronounPoss: child.gender === 'he' ? 'his' : child.gender === 'she' ? 'her' : 'their'
+          pronounPoss: child.gender === 'he' ? 'his' : child.gender === 'she' ? 'her' : 'their',
+          verb: 'is'
         };
       }
 
@@ -2486,7 +2496,8 @@
         name,
         pronoun: 'they',
         pronounObj: 'them',
-        pronounPoss: 'their'
+        pronounPoss: 'their',
+        verb: 'are'
       };
     }
 
@@ -2498,7 +2509,8 @@
         .replace(/{coParentName}/g, state.setup.coParentName)
         .replace(/{pronoun}/g, info.pronoun)
         .replace(/{pronounObj}/g, info.pronounObj)
-        .replace(/{pronounPoss}/g, info.pronounPoss);
+        .replace(/{pronounPoss}/g, info.pronounPoss)
+        .replace(/{verb}/g, info.verb);
     }
 
     function getSection7Prompts() {
