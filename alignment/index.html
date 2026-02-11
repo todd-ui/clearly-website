@@ -3044,13 +3044,22 @@
 
           <!-- Before email capture -->
           <div id="compareEmailCapture" style="${state.email ? 'display:none;' : ''}">
-            <h4>Align with ${state.setup.coParentName}</h4>
-            <p>The real value? Seeing where you align and where you might need a conversation. Enter your email to get a link ${state.setup.coParentName} can use to complete their own plan.</p>
+            <h4>Get More From Your Plan</h4>
+            <p style="margin-bottom: 16px;">Enter your email to:</p>
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; text-align: left;">
+              <div style="display: flex; align-items: flex-start; gap: 10px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
+                <span><strong>Align with ${state.setup.coParentName}</strong> — invite them to complete their own plan and see where you match</span>
+              </div>
+              <div style="display: flex; align-items: flex-start; gap: 10px;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" style="flex-shrink: 0; margin-top: 2px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                <span><strong>Download a PDF</strong> — get a copy of your alignment plan to save or print</span>
+              </div>
+            </div>
             <form class="compare-form" onsubmit="submitCompareEmail(event)">
               <input type="email" id="compareEmailInput" placeholder="you@example.com" required>
-              <button type="submit" id="compareEmailBtn">Invite ${state.setup.coParentName}</button>
+              <button type="submit" id="compareEmailBtn">Get my PDF & invite link</button>
             </form>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 12px;">We'll also send you a PDF copy of your plan.</p>
           </div>
 
           <!-- After email capture -->
