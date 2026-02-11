@@ -16,14 +16,8 @@ const PAGES = [
   'alignment/view/index.html',
   'alignment/compare/index.html',
   'co-parent-communication/index.html',
-  'custody-schedule-help/index.html',
-  'calculators/index.html',
-  'calculators/support/california.html',
-  'calculators/support/florida.html',
-  'calculators/support/illinois.html',
-  'calculators/support/new-york.html',
-  'calculators/support/pennsylvania.html',
-  'calculators/support/texas.html'
+  'custody-schedule-help/index.html'
+  // Note: Calculator pages excluded - they have their own isolated nav
 ];
 
 // Read partials
