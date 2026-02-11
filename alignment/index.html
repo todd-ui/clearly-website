@@ -2599,25 +2599,23 @@
       switch (prompt.type) {
         case 'single-select':
           renderSingleSelect(contentDiv, prompt);
-          buttonsDiv.style.display = 'none';
           break;
         case 'multi-select':
           renderMultiSelect(contentDiv, prompt);
-          buttonsDiv.style.display = 'flex';
           break;
         case 'text':
           renderTextInput(contentDiv, prompt);
-          buttonsDiv.style.display = 'flex';
           break;
         case 'multi-text':
           renderMultiText(contentDiv, prompt);
-          buttonsDiv.style.display = 'flex';
           break;
         case 'matrix':
           renderMatrix(contentDiv, prompt);
-          buttonsDiv.style.display = 'flex';
           break;
       }
+
+      // Always show buttons so Back is available
+      buttonsDiv.style.display = 'flex';
 
       updateContinueButton();
       updateNavProgress();
