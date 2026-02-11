@@ -983,6 +983,49 @@
       color: var(--primary);
     }
 
+    /* Compare form (inline in results) */
+    .compare-form {
+      max-width: 100%;
+      margin: 20px 0 0;
+    }
+
+    .compare-form input {
+      width: 100%;
+      padding: 14px 18px;
+      font-size: 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      transition: border-color 0.2s;
+    }
+
+    .compare-form input:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+
+    .compare-form button {
+      width: 100%;
+      padding: 14px 24px;
+      background: var(--gradient);
+      color: white;
+      font-size: 16px;
+      font-weight: 600;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .compare-form button:hover {
+      opacity: 0.9;
+    }
+
+    .compare-form button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     /* Results screen */
     .results-screen {
       max-width: 720px;
@@ -1519,17 +1562,6 @@
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </button>
           </div>
-        </div>
-
-        <!-- Email Capture Screen -->
-        <div id="emailCapture" class="screen email-screen">
-          <h2>Get your Co-Parenting Alignment Plan</h2>
-          <p>Enter your email to receive your personalized plan as a PDF, plus a link to invite <span id="emailCoParentName">[co-parent]</span> to complete their own version.</p>
-          <form class="email-form" id="emailForm">
-            <input type="email" id="emailInput" placeholder="you@example.com" required>
-            <button type="submit" id="emailSubmitBtn">Send my plan</button>
-          </form>
-          <span class="skip-link" onclick="showResults()">Skip and see results</span>
         </div>
 
         <!-- Results Screen -->
@@ -2856,10 +2888,9 @@
         state.currentSection++;
         state.currentPromptIndex = 0;
       } else {
-        // Done with all prompts
-        showScreen('emailCapture');
-        document.getElementById('emailCoParentName').textContent = state.setup.coParentName;
+        // Done with all prompts - go straight to results
         gtag('event', 'alignment_complete', { event_category: 'engagement' });
+        showResults();
         return;
       }
 
@@ -2893,46 +2924,6 @@
     // ==========================================
     // EMAIL & RESULTS
     // ==========================================
-
-    document.getElementById('emailForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const email = document.getElementById('emailInput').value.trim();
-      const submitBtn = document.getElementById('emailSubmitBtn');
-
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
-
-      try {
-        const response = await fetch(`${SUPABASE_URL}/functions/v1/alignment-signup`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email,
-            setup: state.setup,
-            responses: state.responses,
-            source: 'alignment-tool',
-            link_code: state.linkCode || undefined
-          })
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          state.email = email;
-          state.familyCode = data.family_code || generateFamilyCode();
-          state.viewToken = data.view_token;
-          state.isLinked = data.is_linked || false;
-          saveState();
-
-          gtag('event', 'alignment_email_capture', { event_category: 'conversion' });
-          window.dataLayer.push({ 'event': 'form_submit', 'form_name': 'alignment_signup' });
-        }
-      } catch (error) {
-        console.error('Email submission error:', error);
-      }
-
-      showResults();
-    });
 
     function generateFamilyCode() {
       return Math.random().toString(36).substring(2, 10).toUpperCase();
@@ -3041,24 +3032,39 @@
           <p><strong>Search Institute's 40 Developmental Assets</strong> identify the building blocks children need to thrive. ${child.name}'s developmental snapshot is adapted for their age group based on this research.</p>
         </div>
 
-        <!-- Invite Co-Parent -->
+        <!-- Compare with Co-Parent -->
         <div class="invite-section">
           <div class="invite-icon">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
           </div>
-          <h4>Invite ${state.setup.coParentName} to Complete Their Plan</h4>
-          <p>When both parents complete the alignment plan, you'll see where you naturally agree — and where a conversation might help.</p>
-          <div class="family-code">${state.familyCode}</div>
-          <p class="code-label">Your Family Code</p>
-          <div class="share-buttons">
-            <button class="btn-share" onclick="shareWithCoParent()">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-              Share with ${state.setup.coParentName}
-            </button>
-            <button class="btn-copy" onclick="copyFamilyCode()">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              Copy Code
-            </button>
+
+          <!-- Before email capture -->
+          <div id="compareEmailCapture" style="${state.email ? 'display:none;' : ''}">
+            <h4>Compare with ${state.setup.coParentName}</h4>
+            <p>The real value? Seeing where you align and where you diverge. Enter your email to get a link ${state.setup.coParentName} can use to complete their own plan — then you'll both see the comparison.</p>
+            <form class="compare-form" onsubmit="submitCompareEmail(event)">
+              <input type="email" id="compareEmailInput" placeholder="you@example.com" required>
+              <button type="submit" id="compareEmailBtn">Get comparison link</button>
+            </form>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 12px;">We'll also send you a PDF copy of your plan.</p>
+          </div>
+
+          <!-- After email capture -->
+          <div id="compareShareSection" style="${state.email ? '' : 'display:none;'}">
+            <h4>Invite ${state.setup.coParentName} to Complete Their Plan</h4>
+            <p>When ${state.setup.coParentName} completes their plan with this code, you'll both see where you align — and where a conversation might help.</p>
+            <div class="family-code">${state.familyCode || ''}</div>
+            <p class="code-label">Your Family Code</p>
+            <div class="share-buttons">
+              <button class="btn-share" onclick="shareWithCoParent()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                Share with ${state.setup.coParentName}
+              </button>
+              <button class="btn-copy" onclick="copyFamilyCode()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Copy Code
+              </button>
+            </div>
           </div>
         </div>
 
@@ -3112,6 +3118,54 @@
       });
 
       return html || '<p style="color: var(--text-muted);">Complete Section 7 to see your developmental snapshot.</p>';
+    }
+
+    async function submitCompareEmail(e) {
+      e.preventDefault();
+
+      const email = document.getElementById('compareEmailInput').value.trim();
+      const submitBtn = document.getElementById('compareEmailBtn');
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      try {
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/alignment-signup`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email,
+            setup: state.setup,
+            responses: state.responses,
+            source: 'alignment-tool',
+            link_code: state.linkCode || undefined
+          })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          state.email = email;
+          state.familyCode = data.family_code || generateFamilyCode();
+          state.viewToken = data.view_token;
+          state.isLinked = data.is_linked || false;
+          saveState();
+
+          // Update the UI - hide email form, show share section
+          document.getElementById('compareEmailCapture').style.display = 'none';
+          document.getElementById('compareShareSection').style.display = 'block';
+          document.querySelector('.family-code').textContent = state.familyCode;
+
+          gtag('event', 'alignment_email_capture', { event_category: 'conversion' });
+          window.dataLayer.push({ 'event': 'form_submit', 'form_name': 'alignment_signup' });
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Get comparison link';
+        }
+      } catch (error) {
+        console.error('Email submission error:', error);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Get comparison link';
+      }
     }
 
     function copyFamilyCode() {
