@@ -1,6 +1,14 @@
 import { serve } from 'https://deno.land/std@0.168.0/http/server.ts'
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'
-import { jsPDF } from 'https://esm.sh/jspdf@2.5.1'
+
+// Dynamically import jsPDF to prevent function from failing if it can't load
+let jsPDF: typeof import('jspdf').jsPDF | null = null
+try {
+  const module = await import('https://esm.sh/jspdf@2.5.1')
+  jsPDF = module.jsPDF
+} catch (err) {
+  console.error('Failed to import jsPDF:', err)
+}
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -120,7 +128,11 @@ const QUESTION_LABELS: Record<string, string> = {
   's8-p36': 'A message'
 }
 
-function generateAlignmentPDF(data: NormalizedData, familyCode: string): string {
+function generateAlignmentPDF(data: NormalizedData, familyCode: string): string | null {
+  if (!jsPDF) {
+    console.log('jsPDF not available, skipping PDF generation')
+    return null
+  }
   const doc = new jsPDF()
   const pageWidth = doc.internal.pageSize.getWidth()
   const margin = 20

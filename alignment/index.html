@@ -3174,13 +3174,36 @@
           gtag('event', 'alignment_email_capture', { event_category: 'conversion' });
           window.dataLayer.push({ 'event': 'form_submit', 'form_name': 'alignment_signup' });
         } else {
+          const errorData = await response.json().catch(() => ({}));
+          console.error('Email submission error:', response.status, errorData);
           submitBtn.disabled = false;
           submitBtn.textContent = 'Try again';
+
+          // Show error message to user
+          const errorMsg = errorData.error || 'Something went wrong. Please try again.';
+          let errorEl = document.querySelector('.email-error-msg');
+          if (!errorEl) {
+            errorEl = document.createElement('p');
+            errorEl.className = 'email-error-msg';
+            errorEl.style.cssText = 'color: #dc2626; font-size: 14px; margin-top: 12px; text-align: center;';
+            submitBtn.parentNode.insertBefore(errorEl, submitBtn.nextSibling);
+          }
+          errorEl.textContent = errorMsg;
         }
       } catch (error) {
         console.error('Email submission error:', error);
         submitBtn.disabled = false;
         submitBtn.textContent = 'Try again';
+
+        // Show error message to user
+        let errorEl = document.querySelector('.email-error-msg');
+        if (!errorEl) {
+          errorEl = document.createElement('p');
+          errorEl.className = 'email-error-msg';
+          errorEl.style.cssText = 'color: #dc2626; font-size: 14px; margin-top: 12px; text-align: center;';
+          submitBtn.parentNode.insertBefore(errorEl, submitBtn.nextSibling);
+        }
+        errorEl.textContent = 'Network error. Please check your connection and try again.';
       }
     }
 
