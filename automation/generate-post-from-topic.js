@@ -4,6 +4,8 @@
  * This script is triggered by GitHub Actions when a blog topic issue is created.
  * It parses the issue, uses the existing Claude-based system to generate the article,
  * and publishes it to Notion with a backdated date.
+ *
+ * Includes duplicate detection to prevent creating posts that already exist.
  */
 
 const { generateArticle, triggerNetlifyBuild } = require('./generate-post');
@@ -12,6 +14,199 @@ const { Client } = require('@notionhq/client');
 // Initialize Notion client
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const DATABASE_ID = '2df435a853a58014b9e9dc6ac1cbba09';
+
+// ============================================================================
+// DUPLICATE DETECTION UTILITIES
+// ============================================================================
+
+// Common words to ignore when comparing titles
+const STOP_WORDS = new Set([
+  'a', 'an', 'the', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for', 'of',
+  'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were', 'been', 'be',
+  'have', 'has', 'had', 'do', 'does', 'did', 'will', 'would', 'could', 'should',
+  'may', 'might', 'must', 'shall', 'can', 'need', 'dare', 'ought', 'used',
+  'your', 'my', 'our', 'their', 'his', 'her', 'its', 'who', 'whom', 'whose',
+  'which', 'what', 'when', 'where', 'why', 'how', 'this', 'that', 'these', 'those'
+]);
+
+/**
+ * Normalize a title for comparison by:
+ * - Converting to lowercase
+ * - Removing punctuation
+ * - Removing stop words
+ * - Returning array of significant words
+ */
+function normalizeTitle(title) {
+  return title
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, '')
+    .split(/\s+/)
+    .filter(word => word.length > 0 && !STOP_WORDS.has(word));
+}
+
+/**
+ * Calculate the percentage of words shared between two normalized titles
+ */
+function calculateWordOverlap(words1, words2) {
+  if (words1.length === 0 || words2.length === 0) return 0;
+
+  const set1 = new Set(words1);
+  const set2 = new Set(words2);
+
+  let sharedCount = 0;
+  for (const word of set1) {
+    if (set2.has(word)) sharedCount++;
+  }
+
+  // Calculate overlap as percentage of the smaller set
+  const smallerSetSize = Math.min(set1.size, set2.size);
+  return smallerSetSize > 0 ? sharedCount / smallerSetSize : 0;
+}
+
+/**
+ * Calculate Levenshtein distance between two strings
+ */
+function levenshteinDistance(str1, str2) {
+  const m = str1.length;
+  const n = str2.length;
+
+  const dp = Array(m + 1).fill(null).map(() => Array(n + 1).fill(0));
+
+  for (let i = 0; i <= m; i++) dp[i][0] = i;
+  for (let j = 0; j <= n; j++) dp[0][j] = j;
+
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      if (str1[i - 1] === str2[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1];
+      } else {
+        dp[i][j] = 1 + Math.min(dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]);
+      }
+    }
+  }
+
+  return dp[m][n];
+}
+
+/**
+ * Calculate keyword overlap percentage
+ */
+function calculateKeywordOverlap(keywords1, keywords2) {
+  if (!keywords1 || !keywords2 || keywords1.length === 0 || keywords2.length === 0) {
+    return 0;
+  }
+
+  const normalize = kw => kw.toLowerCase().trim();
+  const set1 = new Set(keywords1.map(normalize));
+  const set2 = new Set(keywords2.map(normalize));
+
+  let sharedCount = 0;
+  for (const kw of set1) {
+    if (set2.has(kw)) sharedCount++;
+  }
+
+  const smallerSetSize = Math.min(set1.size, set2.size);
+  return smallerSetSize > 0 ? sharedCount / smallerSetSize : 0;
+}
+
+/**
+ * Fetch all existing blog posts from Notion
+ */
+async function fetchExistingPosts() {
+  console.log('Fetching existing posts from Notion...');
+
+  const posts = [];
+  let hasMore = true;
+  let startCursor = undefined;
+
+  while (hasMore) {
+    const response = await notion.databases.query({
+      database_id: DATABASE_ID,
+      start_cursor: startCursor,
+      page_size: 100
+    });
+
+    for (const page of response.results) {
+      const props = page.properties;
+
+      const title = props.Title?.title?.[0]?.plain_text || '';
+      const slug = props.Slug?.rich_text?.[0]?.plain_text || '';
+      const keywords = props.Keywords?.rich_text?.[0]?.plain_text || '';
+
+      posts.push({
+        id: page.id,
+        title,
+        slug,
+        keywords: keywords ? keywords.split(',').map(k => k.trim()) : [],
+        normalizedTitle: normalizeTitle(title)
+      });
+    }
+
+    hasMore = response.has_more;
+    startCursor = response.next_cursor;
+  }
+
+  console.log(`Found ${posts.length} existing posts`);
+  return posts;
+}
+
+/**
+ * Check if a new topic is a duplicate of an existing post
+ * Returns { isDuplicate: boolean, reason?: string, matchedPost?: object }
+ */
+function checkForDuplicate(newTopic, existingPosts) {
+  const newSlug = newTopic.slug;
+  const newNormalizedTitle = normalizeTitle(newTopic.title);
+  const newKeywords = newTopic.keywords || [];
+
+  for (const existing of existingPosts) {
+    // Check 1: Exact slug match
+    if (existing.slug === newSlug) {
+      return {
+        isDuplicate: true,
+        reason: 'exact slug match',
+        matchedPost: existing
+      };
+    }
+
+    // Check 2: Title word overlap >= 70%
+    const titleOverlap = calculateWordOverlap(newNormalizedTitle, existing.normalizedTitle);
+    if (titleOverlap >= 0.70) {
+      return {
+        isDuplicate: true,
+        reason: `title similarity ${Math.round(titleOverlap * 100)}%`,
+        matchedPost: existing
+      };
+    }
+
+    // Check 3: Keyword overlap >= 80%
+    if (newKeywords.length > 0 && existing.keywords.length > 0) {
+      const keywordOverlap = calculateKeywordOverlap(newKeywords, existing.keywords);
+      if (keywordOverlap >= 0.80) {
+        return {
+          isDuplicate: true,
+          reason: `keyword overlap ${Math.round(keywordOverlap * 100)}%`,
+          matchedPost: existing
+        };
+      }
+    }
+
+    // Check 4: Levenshtein distance < 15 (catches minor variations)
+    const distance = levenshteinDistance(
+      newTopic.title.toLowerCase(),
+      existing.title.toLowerCase()
+    );
+    if (distance < 15) {
+      return {
+        isDuplicate: true,
+        reason: `title too similar (distance: ${distance})`,
+        matchedPost: existing
+      };
+    }
+  }
+
+  return { isDuplicate: false };
+}
 
 // Parse GitHub Issue body to extract form fields
 function parseIssueBody(body) {
@@ -262,6 +457,7 @@ async function createNotionPage(topic, article, publishDate) {
 // Main function
 async function main() {
   console.log('Starting blog post generation from GitHub Issue...\n');
+  console.log('='.repeat(60));
 
   // Get issue data from environment variables (set by GitHub Actions)
   const issueTitle = process.env.ISSUE_TITLE || '';
@@ -299,31 +495,115 @@ async function main() {
     topic.description += ' ' + fields.keyPoints.replace(/\n/g, ' ').substring(0, 200);
   }
 
-  console.log(`Title: ${topic.title}`);
-  console.log(`Slug: ${topic.slug}`);
-  console.log(`Category: ${topic.category}`);
-  console.log(`Keywords: ${topic.keywords.join(', ')}`);
+  console.log(`\nNew Post Details:`);
+  console.log(`  Title: ${topic.title}`);
+  console.log(`  Slug: ${topic.slug}`);
+  console.log(`  Category: ${topic.category}`);
+  console.log(`  Keywords: ${topic.keywords.join(', ')}`);
+
+  // ============================================================================
+  // STEP 1: PRE-GENERATION DUPLICATE CHECK
+  // ============================================================================
+  console.log('\n' + '='.repeat(60));
+  console.log('STEP 1: Pre-generation duplicate check');
+  console.log('='.repeat(60));
+
+  const existingPosts = await fetchExistingPosts();
+  const duplicateCheck = checkForDuplicate(topic, existingPosts);
+
+  if (duplicateCheck.isDuplicate) {
+    console.log('\n⚠️  SKIP: Duplicate detected!');
+    console.log(`   New title: "${topic.title}"`);
+    console.log(`   Matches existing: "${duplicateCheck.matchedPost.title}"`);
+    console.log(`   Existing slug: ${duplicateCheck.matchedPost.slug}`);
+    console.log(`   Reason: ${duplicateCheck.reason}`);
+    console.log('\nNo post created. Exiting.');
+
+    // Write result file for GitHub Actions to read
+    const fs = require('fs');
+    fs.writeFileSync('generation-result.json', JSON.stringify({
+      status: 'skipped',
+      reason: duplicateCheck.reason,
+      newTitle: topic.title,
+      matchedTitle: duplicateCheck.matchedPost.title,
+      matchedSlug: duplicateCheck.matchedPost.slug
+    }));
+
+    process.exit(0);
+  }
+
+  console.log('\n✅ CREATE: No duplicates found. Proceeding with generation.');
 
   // Generate backdated date
   const publishDate = generateBackdate(fields.dateRange);
-  console.log(`Publish date: ${publishDate}\n`);
+  console.log(`\nPublish date: ${publishDate}`);
 
   // Generate the article using Claude
+  console.log('\n' + '='.repeat(60));
   console.log('Generating article with Claude...');
+  console.log('='.repeat(60));
   const article = await generateArticle(topic);
-  console.log(`Generated ${article.sections.length} sections\n`);
+  console.log(`Generated ${article.sections.length} sections`);
+
+  // ============================================================================
+  // STEP 2: PRE-INSERTION SAFETY NET
+  // ============================================================================
+  console.log('\n' + '='.repeat(60));
+  console.log('STEP 2: Pre-insertion safety check');
+  console.log('='.repeat(60));
+
+  // Re-fetch to catch any posts created since our first check
+  const latestPosts = await fetchExistingPosts();
+  const finalCheck = checkForDuplicate(topic, latestPosts);
+
+  if (finalCheck.isDuplicate) {
+    console.log('\n⚠️  SKIP: Duplicate detected in final safety check!');
+    console.log(`   New title: "${topic.title}"`);
+    console.log(`   Matches existing: "${finalCheck.matchedPost.title}"`);
+    console.log(`   Existing slug: ${finalCheck.matchedPost.slug}`);
+    console.log(`   Reason: ${finalCheck.reason}`);
+    console.log('\nArticle was generated but NOT inserted. Exiting.');
+
+    // Write result file for GitHub Actions to read
+    const fs = require('fs');
+    fs.writeFileSync('generation-result.json', JSON.stringify({
+      status: 'skipped',
+      reason: finalCheck.reason + ' (caught in safety check)',
+      newTitle: topic.title,
+      matchedTitle: finalCheck.matchedPost.title,
+      matchedSlug: finalCheck.matchedPost.slug
+    }));
+
+    process.exit(0);
+  }
+
+  console.log('✅ Safety check passed. Inserting into Notion...');
 
   // Create in Notion
+  console.log('\n' + '='.repeat(60));
   console.log('Publishing to Notion...');
+  console.log('='.repeat(60));
   const page = await createNotionPage(topic, article, publishDate);
 
   // Trigger Netlify rebuild
   await triggerNetlifyBuild();
 
-  console.log('\n Blog post generated and published!');
+  console.log('\n' + '='.repeat(60));
+  console.log('✅ SUCCESS: Blog post generated and published!');
+  console.log('='.repeat(60));
   console.log(`   Title: ${topic.title}`);
   console.log(`   Date: ${publishDate}`);
   console.log(`   URL: https://getclearly.app/blog/${topic.slug}.html`);
+
+  // Write result file for GitHub Actions to read
+  const fs = require('fs');
+  fs.writeFileSync('generation-result.json', JSON.stringify({
+    status: 'created',
+    title: topic.title,
+    slug: topic.slug,
+    date: publishDate,
+    url: `https://getclearly.app/blog/${topic.slug}.html`
+  }));
 }
 
 main().catch(err => {

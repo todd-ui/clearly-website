@@ -37,15 +37,56 @@ jobs:
           cd automation
           node generate-post-from-topic.js
 
-      - name: Comment on issue
+      - name: Read generation result
+        id: result
+        run: |
+          if [ -f automation/generation-result.json ]; then
+            echo "result=$(cat automation/generation-result.json)" >> $GITHUB_OUTPUT
+            echo "status=$(cat automation/generation-result.json | jq -r '.status')" >> $GITHUB_OUTPUT
+          else
+            echo "status=unknown" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Comment on issue (created)
+        if: steps.result.outputs.status == 'created'
         uses: actions/github-script@v7
         with:
           script: |
+            const result = JSON.parse(process.env.RESULT);
             github.rest.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: '✅ Custom blog post generated and added to Notion! It will appear on the site after the next build.'
+              body: `✅ **Blog post generated and published!**\n\n- **Title:** ${result.title}\n- **Date:** ${result.date}\n- **URL:** ${result.url}\n\nIt will appear on the site after the next build.`
+            })
+        env:
+          RESULT: ${{ steps.result.outputs.result }}
+
+      - name: Comment on issue (skipped - duplicate)
+        if: steps.result.outputs.status == 'skipped'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const result = JSON.parse(process.env.RESULT);
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `⚠️ **Skipped — Duplicate detected**\n\nThis topic already exists in the blog:\n\n- **Requested:** "${result.newTitle}"\n- **Matches:** "${result.matchedTitle}"\n- **Existing slug:** \`${result.matchedSlug}\`\n- **Reason:** ${result.reason}\n\nNo new post was created.`
+            })
+        env:
+          RESULT: ${{ steps.result.outputs.result }}
+
+      - name: Add duplicate label if skipped
+        if: steps.result.outputs.status == 'skipped'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['duplicate']
             })
 
       - name: Close issue
