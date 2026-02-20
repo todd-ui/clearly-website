@@ -51,27 +51,13 @@
 
   <style>
     /* ===========================================
-       TYPOGRAPHY SYSTEM
-       H1: 48px / 36px mobile
-       H2: 36px / 28px mobile
-       H3: 20px
-       Body: 17px
-       Small: 14px
+       BASE
        =========================================== */
-
     html, body { overflow-x: hidden; max-width: 100vw; }
 
-    /* Section Label */
-    .section-label {
-      font-size: 13px !important;
-      font-weight: 600 !important;
-      letter-spacing: 0.1em !important;
-      text-transform: uppercase !important;
-      color: #0D8268 !important;
-      margin-bottom: 12px !important;
-    }
-
-    /* Buttons */
+    /* ===========================================
+       BUTTONS
+       =========================================== */
     .btn-primary {
       display: inline-flex;
       align-items: center;
@@ -123,9 +109,7 @@
       text-align: center;
     }
 
-    .hero .container {
-      max-width: 720px;
-    }
+    .hero .container { max-width: 720px; }
 
     .hero-badge {
       display: inline-flex;
@@ -140,10 +124,7 @@
       margin-bottom: 32px;
     }
 
-    .hero-badge svg {
-      width: 16px;
-      height: 16px;
-    }
+    .hero-badge svg { width: 16px; height: 16px; }
 
     .hero h1 {
       font-size: 52px;
@@ -158,10 +139,7 @@
       font-size: 17px;
       line-height: 1.7;
       color: var(--text-secondary);
-      margin-bottom: 0;
-      text-align: center;
-      margin-left: auto;
-      margin-right: auto;
+      margin: 0 auto;
       max-width: 560px;
     }
 
@@ -181,151 +159,117 @@
     }
 
     /* ===========================================
-       CONTENT SECTIONS - UNIFIED STYLE
+       PROSE SECTIONS (Experience, Shift, Different)
+       Centered text blocks with consistent typography
        =========================================== */
-    .content-section {
+    .prose-section {
       padding: 140px 0;
+      background: white;
     }
 
-    .content-section .container {
-      max-width: 1000px;
-    }
+    .prose-section .container { max-width: 680px; }
 
-    .section-header {
+    .prose-section .section-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
       text-align: center;
-      max-width: 680px;
-      margin: 0 auto;
+      margin-bottom: 16px;
     }
 
-    .section-header:not(:last-child) {
-      margin-bottom: 48px;
-    }
-
-    .section-header h2 {
+    .prose-section h2 {
       font-size: 30px;
       font-weight: 600;
       line-height: 1.25;
       color: var(--text);
-      margin-bottom: 20px;
       letter-spacing: -0.02em;
-    }
-
-    .section-header p {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-top: 0;
-    }
-
-    .section-header p + p {
-      margin-top: 16px;
-    }
-
-    @media (max-width: 768px) {
-      .content-section { padding: 100px 0; }
-      .section-header h2 { font-size: 26px; }
-    }
-
-    /* ===========================================
-       EXPERIENCE SECTION (Card treatment)
-       =========================================== */
-    .experience-section {
-      padding: 120px 0;
-      background: white;
-    }
-
-    .experience-section .container {
-      max-width: 720px;
-    }
-
-    .experience-section .experience-card {
-      background: #F8F7F5;
-      border-radius: 20px;
-      padding: 60px 48px;
       text-align: center;
-    }
-
-    .experience-section h2 {
-      font-size: 30px;
-      font-weight: 600;
-      line-height: 1.3;
-      color: var(--text);
       margin-bottom: 24px;
-      letter-spacing: -0.02em;
-      text-align: center;
     }
 
-    .experience-section p {
+    .prose-section p {
       font-size: 17px;
       color: var(--text-secondary);
       line-height: 1.75;
+      text-align: center;
       margin: 0;
-      text-align: center;
     }
 
-    .experience-section p + p {
-      margin-top: 20px;
-    }
+    .prose-section p + p { margin-top: 20px; }
 
-    @media (max-width: 768px) {
-      .experience-section h2 { font-size: 26px; }
-      .experience-section .experience-card { padding: 40px 28px; }
-    }
-
-    /* ===========================================
-       SHIFT SECTION (Key conceptual section)
-       =========================================== */
-    .shift-section {
-      padding: 140px 0;
-      background: white;
-    }
-
-    .shift-section .container {
-      max-width: 720px;
-    }
-
-    .shift-section .section-label {
-      text-align: center;
-      font-size: 14px !important;
-      margin-bottom: 16px !important;
-    }
-
-    .shift-section h2 {
-      font-size: 30px;
-      font-weight: 600;
-      line-height: 1.25;
-      color: var(--text);
-      margin-bottom: 32px;
-      letter-spacing: -0.02em;
-      text-align: center;
-    }
-
-    .shift-section p {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.75;
-      margin: 0;
-      text-align: center;
-    }
-
-    .shift-section p + p {
-      margin-top: 20px;
-    }
-
-    .shift-section .closing-line {
+    .prose-section .closing-line {
       font-weight: 500;
       color: var(--text);
       margin-top: 28px;
       font-size: 18px;
     }
 
+    /* Card variant for Experience section */
+    .prose-section.has-card .prose-card {
+      background: #F8F7F5;
+      border-radius: 20px;
+      padding: 60px 48px;
+    }
+
     @media (max-width: 768px) {
-      .shift-section { padding: 100px 0; }
-      .shift-section h2 { font-size: 26px; }
+      .prose-section { padding: 100px 0; }
+      .prose-section h2 { font-size: 26px; }
+      .prose-section.has-card .prose-card { padding: 40px 28px; }
     }
 
     /* ===========================================
-       HOW IT WORKS - 2x2 GRID
+       GRID SECTIONS (How It Works, Logistics, Tools)
+       Header + grid of cards
+       =========================================== */
+    .grid-section {
+      padding: 140px 0;
+      background: white;
+    }
+
+    .grid-section .container { max-width: 900px; }
+
+    .grid-section .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 48px;
+    }
+
+    .grid-section .section-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--primary);
+      margin-bottom: 16px;
+    }
+
+    .grid-section .section-header h2 {
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 1.25;
+      color: var(--text);
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+
+    .grid-section .section-header p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .grid-section { padding: 100px 0; }
+      .grid-section .section-header h2 { font-size: 26px; }
+    }
+
+    /* ===========================================
+       HOW IT WORKS CARDS
        =========================================== */
     .mechanism-grid {
       display: grid;
@@ -335,15 +279,14 @@
 
     .mechanism-card {
       background: white;
+      border: 1px solid var(--border);
       border-radius: 16px;
       padding: 32px 28px;
-      text-align: left;
-      border-left: 3px solid var(--primary);
     }
 
     .mechanism-card .card-icon {
-      width: 52px;
-      height: 52px;
+      width: 48px;
+      height: 48px;
       background: var(--primary-soft);
       border-radius: 12px;
       display: flex;
@@ -353,10 +296,7 @@
       margin-bottom: 20px;
     }
 
-    .mechanism-card .card-icon svg {
-      width: 24px;
-      height: 24px;
-    }
+    .mechanism-card .card-icon svg { width: 22px; height: 22px; }
 
     .mechanism-card h3 {
       font-size: 17px;
@@ -378,110 +318,11 @@
     }
 
     /* ===========================================
-       ANCHOR LINE (Standalone statement)
+       LOGISTICS CARDS
        =========================================== */
-    .anchor-section {
-      padding: 160px 0;
-      background: #1A1917;
-      text-align: center;
-    }
+    .grid-section.logistics { background: #FAFAF9; }
 
-    .anchor-section .container {
-      max-width: 800px;
-    }
-
-    .anchor-section blockquote {
-      font-size: 26px;
-      font-weight: 500;
-      line-height: 1.4;
-      color: white;
-      margin: 0 0 20px 0;
-      letter-spacing: -0.01em;
-      font-style: italic;
-    }
-
-    .anchor-section cite {
-      display: block;
-      font-size: 14px;
-      font-weight: 400;
-      color: rgba(255, 255, 255, 0.7);
-      font-style: normal;
-    }
-
-    @media (max-width: 768px) {
-      .anchor-section { padding: 100px 0; }
-      .anchor-section blockquote { font-size: 22px; }
-    }
-
-    /* ===========================================
-       DIFFERENTIATION SECTION (Prose)
-       =========================================== */
-    .different-section {
-      padding: 140px 0;
-    }
-
-    .different-section .container {
-      max-width: 680px;
-    }
-
-    .different-section h2 {
-      font-size: 30px;
-      font-weight: 600;
-      line-height: 1.3;
-      color: var(--text);
-      margin-bottom: 24px;
-      letter-spacing: -0.02em;
-      text-align: center;
-    }
-
-    .different-section p {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.75;
-      margin: 0;
-      text-align: center;
-    }
-
-    .different-section p + p {
-      margin-top: 20px;
-    }
-
-    .different-section .closing-line {
-      font-weight: 600;
-      color: var(--text);
-      margin-top: 32px;
-      font-size: 18px;
-    }
-
-    @media (max-width: 768px) {
-      .different-section { padding: 100px 0; }
-      .different-section h2 { font-size: 24px; }
-    }
-
-    /* ===========================================
-       LOGISTICS - COMPACT 3-ITEM
-       =========================================== */
-    .logistics-section {
-      padding: 120px 0;
-      background: #FAFAF9;
-    }
-
-    .logistics-section .section-header {
-      margin-bottom: 32px;
-    }
-
-    .logistics-section .section-header .section-label {
-      font-size: 18px !important;
-      letter-spacing: 0 !important;
-      text-transform: none !important;
-    }
-
-    .logistics-section .section-header p {
-      font-size: 16px;
-      margin-bottom: 0;
-    }
-
-    .logistics-items {
+    .logistics-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
@@ -489,7 +330,7 @@
       margin: 0 auto;
     }
 
-    .logistics-item {
+    .logistics-card {
       display: flex;
       align-items: flex-start;
       gap: 16px;
@@ -499,7 +340,7 @@
       padding: 24px;
     }
 
-    .logistics-item .item-icon {
+    .logistics-card .card-icon {
       width: 44px;
       height: 44px;
       background: var(--primary-soft);
@@ -511,19 +352,16 @@
       flex-shrink: 0;
     }
 
-    .logistics-item .item-icon svg {
-      width: 22px;
-      height: 22px;
-    }
+    .logistics-card .card-icon svg { width: 20px; height: 20px; }
 
-    .logistics-item h3 {
+    .logistics-card h3 {
       font-size: 15px;
       font-weight: 600;
       color: var(--text);
       margin-bottom: 4px;
     }
 
-    .logistics-item p {
+    .logistics-card p {
       font-size: 14px;
       color: var(--text-secondary);
       line-height: 1.5;
@@ -531,17 +369,13 @@
     }
 
     @media (max-width: 768px) {
-      .logistics-items { grid-template-columns: 1fr; }
+      .logistics-grid { grid-template-columns: 1fr; }
     }
 
     /* ===========================================
-       FREE TOOLS - 2 CARDS
+       TOOL CARDS
        =========================================== */
-    .tools-section {
-      padding: 140px 0;
-    }
-
-    .cards-grid-2 {
+    .tools-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 20px;
@@ -549,15 +383,14 @@
       margin: 0 auto;
     }
 
-    .card-cta {
+    .tool-card {
       background: white;
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 32px 28px;
-      text-align: left;
     }
 
-    .card-cta .card-icon {
+    .tool-card .card-icon {
       width: 44px;
       height: 44px;
       background: var(--primary-soft);
@@ -569,55 +402,96 @@
       margin-bottom: 16px;
     }
 
-    .card-cta h3 {
+    .tool-card .card-icon svg { width: 20px; height: 20px; }
+
+    .tool-card h3 {
       font-size: 17px;
       font-weight: 600;
       color: var(--text);
       margin-bottom: 10px;
     }
 
-    .card-cta > p {
+    .tool-card p {
       font-size: 15px;
       color: var(--text-secondary);
       line-height: 1.6;
-      margin-bottom: 6px;
+      margin: 0 0 6px;
     }
 
-    .card-cta .tool-meta {
+    .tool-card .tool-meta {
       font-size: 13px;
       color: var(--text-muted);
       margin-bottom: 20px;
     }
 
-    .card-cta .btn-primary {
+    .tool-card .btn-primary {
       padding: 12px 20px;
       font-size: 14px;
     }
 
     @media (max-width: 768px) {
-      .tools-section { padding: 100px 0; }
-      .cards-grid-2 { grid-template-columns: 1fr; }
+      .tools-grid { grid-template-columns: 1fr; }
     }
 
     /* ===========================================
-       FINAL CTA
+       ANCHOR SECTION (Quote)
+       =========================================== */
+    .anchor-section {
+      padding: 140px 0;
+      background: #1A1917;
+      text-align: center;
+    }
+
+    .anchor-section .container { max-width: 720px; }
+
+    .anchor-section blockquote {
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: white;
+      margin: 0 0 20px;
+      letter-spacing: -0.01em;
+      font-style: italic;
+    }
+
+    .anchor-section cite {
+      display: block;
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.6);
+      font-style: normal;
+    }
+
+    @media (max-width: 768px) {
+      .anchor-section { padding: 100px 0; }
+      .anchor-section blockquote { font-size: 22px; }
+    }
+
+    /* ===========================================
+       CTA SECTION
        =========================================== */
     .cta-section {
       padding: 100px 0;
       background: var(--primary);
+      text-align: center;
     }
 
-    .cta-section .section-header {
-      margin-bottom: 32px;
-    }
+    .cta-section .container { max-width: 680px; }
 
-    .cta-section .section-header h2 {
-      color: white;
+    .cta-section h2 {
       font-size: 30px;
+      font-weight: 600;
+      line-height: 1.25;
+      color: white;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
     }
 
-    .cta-section .section-header p {
+    .cta-section p {
+      font-size: 17px;
       color: rgba(255, 255, 255, 0.85);
+      line-height: 1.7;
+      margin: 0 0 32px;
     }
 
     .cta-section .btn-primary {
@@ -629,19 +503,8 @@
       background: rgba(255, 255, 255, 0.9);
     }
 
-    .cta-section .container {
-      text-align: center;
-    }
-
-    .cta-note {
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.6);
-      margin-top: 16px;
-    }
-
     @media (max-width: 768px) {
-      .cta-section { padding: 100px 0; }
-      .cta-section .section-header h2 { font-size: 24px; }
+      .cta-section h2 { font-size: 26px; }
     }
 
     /* ===========================================
@@ -740,9 +603,9 @@
   </section>
 
   <!-- SECTION 2: NAME THE EXPERIENCE -->
-  <section class="experience-section" id="experience">
+  <section class="prose-section has-card" id="experience">
     <div class="container">
-      <div class="experience-card fade-in">
+      <div class="prose-card fade-in">
         <h2>This is what high-conflict co-parenting communication looks like.</h2>
         <p>A message about Tuesday pickup becomes an argument about last Thursday. A question about expenses turns into a referendum on who's doing more. Every thread drifts. Tone takes over. The thing that actually needed a decision gets buried under everything else.</p>
         <p>The problem isn't what either parent is saying. It's that nothing is containing the conversation.</p>
@@ -751,7 +614,7 @@
   </section>
 
   <!-- SECTION 3: THE SHIFT -->
-  <section class="shift-section" id="shift">
+  <section class="prose-section" id="shift">
     <div class="container">
       <p class="section-label fade-in">The Shift</p>
       <h2 class="fade-in">Messaging is just a channel. Communication requires structure.</h2>
@@ -762,7 +625,7 @@
   </section>
 
   <!-- SECTION 4: HOW IT WORKS -->
-  <section class="content-section" id="how-it-works" style="background: white;">
+  <section class="grid-section" id="how-it-works">
     <div class="container">
       <div class="section-header">
         <p class="section-label fade-in">How It Works</p>
@@ -803,7 +666,7 @@
   </section>
 
   <!-- SECTION 5: DIFFERENTIATION -->
-  <section class="different-section" id="different">
+  <section class="prose-section" id="different">
     <div class="container">
       <h2 class="fade-in">How this is different from other co-parenting apps.</h2>
       <p class="fade-in">Other co-parenting apps are messaging platforms with features bolted on. The core experience is the same dynamic you had before — on a different screen.</p>
@@ -815,40 +678,41 @@
   <!-- SECTION 6: ANCHOR LINE -->
   <section class="anchor-section" id="anchor">
     <div class="container">
-      <blockquote class="fade-in">"Manage how you write and speak to them and structure things so there's not much contact."</blockquote>
-      <cite class="fade-in">— Bill Eddy, LCSW, Esq., co-founder of the High Conflict Institute</cite>
+      <blockquote class="fade-in">"Children fare better in a divorce when parents work together cooperatively."</blockquote>
+      <cite class="fade-in">— Dr. Robert Emery, University of Virginia</cite>
     </div>
   </section>
 
   <!-- SECTION 7: LOGISTICS -->
-  <section class="logistics-section" id="logistics">
+  <section class="grid-section logistics" id="logistics">
     <div class="container">
       <div class="section-header">
         <p class="section-label fade-in">Schedule. Expenses. Shared.</p>
+        <h2 class="fade-in">And yes — it handles the logistics too.</h2>
         <p class="fade-in">Clearly isn't only about messaging. It also handles the practical coordination that co-parenting requires.</p>
       </div>
-      <div class="logistics-items">
-        <div class="logistics-item fade-in">
-          <div class="item-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+      <div class="logistics-grid">
+        <div class="logistics-card fade-in">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
           </div>
           <div>
             <h3>Schedule</h3>
             <p>Custody calendar with holidays, swaps, and iCal sync to your phone.</p>
           </div>
         </div>
-        <div class="logistics-item fade-in">
-          <div class="item-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        <div class="logistics-card fade-in">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
           </div>
           <div>
             <h3>Expenses</h3>
             <p>Log shared costs, split them fairly, settle up without spreadsheets.</p>
           </div>
         </div>
-        <div class="logistics-item fade-in">
-          <div class="item-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+        <div class="logistics-card fade-in">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
           </div>
           <div>
             <h3>Shared</h3>
@@ -860,17 +724,17 @@
   </section>
 
   <!-- SECTION 8: FREE TOOLS -->
-  <section class="tools-section" id="tools">
+  <section class="grid-section" id="tools">
     <div class="container">
       <div class="section-header">
         <p class="section-label fade-in">Free Tools</p>
         <h2 class="fade-in">Understand what's happening in your co-parenting communication.</h2>
         <p class="fade-in">These free tools can help — and show you what might actually change it.</p>
       </div>
-      <div class="cards-grid-2">
-        <div class="card-cta fade-in">
+      <div class="tools-grid">
+        <div class="tool-card fade-in">
           <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
           </div>
           <h3>Understand your communication patterns</h3>
           <p>A quick assessment of how you and your co-parent show up when conversations get hard — and what might help.</p>
@@ -880,9 +744,9 @@
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
         </div>
-        <div class="card-cta fade-in">
+        <div class="tool-card fade-in">
           <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           </div>
           <h3>Build your custody plan</h3>
           <p>Work through the schedule, holidays, and handoffs. Get a clear plan you can share with your co-parent, attorney, or mediator.</p>
@@ -897,12 +761,10 @@
   </section>
 
   <!-- SECTION 9: EARLY ACCESS CTA -->
-  <section class="content-section cta-section" id="cta">
+  <section class="cta-section" id="cta">
     <div class="container">
-      <div class="section-header">
-        <h2 class="fade-in">Built for co-parents where communication has become the hardest part.</h2>
-        <p class="fade-in">Currently in early access for iOS.</p>
-      </div>
+      <h2 class="fade-in">Built for co-parents where communication has become the hardest part.</h2>
+      <p class="fade-in">Currently in early access for iOS.</p>
       <button class="btn-primary fade-in" data-access-modal>
         Request Early Access
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
