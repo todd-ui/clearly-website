@@ -106,9 +106,13 @@
        HERO
        =========================================== */
     .hero {
-      padding: 160px 0 80px;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background: white;
       text-align: center;
+      position: relative;
     }
 
     .hero .container { max-width: 720px; }
@@ -154,26 +158,27 @@
     }
 
     .scroll-hint {
-      display: flex;
-      justify-content: center;
-      margin-top: 48px;
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
       color: var(--text-muted);
-      opacity: 0.5;
+      opacity: 0.4;
       animation: bounce 2s ease infinite;
     }
 
     .scroll-hint svg {
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
     }
 
     @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(6px); }
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
     }
 
     @media (max-width: 768px) {
-      .hero { padding: 120px 0 60px; }
+      .hero { min-height: 100svh; }
       .hero h1 { font-size: 32px; }
       .hero-subtitle { font-size: 16px; }
       .hero-ctas { flex-direction: column; align-items: center; }
