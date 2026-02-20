@@ -18,8 +18,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0D8268">
-  <title>Clearly — Co-Parenting App | Communication That Actually Works</title>
-  <meta name="description" content="Clearly is a co-parenting app that uses interest-based communication to shift the patterns that made co-parenting hard—so you see where you already agree. Shared custody calendar, expense tracking, and messaging built around resolution.">
+  <title>Clearly — Structured Communication for High-Conflict Co-Parenting</title>
+  <meta name="description" content="When co-parenting communication keeps escalating, structure changes everything. Clearly separates emotion from issues so conversations move toward resolution.">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://getclearly.app/">
@@ -27,21 +27,22 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app/">
-  <meta property="og:title" content="Clearly — Co-Parenting App | Communication That Actually Works">
-  <meta property="og:description" content="Clearly is a co-parenting app that uses interest-based communication to shift the patterns that made co-parenting hard—so you see where you already agree.">
+  <meta property="og:title" content="Clearly — Structured Communication for High-Conflict Co-Parenting">
+  <meta property="og:description" content="When co-parenting communication keeps escalating, structure changes everything. Clearly separates emotion from issues so conversations move toward resolution.">
   <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
   <meta property="og:site_name" content="Clearly">
   <meta property="og:locale" content="en_US">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Clearly — Co-Parenting App | Communication That Actually Works">
-  <meta name="twitter:description" content="Clearly is a co-parenting app that uses interest-based communication to shift the patterns that made co-parenting hard.">
+  <meta name="twitter:title" content="Clearly — Structured Communication for High-Conflict Co-Parenting">
+  <meta name="twitter:description" content="When co-parenting communication keeps escalating, structure changes everything. Clearly separates emotion from issues so conversations move toward resolution.">
   <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
 
   <!-- Additional SEO -->
   <meta name="robots" content="index, follow">
   <meta name="author" content="Clearly LLC">
+  <meta name="keywords" content="high-conflict co-parenting app, structured co-parenting communication, co-parenting when communication is hard">
 
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
@@ -92,6 +93,27 @@
       text-decoration: none;
     }
 
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 980px;
+      border: 1px solid var(--border);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--text-secondary);
+      color: var(--text);
+      text-decoration: none;
+    }
+
     /* ===========================================
        HERO
        =========================================== */
@@ -102,7 +124,7 @@
     }
 
     .hero .container {
-      max-width: 680px;
+      max-width: 720px;
     }
 
     .hero-badge {
@@ -124,17 +146,17 @@
     }
 
     .hero h1 {
-      font-size: 48px;
+      font-size: 44px;
       font-weight: 600;
-      line-height: 1.1;
+      line-height: 1.15;
       color: var(--text);
-      margin-bottom: 24px;
+      margin-bottom: 28px;
       letter-spacing: -0.02em;
     }
 
     .hero-subtitle {
-      font-size: 17px;
-      line-height: 1.65;
+      font-size: 18px;
+      line-height: 1.7;
       color: var(--text-secondary);
       margin-bottom: 0;
       text-align: center;
@@ -142,31 +164,23 @@
       margin-right: auto;
     }
 
-    .hero-subtitle + .hero-subtitle {
-      margin-top: 12px;
-    }
-
-    .hero-emphasis {
-      font-weight: 500;
-      color: var(--text);
-    }
-
     .hero-ctas {
       display: flex;
-      flex-direction: column;
-      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
       gap: 12px;
       margin-top: 40px;
     }
 
     @media (max-width: 768px) {
       .hero { padding: 120px 0 80px; }
-      .hero h1 { font-size: 36px; }
+      .hero h1 { font-size: 32px; }
       .hero-subtitle { font-size: 17px; }
+      .hero-ctas { flex-direction: column; align-items: center; }
     }
 
     /* ===========================================
-       ALL CONTENT SECTIONS - UNIFIED STYLE
+       CONTENT SECTIONS - UNIFIED STYLE
        =========================================== */
     .content-section {
       padding: 100px 0;
@@ -178,7 +192,7 @@
 
     .section-header {
       text-align: center;
-      max-width: 600px;
+      max-width: 680px;
       margin: 0 auto;
     }
 
@@ -191,236 +205,362 @@
       font-weight: 600;
       line-height: 1.25;
       color: var(--text);
-      margin-bottom: 16px;
+      margin-bottom: 20px;
       letter-spacing: -0.02em;
     }
 
     .section-header p {
       font-size: 17px;
       color: var(--text-secondary);
-      line-height: 1.65;
+      line-height: 1.7;
       margin-top: 0;
     }
 
     .section-header p + p {
-      margin-top: 12px;
-    }
-
-    .section-header .closing-line {
-      font-weight: 500;
-      color: var(--primary);
+      margin-top: 16px;
     }
 
     @media (max-width: 768px) {
+      .content-section { padding: 80px 0; }
       .section-header h2 { font-size: 26px; }
     }
 
     /* ===========================================
-       STEP CARDS (How It Works - shows flow)
+       EXPERIENCE SECTION (Text-only, left-aligned)
        =========================================== */
-    .steps-grid {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr auto 1fr;
-      gap: 0;
-      align-items: start;
-      position: relative;
+    .experience-section {
+      padding: 80px 0;
     }
 
-    .step-card {
-      background: white;
-      border-radius: 16px;
-      padding: 32px 24px;
-      text-align: center;
-      position: relative;
+    .experience-section .container {
+      max-width: 680px;
     }
 
-    /* Flow connector between cards */
-    .flow-connector {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding-top: 56px;
-    }
-
-    .flow-connector svg {
-      color: var(--primary);
-    }
-
-    @media (max-width: 900px) {
-      .steps-grid {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-      .flow-connector {
-        padding: 12px 0;
-        transform: rotate(90deg);
-      }
-    }
-
-    .step-card .card-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--primary-soft);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      margin: 0 auto 16px;
-      position: relative;
-    }
-
-    .step-card h3 {
-      font-size: 18px;
+    .experience-section h2 {
+      font-size: 28px;
       font-weight: 600;
+      line-height: 1.3;
       color: var(--text);
-      margin-bottom: 12px;
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
     }
 
-    .step-card p {
-      font-size: 16px;
+    .experience-section p {
+      font-size: 17px;
       color: var(--text-secondary);
-      line-height: 1.6;
+      line-height: 1.75;
+      margin: 0;
     }
 
-
-    /* ===========================================
-       STANDARD CARDS (3-col)
-       =========================================== */
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
+    .experience-section p + p {
+      margin-top: 20px;
     }
 
-    .card {
-      background: white;
-      border-radius: 16px;
-      padding: 32px 24px;
-      text-align: center;
-    }
-
-    .card-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--primary-soft);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      margin: 0 auto 16px;
-    }
-
-    .card h3 {
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 12px;
-    }
-
-    .card p {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-
-    @media (max-width: 900px) {
-      .cards-grid { grid-template-columns: 1fr; gap: 12px; }
+    @media (max-width: 768px) {
+      .experience-section h2 { font-size: 24px; }
     }
 
     /* ===========================================
-       LOGISTICS - 4 COLUMN GRID
+       SHIFT SECTION (Key conceptual section)
        =========================================== */
-    .cards-grid-4 {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
+    .shift-section {
+      padding: 100px 0;
+      background: #FAFAF9;
     }
 
-    .card-small {
+    .shift-section .container {
+      max-width: 720px;
+    }
+
+    .shift-section h2 {
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
       text-align: center;
-      padding: 28px 16px;
-      background: white;
-      border-radius: 12px;
     }
 
-    .card-small .card-icon {
+    .shift-section p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin: 0;
+      text-align: left;
+    }
+
+    .shift-section p + p {
+      margin-top: 20px;
+    }
+
+    .shift-section .closing-line {
+      font-weight: 500;
+      color: var(--text);
+      margin-top: 24px;
+      font-size: 18px;
+    }
+
+    @media (max-width: 768px) {
+      .shift-section { padding: 80px 0; }
+      .shift-section h2 { font-size: 26px; }
+    }
+
+    /* ===========================================
+       HOW IT WORKS - 2x2 GRID
+       =========================================== */
+    .mechanism-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .mechanism-card {
+      background: white;
+      border-radius: 16px;
+      padding: 32px 28px;
+      text-align: left;
+    }
+
+    .mechanism-card .card-icon {
       width: 44px;
       height: 44px;
       background: var(--primary-soft);
-      margin: 0 auto 12px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      margin-bottom: 16px;
     }
 
-    .card-small h3 {
-      font-size: 16px;
+    .mechanism-card h3 {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+
+    .mechanism-card p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .mechanism-grid { grid-template-columns: 1fr; gap: 16px; }
+    }
+
+    /* ===========================================
+       ANCHOR LINE (Standalone statement)
+       =========================================== */
+    .anchor-section {
+      padding: 80px 0;
+      background: #F5F4F2;
+      text-align: center;
+    }
+
+    .anchor-section .container {
+      max-width: 800px;
+    }
+
+    .anchor-section blockquote {
+      font-size: 26px;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--text);
+      margin: 0;
+      letter-spacing: -0.01em;
+    }
+
+    @media (max-width: 768px) {
+      .anchor-section { padding: 60px 0; }
+      .anchor-section blockquote { font-size: 22px; }
+    }
+
+    /* ===========================================
+       DIFFERENTIATION SECTION (Prose)
+       =========================================== */
+    .different-section {
+      padding: 100px 0;
+    }
+
+    .different-section .container {
+      max-width: 680px;
+    }
+
+    .different-section h2 {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 24px;
+      letter-spacing: -0.01em;
+      text-align: center;
+    }
+
+    .different-section p {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      margin: 0;
+    }
+
+    .different-section p + p {
+      margin-top: 20px;
+    }
+
+    .different-section .closing-line {
+      font-weight: 500;
+      color: var(--text);
+      margin-top: 24px;
+    }
+
+    @media (max-width: 768px) {
+      .different-section { padding: 80px 0; }
+      .different-section h2 { font-size: 24px; }
+    }
+
+    /* ===========================================
+       LOGISTICS - COMPACT 3-ITEM
+       =========================================== */
+    .logistics-section {
+      padding: 80px 0;
+      background: #FAFAF9;
+    }
+
+    .logistics-section .section-header {
+      margin-bottom: 32px;
+    }
+
+    .logistics-section .section-header h2 {
+      font-size: 20px;
       font-weight: 600;
       color: var(--text);
       margin-bottom: 8px;
     }
 
-    .card-small p {
+    .logistics-section .section-header p {
+      font-size: 16px;
+      margin-bottom: 0;
+    }
+
+    .logistics-items {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .logistics-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    .logistics-item .item-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--primary-soft);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+
+    .logistics-item h3 {
       font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .logistics-item p {
+      font-size: 14px;
       color: var(--text-secondary);
       line-height: 1.5;
+      margin: 0;
     }
 
-    @media (max-width: 900px) {
-      .cards-grid-4 { grid-template-columns: repeat(2, 1fr); }
-    }
-
-    @media (max-width: 600px) {
-      .cards-grid-4 { grid-template-columns: 1fr; }
+    @media (max-width: 768px) {
+      .logistics-items { grid-template-columns: 1fr; }
     }
 
     /* ===========================================
-       TWO TOOLS / FREE TOOLS
+       FREE TOOLS - 2 CARDS
        =========================================== */
+    .tools-section {
+      padding: 100px 0;
+    }
+
     .cards-grid-2 {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
+      gap: 20px;
       max-width: 800px;
       margin: 0 auto;
     }
 
     .card-cta {
       background: white;
+      border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 32px 24px;
-      text-align: center;
+      padding: 32px 28px;
+      text-align: left;
     }
 
     .card-cta .card-icon {
-      margin: 0 auto 16px;
+      width: 44px;
+      height: 44px;
+      background: var(--primary-soft);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      margin-bottom: 16px;
     }
 
     .card-cta h3 {
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 600;
       color: var(--text);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .card-cta > p {
-      font-size: 16px;
+      font-size: 15px;
       color: var(--text-secondary);
       line-height: 1.6;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .card-cta .tool-meta {
-      font-size: 14px;
+      font-size: 13px;
       color: var(--text-muted);
       margin-bottom: 20px;
     }
 
+    .card-cta .btn-primary {
+      padding: 12px 20px;
+      font-size: 14px;
+    }
+
     @media (max-width: 768px) {
+      .tools-section { padding: 80px 0; }
       .cards-grid-2 { grid-template-columns: 1fr; }
     }
 
     /* ===========================================
-       BETA CTA
+       FINAL CTA
        =========================================== */
     .cta-section {
       padding: 100px 0;
@@ -433,6 +573,7 @@
 
     .cta-section .section-header h2 {
       color: white;
+      font-size: 30px;
     }
 
     .cta-section .section-header p {
@@ -456,6 +597,11 @@
       font-size: 14px;
       color: rgba(255, 255, 255, 0.6);
       margin-top: 16px;
+    }
+
+    @media (max-width: 768px) {
+      .cta-section { padding: 80px 0; }
+      .cta-section .section-header h2 { font-size: 26px; }
     }
 
     /* ===========================================
@@ -498,295 +644,229 @@
 <a href="#main-content" class="skip-link">Skip to content</a>
 
   <!-- Navigation -->
-  <a href="#main-content" class="skip-link">Skip to content</a>
-<a href="#main-content" class="skip-link">Skip to content</a>
-<a href="#main-content" class="skip-link">Skip to content</a>
-<a href="#main-content" class="skip-link">Skip to content</a>
-<a href="#main-content" class="skip-link">Skip to content</a>
-<a href="#main-content" class="skip-link">Skip to content</a>
-<a href="#main-content" class="skip-link">Skip to content</a>
-<nav class="nav">
-  <div class="container">
-    <a href="/" class="nav-brand">
-      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
-      Clearly
-    </a>
-    <ul class="nav-links">
-      <li><a href="/blog.html">Common Ground</a></li>
-      <li><a href="/professionals.html">For Professionals</a></li>
-      <li><a href="#" class="nav-cta" data-access-modal>Request Access</a></li>
-    </ul>
-    <button class="nav-toggle" aria-label="Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-</nav>
+  <nav class="nav">
+    <div class="container">
+      <a href="/" class="nav-brand">
+        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+        Clearly
+      </a>
+      <ul class="nav-links">
+        <li><a href="/blog.html">Common Ground</a></li>
+        <li><a href="/professionals.html">For Professionals</a></li>
+        <li><a href="#" class="nav-cta" data-access-modal>Request Access</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
 
-<script>
-  // Mobile menu toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-  }
-</script>
-<script src="/js/access-modal.js" defer></script>
+  <script>
+    // Mobile menu toggle
+    const navToggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navToggle.classList.toggle('open');
+        navLinks.classList.toggle('open');
+      });
+    }
+  </script>
 
-<script>
-  // Mobile menu toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-  }
-</script>
-<script src="/js/access-modal.js" defer></script>
-
-<script>
-  // Mobile menu toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-  }
-</script>
-<script src="/js/access-modal.js" defer></script>
-
-<script>
-  // Mobile menu toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-  }
-</script>
-<script src="/js/access-modal.js" defer></script>
-
-<script>
-  // Mobile menu toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-  }
-</script>
-<script src="/js/access-modal.js" defer></script>
-
-<script>
-  // Mobile menu toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-  }
-</script>
-<script src="/js/access-modal.js" defer></script>
-
-<script>
-  // Mobile menu toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-  }
-</script>
-<script src="/js/access-modal.js" defer></script>
-
-  <!-- Hero -->
   <main id="main-content">
-  <section class="hero">
+
+  <!-- SECTION 1: HERO -->
+  <section class="hero" id="hero">
     <div class="container">
       <div class="hero-badge fade-in">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         Coming to iOS
       </div>
-      <h1 class="fade-in">Messaging isn't communicating.</h1>
-      <p class="hero-subtitle fade-in">The patterns that made it hard while married don't change with separation. Other apps just move them to a new platform.</p>
-      <p class="hero-subtitle hero-emphasis fade-in">Clearly shifts them.</p>
+      <h1 class="fade-in">Other apps support messaging.<br>Clearly supports communication.</h1>
+      <p class="hero-subtitle fade-in">The patterns that made communication hard during your marriage don't disappear with separation. Other co-parenting apps just move those patterns to a new platform. Clearly changes them — by separating emotion from issues, containing each conversation to a single topic, and moving everything toward resolution.</p>
       <div class="hero-ctas fade-in">
         <button class="btn-primary" data-access-modal>
           Get Early Access
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </button>
+        <a href="#how-it-works" class="btn-secondary">
+          See How It Works
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- The Clearly Method -->
-  <section class="content-section" id="method">
+  <!-- SECTION 2: NAME THE EXPERIENCE -->
+  <section class="experience-section" id="experience">
     <div class="container">
-      <div class="section-header">
-        <p class="section-label fade-in">The Clearly Method</p>
-        <h2 class="fade-in">You both love your kids. That's not the problem.</h2>
-        <p class="fade-in">The problem is that every conversation becomes positions vs positions. What you're asking for vs what they're asking for. It sounds like conflict — but underneath, you often want the same thing.</p>
-        <p class="fade-in">The Clearly Method draws from interest-based communication — how real conflict actually gets resolved. It's woven into the experience, subtle and natural. You just write. Clearly does the rest.</p>
-      </div>
+      <h2 class="fade-in">This is what high-conflict co-parenting communication looks like.</h2>
+      <p class="fade-in">A message about Tuesday pickup becomes an argument about last Thursday. A question about expenses turns into a referendum on who's doing more. Every thread drifts. Tone takes over. The thing that actually needed a decision gets buried under everything else.</p>
+      <p class="fade-in">The problem isn't what either parent is saying. It's that nothing is containing the conversation.</p>
     </div>
   </section>
 
-  <!-- How It Works -->
-  <section class="content-section" id="how-it-works" style="background: #FAFAF9;">
+  <!-- SECTION 3: THE SHIFT -->
+  <section class="shift-section" id="shift">
+    <div class="container">
+      <p class="section-label fade-in">The Shift</p>
+      <h2 class="fade-in">Messaging is just a channel. Communication requires structure.</h2>
+      <p class="fade-in">Most co-parenting apps are messaging platforms. They provide a thread, maybe flag aggressive language or make you wait before sending. But the conversation itself works the same way it always did — open-ended, emotionally tangled, and nothing truly closes.</p>
+      <p class="fade-in">Clearly is not a messaging app. It's structured communication. Every exchange is organized around a single issue. The emotional charge is separated from what actually needs a decision. And every topic has a visible state — open, or resolved. Nothing lingers. Nothing drifts.</p>
+      <p class="closing-line fade-in">That's the difference between providing a new place to argue and building a way to stop.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 4: HOW IT WORKS -->
+  <section class="content-section" id="how-it-works" style="background: white;">
     <div class="container">
       <div class="section-header">
         <p class="section-label fade-in">How It Works</p>
-        <h2 class="fade-in">From positions to interests</h2>
+        <h2 class="fade-in">You just write. Clearly handles the rest.</h2>
+        <p class="fade-in">There's nothing to learn, no workflow to follow. You write your message the way you normally would. Behind the scenes, Clearly restructures the conversation so it actually moves forward.</p>
       </div>
-      <div class="steps-grid">
-        <div class="step-card fade-in">
+      <div class="mechanism-grid">
+        <div class="mechanism-card fade-in">
           <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </div>
-          <h3>Write your message</h3>
-          <p>Clearly translates it from what you're asking for to why it matters.</p>
+          <h3>Emotion is acknowledged, then set aside</h3>
+          <p>You don't have to filter yourself or choose your words carefully. Clearly automatically separates the emotional charge from the actionable issue — so what needs a decision gets one, without the fight that usually comes with it.</p>
         </div>
-        <div class="flow-connector fade-in">
-          <svg width="40" height="16" viewBox="0 0 40 16" fill="none">
-            <circle cx="4" cy="8" r="4" fill="currentColor"/>
-            <line x1="8" y1="8" x2="32" y2="8" stroke="currentColor" stroke-width="2"/>
-            <circle cx="36" cy="8" r="4" fill="currentColor"/>
-          </svg>
-        </div>
-        <div class="step-card fade-in">
+        <div class="mechanism-card fade-in">
           <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
-          <h3>See the alignment</h3>
-          <p>When both parents see interests instead of demands, the common ground becomes obvious.</p>
+          <h3>What actually needs resolution surfaces on its own</h3>
+          <p>Underneath most co-parenting arguments are straightforward questions: Who's covering this cost? What time works for pickup? Can we adjust the schedule? Clearly finds them and makes them visible to both parents.</p>
         </div>
-        <div class="flow-connector fade-in">
-          <svg width="40" height="16" viewBox="0 0 40 16" fill="none">
-            <circle cx="4" cy="8" r="4" fill="currentColor"/>
-            <line x1="8" y1="8" x2="32" y2="8" stroke="currentColor" stroke-width="2"/>
-            <circle cx="36" cy="8" r="4" fill="currentColor"/>
-          </svg>
-        </div>
-        <div class="step-card fade-in">
+        <div class="mechanism-card fade-in">
           <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
           </div>
-          <h3>Resolve and close</h3>
-          <p>Topics move toward decisions. No endless threads. No rehashing.</p>
+          <h3>Every issue stays in its own lane</h3>
+          <p>No more stacked threads where Tuesday's logistics sit next to last month's grievance. Clearly organizes each issue into its own contained topic — automatically. Conversations stay focused and current.</p>
+        </div>
+        <div class="mechanism-card fade-in">
+          <div class="card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3>Resolution happens, visibly</h3>
+          <p>Every topic is either open or resolved. There's no ambiguous middle ground where issues sit unaddressed for weeks. When something is resolved, it's done. When it's not, it's clear what still needs attention.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Logistics Section -->
-  <section class="content-section">
+  <!-- SECTION 5: ANCHOR LINE -->
+  <section class="anchor-section" id="anchor">
+    <div class="container">
+      <blockquote class="fade-in">In high-conflict co-parenting, better messaging doesn't help. Structure does.</blockquote>
+    </div>
+  </section>
+
+  <!-- SECTION 6: DIFFERENTIATION -->
+  <section class="different-section" id="different">
+    <div class="container">
+      <h2 class="fade-in">How this is different from other co-parenting apps.</h2>
+      <p class="fade-in">Other co-parenting apps are messaging platforms with features bolted on. They provide a timestamped record, maybe a shared calendar, maybe expense tracking. That's useful. But the core experience is still the same dynamic you had before — just on a different screen.</p>
+      <p class="fade-in">Clearly starts from a different premise entirely. Communication between high-conflict co-parents doesn't need a better channel. It needs structure. Instead of open-ended threads that drift, every conversation is contained to one issue. Instead of tone warnings that put you on defense before you've started, the structure itself prevents escalation. Instead of threads that live forever in limbo, every topic moves toward resolution.</p>
+      <p class="closing-line fade-in">Other apps digitize the patterns from your marriage. Clearly replaces them.</p>
+    </div>
+  </section>
+
+  <!-- SECTION 7: LOGISTICS -->
+  <section class="logistics-section" id="logistics">
     <div class="container">
       <div class="section-header">
-        <p class="section-label fade-in">The Logistics</p>
-        <h2 class="fade-in">Yes, it handles the logistics too</h2>
-        <p class="fade-in">Shared calendar with your custody schedule built in. A place for documents, contacts, and everything else you need to coordinate.</p>
+        <h2 class="fade-in">And yes — it handles the rest too.</h2>
+        <p class="fade-in">Clearly isn't only about messaging. It also handles the practical coordination that co-parenting requires.</p>
       </div>
-      <div class="cards-grid-4">
-        <div class="card-small fade-in">
-          <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+      <div class="logistics-items">
+        <div class="logistics-item fade-in">
+          <div class="item-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
           </div>
-          <h3>Schedule</h3>
-          <p>A custody calendar built from the ground up—holidays, swap requests, and more</p>
+          <div>
+            <h3>Schedule</h3>
+            <p>Custody calendar with holidays, swaps, and iCal sync to your phone.</p>
+          </div>
         </div>
-        <div class="card-small fade-in">
-          <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        <div class="logistics-item fade-in">
+          <div class="item-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
           </div>
-          <h3>Expenses</h3>
-          <p>Log shared costs, split them fairly, and settle up—no spreadsheets required</p>
+          <div>
+            <h3>Expenses</h3>
+            <p>Log shared costs, split them fairly, settle up without spreadsheets.</p>
+          </div>
         </div>
-        <div class="card-small fade-in">
-          <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+        <div class="logistics-item fade-in">
+          <div class="item-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
           </div>
-          <h3>Shared</h3>
-          <p>Documents, contacts, the info you both need</p>
-        </div>
-        <div class="card-small fade-in">
-          <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"></path></svg>
+          <div>
+            <h3>Shared</h3>
+            <p>Documents, contacts, and everything you both need in one place.</p>
           </div>
-          <h3>Stay in Sync</h3>
-          <p>iCal integration keeps your custody schedule on Google, Outlook, or Apple Calendar</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Start Here Section -->
-  <section class="content-section" style="background: #FAFAF9;">
+  <!-- SECTION 8: FREE TOOLS -->
+  <section class="tools-section" id="tools">
     <div class="container">
       <div class="section-header">
-        <p class="section-label fade-in">Free Tools</p>
-        <h2 class="fade-in">Not sure where to start?</h2>
-        <p class="fade-in">These free tools can help—whether you're figuring out the logistics or just trying to understand why conversations keep going sideways.</p>
+        <p class="section-label fade-in">Not sure yet? Start here.</p>
+        <p class="fade-in">These free tools can help you understand what's happening in your co-parenting communication — and what might actually change it.</p>
       </div>
       <div class="cards-grid-2">
         <div class="card-cta fade-in">
           <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
           </div>
-          <h3>Understand your patterns</h3>
-          <p>A quick assessment to see how you and your co-parent show up when conversations get hard—and what might help.</p>
+          <h3>Understand your communication patterns</h3>
+          <p>A quick assessment of how you and your co-parent show up when conversations get hard — and what might help.</p>
           <p class="tool-meta">2 minutes · Free</p>
           <a href="/communication-styles/" class="btn-primary">
-            See your patterns
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            Take the Assessment
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
         </div>
         <div class="card-cta fade-in">
           <div class="card-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           </div>
-          <h3>Sort out the schedule</h3>
-          <p>Work through custody, holidays, and handoffs. Get a clear plan you can share with your co-parent, attorney, or mediator.</p>
+          <h3>Build your custody plan</h3>
+          <p>Work through the schedule, holidays, and handoffs. Get a clear plan you can share with your co-parent, attorney, or mediator.</p>
           <p class="tool-meta">5 minutes · Free</p>
           <a href="/plan-builder/" class="btn-primary">
-            Build your plan
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            Start Building
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Beta Section -->
-  <section class="content-section cta-section" id="beta">
+  <!-- SECTION 9: EARLY ACCESS CTA -->
+  <section class="content-section cta-section" id="cta">
     <div class="container">
       <div class="section-header">
-        <p class="section-label fade-in" style="color: rgba(255,255,255,0.95) !important;">Early Access</p>
-        <h2 class="fade-in">Ready for the full toolkit?</h2>
-        <p class="fade-in">Clearly is currently in private beta. Request access to get structured messaging, shared scheduling, expense tracking, and everything else—all designed around resolution, not conflict.</p>
+        <h2 class="fade-in">Messaging hasn't worked. Communication can.</h2>
+        <p class="fade-in">Clearly is built for co-parents where tension runs high and the old patterns aren't working. It's currently in early access for iOS.</p>
       </div>
       <button class="btn-primary fade-in" data-access-modal>
-        Request early access
+        Request Early Access
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
       </button>
-      <p class="cta-note fade-in">We'll let you know when it's ready.</p>
+      <p class="cta-note fade-in">We'll reach out when it's ready for you.</p>
     </div>
   </section>
+
   </main>
 
   <!-- Footer -->
@@ -798,7 +878,7 @@
           <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" loading="lazy">
           <span>Clearly</span>
         </div>
-        <p class="footer-tagline">Co-parenting made clear.</p>
+        <p class="footer-tagline">Structured communication for co-parents.</p>
       </div>
       <div class="footer-nav">
         <div class="footer-col">
@@ -879,7 +959,7 @@
     "legalName": "Clearly LLC",
     "url": "https://getclearly.app",
     "logo": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png",
-    "description": "Clearly is a co-parenting app that uses interest-based communication to shift the patterns that made co-parenting hard. Shared calendar, expense tracking, and tools built around resolution.",
+    "description": "Clearly is a structured communication app for high-conflict co-parenting. It separates emotion from issues so conversations move toward resolution.",
     "email": "hello@getclearly.app",
     "sameAs": []
   }
@@ -893,7 +973,7 @@
     "name": "Clearly",
     "applicationCategory": "LifestyleApplication",
     "operatingSystem": "iOS",
-    "description": "Co-parenting communication app using interest-based methods to help separated parents find common ground.",
+    "description": "Structured communication app for high-conflict co-parenting. Separates emotion from issues so conversations move toward resolution.",
     "offers": {
       "@type": "Offer",
       "price": "0",
