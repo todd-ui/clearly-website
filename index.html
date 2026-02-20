@@ -153,6 +153,25 @@
       margin-top: 40px;
     }
 
+    .scroll-hint {
+      display: flex;
+      justify-content: center;
+      margin-top: 48px;
+      color: var(--text-muted);
+      opacity: 0.5;
+      animation: bounce 2s ease infinite;
+    }
+
+    .scroll-hint svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
     @media (max-width: 768px) {
       .hero { padding: 120px 0 60px; }
       .hero h1 { font-size: 32px; }
@@ -582,6 +601,9 @@
           See How It Works
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
         </a>
+      </div>
+      <div class="scroll-hint fade-in">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </div>
     </div>
   </section>
