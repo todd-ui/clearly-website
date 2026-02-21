@@ -2,175 +2,673 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://getclearly.app/</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://getclearly.app/plan-builder/</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
     <loc>https://getclearly.app/communication-styles/</loc>
-    <lastmod>2026-02-07</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/alignment/</loc>
-    <lastmod>2026-02-09</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
     <loc>https://getclearly.app/calculators/</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
     <loc>https://getclearly.app/co-parent-communication/</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://getclearly.app/custody-schedule-help/</loc>
-    <lastmod>2026-02-07</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/coparenting-alignment-guide/</loc>
-    <lastmod>2026-02-11</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://getclearly.app/blog.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>https://getclearly.app/faq.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/help.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://getclearly.app/privacy.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://getclearly.app/terms.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
     <loc>https://getclearly.app/professionals.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://getclearly.app/alignment/</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/coparenting-alignment-guide/</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/kids-and-divorce/</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/mediation-prep/</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/co-parenting-expenses/</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/high-conflict-coparenting/</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/50-50-custody-myth-equal-time-not-always-equal.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-introduce-co-parenting-rules-to-children-age-guide.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/child-refuses-visitation-other-parent-house-what-to-do.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/child-support-modifications-when-how-request-changes.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/essential-first-steps-beginning-co-parenting-journey.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/ex-starts-dating-helping-kids-navigate-new-relationships.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/age-appropriate-custody-schedules-guide.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://getclearly.app/blog/holiday-custody-schedules-fair-traditions-both-homes.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/requesting-schedule-swaps-work-travel-strategic-approach.html</loc>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/blog/handling-co-parenting-schedule-changes-without-conflict.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/blog/children-fear-abandonment-divorce.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/blog/creating-first-co-parenting-plan-essential-elements.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/blog/children-wellbeing-divorce-research.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/when-to-divorce-timing-separation-around-life-events.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/is-it-time-making-the-hard-decision-about-your-marriage.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/hidden-truths-about-coparenting-no-one-tells-you.html</loc>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/blog/co-parenting-communication-channels.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/surprising-benefits-of-co-parenting-better-than-you-think.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/fatal-flaw-co-parenting-apps-what-actually-works.html</loc>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/blog/counter-parenting-signs-solutions.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/unexpected-silver-linings-hidden-benefits-co-parenting.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/timing-your-divorce-when-to-consider-separation-around-life-events.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/helping-your-child-bond-with-a-stepparent-without-forcing-it.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-set-boundaries-in-co-parent-communication.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-protect-your-children-from-co-parenting-conflict.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/what-to-expect-in-family-court-a-co-parent-s-guide.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-cope-on-the-days-you-don-t-have-your-kids.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/when-your-child-has-a-new-sibling-at-the-other-house.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-respond-to-a-hostile-co-parenting-message.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/rebuilding-your-identity-after-divorce.html</loc>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/blog/gray-rock-method-coparenting.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-co-parent-when-your-ex-remarries.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/what-to-do-when-your-co-parent-badmouths-you-to-the-kids.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/what-makes-co-parenting-communication-actually-work.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-stop-co-parenting-conflict-from-taking-over-your-life.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-co-parent-with-a-narcissist.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/when-co-parenting-conflict-won-t-stop-knowing-when-to-get-help.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/what-is-structured-co-parenting-communication.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/when-your-co-parent-uses-the-kids-as-messengers.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-handle-a-co-parent-who-threatens-to-take-you-to-court.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/is-it-time-navigating-whether-to-stay-or-go.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/what-to-do-when-your-co-parent-brings-up-the-past-in-every-conversation.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-co-parent-when-you-re-afraid-of-your-ex.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-co-parent-with-someone-who-won-t-cooperate.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-handle-transitions-and-drop-offs-with-a-high-conflict-co-parent.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/parallel-parenting-vs-co-parenting-what-s-the-difference.html</loc>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/blog/co-parenting-communication-boundaries.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/signs-your-co-parenting-situation-is-improving-even-when-it-doesn-t-feel-like-it.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/co-parenting-expenses-when-one-parent-earns-more.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/hidden-realities-co-parenting-no-one-warns-you-about.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-build-a-communication-record-that-protects-you.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/when-your-child-says-they-don-t-want-to-go-to-the-other-parent-s-house.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-handle-last-minute-custody-schedule-changes.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-protect-yourself-from-gaslighting-in-co-parenting.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-keep-co-parenting-conversations-focused-on-the-kids.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-handle-medical-expenses-in-co-parenting.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-split-expenses-with-your-co-parent-without-fighting.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/what-to-do-when-your-co-parent-refuses-to-communicate.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-make-a-custody-schedule-that-actually-works.html</loc>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/blog/mindset-shift-divorced-coparents.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-communicate-with-a-high-conflict-co-parent.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-co-parent-with-someone-who-uses-email-as-a-weapon.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-deal-with-a-co-parent-who-breaks-agreements.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-talk-to-your-kids-about-the-divorce-at-every-age.html</loc>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/blog/biff-method-co-parenting-communication.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/the-48-hour-rule-why-waiting-before-responding-changes-everything.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-help-your-child-adjust-to-two-homes.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-handle-holidays-and-events-with-a-blended-family.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/finding-a-therapist-who-understands-high-conflict-co-parenting.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-co-parent-when-your-ex-s-new-partner-gets-involved-in-your-co-parenting.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/what-counts-as-a-shared-expense-in-co-parenting.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/what-your-kids-experience-when-co-parents-can-t-communicate.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/relocation-after-divorce-what-you-need-to-know-before-you-move.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-stop-your-co-parent-from-controlling-you-through-the-kids.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-choose-a-family-law-attorney-for-a-high-conflict-custody-case.html</loc>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/blog/tone-in-text-co-parenting.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/what-is-contempt-of-court-in-custody-cases.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-handle-false-accusations-from-your-co-parent.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/the-stepparent-s-role-in-co-parenting-boundaries-that-work.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/the-emotional-toll-of-co-parenting-with-a-difficult-ex.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-parental-conflict-affects-children-s-relationships-later-in-life.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/when-your-co-parent-undermines-your-parenting.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/what-is-a-parenting-plan-and-do-you-need-one.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-stop-co-parenting-arguments-over-text.html</loc>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/blog/co-parenting-documentation-guide.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/what-is-a-guardian-ad-litem-and-what-do-they-do.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/how-to-modify-a-custody-agreement-when-and-how.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/managing-anxiety-when-you-can-t-control-what-happens-at-the-other-house.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/signs-your-child-is-struggling-with-the-divorce-and-what-to-do.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/why-co-parenting-feels-harder-than-it-should.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/what-counts-as-high-conflict-co-parenting.html</loc>
+    <lastmod>2026-02-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/blog/what-your-teenager-needs-from-you-during-and-after-divorce.html</loc>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/blog/co-parenting-spectrum-finding-balance.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://getclearly.app/blog/co-parenting-vs-parallel-parenting.html</loc>
-    <lastmod>2026-02-07</lastmod>
+    <lastmod>2026-02-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>

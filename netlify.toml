@@ -65,6 +65,26 @@
   to = "/coparenting-alignment-guide/"
   status = 301
 
+[[redirects]]
+  from = "/kids-and-divorce"
+  to = "/kids-and-divorce/"
+  status = 301
+
+[[redirects]]
+  from = "/mediation-prep"
+  to = "/mediation-prep/"
+  status = 301
+
+[[redirects]]
+  from = "/co-parenting-expenses"
+  to = "/co-parenting-expenses/"
+  status = 301
+
+[[redirects]]
+  from = "/high-conflict-coparenting"
+  to = "/high-conflict-coparenting/"
+  status = 301
+
 # Redirect pretty URLs to .html versions for pages served as files
 [[redirects]]
   from = "/blog"

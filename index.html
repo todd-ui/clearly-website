@@ -18,8 +18,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0D8268">
-  <title>Clearly — Structured Communication for High-Conflict Co-Parenting</title>
-  <meta name="description" content="Co-parenting apps move the patterns from your marriage to a new platform. Clearly replaces them. Structured communication that moves every conversation toward resolution.">
+  <title>Clearly — Change the Conversation</title>
+  <meta name="description" content="The marriage ends. The messages don't. Clearly sits between both parents, extracting the substance from every message so you can focus on what matters: your kids.">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://getclearly.app">
@@ -27,19 +27,19 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app">
-  <meta property="og:title" content="Clearly — Structured Communication for High-Conflict Co-Parenting">
-  <meta property="og:description" content="Other co-parenting apps digitize the chaos. Clearly replaces it with structure. Every exchange organized, every issue contained, every topic moving toward resolution.">
+  <meta property="og:title" content="Clearly — Change the Conversation">
+  <meta property="og:description" content="The marriage ends. The messages don't. Clearly sits between both parents, extracting the substance from every message so you can focus on what matters: your kids.">
   <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
-  <meta property="og:image:alt" content="Clearly — Structured communication for high-conflict co-parenting">
+  <meta property="og:image:alt" content="Clearly — Change the conversation">
   <meta property="og:site_name" content="Clearly">
   <meta property="og:locale" content="en_US">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Clearly — Structured Communication for High-Conflict Co-Parenting">
-  <meta name="twitter:description" content="Other co-parenting apps digitize the chaos. Clearly replaces it with structure. Every exchange organized, every issue contained, every topic moving toward resolution.">
+  <meta name="twitter:title" content="Clearly — Change the Conversation">
+  <meta name="twitter:description" content="The marriage ends. The messages don't. Clearly sits between both parents, extracting the substance from every message so you can focus on what matters: your kids.">
   <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
-  <meta name="twitter:image:alt" content="Clearly — Structured communication for high-conflict co-parenting">
+  <meta name="twitter:image:alt" content="Clearly — Change the conversation">
 
   <!-- Additional SEO -->
   <meta name="robots" content="index, follow">
@@ -87,18 +87,18 @@
       gap: 8px;
       padding: 14px 28px;
       background: transparent;
-      color: var(--text-secondary);
+      color: var(--text);
       font-size: 16px;
       font-weight: 500;
       border-radius: 980px;
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--text);
       transition: all 0.2s ease;
       cursor: pointer;
     }
 
     .btn-secondary:hover {
-      border-color: var(--text-secondary);
-      color: var(--text);
+      background: var(--text);
+      color: white;
       text-decoration: none;
     }
 
@@ -247,7 +247,7 @@
       background: #FAFAF9;
     }
 
-    .grid-section .container { max-width: 900px; }
+    .grid-section .container { max-width: 1100px; }
 
     .grid-section .section-header {
       text-align: center;
@@ -394,9 +394,8 @@
        =========================================== */
     .tools-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      max-width: 800px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
       margin: 0 auto;
     }
 
@@ -405,6 +404,12 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .tool-card .btn-primary {
+      margin-top: auto;
     }
 
     .tool-card .card-icon {
@@ -454,25 +459,25 @@
        ANCHOR SECTION (Quote)
        =========================================== */
     .anchor-section {
-      padding: 100px 0;
-      background: #1A1917;
+      padding: 80px 0;
+      background: #1A1A1A;
       text-align: center;
     }
 
-    .anchor-section .container { max-width: 720px; }
+    .anchor-section .container { max-width: 800px; }
 
     .anchor-section p {
-      font-size: 26px;
-      font-weight: 500;
-      line-height: 1.4;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.3;
       color: white;
       margin: 0;
-      letter-spacing: -0.01em;
+      letter-spacing: -0.02em;
     }
 
     @media (max-width: 768px) {
-      .anchor-section { padding: 72px 0; }
-      .anchor-section p { font-size: 22px; }
+      .anchor-section { padding: 60px 0; }
+      .anchor-section p { font-size: 24px; }
     }
 
     /* ===========================================
@@ -555,24 +560,80 @@
 <a href="#main-content" class="skip-link">Skip to content</a>
 
   <!-- Navigation -->
-  <nav class="nav">
-    <div class="container">
-      <a href="/" class="nav-brand">
-        <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
-        Clearly
-      </a>
-      <ul class="nav-links">
-        <li><a href="/blog.html">Common Ground</a></li>
-        <li><a href="/professionals.html">For Professionals</a></li>
-        <li><a href="#" class="nav-cta" data-access-modal>Request Access</a></li>
-      </ul>
-      <button class="nav-toggle" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </nav>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+<a href="#main-content" class="skip-link">Skip to content</a>
+<a href="#main-content" class="skip-link">Skip to content</a>
+<a href="#main-content" class="skip-link">Skip to content</a>
+<nav class="nav">
+  <div class="container">
+    <a href="/" class="nav-brand">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
+      Clearly
+    </a>
+    <ul class="nav-links">
+      <li><a href="/blog.html">Common Ground</a></li>
+      <li><a href="/professionals.html">For Professionals</a></li>
+      <li><a href="#" class="nav-cta" data-access-modal>Request Access</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<script>
+  // Mobile menu toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+  }
+</script>
+<script src="/js/access-modal.js" defer></script>
+
+<script>
+  // Mobile menu toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+  }
+</script>
+<script src="/js/access-modal.js" defer></script>
+
+<script>
+  // Mobile menu toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+  }
+</script>
+<script src="/js/access-modal.js" defer></script>
+
+<script>
+  // Mobile menu toggle
+  const navToggle = document.querySelector('.nav-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  if (navToggle && navLinks) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinks.classList.toggle('open');
+    });
+  }
+</script>
+<script src="/js/access-modal.js" defer></script>
 
   <script>
     // Mobile menu toggle
@@ -595,8 +656,8 @@
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
         Coming to iOS
       </div>
-      <h1 class="fade-in">Structured communication for high-conflict&nbsp;co-parenting.</h1>
-      <p class="hero-subtitle fade-in">Other co-parenting apps move the patterns from your marriage to a new platform. Clearly replaces&nbsp;them.</p>
+      <h1 class="fade-in">The marriage ends. The messages&nbsp;don't.</h1>
+      <p class="hero-subtitle fade-in">Most parents assume separation makes communication easier. It doesn't. The same patterns that didn't work in your marriage follow you — and most co-parenting apps just give them a new home. Clearly changes them so you can focus on what matters: your&nbsp;kids.</p>
       <div class="hero-ctas fade-in">
         <button class="btn-primary" data-access-modal>
           Get Early Access
@@ -616,21 +677,22 @@
   <!-- SECTION 2: NAME THE EXPERIENCE -->
   <section class="prose-section" id="experience">
     <div class="container">
-      <p class="section-label fade-in">Sound Familiar?</p>
-      <h2 class="fade-in">This is what high-conflict co-parenting communication looks&nbsp;like.</h2>
-      <p class="fade-in">A message about Tuesday pickup becomes an argument about last Thursday. A question about expenses turns into a referendum on who's doing more. Every thread drifts. Tone takes over. The thing that actually needed a decision gets buried under everything&nbsp;else.</p>
-      <p class="fade-in">The problem isn't what either parent is saying. It's that nothing is containing the&nbsp;conversation.</p>
+      <p class="section-label fade-in">What nobody tells you.</p>
+      <h2 class="fade-in">Separation doesn't reduce communication — it increases&nbsp;it.</h2>
+      <p class="fade-in">You think once you're living apart, the hard conversations will stop. But pickup times, medical decisions, school forms, expenses, holidays, schedule changes — you're going to talk to this person more than you expect, about more than you expect, for longer than you&nbsp;expect.</p>
+      <p class="fade-in">And without something fundamentally different about how those conversations happen, every text about Tuesday pickup carries the weight of everything that came before&nbsp;it.</p>
+      <p class="closing-line fade-in">That's not unique to you. That's what happens when two people with history try to make decisions together through a&nbsp;screen.</p>
     </div>
   </section>
 
   <!-- SECTION 3: THE SHIFT -->
   <section class="prose-section" id="shift">
     <div class="container">
-      <p class="section-label fade-in">Here's The Thing</p>
-      <h2 class="fade-in">Messaging is just a channel. Communication requires&nbsp;structure.</h2>
-      <p class="fade-in">Other apps provide messaging — a thread, maybe a tone warning. The conversation itself doesn't&nbsp;change.</p>
-      <p class="fade-in">Clearly is structured communication. Every exchange is organized around a single issue. The emotional charge is separated from what needs a decision. Every topic has a visible state — open, or&nbsp;resolved.</p>
-      <p class="closing-line fade-in">That's the difference between providing a new place to argue and building a way to&nbsp;stop.</p>
+      <p class="section-label fade-in">Most parents don't realize.</p>
+      <h2 class="fade-in">You probably agree on more than you&nbsp;think.</h2>
+      <p class="fade-in">You both love your kids. You both want this to be as easy on them as possible. You both want to make good decisions for them. Most co-parents are closer to agreement than they&nbsp;realize.</p>
+      <p class="fade-in">But the way you're communicating makes it impossible to act on that. A question about soccer becomes a fight about something else. A simple expense turns into a referendum on fairness. The shared ground is there — the conversation keeps burying&nbsp;it.</p>
+      <p class="closing-line fade-in">Clearly was built to uncover it — and help you act on&nbsp;it.</p>
     </div>
   </section>
 
@@ -638,58 +700,47 @@
   <section class="grid-section" id="how-it-works">
     <div class="container">
       <div class="section-header">
-        <p class="section-label fade-in">How It Works</p>
-        <h2 class="fade-in">You just write. Clearly handles the&nbsp;rest.</h2>
-        <p class="fade-in">There's nothing to learn, no workflow to follow. You write your message the way you normally would. Behind the scenes, Clearly restructures the conversation so it actually moves&nbsp;forward.</p>
+        <p class="section-label fade-in">How it works.</p>
+        <h2 class="fade-in">This is not a tone&nbsp;meter.</h2>
+        <p class="fade-in">Some apps flag your language and suggest you soften it. That's a surface fix. It doesn't change what you receive, and it doesn't help either parent get to a decision. Clearly works differently. It sits between both parents. Every message — yours and theirs — passes through Clearly before it's delivered. The emotion, the judgment, the subtext, the history — none of that reaches the other side. What comes through is the substance: the issue, the question, the decision your kids need you to make. What you send is clear. What you receive is&nbsp;too.</p>
       </div>
       <div class="mechanism-grid">
         <div class="mechanism-card fade-in">
           <div class="card-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
           </div>
-          <h3>Emotion is acknowledged, then set aside</h3>
-          <p>You don't have to filter yourself or choose your words carefully. Clearly automatically separates the emotional charge from the actionable issue — so what needs a decision gets one, without the fight that usually comes with&nbsp;it.</p>
+          <h3>You and your co-parent get the facts. Not the fight.</h3>
+          <p>Every message passes through Clearly. It extracts the substance — the questions, the decisions, the logistics — and strips out the emotion, the judgment, and the history. What lands on the other side is only what&nbsp;matters.</p>
         </div>
         <div class="mechanism-card fade-in">
           <div class="card-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </div>
-          <h3>What needs a decision becomes visible</h3>
-          <p>Underneath most co-parenting arguments are straightforward questions: Who's covering this cost? What time works for pickup? Can we adjust the schedule? Clearly finds them and makes them visible to both&nbsp;parents.</p>
+          <h3>Nothing lingers.</h3>
+          <p>Topics have response windows. Unaddressed issues resolve or archive automatically. Nothing gets used as&nbsp;leverage.</p>
         </div>
         <div class="mechanism-card fade-in">
           <div class="card-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
           </div>
-          <h3>Every issue stays in its own lane</h3>
-          <p>No more stacked threads where Tuesday's logistics sit next to last month's grievance. Clearly organizes each issue into its own contained topic — automatically. Conversations stay focused and&nbsp;current.</p>
+          <h3>Everything on the record.</h3>
+          <p>Every message is immutable and timestamped. Export clean, formatted PDFs or CSVs anytime — with business record certification. Court-ready if you ever need&nbsp;it.</p>
         </div>
         <div class="mechanism-card fade-in">
           <div class="card-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
           </div>
-          <h3>Resolution happens, visibly</h3>
-          <p>Every topic is either open or resolved. There's no ambiguous middle ground where issues sit unaddressed for weeks. When something is resolved, it's done. When it's not, it's clear what still needs&nbsp;attention.</p>
+          <h3>Built on proven frameworks.</h3>
+          <p>Clearly uses methods from mediators and negotiators — designed to help people who disagree find common ground and make decisions&nbsp;together.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 5: DIFFERENTIATION -->
-  <section class="prose-section" id="different">
-    <div class="container">
-      <p class="section-label fade-in">Why It's Different</p>
-      <h2 class="fade-in">How this is different from other co-parenting&nbsp;apps.</h2>
-      <p class="fade-in">Other co-parenting apps are messaging platforms with features bolted on. The core experience is the same dynamic you had before — on a different&nbsp;screen.</p>
-      <p class="fade-in">Clearly starts from a different premise. Communication between high-conflict co-parents doesn't need a better channel. It needs structure. Every conversation is contained to one issue. The structure itself prevents escalation. Every topic moves toward&nbsp;resolution.</p>
-      <p class="closing-line fade-in">Other apps digitize the patterns from your marriage. Clearly replaces&nbsp;them.</p>
-    </div>
-  </section>
-
-  <!-- SECTION 6: ANCHOR LINE -->
+  <!-- ANCHOR SECTION -->
   <section class="anchor-section" id="anchor">
     <div class="container">
-      <p class="fade-in">When co-parents work well together, children thrive. Clearly makes that possible — even when it's&nbsp;hard.</p>
+      <p class="fade-in">When co-parents communicate well, children don't just adjust — they&nbsp;thrive.</p>
     </div>
   </section>
 
@@ -697,37 +748,37 @@
   <section class="grid-section logistics" id="logistics">
     <div class="container">
       <div class="section-header">
-        <p class="section-label fade-in">There's More</p>
+        <p class="section-label fade-in">Beyond communication.</p>
         <h2 class="fade-in">And yes — it handles the logistics&nbsp;too.</h2>
-        <p class="fade-in">Clearly isn't only about messaging. It also handles the practical coordination that co-parenting&nbsp;requires.</p>
       </div>
-      <div class="logistics-grid">
-        <div class="logistics-card fade-in">
+      <div class="mechanism-grid">
+        <div class="mechanism-card fade-in">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <h3>Today</h3>
+          <p>One screen that shows you everything that needs your attention — action items, status updates, upcoming exchanges. No digging through tabs to figure out what's&nbsp;happening.</p>
+        </div>
+        <div class="mechanism-card fade-in">
           <div class="card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
           </div>
-          <div>
-            <h3>Schedule</h3>
-            <p>Custody calendar with holidays, swaps, and iCal sync to your&nbsp;phone.</p>
-          </div>
+          <h3>Schedule</h3>
+          <p>Your full custody calendar — weekly patterns, holidays, summer schedules, and swaps. Request and accept changes in one tap. Syncs with Apple Calendar and Google&nbsp;Calendar.</p>
         </div>
-        <div class="logistics-card fade-in">
+        <div class="mechanism-card fade-in">
           <div class="card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
           </div>
-          <div>
-            <h3>Expenses</h3>
-            <p>Log shared costs, split them fairly, settle up without&nbsp;spreadsheets.</p>
-          </div>
+          <h3>Expenses</h3>
+          <p>Log shared costs and Clearly pre-calculates each parent's share based on your split. No spreadsheets. No back-and-forth about who owes&nbsp;what.</p>
         </div>
-        <div class="logistics-card fade-in">
+        <div class="mechanism-card fade-in">
           <div class="card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
           </div>
-          <div>
-            <h3>Shared</h3>
-            <p>Documents, contacts, and everything you both need in one&nbsp;place.</p>
-          </div>
+          <h3>Shared</h3>
+          <p>Medications, emergency contacts, school info, addresses, doctors — everything both parents need access to, always current, in one&nbsp;place.</p>
         </div>
       </div>
     </div>
@@ -737,20 +788,19 @@
   <section class="grid-section" id="tools">
     <div class="container">
       <div class="section-header">
-        <p class="section-label fade-in">Try These First</p>
-        <h2 class="fade-in">Understand what's happening in your co-parenting&nbsp;communication.</h2>
-        <p class="fade-in">These free tools can help — and show you what might actually change&nbsp;it.</p>
+        <p class="section-label fade-in">Tools & Resources</p>
+        <h2 class="fade-in">We built these to help you on your&nbsp;journey.</h2>
       </div>
       <div class="tools-grid">
         <div class="tool-card fade-in">
           <div class="card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
           </div>
-          <h3>Understand your communication patterns</h3>
-          <p>A quick assessment of how you and your co-parent show up when conversations get hard — and what might&nbsp;help.</p>
+          <h3>Communication Style Quiz</h3>
+          <p>Answer a few questions about how you and your co-parent handle decisions, disagreements, and daily logistics. Get a clear picture of where your communication works, where it breaks down, and what to do about&nbsp;it.</p>
           <p class="tool-meta">2 minutes · Free</p>
           <a href="/communication-styles/" class="btn-primary">
-            Take the Assessment
+            Take the Quiz
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
         </div>
@@ -758,11 +808,23 @@
           <div class="card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
           </div>
-          <h3>Build your custody plan</h3>
-          <p>Work through the schedule, holidays, and handoffs. Get a clear plan you can share with your co-parent, attorney, or&nbsp;mediator.</p>
+          <h3>Custody Plan Builder</h3>
+          <p>Walk through your schedule, holidays, summer, expenses, and exchange logistics step by step. Get a shareable plan you can actually use — whether you're starting from scratch or cleaning up what you&nbsp;have.</p>
           <p class="tool-meta">5 minutes · Free</p>
           <a href="/plan-builder/" class="btn-primary">
-            Start Building
+            Build Your Plan
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+        </div>
+        <div class="tool-card fade-in">
+          <div class="card-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3>Co-Parenting Alignment Plan</h3>
+          <p>See where you and your co-parent already agree — and where you don't yet. Get a clear starting point for the conversations that matter&nbsp;most.</p>
+          <p class="tool-meta">5 minutes · Free</p>
+          <a href="/alignment/" class="btn-primary">
+            Get Your Plan
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
         </div>
@@ -773,8 +835,8 @@
   <!-- SECTION 9: EARLY ACCESS CTA -->
   <section class="cta-section" id="cta">
     <div class="container">
-      <h2 class="fade-in">Built for co-parents where communication has become the hardest&nbsp;part.</h2>
-      <p class="fade-in">Currently in early access for&nbsp;iOS.</p>
+      <h2 class="fade-in">You're still early enough to get this&nbsp;right.</h2>
+      <p class="fade-in">The way you communicate with your co-parent will shape your kids' experience of this more than anything else. Clearly helps you find the common ground, make the decisions, and keep it about the kids. Currently in early access for&nbsp;iOS.</p>
       <button class="btn-primary fade-in" data-access-modal>
         Request Early Access
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
@@ -793,7 +855,7 @@
           <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" loading="lazy">
           <span>Clearly</span>
         </div>
-        <p class="footer-tagline">Structured communication for co-parents.</p>
+        <p class="footer-tagline">Clearly. Change the conversation.</p>
       </div>
       <div class="footer-nav">
         <div class="footer-col">
@@ -809,9 +871,13 @@
         <div class="footer-col">
           <h4>Guides</h4>
           <ul>
-            <li><a href="/coparenting-alignment-guide/">Co-Parenting Alignment</a></li>
-            <li><a href="/custody-schedule-help/">Custody Schedule</a></li>
+            <li><a href="/kids-and-divorce/">Helping Your Kids Through Divorce</a></li>
+            <li><a href="/mediation-prep/">Preparing for Mediation</a></li>
+            <li><a href="/co-parenting-expenses/">Co-Parenting Expenses</a></li>
             <li><a href="/co-parent-communication/">Co-Parent Communication</a></li>
+            <li><a href="/custody-schedule-help/">Custody Schedule</a></li>
+            <li><a href="/coparenting-alignment-guide/">Co-Parenting Alignment</a></li>
+            <li><a href="/high-conflict-coparenting/">High-Conflict Co-Parenting</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -885,7 +951,7 @@
     "name": "Clearly",
     "applicationCategory": "LifestyleApplication",
     "operatingSystem": "iOS",
-    "description": "Structured communication app for high-conflict co-parenting. Organizes every exchange around a single issue, separates emotion from decisions, and moves every topic toward resolution.",
+    "description": "The marriage ends. The messages don't. Clearly sits between both parents, extracting the substance from every message — the questions, the decisions, the logistics — so you can focus on what matters: your kids.",
     "url": "https://getclearly.app",
     "offers": {
       "@type": "Offer",
