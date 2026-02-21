@@ -271,11 +271,19 @@ function generateSlug(title) {
 // Map form categories to Notion database categories
 function mapCategory(formCategory) {
   const categoryMap = {
+    // Original categories
     'Communication': 'Communication',
     'Co-Parenting Basics': 'Co-Parenting Basics',
     'Your Children': 'Your Children',
     'Scheduling': 'Schedules & Custody',
+    'Schedule': 'Schedules & Custody',
     'Legal & Documentation': 'Legal Basics',
+    // New categories
+    'Expenses': 'Expenses',
+    'Legal Basics': 'Legal Basics',
+    'Self-Care & Support': 'Self-Care & Support',
+    'High-Conflict Situations': 'High-Conflict Situations',
+    'Blended Families': 'Blended Families',
   };
   return categoryMap[formCategory] || 'Co-Parenting Basics';
 }
