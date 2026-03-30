@@ -10,15 +10,27 @@ const headerPartial = fs.readFileSync(path.join(__dirname, '_partials/header.htm
 const footerPartial = fs.readFileSync(path.join(__dirname, '_partials/footer.html'), 'utf-8').trim();
 
 async function fetchPosts() {
-  const response = await notion.databases.query({
-    database_id: DATABASE_ID,
-    filter: {
-      property: 'Published',
-      checkbox: { equals: true }
-    },
-    sorts: [{ property: 'Date', direction: 'descending' }]
-  });
-  return response.results;
+  let allResults = [];
+  let hasMore = true;
+  let startCursor = undefined;
+
+  while (hasMore) {
+    const response = await notion.databases.query({
+      database_id: DATABASE_ID,
+      filter: {
+        property: 'Published',
+        checkbox: { equals: true }
+      },
+      sorts: [{ property: 'Date', direction: 'descending' }],
+      start_cursor: startCursor
+    });
+    allResults = allResults.concat(response.results);
+    hasMore = response.has_more;
+    startCursor = response.next_cursor;
+  }
+
+  console.log(`Fetched ${allResults.length} published posts from Notion`);
+  return allResults;
 }
 
 async function getPageContent(pageId) {
@@ -924,4 +936,7 @@ ${processedPosts.map(post => `    <item>
   console.log('Blog build complete!');
 }
 
-build().catch(console.error);
+build().catch(err => {
+  console.error('Blog build failed:', err);
+  process.exit(1);
+});
