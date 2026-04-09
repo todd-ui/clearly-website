@@ -217,14 +217,27 @@ img.footer-icon {
 }
 
 @media (max-width: 768px) {
-  .site-footer { padding: 48px 20px 0; }
+  .site-footer { padding: 40px 20px 0; }
   .footer-main {
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: 24px 32px;
   }
+  .site-footer .footer-brand {
+    grid-column: 1 / -1;
+    margin-bottom: 8px;
+  }
+  .footer-col-label { margin-bottom: 14px; }
+  .site-footer .footer-col ul { gap: 10px; }
 }
 @media (max-width: 480px) {
-  .footer-main { grid-template-columns: 1fr; }
+  .site-footer { padding: 36px 16px 0; overflow: hidden; }
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .site-footer .footer-col ul li a { font-size: 13px; }
+  .site-footer .footer-col ul { gap: 8px; }
+  .footer-col-label { font-size: 9px; letter-spacing: 1px; margin-bottom: 10px; }
 }
 
 /* ==========================================

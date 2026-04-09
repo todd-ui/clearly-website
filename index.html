@@ -777,7 +777,15 @@
        RESPONSIVE
        ========================================== */
     @media (max-width: 900px) {
-      .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      /* Show copy first, phone second on mobile */
+      .hero-copy { order: 1; }
+      .hero-phone { order: 2; display: flex; justify-content: center; width: 100%; }
+      .hero-btns { justify-content: center; }
+      .phone { max-width: 300px; }
       .steps-grid { grid-template-columns: 1fr; }
       .feat-grid { grid-template-columns: 1fr; }
       .pricing-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -785,11 +793,12 @@
       h1 { font-size: 40px; }
       h2 { font-size: 30px; }
       .close-section h2 { font-size: 36px; }
+      #hero { min-height: auto; }
     }
     @media (max-width: 600px) {
       .hp-section { padding: 64px 20px; }
       .close-section { padding: 64px 20px; }
-      .hero-btns { flex-direction: column; }
+      .hero-btns { flex-direction: column; align-items: center; }
       .close-btns { flex-direction: column; align-items: center; }
       h1 { font-size: 34px; }
       .price-amt { font-size: 48px; }
