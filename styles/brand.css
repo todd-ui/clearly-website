@@ -14,26 +14,18 @@
 
 body {
   font-family: 'Instrument Sans', Helvetica Neue, Helvetica, Arial, sans-serif;
+  background-color: #F6F5F1;
+  color: #1C1C1A;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Page content — only where .clearly-page is added to <main> or <body> */
-.clearly-page h1,
-.clearly-page h2,
-.clearly-page h3 {
+h1, h2, h3 {
   font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 400;
 }
 
-.clearly-page h1 { font-size: 54px; line-height: 1.06; letter-spacing: -1px; }
-.clearly-page h2 { font-size: 38px; line-height: 1.1; letter-spacing: -0.5px; }
-.clearly-page h1 em, .clearly-page h2 em { font-style: italic; color: #0D8268; }
-
-.clearly-page p { font-size: 16px; line-height: 1.8; color: #4A4A47; }
-
-.clearly-page a { color: #0D8268; text-decoration: none; }
-.clearly-page a:focus, .clearly-page button:focus {
-  outline: 2px solid #0D8268;
-  outline-offset: 2px;
+h1 em, h2 em, h3 em {
+  font-style: italic;
+  color: #0D8268;
 }

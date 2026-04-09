@@ -37,6 +37,7 @@
   <meta name="author" content="Clearly LLC">
 
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles/brand.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
   <link rel="apple-touch-icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
 
@@ -47,10 +48,11 @@
       background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%);
     }
     .calc-hero h1 {
-      font-size: 42px;
-      font-weight: 700;
+      font-size: 38px;
+      font-weight: 400;
       margin-bottom: 16px;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
     }
     .calc-hero p {
       font-size: 18px;
@@ -126,8 +128,9 @@
     }
     .features-section h2 {
       text-align: center;
-      font-size: 32px;
-      font-weight: 700;
+      font-size: 38px;
+      font-weight: 400;
+      letter-spacing: -0.5px;
       margin-bottom: 48px;
     }
     .calc-features {
@@ -152,8 +155,9 @@
       color: var(--primary);
     }
     .calc-feature h3 {
+      font-family: 'Instrument Sans', Helvetica Neue, Helvetica, Arial, sans-serif;
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 500;
       margin-bottom: 8px;
     }
     .calc-feature p {
@@ -165,8 +169,9 @@
     }
     .all-states-section h2 {
       text-align: center;
-      font-size: 28px;
-      font-weight: 700;
+      font-size: 38px;
+      font-weight: 400;
+      letter-spacing: -0.5px;
       margin-bottom: 16px;
     }
     .all-states-section > .container > p {
@@ -224,8 +229,9 @@
       padding: 32px;
     }
     .disclaimer-card h3 {
+      font-family: 'Instrument Sans', Helvetica Neue, Helvetica, Arial, sans-serif;
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 500;
       color: #92400E;
       margin-bottom: 16px;
     }
@@ -515,6 +521,14 @@
       "Privacy-first design"
     ]
   }
+  </script>
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
   </script>
 
 </body>

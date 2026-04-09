@@ -294,11 +294,9 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   background-color: var(--bg);
   color: var(--text);
   line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
 }
 
 a {
@@ -552,7 +550,7 @@ img {
 
 .hero h1 {
   font-size: 56px;
-  font-weight: 700;
+  font-weight: 400;
   color: var(--text);
   margin-bottom: 24px;
   line-height: 1.1;
@@ -635,7 +633,7 @@ img {
 .section-title {
   text-align: center;
   font-size: 40px;
-  font-weight: 700;
+  font-weight: 400;
   margin-bottom: 64px;
   letter-spacing: -0.02em;
 }
@@ -673,7 +671,7 @@ img {
 
 .feature-card h3 {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 12px;
   color: var(--text);
 }
@@ -738,7 +736,7 @@ img {
 
 .showcase-content h2 {
   font-size: 36px;
-  font-weight: 700;
+  font-weight: 400;
   margin-bottom: 20px;
   line-height: 1.2;
   letter-spacing: -0.02em;
@@ -884,7 +882,7 @@ img {
 
 .feature-panel-content h3 {
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 400;
   margin-bottom: 16px;
   color: var(--text);
 }
@@ -983,7 +981,7 @@ img {
 
 .pricing-card h3 {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 16px;
   color: var(--text);
 }
@@ -1182,7 +1180,7 @@ img {
 
 .cta h2 {
   font-size: 48px;
-  font-weight: 700;
+  font-weight: 400;
   color: white;
   margin-bottom: 20px;
   letter-spacing: -0.02em;
@@ -1359,7 +1357,7 @@ img {
 
 .page-header h1 {
   font-size: 42px;
-  font-weight: 700;
+  font-weight: 400;
   margin-bottom: 12px;
   letter-spacing: -0.02em;
 }
@@ -1380,13 +1378,13 @@ img {
 
 .content-page h2 {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 400;
   margin: 40px 0 16px;
 }
 
 .content-page h3 {
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 400;
   margin: 32px 0 12px;
 }
 
@@ -1421,7 +1419,7 @@ img {
 
 .download-hero h1 {
   font-size: 42px;
-  font-weight: 700;
+  font-weight: 400;
   margin-bottom: 16px;
   letter-spacing: -0.02em;
 }
@@ -1450,7 +1448,7 @@ img {
 
 .faq-section h2 {
   font-size: 28px;
-  font-weight: 700;
+  font-weight: 400;
   margin-bottom: 32px;
 }
 
@@ -1469,7 +1467,7 @@ img {
 
 .faq-item h3 {
   font-size: 17px;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 12px;
   color: var(--text);
 }
@@ -1491,7 +1489,7 @@ img {
 
 .contact-card h3 {
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 12px;
 }
 
@@ -1593,7 +1591,7 @@ img {
 
 .access-modal-content h2 {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 8px;
   text-align: center;
   padding: 0 40px;
@@ -1723,7 +1721,7 @@ img {
 
 .access-success h3 {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 8px;
 }
 
@@ -1808,7 +1806,7 @@ img {
 
 .pro-modal-content h2 {
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 28px;
   text-align: center;
   padding: 0 40px;
@@ -1936,7 +1934,7 @@ img {
 
 .pro-modal-success h3 {
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 400;
   margin-bottom: 8px;
 }
 

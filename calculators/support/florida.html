@@ -16,11 +16,13 @@
   <meta name="robots" content="noindex, follow">
   <meta name="keywords" content="florida child support calculator, FL child support, florida statute 61.30, florida child support guidelines 2025, income shares florida">
   <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/styles/brand.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
   <style>
     .calc-page-header { padding: 60px 0 40px; background: linear-gradient(180deg, var(--surface) 0%, var(--bg) 100%); border-bottom: 1px solid var(--border); }
     .calc-page-header .container { max-width: 900px; }
-    .calc-page-header h1 { font-size: 36px; font-weight: 700; margin-bottom: 12px; }
+    h2, h3, h4 { font-family: "Instrument Sans", Helvetica Neue, Helvetica, Arial, sans-serif !important; }
+    .calc-page-header h1 { font-size: 38px; font-weight: 400; letter-spacing: -0.5px; margin-bottom: 12px; }
     .calc-page-header p { font-size: 17px; color: var(--text-secondary); margin-bottom: 8px; }
     .calc-page-header .last-updated { font-size: 14px; color: var(--text-muted); }
     .calc-breadcrumb { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; }
@@ -73,7 +75,8 @@
     .calc-toggle-switch.active::after { transform: translateX(20px); }
     .calc-toggle label { font-size: 14px; color: var(--text-secondary); cursor: pointer; }
     @media (max-width: 768px) {
-      .calc-page-header h1 { font-size: 28px; }
+      h2, h3, h4 { font-family: "Instrument Sans", Helvetica Neue, Helvetica, Arial, sans-serif !important; }
+    .calc-page-header h1 { font-size: 28px; }
       .income-grid { grid-template-columns: 1fr; }
       .calc-button-row { flex-direction: column; }
     }
@@ -223,7 +226,7 @@
       </div>
 
       <div class="calc-results-section" id="resultsSection">
-        <h2 style="font-size: 24px; font-weight: 700; margin: 32px 0 24px;">Results</h2>
+        <h2 style="font-size: 24px; font-weight: 500; font-family: Instrument Sans, sans-serif; margin: 32px 0 24px;">Results</h2>
         <div class="calc-results-card">
           <h3>Guideline Child Support</h3>
           <div class="calc-result-primary">
