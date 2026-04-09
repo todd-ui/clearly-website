@@ -69,7 +69,8 @@
     .lp-tips-list { text-align: left; max-width: 560px; margin: 0 auto 40px; }
     .lp-tips-list p { margin-bottom: 20px; }
     .lp-tips-list p:last-child { margin-bottom: 0; }
-    .lp-tools-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; max-width: 700px; margin: 0 auto; text-align: left; }
+    .lp-tools-section .container { max-width: 960px; }
+    .lp-tools-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin: 0 auto; text-align: left; }
     .lp-tool-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
     .lp-tool-card h3 { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 8px; }
     .lp-tool-card p { font-size: 15px; color: var(--text-secondary); line-height: 1.6; margin-bottom: 12px; }
@@ -103,7 +104,7 @@
     <ul class="nav-links">
       <li><a href="/blog.html">Common Ground</a></li>
       <li><a href="/professionals.html">For Professionals</a></li>
-      <li><a href="#" class="nav-cta" data-access-modal>Request Access</a></li>
+      <li><a href="#app-store-coming-soon" class="nav-cta">Download on the App Store — Coming Soon</a></li>
     </ul>
     <button class="nav-toggle" aria-label="Menu">
       <span></span>
@@ -164,7 +165,7 @@
   </section>
 
   <!-- Free Tools -->
-  <section class="lp-section lp-section-alt">
+  <section class="lp-section lp-section-alt lp-tools-section">
     <div class="container">
       <h2 class="fade-in">Free tools to help you prepare.</h2>
       <p class="fade-in">We built these specifically to help parents walk into mediation organized.</p>
@@ -174,12 +175,6 @@
           <p>Walk through schedule, holidays, summer, expenses, and exchange logistics step by step. Get a shareable summary you can bring to mediation as your starting point.</p>
           <p class="tool-meta">5 minutes · Free</p>
           <a href="/plan-builder/" class="btn-primary">Build Your Plan <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
-        </div>
-        <div class="lp-tool-card">
-          <h3>Clarify your values.</h3>
-          <p>The Co-Parenting Alignment Plan helps you identify your priorities, your non-negotiables, and your vision for raising your kids — before you start negotiating.</p>
-          <p class="tool-meta">15–20 minutes · Free</p>
-          <a href="/alignment/" class="btn-primary">Create Your Plan <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></a>
         </div>
         <div class="lp-tool-card">
           <h3>Estimate child support.</h3>
@@ -261,7 +256,7 @@
         <div class="footer-col">
           <h4>Tools & Resources</h4>
           <ul>
-            <li><a href="/alignment/">Co-Parenting Alignment Plan</a></li>
+
             <li><a href="/plan-builder/">Custody Plan Builder</a></li>
             <li><a href="/communication-styles/">Communication Style Quiz</a></li>
             <li><a href="/calculators/">Support Calculator</a></li>
