@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Preconnect hints for performance -->
-  <link rel="preconnect" href="https://www.googletagmanager.com">
-  <link rel="preconnect" href="https://dwncravjhkbclbuzijra.supabase.co">
-  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="dns-prefetch" href="https://dwncravjhkbclbuzijra.supabase.co">
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-DYZ1XEXPMT');
-  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0D8268">
+
+  <!-- Fonts — must load before any styles or scripts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+  <!-- Preconnect hints -->
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+
   <title>Clearly — Change the Conversation</title>
   <meta name="description" content="The marriage ends. The messages don't. Clearly sits between both parents, extracting the substance from every message so you can focus on what matters: your kids.">
 
@@ -48,872 +44,1138 @@
 
   <link rel="stylesheet" href="styles.css">
   <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
-  <link rel="manifest" href="/manifest.json">
-  <link rel="apple-touch-icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DYZ1XEXPMT');
+  </script>
 
   <style>
-    /* ===========================================
-       BASE
-       =========================================== */
-    html, body { overflow-x: hidden; max-width: 100vw; }
+    /* ==========================================
+       HOMEPAGE STYLES
+       ========================================== */
 
-    /* ===========================================
-       BUTTONS
-       =========================================== */
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      background: var(--primary);
-      color: white;
-      font-size: 16px;
-      font-weight: 500;
-      border-radius: 980px;
-      border: none;
-      transition: all 0.2s ease;
-      cursor: pointer;
+    /* Body font */
+    body {
+      font-family: 'Instrument Sans', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    .btn-primary:hover {
-      background: var(--primary-dark);
-      color: white;
-      text-decoration: none;
-    }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      background: transparent;
-      color: var(--text);
-      font-size: 16px;
-      font-weight: 500;
-      border-radius: 980px;
-      border: 1.5px solid var(--text);
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-
-    .btn-secondary:hover {
-      background: var(--text);
-      color: white;
-      text-decoration: none;
-    }
-
-    /* ===========================================
-       HERO
-       =========================================== */
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: white;
-      text-align: center;
-      position: relative;
-    }
-
-    .hero .container { max-width: 720px; }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: var(--primary-soft);
-      color: var(--primary);
-      font-size: 14px;
-      font-weight: 500;
-      border-radius: 20px;
-      margin-bottom: 32px;
-    }
-
-    .hero-badge svg { width: 16px; height: 16px; }
-
-    .hero h1 {
-      font-size: 52px;
-      font-weight: 600;
-      line-height: 1.1;
-      color: var(--text);
-      margin-bottom: 32px;
-      letter-spacing: -0.025em;
-    }
-
-    .hero-subtitle {
-      font-size: 17px;
-      line-height: 1.7;
-      color: var(--text-secondary);
+    /* Section rhythm */
+    .hp-section {
+      padding: 96px 56px;
       margin: 0 auto;
-      max-width: 560px;
     }
+    .hp-section .inner { max-width: 960px; margin: 0 auto; }
+    .hp-section .inner-narrow { max-width: 680px; margin: 0 auto; }
+    .hp-section .inner-mid { max-width: 800px; margin: 0 auto; }
 
-    .hero-ctas {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-      margin-top: 40px;
-    }
+    .bg-paper { background: var(--paper); }
+    .bg-white { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .bg-moss { background: var(--moss); }
 
-    .scroll-hint {
-      position: absolute;
-      bottom: 32px;
-      left: 50%;
-      transform: translateX(-50%);
-      color: var(--text-muted);
-      opacity: 0.4;
-      animation: bounce 2s ease infinite;
-    }
-
-    .scroll-hint svg {
-      width: 28px;
-      height: 28px;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(8px); }
-    }
-
-    @media (max-width: 768px) {
-      .hero { min-height: 100svh; }
-      .hero h1 { font-size: 32px; }
-      .hero-subtitle { font-size: 16px; }
-      .hero-ctas { flex-direction: column; align-items: center; }
-    }
-
-    /* ===========================================
-       PROSE SECTIONS (Experience, Shift, Different)
-       Centered text blocks with consistent typography
-       =========================================== */
-    .prose-section {
-      padding: 80px 0;
-      background: white;
-    }
-
-    .prose-section .container { max-width: 680px; }
-
-    .prose-section .section-label {
-      display: block;
-      font-size: 15px;
+    /* Typography */
+    .hp-eyebrow {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 11px;
       font-weight: 500;
-      color: var(--primary);
-      text-align: center;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: var(--moss);
       margin-bottom: 16px;
     }
-
-    .prose-section h2 {
-      font-size: 30px;
-      font-weight: 600;
-      line-height: 1.25;
-      color: var(--text);
-      letter-spacing: -0.02em;
-      text-align: center;
+    h1 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 54px;
+      line-height: 1.06;
+      letter-spacing: -1px;
+      font-weight: 400;
+      color: var(--ink);
       margin-bottom: 24px;
     }
-
-    .prose-section p {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.75;
-      text-align: center;
-      margin: 0;
+    h1 em, h2 em {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--moss);
     }
-
-    .prose-section p + p { margin-top: 20px; }
-
-    .prose-section .closing-line {
-      font-weight: 500;
-      color: var(--text);
-      margin-top: 28px;
+    h2 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 38px;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 24px;
+    }
+    h2.sm {
+      font-size: 28px;
+      line-height: 1.15;
+      letter-spacing: -0.3px;
+      font-weight: 400;
+    }
+    .hp-lead {
+      font-family: 'Instrument Sans', sans-serif;
       font-size: 18px;
-    }
-
-
-    @media (max-width: 768px) {
-      .prose-section { padding: 60px 0; }
-      .prose-section h2 { font-size: 26px; }
-      .prose-section.has-card .prose-card { padding: 40px 28px; }
-    }
-
-    /* ===========================================
-       GRID SECTIONS (How It Works, Logistics, Tools)
-       Header + grid of cards
-       =========================================== */
-    .grid-section {
-      padding: 100px 0;
-      background: #FAFAF9;
-    }
-
-    .grid-section .container { max-width: 1100px; }
-
-    .grid-section .section-header {
-      text-align: center;
-      max-width: 680px;
-      margin: 0 auto 48px;
-    }
-
-    .grid-section .section-header h2 {
-      font-size: 30px;
-      font-weight: 600;
-      line-height: 1.25;
-      color: var(--text);
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
-    }
-
-    .grid-section .section-header p {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin: 0;
-    }
-
-    .grid-section .section-header .section-label {
-      font-size: 15px;
       font-weight: 500;
-      color: var(--primary);
-      text-align: center;
-      margin-bottom: 16px;
+      color: var(--ink);
+      line-height: 1.6;
     }
-
-    @media (max-width: 768px) {
-      .grid-section { padding: 72px 0; }
-      .grid-section .section-header h2 { font-size: 26px; }
-    }
-
-    /* ===========================================
-       HOW IT WORKS CARDS
-       =========================================== */
-    .mechanism-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-
-    .mechanism-card {
-      background: white;
-      border: 1px solid #E5E4E2;
-      border-radius: 16px;
-      padding: 32px 28px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-    }
-
-    .mechanism-card .card-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--primary-soft);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
+    .hp-body {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--ink-mid);
       margin-bottom: 20px;
     }
-
-    .mechanism-card .card-icon svg { width: 22px; height: 22px; }
-
-    .mechanism-card h3 {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 10px;
-      line-height: 1.3;
+    .hp-body:last-child { margin-bottom: 0; }
+    .hp-body strong { color: var(--ink); font-weight: 500; }
+    .hp-punch {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: #1C1C1A;
+      padding-top: 24px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+      margin-top: 24px;
     }
-
-    .mechanism-card p {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.65;
+    .hp-credit {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      font-style: italic;
+      color: var(--ink-faint);
+      margin-top: 20px;
+    }
+    .hp-small {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      color: var(--ink-faint);
+    }
+    .hp-divider {
+      border: none;
+      border-top: 1px solid rgba(0,0,0,0.07);
       margin: 0;
     }
 
-    @media (max-width: 768px) {
-      .mechanism-grid { grid-template-columns: 1fr; gap: 16px; }
+    /* Buttons */
+    .btn-moss {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #0D8268;
+      color: #FFFFFF;
+      padding: 13px 24px;
+      border-radius: 8px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
     }
-
-    /* ===========================================
-       LOGISTICS CARDS
-       =========================================== */
-    /* Logistics uses same background as grid-section base */
-
-    .logistics-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      max-width: 800px;
-      margin: 0 auto;
+    .btn-moss:hover { opacity: 0.9; text-decoration: none; }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #1C1C1A;
+      border: 1px solid rgba(0,0,0,0.2);
+      padding: 13px 24px;
+      border-radius: 8px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
     }
-
-    .logistics-card {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
+    .btn-ghost:hover { border-color: rgba(0,0,0,0.4); text-decoration: none; }
+    .btn-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      color: #0D8268;
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
     }
+    .btn-white:hover { opacity: 0.9; text-decoration: none; }
+    .btn-ghost-white {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #FFFFFF;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      padding: 14px 28px;
+      border-radius: 8px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .btn-ghost-white:hover { border-color: rgba(255,255,255,0.8); text-decoration: none; }
+    .btn-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      color: #1C1C1A;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-dark:hover { opacity: 0.9; text-decoration: none; }
 
-    .logistics-card .card-icon {
-      width: 44px;
-      height: 44px;
-      background: var(--primary-soft);
-      border-radius: 10px;
+    /* ==========================================
+       HERO
+       ========================================== */
+    #hero {
+      min-height: 600px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      color: var(--primary);
-      flex-shrink: 0;
     }
-
-    .logistics-card .card-icon svg { width: 20px; height: 20px; }
-
-    .logistics-card h3 {
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .logistics-card p {
-      font-size: 14px;
-      color: var(--text-secondary);
-      line-height: 1.5;
-      margin: 0;
-    }
-
-    @media (max-width: 768px) {
-      .logistics-grid { grid-template-columns: 1fr; }
-    }
-
-    /* ===========================================
-       TOOL CARDS
-       =========================================== */
-    .tools-grid {
+    .hero-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-      max-width: 800px;
-      margin: 0 auto;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
     }
-
-    .tool-card {
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 32px 28px;
+    /* Stack layout for two-block sections */
+    .stack {
       display: flex;
       flex-direction: column;
+      gap: 0;
+    }
+    .stack > div {
+      padding: 56px 0;
+    }
+    .stack > div:first-child {
+      padding-top: 0;
+    }
+    .stack > div:last-child {
+      padding-bottom: 0;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid rgba(0,0,0,0.12);
+      border-radius: 20px;
+      padding: 5px 12px 5px 8px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      color: #4A4A47;
+      background: #FFFFFF;
+      margin-bottom: 28px;
+    }
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #0D8268;
+    }
+    .hero-lead-divider {
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+      margin-bottom: 20px;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 10px;
+      margin-top: 28px;
     }
 
-    .tool-card .btn-primary {
-      margin-top: auto;
+    /* Phone mockup */
+    .phone {
+      background: #F6F5F1;
+      border-radius: 20px;
+      border: 1px solid rgba(0,0,0,0.1);
+      overflow: hidden;
+      box-shadow: 0 2px 32px rgba(0,0,0,0.07);
+      max-width: 300px;
+      margin: 0 auto;
+      font-family: 'Instrument Sans', sans-serif;
+    }
+    .ph-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: #FFFFFF;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+    }
+    .ph-bar-back { font-size: 13px; color: #0D8268; font-weight: 500; }
+    .ph-bar-title { font-size: 14px; font-weight: 600; color: #1C1C1A; }
+    .ph-bar-spacer { width: 50px; }
+    .ph-summary {
+      background: #FFFFFF;
+      border-radius: 12px;
+      margin: 12px 12px 0;
+      border: 1px solid rgba(0,0,0,0.07);
+      padding: 14px;
+    }
+    .ph-summary-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: #0D8268;
+      margin-bottom: 8px;
+    }
+    .ph-summary-text { font-size: 13px; color: #1C1C1A; line-height: 1.5; }
+    .ph-hold {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: calc(100% - 24px);
+      margin: 10px 12px 0;
+      padding: 12px;
+      background: #FFFFFF;
+      border: 1.5px solid #BFBFBB;
+      border-radius: 10px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 13px;
+      color: #8A8A87;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .ph-res {
+      background: #E4F4EF;
+      border-radius: 12px;
+      padding: 14px;
+      border: 1px solid rgba(13,130,104,0.15);
+      margin: 10px 12px 12px;
+    }
+    .ph-res-label {
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #0D8268;
+      margin-bottom: 8px;
+    }
+    .ph-res-text {
+      font-size: 13px;
+      color: #1C1C1A;
+      line-height: 1.5;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(13,130,104,0.15);
+      margin-bottom: 12px;
+    }
+    .ph-res-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .ph-res-btns button {
+      padding: 10px;
+      border-radius: 8px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 13px;
+      cursor: pointer;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .ph-btn-keep { background: #FFFFFF; border: 1.5px solid #BFBFBB; color: #4A4A47; }
+    .ph-btn-resolve { background: #0D8268; border: none; color: #FFFFFF; font-weight: 500; }
+
+    /* ==========================================
+       TRANSFORMATION (See it work)
+       ========================================== */
+    .orig {
+      background: #FEF2F2;
+      border-left: 3px solid #FCA5A5;
+      border-radius: 0 10px 10px 0;
+      padding: 20px 24px;
+      margin-bottom: 12px;
+    }
+    .orig-label {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #C97B7B;
+      margin-bottom: 10px;
+    }
+    .orig-text {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 15px;
+      color: #7F1D1D;
+      font-style: italic;
+      line-height: 1.6;
+    }
+    .arrow-down {
+      text-align: center;
+      font-size: 18px;
+      color: #AEAEAD;
+      padding: 8px 0;
+      margin-bottom: 12px;
+    }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    .step {
+      background: #FFFFFF;
+      border-radius: 10px;
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 18px 20px;
+    }
+    .step-label {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: #0D8268;
+      margin-bottom: 8px;
+    }
+    .step h4 {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .step p {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 13px;
+      color: var(--ink-mid);
+      line-height: 1.5;
+    }
+    .output {
+      background: #E4F4EF;
+      border: 1px solid rgba(13,130,104,0.15);
+      border-radius: 10px;
+      padding: 22px 24px;
+      margin-bottom: 20px;
+    }
+    .output-label {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #0D8268;
+      margin-bottom: 10px;
+    }
+    .output-text {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+    .output-note {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      font-style: italic;
+      color: #4A4A47;
     }
 
-    .tool-card .card-icon {
+    /* ==========================================
+       FEATURES
+       ========================================== */
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 48px;
+    }
+    .feat-card {
+      background: #FFFFFF;
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.07);
+      padding: 28px;
+    }
+    .feat-icon {
       width: 44px;
       height: 44px;
-      background: var(--primary-soft);
+      background: #E4F4EF;
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--primary);
       margin-bottom: 16px;
     }
-
-    .tool-card .card-icon svg { width: 20px; height: 20px; }
-
-    .tool-card h3 {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--text);
+    .feat-icon svg { color: #0D8268; }
+    .feat-card h3 {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+    .feat-card p {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      color: var(--ink-mid);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+    /* Mini UI inside feature cards */
+    .mini-ui {
+      background: var(--paper);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-top: 14px;
+      border: 1px solid rgba(0,0,0,0.06);
+      font-size: 12px;
+    }
+    .mini-label {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--ink-faint);
       margin-bottom: 10px;
     }
-
-    .tool-card p {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      margin: 0 0 6px;
+    .mini-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #FFFFFF;
+      border-radius: 7px;
+      padding: 8px 10px;
+      border: 1px solid rgba(0,0,0,0.06);
+      margin-bottom: 6px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      color: var(--ink);
     }
-
-    .tool-card .tool-meta {
+    .mini-row:last-child { margin-bottom: 0; }
+    .mini-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .mini-dot-green { background: #0D8268; }
+    .mini-dot-amber { background: #D97706; }
+    .mini-cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px;
+      text-align: center;
+    }
+    .mini-cal-day {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 11px;
+      color: var(--ink-faint);
+      padding: 2px;
+    }
+    .mini-cal-cell {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      color: var(--ink-mid);
+      padding: 6px 2px;
+      border-radius: 6px;
+    }
+    .mini-cal-cell.you { background: #E4F4EF; color: #0D8268; font-weight: 500; }
+    .mini-expense {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      font-family: 'Instrument Sans', sans-serif;
+    }
+    .mini-expense + .mini-expense { border-top: 1px solid rgba(0,0,0,0.05); }
+    .mini-expense-name { font-size: 13px; color: var(--ink-mid); }
+    .mini-expense-split { font-size: 11px; color: var(--ink-faint); }
+    .mini-expense-amt { font-size: 13px; color: #0D8268; font-weight: 500; }
+    .mini-info-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      font-family: 'Instrument Sans', sans-serif;
       font-size: 13px;
-      color: var(--text-muted);
-      margin-bottom: 20px;
+      color: var(--ink-mid);
     }
+    .mini-info-row + .mini-info-row { border-top: 1px solid rgba(0,0,0,0.05); }
+    .mini-info-icon { color: var(--ink-faint); flex-shrink: 0; }
 
-    .tool-card .btn-primary {
-      padding: 12px 20px;
+    /* Plan Builder CTA card */
+    .plan-cta {
+      background: #1C1C1A;
+      border-radius: 16px;
+      padding: 40px 48px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      margin-top: 24px;
+    }
+    .plan-cta h3 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: #FFFFFF;
+      margin-bottom: 8px;
+    }
+    .plan-cta p {
+      font-family: 'Instrument Sans', sans-serif;
       font-size: 14px;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.6;
     }
 
-    @media (max-width: 768px) {
-      .tools-grid { grid-template-columns: 1fr; }
+    /* ==========================================
+       PRICING
+       ========================================== */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
     }
-
-    /* ===========================================
-       ANCHOR SECTION (Quote)
-       =========================================== */
-    .anchor-section {
-      padding: 80px 0;
-      background: #1A1A1A;
+    .price-card {
+      background: #F6F5F1;
+      border-radius: 16px;
+      border: 1px solid rgba(0,0,0,0.08);
+      padding: 36px;
+    }
+    .price-amt {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 64px;
+      font-weight: 400;
+      letter-spacing: -2px;
+      color: var(--ink);
+      line-height: 1;
+    }
+    .price-per {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      color: var(--ink-faint);
+      margin-top: 4px;
+      margin-bottom: 28px;
+    }
+    .price-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .price-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      color: var(--ink-mid);
+      line-height: 1.5;
+    }
+    .price-check {
+      color: #0D8268;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .price-fine {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      color: var(--ink-faint);
       text-align: center;
+      margin-top: 12px;
+    }
+    .price-compare {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--ink-faint);
+      margin-top: 20px;
+      line-height: 1.6;
     }
 
-    .anchor-section .container { max-width: 800px; }
-
-    .anchor-section p {
-      font-size: 32px;
-      font-weight: 600;
-      line-height: 1.3;
-      color: white;
-      margin: 0;
-      letter-spacing: -0.02em;
-    }
-
-    @media (max-width: 768px) {
-      .anchor-section { padding: 60px 0; }
-      .anchor-section p { font-size: 24px; }
-    }
-
-    /* ===========================================
-       CTA SECTION
-       =========================================== */
-    .cta-section {
-      padding: 100px 0;
-      background: var(--primary);
+    /* ==========================================
+       CLOSE (green section)
+       ========================================== */
+    .close-section {
       text-align: center;
+      padding: 96px 56px;
+      background: #0D8268;
     }
-
-    .cta-section .container { max-width: 680px; }
-
-    .cta-section h2 {
-      font-size: 30px;
-      font-weight: 600;
-      line-height: 1.25;
-      color: white;
-      letter-spacing: -0.02em;
-      margin-bottom: 16px;
+    .close-section h2 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 46px;
+      font-weight: 400;
+      color: #FFFFFF;
+      letter-spacing: -1px;
+      margin-bottom: 24px;
     }
-
-    .cta-section p {
+    .close-section h2 em { color: rgba(255,255,255,0.55); }
+    .close-section .close-body {
+      font-family: 'Instrument Sans', sans-serif;
       font-size: 17px;
-      color: rgba(255, 255, 255, 0.85);
-      line-height: 1.7;
-      margin: 0 0 32px;
+      color: rgba(255,255,255,0.85);
+      max-width: 440px;
+      margin: 0 auto 34px;
+      line-height: 1.75;
+    }
+    .close-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+    .close-note {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      margin-top: 16px;
     }
 
-    .cta-section .btn-primary {
-      background: white;
-      color: var(--primary);
+    /* ==========================================
+       ADA CONTRAST
+       ========================================== */
+    .hp-credit, .price-fine, .close-note, .price-compare {
+      color: #6B6B67;
+    }
+    .step p {
+      color: #4A4A47;
+    }
+    a:focus, button:focus {
+      outline: 2px solid #0D8268;
+      outline-offset: 2px;
     }
 
-    .cta-section .btn-primary:hover {
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    @media (max-width: 768px) {
-      .cta-section h2 { font-size: 26px; }
-    }
-
-    /* ===========================================
-       FOOTER ADJUSTMENTS
-       =========================================== */
-    .footer .footer-nav {
-      flex: 0 !important;
-      justify-content: flex-end !important;
-      gap: 48px !important;
-    }
-
-    .footer .footer-col a,
-    .footer .footer-col h4 {
-      white-space: nowrap !important;
-    }
-
-    /* ===========================================
+    /* ==========================================
        ANIMATIONS
-       =========================================== */
+       ========================================== */
     .fade-in {
-      opacity: 1;
-      transform: translateY(0);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-
-    .js-loaded .fade-in {
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(16px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
     }
-
-    .js-loaded .fade-in.visible {
+    .fade-in.visible {
       opacity: 1;
       transform: translateY(0);
     }
 
+    /* ==========================================
+       RESPONSIVE
+       ========================================== */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .feat-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr; gap: 40px; }
+      .plan-cta { grid-template-columns: 1fr; text-align: center; }
+      h1 { font-size: 40px; }
+      h2 { font-size: 30px; }
+      .close-section h2 { font-size: 36px; }
+    }
+    @media (max-width: 600px) {
+      .hp-section { padding: 64px 20px; }
+      .close-section { padding: 64px 20px; }
+      .hero-btns { flex-direction: column; }
+      .close-btns { flex-direction: column; align-items: center; }
+      h1 { font-size: 34px; }
+      .price-amt { font-size: 48px; }
+    }
   </style>
-  <script src="/js/access-modal.js" defer></script>
 </head>
 <body>
-<a href="#main-content" class="skip-link">Skip to content</a>
-
-  <!-- Navigation -->
-<nav class="nav">
-  <div class="container">
-    <a href="/" class="nav-brand">
-      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
-      Clearly
-    </a>
-    <ul class="nav-links">
-      <li><a href="/blog.html">Common Ground</a></li>
-      <li><a href="/professionals.html">For Professionals</a></li>
-      <li><a href="#app-store-coming-soon" class="nav-cta">Download on the App Store — Coming Soon</a></li>
-    </ul>
+  <!-- Header -->
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <header class="site-nav">
+    <a href="/" class="nav-logo">Clearly</a>
+    <div class="nav-right">
+      <a href="/blog.html" class="nav-link">Common Ground</a>
+      <a href="/professionals.html" class="nav-link">For Professionals</a>
+      <a href="#app-store-coming-soon" class="app-badge">
+        <svg width="22" height="26" viewBox="0 0 22 26" fill="none">
+          <path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/>
+          <path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/>
+        </svg>
+        <div class="badge-text">
+          <span class="badge-small">Download on the</span>
+          <span class="badge-large">App Store</span>
+        </div>
+      </a>
+    </div>
     <button class="nav-toggle" aria-label="Menu">
       <span></span>
       <span></span>
       <span></span>
     </button>
-  </div>
-</nav>
-
-<script>
-  // Mobile menu toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-  }
-</script>
-<script src="/js/access-modal.js" defer></script>
-
-<script>
-  // Mobile menu toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-  }
-</script>
-<script src="/js/access-modal.js" defer></script>
-
-<script>
-  // Mobile menu toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-  }
-</script>
-<script src="/js/access-modal.js" defer></script>
-
-<script>
-  // Mobile menu toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
-    });
-  }
-</script>
-<script src="/js/access-modal.js" defer></script>
-
-  <script>
-    // Mobile menu toggle
-    const navToggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    if (navToggle && navLinks) {
-      navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('open');
-        navLinks.classList.toggle('open');
-      });
-    }
-  </script>
+  </header>
 
   <main id="main-content">
 
   <!-- SECTION 1: HERO -->
-  <section class="hero" id="hero">
-    <div class="container">
-      <div class="hero-badge fade-in">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        Coming to iOS
-      </div>
-      <h1 class="fade-in">The marriage ends. The messages&nbsp;don't.</h1>
-      <p class="hero-subtitle fade-in">Most parents assume separation makes communication easier. It doesn't. The same patterns that didn't work in your marriage follow you — and most co-parenting apps just give them a new home. Clearly changes them so you can focus on what matters: your&nbsp;kids.</p>
-      <div class="hero-ctas fade-in">
-        <a href="#app-store-coming-soon" class="btn-primary">
-          Download on the App Store — Coming Soon
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </a>
-        <a href="#how-it-works" class="btn-secondary">
-          See How It Works
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
-        </a>
-      </div>
-      <div class="scroll-hint fade-in">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
-      </div>
-    </div>
-  </section>
-
-  <!-- SECTION 2: NAME THE EXPERIENCE -->
-  <section class="prose-section" id="experience">
-    <div class="container">
-      <p class="section-label fade-in">What nobody tells you.</p>
-      <h2 class="fade-in">Separation doesn't reduce communication — it increases&nbsp;it.</h2>
-      <p class="fade-in">You think once you're living apart, the hard conversations will stop. But pickup times, medical decisions, school forms, expenses, holidays, schedule changes — you're going to talk to this person more than you expect, about more than you expect, for longer than you&nbsp;expect.</p>
-      <p class="fade-in">And without something fundamentally different about how those conversations happen, every text about Tuesday pickup carries the weight of everything that came before&nbsp;it.</p>
-      <p class="closing-line fade-in">That's not unique to you. That's what happens when two people with history try to make decisions together through a&nbsp;screen.</p>
-    </div>
-  </section>
-
-  <!-- SECTION 3: THE SHIFT -->
-  <section class="prose-section" id="shift">
-    <div class="container">
-      <p class="section-label fade-in">Most parents don't realize.</p>
-      <h2 class="fade-in">You probably agree on more than you&nbsp;think.</h2>
-      <p class="fade-in">You both love your kids. You both want this to be as easy on them as possible. You both want to make good decisions for them. Most co-parents are closer to agreement than they&nbsp;realize.</p>
-      <p class="fade-in">But the way you're communicating makes it impossible to act on that. A question about soccer becomes a fight about something else. A simple expense turns into a referendum on fairness. The shared ground is there — the conversation keeps burying&nbsp;it.</p>
-      <p class="closing-line fade-in">Clearly was built to uncover it — and help you act on&nbsp;it.</p>
-    </div>
-  </section>
-
-  <!-- SECTION 4: HOW IT WORKS -->
-  <section class="grid-section" id="how-it-works">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label fade-in">How it works.</p>
-        <h2 class="fade-in">This is not a tone&nbsp;meter.</h2>
-        <p class="fade-in">Some apps flag your language and suggest you soften it. That's a surface fix. It doesn't change what you receive, and it doesn't help either parent get to a decision. Clearly works differently. It sits between both parents. Every message — yours and theirs — passes through Clearly before it's delivered. The emotion, the judgment, the subtext, the history — none of that reaches the other side. What comes through is the substance: the issue, the question, the decision your kids need you to make. What you send is clear. What you receive is&nbsp;too.</p>
-      </div>
-      <div class="mechanism-grid">
-        <div class="mechanism-card fade-in">
-          <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+  <section class="hp-section bg-paper" id="hero">
+    <div class="inner">
+      <div class="hero-grid">
+        <div class="hero-copy fade-in">
+          <div class="pill">
+            <span class="pill-dot"></span>
+            Now on iOS
           </div>
-          <h3>You and your co-parent get the facts. Not the fight.</h3>
-          <p>Every message passes through Clearly. It extracts the substance — the questions, the decisions, the logistics — and strips out the emotion, the judgment, and the history. What lands on the other side is only what&nbsp;matters.</p>
+          <h1>The marriage ends.<br>The messages <em>don't.</em></h1>
+          <p class="hp-lead hero-lead-divider">Every conversation still carries the weight of everything that came before it.</p>
+          <p class="hp-body">Most co-parenting apps just give those patterns a new home. <strong>Clearly changes them.</strong> Every message passes through Clearly before it's delivered — the emotion, the history, the charge stripped out — leaving only what actually needs a response.</p>
+          <p class="hp-body">So you can focus on the one thing you still agree on: your kids.</p>
+          <div class="hero-btns">
+            <a href="#app-store-coming-soon" class="btn-moss">Download on iOS</a>
+            <a href="#how-it-works" class="btn-ghost">See how it works</a>
+          </div>
         </div>
-        <div class="mechanism-card fade-in">
-          <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div class="hero-phone fade-in">
+          <div class="phone">
+            <div class="ph-bar">
+              <span class="ph-bar-back">&lt; Topics</span>
+              <span class="ph-bar-title">Pickup timing</span>
+              <span class="ph-bar-spacer"></span>
+            </div>
+            <div class="ph-summary">
+              <div class="ph-summary-label">&#9733; Clearly's Summary</div>
+              <div class="ph-summary-text">There's a recurring concern about pickup times on Thursdays. The request is to agree on a consistent time that works for both schedules.</div>
+            </div>
+            <button class="ph-hold">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
+                <ellipse cx="7.5" cy="7.5" rx="6.5" ry="4" stroke="#8A8A87" stroke-width="1.3"/>
+                <circle cx="7.5" cy="7.5" r="2" stroke="#8A8A87" stroke-width="1.3"/>
+              </svg>
+              Hold to view original message
+            </button>
+            <div class="ph-res">
+              <div class="ph-res-label">Resolution Pending</div>
+              <div class="ph-res-text">Agree on a pickup time for Thursdays going forward.</div>
+              <div class="ph-res-btns">
+                <button class="ph-btn-keep">Keep open</button>
+                <button class="ph-btn-resolve">Resolve</button>
+              </div>
+            </div>
           </div>
-          <h3>Nothing lingers.</h3>
-          <p>Topics have response windows. Unaddressed issues resolve or archive automatically. Nothing gets used as&nbsp;leverage.</p>
-        </div>
-        <div class="mechanism-card fade-in">
-          <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-          </div>
-          <h3>Everything on the record.</h3>
-          <p>Every message is immutable and timestamped. Export clean, formatted PDFs or CSVs anytime — with business record certification. Court-ready if you ever need&nbsp;it.</p>
-        </div>
-        <div class="mechanism-card fade-in">
-          <div class="card-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-          </div>
-          <h3>Built on proven frameworks.</h3>
-          <p>Clearly uses methods from mediators and negotiators — designed to help people who disagree find common ground and make decisions&nbsp;together.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ANCHOR SECTION -->
-  <section class="anchor-section" id="anchor">
-    <div class="container">
-      <p class="fade-in">When co-parents communicate well, children don't just adjust — they&nbsp;thrive.</p>
+  <!-- SECTION 2: PROBLEM -->
+  <section class="hp-section bg-white" id="problem">
+    <div class="inner-narrow stack">
+      <div class="fade-in">
+        <p class="hp-eyebrow">What nobody tells you</p>
+        <h2>Separation doesn't reduce communication.<br><em>It increases it.</em></h2>
+        <p class="hp-body">You think once you're living apart, the hard conversations will stop. But pickup times, medical decisions, school forms, expenses, holidays, schedule changes — you're going to talk to this person more than you expect, about more than you expect, for longer than you expect.</p>
+        <p class="hp-body"><strong>Every text about Tuesday pickup carries the weight of everything that came before it.</strong> That's not unique to you. That's what happens when two people with history try to make decisions together through a screen.</p>
+      </div>
+      <hr class="hp-divider">
+      <div class="fade-in">
+        <p class="hp-eyebrow">Most parents don't realize</p>
+        <h2>You probably agree on<br><em>more than you think.</em></h2>
+        <p class="hp-body">You both love your kids. You both want this to be as easy on them as possible. Most co-parents are closer to agreement than they realize — but the way they're communicating makes it impossible to act on that.</p>
+        <p class="hp-body">A question about soccer becomes a fight about something else. A simple expense turns into a referendum on fairness. The shared ground is there — the conversation keeps burying it.</p>
+        <p class="hp-punch">Clearly was built to uncover it.</p>
+      </div>
     </div>
   </section>
 
-  <!-- SECTION 7: LOGISTICS -->
-  <section class="grid-section logistics" id="logistics">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label fade-in">Beyond communication.</p>
-        <h2 class="fade-in">And yes — it handles the logistics&nbsp;too.</h2>
+  <!-- SECTION 3: SEE IT WORK -->
+  <section class="hp-section bg-paper" id="how-it-works">
+    <div class="inner-narrow">
+      <p class="hp-eyebrow fade-in">Clearly AI &middot; See it work</p>
+      <h2 class="fade-in">From message to <em>resolution.</em></h2>
+      <p class="hp-body fade-in">A real message. Here's exactly what Clearly does with it.</p>
+
+      <p style="font-size:12px; text-transform:uppercase; letter-spacing:0.8px; color:#8A8A87; margin-bottom:8px;" class="fade-in">You send this:</p>
+      <div class="orig fade-in">
+        <div class="orig-label">What was sent</div>
+        <div class="orig-text">"You're ALWAYS late. Every single time. I have a life too and you have zero respect for my time or for these kids. I'm so sick of your selfish behaviour, it's exhausting."</div>
       </div>
-      <div class="mechanism-grid">
-        <div class="mechanism-card fade-in">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+
+      <div style="display:flex; align-items:center; justify-content:center; gap:8px; padding:10px 0; margin-bottom:12px; font-size:12px; color:#8A8A87; font-style:italic; font-family:'Instrument Sans',sans-serif;" class="fade-in">
+        <span>&darr;</span>
+        <span>Clearly AI processes your message</span>
+      </div>
+
+      <div class="steps-grid fade-in">
+        <div class="step">
+          <div class="step-label">Clearly AI — 1 of 3</div>
+          <h4>Remove accusation and blame</h4>
+          <p>"You always," "zero respect," "selfish" — stripped. 47 words of emotion, one actionable fact.</p>
+        </div>
+        <div class="step">
+          <div class="step-label">Clearly AI — 2 of 3</div>
+          <h4>Extract the single issue</h4>
+          <p>One word buried in the message actually matters: late. Clearly finds it and builds from there.</p>
+        </div>
+        <div class="step">
+          <div class="step-label">Clearly AI — 3 of 3</div>
+          <h4>Convert to a forward request</h4>
+          <p>Not what went wrong. What needs to happen next — the only thing co-parenting needs to be.</p>
+        </div>
+      </div>
+
+      <div class="arrow-down fade-in">&darr;</div>
+
+      <div class="output fade-in">
+        <div class="output-label">&#10022; Clearly AI delivers</div>
+        <div class="output-text">"Drop-off has been late on multiple recent occasions. Please confirm you can meet the agreed pick-up/drop-off time going forward."</div>
+        <div class="output-note">No blame. No tone. No exhaustion. Just the one thing that requires a response.</div>
+      </div>
+
+      <p class="hp-credit fade-in" style="text-align: center;">Grounded in the Harvard Negotiation Project's Getting to Yes framework</p>
+    </div>
+  </section>
+
+  <!-- SECTION 4: WHAT MAKES CLEARLY DIFFERENT -->
+  <section class="hp-section bg-white" id="different">
+    <div class="inner-narrow stack">
+      <div class="fade-in">
+        <p class="hp-eyebrow">What makes Clearly different</p>
+        <h2>Other apps move messages.<br><em>Clearly changes them.</em></h2>
+        <p class="hp-body">Most co-parenting apps give the same patterns a new platform. The same emotional charge, the same triggers, the same loops — just with a different interface. They digitize the dynamic that didn't work in your marriage and hand it back to you.</p>
+        <p class="hp-body">Clearly sits between both parents. Every message — yours and theirs — passes through before it's delivered. <strong>What comes through is the substance: the question, the decision, what your kids need you to resolve.</strong> The emotion, the history, the charge — none of that reaches the other side.</p>
+        <p class="hp-punch">Moving people from messages to communicating. That's the difference.</p>
+      </div>
+      <hr class="hp-divider">
+      <div class="fade-in">
+        <p class="hp-eyebrow">The foundation</p>
+        <h2>Built on frameworks that<br><em>resolve real conflict.</em></h2>
+        <p class="hp-body">The same principles used in mediation and high-stakes negotiation — separate the person from the problem, focus on interests not positions, create a path to a decision.</p>
+        <p class="hp-body">Because the conversations you're having with your co-parent are genuinely difficult. They deserve a system designed for that — not a messaging app with a friendlier icon.</p>
+        <p class="hp-credit">Grounded in the Harvard Negotiation Project's Getting to Yes framework</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5: FEATURES -->
+  <section class="hp-section bg-paper" id="features">
+    <div class="inner">
+      <p class="hp-eyebrow fade-in">Everything included</p>
+      <h2 class="fade-in">And yes — it handles the logistics too.</h2>
+      <p class="hp-body fade-in" style="max-width: 520px;">Best-in-class custody calendar. Shared expenses. A today view that surfaces what needs your attention. Everything both parents need, in one place.</p>
+
+      <div class="feat-grid">
+        <!-- Today -->
+        <div class="feat-card fade-in">
+          <div class="feat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
           </div>
           <h3>Today</h3>
-          <p>One screen that shows you everything that needs your attention — action items, status updates, upcoming exchanges. No digging through tabs to figure out what's&nbsp;happening.</p>
+          <p>One screen that shows you everything that needs your attention — action items, upcoming exchanges, pending topics. No digging through tabs.</p>
+          <div class="mini-ui">
+            <div class="mini-label">Today</div>
+            <div class="mini-row"><span class="mini-dot mini-dot-green"></span> Pickup at 3pm &middot; Alex's turn</div>
+            <div class="mini-row"><span class="mini-dot mini-dot-amber"></span> Expense pending &middot; $84</div>
+            <div class="mini-row"><span class="mini-dot mini-dot-green"></span> Topic needs response &middot; Pickup timing</div>
+          </div>
         </div>
-        <div class="mechanism-card fade-in">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+        <!-- Schedule -->
+        <div class="feat-card fade-in">
+          <div class="feat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
           </div>
           <h3>Schedule</h3>
-          <p>Your full custody calendar — weekly patterns, holidays, summer schedules, and swaps. Request and accept changes in one tap. Syncs with Apple Calendar and Google&nbsp;Calendar.</p>
+          <p>Best-in-class custody calendar — weekly patterns, holidays, summer. Swap requests handled in-app. Syncs with Apple and Google Calendar.</p>
+          <div class="mini-ui">
+            <div class="mini-cal-grid">
+              <div class="mini-cal-day">M</div><div class="mini-cal-day">T</div><div class="mini-cal-day">W</div><div class="mini-cal-day">T</div><div class="mini-cal-day">F</div><div class="mini-cal-day">S</div><div class="mini-cal-day">S</div>
+              <div class="mini-cal-cell you">7</div><div class="mini-cal-cell you">8</div><div class="mini-cal-cell">9</div><div class="mini-cal-cell">10</div><div class="mini-cal-cell you">11</div><div class="mini-cal-cell you">12</div><div class="mini-cal-cell you">13</div>
+              <div class="mini-cal-cell">14</div><div class="mini-cal-cell">15</div><div class="mini-cal-cell you">16</div><div class="mini-cal-cell you">17</div><div class="mini-cal-cell">18</div><div class="mini-cal-cell">19</div><div class="mini-cal-cell">20</div>
+            </div>
+          </div>
         </div>
-        <div class="mechanism-card fade-in">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+        <!-- Expenses -->
+        <div class="feat-card fade-in">
+          <div class="feat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
           </div>
           <h3>Expenses</h3>
-          <p>Log shared costs and Clearly pre-calculates each parent's share based on your split. No spreadsheets. No back-and-forth about who owes&nbsp;what.</p>
-        </div>
-        <div class="mechanism-card fade-in">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+          <p>Log shared costs and Clearly pre-calculates each parent's share based on your split. No spreadsheets. No back-and-forth about who owes what.</p>
+          <div class="mini-ui">
+            <div class="mini-expense">
+              <div><div class="mini-expense-name">Soccer registration</div><div class="mini-expense-split">Your share: 60%</div></div>
+              <div class="mini-expense-amt">$144</div>
+            </div>
+            <div class="mini-expense">
+              <div><div class="mini-expense-name">School supplies</div><div class="mini-expense-split">Your share: 60%</div></div>
+              <div class="mini-expense-amt">$52</div>
+            </div>
           </div>
-          <h3>Shared</h3>
-          <p>Medications, emergency contacts, school info, addresses, doctors — everything both parents need access to, always current, in one&nbsp;place.</p>
+        </div>
+        <!-- Shared info -->
+        <div class="feat-card fade-in">
+          <div class="feat-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <h3>Shared info</h3>
+          <p>Medications, emergency contacts, school info, addresses, doctors — everything both parents need access to, always current, in one place.</p>
+          <div class="mini-ui">
+            <div class="mini-info-row">
+              <svg class="mini-info-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"/></svg>
+              Dr. Martinez &middot; Pediatrician
+            </div>
+            <div class="mini-info-row">
+              <svg class="mini-info-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              142 Oak St &middot; Mom's address
+            </div>
+            <div class="mini-info-row">
+              <svg class="mini-info-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+              Lincoln Elementary &middot; Grade 3
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Plan Builder CTA -->
+      <div class="plan-cta fade-in">
+        <div>
+          <h3>Not sure where to start?</h3>
+          <p>The Custody Plan Builder walks you through your schedule, holidays, expenses, and exchange logistics step by step. Free — no account needed.</p>
+        </div>
+        <a href="/plan-builder/" class="btn-dark">Build your plan &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6: PRICING -->
+  <section class="hp-section bg-white" id="pricing">
+    <div class="inner">
+      <div class="pricing-grid">
+        <div class="fade-in">
+          <p class="hp-eyebrow">Pricing</p>
+          <h2>Less than one difficult conversation costs you.</h2>
+          <p class="hp-body">A single hour of mediation runs $300–500. One avoided conflict pays for the year.</p>
+          <p class="hp-body">Clearly isn't priced like a utility because <strong>it isn't one.</strong> It's a system that changes how two people with history communicate about the most important thing in both their lives.</p>
+          <p class="price-compare">Therapy: $200–300/session &middot; Mediation: $300–500/hour<br>Clearly: less than two sessions. Used every day.</p>
+        </div>
+        <div class="fade-in">
+          <div class="price-card">
+            <div class="price-amt">$290</div>
+            <div class="price-per">per year</div>
+            <ul class="price-list">
+              <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> AI message processing and tone rewriting</li>
+              <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Shared custody calendar with swap requests</li>
+              <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Shared expense tracking and splits</li>
+              <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Topics that resolve — not threads that spiral</li>
+              <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Full communication record, preserved and timestamped</li>
+            </ul>
+            <a href="#app-store-coming-soon" class="btn-moss" style="width: 100%; justify-content: center;">Download on iOS</a>
+            <div class="price-fine">Free to try &middot; Cancel anytime</div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 8: FREE TOOLS -->
-  <section class="grid-section" id="tools">
-    <div class="container">
-      <div class="section-header">
-        <p class="section-label fade-in">Tools & Resources</p>
-        <h2 class="fade-in">We built these to help you on your&nbsp;journey.</h2>
-      </div>
-      <div class="tools-grid">
-        <div class="tool-card fade-in">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><path d="M8 10h.01"/><path d="M12 10h.01"/><path d="M16 10h.01"/></svg>
-          </div>
-          <h3>Communication Style Quiz</h3>
-          <p>Answer a few questions about how you and your co-parent handle decisions, disagreements, and daily logistics. Get a clear picture of where your communication works, where it breaks down, and what to do about&nbsp;it.</p>
-          <p class="tool-meta">2 minutes · Free</p>
-          <a href="/communication-styles/" class="btn-primary">
-            Take the Quiz
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
-        </div>
-        <div class="tool-card fade-in">
-          <div class="card-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-          </div>
-          <h3>Custody Plan Builder</h3>
-          <p>Walk through your schedule, holidays, summer, expenses, and exchange logistics step by step. Get a shareable plan you can actually use — whether you're starting from scratch or cleaning up what you&nbsp;have.</p>
-          <p class="tool-meta">5 minutes · Free</p>
-          <a href="/plan-builder/" class="btn-primary">
-            Build Your Plan
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
-        </div>
-      </div>
+  <!-- SECTION 7: CLOSE -->
+  <section class="close-section">
+    <h2 class="fade-in">For the kids.<br><em>And for you.</em></h2>
+    <p class="close-body fade-in">The way you communicate with your co-parent will shape your kids' experience of this more than anything else. Clearly helps you find the common ground, make the decisions, and keep it about the kids.</p>
+    <div class="close-btns fade-in">
+      <a href="#app-store-coming-soon" class="btn-white">Download on iOS</a>
+      <a href="#how-it-works" class="btn-ghost-white">See how it works</a>
     </div>
-  </section>
-
-  <!-- SECTION 9: EARLY ACCESS CTA -->
-  <section class="cta-section" id="cta">
-    <div class="container">
-      <h2 class="fade-in">You're still early enough to get this&nbsp;right.</h2>
-      <p class="fade-in">The way you communicate with your co-parent will shape your kids' experience of this more than anything else. Clearly helps you find the common ground, make the decisions, and keep it about the kids. Currently in early access for&nbsp;iOS.</p>
-      <a href="#app-store-coming-soon" class="btn-primary fade-in">
-        Download on the App Store — Coming Soon
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-      </a>
-    </div>
+    <p class="close-note fade-in">Free to try &middot; $290/year &middot; iOS</p>
   </section>
 
   </main>
 
   <!-- Footer -->
-  <footer class="footer">
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand-section">
-        <div class="footer-brand">
-          <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" loading="lazy">
-          <span>Clearly</span>
+  <footer class="site-footer">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <div class="footer-logo-row">
+          <img class="footer-icon" src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" loading="lazy">
+          <span class="footer-logo-text">Clearly</span>
         </div>
-        <p class="footer-tagline">Clearly. Change the conversation.</p>
+        <div class="footer-tagline">Co-Parenting Resolved.</div>
       </div>
-      <div class="footer-nav">
-        <div class="footer-col">
-          <h4>Tools & Resources</h4>
-          <ul>
-
-            <li><a href="/plan-builder/">Custody Plan Builder</a></li>
-            <li><a href="/communication-styles/">Communication Style Quiz</a></li>
-            <li><a href="/calculators/">Support Calculator</a></li>
-            <li><a href="/blog.html">Common Ground Blog</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Guides</h4>
-          <ul>
-            <li><a href="/kids-and-divorce/">Helping Your Kids Through Divorce</a></li>
-            <li><a href="/mediation-prep/">Preparing for Mediation</a></li>
-            <li><a href="/co-parenting-expenses/">Co-Parenting Expenses</a></li>
-            <li><a href="/co-parent-communication/">Co-Parent Communication</a></li>
-            <li><a href="/custody-schedule-help/">Custody Schedule</a></li>
-            <li><a href="/coparenting-alignment-guide/">Co-Parenting Alignment</a></li>
-            <li><a href="/high-conflict-coparenting/">High-Conflict Co-Parenting</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <ul>
-            <li><a href="/professionals.html">For Family & Legal Professionals</a></li>
-            <li><a href="mailto:hello@getclearly.app">Contact</a></li>
-            <li><a href="/faq.html">FAQ</a></li>
-            <li><a href="/privacy.html">Privacy</a></li>
-            <li><a href="/terms.html">Terms</a></li>
-          </ul>
-        </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Tools & Resources</div>
+        <ul>
+          <li><a href="/alignment/">Co-Parenting Alignment Plan</a></li>
+          <li><a href="/plan-builder/">Custody Plan Builder</a></li>
+          <li><a href="/communication-styles/">Communication Style Quiz</a></li>
+          <li><a href="/calculators/">Support Calculator</a></li>
+          <li><a href="/blog.html">Common Ground Blog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Guides</div>
+        <ul>
+          <li><a href="/kids-and-divorce/">Helping Your Kids Through Divorce</a></li>
+          <li><a href="/mediation-prep/">Preparing for Mediation</a></li>
+          <li><a href="/co-parenting-expenses/">Co-Parenting Expenses</a></li>
+          <li><a href="/co-parent-communication/">Co-Parent Communication</a></li>
+          <li><a href="/custody-schedule-help/">Custody Schedule</a></li>
+          <li><a href="/coparenting-alignment-guide/">Co-Parenting Alignment</a></li>
+          <li><a href="/high-conflict-coparenting/">High-Conflict Co-Parenting</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-label">Company</div>
+        <ul>
+          <li><a href="/professionals.html">For Family & Legal Professionals</a></li>
+          <li><a href="mailto:hello@getclearly.app">Contact</a></li>
+          <li><a href="/faq.html">FAQ</a></li>
+          <li><a href="/privacy.html">Privacy</a></li>
+          <li><a href="/terms.html">Terms</a></li>
+        </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2026 Clearly LLC</p>
+      <span>&copy; 2026 Clearly LLC</span>
     </div>
-  </div>
-</footer><script>
-    // Add js-loaded class to enable animations
-    document.body.classList.add('js-loaded');
+  </footer>
 
+  <script>
     // Scroll reveal animation
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
         }
       });
-    }, observerOptions);
+    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
     // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const href = this.getAttribute('href');
-        if (href !== '#') {
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) {
           e.preventDefault();
-          const target = document.querySelector(href);
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
     });
+
+    // Mobile menu toggle
+    const siteNavToggle = document.querySelector('.site-nav .nav-toggle');
+    const siteNavRight = document.querySelector('.nav-right');
+    if (siteNavToggle && siteNavRight) {
+      siteNavToggle.addEventListener('click', () => {
+        siteNavToggle.classList.toggle('open');
+        siteNavRight.classList.toggle('open');
+      });
+    }
   </script>
 
   <!-- Structured Data - Organization -->
@@ -940,8 +1202,7 @@
     "url": "https://getclearly.app",
     "offers": {
       "@type": "Offer",
-      "availability": "https://schema.org/PreOrder",
-      "price": "0",
+      "price": "290",
       "priceCurrency": "USD"
     }
   }

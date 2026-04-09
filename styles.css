@@ -1,5 +1,236 @@
 /* Clearly Website - Brand Styles */
 
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500&display=swap');
+
+/* ==========================================
+   NEW DESIGN SYSTEM TOKENS (v2)
+   ========================================== */
+:root {
+  --paper: #F6F5F1;
+  --white: #FFFFFF;
+  --ink: #1C1C1A;
+  --ink-mid: #4A4A47;
+  --ink-faint: #8A8A87;
+  --moss: #0D8268;
+  --moss-pale: #E4F4EF;
+  --rule: rgba(0,0,0,0.08);
+  --dark: #1C1C1A;
+}
+
+/* ==========================================
+   SITE-WIDE HEADER (.site-nav)
+   ========================================== */
+.site-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 56px;
+  height: 64px;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  background: #F6F5F1;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.nav-logo {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  color: #0D8268;
+  letter-spacing: -0.3px;
+  text-decoration: none;
+}
+.nav-logo:hover {
+  text-decoration: none;
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.site-nav .nav-link {
+  font-family: 'Instrument Sans', sans-serif;
+  font-size: 14px;
+  color: #4A4A47;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.site-nav .nav-link:hover { color: #1C1C1A; text-decoration: none; }
+.site-nav .nav-link.active { color: #1C1C1A; }
+
+/* App Store badge */
+.app-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #000000;
+  border: 1px solid #A6A6A6;
+  border-radius: 8px;
+  padding: 6px 14px 6px 10px;
+  height: 40px;
+  text-decoration: none;
+  cursor: pointer;
+}
+.app-badge:hover { text-decoration: none; opacity: 0.9; }
+.badge-text { display: flex; flex-direction: column; }
+.badge-small {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 9.5px;
+  color: #FFFFFF;
+  letter-spacing: 0.1px;
+  font-weight: 400;
+  display: block;
+  line-height: 1;
+}
+.badge-large {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 500;
+  color: #FFFFFF;
+  letter-spacing: -0.3px;
+  display: block;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+/* Mobile nav toggle for new header */
+.site-nav .nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  position: relative;
+  width: 44px;
+  height: 44px;
+}
+.site-nav .nav-toggle span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #1C1C1A;
+  position: absolute;
+  left: 11px;
+  transition: all 0.3s;
+}
+.site-nav .nav-toggle span:nth-child(1) { top: 14px; }
+.site-nav .nav-toggle span:nth-child(2) { top: 21px; }
+.site-nav .nav-toggle span:nth-child(3) { top: 28px; }
+.site-nav .nav-toggle.open span:nth-child(1) { top: 21px; transform: rotate(45deg); }
+.site-nav .nav-toggle.open span:nth-child(2) { opacity: 0; }
+.site-nav .nav-toggle.open span:nth-child(3) { top: 21px; transform: rotate(-45deg); }
+
+@media (max-width: 768px) {
+  .site-nav { padding: 0 20px; }
+  .site-nav .nav-toggle { display: block; }
+  .nav-right {
+    display: none;
+    position: absolute;
+    top: 64px;
+    left: 0;
+    right: 0;
+    background: #F6F5F1;
+    flex-direction: column;
+    padding: 24px 20px;
+    gap: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+  }
+  .nav-right.open { display: flex; }
+}
+
+/* ==========================================
+   SITE-WIDE FOOTER (.site-footer)
+   ========================================== */
+.site-footer {
+  background: #1C1C1A;
+  padding: 72px 56px 0;
+  font-family: 'Instrument Sans', sans-serif;
+}
+.footer-main {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr 1fr;
+  gap: 48px;
+  padding-bottom: 64px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  align-items: start;
+}
+.site-footer .footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+img.footer-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.footer-logo-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.footer-logo-text {
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: #FFFFFF;
+  letter-spacing: -0.3px;
+  line-height: 1;
+}
+.site-footer .footer-tagline {
+  font-size: 13px;
+  color: rgba(255,255,255,0.4);
+  display: block;
+  margin-top: 4px;
+}
+.footer-col-label {
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 20px;
+}
+.site-footer .footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+}
+.site-footer .footer-col ul li a {
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+}
+.site-footer .footer-col ul li a:hover { color: #FFFFFF; text-decoration: none; }
+.site-footer .footer-bottom {
+  padding: 24px 0;
+  font-size: 13px;
+  color: rgba(255,255,255,0.3);
+}
+
+@media (max-width: 768px) {
+  .site-footer { padding: 48px 20px 0; }
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+}
+@media (max-width: 480px) {
+  .footer-main { grid-template-columns: 1fr; }
+}
+
+/* ==========================================
+   LEGACY STYLES (kept for sub-pages)
+   ========================================== */
+
 /* Skip to content link (accessibility) */
 .skip-link {
   position: absolute;

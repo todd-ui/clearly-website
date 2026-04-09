@@ -121,37 +121,40 @@
 <a href="#main-content" class="skip-link">Skip to content</a>
 
   <a href="#main-content" class="skip-link">Skip to content</a>
-<nav class="nav">
-  <div class="container">
-    <a href="/" class="nav-brand">
-      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
-      Clearly
+<header class="site-nav">
+  <a href="/" class="nav-logo">Clearly</a>
+  <div class="nav-right">
+    <a href="/blog.html" class="nav-link">Common Ground</a>
+    <a href="/professionals.html" class="nav-link">For Professionals</a>
+    <a href="#app-store-coming-soon" class="app-badge">
+      <svg width="22" height="26" viewBox="0 0 22 26" fill="none">
+        <path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/>
+        <path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/>
+      </svg>
+      <div class="badge-text">
+        <span class="badge-small">Download on the</span>
+        <span class="badge-large">App Store</span>
+      </div>
     </a>
-    <ul class="nav-links">
-      <li><a href="/blog.html">Common Ground</a></li>
-      <li><a href="/professionals.html">For Professionals</a></li>
-      <li><a href="#app-store-coming-soon" class="nav-cta">Download on the App Store — Coming Soon</a></li>
-    </ul>
-    <button class="nav-toggle" aria-label="Menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
   </div>
-</nav>
-
+  <button class="nav-toggle" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
 <script>
   // Mobile menu toggle
-  const navToggle = document.querySelector('.nav-toggle');
-  const navLinks = document.querySelector('.nav-links');
-  if (navToggle && navLinks) {
-    navToggle.addEventListener('click', () => {
-      navToggle.classList.toggle('open');
-      navLinks.classList.toggle('open');
+  const siteNavToggle = document.querySelector('.site-nav .nav-toggle');
+  const siteNavRight = document.querySelector('.nav-right');
+  if (siteNavToggle && siteNavRight) {
+    siteNavToggle.addEventListener('click', () => {
+      siteNavToggle.classList.toggle('open');
+      siteNavRight.classList.toggle('open');
     });
   }
 </script>
-<script src="/js/access-modal.js" defer></script>
+
 
   <article class="blog-post" id="main-content">
     <a href="/blog.html" class="back-link">&larr; Back to Blog</a>
@@ -273,55 +276,54 @@
   </section>
   
 
-  <footer class="footer">
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand-section">
-        <div class="footer-brand">
-          <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" loading="lazy">
-          <span>Clearly</span>
-        </div>
-        <p class="footer-tagline">Clearly. Change the conversation.</p>
+  <footer class="site-footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="footer-logo-row">
+        <img class="footer-icon" src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" loading="lazy">
+        <span class="footer-logo-text">Clearly</span>
       </div>
-      <div class="footer-nav">
-        <div class="footer-col">
-          <h4>Tools & Resources</h4>
-          <ul>
-            <li><a href="/plan-builder/">Custody Plan Builder</a></li>
-            <li><a href="/communication-styles/">Communication Style Quiz</a></li>
-            <li><a href="/calculators/">Support Calculator</a></li>
-            <li><a href="/blog.html">Common Ground Blog</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Guides</h4>
-          <ul>
-            <li><a href="/kids-and-divorce/">Helping Your Kids Through Divorce</a></li>
-            <li><a href="/mediation-prep/">Preparing for Mediation</a></li>
-            <li><a href="/co-parenting-expenses/">Co-Parenting Expenses</a></li>
-            <li><a href="/co-parent-communication/">Co-Parent Communication</a></li>
-            <li><a href="/custody-schedule-help/">Custody Schedule</a></li>
-            <li><a href="/coparenting-alignment-guide/">Co-Parenting Alignment</a></li>
-            <li><a href="/high-conflict-coparenting/">High-Conflict Co-Parenting</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Company</h4>
-          <ul>
-            <li><a href="/professionals.html">For Family & Legal Professionals</a></li>
-            <li><a href="mailto:hello@getclearly.app">Contact</a></li>
-            <li><a href="/faq.html">FAQ</a></li>
-            <li><a href="/privacy.html">Privacy</a></li>
-            <li><a href="/terms.html">Terms</a></li>
-          </ul>
-        </div>
-      </div>
+      <div class="footer-tagline">Co-Parenting Resolved.</div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2026 Clearly LLC</p>
+    <div class="footer-col">
+      <div class="footer-col-label">Tools & Resources</div>
+      <ul>
+        <li><a href="/alignment/">Co-Parenting Alignment Plan</a></li>
+        <li><a href="/plan-builder/">Custody Plan Builder</a></li>
+        <li><a href="/communication-styles/">Communication Style Quiz</a></li>
+        <li><a href="/calculators/">Support Calculator</a></li>
+        <li><a href="/blog.html">Common Ground Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Guides</div>
+      <ul>
+        <li><a href="/kids-and-divorce/">Helping Your Kids Through Divorce</a></li>
+        <li><a href="/mediation-prep/">Preparing for Mediation</a></li>
+        <li><a href="/co-parenting-expenses/">Co-Parenting Expenses</a></li>
+        <li><a href="/co-parent-communication/">Co-Parent Communication</a></li>
+        <li><a href="/custody-schedule-help/">Custody Schedule</a></li>
+        <li><a href="/coparenting-alignment-guide/">Co-Parenting Alignment</a></li>
+        <li><a href="/high-conflict-coparenting/">High-Conflict Co-Parenting</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Company</div>
+      <ul>
+        <li><a href="/professionals.html">For Family & Legal Professionals</a></li>
+        <li><a href="mailto:hello.app">Contact</a></li>
+        <li><a href="/faq.html">FAQ</a></li>
+        <li><a href="/privacy.html">Privacy</a></li>
+        <li><a href="/terms.html">Terms</a></li>
+      </ul>
     </div>
   </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Clearly LLC</span>
+  </div>
 </footer>
+
+
 
   <!-- Article Structured Data -->
   <script type="application/ld+json">
