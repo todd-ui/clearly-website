@@ -20,12 +20,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3 {
+h1, h2 {
   font-family: 'Instrument Serif', Georgia, serif;
   font-weight: 400;
 }
 
-h1 em, h2 em, h3 em {
+h3, h4, h5, h6 {
+  font-family: 'Instrument Sans', Helvetica Neue, Helvetica, Arial, sans-serif;
+  font-weight: 500;
+}
+
+h1 em, h2 em {
   font-style: italic;
   color: #0D8268;
 }
