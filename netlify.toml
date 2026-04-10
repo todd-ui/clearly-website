@@ -5,6 +5,19 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# Alignment tool archived — redirect to guide page
+[[redirects]]
+  from = "/alignment/"
+  to = "/coparenting-alignment-guide/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/alignment"
+  to = "/coparenting-alignment-guide/"
+  status = 301
+  force = true
+
 # Canonical domain redirect: www → non-www (301 permanent)
 # This consolidates SEO and prevents duplicate content issues
 [[redirects]]
