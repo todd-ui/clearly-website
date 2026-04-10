@@ -34,9 +34,9 @@
   z-index: 100;
 }
 .nav-logo {
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 20px;
-  font-weight: 500;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
   color: #0D8268;
   letter-spacing: -0.3px;
   text-decoration: none;
@@ -175,9 +175,9 @@ img.footer-icon {
   margin-bottom: 10px;
 }
 .footer-logo-text {
-  font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-  font-size: 18px;
-  font-weight: 500;
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 20px;
+  font-weight: 400;
   color: #FFFFFF;
   letter-spacing: -0.3px;
   line-height: 1;
