@@ -403,8 +403,9 @@
       background: #FEF2F2;
       border-left: 3px solid #FCA5A5;
       border-radius: 0 10px 10px 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
       padding: 20px 24px;
-      margin-bottom: 12px;
+      margin-bottom: 0;
     }
     .orig-label {
       font-family: 'Instrument Sans', sans-serif;
@@ -422,6 +423,34 @@
       font-style: italic;
       line-height: 1.6;
     }
+    .flow-connector {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding: 6px 0;
+    }
+    .flow-connector .flow-line {
+      width: 2px;
+      height: 16px;
+      background: #0D8268;
+      opacity: 0.25;
+    }
+    .flow-connector .flow-arrow {
+      font-size: 14px;
+      color: #0D8268;
+      opacity: 0.4;
+      line-height: 1;
+    }
+    .flow-connector .flow-label {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      color: #0D8268;
+      letter-spacing: 0.5px;
+      opacity: 0.5;
+      padding: 2px 0;
+    }
     .arrow-down {
       text-align: center;
       font-size: 18px;
@@ -433,12 +462,13 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
-      margin-bottom: 12px;
+      margin-bottom: 0;
     }
     .step {
       background: #FFFFFF;
       border-radius: 10px;
-      border: 1px solid rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
       padding: 18px 20px;
     }
     .step-label {
@@ -467,6 +497,7 @@
       background: #E4F4EF;
       border: 1px solid rgba(13,130,104,0.15);
       border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
       padding: 22px 24px;
       margin-bottom: 20px;
     }
@@ -506,7 +537,8 @@
     .feat-card {
       background: #FFFFFF;
       border-radius: 16px;
-      border: 1px solid rgba(0,0,0,0.07);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
       padding: 28px;
     }
     .feat-icon {
@@ -654,7 +686,8 @@
     .price-card {
       background: #F6F5F1;
       border-radius: 16px;
-      border: 1px solid rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
       padding: 36px;
     }
     .price-amt {
@@ -814,7 +847,7 @@
     <div class="nav-right">
       <a href="/blog.html" class="nav-link">Common Ground</a>
       <a href="/professionals.html" class="nav-link">For Professionals</a>
-      <a href="#app-store-coming-soon" class="app-badge">
+      <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge">
         <svg width="22" height="26" viewBox="0 0 22 26" fill="none">
           <path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/>
           <path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/>
@@ -848,7 +881,7 @@
           <p class="hp-body">Most co-parenting apps just give those patterns a new home. <strong>Clearly changes them.</strong> Every message passes through Clearly before it's delivered — the emotion, the history, the charge stripped out — leaving only what actually needs a response.</p>
           <p class="hp-body">So you can focus on the one thing you still agree on: your kids.</p>
           <div class="hero-btns">
-            <a href="#app-store-coming-soon" class="btn-moss">Download on iOS</a>
+            <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="btn-moss">Download on iOS</a>
             <a href="#how-it-works" class="btn-ghost">See how it works</a>
           </div>
         </div>
@@ -911,15 +944,17 @@
       <h2 class="fade-in">From message to <em>resolution.</em></h2>
       <p class="hp-body fade-in">A real message. Here's exactly what Clearly does with it.</p>
 
-      <p style="font-size:12px; text-transform:uppercase; letter-spacing:0.8px; color:#8A8A87; margin-bottom:8px;" class="fade-in">You send this:</p>
       <div class="orig fade-in">
         <div class="orig-label">What was sent</div>
         <div class="orig-text">"You're ALWAYS late. Every single time. I have a life too and you have zero respect for my time or for these kids. I'm so sick of your selfish behaviour, it's exhausting."</div>
       </div>
 
-      <div style="display:flex; align-items:center; justify-content:center; gap:8px; padding:10px 0; margin-bottom:12px; font-size:12px; color:#8A8A87; font-style:italic; font-family:'Instrument Sans',sans-serif;" class="fade-in">
-        <span>&darr;</span>
-        <span>Clearly AI processes your message</span>
+      <div class="flow-connector fade-in">
+        <div class="flow-line"></div>
+        <div class="flow-arrow">&darr;</div>
+        <div class="flow-label">Clearly AI processes your message</div>
+        <div class="flow-arrow">&darr;</div>
+        <div class="flow-line"></div>
       </div>
 
       <div class="steps-grid fade-in">
@@ -940,7 +975,11 @@
         </div>
       </div>
 
-      <div class="arrow-down fade-in">&darr;</div>
+      <div class="flow-connector fade-in">
+        <div class="flow-line"></div>
+        <div class="flow-arrow">&darr;</div>
+        <div class="flow-line"></div>
+      </div>
 
       <div class="output fade-in">
         <div class="output-label">&#10022; Clearly AI delivers</div>
@@ -948,7 +987,6 @@
         <div class="output-note">No blame. No tone. No exhaustion. Just the one thing that requires a response.</div>
       </div>
 
-      <p class="hp-credit fade-in" style="text-align: center;">Grounded in the Harvard Negotiation Project's Getting to Yes framework</p>
     </div>
   </section>
 
@@ -957,7 +995,7 @@
     <div class="inner-narrow stack">
       <div class="fade-in">
         <p class="hp-eyebrow">What makes Clearly different</p>
-        <h2>Other apps move messages.<br><em>Clearly changes them.</em></h2>
+        <h2>Other apps bring your patterns with you.<br><em>Clearly changes them.</em></h2>
         <p class="hp-body">Most co-parenting apps give the same patterns a new platform. The same emotional charge, the same triggers, the same loops — just with a different interface. They digitize the dynamic that didn't work in your marriage and hand it back to you.</p>
         <p class="hp-body">Clearly sits between both parents. Every message — yours and theirs — passes through before it's delivered. <strong>What comes through is the substance: the question, the decision, what your kids need you to resolve.</strong> The emotion, the history, the charge — none of that reaches the other side.</p>
         <p class="hp-punch">Moving people from messages to communicating. That's the difference.</p>
@@ -967,7 +1005,7 @@
         <p class="hp-eyebrow">The foundation</p>
         <h2>Built on frameworks that<br><em>resolve real conflict.</em></h2>
         <p class="hp-body">The same principles used in mediation and high-stakes negotiation — separate the person from the problem, focus on interests not positions, create a path to a decision.</p>
-        <p class="hp-body">Because the conversations you're having with your co-parent are genuinely difficult. They deserve a system designed for that — not a messaging app with a friendlier icon.</p>
+        <p class="hp-body">Because the conversations you're having with your co-parent are genuinely difficult. They deserve a system designed for that.</p>
         <p class="hp-credit">Grounded in the Harvard Negotiation Project's Getting to Yes framework</p>
       </div>
     </div>
@@ -1056,7 +1094,7 @@
       <div class="plan-cta fade-in">
         <div>
           <h3>Not sure where to start?</h3>
-          <p>The Custody Plan Builder walks you through your schedule, holidays, expenses, and exchange logistics step by step. Free — no account needed.</p>
+          <p>Build your custody plan. Free. Step through your schedule, holidays, expenses, and exchange logistics at your own pace. Share it with your co-parent, your lawyer — or import it into Clearly to get the app set up in one tap.</p>
         </div>
         <a href="/plan-builder/" class="btn-dark">Build your plan &rarr;</a>
       </div>
@@ -1085,7 +1123,7 @@
               <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Topics that resolve — not threads that spiral</li>
               <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Full communication record, preserved and timestamped</li>
             </ul>
-            <a href="#app-store-coming-soon" class="btn-moss" style="width: 100%; justify-content: center;">Download on iOS</a>
+            <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="btn-moss" style="width: 100%; justify-content: center;">Download on iOS</a>
             <div class="price-fine">Free to try &middot; Cancel anytime</div>
           </div>
         </div>
@@ -1098,7 +1136,7 @@
     <h2 class="fade-in">For the kids.<br><em>And for you.</em></h2>
     <p class="close-body fade-in">The way you communicate with your co-parent will shape your kids' experience of this more than anything else. Clearly helps you find the common ground, make the decisions, and keep it about the kids.</p>
     <div class="close-btns fade-in">
-      <a href="#app-store-coming-soon" class="btn-white">Download on iOS</a>
+      <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="btn-white">Download on iOS</a>
       <a href="#how-it-works" class="btn-ghost-white">See how it works</a>
     </div>
     <p class="close-note fade-in">Free to try &middot; $290/year &middot; iOS</p>

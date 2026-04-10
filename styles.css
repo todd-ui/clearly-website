@@ -162,17 +162,17 @@
   align-items: flex-start;
 }
 img.footer-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 9px;
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
   flex-shrink: 0;
   object-fit: cover;
 }
 .footer-logo-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 8px;
+  margin-bottom: 4px;
 }
 .footer-logo-text {
   font-family: 'EB Garamond', Georgia, serif;
@@ -186,7 +186,7 @@ img.footer-icon {
   font-size: 13px;
   color: rgba(255,255,255,0.4);
   display: block;
-  margin-top: 4px;
+  margin-top: 0;
 }
 .footer-col-label {
   font-size: 10px;
@@ -194,13 +194,13 @@ img.footer-icon {
   letter-spacing: 1.3px;
   text-transform: uppercase;
   color: rgba(255,255,255,0.55);
-  margin-bottom: 20px;
+  margin-bottom: 14px;
 }
 .site-footer .footer-col ul {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 2px;
   padding: 0;
   margin: 0;
 }
@@ -208,6 +208,8 @@ img.footer-icon {
   font-size: 14px;
   color: rgba(255,255,255,0.75);
   text-decoration: none;
+  line-height: 1.4;
+  display: inline-block;
 }
 .site-footer .footer-col ul li a:hover { color: #FFFFFF; text-decoration: none; }
 .site-footer .footer-bottom {
@@ -227,7 +229,7 @@ img.footer-icon {
     margin-bottom: 8px;
   }
   .footer-col-label { margin-bottom: 14px; }
-  .site-footer .footer-col ul { gap: 10px; }
+  .site-footer .footer-col ul { gap: 2px; }
 }
 @media (max-width: 480px) {
   .site-footer { padding: 36px 16px 0; overflow: hidden; }
@@ -236,7 +238,7 @@ img.footer-icon {
     gap: 20px;
   }
   .site-footer .footer-col ul li a { font-size: 13px; }
-  .site-footer .footer-col ul { gap: 8px; }
+  .site-footer .footer-col ul { gap: 2px; }
   .footer-col-label { font-size: 9px; letter-spacing: 1px; margin-bottom: 10px; }
 }
 

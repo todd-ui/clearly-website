@@ -113,18 +113,14 @@
       color: var(--text-muted);
     }
     .logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 22px;
+      font-weight: 400;
       text-decoration: none;
-      color: var(--text);
-      font-weight: 600;
+      color: #0D8268;
+      letter-spacing: -0.3px;
     }
-    .logo img {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-    }
+    .logo:hover { text-decoration: none; }
 
     /* Main Container */
     .wizard-container {
@@ -1621,15 +1617,12 @@
 
   <!-- Header -->
   <header class="wizard-header" style="position: fixed; top: 4px; left: 0; right: 0; z-index: 9999; background: #FAFAF9;">
+    <a href="/" class="logo">Clearly</a>
+    <span class="step-counter" id="stepCounter">Step 1 of 10</span>
     <button class="back-btn hidden" id="backBtn" onclick="goBack()">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       Back
     </button>
-    <span class="step-counter" id="stepCounter">Step 1 of 10</span>
-    <a href="/" class="logo">
-      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly">
-      <span>Clearly</span>
-    </a>
   </header>
 
   <!-- Main Content -->
@@ -1639,7 +1632,7 @@
       <!-- Screen 1: Welcome -->
       <div class="screen active" id="screen-welcome">
         <h1>Parenting Plan Builder</h1>
-        <p class="subtitle">Work through schedules, expenses, and decisions — then share with your co-parent or attorney.</p>
+        <p class="subtitle">Build your custody plan. Free. Step through your schedule, holidays, expenses, and exchange logistics at your own pace. Share it with your co-parent, your lawyer — or import it into Clearly to get the app set up in one tap.</p>
 
         <div class="pathway-cards">
           <div class="pathway-card" onclick="startBuilder()">
@@ -2081,7 +2074,7 @@
             </div>
             <div>
               <strong>Want ongoing coordination?</strong>
-              <p>Request access to Clearly's private beta for calendars, expenses, and messaging</p>
+              <p>Download Clearly for calendars, expenses, and messaging</p>
             </div>
           </div>
         </div>
