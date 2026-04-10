@@ -192,7 +192,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   <style>
     .blog-post { max-width: 720px; margin: 0 auto; padding: 120px 24px 80px; }
     .blog-post-header { margin-bottom: 48px; }
-    .blog-post-title { font-size: 42px; font-weight: 700; line-height: 1.2; margin-bottom: 16px; }
+    .blog-post-title { font-size: 42px; font-weight: 400; line-height: 1.2; margin-bottom: 16px; }
     .blog-post-meta { color: var(--text-muted); font-size: 15px; }
     .blog-post-content h2 { font-size: 28px; margin: 48px 0 16px; }
     .blog-post-content h3 { font-size: 22px; margin: 32px 0 12px; }
@@ -248,11 +248,11 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
 
     /* Related Articles */
     .related-articles { background: var(--surface); padding: 80px 0; border-top: 1px solid var(--border); }
-    .related-articles h2 { font-size: 28px; font-weight: 700; margin-bottom: 32px; text-align: center; }
+    .related-articles h2 { font-size: 28px; font-weight: 400; margin-bottom: 32px; text-align: center; }
     .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 960px; margin: 0 auto; }
     .related-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
     .related-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); text-decoration: none; }
-    .related-card h3 { font-size: 18px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
+    .related-card h3 { font-size: 18px; font-weight: 400; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
     .related-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin: 0; }
     .related-category { display: inline-block; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 20px; margin-bottom: 12px; background: rgba(13, 130, 104, 0.1); color: #0d9373; }
     .related-category[data-cat="Communication"] { background: rgba(59, 130, 246, 0.1); color: #2563eb; }
@@ -473,7 +473,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
     }
     .blog-hero h1 {
       font-size: 44px;
-      font-weight: 700;
+      font-weight: 400;
       color: var(--text);
       margin-bottom: 8px;
       line-height: 1.2;
@@ -535,7 +535,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
     }
     .blog-card h3 {
       font-size: 20px;
-      font-weight: 600;
+      font-weight: 400;
       margin-bottom: 12px;
       line-height: 1.4;
     }
