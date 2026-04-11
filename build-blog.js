@@ -175,8 +175,10 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   <meta property="og:title" content="${escapeHtml(post.title)}">
   <meta property="og:description" content="${escapeHtml(post.description)}">
   <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+  <meta property="og:image:width" content="512">
+  <meta property="og:image:height" content="512">
   <meta property="og:site_name" content="Clearly">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="${escapeHtml(post.title)}">
   <meta name="twitter:description" content="${escapeHtml(post.description)}">
   <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
@@ -533,16 +535,16 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
       color: var(--primary);
       margin-bottom: 10px;
     }
-    .blog-card h3 {
+    .blog-card h2 {
       font-size: 20px;
       font-weight: 400;
       margin-bottom: 12px;
       line-height: 1.4;
     }
-    .blog-card h3 a {
+    .blog-card h2 a {
       color: var(--text);
     }
-    .blog-card h3 a:hover {
+    .blog-card h2 a:hover {
       color: var(--primary);
       text-decoration: none;
     }
@@ -694,7 +696,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
         <article class="blog-card" data-category="${escapeHtml(post.category)}">
           ${post.category ? `<span class="blog-card-category" data-cat="${escapeHtml(post.category)}">${escapeHtml(post.category)}</span>` : ''}
           <div class="blog-card-date">${post.date}</div>
-          <h3><a href="/blog/${post.slug}.html">${escapeHtml(post.title)}</a></h3>
+          <h2><a href="/blog/${post.slug}.html">${escapeHtml(post.title)}</a></h2>
           <p>${escapeHtml(post.description)}</p>
           <a href="/blog/${post.slug}.html" class="blog-card-link">
             Read article
@@ -756,7 +758,25 @@ async function build() {
   for (const page of posts) {
     const title = getProperty(page, 'Title');
     const slug = generateSlug(title, getProperty(page, 'Slug'));
-    const description = getProperty(page, 'Description') || '';
+    const rawDescription = getProperty(page, 'Description') || '';
+
+    // SEO description: auto-fix bad descriptions so they never reach production
+    const badPrefixes = ['Cover ', 'This post should', 'Explore the ', 'Write about'];
+    const isBadDesc = badPrefixes.some(p => rawDescription.startsWith(p));
+    let description;
+    if (!rawDescription || isBadDesc) {
+      // Generate a clean description from the title
+      description = `${title}. Practical guidance for co-parents navigating separation and divorce.`;
+      if (description.length > 155) {
+        description = description.substring(0, 152).replace(/\s+\S*$/, '') + '...';
+      }
+      console.log(`  → Auto-generated description for: ${title}`);
+    } else if (rawDescription.length > 155) {
+      // Truncate at word boundary
+      description = rawDescription.substring(0, 152).replace(/\s+\S*$/, '') + '...';
+    } else {
+      description = rawDescription;
+    }
     const rawDate = getProperty(page, 'Date');
     const date = formatDate(rawDate);
     const dateISO = rawDate || new Date().toISOString().split('T')[0];
