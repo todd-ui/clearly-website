@@ -174,14 +174,14 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   <meta property="og:url" content="https://getclearly.app/blog/${post.slug}.html">
   <meta property="og:title" content="${escapeHtml(post.title)}">
   <meta property="og:description" content="${escapeHtml(post.description)}">
-  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
-  <meta property="og:image:width" content="512">
-  <meta property="og:image:height" content="512">
+  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/splash-icon.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="Clearly">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(post.title)}">
   <meta name="twitter:description" content="${escapeHtml(post.description)}">
-  <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+  <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/splash-icon.png">
   <meta name="robots" content="index, follow">
   <link rel="alternate" type="application/rss+xml" title="Clearly Blog RSS Feed" href="https://getclearly.app/feed.xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -351,14 +351,14 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
       "name": "Clearly",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png"
+        "url": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/splash-icon.png"
       }
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://getclearly.app/blog/${post.slug}.html"
     },
-    "image": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png"
+    "image": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/splash-icon.png"
   }
   </script>
 
@@ -406,12 +406,12 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
   <meta property="og:url" content="https://getclearly.app/blog.html">
   <meta property="og:title" content="Common Ground - Co-Parenting Tips & Advice">
   <meta property="og:description" content="Real topics, practical advice, and perspectives for co-parents.">
-  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/splash-icon.png">
   <meta property="og:site_name" content="Clearly">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Common Ground - Co-Parenting Tips & Advice">
   <meta name="twitter:description" content="Real topics, practical advice, and perspectives for co-parents.">
-  <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png">
+  <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/splash-icon.png">
   <meta name="robots" content="index, follow">
   <meta name="keywords" content="co-parenting tips, custody advice, shared parenting, divorce resources, co-parent communication">
   <link rel="alternate" type="application/rss+xml" title="Clearly Blog RSS Feed" href="https://getclearly.app/feed.xml">
@@ -944,7 +944,7 @@ ${processedPosts.map(post => `  <url>
     <language>en-us</language>
     <lastBuildDate>${rssDate}</lastBuildDate>
     <image>
-      <url>https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png</url>
+      <url>https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/splash-icon.png</url>
       <title>Common Ground - Clearly Blog</title>
       <link>https://getclearly.app/blog.html</link>
     </image>
