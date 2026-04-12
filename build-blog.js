@@ -174,14 +174,14 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   <meta property="og:url" content="https://getclearly.app/blog/${post.slug}.html">
   <meta property="og:title" content="${escapeHtml(post.title)}">
   <meta property="og:description" content="${escapeHtml(post.description)}">
-  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/splash-icon.png">
+  <meta property="og:image" content="https://getclearly.app/images/blog-og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:site_name" content="Clearly">
+  <meta property="og:site_name" content="Clearly.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${escapeHtml(post.title)}">
   <meta name="twitter:description" content="${escapeHtml(post.description)}">
-  <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/splash-icon.png">
+  <meta name="twitter:image" content="https://getclearly.app/images/blog-og.png">
   <meta name="robots" content="index, follow">
   <link rel="alternate" type="application/rss+xml" title="Clearly Blog RSS Feed" href="https://getclearly.app/feed.xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -189,7 +189,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="/styles/brand.css">
-  <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
+  <link rel="icon" href="/images/favicon-32.png">
   <link rel="manifest" href="/manifest.json">
   <style>
     .blog-post { max-width: 720px; margin: 0 auto; padding: 120px 24px 80px; }
@@ -351,14 +351,14 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
       "name": "Clearly",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/splash-icon.png"
+        "url": "https://getclearly.app/images/blog-og.png"
       }
     },
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "https://getclearly.app/blog/${post.slug}.html"
     },
-    "image": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/splash-icon.png"
+    "image": "https://getclearly.app/images/blog-og.png"
   }
   </script>
 
@@ -406,12 +406,12 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
   <meta property="og:url" content="https://getclearly.app/blog.html">
   <meta property="og:title" content="Common Ground - Co-Parenting Tips & Advice">
   <meta property="og:description" content="Real topics, practical advice, and perspectives for co-parents.">
-  <meta property="og:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/splash-icon.png">
-  <meta property="og:site_name" content="Clearly">
+  <meta property="og:image" content="https://getclearly.app/images/blog-og.png">
+  <meta property="og:site_name" content="Clearly.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Common Ground - Co-Parenting Tips & Advice">
   <meta name="twitter:description" content="Real topics, practical advice, and perspectives for co-parents.">
-  <meta name="twitter:image" content="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/splash-icon.png">
+  <meta name="twitter:image" content="https://getclearly.app/images/blog-og.png">
   <meta name="robots" content="index, follow">
   <meta name="keywords" content="co-parenting tips, custody advice, shared parenting, divorce resources, co-parent communication">
   <link rel="alternate" type="application/rss+xml" title="Clearly Blog RSS Feed" href="https://getclearly.app/feed.xml">
@@ -420,7 +420,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="/styles/brand.css">
-  <link rel="icon" href="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/favicon.png">
+  <link rel="icon" href="/images/favicon-32.png">
   <link rel="manifest" href="/manifest.json">
   <style>
     .blog-hero {
@@ -944,7 +944,7 @@ ${processedPosts.map(post => `  <url>
     <language>en-us</language>
     <lastBuildDate>${rssDate}</lastBuildDate>
     <image>
-      <url>https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/splash-icon.png</url>
+      <url>https://getclearly.app/images/blog-og.png</url>
       <title>Common Ground - Clearly Blog</title>
       <link>https://getclearly.app/blog.html</link>
     </image>
