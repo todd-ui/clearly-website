@@ -1121,6 +1121,16 @@
       "url": "https://getclearly.app"
     }
   }
+  // Track App Store clicks
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href*="apps.apple.com"]');
+    if (link && typeof gtag === 'function') {
+      gtag('event', 'app_store_click', {
+        link_url: link.href,
+        link_location: 'cta'
+      });
+    }
+  });
   </script>
 </body>
 </html>
