@@ -49,17 +49,19 @@ serve(async (req) => {
     const supabase = createClient(supabaseUrl, supabaseServiceKey);
 
     // Insert into professionals table
+    const insertData: Record<string, unknown> = {
+      email: email.toLowerCase().trim(),
+      role_type: role_type?.trim() || null,
+      feature_interests: feature_interests || null,
+      notes: notes?.trim() || null
+    };
+    if (name?.trim()) insertData.name = name.trim();
+    if (profession_type?.trim()) insertData.profession_type = profession_type.trim();
+    if (organization?.trim()) insertData.organization = organization.trim();
+
     const { data, error: dbError } = await supabase
       .from("z_professionals")
-      .insert({
-        email: email.toLowerCase().trim(),
-        name: name?.trim() || null,
-        profession_type: profession_type?.trim() || null,
-        organization: organization?.trim() || null,
-        role_type: role_type?.trim() || null,
-        feature_interests: feature_interests || null,
-        notes: notes?.trim() || null
-      })
+      .insert(insertData)
       .select()
       .single();
 
@@ -98,6 +100,10 @@ serve(async (req) => {
             from: "Clearly <hello@getclearly.app>",
             to: email,
             subject: "Welcome to Clearly — For Professionals",
+            headers: {
+              "List-Unsubscribe": "<mailto:hello@getclearly.app?subject=Unsubscribe>",
+              "List-Unsubscribe-Post": "List-Unsubscribe=One-Click"
+            },
             html: `
 <!DOCTYPE html>
 <html>
@@ -112,40 +118,40 @@ serve(async (req) => {
 
     <!-- Logo -->
     <div style="text-align: center; margin-bottom: 32px;">
-      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" width="48" height="48">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/default.png" alt="Clearly." width="48" height="48" style="border-radius: 12px;">
     </div>
 
     <!-- Opening -->
     <p style="color: #5C5856; font-size: 16px; line-height: 1.7;">
-      Thank you for your interest in Clearly. We're building with legal and family professionals in mind.
+      Thank you for your interest in Clearly. We built it with legal and family professionals in mind.
     </p>
 
     <!-- Main Card -->
     <div style="background: white; border: 1px solid #E8E6E4; border-radius: 12px; padding: 28px; margin: 28px 0;">
       <p style="font-size: 13px; color: #0D8268; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin: 0 0 8px 0;">For Professionals</p>
       <h2 style="font-size: 24px; color: #1A1917; margin: 0 0 16px 0;">Clear, time-stamped, professionally reviewable records.</h2>
-      <p style="font-size: 15px; color: #5C5856; margin: 0;">We'll notify you when we launch so you can see how Clearly can help your clients.</p>
+      <p style="font-size: 15px; color: #5C5856; margin: 0;">Clearly produces structured communication records that are ready for professional review, mediation, and court processes.</p>
     </div>
 
-    <!-- What's coming -->
-    <h3 style="font-size: 16px; color: #1A1917; margin: 28px 0 12px 0;">What we're building</h3>
+    <!-- What's included -->
+    <h3 style="font-size: 16px; color: #1A1917; margin: 28px 0 12px 0;">What Clearly provides</h3>
     <p style="color: #5C5856; font-size: 15px; line-height: 1.8;">
       • Streamlined record review and export tools<br>
       • Complete communication history with timestamps<br>
       • Custody calendar documentation<br>
       • Expense tracking with receipt attachments<br>
-      • Professional resources and best practices
+      • PDF exports for court and mediation
     </p>
 
     <!-- CTA -->
     <div style="background: #E6F5F1; border-radius: 12px; padding: 24px; margin: 28px 0;">
-      <h3 style="font-size: 16px; color: #0D8268; margin: 0 0 12px 0; text-align: center;">Learn more</h3>
+      <h3 style="font-size: 16px; color: #0D8268; margin: 0 0 12px 0; text-align: center;">Try Clearly</h3>
       <p style="color: #1A1917; font-size: 15px; line-height: 1.8; margin: 0 0 16px 0; text-align: center;">
-        See what we're building for legal and family professionals.
+        Download the app and see how it can help your clients.
       </p>
       <div style="text-align: center;">
-        <a href="https://getclearly.app/professionals.html" style="display: inline-block; background: #0D8268; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 24px; border-radius: 8px;">
-          For Professionals
+        <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" style="display: inline-block; background: #0D8268; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 24px; border-radius: 8px;">
+          Download on the App Store
         </a>
       </div>
     </div>

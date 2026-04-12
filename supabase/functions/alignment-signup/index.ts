@@ -558,7 +558,7 @@ async function sendPlanEmail(data: NormalizedData, viewToken: string, familyCode
   <div style="max-width: 560px; margin: 0 auto; padding: 40px 20px;">
 
     <div style="text-align: center; margin-bottom: 32px;">
-      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" width="48" height="48">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/default.png" alt="Clearly." width="48" height="48" style="border-radius: 12px;">
     </div>
 
     <p style="color: #5C5856; font-size: 16px; line-height: 1.7;">
@@ -589,7 +589,7 @@ async function sendPlanEmail(data: NormalizedData, viewToken: string, familyCode
 
     <div style="border-top: 1px solid #E8E6E4; margin-top: 36px; padding-top: 28px;">
       <p style="color: #5C5856; font-size: 15px; line-height: 1.8;">
-        We're building Clearly—a co-parenting app designed to make day-to-day coordination easier. It's currently in private beta. <a href="https://getclearly.app" style="color: #0D8268;">Request early access</a>.
+        Clearly is a co-parenting app designed to make day-to-day coordination easier. <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" style="color: #0D8268;">Download it on the App Store</a>.
       </p>
     </div>
 
@@ -625,6 +625,10 @@ async function sendPlanEmail(data: NormalizedData, viewToken: string, familyCode
       from: 'Clearly <hello@getclearly.app>',
       to: [data.email],
       subject: 'Your Co-Parenting Alignment Plan',
+      headers: {
+        'List-Unsubscribe': '<mailto:hello@getclearly.app?subject=Unsubscribe>',
+        'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click'
+      },
       html: emailHtml
     }
 
@@ -685,7 +689,7 @@ async function sendComparisonEmail(data: NormalizedData, familyCode: string, lin
   <div style="max-width: 560px; margin: 0 auto; padding: 40px 20px;">
 
     <div style="text-align: center; margin-bottom: 32px;">
-      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" width="48" height="48">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/default.png" alt="Clearly." width="48" height="48" style="border-radius: 12px;">
     </div>
 
     <p style="color: #5C5856; font-size: 16px; line-height: 1.7;">
@@ -736,6 +740,10 @@ async function sendComparisonEmail(data: NormalizedData, familyCode: string, lin
         from: 'Clearly <hello@getclearly.app>',
         to: [data.email],
         subject: 'Your Co-Parenting Alignment Comparison is Ready',
+        headers: {
+          'List-Unsubscribe': '<mailto:hello@getclearly.app?subject=Unsubscribe>',
+          'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click'
+        },
         html: emailHtml
       })
     })
@@ -764,7 +772,7 @@ async function sendComparisonEmailToFirstParent(firstParent: { email: string; pa
   <div style="max-width: 560px; margin: 0 auto; padding: 40px 20px;">
 
     <div style="text-align: center; margin-bottom: 32px;">
-      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" width="48" height="48">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/default.png" alt="Clearly." width="48" height="48" style="border-radius: 12px;">
     </div>
 
     <p style="color: #5C5856; font-size: 16px; line-height: 1.7;">
@@ -815,6 +823,10 @@ async function sendComparisonEmailToFirstParent(firstParent: { email: string; pa
         from: 'Clearly <hello@getclearly.app>',
         to: [firstParent.email],
         subject: 'Your Co-Parenting Alignment Comparison is Ready',
+        headers: {
+          'List-Unsubscribe': '<mailto:hello@getclearly.app?subject=Unsubscribe>',
+          'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click'
+        },
         html: emailHtml
       })
     })

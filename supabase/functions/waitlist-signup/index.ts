@@ -89,7 +89,11 @@ serve(async (req) => {
           body: JSON.stringify({
             from: "Clearly <hello@getclearly.app>",
             to: email,
-            subject: "You're on the list — We'll be in touch",
+            subject: "Welcome to Clearly — A calmer way to co-parent",
+            headers: {
+              "List-Unsubscribe": "<mailto:hello@getclearly.app?subject=Unsubscribe>",
+              "List-Unsubscribe-Post": "List-Unsubscribe=One-Click"
+            },
             html: `
 <!DOCTYPE html>
 <html>
@@ -104,14 +108,14 @@ serve(async (req) => {
 
     <!-- Logo -->
     <div style="text-align: center; margin-bottom: 32px;">
-      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" width="48" height="48">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/default.png" alt="Clearly." width="48" height="48" style="border-radius: 12px;">
     </div>
 
     <!-- Main Card -->
     <div style="background: white; border: 1px solid #E8E6E4; border-radius: 12px; padding: 28px; margin: 0 0 28px 0;">
-      <h1 style="font-size: 26px; color: #1A1917; margin: 0 0 16px 0; text-align: center;">You're on the list.</h1>
+      <h1 style="font-size: 26px; color: #1A1917; margin: 0 0 16px 0; text-align: center;">Thanks for your interest in Clearly.</h1>
       <p style="color: #5C5856; font-size: 16px; line-height: 1.7; margin: 0; text-align: center;">
-        We're opening access gradually and will send you an invite when it's your turn.
+        Clearly is available now on the App Store. Download it and start co-parenting with less conflict.
       </p>
     </div>
 
@@ -132,15 +136,15 @@ serve(async (req) => {
       </p>
     </div>
 
-    <!-- Blog CTA -->
-    <p style="color: #5C5856; font-size: 15px; line-height: 1.8; margin: 0 0 16px 0; text-align: center;">
-      While you wait, our blog has practical advice for navigating co-parenting.
-    </p>
-    <div style="text-align: center;">
-      <a href="https://getclearly.app/blog.html" style="display: inline-block; background: #0D8268; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 24px; border-radius: 8px;">
-        Read Common Ground
+    <!-- App Store CTA -->
+    <div style="text-align: center; margin: 0 0 16px 0;">
+      <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" style="display: inline-block; background: #0D8268; color: #ffffff; text-decoration: none; font-weight: 600; font-size: 15px; padding: 12px 24px; border-radius: 8px;">
+        Download on the App Store
       </a>
     </div>
+    <p style="color: #5C5856; font-size: 15px; line-height: 1.8; margin: 0 0 0 0; text-align: center;">
+      Our blog also has practical advice for navigating co-parenting: <a href="https://getclearly.app/blog.html" style="color: #0D8268;">Read Common Ground</a>
+    </p>
 
     <!-- Sign-off -->
     <div style="margin-top: 36px; text-align: center;">
