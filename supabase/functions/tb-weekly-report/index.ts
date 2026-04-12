@@ -183,11 +183,21 @@ function buildEmail(d: any): string {
       <th style="padding: 6px 12px; text-align: right; color: #888; font-size: 10px; text-transform: uppercase;">Engaged</th>
     </tr>`;
 
-  const srcRows = tw.sources.slice(0, 6).map((s: any) => `
+  // Traffic category summary
+  const catRows = (tw.trafficByCategory || []).map((c: any) => `
     <tr style="border-bottom: 1px solid #eee;">
-      <td style="padding: 8px 12px; color: #1A1917; font-size: 12px;">${s.source}</td>
-      <td style="padding: 8px 12px; color: #1A1917; font-size: 12px; text-align: right;">${s.sessions}</td>
-      <td style="padding: 8px 12px; color: #1A1917; font-size: 12px; text-align: right;">${s.users}</td>
+      <td style="padding: 8px 12px; color: #1A1917; font-size: 12px; font-weight: 500;">${c.category}</td>
+      <td style="padding: 8px 12px; color: #1A1917; font-size: 12px; text-align: right;">${c.sessions}</td>
+      <td style="padding: 8px 12px; color: #1A1917; font-size: 12px; text-align: right;">${tw.sessions > 0 ? ((c.sessions / tw.sessions) * 100).toFixed(0) : 0}%</td>
+    </tr>`).join("");
+
+  // Referring sites detail
+  const refRows = (tw.referralSites || []).slice(0, 8).map((r: any) => `
+    <tr style="border-bottom: 1px solid #eee;">
+      <td style="padding: 6px 12px; color: #1A1917; font-size: 12px;">${r.source}</td>
+      <td style="padding: 6px 12px; color: #888; font-size: 11px;">${r.category}</td>
+      <td style="padding: 6px 12px; color: #1A1917; font-size: 12px; text-align: right;">${r.sessions}</td>
+      <td style="padding: 6px 12px; color: #1A1917; font-size: 12px; text-align: right;">${r.engRate}%</td>
     </tr>`).join("");
 
   const kwRows = queries.slice(0, 10).map((q: any) => {
@@ -299,17 +309,33 @@ function buildEmail(d: any): string {
     ${pageTableHeader}${makePageRows(keyPages)}</table>
   </div>` : ""}
 
-  <!-- Sources -->
+  <!-- How People Found You -->
   <div style="background: white; border: 1px solid #e0e0d8; padding: 24px; margin-bottom: 24px;">
-    <h2 style="font-size: 14px; color: #1A1917; margin: 0 0 16px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">Traffic Sources</h2>
+    <h2 style="font-size: 14px; color: #1A1917; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">How People Found You</h2>
+    <p style="color: #888; font-size: 12px; margin: 0 0 16px;">Traffic breakdown by channel</p>
     <table width="100%" cellpadding="0" cellspacing="0">
       <tr style="border-bottom: 2px solid #e0e0d8;">
-        <th style="padding: 6px 12px; text-align: left; color: #888; font-size: 10px; text-transform: uppercase;">Source</th>
+        <th style="padding: 6px 12px; text-align: left; color: #888; font-size: 10px; text-transform: uppercase;">Channel</th>
         <th style="padding: 6px 12px; text-align: right; color: #888; font-size: 10px; text-transform: uppercase;">Sessions</th>
-        <th style="padding: 6px 12px; text-align: right; color: #888; font-size: 10px; text-transform: uppercase;">Users</th>
-      </tr>${srcRows}
+        <th style="padding: 6px 12px; text-align: right; color: #888; font-size: 10px; text-transform: uppercase;">Share</th>
+      </tr>${catRows}
     </table>
   </div>
+
+  <!-- Referring Sites -->
+  ${(tw.referralSites || []).length > 0 ? `
+  <div style="background: white; border: 1px solid #e0e0d8; padding: 24px; margin-bottom: 24px;">
+    <h2 style="font-size: 14px; color: #1A1917; margin: 0 0 4px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">Referring Sites & Social</h2>
+    <p style="color: #888; font-size: 12px; margin: 0 0 16px;">Specific sites and platforms sending you visitors</p>
+    <table width="100%" cellpadding="0" cellspacing="0">
+      <tr style="border-bottom: 2px solid #e0e0d8;">
+        <th style="padding: 6px 12px; text-align: left; color: #888; font-size: 10px; text-transform: uppercase;">Site</th>
+        <th style="padding: 6px 12px; text-align: left; color: #888; font-size: 10px; text-transform: uppercase;">Type</th>
+        <th style="padding: 6px 12px; text-align: right; color: #888; font-size: 10px; text-transform: uppercase;">Sessions</th>
+        <th style="padding: 6px 12px; text-align: right; color: #888; font-size: 10px; text-transform: uppercase;">Engaged</th>
+      </tr>${refRows}
+    </table>
+  </div>` : ""}
 
   <!-- Footer -->
   <div style="border-top: 1px solid #e0e0d8; padding-top: 24px; text-align: center;">
@@ -348,14 +374,16 @@ serve(async (req) => {
       getAccessToken("https://www.googleapis.com/auth/webmasters.readonly"),
     ]);
 
-    const [ovTW, ovLW, ovTM, ovLM, ovLY, pgTW, srcTW, evTW, evLW, scTW, scLW] = await Promise.all([
+    const [ovTW, ovLW, ovTM, ovLM, ovLY, pgTW, srcTW, refTW, evTW, evLW, scTW, scLW] = await Promise.all([
       ga4Report(ga4T, { dateRanges: [twR], metrics: [{ name: "activeUsers" }, { name: "newUsers" }, { name: "sessions" }, { name: "userEngagementDuration" }, { name: "engagedSessions" }] }),
       ga4Report(ga4T, { dateRanges: [lwR], metrics: [{ name: "activeUsers" }, { name: "newUsers" }, { name: "sessions" }, { name: "userEngagementDuration" }, { name: "engagedSessions" }] }),
       ga4Report(ga4T, { dateRanges: [tmR], metrics: [{ name: "activeUsers" }, { name: "sessions" }] }),
       ga4Report(ga4T, { dateRanges: [lmR], metrics: [{ name: "activeUsers" }, { name: "sessions" }] }),
       ga4Report(ga4T, { dateRanges: [lyR], metrics: [{ name: "activeUsers" }, { name: "sessions" }] }),
       ga4Report(ga4T, { dateRanges: [twR], dimensions: [{ name: "pagePath" }], metrics: [{ name: "sessions" }, { name: "activeUsers" }, { name: "engagedSessions" }], orderBys: [{ metric: { metricName: "sessions" }, desc: true }], limit: 25 }),
-      ga4Report(ga4T, { dateRanges: [twR], dimensions: [{ name: "sessionSourceMedium" }], metrics: [{ name: "sessions" }, { name: "activeUsers" }], orderBys: [{ metric: { metricName: "sessions" }, desc: true }], limit: 8 }),
+      ga4Report(ga4T, { dateRanges: [twR], dimensions: [{ name: "sessionSourceMedium" }], metrics: [{ name: "sessions" }, { name: "activeUsers" }], orderBys: [{ metric: { metricName: "sessions" }, desc: true }], limit: 12 }),
+      // Referring sites (just the source, not medium)
+      ga4Report(ga4T, { dateRanges: [twR], dimensions: [{ name: "sessionSource" }, { name: "sessionMedium" }], metrics: [{ name: "sessions" }, { name: "activeUsers" }, { name: "engagedSessions" }], orderBys: [{ metric: { metricName: "sessions" }, desc: true }], limit: 15 }),
       ga4Report(ga4T, { dateRanges: [twR], dimensions: [{ name: "eventName" }], metrics: [{ name: "eventCount" }], limit: 20 }),
       ga4Report(ga4T, { dateRanges: [lwR], dimensions: [{ name: "eventName" }], metrics: [{ name: "eventCount" }], limit: 20 }),
       gscQuery(gscT, twR.startDate, twR.endDate),
@@ -379,6 +407,25 @@ serve(async (req) => {
     const sources = rows(srcTW).map(r => ({ source: r.dims[0] || "unknown", sessions: r.vals[0], users: r.vals[1] }));
     const organicSessions = sources.filter(s => s.source.includes("organic")).reduce((sum, s) => sum + s.sessions, 0);
 
+    // Detailed referrers with categories
+    const referrers = rows(refTW).map(r => {
+      const source = r.dims[0] || "unknown";
+      const medium = r.dims[1] || "none";
+      let category = "Other";
+      if (medium === "organic") category = "Search";
+      else if (medium === "(none)" && source === "(direct)") category = "Direct";
+      else if (medium === "referral") category = "Referral";
+      else if (medium === "social" || ["linkedin", "linkedin.com", "l.linkedin.com", "lnkd.in", "instagram", "instagram.com", "facebook", "facebook.com", "twitter", "t.co", "x.com"].some(s => source.includes(s))) category = "Social";
+      else if (medium === "email" || source.includes("newsletter") || source.includes("buttondown")) category = "Email";
+      return { source, medium, category, sessions: r.vals[0], users: r.vals[1], engRate: r.vals[0] > 0 ? ((r.vals[2] / r.vals[0]) * 100).toFixed(0) : "0" };
+    });
+
+    const trafficByCategory = ["Search", "Direct", "Social", "Referral", "Email", "Other"]
+      .map(cat => ({ category: cat, sessions: referrers.filter(r => r.category === cat).reduce((s, r) => s + r.sessions, 0), users: referrers.filter(r => r.category === cat).reduce((s, r) => s + r.users, 0) }))
+      .filter(c => c.sessions > 0);
+
+    const referralSites = referrers.filter(r => r.category === "Referral" || r.category === "Social").sort((a, b) => b.sessions - a.sessions);
+
     const findEv = (report: any, name: string) => { const r = rows(report).find(r => r.dims[0] === name); return r ? r.vals[0] : 0; };
     const formStarts = findEv(evTW, "form_start");
     const formSubmits = findEv(evTW, "form_submit");
@@ -386,7 +433,7 @@ serve(async (req) => {
     const parseQ = (sc: any) => (sc.rows || []).map((r: any) => ({ query: r.keys[0], clicks: r.clicks, impressions: r.impressions, position: r.position }));
 
     const data = {
-      tw: { ...tw, topPages, sources, organicSessions, formStarts, formSubmits },
+      tw: { ...tw, topPages, sources, organicSessions, formStarts, formSubmits, trafficByCategory, referralSites },
       lw: { ...lw, engagedSessions: lw.engagedSessions },
       tm: parseS(ovTM), lm: parseS(ovLM), ly: parseS(ovLY),
       queries: parseQ(scTW), queriesLW: parseQ(scLW),
