@@ -160,6 +160,16 @@
       siteNavToggle.classList.toggle('open');
       siteNavRight.classList.toggle('open');
     });
+    // Track App Store clicks
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a[href*="apps.apple.com"]');
+      if (link && typeof gtag === 'function') {
+        gtag('event', 'app_store_click', {
+          link_url: link.href,
+          link_location: link.closest('header,footer,.final-cta,.hero') ? link.closest('header') ? 'header' : link.closest('footer') ? 'footer' : 'cta' : 'body'
+        });
+      }
+    });
   }
 </script>
 

@@ -206,11 +206,9 @@
         successView.style.display = 'block';
 
         // GA4 event tracking
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          'event': 'form_submit',
-          'form_name': 'professional_signup'
-        });
+        if (typeof gtag === 'function') {
+          gtag('event', 'form_submit', { form_name: 'professional_signup' });
+        }
 
       } catch (error) {
         console.error('Professional signup error:', error);
