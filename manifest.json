@@ -1,6 +1,6 @@
 {
-  "name": "Clearly - Co-Parenting Communication That Works",
-  "short_name": "Clearly",
+  "name": "Clearly. - Co-Parenting Communication That Works",
+  "short_name": "Clearly.",
   "description": "Co-parenting app using interest-based communication to shift patterns and find common ground. Shared calendar, expense tracking, and resolution tools.",
   "start_url": "/",
   "display": "standalone",
@@ -8,13 +8,13 @@
   "theme_color": "#0D8268",
   "icons": [
     {
-      "src": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png",
+      "src": "/images/favicon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png",
-      "sizes": "512x512",
+      "src": "/images/app-icon.png",
+      "sizes": "1024x1024",
       "type": "image/png"
     }
   ]
