@@ -147,7 +147,7 @@ async function sendResultsEmail(email: string, styleResult: string, secondarySty
 
     <!-- Logo -->
     <div style="text-align: center; margin-bottom: 32px;">
-      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" width="48" height="48">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/default.png" alt="Clearly." width="48" height="48" style="border-radius: 12px;">
     </div>
 
     <!-- Opening -->
@@ -193,10 +193,10 @@ async function sendResultsEmail(email: string, styleResult: string, secondarySty
     <!-- Soft CTA -->
     <div style="border-top: 1px solid #E8E6E4; margin-top: 36px; padding-top: 28px;">
       <p style="color: #5C5856; font-size: 15px; line-height: 1.8;">
-        We're building Clearly—a co-parenting app designed around these same principles. Topic-based conversations that resolve. Structure that makes the day-to-day easier.
+        Clearly is a co-parenting app designed around these same principles. Topic-based conversations that resolve. Structure that makes the day-to-day easier.
       </p>
       <p style="color: #5C5856; font-size: 15px; line-height: 1.8;">
-        It's currently in private beta. If you'd like early access, you can <a href="https://getclearly.app" style="color: #0D8268;">request it here</a>.
+        <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" style="color: #0D8268;">Download Clearly on the App Store</a> and start putting these principles into practice.
       </p>
     </div>
 
@@ -233,6 +233,10 @@ async function sendResultsEmail(email: string, styleResult: string, secondarySty
         from: 'Clearly <hello@getclearly.app>',
         to: [email],
         subject: `Your co-parenting communication style: ${style.name}`,
+        headers: {
+          'List-Unsubscribe': '<mailto:hello@getclearly.app?subject=Unsubscribe>',
+          'List-Unsubscribe-Post': 'List-Unsubscribe=One-Click'
+        },
         html: emailHtml
       })
     })

@@ -364,6 +364,10 @@ serve(async (req) => {
             from: "Clearly <hello@getclearly.app>",
             to: data.email,
             subject: `Your Clearly Family Code: ${planTemplate.share_code}`,
+            headers: {
+              "List-Unsubscribe": "<mailto:hello@getclearly.app?subject=Unsubscribe>",
+              "List-Unsubscribe-Post": "List-Unsubscribe=One-Click"
+            },
             html: `
 <!DOCTYPE html>
 <html>
@@ -376,7 +380,7 @@ serve(async (req) => {
 
     <!-- Logo -->
     <div style="text-align: center; margin-bottom: 40px;">
-      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/icon.png" alt="Clearly" width="56" height="56" style="width: 56px; height: 56px; border-radius: 14px;">
+      <img src="https://dwncravjhkbclbuzijra.supabase.co/storage/v1/object/public/Clearly%20Logos/default.png" alt="Clearly." width="56" height="56" style="width: 56px; height: 56px; border-radius: 14px;">
     </div>
 
     <!-- Main Card -->
