@@ -164,9 +164,8 @@ function buildEmail(d: any): string {
 
   // Categorize pages
   const fieldNotesPages = tw.topPages.filter((p: any) => p.path.includes("field-notes") || p.path.includes("fieldnotes") || p.path.includes("/fn/"));
-  const servicePages = tw.topPages.filter((p: any) => p.path.includes("service") || p.path.includes("advisory") || p.path.includes("design-in-context") || p.path.includes("fractional") || p.path.includes("capabilities"));
-  const portfolioPages = tw.topPages.filter((p: any) => !fieldNotesPages.includes(p) && !servicePages.includes(p) && p.path !== "/" && !p.path.includes("contact") && !p.path.includes("about"));
-  const otherPages = tw.topPages.filter((p: any) => p.path === "/" || p.path.includes("contact") || p.path.includes("about"));
+  const servicePages = tw.topPages.filter((p: any) => p.path.includes("service") || p.path.includes("design-in-context"));
+  const keyPages = tw.topPages.filter((p: any) => !fieldNotesPages.includes(p) && !servicePages.includes(p));
 
   const makePageRows = (pages: any[]) => pages.slice(0, 5).map((p: any, i: number) => `
     <tr style="border-bottom: 1px solid #eee;">
@@ -293,18 +292,11 @@ function buildEmail(d: any): string {
     ${pageTableHeader}${makePageRows(servicePages)}</table>
   </div>` : ""}
 
-  <!-- Portfolio / Work -->
-  ${portfolioPages.length > 0 ? `
-  <div style="background: white; border: 1px solid #e0e0d8; padding: 24px; margin-bottom: 24px;">
-    <h2 style="font-size: 14px; color: #1A1917; margin: 0 0 16px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">Portfolio — Most Viewed</h2>
-    ${pageTableHeader}${makePageRows(portfolioPages)}</table>
-  </div>` : ""}
-
-  <!-- Other Pages -->
-  ${otherPages.length > 0 ? `
+  <!-- Key Pages -->
+  ${keyPages.length > 0 ? `
   <div style="background: white; border: 1px solid #e0e0d8; padding: 24px; margin-bottom: 24px;">
     <h2 style="font-size: 14px; color: #1A1917; margin: 0 0 16px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">Key Pages</h2>
-    ${pageTableHeader}${makePageRows(otherPages)}</table>
+    ${pageTableHeader}${makePageRows(keyPages)}</table>
   </div>` : ""}
 
   <!-- Sources -->
