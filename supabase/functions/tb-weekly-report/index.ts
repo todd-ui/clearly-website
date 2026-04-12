@@ -162,13 +162,27 @@ function buildEmail(d: any): string {
 
   const insights = generateInsights(d).map(i => `<li style="color: #333; font-size: 14px; line-height: 1.8; margin-bottom: 14px;">${i}</li>`).join("");
 
-  const pageRows = tw.topPages.slice(0, 10).map((p: any, i: number) => `
+  // Categorize pages
+  const fieldNotesPages = tw.topPages.filter((p: any) => p.path.includes("field-notes") || p.path.includes("fieldnotes") || p.path.includes("/fn/"));
+  const servicePages = tw.topPages.filter((p: any) => p.path.includes("service") || p.path.includes("advisory") || p.path.includes("design-in-context") || p.path.includes("fractional") || p.path.includes("capabilities"));
+  const portfolioPages = tw.topPages.filter((p: any) => !fieldNotesPages.includes(p) && !servicePages.includes(p) && p.path !== "/" && !p.path.includes("contact") && !p.path.includes("about"));
+  const otherPages = tw.topPages.filter((p: any) => p.path === "/" || p.path.includes("contact") || p.path.includes("about"));
+
+  const makePageRows = (pages: any[]) => pages.slice(0, 5).map((p: any, i: number) => `
     <tr style="border-bottom: 1px solid #eee;">
-      <td style="padding: 8px 12px; color: #888; font-size: 12px;">${i + 1}</td>
-      <td style="padding: 8px 12px; color: #1A1917; font-size: 12px; max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${p.path}</td>
-      <td style="padding: 8px 12px; color: #1A1917; font-size: 12px; text-align: right;">${p.sessions}</td>
-      <td style="padding: 8px 12px; color: #1A1917; font-size: 12px; text-align: right;">${p.engRate}%</td>
+      <td style="padding: 6px 12px; color: #888; font-size: 12px;">${i + 1}</td>
+      <td style="padding: 6px 12px; color: #1A1917; font-size: 12px; max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${p.path}</td>
+      <td style="padding: 6px 12px; color: #1A1917; font-size: 12px; text-align: right;">${p.sessions}</td>
+      <td style="padding: 6px 12px; color: #1A1917; font-size: 12px; text-align: right;">${p.engRate}%</td>
     </tr>`).join("");
+
+  const pageTableHeader = `<table width="100%" cellpadding="0" cellspacing="0">
+    <tr style="border-bottom: 2px solid #e0e0d8;">
+      <th style="padding: 6px 12px; text-align: left; color: #888; font-size: 10px; text-transform: uppercase;">#</th>
+      <th style="padding: 6px 12px; text-align: left; color: #888; font-size: 10px; text-transform: uppercase;">Page</th>
+      <th style="padding: 6px 12px; text-align: right; color: #888; font-size: 10px; text-transform: uppercase;">Sessions</th>
+      <th style="padding: 6px 12px; text-align: right; color: #888; font-size: 10px; text-transform: uppercase;">Engaged</th>
+    </tr>`;
 
   const srcRows = tw.sources.slice(0, 6).map((s: any) => `
     <tr style="border-bottom: 1px solid #eee;">
@@ -247,18 +261,51 @@ function buildEmail(d: any): string {
     </table>
   </div>` : ""}
 
-  <!-- Top Pages -->
-  <div style="background: white; border: 1px solid #e0e0d8; padding: 24px; margin-bottom: 24px;">
-    <h2 style="font-size: 14px; color: #1A1917; margin: 0 0 16px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">Top Pages</h2>
-    <table width="100%" cellpadding="0" cellspacing="0">
-      <tr style="border-bottom: 2px solid #e0e0d8;">
-        <th style="padding: 6px 12px; text-align: left; color: #888; font-size: 10px; text-transform: uppercase;">#</th>
-        <th style="padding: 6px 12px; text-align: left; color: #888; font-size: 10px; text-transform: uppercase;">Page</th>
-        <th style="padding: 6px 12px; text-align: right; color: #888; font-size: 10px; text-transform: uppercase;">Sessions</th>
-        <th style="padding: 6px 12px; text-align: right; color: #888; font-size: 10px; text-transform: uppercase;">Engaged</th>
-      </tr>${pageRows}
-    </table>
+  <!-- Field Notes & Contact -->
+  <div style="background: white; border: 1px solid #e0e0d8; margin-bottom: 24px;">
+    <table width="100%" cellpadding="0" cellspacing="0"><tr>
+      <td style="padding: 16px 8px; text-align: center; border-right: 1px solid #e0e0d8;">
+        <p style="color: #888; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 6px;">Field Notes Views</p>
+        <p style="color: #1A1917; font-size: 24px; font-weight: 300; margin: 0;">${fieldNotesPages.reduce((s: number, p: any) => s + p.sessions, 0)}</p>
+      </td>
+      <td style="padding: 16px 8px; text-align: center; border-right: 1px solid #e0e0d8;">
+        <p style="color: #888; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 6px;">Form Starts</p>
+        <p style="color: #1A1917; font-size: 24px; font-weight: 300; margin: 0;">${tw.formStarts}</p>
+      </td>
+      <td style="padding: 16px 8px; text-align: center;">
+        <p style="color: #888; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; margin: 0 0 6px;">Form Submits</p>
+        <p style="color: #1A1917; font-size: 24px; font-weight: 300; margin: 0;">${tw.formSubmits}</p>
+      </td>
+    </tr></table>
   </div>
+
+  <!-- Field Notes Articles -->
+  ${fieldNotesPages.length > 0 ? `
+  <div style="background: white; border: 1px solid #e0e0d8; padding: 24px; margin-bottom: 24px;">
+    <h2 style="font-size: 14px; color: #1A1917; margin: 0 0 16px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">Field Notes — Top Articles</h2>
+    ${pageTableHeader}${makePageRows(fieldNotesPages)}</table>
+  </div>` : ""}
+
+  <!-- Services -->
+  ${servicePages.length > 0 ? `
+  <div style="background: white; border: 1px solid #e0e0d8; padding: 24px; margin-bottom: 24px;">
+    <h2 style="font-size: 14px; color: #1A1917; margin: 0 0 16px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">Services — Most Viewed</h2>
+    ${pageTableHeader}${makePageRows(servicePages)}</table>
+  </div>` : ""}
+
+  <!-- Portfolio / Work -->
+  ${portfolioPages.length > 0 ? `
+  <div style="background: white; border: 1px solid #e0e0d8; padding: 24px; margin-bottom: 24px;">
+    <h2 style="font-size: 14px; color: #1A1917; margin: 0 0 16px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">Portfolio — Most Viewed</h2>
+    ${pageTableHeader}${makePageRows(portfolioPages)}</table>
+  </div>` : ""}
+
+  <!-- Other Pages -->
+  ${otherPages.length > 0 ? `
+  <div style="background: white; border: 1px solid #e0e0d8; padding: 24px; margin-bottom: 24px;">
+    <h2 style="font-size: 14px; color: #1A1917; margin: 0 0 16px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 500;">Key Pages</h2>
+    ${pageTableHeader}${makePageRows(otherPages)}</table>
+  </div>` : ""}
 
   <!-- Sources -->
   <div style="background: white; border: 1px solid #e0e0d8; padding: 24px; margin-bottom: 24px;">
@@ -315,7 +362,7 @@ serve(async (req) => {
       ga4Report(ga4T, { dateRanges: [tmR], metrics: [{ name: "activeUsers" }, { name: "sessions" }] }),
       ga4Report(ga4T, { dateRanges: [lmR], metrics: [{ name: "activeUsers" }, { name: "sessions" }] }),
       ga4Report(ga4T, { dateRanges: [lyR], metrics: [{ name: "activeUsers" }, { name: "sessions" }] }),
-      ga4Report(ga4T, { dateRanges: [twR], dimensions: [{ name: "pagePath" }], metrics: [{ name: "sessions" }, { name: "activeUsers" }, { name: "engagedSessions" }], orderBys: [{ metric: { metricName: "sessions" }, desc: true }], limit: 10 }),
+      ga4Report(ga4T, { dateRanges: [twR], dimensions: [{ name: "pagePath" }], metrics: [{ name: "sessions" }, { name: "activeUsers" }, { name: "engagedSessions" }], orderBys: [{ metric: { metricName: "sessions" }, desc: true }], limit: 25 }),
       ga4Report(ga4T, { dateRanges: [twR], dimensions: [{ name: "sessionSourceMedium" }], metrics: [{ name: "sessions" }, { name: "activeUsers" }], orderBys: [{ metric: { metricName: "sessions" }, desc: true }], limit: 8 }),
       ga4Report(ga4T, { dateRanges: [twR], dimensions: [{ name: "eventName" }], metrics: [{ name: "eventCount" }], limit: 20 }),
       ga4Report(ga4T, { dateRanges: [lwR], dimensions: [{ name: "eventName" }], metrics: [{ name: "eventCount" }], limit: 20 }),
