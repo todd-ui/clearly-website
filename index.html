@@ -589,6 +589,219 @@
       color: #4A4A47;
     }
 
+    /* Narrated transformation — Option C: single column, message-led */
+    .transformation {
+      margin-top: 48px;
+    }
+    .transformation-pin {
+      display: grid;
+      grid-template-columns: 1fr;
+    }
+    .pin-content, .triggers {
+      grid-area: 1 / 1;
+    }
+    .pin-content {
+      position: sticky;
+      top: 72px;
+      align-self: start;
+      min-height: calc(100vh - 96px);
+      max-height: calc(100vh - 96px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      pointer-events: none;
+      z-index: 2;
+    }
+    .pin-content .pin-intro,
+    .pin-content .msg-group,
+    .pin-content .caption-group {
+      pointer-events: auto;
+      width: 100%;
+      max-width: 560px;
+    }
+    .pin-intro {
+      text-align: left;
+    }
+    .pin-intro .hp-eyebrow {
+      margin-bottom: 14px;
+    }
+    .pin-intro h2 {
+      font-size: clamp(32px, 4vw, 44px);
+      margin-bottom: 12px;
+    }
+    .pin-intro .hp-body {
+      font-size: 15px;
+      margin: 0;
+    }
+    .pin-intro-mobile {
+      display: none;
+    }
+    /* Layer the two message cards on top of each other for cross-fade */
+    .msg-group {
+      display: grid;
+    }
+    .msg-group > .msg {
+      grid-area: 1 / 1;
+    }
+    /* Layer captions */
+    .caption-group {
+      position: relative;
+      min-height: 62px;
+      max-width: 560px;
+    }
+    .caption {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      text-align: center;
+    }
+    .caption-label {
+      display: block;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #0D8268;
+      margin-bottom: 8px;
+    }
+    .caption p {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--ink-mid);
+      margin: 0;
+    }
+    .caption p em {
+      font-style: italic;
+      color: #0D8268;
+      font-weight: 500;
+    }
+    .transformation[data-stage="0"] .caption[data-stage="0"],
+    .transformation[data-stage="2"] .caption[data-stage="2"],
+    .transformation[data-stage="3"] .caption[data-stage="3"] {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* Scroll-distance triggers — invisible, provide scroll height */
+    .triggers {
+      display: flex;
+      flex-direction: column;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .trigger {
+      height: 55vh;
+    }
+    /* Mobile-only fallback linear scenes */
+    .transformation-mobile {
+      display: none;
+    }
+    .mobile-flow-arrow {
+      display: none;
+    }
+    .msg {
+      border-radius: 12px;
+      padding: 28px 30px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04);
+    }
+    .msg-label {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .msg-text {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+    .msg-note {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      font-style: italic;
+      color: #4A4A47;
+      margin-top: 14px;
+    }
+    .msg-sent {
+      background: #FEF2F2;
+      border: 1px solid rgba(252,165,165,0.35);
+    }
+    .msg-sent .msg-label { color: #C97B7B; }
+    .msg-sent .msg-text { color: #7F1D1D; font-style: italic; }
+    .msg-delivered {
+      background: #E4F4EF;
+      border: 1px solid rgba(13,130,104,0.18);
+    }
+    /* Initial hidden state only applies when layered inside the sticky pin */
+    .pin-content .msg-delivered {
+      opacity: 0;
+      transform: translateY(12px) scale(0.98);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      pointer-events: none;
+    }
+    .msg-delivered .msg-label { color: #0D8268; }
+    .msg-delivered .msg-text { color: var(--ink); font-weight: 500; font-style: normal; }
+    .msg-delivered-mobile { display: none; }
+
+    /* Word-level states */
+    .msg-chunk {
+      transition: color 0.9s ease, opacity 0.9s ease;
+      text-decoration: line-through;
+      text-decoration-color: transparent;
+      text-decoration-thickness: 1.5px;
+      -webkit-text-decoration-color: transparent;
+    }
+    .msg-keyword {
+      display: inline;
+      border-radius: 3px;
+      transition: background-color 0.6s ease, color 0.6s ease, box-shadow 0.6s ease, padding 0.6s ease;
+    }
+    .transformation[data-stage="2"] .msg-keyword,
+    .transformation[data-stage="3"] .msg-keyword {
+      display: inline-block;
+      padding: 0 4px;
+      margin: 0 1px;
+    }
+
+    /* Stage 1: emotional words struck through + faded */
+    .transformation[data-stage="1"] .msg-chunk[data-emotion],
+    .transformation[data-stage="2"] .msg-chunk[data-emotion],
+    .transformation[data-stage="3"] .msg-chunk[data-emotion] {
+      color: rgba(127, 29, 29, 0.28);
+      text-decoration-color: rgba(127, 29, 29, 0.5);
+      -webkit-text-decoration-color: rgba(127, 29, 29, 0.5);
+    }
+
+    /* Stage 2: highlight the keyword */
+    .transformation[data-stage="2"] .msg-keyword,
+    .transformation[data-stage="3"] .msg-keyword {
+      background: #FEF3C7;
+      color: #78350F;
+      box-shadow: 0 0 0 3px #FEF3C7;
+    }
+
+    /* Stage 3: sent fades back, delivered takes over — only inside the sticky pin */
+    .transformation[data-stage="3"] .pin-content .msg-sent {
+      opacity: 0.15;
+      transform: translateY(-12px) scale(0.98);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+      pointer-events: none;
+    }
+    .transformation[data-stage="3"] .pin-content .msg-delivered {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+
     /* ==========================================
        FEATURES
        ========================================== */
@@ -989,6 +1202,70 @@
       .phone { max-width: 300px; }
       .steps-grid { grid-template-columns: 1fr; }
       .feat-grid { grid-template-columns: 1fr; }
+      /* Mobile transformation: hide sticky pin, show linear scenes */
+      .transformation { margin-top: 0; }
+      .transformation-pin { display: none; }
+      .transformation-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+      }
+      .pin-intro-mobile { display: block; margin-bottom: 16px; }
+      .pin-intro-mobile h2 { font-size: 32px; }
+      .mobile-scene {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        align-items: center;
+        text-align: center;
+      }
+      .mobile-scene .msg {
+        width: 100%;
+        text-align: left;
+      }
+      .mobile-scene-label {
+        font-family: 'Instrument Sans', sans-serif;
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #0D8268;
+      }
+      .mobile-scene-caption {
+        font-family: 'Instrument Sans', sans-serif;
+        font-size: 14px;
+        line-height: 1.5;
+        color: var(--ink-mid);
+        margin: 0;
+        max-width: 320px;
+      }
+      .mobile-flow-arrow {
+        display: flex;
+        justify-content: center;
+        padding: 24px 0;
+      }
+      .mobile-scene-caption em {
+        font-style: italic;
+        color: #0D8268;
+        font-weight: 500;
+      }
+      .msg-static { box-shadow: 0 6px 18px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.03); }
+      /* Mobile-only transformed state — pre-applied via .m-strike / .m-highlight */
+      .m-strike {
+        color: rgba(127, 29, 29, 0.28);
+        text-decoration: line-through;
+        text-decoration-color: rgba(127, 29, 29, 0.5);
+      }
+      .m-highlight {
+        background: #FEF3C7;
+        color: #78350F;
+        display: inline-block;
+        padding: 0 4px;
+        margin: 0 1px;
+        border-radius: 3px;
+        box-shadow: 0 0 0 3px #FEF3C7;
+      }
+
       /* Mobile: horizontal swipe carousel instead of long vertical stack */
       .scroll-story { grid-template-columns: 1fr; gap: 0; margin-top: 24px; }
       .scroll-story-media { display: none; }
@@ -1180,51 +1457,90 @@
   <!-- SECTION 3: SEE IT WORK -->
   <section class="hp-section bg-paper" id="how-it-works">
     <div class="inner-narrow">
-      <p class="hp-eyebrow fade-in">Clearly AI &middot; See it work</p>
-      <h2 class="fade-in">From message to <em>resolution.</em></h2>
-      <p class="hp-body fade-in">A real message. Here's exactly what Clearly does with it.</p>
-
-      <div class="orig fade-in">
-        <div class="orig-label">What was sent</div>
-        <div class="orig-text">"You're ALWAYS late. Every single time. I have a life too and you have zero respect for my time or for these kids. I'm so sick of your selfish behaviour, it's exhausting."</div>
-      </div>
-
-      <div class="flow-connector fade-in">
-        <div class="flow-line"></div>
-        <div class="flow-arrow">&darr;</div>
-        <div class="flow-label">Clearly AI processes your message</div>
-        <div class="flow-arrow">&darr;</div>
-        <div class="flow-line"></div>
-      </div>
-
-      <div class="steps-grid fade-in">
-        <div class="step">
-          <div class="step-label">Clearly AI — 1 of 3</div>
-          <h3>Remove accusation and blame</h3>
-          <p>"You always," "zero respect," "selfish" — stripped. 47 words of emotion, one actionable fact.</p>
+      <!-- Narrated word-level transformation (Option C: single column, message-led) -->
+      <div class="transformation" data-stage="0">
+        <div class="transformation-pin">
+          <!-- Sticky pin-content that holds intro + message + caption -->
+          <div class="pin-content">
+            <div class="pin-intro">
+              <p class="hp-eyebrow">Clearly AI &middot; See it work</p>
+              <h2>From message to <em>resolution.</em></h2>
+              <p class="hp-body">A real message. Here's exactly what Clearly does with it.</p>
+            </div>
+            <div class="msg-group">
+              <div class="msg msg-sent">
+                <div class="msg-label">What was sent</div>
+                <div class="msg-text">"<span class="msg-chunk" data-emotion>You're </span><span class="msg-chunk" data-emotion>ALWAYS </span><span class="msg-keyword">late</span><span class="msg-chunk" data-emotion>. Every single time.</span> <span class="msg-chunk" data-emotion>I have a life too and you have zero respect for my time or for these kids.</span> <span class="msg-chunk" data-emotion>I'm so sick of your selfish behaviour, it's exhausting.</span>"</div>
+              </div>
+              <div class="msg msg-delivered" aria-hidden="true">
+                <div class="msg-label">&#10022; Clearly AI delivers</div>
+                <div class="msg-text">"Drop-off has been late on multiple recent occasions. Please confirm you can meet the agreed pick-up/drop-off time going forward."</div>
+              </div>
+            </div>
+            <div class="caption-group">
+              <div class="caption" data-stage="0">
+                <span class="caption-label">Original Message &mdash; 1 of 3</span>
+                <p>The same pattern from the marriage. Same tone, same triggers.</p>
+              </div>
+              <div class="caption" data-stage="2">
+                <span class="caption-label">Clearly AI &mdash; 2 of 3</span>
+                <p>Strip the charge. Find the one word that actually matters: <em>late.</em></p>
+              </div>
+              <div class="caption" data-stage="3">
+                <span class="caption-label">What is delivered &mdash; 3 of 3</span>
+                <p>No blame. No tone. No exhaustion. Just the one thing that requires a response.</p>
+              </div>
+            </div>
+          </div>
+          <!-- Scroll-distance triggers: each one drives one stage of the story -->
+          <div class="triggers" aria-hidden="true">
+            <div class="trigger" data-stage="0"></div>
+            <div class="trigger" data-stage="2"></div>
+            <div class="trigger" data-stage="3"></div>
+          </div>
         </div>
-        <div class="step">
-          <div class="step-label">Clearly AI — 2 of 3</div>
-          <h3>Extract the single issue</h3>
-          <p>One word buried in the message actually matters: late. Clearly finds it and builds from there.</p>
+        <!-- Mobile fallback: three linear scenes -->
+        <div class="transformation-mobile">
+          <div class="pin-intro pin-intro-mobile">
+            <p class="hp-eyebrow">Clearly AI &middot; See it work</p>
+            <h2>From message to <em>resolution.</em></h2>
+            <p class="hp-body">A real message. Here's exactly what Clearly does with it.</p>
+          </div>
+          <div class="mobile-scene">
+            <div class="mobile-scene-label">Original Message &mdash; 1 of 3</div>
+            <div class="msg msg-sent msg-static">
+              <div class="msg-label">What was sent</div>
+              <div class="msg-text">"You're ALWAYS late. Every single time. I have a life too and you have zero respect for my time or for these kids. I'm so sick of your selfish behaviour, it's exhausting."</div>
+            </div>
+            <p class="mobile-scene-caption">The same pattern from the marriage. Same tone, same triggers.</p>
+          </div>
+          <div class="mobile-flow-arrow" aria-hidden="true">
+            <svg width="18" height="24" viewBox="0 0 18 24" fill="none">
+              <path d="M9 2 V22 M3 16 L9 22 L15 16" stroke="#0D8268" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+            </svg>
+          </div>
+          <div class="mobile-scene">
+            <div class="mobile-scene-label">Clearly AI &mdash; 2 of 3</div>
+            <div class="msg msg-sent msg-static msg-transformed">
+              <div class="msg-label">What was sent</div>
+              <div class="msg-text">"<span class="m-strike">You're </span><span class="m-strike">ALWAYS </span><span class="m-highlight">late</span><span class="m-strike">. Every single time.</span> <span class="m-strike">I have a life too and you have zero respect for my time or for these kids.</span> <span class="m-strike">I'm so sick of your selfish behaviour, it's exhausting.</span>"</div>
+            </div>
+            <p class="mobile-scene-caption">Strip the charge. Find the one word that actually matters: <em>late.</em></p>
+          </div>
+          <div class="mobile-flow-arrow" aria-hidden="true">
+            <svg width="18" height="24" viewBox="0 0 18 24" fill="none">
+              <path d="M9 2 V22 M3 16 L9 22 L15 16" stroke="#0D8268" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
+            </svg>
+          </div>
+          <div class="mobile-scene">
+            <div class="mobile-scene-label">What is delivered &mdash; 3 of 3</div>
+            <div class="msg msg-delivered msg-static">
+              <div class="msg-label">&#10022; Clearly AI delivers</div>
+              <div class="msg-text">"Drop-off has been late on multiple recent occasions. Please confirm you can meet the agreed pick-up/drop-off time going forward."</div>
+            </div>
+            <p class="mobile-scene-caption">No blame. No tone. No exhaustion. Just the one thing that requires a response.</p>
+          </div>
         </div>
-        <div class="step">
-          <div class="step-label">Clearly AI — 3 of 3</div>
-          <h3>Convert to a forward request</h3>
-          <p>Not what went wrong. What needs to happen next — the only thing co-parenting needs to be.</p>
-        </div>
-      </div>
-
-      <div class="flow-connector fade-in">
-        <div class="flow-line"></div>
-        <div class="flow-arrow">&darr;</div>
-        <div class="flow-line"></div>
-      </div>
-
-      <div class="output fade-in">
-        <div class="output-label">&#10022; Clearly AI delivers</div>
-        <div class="output-text">"Drop-off has been late on multiple recent occasions. Please confirm you can meet the agreed pick-up/drop-off time going forward."</div>
-        <div class="output-note">No blame. No tone. No exhaustion. Just the one thing that requires a response.</div>
       </div>
 
     </div>
@@ -1517,6 +1833,38 @@
       }, { rootMargin: '-35% 0px -35% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
 
       chapters.forEach(ch => storyObs.observe(ch));
+
+      // Narrated transformation (Section 3): update data-stage as beats enter view
+      const transformation = document.querySelector('.transformation');
+      const triggers = document.querySelectorAll('.transformation .trigger');
+      if (transformation && triggers.length) {
+        // Find trigger whose center is closest to viewport center on scroll.
+        const update = () => {
+          const center = window.innerHeight / 2;
+          let best = null, bestDist = Infinity;
+          triggers.forEach(t => {
+            const r = t.getBoundingClientRect();
+            const bc = (r.top + r.bottom) / 2;
+            if (bc < -200 || bc > window.innerHeight + 200) return;
+            const d = Math.abs(bc - center);
+            if (d < bestDist) { bestDist = d; best = t; }
+          });
+          if (!best) return;
+          const stage = best.dataset.stage || '0';
+          transformation.setAttribute('data-stage', stage);
+        };
+        // Use rAF-throttled scroll listener for smooth state updates
+        let ticking = false;
+        const onScroll = () => {
+          if (!ticking) {
+            requestAnimationFrame(() => { update(); ticking = false; });
+            ticking = true;
+          }
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll, { passive: true });
+        update();
+      }
 
       // Mobile carousel: sync dots, and allow dot tap to scroll to slide
       const dots = document.querySelectorAll('.scroll-story-dot');
