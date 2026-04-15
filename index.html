@@ -403,6 +403,63 @@
     .ph-btn-keep { background: #FFFFFF; border: 1.5px solid #BFBFBB; color: #4A4A47; }
     .ph-btn-resolve { background: #0D8268; border: none; color: #FFFFFF; font-weight: 500; }
 
+    /* Hero layered cards */
+    .hero-cards {
+      position: relative;
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+      padding: 12px 0 48px;
+    }
+    .hero-card {
+      border-radius: 12px;
+      padding: 22px 26px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.05);
+    }
+    .hero-card-label {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .hero-card-text {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .hero-card-sent {
+      background: #FEF2F2;
+      border: 1px solid rgba(252,165,165,0.35);
+      width: 88%;
+    }
+    .hero-card-sent .hero-card-label { color: #C97B7B; }
+    .hero-card-sent .hero-card-text {
+      color: #7F1D1D;
+      font-style: italic;
+    }
+    .hero-card-delivered {
+      background: #E4F4EF;
+      border: 1px solid rgba(13,130,104,0.18);
+      width: 92%;
+      margin-left: auto;
+      margin-top: -8px;
+      position: relative;
+    }
+    .hero-card-delivered .hero-card-label { color: #0D8268; }
+    .hero-card-delivered .hero-card-text {
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .hero-card-note {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      font-style: italic;
+      color: #4A4A47;
+      margin-top: 10px;
+    }
+
     /* ==========================================
        TRANSFORMATION (See it work)
        ========================================== */
@@ -822,9 +879,10 @@
         grid-template-columns: 1fr;
         gap: 40px;
       }
-      /* Show copy first, phone second on mobile */
+      /* Show copy first, cards second on mobile */
       .hero-copy { order: 1; }
       .hero-phone { order: 2; display: flex; justify-content: center; width: 100%; }
+      .hero-cards { order: 2; max-width: 360px; }
       .hero-btns { justify-content: center; }
       .phone { max-width: 300px; }
       .steps-grid { grid-template-columns: 1fr; }
@@ -892,32 +950,15 @@
             <a href="#how-it-works" class="btn-ghost">See how it works</a>
           </div>
         </div>
-        <div class="hero-phone fade-in">
-          <div class="phone">
-            <div class="ph-bar">
-              <span class="ph-bar-back">&lt; Topics</span>
-              <span class="ph-bar-title">Pickup timing</span>
-              <span class="ph-bar-spacer"></span>
-            </div>
-            <div class="ph-summary">
-              <div class="ph-summary-label">&#9733; Clearly's Summary</div>
-              <div class="ph-summary-text">There's a recurring concern about pickup times on Thursdays. The request is to agree on a consistent time that works for both schedules.</div>
-            </div>
-            <button class="ph-hold">
-              <svg width="15" height="15" viewBox="0 0 15 15" fill="none">
-                <ellipse cx="7.5" cy="7.5" rx="6.5" ry="4" stroke="#8A8A87" stroke-width="1.3"/>
-                <circle cx="7.5" cy="7.5" r="2" stroke="#8A8A87" stroke-width="1.3"/>
-              </svg>
-              Hold to view original message
-            </button>
-            <div class="ph-res">
-              <div class="ph-res-label">Resolution Pending</div>
-              <div class="ph-res-text">Agree on a pickup time for Thursdays going forward.</div>
-              <div class="ph-res-btns">
-                <button class="ph-btn-keep">Keep open</button>
-                <button class="ph-btn-resolve">Resolve</button>
-              </div>
-            </div>
+        <div class="hero-cards fade-in">
+          <div class="hero-card hero-card-sent">
+            <div class="hero-card-label">What was sent</div>
+            <div class="hero-card-text">"You're ALWAYS late. Every single time. I have a life too and you have zero respect for my time or for these kids. I'm so sick of your selfish behaviour, it's exhausting."</div>
+          </div>
+          <div class="hero-card hero-card-delivered">
+            <div class="hero-card-label">&#10022; Clearly AI delivers</div>
+            <div class="hero-card-text">"Drop-off has been late on multiple recent occasions. Please confirm you can meet the agreed pick-up/drop-off time going forward."</div>
+            <div class="hero-card-note">No blame. No tone. No exhaustion. Just the one thing that requires a response.</div>
           </div>
         </div>
       </div>
