@@ -592,6 +592,108 @@
     /* ==========================================
        FEATURES
        ========================================== */
+
+    /* Sticky-scroll app story */
+    .scroll-story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      margin-top: 56px;
+      align-items: stretch;
+    }
+    .scroll-story-media {
+      /* Flex would break sticky on the child; keep as block. */
+    }
+    .scroll-story-media-inner {
+      position: sticky;
+      top: 88px;
+      height: calc(100vh - 120px);
+      max-height: 760px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .scroll-story-phone {
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+      aspect-ratio: 1027 / 2137;
+    }
+    .scroll-story-img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.12)) drop-shadow(0 6px 12px rgba(0,0,0,0.06));
+    }
+    .scroll-story-img.is-active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .scroll-story-chapters {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .scroll-chapter {
+      min-height: 70vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px 0;
+      opacity: 0.35;
+      transition: opacity 0.5s ease;
+    }
+    .scroll-chapter.is-active {
+      opacity: 1;
+    }
+    .scroll-chapter:first-child {
+      padding-top: 0;
+      min-height: 60vh;
+    }
+    .scroll-chapter:last-child {
+      padding-bottom: 0;
+      min-height: 60vh;
+    }
+    .scroll-chapter-num {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: #0D8268;
+      margin-bottom: 16px;
+    }
+    .scroll-chapter h3 {
+      font-family: 'Instrument Serif', serif;
+      font-size: clamp(28px, 3.2vw, 40px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 18px;
+      letter-spacing: -0.01em;
+    }
+    .scroll-chapter p {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--ink-mid);
+      max-width: 460px;
+    }
+    .scroll-chapter-img-mobile {
+      display: none;
+    }
+    .scroll-story-dots,
+    .scroll-story-hint {
+      display: none;
+    }
+
     .feat-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -887,6 +989,96 @@
       .phone { max-width: 300px; }
       .steps-grid { grid-template-columns: 1fr; }
       .feat-grid { grid-template-columns: 1fr; }
+      /* Mobile: horizontal swipe carousel instead of long vertical stack */
+      .scroll-story { grid-template-columns: 1fr; gap: 0; margin-top: 24px; }
+      .scroll-story-media { display: none; }
+      .scroll-story-chapters {
+        display: flex;
+        flex-direction: row;
+        gap: 12px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        margin: 0 -20px;
+        padding: 0 7vw;
+        scroll-padding-inline: 7vw;
+        scrollbar-width: none;
+      }
+      .scroll-story-chapters::-webkit-scrollbar { display: none; }
+      .scroll-chapter {
+        flex: 0 0 86vw;
+        min-width: 86vw;
+        min-height: 560px;
+        padding: 0;
+        scroll-snap-align: start;
+        opacity: 1;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
+      .scroll-chapter-img-mobile {
+        display: block;
+        width: auto;
+        max-width: 190px;
+        height: 390px;
+        flex: 0 0 390px;
+        margin: 0 auto;
+        object-fit: contain;
+        object-position: center bottom;
+        filter: drop-shadow(0 16px 32px rgba(0,0,0,0.12));
+      }
+      .scroll-chapter-num {
+        display: none;
+      }
+      .scroll-chapter h3 {
+        margin-top: 22px;
+      }
+      .scroll-chapter h3 {
+        font-size: 22px;
+        margin-bottom: 10px;
+        line-height: 1.22;
+        min-height: 54px;
+      }
+      .scroll-chapter p {
+        margin: 0 auto;
+        font-size: 14px;
+        line-height: 1.55;
+        max-width: 320px;
+      }
+      /* Dot pagination + hint: visible on mobile only */
+      .scroll-story-hint { display: block; }
+      .scroll-story-dots {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 28px;
+      }
+      .scroll-story-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: rgba(0,0,0,0.15);
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        transition: background 0.3s ease, transform 0.3s ease;
+      }
+      .scroll-story-dot.is-active {
+        background: #0D8268;
+        transform: scale(1.25);
+      }
+      /* Swipe hint label */
+      .scroll-story-hint {
+        display: block;
+        text-align: center;
+        font-family: 'Instrument Sans', sans-serif;
+        font-size: 11px;
+        letter-spacing: 0.8px;
+        text-transform: uppercase;
+        color: #8A8A87;
+        margin-top: 14px;
+      }
       .pricing-grid { grid-template-columns: 1fr; gap: 40px; }
       .plan-cta { grid-template-columns: 1fr; text-align: center; }
       h1 { font-size: 40px; }
@@ -1066,7 +1258,54 @@
       <h2 class="fade-in">And yes — it handles the logistics too.</h2>
       <p class="hp-body fade-in" style="max-width: 520px;">Best-in-class custody calendar. Shared expenses. A today view that surfaces what needs your attention. Everything both parents need, in one place.</p>
 
-      <div class="feat-grid">
+      <!-- Sticky-scroll app story -->
+      <div class="scroll-story">
+        <div class="scroll-story-media">
+          <div class="scroll-story-media-inner">
+            <div class="scroll-story-phone">
+              <img class="scroll-story-img is-active" data-view="today" src="/images/Today.png" alt="Today view in the Clearly app" loading="lazy">
+              <img class="scroll-story-img" data-view="schedule" src="/images/cal.png" alt="Schedule view with custody calendar" loading="lazy">
+              <img class="scroll-story-img" data-view="expenses" src="/images/expense.png" alt="Expenses view with unpaid and paid balances" loading="lazy">
+              <img class="scroll-story-img" data-view="shared" src="/images/shared.png" alt="Shared plan, kids, and contacts view" loading="lazy">
+            </div>
+          </div>
+        </div>
+        <div class="scroll-story-chapters">
+          <div class="scroll-chapter" data-view="today">
+            <img class="scroll-chapter-img-mobile" src="/images/Today.png" alt="" loading="lazy">
+            <p class="scroll-chapter-num">01 &middot; Today</p>
+            <h3>Everything in one place.<br><em>Clearly.</em></h3>
+            <p>One screen. Every action, exchange, and pending topic — surfaced and prioritized. No searching, no tabs, no surprises. Just what the next twenty-four hours need from you.</p>
+          </div>
+          <div class="scroll-chapter" data-view="schedule">
+            <img class="scroll-chapter-img-mobile" src="/images/cal.png" alt="" loading="lazy">
+            <p class="scroll-chapter-num">02 &middot; Schedule</p>
+            <h3>Custody without the calendar fights.</h3>
+            <p>The weekly pattern. Holidays. Summer. Swap requests handled in-app, documented, done. Syncs with Apple and Google Calendar so everyone's on the same page — literally.</p>
+          </div>
+          <div class="scroll-chapter" data-view="expenses">
+            <img class="scroll-chapter-img-mobile" src="/images/expense.png" alt="" loading="lazy">
+            <p class="scroll-chapter-num">03 &middot; Expenses</p>
+            <h3>Money, settled.</h3>
+            <p>Log it once. Clearly calculates each parent's share based on your agreed split. No spreadsheets. No interpretation. No "what did we decide again" conversations.</p>
+          </div>
+          <div class="scroll-chapter" data-view="shared">
+            <img class="scroll-chapter-img-mobile" src="/images/shared.png" alt="" loading="lazy">
+            <p class="scroll-chapter-num">04 &middot; Shared</p>
+            <h3>The source of truth you both trust.</h3>
+            <p>Custody plan. Split agreements. Pediatricians, medications, addresses, school contacts. Everything you've decided together — maintained in one place, always current, visible to both of you.</p>
+          </div>
+        </div>
+        <div class="scroll-story-dots" aria-hidden="true">
+          <button class="scroll-story-dot is-active" data-view="today" aria-label="Today"></button>
+          <button class="scroll-story-dot" data-view="schedule" aria-label="Schedule"></button>
+          <button class="scroll-story-dot" data-view="expenses" aria-label="Expenses"></button>
+          <button class="scroll-story-dot" data-view="shared" aria-label="Shared"></button>
+        </div>
+        <span class="scroll-story-hint">Swipe to explore</span>
+      </div>
+
+      <div class="feat-grid" style="display:none">
         <!-- Today -->
         <div class="feat-card fade-in">
           <div class="feat-icon">
@@ -1250,6 +1489,60 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
     document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+    // Sticky-scroll app story — swap active phone image as user scrolls chapters
+    (function initScrollStory() {
+      const chapters = document.querySelectorAll('.scroll-chapter');
+      const images = document.querySelectorAll('.scroll-story-img');
+      if (!chapters.length || !images.length) return;
+
+      const setActive = (view) => {
+        images.forEach(img => img.classList.toggle('is-active', img.dataset.view === view));
+        chapters.forEach(ch => ch.classList.toggle('is-active', ch.dataset.view === view));
+      };
+
+      const storyObs = new IntersectionObserver((entries) => {
+        // Pick the entry closest to the viewport center
+        const visible = entries.filter(e => e.isIntersecting);
+        if (!visible.length) return;
+        const center = window.innerHeight / 2;
+        let best = visible[0];
+        let bestDist = Infinity;
+        visible.forEach(e => {
+          const rect = e.boundingClientRect;
+          const dist = Math.abs((rect.top + rect.bottom) / 2 - center);
+          if (dist < bestDist) { bestDist = dist; best = e; }
+        });
+        setActive(best.target.dataset.view);
+      }, { rootMargin: '-35% 0px -35% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
+
+      chapters.forEach(ch => storyObs.observe(ch));
+
+      // Mobile carousel: sync dots, and allow dot tap to scroll to slide
+      const dots = document.querySelectorAll('.scroll-story-dot');
+      const track = document.querySelector('.scroll-story-chapters');
+      if (dots.length && track) {
+        const setDot = (view) => dots.forEach(d => d.classList.toggle('is-active', d.dataset.view === view));
+        // Horizontal carousel IO — only fires when chapters are side-by-side (mobile)
+        const hObs = new IntersectionObserver((entries) => {
+          const visible = entries.filter(e => e.isIntersecting);
+          if (!visible.length) return;
+          const center = window.innerWidth / 2;
+          let best = visible[0], bestDist = Infinity;
+          visible.forEach(e => {
+            const r = e.boundingClientRect;
+            const d = Math.abs((r.left + r.right) / 2 - center);
+            if (d < bestDist) { bestDist = d; best = e; }
+          });
+          setDot(best.target.dataset.view);
+        }, { root: track, threshold: [0.5, 0.75, 1] });
+        chapters.forEach(ch => hObs.observe(ch));
+        dots.forEach(dot => dot.addEventListener('click', () => {
+          const target = document.querySelector('.scroll-chapter[data-view="' + dot.dataset.view + '"]');
+          if (target) target.scrollIntoView({behavior: 'smooth', inline: 'center', block: 'nearest'});
+        }));
+      }
+    })();
 
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(link => {
