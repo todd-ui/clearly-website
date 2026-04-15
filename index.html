@@ -76,7 +76,7 @@
 
     /* Section rhythm */
     .hp-section {
-      padding: 96px 56px;
+      padding: 88px 56px;
       margin: 0 auto;
     }
     .hp-section .inner { max-width: 960px; margin: 0 auto; }
@@ -134,6 +134,7 @@
       color: var(--ink);
       line-height: 1.6;
     }
+    .hero-lead-br { display: none; }
     .hp-body {
       font-family: 'Instrument Sans', sans-serif;
       font-size: 16px;
@@ -433,6 +434,9 @@
       background: #FEF2F2;
       border: 1px solid rgba(252,165,165,0.35);
       width: 88%;
+      opacity: 0;
+      transform: translateY(18px);
+      animation: hero-card-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.45s forwards;
     }
     .hero-card-sent .hero-card-label { color: #C97B7B; }
     .hero-card-sent .hero-card-text {
@@ -446,6 +450,15 @@
       margin-left: auto;
       margin-top: -18px;
       position: relative;
+      opacity: 0;
+      transform: translateY(24px) translateX(12px) scale(0.98);
+      animation: hero-card-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.05s forwards;
+    }
+    @keyframes hero-card-in {
+      to {
+        opacity: 1;
+        transform: translateY(0) translateX(0) scale(1);
+      }
     }
     .hero-card-delivered .hero-card-label { color: #0D8268; }
     .hero-card-delivered .hero-card-text {
@@ -628,7 +641,6 @@
       margin-bottom: 14px;
     }
     .pin-intro h2 {
-      font-size: clamp(32px, 4vw, 44px);
       margin-bottom: 12px;
     }
     .pin-intro .hp-body {
@@ -697,7 +709,10 @@
       z-index: 1;
     }
     .trigger {
-      height: 55vh;
+      height: 50vh;
+    }
+    .trigger:last-child {
+      height: 40vh; /* less tail after the final stage */
     }
     /* Mobile-only fallback linear scenes */
     .transformation-mobile {
@@ -1364,11 +1379,21 @@
       #hero { min-height: auto; }
     }
     @media (max-width: 600px) {
-      .hp-section { padding: 64px 20px; }
-      .close-section { padding: 64px 20px; }
-      .hero-btns { flex-direction: column; align-items: center; }
+      .hp-section { padding: 56px 20px; }
+      .close-section { padding: 56px 20px; }
+      #hero { padding: 28px 20px 48px; }
+      .hero-lead-br { display: none; } /* keep on one line */
+      .hero-btns { flex-direction: row; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
+      .hero-btns .btn-moss, .hero-btns .btn-ghost { padding: 10px 16px; font-size: 13px; }
       .close-btns { flex-direction: column; align-items: center; }
-      h1 { font-size: 34px; }
+      h1 { font-size: 30px; line-height: 1.1; }
+      .hp-lead { font-size: 14px; line-height: 1.45; }
+      .hero-cards { max-width: 320px; padding-bottom: 24px; }
+      .hero-card { padding: 16px 18px; }
+      .hero-card-label { font-size: 10px; margin-bottom: 8px; }
+      .hero-card-text { font-size: 12px; line-height: 1.5; }
+      .hero-card-note { font-size: 10px; margin-top: 8px; }
+      .hero-card-delivered { margin-top: -4px; } /* looser overlap on mobile */
       .price-amt { font-size: 48px; }
     }
   </style>
@@ -1411,9 +1436,7 @@
             Now on iOS
           </div>
           <h1>The marriage ends.<br>The messages <em>don't.</em></h1>
-          <p class="hp-lead hero-lead-divider">Every conversation still carries the weight of everything that came before it.</p>
-          <p class="hp-body">Most co-parenting apps just give those patterns a new home. <strong>Clearly changes them.</strong> Every message passes through Clearly before it's delivered — the emotion, the history, the charge stripped out — leaving only what actually needs a response.</p>
-          <p class="hp-body">So you can focus on the one thing you still agree on: your kids.</p>
+          <p class="hp-lead">Move from messaging to <em>communicating.</em></p>
           <div class="hero-btns">
             <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="btn-moss">Download on iOS</a>
             <a href="#how-it-works" class="btn-ghost">See how it works</a>
