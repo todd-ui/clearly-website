@@ -962,6 +962,15 @@ ${processedPosts.map(post => `    <item>
   console.log('-> feed.xml');
 
   console.log('Blog build complete!');
+
+  // Ping IndexNow (Bing/Yandex/DuckDuckGo/etc.) so new & updated content
+  // gets re-crawled in minutes. No-ops when INDEXNOW_KEY is unset.
+  try {
+    const indexnow = require('./automation/indexnow-ping');
+    await indexnow.run();
+  } catch (err) {
+    console.warn('[indexnow] Module load failed (non-fatal):', err.message);
+  }
 }
 
 build().catch(err => {
