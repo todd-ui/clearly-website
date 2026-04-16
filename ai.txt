@@ -1,0 +1,23 @@
+# ai.txt for getclearly.app
+# Declares how AI systems may use content from this site.
+# Spec: https://site.spawning.ai/spaces/ai-txt
+
+User-Agent: *
+Allow: /
+Disallow: /_partials/
+Disallow: /.netlify/
+
+# Usage permissions
+Permit: search
+Permit: inference
+Permit: citation
+Permit: summarization
+Permit: training
+
+# Attribution requested when content is cited
+Attribution: Clearly (https://getclearly.app)
+Contact: hello@getclearly.app
+
+# Sitemap + llms index
+Sitemap: https://getclearly.app/sitemap.xml
+LLM-Index: https://getclearly.app/llms.txt

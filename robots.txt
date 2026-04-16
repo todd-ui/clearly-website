@@ -14,3 +14,84 @@ Sitemap: https://getclearly.app/sitemap.xml
 # Google-specific (faster crawling)
 User-agent: Googlebot
 Allow: /
+
+# ---------------------------------------------------------------
+# AI / LLM crawlers — explicitly allowed so Clearly can be cited
+# in ChatGPT, Claude, Perplexity, Gemini, and other AI answers.
+# ---------------------------------------------------------------
+
+# OpenAI (ChatGPT, ChatGPT Search)
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+# Anthropic (Claude, Claude Search)
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+# Perplexity
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+# Google AI (Gemini, AI Overviews training corpus opt-in)
+User-agent: Google-Extended
+Allow: /
+
+# Apple Intelligence
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Amazon (Alexa / Rufus / Nova)
+User-agent: Amazonbot
+Allow: /
+
+# Common Crawl (foundation-model training corpus used by most LLMs)
+User-agent: CCBot
+Allow: /
+
+# Meta AI
+User-agent: Meta-ExternalAgent
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+# Bytedance / TikTok / Doubao
+User-agent: Bytespider
+Allow: /
+
+# You.com
+User-agent: YouBot
+Allow: /
+
+# Diffbot (used by many citation engines)
+User-agent: Diffbot
+Allow: /
+
+# Mistral
+User-agent: MistralAI-User
+Allow: /
+
+# Cohere
+User-agent: cohere-ai
+Allow: /
+
+User-agent: cohere-training-data-crawler
+Allow: /
