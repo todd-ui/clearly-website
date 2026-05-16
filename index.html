@@ -979,9 +979,18 @@
        ========================================== */
     .pricing-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
+      grid-template-columns: 1fr;
+      gap: 48px;
       align-items: center;
+    }
+    .pricing-intro { text-align: center; max-width: 680px; margin: 0 auto; }
+    .pricing-intro .hp-eyebrow { text-align: center; }
+    .pricing-intro .price-compare { text-align: center; }
+    .price-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
     }
     .price-card {
       background: #F6F5F1;
@@ -989,6 +998,13 @@
       border: 1px solid rgba(0,0,0,0.06);
       box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
       padding: 36px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .price-card-featured {
+      border: 2px solid #0D8268;
+      box-shadow: 0 4px 16px rgba(13,130,104,0.08), 0 2px 6px rgba(13,130,104,0.06);
     }
     .price-amt {
       font-family: 'EB Garamond', Georgia, serif;
@@ -998,12 +1014,34 @@
       color: var(--ink);
       line-height: 1;
     }
+    .price-amt-unit {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--ink-faint);
+      letter-spacing: 0;
+      margin-left: 4px;
+      vertical-align: baseline;
+    }
     .price-per {
       font-family: 'Instrument Sans', sans-serif;
       font-size: 14px;
       color: var(--ink-faint);
       margin-top: 4px;
-      margin-bottom: 28px;
+      margin-bottom: 12px;
+    }
+    .price-tag {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: #0D8268;
+      margin-bottom: 24px;
+    }
+    .price-tag-muted {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 13px;
+      color: var(--ink-faint);
+      margin-bottom: 24px;
     }
     .price-list {
       list-style: none;
@@ -1027,6 +1065,15 @@
       flex-shrink: 0;
       margin-top: 2px;
     }
+    .price-monthly-note {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-style: italic;
+      font-size: 17px;
+      line-height: 1.55;
+      color: var(--ink-mid);
+      margin: 0 0 28px;
+    }
+    .price-card .btn-moss { margin-top: auto; }
     .price-fine {
       font-family: 'Instrument Sans', sans-serif;
       font-size: 12px;
@@ -1040,6 +1087,14 @@
       font-style: italic;
       color: var(--ink-faint);
       margin-top: 20px;
+      line-height: 1.6;
+    }
+    .price-disclosure {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 12px;
+      color: var(--ink-faint);
+      text-align: center;
+      margin-top: 24px;
       line-height: 1.6;
     }
 
@@ -1223,6 +1278,8 @@
         margin-top: 14px;
       }
       .pricing-grid { grid-template-columns: 1fr; gap: 40px; }
+      .price-cards { grid-template-columns: 1fr; gap: 20px; max-width: 440px; margin: 0 auto; }
+      .price-card { padding: 28px; }
       .plan-cta { grid-template-columns: 1fr; text-align: center; }
       h1 { font-size: 40px; }
       h2 { font-size: 30px; }
@@ -1542,17 +1599,20 @@
   <section class="hp-section bg-white" id="pricing">
     <div class="inner">
       <div class="pricing-grid">
-        <div class="fade-in">
+        <div class="pricing-intro fade-in">
           <p class="hp-eyebrow">Pricing</p>
           <h2>Less than one difficult conversation costs you.</h2>
           <p class="hp-body">A single hour of mediation runs $300–500. One avoided conflict pays for the year.</p>
           <p class="hp-body">Clearly isn't priced like a utility because <strong>it isn't one.</strong> It's a system that changes how two people with history communicate about the most important thing in both their lives.</p>
           <p class="price-compare">Therapy: $200–300/session &middot; Mediation: $300–500/hour<br>Clearly: less than two sessions. Used every day.</p>
         </div>
-        <div class="fade-in">
-          <div class="price-card">
-            <div class="price-amt">$290</div>
-            <div class="price-per">per year</div>
+
+        <div class="price-cards fade-in">
+          <!-- Annual card -->
+          <div class="price-card price-card-featured">
+            <div class="price-amt">$290<span class="price-amt-unit">/year</span></div>
+            <div class="price-per">Per parent &middot; Billed annually</div>
+            <div class="price-tag">Best value — saves $70 vs. monthly</div>
             <ul class="price-list">
               <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> AI message processing and tone rewriting</li>
               <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Shared custody calendar with swap requests</li>
@@ -1563,7 +1623,19 @@
             <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="btn-moss" style="width: 100%; justify-content: center;">Download on iOS</a>
             <div class="price-fine">Free to try &middot; Cancel anytime</div>
           </div>
+
+          <!-- Monthly card -->
+          <div class="price-card">
+            <div class="price-amt">$29.99<span class="price-amt-unit">/month</span></div>
+            <div class="price-per">Per parent &middot; Billed monthly</div>
+            <div class="price-tag-muted">Start month-to-month, switch to annual anytime</div>
+            <p class="price-monthly-note">Same features. Same product.<br>Just a different commitment.</p>
+            <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="btn-moss" style="width: 100%; justify-content: center;">Download on iOS</a>
+            <div class="price-fine">Free to try &middot; Cancel anytime</div>
+          </div>
         </div>
+
+        <p class="price-disclosure fade-in">Both parents subscribe independently. Each owns their account — no one controls the other's access.</p>
       </div>
     </div>
   </section>
@@ -1576,7 +1648,7 @@
       <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="btn-white">Download on iOS</a>
       <a href="#how-it-works" class="btn-ghost-white">See how it works</a>
     </div>
-    <p class="close-note fade-in">Free to try &middot; $290/year &middot; iOS</p>
+    <p class="close-note fade-in">Free to try &middot; From $29.99/month &middot; iOS</p>
   </section>
 
   </main>
