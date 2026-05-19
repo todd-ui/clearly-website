@@ -83,6 +83,11 @@
   to = "/high-conflict-coparenting/"
   status = 301
 
+[[redirects]]
+  from = "/best-co-parenting-apps-2026"
+  to = "/best-co-parenting-apps-2026/"
+  status = 301
+
 # Redirect pretty URLs to .html versions for pages served as files
 [[redirects]]
   from = "/blog"
