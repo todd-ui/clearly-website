@@ -18,7 +18,8 @@ const PAGES = [
   'kids-and-divorce/index.html',
   'mediation-prep/index.html',
   'co-parenting-expenses/index.html',
-  'high-conflict-coparenting/index.html'
+  'high-conflict-coparenting/index.html',
+  'best-co-parenting-apps-2026/index.html'
   // Note: index.html excluded - has its own inline header/footer
 ];
 
