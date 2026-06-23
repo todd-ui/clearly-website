@@ -7,6 +7,10 @@ const notion = new Client({ auth: process.env.NOTION_API_KEY });
 
 const DATABASE_ID = '2df435a853a58014b9e9dc6ac1cbba09';
 
+// Model name comes from an env var so it can be changed without editing code.
+// Falls back to a current model if ANTHROPIC_MODEL isn't set.
+const MODEL = process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-6';
+
 // Categories to rotate through
 const CATEGORIES = [
   'Co-Parenting Basics',
@@ -71,7 +75,7 @@ Respond with JSON only:
 }`;
 
   const response = await anthropic.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: MODEL,
     max_tokens: 500,
     messages: [{ role: 'user', content: prompt }]
   });
@@ -140,7 +144,7 @@ Valid types: paragraph, heading2, heading3, bullet_list, numbered_list, quote
 Write the complete article now as JSON:`;
 
   const response = await anthropic.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: MODEL,
     max_tokens: 4096,
     messages: [{ role: 'user', content: prompt }]
   });
@@ -551,12 +555,18 @@ if (require.main === module) {
     // Generate and publish one new article
     publishNewArticle()
       .then(() => triggerNetlifyBuild())
-      .catch(console.error);
+      .catch(err => {
+        console.error('Error:', err);
+        process.exit(1);
+      });
   } else if (command === 'backfill') {
     // Backfill initial 12 articles
     backfillInitialArticles()
       .then(() => triggerNetlifyBuild())
-      .catch(console.error);
+      .catch(err => {
+        console.error('Error:', err);
+        process.exit(1);
+      });
   } else {
     console.log('Clearly Blog Generator');
     console.log('----------------------');
