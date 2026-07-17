@@ -422,6 +422,29 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
   <link rel="stylesheet" href="/styles/brand.css">
   <link rel="icon" href="/images/favicon-32.png">
   <link rel="manifest" href="/manifest.json">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Common Ground",
+    "description": "Real topics, practical advice, and perspectives for co-parents. Custody schedules, communication strategies, and tips for calmer co-parenting.",
+    "url": "https://getclearly.app/blog.html",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Clearly LLC",
+      "url": "https://getclearly.app"
+    },
+    "blogPost": [
+${posts.map(post => `      {
+        "@type": "BlogPosting",
+        "headline": ${JSON.stringify(post.title)},
+        "description": ${JSON.stringify(post.description)},
+        "url": "https://getclearly.app/blog/${post.slug}.html",
+        "datePublished": ${JSON.stringify(post.dateISO)}
+      }`).join(',\n')}
+    ]
+  }
+  </script>
   <style>
     .blog-hero {
       padding: 100px 0 80px;
@@ -887,16 +910,10 @@ async function build() {
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://getclearly.app/alignment/</loc>
+    <loc>https://getclearly.app/coparenting-alignment-guide/</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/coparenting-alignment-guide/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://getclearly.app/kids-and-divorce/</loc>
@@ -921,6 +938,12 @@ async function build() {
     <lastmod>${today}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://getclearly.app/best-co-parenting-apps-2026/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
   </url>
 ${processedPosts.map(post => `  <url>
     <loc>https://getclearly.app/blog/${post.slug}.html</loc>

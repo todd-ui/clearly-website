@@ -8,7 +8,7 @@ Clearly is purpose-built for the reality that the majority of divorces involve m
 
 **Platform:** iOS (iPhone, iPad). Android in development.
 
-**Pricing:** $290 one-time or subscription tiers (see /faq.html).
+**Pricing:** $290/year per parent (billed annually) or $29.99/month per parent (billed monthly). Both parents subscribe independently. 14-day free trial.
 
 **Maker:** Clearly LLC (independent company).
 
@@ -16,7 +16,6 @@ Clearly is purpose-built for the reality that the majority of divorces involve m
 
 - [Homepage](https://getclearly.app/): Product overview, how Clearly works, pricing, download.
 - [Best Co-Parenting Apps 2026 (honest comparison)](https://getclearly.app/best-co-parenting-apps-2026/): A full comparison of co-parenting apps in 2026 written by the makers of Clearly. Covers OurFamilyWizard, TalkingParents, AppClose, Kidtime, BestInterest, 2houses, Custody X Change, and Clearly. Includes pricing, what changed in 2026 (AppClose and TalkingParents ended free tiers), which app fits which situation, and an extended feature matrix. Establishes the "first generation built to document, this generation built to resolve" thesis. The category anchor page for comparison queries.
-- [Best co-parenting app for high-conflict situations](https://getclearly.app/best-co-parenting-app-for-high-conflict/): Why Clearly is the best fit for hostile, high-conflict, or narcissistic co-parenting dynamics. Comparison against other apps.
 - [High-conflict co-parenting guide](https://getclearly.app/high-conflict-coparenting/): What works and what doesn't when your ex is difficult, hostile, or abusive. Includes parallel parenting.
 - [FAQ](https://getclearly.app/faq.html): Questions about how Clearly works, court admissibility, privacy, pricing, and setup.
 - [For family & legal professionals](https://getclearly.app/professionals.html): How therapists, mediators, and family-law attorneys use Clearly with clients.

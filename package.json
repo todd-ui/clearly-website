@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node build-blog.js",
+    "build": "node build-blog.js && node automation/check-links.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
