@@ -123,13 +123,15 @@ Status column: `200*` = expected 200, to be confirmed live on the Deploy Preview
 | `/mediation-prep/` | 200* | Yes | ✅ | How to Prepare for Divorce Mediation \| Free Tools | "Walking into mediation prepared…" | Article, FAQPage, BreadcrumbList, WebPage, Organization | ✅ |
 | `/plan-builder/` | 200* | Yes | ✅ | Custody Plan Builder — Clearly | Parenting Plan Builder | WebApplication, Offer, Organization | ✅ |
 | `/calculators/` | 200* | Yes | ✅ | Child Support & Maintenance Calculator \| All 50 States \| Clearly | "Child Support &…" | WebApplication, Offer, Organization | ✅ |
-| `/calculators/support/{6 states}.html` | 200* | Yes | ✅ | "{State} Child Support Calculator 2025 \| Free & Private \| Clearly" | {State} Child Support Calculator | WebApplication, FAQPage, Offer | ✅ (added this round) |
+| `/calculators/support/{6 states}.html` | 200* | Yes — **was `noindex`; changed to `index,follow` this round per owner decision** | ✅ | "{State} Child Support Calculator 2025 \| Free & Private \| Clearly" | {State} Child Support Calculator | WebApplication, FAQPage, Offer | ✅ (added this round) |
 | `/privacy.html` | 200* | Yes | ✅ | Privacy — Clearly | Privacy Policy | (none) | ✅ |
 | `/terms.html` | 200* | Yes | ✅ | Terms — Clearly | Terms of Service | (none) | ✅ |
 | `/blog/*.html` (101) | 200* | Yes | ✅ | (per-post) | (per-post) | Article (generated) | ✅ |
 | `/alignment/` | 301→ `/coparenting-alignment-guide/` | n/a | n/a | — | — | — | ❌ removed from sitemap ✅ |
 
-**State-calculator title note:** the 6 state pages' `<title>`/`og:title` say **"2025"** while the rest of the site is 2026. This is **not changed** this round because bumping the year without confirming the underlying calculator uses current-year (2026) guideline figures would introduce an unverified claim. Flagged for round 2 (§5, needs data verification).
+**State-calculator indexability:** during review the owner confirmed these 6 pages **should** be indexed. They were carrying `<meta name="robots" content="noindex, follow">` (an accidental block, given that intent), so this round removes it → `index, follow`. This is the brief's permitted "fix accidental noindex / indexing exposure" and is non-visible. (Correcting the record: an earlier draft of this table mistakenly listed them as already indexable — they were not until this change.)
+
+**State-calculator title note (OPEN — owner decision needed before these rank):** the 6 pages' `<title>`/`og:title` say **"2025"** while the rest of the site is 2026. Now that they are indexable, the year is a live search-quality issue. It is **still not changed** here because bumping "2025"→"2026" without confirming the calculator's underlying guideline figures are current-year would introduce an unverified claim — and if the figures really are 2025 data, "2025" is the honest label. **Decide the year alongside the data before/at merge** (§5, needs data verification).
 
 ---
 
@@ -144,11 +146,13 @@ All changes below alter machine-readable metadata only — **zero visible page c
 5. **`llms.txt` — added a factual `Tools` section** (calculators + 6 state pages) **and a `Support` entry** (`help.html`). Descriptions are neutral and factual (no new marketing claims). This closes the gap where real tool pages were invisible to AI-index consumers.
 6. **`404.html` — moved `<meta charset>` to be the first element in `<head>`** (was after the gtag script). Standards correctness; non-visible.
 7. **Added `automation/seo-check.js` + wired `npm test`.** A dependency-free, network-free static regression guard that fails on: invalid JSON-LD, known-invalid `@type` (denylist incl. `Guide`), missing/relative/duplicate canonicals, relative image/logo URLs in JSON-LD, and any sitemap URL that is a redirect source. Proven to fail on a bad fixture and pass on the current tree. `npm test` now runs `seo-check.js` + the existing `check-links.js`.
+8. **Removed accidental `noindex` on the 6 state calculator pages** (`calculators/support/*.html`): `noindex, follow` → `index, follow`, after the owner confirmed during review that these pages should be indexed. Non-visible; the brief explicitly permits "fixing accidental `noindex` / indexing exposure." (This resolves the sitemap/`noindex` contradiction the owner's checklist surfaced — the pages are now consistently indexable *and* listed.) **Companion item still open: the "2025" titles — see §2/§5.**
 
 ### Files changed
 - `index.html` (1 line — logo URL)
 - `coparenting-alignment-guide/index.html`, `co-parent-communication/index.html` (2 lines each — `@type` + absolute logo)
 - `high-conflict-coparenting/index.html`, `mediation-prep/index.html`, `custody-schedule-help/index.html`, `co-parenting-expenses/index.html`, `kids-and-divorce/index.html` (1 line each — absolute logo)
+- `calculators/support/{california,florida,illinois,new-york,pennsylvania,texas}.html` (1 line each — `noindex` → `index`)
 - `build-blog.js` (sitemap generator — +6 calculator URLs)
 - `sitemap.xml` (−1 redirect URL, +6 calculator URLs)
 - `llms.txt` (+Tools and +Support sections)
