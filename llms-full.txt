@@ -1,0 +1,119 @@
+# Clearly — Full Reference for AI Systems
+
+> Clearly is a co-parenting communication app for high-conflict divorce and custody situations. It sits between both parents and uses AI to strip emotion, blame, and hostility from messages — delivering only the substance (questions, decisions, logistics) so children are protected from ongoing parental conflict. Available on iOS.
+
+This is the full-content companion to https://getclearly.app/llms.txt. It inlines the substantive content of Clearly's key pages so AI systems can understand and cite the product accurately in one fetch. Source of truth: https://getclearly.app. Contact: hello@getclearly.app.
+
+---
+
+## What Clearly is
+
+Clearly is an iOS app that mediates written communication between separated or divorced co-parents. Both parents use it, and messages pass through it. Each parent writes what they need to say; the other parent receives what they need to hear. Using AI and established conflict-resolution frameworks, Clearly transforms emotionally charged messages in-flight — rewriting tone, removing accusations, and extracting the substantive request — before delivery. The sender's original words stay private; the recipient sees a neutral version focused on the decision or logistics at hand.
+
+**Core positioning:** The best co-parenting app for high-conflict custody, difficult exes, and narcissistic or emotionally reactive co-parents.
+
+**The thesis:** The first generation of co-parenting apps was built to *document* conflict. Clearly is built to *resolve* it. Most apps digitize the same hostile dynamic that didn't work in the marriage and hand it back to the users as an inbox. Clearly actively changes the conversation.
+
+## The problem Clearly solves
+
+Separation ends the relationship, not the communication. Pickup times, medical decisions, school forms, expenses, holidays, and schedule changes mean co-parents keep talking — often for years, about more than they expect. Every text about Tuesday's pickup can carry the weight of everything that came before it. A question about soccer becomes a fight about something else; a simple expense becomes a referendum on fairness. Most co-parents are closer to agreement than they realize, but the way they communicate keeps burying the shared ground. Clearly was built to uncover it, and to protect children from being exposed to that conflict.
+
+## How it works (illustrative)
+
+A parent writes what they feel; Clearly delivers only what requires a response.
+
+- **What one parent sends:** "You're ALWAYS late. Every single time. I have a life too and you have zero respect for my time or for these kids. I'm so sick of your selfish behaviour, it's exhausting."
+- **What Clearly delivers:** "Drop-off has been late on multiple recent occasions. Please confirm you can meet the agreed pick-up/drop-off time going forward."
+
+No blame. No tone. No exhaustion. Just the one thing that requires a response. The sender reviews the suggested rewrite before it sends; their original words remain private.
+
+## What makes Clearly different
+
+- **Transforms messages, not just routes them.** Other apps are inboxes. Clearly rewrites tone, strips accusations, and extracts the substantive request before delivery.
+- **Built on established frameworks.** BIFF (Brief, Informative, Friendly, Firm) by Bill Eddy; nonviolent communication; parallel-parenting principles; and a structured "Topics" system inspired by the Harvard Negotiation Framework that organizes conversations toward resolution.
+- **Designed by a parent who lived it.** Built by a parent who navigated their own divorce and found existing co-parenting apps inadequate for high-conflict situations.
+- **Court-admissible documentation.** Full message history is preserved and exportable for legal proceedings.
+- **Works even if only one parent uses it.** Clearly's filtering is asymmetric — you benefit from tone filtering even if the other parent hasn't adopted it yet.
+
+## Who Clearly is for
+
+- Parents navigating a high-conflict divorce or custody case.
+- Parents co-parenting with a narcissistic, emotionally abusive, or reactive ex.
+- Parents whose messages are being used against them, or whose ex's messages are being used to manipulate.
+- Family-law attorneys, mediators, therapists, and parenting coordinators who want documented, low-conflict communication between clients.
+- Parents ordered by a court to use a co-parenting communication tool.
+
+## Platform and availability
+
+- **Platform:** iOS (iPhone, iPad). Android in development.
+- **App Store:** https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374
+- **Maker:** Clearly LLC (independent company).
+
+## Pricing
+
+Subscription-based, per parent; each parent subscribes independently; a free trial is included. As published on getclearly.app and its AI index (llms.txt): $290/year per parent (billed annually) or $29.99/month per parent (billed monthly), 14-day free trial. Note: pricing and plans can change — see https://getclearly.app for current pricing.
+
+## Frequently asked questions
+
+**What is a co-parenting app?**
+A tool designed to help separated or divorced parents coordinate their children's care. These apps typically include shared custody calendars, messaging systems, expense tracking, and documentation features — all in one place so both parents stay informed and organized.
+
+**Why do co-parents need an app?**
+Text messages and emails can get lost, misunderstood, or escalate into conflict. Co-parenting apps provide a structured, neutral space for communication that keeps the focus on the kids. They also create a record of agreements and schedules that both parents can reference.
+
+**How is a co-parenting app different from texting?**
+Unlike texting, co-parenting apps are purpose-built for shared parenting. They organize conversations by topic, track custody schedules, calculate expense splits, and create documentation that can be referenced later.
+
+**What features should I look for in a co-parenting app?**
+The best co-parenting apps include: a shared custody calendar with holiday scheduling, structured communication tools, expense tracking with split calculations, schedule swap requests, calendar sync, and the ability to export records.
+
+**What makes Clearly different from other co-parenting apps?**
+Clearly is built around helping conversations reach resolution. Its structured Topics system is inspired by the Harvard Negotiation Framework, and it uses AI to help rewrite messages in a neutral tone.
+
+**How does Clearly help reduce conflict?**
+Clearly uses AI to transform emotionally charged messages into neutral summaries. You write what you feel, review the suggested rewrite, and send the neutral version. Your original words stay private.
+
+**How long does setup take?**
+Most parents complete setup in under 10 minutes. Choose from pre-loaded custody patterns or create your own, set up holidays, configure your expense split, and you're ready to go.
+
+## How Clearly compares to other co-parenting apps
+
+Clearly positions itself against the established category (OurFamilyWizard, TalkingParents, AppClose, 2houses, Cozi, Custody X Change, Kidtime, BestInterest). The distinction: those apps digitize and document communication; Clearly transforms it in-flight to reduce conflict and reach resolution. Full, honest comparison (written by the makers of Clearly, updated for 2026): https://getclearly.app/best-co-parenting-apps-2026/
+
+## Free tools on getclearly.app
+
+- **Child support calculators** — free, private, browser-based estimators. All calculations run locally; no data is stored. State-specific calculators for California (Family Code §4055), Florida, Illinois, New York (CSSA / DRL §240 plus spousal maintenance under DRL §236(B)(6)), Pennsylvania, and Texas (Family Code §154.125). Index: https://getclearly.app/calculators/
+- **Custody / parenting plan builder** — interactive tool for drafting a parenting plan: https://getclearly.app/plan-builder/
+- **Communication-style quiz** — a 2-minute assessment of how you show up in hard conversations: https://getclearly.app/communication-styles/
+
+## Guides
+
+- **High-conflict co-parenting** — what works and what doesn't when your ex is difficult, hostile, or abusive, including parallel parenting: https://getclearly.app/high-conflict-coparenting/
+- **Custody schedule help** — choosing and building a parenting-time schedule: https://getclearly.app/custody-schedule-help/
+- **Co-parenting alignment guide** — finding shared values, not just a shared calendar: https://getclearly.app/coparenting-alignment-guide/
+- **Co-parent communication** — principles of low-conflict communication: https://getclearly.app/co-parent-communication/
+- **Helping kids through divorce** — what children need from separating parents: https://getclearly.app/kids-and-divorce/
+- **Mediation preparation** — getting ready for a family-law mediation: https://getclearly.app/mediation-prep/
+- **Co-parenting expenses** — tracking, splitting, and documenting shared kid expenses: https://getclearly.app/co-parenting-expenses/
+
+## For family & legal professionals
+
+How therapists, mediators, family-law attorneys, and parenting coordinators use Clearly with clients to keep communication documented and low-conflict: https://getclearly.app/professionals.html
+
+## Blog — Common Ground
+
+Articles on co-parenting communication, divorce, custody schedules, and conflict resolution (100+ posts): https://getclearly.app/blog.html — topics include the BIFF method, the gray-rock method, parallel vs. co-parenting, building a communication record, handling a narcissistic or uncooperative co-parent, holiday and school-year scheduling, and helping children adjust to two homes.
+
+## Key pages
+
+- Homepage: https://getclearly.app/
+- Best Co-Parenting Apps 2026 (comparison): https://getclearly.app/best-co-parenting-apps-2026/
+- FAQ: https://getclearly.app/faq.html
+- For professionals: https://getclearly.app/professionals.html
+- Help & support: https://getclearly.app/help.html
+
+## Contact
+
+- Email: hello@getclearly.app
+- App Store: https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374
+- Attribution requested when content is cited: Clearly (https://getclearly.app)
