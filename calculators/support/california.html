@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
-  <title>California Child Support Calculator 2025 | Free & Private | Clearly</title>
+  <title>California Child Support Calculator | Free & Private | Clearly</title>
   <meta name="description" content="Calculate California child support using the official guideline formula. Free, private calculator - no data stored. Based on California Family Code Section 4055.">
 
   <!-- Canonical URL -->
@@ -24,19 +24,19 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app/calculators/support/california.html">
-  <meta property="og:title" content="California Child Support Calculator 2025 | Free & Private">
+  <meta property="og:title" content="California Child Support Calculator | Free & Private">
   <meta property="og:description" content="Calculate California child support using the official guideline formula. Free, private - no data stored.">
   <meta property="og:image" content="/images/app-icon.png">
   <meta property="og:site_name" content="Clearly">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="California Child Support Calculator 2025">
+  <meta name="twitter:title" content="California Child Support Calculator">
   <meta name="twitter:description" content="Calculate California child support using official guideline formula. Free, private - no data stored.">
   <meta name="twitter:image" content="/images/app-icon.png">
 
   <!-- Additional SEO -->
-  <meta name="robots" content="noindex, follow">
+  <meta name="robots" content="index, follow">
   <meta name="keywords" content="california child support calculator, CA child support, california family code 4055, california child support formula, california child support guidelines 2025">
   <meta name="author" content="Clearly LLC">
 
@@ -412,6 +412,103 @@
         navLinks.classList.toggle('open');
       });
     }
+
+    // ==================================================================
+    // California guideline child support — Family Code §4055
+    //   CS = K [HN − (H%)(TN)]      (per the statewide uniform guideline)
+    // Monthly figures. Estimate only — courts have final authority.
+    // ==================================================================
+    const CA_MULTI = { 1: 1, 2: 1.6, 3: 2, 4: 2.3, 5: 2.5 }; // §4055(b)(4)
+
+    function caMoney(n) { return '$' + Math.round(n).toLocaleString(); }
+    function caVal(id) { const el = document.getElementById(id); return el ? (parseFloat(el.value) || 0) : 0; }
+    function toggleSection(header) { header.closest('.calc-form-group').classList.toggle('collapsed'); }
+
+    function netIncome(p) {
+      return Math.max(0, caVal(p + 'Gross') - caVal(p + 'Taxes') - caVal(p + 'Health') - caVal(p + 'Retirement'));
+    }
+
+    function calculateTotals() {
+      document.getElementById('p1Net').textContent = caMoney(netIncome('p1'));
+      document.getElementById('p2Net').textContent = caMoney(netIncome('p2'));
+    }
+
+    // Keep the two time-shares summing to 100%.
+    function updateTimeShare(which) {
+      const v = Math.min(100, Math.max(0, caVal(which === 1 ? 'p1Time' : 'p2Time')));
+      if (which === 1) document.getElementById('p2Time').value = 100 - v;
+      else document.getElementById('p1Time').value = 100 - v;
+    }
+
+    // §4055(b)(3) K-factor fraction from total net monthly disposable income.
+    function caKFraction(TN) {
+      if (TN <= 800) return 0.20 + TN / 16000;
+      if (TN <= 6666) return 0.25;
+      if (TN <= 10000) return 0.10 + 1000 / TN;
+      return 0.12 + 800 / TN;
+    }
+
+    function calculateSupport() {
+      calculateTotals();
+      const p1 = netIncome('p1'), p2 = netIncome('p2');
+      const TN = p1 + p2;
+      if (TN <= 0) { alert("Please enter each parent's income."); return; }
+
+      const payorIsP1 = p1 >= p2;                 // high earner pays
+      const HN = payorIsP1 ? p1 : p2;             // high earner's net
+      const hTimePct = (payorIsP1 ? caVal('p1Time') : caVal('p2Time')) / 100; // high earner's timeshare
+
+      const frac = caKFraction(TN);
+      const K = frac * (hTimePct <= 0.5 ? (1 + hTimePct) : (2 - hTimePct));
+      let cs = K * (HN - hTimePct * TN);
+      if (cs < 0) cs = 0;
+
+      const numChildren = parseInt(document.getElementById('numChildren').value, 10) || 1;
+      cs *= (CA_MULTI[Math.min(Math.max(numChildren, 1), 5)] || 1);
+
+      // Mandatory add-ons (childcare + health + uninsured), apportioned by net income share.
+      const addOns = caVal('childcare') + caVal('childHealth') + caVal('uninsured');
+      const payorShare = TN > 0 ? HN / TN : 0;
+      const payorAddOn = addOns * payorShare;
+
+      document.getElementById('resultsSection').classList.add('visible');
+      document.getElementById('monthlySupport').textContent = caMoney(cs);
+      document.getElementById('annualSupport').textContent = caMoney(cs * 12);
+      document.getElementById('payorParent').textContent = cs > 0 ? (payorIsP1 ? 'Parent 1' : 'Parent 2') : 'Neither';
+      document.getElementById('combinedIncome').textContent = caMoney(TN);
+      const addRow = document.getElementById('addOnRow');
+      if (addOns > 0) { addRow.style.display = 'flex'; document.getElementById('addOnAmount').textContent = caMoney(payorAddOn); }
+      else { addRow.style.display = 'none'; }
+      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetCalculator() {
+      document.querySelectorAll('.calc-input').forEach(function (i) { i.value = ''; });
+      document.querySelectorAll('.calc-select').forEach(function (s) { s.selectedIndex = 0; });
+      document.getElementById('p1Time').value = 50;
+      document.getElementById('p2Time').value = 50;
+      calculateTotals();
+      document.getElementById('resultsSection').classList.remove('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function downloadPDF() {
+      if (!window.jspdf) { alert('PDF library not loaded.'); return; }
+      const doc = new window.jspdf.jsPDF();
+      let y = 22;
+      doc.setFontSize(18); doc.text('California Child Support Estimate', 20, y); y += 12;
+      doc.setFontSize(11);
+      function row(l, v) { doc.text(l, 20, y); doc.text(String(v), 130, y); y += 8; }
+      row('Guideline child support (monthly):', document.getElementById('monthlySupport').textContent);
+      row('Annual amount:', document.getElementById('annualSupport').textContent);
+      row('Payor:', document.getElementById('payorParent').textContent);
+      row('Combined net income:', document.getElementById('combinedIncome').textContent);
+      y += 6; doc.setFontSize(9);
+      doc.text('Estimate only, based on CA Family Code §4055. Not legal advice.', 20, y);
+      doc.save('ca-child-support-estimate.pdf');
+    }
+
+    document.addEventListener('DOMContentLoaded', calculateTotals);
   </script>
 
   <!-- Structured Data -->
@@ -425,7 +522,7 @@
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
     "creator": { "@type": "Organization", "name": "Clearly LLC", "url": "https://getclearly.app" },
     "description": "Calculate California child support using the official guideline formula based on California Family Code Section 4055.",
-    "dateModified": "2025-01-01"
+    "dateModified": "2026-08-03"
   }
   </script>
 

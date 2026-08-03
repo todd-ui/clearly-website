@@ -15,8 +15,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
-  <title>Texas Child Support Calculator 2025 | Free & Private | Clearly</title>
-  <meta name="description" content="Calculate Texas child support using official 2025 guidelines. Free, private calculator based on Texas Family Code. No data stored - all calculations in your browser.">
+  <title>Texas Child Support Calculator | Free & Private | Clearly</title>
+  <meta name="description" content="Calculate Texas child support using official guidelines. Free, private calculator based on Texas Family Code. No data stored - all calculations in your browser.">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://getclearly.app/calculators/support/texas.html">
@@ -24,19 +24,19 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app/calculators/support/texas.html">
-  <meta property="og:title" content="Texas Child Support Calculator 2025 | Free & Private">
-  <meta property="og:description" content="Calculate Texas child support using official 2025 guidelines. Free, private - no data stored.">
+  <meta property="og:title" content="Texas Child Support Calculator | Free & Private">
+  <meta property="og:description" content="Calculate Texas child support using official guidelines. Free, private - no data stored.">
   <meta property="og:image" content="/images/app-icon.png">
   <meta property="og:site_name" content="Clearly">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Texas Child Support Calculator 2025">
-  <meta name="twitter:description" content="Calculate Texas child support using official 2025 guidelines. Free, private - no data stored.">
+  <meta name="twitter:title" content="Texas Child Support Calculator">
+  <meta name="twitter:description" content="Calculate Texas child support using official guidelines. Free, private - no data stored.">
   <meta name="twitter:image" content="/images/app-icon.png">
 
   <!-- Additional SEO -->
-  <meta name="robots" content="noindex, follow">
+  <meta name="robots" content="index, follow">
   <meta name="keywords" content="texas child support calculator, TX child support, texas family code 154.125, texas child support percentage, texas child support guidelines 2025">
   <meta name="author" content="Clearly LLC">
 
@@ -362,6 +362,67 @@
         navLinks.classList.toggle('open');
       });
     }
+
+    // ------------------------------------------------------------------
+    // Texas child support calculator
+    // Texas Family Code §154.125 (guideline %) + §154.129 (multiple
+    // families) + §154.126 (net-resources cap, $11,700/mo eff. Sep 2025).
+    // Estimate only — courts have final authority.
+    // ------------------------------------------------------------------
+    const TX_CAP = 11700; // monthly net resources cap (effective Sep 1, 2025)
+
+    // §154.129 multiple-family adjusted guideline percentages.
+    // Row = number of OTHER children the obligor is obligated to support (0–5+).
+    // Col = number of children before the court (1–5+).  Row 0 = §154.125 base.
+    const TX_PCT = {
+      0: [0.2000, 0.2500, 0.3000, 0.3500, 0.4000],
+      1: [0.1750, 0.2250, 0.2738, 0.3220, 0.3733],
+      2: [0.1600, 0.2063, 0.2520, 0.3033, 0.3543],
+      3: [0.1475, 0.1900, 0.2400, 0.2900, 0.3400],
+      4: [0.1360, 0.1833, 0.2314, 0.2800, 0.3289],
+      5: [0.1333, 0.1786, 0.2250, 0.2722, 0.3200]
+    };
+
+    function txMoney(n) { return '$' + Math.round(n).toLocaleString(); }
+    function txVal(id) { return parseFloat(document.getElementById(id).value) || 0; }
+
+    function calculateNet() {
+      const gross = txVal('grossIncome') + txVal('otherIncome');
+      const deductions = txVal('taxes') + txVal('socialSecurity') + txVal('unionDues') + txVal('healthInsurance');
+      const net = Math.max(0, gross - deductions);
+      document.getElementById('netResources').textContent = txMoney(net);
+      return net;
+    }
+
+    function calculateSupport() {
+      const net = calculateNet();
+      if (net <= 0) { alert("Please enter the obligor's monthly income."); return; }
+
+      const numChildren = parseInt(document.getElementById('numChildren').value, 10) || 1;
+      const otherChildren = parseInt(document.getElementById('otherChildren').value, 10) || 0;
+      const col = Math.min(Math.max(numChildren, 1), 5) - 1;
+      const row = Math.min(Math.max(otherChildren, 0), 5);
+      const pct = TX_PCT[row][col];
+
+      const cappedNet = Math.min(net, TX_CAP);
+      const monthly = cappedNet * pct;
+
+      document.getElementById('resultsSection').classList.add('visible');
+      document.getElementById('monthlySupport').textContent = txMoney(monthly);
+      document.getElementById('annualSupport').textContent = txMoney(monthly * 12);
+      document.getElementById('percentageApplied').textContent = (pct * 100).toFixed(2).replace(/\.?0+$/, '') + '%';
+      document.getElementById('netResourcesUsed').textContent = txMoney(cappedNet);
+      document.getElementById('capNote').style.display = net > TX_CAP ? 'flex' : 'none';
+      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetCalculator() {
+      document.querySelectorAll('.calc-input').forEach(i => { i.value = ''; });
+      document.querySelectorAll('.calc-select').forEach(s => { s.selectedIndex = 0; });
+      document.getElementById('netResources').textContent = '$0';
+      document.getElementById('resultsSection').classList.remove('visible');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   </script>
 
   <!-- Structured Data -->
@@ -375,8 +436,8 @@
     "browserRequirements": "Requires JavaScript",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
     "creator": { "@type": "Organization", "name": "Clearly LLC", "url": "https://getclearly.app" },
-    "description": "Calculate Texas child support using official 2025 guidelines based on Texas Family Code Section 154.125.",
-    "dateModified": "2025-01-01"
+    "description": "Calculate Texas child support using official guidelines based on Texas Family Code Section 154.125.",
+    "dateModified": "2026-08-03"
   }
   </script>
 

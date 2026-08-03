@@ -32,6 +32,20 @@ Clearly is purpose-built for the reality that the majority of divorces involve m
 - [Co-parenting expenses](https://getclearly.app/co-parenting-expenses/): Tracking, splitting, and documenting shared kid expenses.
 - [Co-parent communication](https://getclearly.app/co-parent-communication/): Principles of low-conflict communication.
 
+## Tools
+
+- [Child support calculators](https://getclearly.app/calculators/): Free, private, browser-based child support estimate calculators.
+- [California child support calculator](https://getclearly.app/calculators/support/california.html): State-specific child support estimate for California.
+- [Florida child support calculator](https://getclearly.app/calculators/support/florida.html): State-specific child support estimate for Florida.
+- [Illinois child support calculator](https://getclearly.app/calculators/support/illinois.html): State-specific child support estimate for Illinois.
+- [New York child support calculator](https://getclearly.app/calculators/support/new-york.html): State-specific child support estimate for New York.
+- [Pennsylvania child support calculator](https://getclearly.app/calculators/support/pennsylvania.html): State-specific child support estimate for Pennsylvania.
+- [Texas child support calculator](https://getclearly.app/calculators/support/texas.html): State-specific child support estimate for Texas.
+
+## Support
+
+- [Help & support](https://getclearly.app/help.html): Setup, account, and common questions about using Clearly.
+
 ## Who Clearly is for
 
 - Parents navigating a high-conflict divorce or custody case.

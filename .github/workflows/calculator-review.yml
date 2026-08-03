@@ -74,8 +74,10 @@ jobs:
 
             ### Resources
 
+            - [2026 Verification Worksheet](/docs/calculator-2026-verification.md) — per-state fields, current values, official sources, and exactly where to edit
             - [Maintenance Guide](/calculators/MAINTENANCE.md)
-            - [Calculator Config](/calculators/calculator-config.js)
+            - [Calculator Config](/calculators/calculator-config.js) — figures live under \`states["<state>"]\`
+            - Run \`node automation/calculator-staleness.js\` to list states whose review date has passed
 
             ---
 

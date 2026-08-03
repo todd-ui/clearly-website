@@ -1,0 +1,22 @@
+name: Calculator Guideline Staleness Check
+
+# A NUDGE, not an edit. Surfaces (as a visible red check) any state whose
+# child-support guideline `nextReviewDate` has passed, so a human verifies the
+# figures against the official source. It never changes any numbers, and it is
+# deliberately separate from the site build so it can never block a deploy.
+
+on:
+  schedule:
+    - cron: '0 9 1 * *'   # 1st of every month, 09:00 UTC
+  workflow_dispatch:
+
+jobs:
+  staleness:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Report overdue guideline reviews
+        run: node automation/calculator-staleness.js

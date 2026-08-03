@@ -15,8 +15,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
-  <title>New York Child Support Calculator 2025 | Free & Private | Clearly</title>
-  <meta name="description" content="Calculate NY child support and spousal maintenance using official 2025 CSSA formulas. Free, private calculator - no data stored. Based on NY Domestic Relations Law.">
+  <title>New York Child Support Calculator | Free & Private | Clearly</title>
+  <meta name="description" content="Calculate NY child support and spousal maintenance using official CSSA formulas. Free, private calculator - no data stored. Based on NY Domestic Relations Law.">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://getclearly.app/calculators/support/new-york.html">
@@ -24,19 +24,19 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app/calculators/support/new-york.html">
-  <meta property="og:title" content="New York Child Support Calculator 2025 | Free & Private">
-  <meta property="og:description" content="Calculate NY child support and spousal maintenance using official 2025 CSSA formulas. Free, private - no data stored.">
+  <meta property="og:title" content="New York Child Support Calculator | Free & Private">
+  <meta property="og:description" content="Calculate NY child support and spousal maintenance using official CSSA formulas. Free, private - no data stored.">
   <meta property="og:image" content="/images/app-icon.png">
   <meta property="og:site_name" content="Clearly">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="New York Child Support Calculator 2025">
-  <meta name="twitter:description" content="Calculate NY child support and spousal maintenance using official 2025 formulas. Free, private - no data stored.">
+  <meta name="twitter:title" content="New York Child Support Calculator">
+  <meta name="twitter:description" content="Calculate NY child support and spousal maintenance using official formulas. Free, private - no data stored.">
   <meta name="twitter:image" content="/images/app-icon.png">
 
   <!-- Additional SEO -->
-  <meta name="robots" content="noindex, follow">
+  <meta name="robots" content="index, follow">
   <meta name="keywords" content="new york child support calculator, NY maintenance calculator, NY spousal support, CSSA calculator, NY alimony calculator, new york divorce calculator">
   <meta name="author" content="Clearly LLC">
 
@@ -55,8 +55,8 @@
       max-width: 900px;
     }
     .calc-page-header h1 {
-      font-size: 36px;
-      font-weight: 700;
+      font-size: 38px;
+      font-weight: 400;
       margin-bottom: 12px;
       letter-spacing: -0.02em;
     }
@@ -927,6 +927,199 @@
         navLinks.classList.toggle('open');
       });
     }
+
+    // ==================================================================
+    // New York maintenance + child support calculator
+    // DRL §236(B)(6) (maintenance) + §240 / CSSA (child support).
+    // All inputs annual. Estimate only — courts have final authority.
+    // ==================================================================
+    const NY = {
+      maintenanceCap: 241000,    // 2026 payor income cap (eff. Mar 1, 2026)
+      cssaCap: 193000,           // 2026 combined parental income cap
+      selfSupportReserve: 21546, // 135% × 2026 federal poverty ($15,960)
+      ssWageBase: 176100,        // Social Security wage base (matches reference calculator)
+      addlMedicareThreshold: 200000, // Additional Medicare Tax (0.9%) applies above this
+      cssaPct: { 1: 0.17, 2: 0.25, 3: 0.29, 4: 0.31, 5: 0.35 }
+    };
+
+    function nyMoney(n) { return '$' + Math.round(n).toLocaleString(); }
+    function nyVal(id) { const el = document.getElementById(id); return el ? (parseFloat(el.value) || 0) : 0; }
+
+    // FICA estimate: SS 6.2% capped at the wage base + Medicare 1.45% + Additional
+    // Medicare 0.9% over $200k; self-employment via SECA on 92.35% of net earnings.
+    function estFICA(wages, selfEmp) {
+      let fica = 0.062 * Math.min(wages, NY.ssWageBase) + 0.0145 * wages;
+      if (selfEmp > 0) {
+        const seBase = 0.9235 * selfEmp;
+        const room = Math.max(0, NY.ssWageBase - wages);
+        fica += 0.124 * Math.min(seBase, room) + 0.029 * seBase;
+      }
+      const medicareBase = wages + (selfEmp > 0 ? 0.9235 * selfEmp : 0);
+      if (medicareBase > NY.addlMedicareThreshold) fica += 0.009 * (medicareBase - NY.addlMedicareThreshold);
+      return fica;
+    }
+
+    function partyIncome(p) {
+      const wages = nyVal(p + 'Wages'), se = nyVal(p + 'SelfEmployment');
+      const gross = wages + se + nyVal(p + 'Investment') + nyVal(p + 'Other') + nyVal(p + 'Benefits');
+      const method = (document.querySelector('input[name="ficaMethod"]:checked') || {}).value;
+      const fica = method === 'manual' ? nyVal(p + 'FICA') : estFICA(wages, se);
+      const deductions = fica + nyVal(p + 'CityTax') + nyVal(p + 'OtherSupport');
+      return { gross: gross, adjusted: Math.max(0, gross - deductions) };
+    }
+
+    function calculateTotals() {
+      ['p1', 'p2'].forEach(function (p) {
+        const r = partyIncome(p);
+        const g = document.getElementById(p + 'GrossTotal'); if (g) g.textContent = nyMoney(r.gross);
+        const a = document.getElementById(p + 'AdjustedTotal'); if (a) a.textContent = nyMoney(r.adjusted);
+      });
+    }
+
+    function calculateDuration() {
+      const m = document.getElementById('marriageDate').value;
+      const d = document.getElementById('divorceDate').value;
+      const box = document.getElementById('durationResult');
+      if (!m || !d) { if (box) box.style.display = 'none'; return null; }
+      const years = (new Date(d) - new Date(m)) / (365.25 * 24 * 3600 * 1000);
+      if (isNaN(years) || years < 0) { if (box) box.style.display = 'none'; return null; }
+      let lo, hi;
+      if (years < 15) { lo = 0.15; hi = 0.30; }
+      else if (years <= 20) { lo = 0.30; hi = 0.40; }
+      else { lo = 0.35; hi = 0.50; }
+      document.getElementById('marriageLength').textContent = years.toFixed(1) + ' years';
+      const range = (years * lo).toFixed(1) + '–' + (years * hi).toFixed(1) + ' years';
+      document.getElementById('maintenanceDuration').textContent = range;
+      box.style.display = 'block';
+      return range;
+    }
+
+    function calculateSupport() {
+      calculateTotals();
+      const p1 = partyIncome('p1').adjusted, p2 = partyIncome('p2').adjusted;
+      if (p1 + p2 <= 0) { alert('Please enter income for at least one party.'); return; }
+
+      const payorIsP1 = p1 >= p2;
+      const payorInc = payorIsP1 ? p1 : p2, payeeInc = payorIsP1 ? p2 : p1;
+      const payorName = payorIsP1 ? 'Party 1' : 'Party 2', payeeName = payorIsP1 ? 'Party 2' : 'Party 1';
+
+      const hasChildren = ((document.querySelector('input[name="hasChildren"]:checked') || {}).value) === 'yes';
+      const numChildren = parseInt(document.getElementById('numChildren').value, 10) || 1;
+      const custodial = document.getElementById('custodialParent').value; // party1 | party2
+      const payorParty = payorIsP1 ? 'party1' : 'party2';
+      const payorIsNonCustodial = hasChildren && custodial !== payorParty;
+
+      // ---- Spousal maintenance (payor income capped) ----
+      const capInc = Math.min(payorInc, NY.maintenanceCap);
+      const m1 = payorIsNonCustodial ? (0.20 * capInc - 0.25 * payeeInc) : (0.30 * capInc - 0.20 * payeeInc);
+      const m2 = 0.40 * (capInc + payeeInc) - payeeInc;
+      const maintenance = Math.max(0, Math.min(m1, m2));
+
+      // ---- Child support (CSSA) on maintenance-adjusted income ----
+      let childSupport = 0, cssaPct = 0, csPayorName = '-';
+      if (hasChildren) {
+        const p1CS = payorIsP1 ? (payorInc - maintenance) : (payeeInc + maintenance);
+        const p2CS = payorIsP1 ? (payeeInc + maintenance) : (payorInc - maintenance);
+        const cpi = Math.max(0, p1CS + p2CS);
+        cssaPct = NY.cssaPct[Math.min(Math.max(numChildren, 1), 5)];
+        const basic = Math.min(cpi, NY.cssaCap) * cssaPct;
+        const ncIsP1 = custodial === 'party2';
+        const ncIncome = ncIsP1 ? p1CS : p2CS;
+        const ncShare = cpi > 0 ? ncIncome / cpi : 0;
+        childSupport = basic * ncShare;
+        // self-support reserve floor
+        const available = ncIncome - NY.selfSupportReserve;
+        if (childSupport > available) childSupport = Math.max(available, 0);
+        if (childSupport <= 0 && ncIncome > 0) childSupport = 300; // $25/mo statutory minimum
+        csPayorName = ncIsP1 ? 'Party 1' : 'Party 2';
+      }
+
+      // ---- Render ----
+      document.getElementById('resultsSection').classList.add('visible');
+      document.getElementById('maintenanceMonthly').textContent = nyMoney(maintenance / 12);
+      document.getElementById('maintenanceAnnual').textContent = nyMoney(maintenance);
+      document.getElementById('maintenancePayor').textContent = maintenance > 0 ? payorName : '-';
+      document.getElementById('maintenancePayee').textContent = maintenance > 0 ? payeeName : '-';
+
+      const dur = calculateDuration();
+      const durRow = document.getElementById('durationRow');
+      if (dur) { document.getElementById('maintenanceDurationResult').textContent = dur; durRow.style.display = 'flex'; }
+      else { durRow.style.display = 'none'; }
+
+      const csCard = document.getElementById('childSupportResults');
+      if (hasChildren) {
+        csCard.style.display = 'block';
+        document.getElementById('childSupportMonthly').textContent = nyMoney(childSupport / 12);
+        document.getElementById('childSupportAnnual').textContent = nyMoney(childSupport);
+        document.getElementById('cssaPercentage').textContent = Math.round(cssaPct * 100) + '%';
+        document.getElementById('childSupportPayor').textContent = csPayorName;
+      } else {
+        csCard.style.display = 'none';
+      }
+
+      const total = maintenance + childSupport;
+      document.getElementById('totalMonthly').textContent = nyMoney(total / 12);
+      document.getElementById('totalAnnual').textContent = nyMoney(total);
+      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function resetCalculator() {
+      document.querySelectorAll('.calc-input').forEach(function (i) { i.value = ''; });
+      document.querySelectorAll('.calc-select').forEach(function (s) { s.selectedIndex = 0; });
+      calculateTotals();
+      document.getElementById('resultsSection').classList.remove('visible');
+      document.getElementById('durationResult').style.display = 'none';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // ---- UI helpers ----
+    function toggleSection(header) { header.closest('.calc-form-group').classList.toggle('collapsed'); }
+
+    function toggleFICA(method) {
+      document.getElementById('manualFICA').style.display = method === 'manual' ? 'grid' : 'none';
+      document.querySelectorAll('input[name="ficaMethod"]').forEach(function (r) { r.checked = r.value === method; });
+      document.querySelectorAll('.calc-toggle').forEach(function (t) {
+        const inp = t.querySelector('input[name="ficaMethod"]');
+        if (inp) t.classList.toggle('active', inp.value === method);
+      });
+      calculateTotals();
+    }
+
+    function toggleChildren(val) {
+      document.getElementById('childrenDetails').style.display = val === 'yes' ? 'block' : 'none';
+      document.querySelectorAll('input[name="hasChildren"]').forEach(function (r) { r.checked = r.value === val; });
+      document.querySelectorAll('.calc-toggle').forEach(function (t) {
+        const inp = t.querySelector('input[name="hasChildren"]');
+        if (inp) t.classList.toggle('active', inp.value === val);
+      });
+    }
+
+    function downloadPDF() {
+      if (!window.jspdf) { alert('PDF library not loaded.'); return; }
+      const doc = new window.jspdf.jsPDF();
+      let y = 22;
+      doc.setFontSize(18); doc.text('New York Support Estimate', 20, y); y += 12;
+      doc.setFontSize(11);
+      function row(label, val) { doc.text(label, 20, y); doc.text(String(val), 130, y); y += 8; }
+      row('Spousal maintenance (monthly):', document.getElementById('maintenanceMonthly').textContent);
+      row('Spousal maintenance (annual):', document.getElementById('maintenanceAnnual').textContent);
+      row('Maintenance payor:', document.getElementById('maintenancePayor').textContent);
+      if (document.getElementById('childSupportResults').style.display !== 'none') {
+        row('Child support (monthly):', document.getElementById('childSupportMonthly').textContent);
+        row('Child support (annual):', document.getElementById('childSupportAnnual').textContent);
+        row('Child support payor:', document.getElementById('childSupportPayor').textContent);
+      }
+      row('Total monthly support:', document.getElementById('totalMonthly').textContent);
+      y += 6; doc.setFontSize(9);
+      doc.text('Estimate only, based on NY DRL §236 & §240. Not legal advice.', 20, y);
+      doc.save('ny-support-estimate.pdf');
+    }
+
+    // ---- Init default UI state ----
+    document.addEventListener('DOMContentLoaded', function () {
+      toggleFICA(((document.querySelector('input[name="ficaMethod"]:checked') || {}).value) || 'estimate');
+      toggleChildren(((document.querySelector('input[name="hasChildren"]:checked') || {}).value) || 'no');
+    });
   </script>
 
   <!-- Structured Data -->
@@ -948,7 +1141,7 @@
       "name": "Clearly LLC",
       "url": "https://getclearly.app"
     },
-    "description": "Calculate New York child support and spousal maintenance using official 2025 CSSA guidelines. Privacy-first: all calculations performed locally.",
+    "description": "Calculate New York child support and spousal maintenance using official CSSA guidelines. Privacy-first: all calculations performed locally.",
     "featureList": [
       "Child support calculation using CSSA percentages",
       "Spousal maintenance calculation",
@@ -956,7 +1149,7 @@
       "FICA and city tax deductions",
       "Maintenance duration guidelines"
     ],
-    "dateModified": "2025-01-01"
+    "dateModified": "2026-08-03"
   }
   </script>
 
