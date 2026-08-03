@@ -255,3 +255,18 @@ Nothing is deployed to production by this work. If the branch/preview must be di
 4. **Performance:** WebP/AVIF image pipeline; `width`/`height` on images; dedicated small footer icon; 1200×630 OG image.
 5. **Accessibility:** `prefers-reduced-motion`, menu `aria-expanded`, focusable-dots `aria-hidden` fix, `.close-note` contrast, `no-js` content fallback, `Instrument Serif` font.
 6. **(Optional, dedicated round) Metadata templating layer** for hand-authored pages — treated as its own tested refactor, not a drive-by.
+
+---
+
+## 12. Review-driven additions — state calculator pages
+
+Added during owner review, after the decision to index the 6 state calculator pages. **No guideline figures were changed** — updating legal/financial numbers requires human verification against official sources (which could not be reached from the build sandbox), so the figures remain as-shipped and are tracked for verification.
+
+- **Indexability:** `noindex, follow` → `index, follow` on all 6 pages (§3 item 8).
+- **Evergreen metadata:** removed the pinned "2025" from every `<title>`, `og:title`, `twitter:title`, and meta/OG/Twitter/schema `description` on the 6 pages, so search metadata does not go stale. **Visible on-page facts left intact** (e.g. Texas "cap is $11,700/month as of September 2025", effective-date rows, embedded JS schedule values) — they are accurate to the currently-loaded figures and must only change as part of a verified figure update. Bumped `dateModified` to the edit date on the 3 pages that carry it (CA, NY, TX).
+- **Bug fix:** corrected a corrupted Illinois `sourceUrl` in `calculators/calculator-config.js` (was a `702702…` garbage string) → the ILGA 750 ILCS 5/505 statute link already used elsewhere in the repo.
+- **Verification worksheet:** `docs/calculator-2026-verification.md` — per-state fields, current values, official sources, and exact edit locations, so 2026 figures can be confirmed and applied safely.
+- **Staleness nudge:** `automation/calculator-staleness.js` reports states whose `nextReviewDate` has passed (currently all 6) and exits non-zero. A NUDGE only — it changes no figures and is deliberately NOT wired into `npm run build`/`npm test`, so it can never block a deploy.
+- **Automation:** new `.github/workflows/calculator-staleness.yml` (monthly) surfaces the nudge as a visible check; the existing semi-annual `calculator-review.yml` reminder was tightened to point at the worksheet, the exact `states["<state>"]` config keys, and the staleness command.
+
+**Still open (needs the owner / a human with official sources):** verify and apply the actual 2026 guideline figures via the worksheet. I did not and will not fabricate these.

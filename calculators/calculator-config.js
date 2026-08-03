@@ -120,7 +120,7 @@ const CALCULATOR_CONFIG = {
       guidelinesEffective: "2025",
       nextReviewDate: "2026-01-01",
       source: "750 ILCS 5/505",
-      sourceUrl: "https://hfs.illinois.gov/childsupport/parents/702702702702702702702702702702702702702702702702702702702702702702702702702702702702702702702702702702702702702702702702702702702702.html",
+      sourceUrl: "https://www.ilga.gov/legislation/ilcs/ilcs4.asp?ActID=2086",
       notes: "Income shares model. Low-income provisions apply below 75% FPL.",
       values: {
         incomeCap: 30025,
