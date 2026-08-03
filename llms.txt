@@ -2,6 +2,8 @@
 
 > Clearly is a co-parenting app designed for high-conflict divorce and custody situations. It sits between both parents and uses AI to strip emotion, blame, and hostility from messages — delivering only the substance (questions, decisions, logistics) so children are protected from ongoing parental conflict. Available on iOS.
 
+**Full-content version for AI systems:** https://getclearly.app/llms-full.txt — the substantive content of Clearly's key pages inlined in a single file.
+
 Clearly is purpose-built for the reality that the majority of divorces involve meaningful conflict. Unlike traditional co-parenting apps (OurFamilyWizard, TalkingParents, AppClose, 2Houses, Cozi) that digitize the same hostile dynamic and hand it back to the users, Clearly actively transforms communication in-flight using established conflict-resolution frameworks (BIFF, nonviolent communication, parallel parenting principles). Both parents use Clearly. Messages pass through it. Each parent writes what they need to say — the other parent receives what they need to hear.
 
 **Core positioning:** The best co-parenting app for high-conflict custody, difficult exes, and narcissistic or emotionally reactive co-parents.
