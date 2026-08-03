@@ -277,7 +277,8 @@ While preparing the figure work, discovered that **only 3 of the 6 state calcula
 
 Actions taken:
 - **Texas: built.** Implemented `calculateNet` / `calculateSupport` / `resetCalculator` per Texas Family Code §154.125 (guideline %), §154.129 (multiple-family table), and the $11,700/mo net-resources cap (confirmed by owner as effective Sep 2025 through 2026). Formula logic verified in Node against 5 cases, and **browser‑validated by the owner on the Deploy Preview** (2026‑08‑03: $4,000/2‑kids→$1,000/mo, cap and multiple‑family cases all correct). **Done.** `index,follow`.
-- **California & New York: reverted to `noindex`** — still non-functional shells; must not be indexed until built. (NY additionally requires spousal-maintenance figures, since that page computes maintenance + child support, not child support alone.)
+- **New York: built** (maintenance + child support). Implemented DRL §236(B)(6) maintenance (two-formula minimum, $241,000 payor income cap eff. Mar 1 2026), CSSA child support on maintenance-adjusted income ($193,000 combined cap, 17/25/29/31/35%, self-support-reserve floor $21,546), FICA estimate (SS capped at the $184,500 2026 wage base), maintenance duration, and the page's UI toggles. Figures owner-sourced (maintenance cap $241k; child-support cap/poverty from the Underwood/Joy Rosenthal references). Node-verified; **kept `noindex` pending browser validation against the Joy Rosenthal calculator.**
+- **California: still a non-functional shell → remains `noindex`.** To build next.
 - Florida / Illinois / Pennsylvania: functional and `index,follow` (figures still pending verification via the worksheet).
 
-**Open build work (owner-directed, separate from SEO round 1):** build California and New York calculation engines, each validated against the state's official calculator before indexing.
+**Open build work (owner-directed, separate from SEO round 1):** validate New York against the reference calculator then flip to `index`; build California's engine (official algebraic formula) and validate before indexing.
