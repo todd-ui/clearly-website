@@ -270,3 +270,14 @@ Added during owner review, after the decision to index the 6 state calculator pa
 - **Automation:** new `.github/workflows/calculator-staleness.yml` (monthly) surfaces the nudge as a visible check; the existing semi-annual `calculator-review.yml` reminder was tightened to point at the worksheet, the exact `states["<state>"]` config keys, and the staleness command.
 
 **Still open (needs the owner / a human with official sources):** verify and apply the actual 2026 guideline figures via the worksheet. I did not and will not fabricate these.
+
+### 12a. Calculator functionality — major finding
+
+While preparing the figure work, discovered that **only 3 of the 6 state calculators actually compute**. Florida, Illinois, and Pennsylvania define a full calculation engine (9–10 JS functions). **California, New York, and Texas were empty shells** — the form and "Calculate" button call functions (`calculateSupport`, `calculateTotals`) that were never defined (only the `gtag` analytics stub existed). Their buttons produced JS errors and no result. This almost certainly explains the original `noindex` on all six.
+
+Actions taken:
+- **Texas: built.** Implemented `calculateNet` / `calculateSupport` / `resetCalculator` per Texas Family Code §154.125 (guideline %), §154.129 (multiple-family table), and the $11,700/mo net-resources cap (confirmed by owner as effective Sep 2025 through 2026). Formula logic verified in Node against 5 cases; **still needs browser validation on the preview** before it should be considered done. Left `index,follow`.
+- **California & New York: reverted to `noindex`** — still non-functional shells; must not be indexed until built. (NY additionally requires spousal-maintenance figures, since that page computes maintenance + child support, not child support alone.)
+- Florida / Illinois / Pennsylvania: functional and `index,follow` (figures still pending verification via the worksheet).
+
+**Open build work (owner-directed, separate from SEO round 1):** build California and New York calculation engines, each validated against the state's official calculator before indexing.
