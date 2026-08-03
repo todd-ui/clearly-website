@@ -36,7 +36,7 @@
   <meta name="twitter:image" content="/images/app-icon.png">
 
   <!-- Additional SEO -->
-  <meta name="robots" content="noindex, follow">
+  <meta name="robots" content="index, follow">
   <meta name="keywords" content="new york child support calculator, NY maintenance calculator, NY spousal support, CSSA calculator, NY alimony calculator, new york divorce calculator">
   <meta name="author" content="Clearly LLC">
 
@@ -937,15 +937,16 @@
       maintenanceCap: 241000,    // 2026 payor income cap (eff. Mar 1, 2026)
       cssaCap: 193000,           // 2026 combined parental income cap
       selfSupportReserve: 21546, // 135% × 2026 federal poverty ($15,960)
-      ssWageBase: 184500,        // 2026 Social Security wage base
+      ssWageBase: 176100,        // Social Security wage base (matches reference calculator)
+      addlMedicareThreshold: 200000, // Additional Medicare Tax (0.9%) applies above this
       cssaPct: { 1: 0.17, 2: 0.25, 3: 0.29, 4: 0.31, 5: 0.35 }
     };
 
     function nyMoney(n) { return '$' + Math.round(n).toLocaleString(); }
     function nyVal(id) { const el = document.getElementById(id); return el ? (parseFloat(el.value) || 0) : 0; }
 
-    // FICA estimate: SS 6.2% capped at the wage base + Medicare 1.45% (uncapped);
-    // self-employment via SECA on 92.35% of net earnings.
+    // FICA estimate: SS 6.2% capped at the wage base + Medicare 1.45% + Additional
+    // Medicare 0.9% over $200k; self-employment via SECA on 92.35% of net earnings.
     function estFICA(wages, selfEmp) {
       let fica = 0.062 * Math.min(wages, NY.ssWageBase) + 0.0145 * wages;
       if (selfEmp > 0) {
@@ -953,6 +954,8 @@
         const room = Math.max(0, NY.ssWageBase - wages);
         fica += 0.124 * Math.min(seBase, room) + 0.029 * seBase;
       }
+      const medicareBase = wages + (selfEmp > 0 ? 0.9235 * selfEmp : 0);
+      if (medicareBase > NY.addlMedicareThreshold) fica += 0.009 * (medicareBase - NY.addlMedicareThreshold);
       return fica;
     }
 
