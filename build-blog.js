@@ -281,7 +281,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
     <a href="/blog.html" class="back-link">&larr; Back to Blog</a>
     <header class="blog-post-header">
       <h1 class="blog-post-title">${escapeHtml(post.title)}</h1>
-      <p class="blog-post-meta">${post.date}</p>
+      <p class="blog-post-meta">By The Clearly Team &middot; ${post.date}</p>
       <div class="share-buttons">
         <span>Share:</span>
         <button class="share-btn" onclick="copyLink()" title="Copy link" id="copy-btn">
