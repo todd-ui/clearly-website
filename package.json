@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node build-blog.js && node automation/check-links.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node automation/seo-check.js && node automation/check-links.js"
   },
   "repository": {
     "type": "git",
