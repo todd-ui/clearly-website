@@ -10,7 +10,7 @@
     "from-subject": "node generate-post-from-subject.js"
   },
   "dependencies": {
-    "@anthropic-ai/sdk": "^0.52.0",
+    "@anthropic-ai/sdk": "^0.124.0",
     "@notionhq/client": "^2.2.15"
   }
 }

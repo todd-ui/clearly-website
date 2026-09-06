@@ -13,7 +13,7 @@
 
 const Anthropic = require('@anthropic-ai/sdk');
 const { Client } = require('@notionhq/client');
-const { requestJson } = require('./json-response');
+const { requestJson, topicSchema, articleSchema } = require('./json-response');
 
 // Initialize clients
 const anthropic = new Anthropic();
@@ -119,7 +119,7 @@ Respond with JSON only:
     model: MODEL,
     max_tokens: 1000,
     messages: [{ role: 'user', content: prompt }]
-  }, 'topic');
+  }, topicSchema(CATEGORIES), 'topic');
 }
 
 // Generate full article content using Claude
@@ -178,7 +178,7 @@ Write the complete article now as JSON:`;
     model: MODEL,
     max_tokens: 16000,
     messages: [{ role: 'user', content: prompt }]
-  }, 'article');
+  }, articleSchema, 'article');
 }
 
 // Parse text with **bold** and *italic* markers into Notion rich_text
