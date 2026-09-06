@@ -13,6 +13,7 @@
 
 const Anthropic = require('@anthropic-ai/sdk');
 const { Client } = require('@notionhq/client');
+const { requestJson } = require('./json-response');
 
 // Initialize clients
 const anthropic = new Anthropic();
@@ -114,19 +115,11 @@ Respond with JSON only:
   "keywords": ["keyword 1", "keyword 2", "keyword 3", "keyword 4"]
 }`;
 
-  const response = await anthropic.messages.create({
+  return await requestJson(anthropic, {
     model: MODEL,
-    max_tokens: 500,
+    max_tokens: 1000,
     messages: [{ role: 'user', content: prompt }]
-  });
-
-  const content = response.content[0].text;
-  const jsonMatch = content.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) {
-    throw new Error('Failed to parse topic JSON');
-  }
-
-  return JSON.parse(jsonMatch[0]);
+  }, 'topic');
 }
 
 // Generate full article content using Claude
@@ -181,19 +174,11 @@ Valid types: paragraph, heading2, heading3, bullet_list, numbered_list, quote
 
 Write the complete article now as JSON:`;
 
-  const response = await anthropic.messages.create({
+  return await requestJson(anthropic, {
     model: MODEL,
-    max_tokens: 4096,
+    max_tokens: 16000,
     messages: [{ role: 'user', content: prompt }]
-  });
-
-  const content = response.content[0].text;
-  const jsonMatch = content.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) {
-    throw new Error('Failed to parse article JSON');
-  }
-
-  return JSON.parse(jsonMatch[0]);
+  }, 'article');
 }
 
 // Parse text with **bold** and *italic* markers into Notion rich_text
