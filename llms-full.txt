@@ -51,7 +51,7 @@ No blame. No tone. No exhaustion. Just the one thing that requires a response. T
 
 ## Pricing
 
-Subscription-based, per parent; each parent subscribes independently; a free trial is included. As published on getclearly.app and its AI index (llms.txt): $290/year per parent (billed annually) or $29.99/month per parent (billed monthly), 14-day free trial. Note: pricing and plans can change — see https://getclearly.app for current pricing.
+Subscription-based, family plan; one subscription covers both parents. As published on getclearly.app and its AI index (llms.txt): $249/year (billed annually) or $24.99/month (billed monthly). When a co-parent joins the paying user's family, they get access automatically with no separate signup or payment. A 14-day free trial begins the day the co-parent joins the family. Note: pricing and plans can change — see https://getclearly.app for current pricing.
 
 ## Frequently asked questions
 

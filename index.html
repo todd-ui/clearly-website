@@ -1097,6 +1097,30 @@
       margin-top: 24px;
       line-height: 1.6;
     }
+    .price-family-callout {
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--ink-mid);
+      background: var(--moss-pale);
+      border: 1px solid rgba(13,130,104,0.18);
+      border-radius: 999px;
+      padding: 12px 22px;
+      margin: 32px auto 24px;
+      max-width: 640px;
+      text-align: center;
+    }
+    .price-family-callout strong {
+      color: var(--moss);
+      font-weight: 500;
+    }
+    @media (max-width: 600px) {
+      .price-family-callout {
+        border-radius: 14px;
+        padding: 14px 18px;
+        font-size: 13.5px;
+      }
+    }
 
     /* ==========================================
        CLOSE (green section)
@@ -1605,15 +1629,17 @@
           <h2>Less than one difficult conversation costs you.</h2>
           <p class="hp-body">A single hour of mediation runs $300–500. One avoided conflict pays for the year.</p>
           <p class="hp-body">Clearly isn't priced like a utility because <strong>it isn't one.</strong> It's a system that changes how two people with history communicate about the most important thing in both their lives.</p>
-          <p class="price-compare">Therapy: $200–300/session &middot; Mediation: $300–500/hour<br>Clearly: less than two sessions. Used every day.</p>
+          <p class="price-compare">Therapy: $200–300/session &middot; Mediation: $300–500/hour<br>Clearly: less than one session per year, for the whole family. Used every day.</p>
         </div>
+
+        <p class="price-family-callout fade-in"><strong>One subscription covers both parents.</strong> Your co-parent gets access when they join your family &mdash; no separate signup, no separate payment.</p>
 
         <div class="price-cards fade-in">
           <!-- Annual card -->
           <div class="price-card price-card-featured">
-            <div class="price-amt">$290<span class="price-amt-unit">/year</span></div>
-            <div class="price-per">Per parent &middot; Billed annually</div>
-            <div class="price-tag">Best value — saves $70 vs. monthly</div>
+            <div class="price-amt">$249<span class="price-amt-unit">/year</span></div>
+            <div class="price-per">Covers both parents &middot; Billed annually</div>
+            <div class="price-tag">Best value — saves $50 vs. monthly</div>
             <ul class="price-list">
               <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> AI message processing and tone rewriting</li>
               <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Shared custody calendar with swap requests</li>
@@ -1627,8 +1653,8 @@
 
           <!-- Monthly card -->
           <div class="price-card">
-            <div class="price-amt">$29.99<span class="price-amt-unit">/month</span></div>
-            <div class="price-per">Per parent &middot; Billed monthly</div>
+            <div class="price-amt">$24.99<span class="price-amt-unit">/month</span></div>
+            <div class="price-per">Covers both parents &middot; Billed monthly</div>
             <div class="price-tag-muted">Start month-to-month, switch to annual anytime</div>
             <p class="price-monthly-note">Same features. Same product.<br>Just a different commitment.</p>
             <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="btn-moss" style="width: 100%; justify-content: center;">Download on iOS</a>
@@ -1636,7 +1662,7 @@
           </div>
         </div>
 
-        <p class="price-disclosure fade-in">Both parents subscribe independently. Each owns their account — no one controls the other's access.</p>
+        <p class="price-disclosure fade-in">Free to try &mdash; the 14-day trial starts the day your co-parent joins.</p>
       </div>
     </div>
   </section>
@@ -1649,7 +1675,7 @@
       <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="btn-white">Download on iOS</a>
       <a href="#how-it-works" class="btn-ghost-white">See how it works</a>
     </div>
-    <p class="close-note fade-in">Free to try &middot; From $29.99/month &middot; iOS</p>
+    <p class="close-note fade-in">Free to try &middot; From $24.99/month &middot; iOS</p>
   </section>
 
   </main>
@@ -1833,8 +1859,9 @@
     },
     "offers": {
       "@type": "Offer",
-      "price": "290",
-      "priceCurrency": "USD"
+      "price": "249",
+      "priceCurrency": "USD",
+      "description": "Family subscription: one plan covers both parents. $249/year or $24.99/month."
     },
     "aggregateRating": {
       "@type": "AggregateRating",

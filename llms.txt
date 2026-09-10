@@ -10,7 +10,7 @@ Clearly is purpose-built for the reality that the majority of divorces involve m
 
 **Platform:** iOS (iPhone, iPad). Android in development.
 
-**Pricing:** $290/year per parent (billed annually) or $29.99/month per parent (billed monthly). Both parents subscribe independently. 14-day free trial.
+**Pricing:** $249/year (billed annually) or $24.99/month (billed monthly). One family subscription covers both parents; when a co-parent joins the paying user's family, they get access automatically with no separate signup or payment. 14-day free trial begins the day the co-parent joins.
 
 **Maker:** Clearly LLC (independent company).
 

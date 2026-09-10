@@ -546,6 +546,17 @@
       letter-spacing: 1.4px;
       text-transform: uppercase;
     }
+    .cmp-row-price-note {
+      display: block;
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.4px;
+      margin-top: 2px;
+    }
+    .cmp-col-clearly .cmp-row-price-note {
+      color: var(--primary);
+    }
     .cmp-table-note {
       font-size: 14px;
       color: var(--text-muted);
@@ -593,6 +604,17 @@
       white-space: nowrap;
     }
     .cmp-card-clearly .cmp-card-price { color: var(--primary); }
+    .cmp-card-price-note {
+      display: inline-block;
+      font-family: 'Instrument Sans', sans-serif;
+      font-size: 11px;
+      font-style: normal;
+      font-weight: 400;
+      color: var(--text-muted);
+      letter-spacing: 0.3px;
+      margin-left: 4px;
+    }
+    .cmp-card-clearly .cmp-card-price-note { color: var(--primary); opacity: 0.75; }
     .cmp-card ul {
       list-style: none;
       padding: 0;
@@ -1023,7 +1045,7 @@
   <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="mobile-cta" aria-label="Download Clearly on the App Store">
     <div class="mobile-cta-content">
       <span class="mobile-cta-title">Download Clearly</span>
-      <span class="mobile-cta-meta">From $29.99/mo &middot; Free to try</span>
+      <span class="mobile-cta-meta">From $24.99/mo for both parents &middot; Free to try</span>
     </div>
     <span class="mobile-cta-btn" aria-hidden="true">
       <svg width="18" height="22" viewBox="0 0 22 26" fill="none">
@@ -1088,7 +1110,7 @@
   <section class="cmp-section" id="comparison">
     <div class="container">
       <h2 class="fade-in">The comparison.</h2>
-      <p class="cmp-intro fade-in">Per parent, per year. Both parents subscribe separately in every app on this list.</p>
+      <p class="cmp-intro fade-in">Annual subscription cost. Every app on this list except Clearly requires both parents to subscribe separately. Clearly is a family plan: one subscription covers both.</p>
       <div class="cmp-table-wrap fade-in">
         <table class="cmp-table cmp-matrix">
           <thead>
@@ -1158,23 +1180,23 @@
               <td class="cmp-col-clearly cmp-yes">&#10003;</td>
             </tr>
             <tr class="cmp-row-price">
-              <td>Annual cost per parent</td>
-              <td>$150 to $396</td>
-              <td>$77 to $353</td>
-              <td>$108</td>
-              <td class="cmp-col-clearly"><strong>$290</strong></td>
+              <td>Annual subscription cost</td>
+              <td>$150 to $396 <span class="cmp-row-price-note">per parent</span></td>
+              <td>$77 to $353 <span class="cmp-row-price-note">per parent</span></td>
+              <td>$108 <span class="cmp-row-price-note">per parent</span></td>
+              <td class="cmp-col-clearly"><strong>$249</strong> <span class="cmp-row-price-note">covers both parents</span></td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="cmp-table-note">Pricing as of 2026. All paid apps require both parents to subscribe independently.</p>
+      <p class="cmp-table-note">Pricing as of 2026. Every app on this list except Clearly requires both parents to subscribe separately. Clearly is a family plan: one subscription covers both parents.</p>
 
       <!-- Mobile-only card view: same data, stacked per-app instead of horizontal-scroll table -->
       <div class="cmp-mobile fade-in" aria-hidden="true">
         <article class="cmp-card cmp-card-clearly">
           <header>
             <h3>Clearly</h3>
-            <span class="cmp-card-price">$290/yr</span>
+            <span class="cmp-card-price">$249/yr <em class="cmp-card-price-note">both parents</em></span>
           </header>
           <ul>
             <li><span class="cmp-card-check">&#10003;</span> Built on a documented negotiation framework <em>(Harvard Negotiation Project)</em></li>
@@ -1191,7 +1213,7 @@
         <article class="cmp-card">
           <header>
             <h3>OurFamilyWizard</h3>
-            <span class="cmp-card-price">$150&ndash;$396/yr</span>
+            <span class="cmp-card-price">$150&ndash;$396/yr <em class="cmp-card-price-note">per parent</em></span>
           </header>
           <ul>
             <li><span class="cmp-card-x">&mdash;</span> No documented negotiation framework</li>
@@ -1208,7 +1230,7 @@
         <article class="cmp-card">
           <header>
             <h3>TalkingParents</h3>
-            <span class="cmp-card-price">$77&ndash;$353/yr</span>
+            <span class="cmp-card-price">$77&ndash;$353/yr <em class="cmp-card-price-note">per parent</em></span>
           </header>
           <ul>
             <li><span class="cmp-card-x">&mdash;</span> No documented negotiation framework</li>
@@ -1225,7 +1247,7 @@
         <article class="cmp-card">
           <header>
             <h3>AppClose</h3>
-            <span class="cmp-card-price">$108/yr</span>
+            <span class="cmp-card-price">$108/yr <em class="cmp-card-price-note">per parent</em></span>
           </header>
           <ul>
             <li><span class="cmp-card-x">&mdash;</span> No documented negotiation framework</li>
@@ -1316,7 +1338,7 @@
         <p>Clearly is a co-parenting communication system built on the Harvard Negotiation Project's framework for resolving conflict. It sits between both parents and surfaces what's actionable in each message before delivery, separating the substance from the charge. The original message stays in the shared record. What reaches the other parent is what matters, with the patterns that didn't serve the marriage filtered out of the conversation that follows it.</p>
         <p>The fights themselves don't get logged. They get interrupted. Most co-parenting apps assume the patterns you couldn't fix in the marriage will keep going on a new platform. Clearly assumes the opposite. Stonewalling, the silent treatment, the slow drip of hostility one message at a time: those don't work in a system designed to close the loop, not extend it. The calendar, expenses, and custody schedule work the way a well-designed app should. The logistics are the easy part. Shifting the patterns is the hard part. Clearly does both.</p>
         <p class="app-honest">iOS only at the moment. Newer than the incumbents, so courts and lawyers don't yet name it in orders the way they name OurFamilyWizard. If your case is in active litigation and your attorney has a preferred app, use theirs.</p>
-        <p class="app-meta">$290 per year per parent, or $29.99 per month per parent. Free to try.</p>
+        <p class="app-meta">$249 per year, or $24.99 per month. One subscription covers both parents. Free to try.</p>
         <p><a href="/" class="btn-link">Learn more about Clearly
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
         </a></p>
@@ -1467,7 +1489,7 @@
             </span>
           </summary>
           <div class="faq-a">
-            <p>Per parent per year: Kidtime free or $70, TalkingParents $77 to $353, AppClose $108, OurFamilyWizard $150 to $396, Clearly $290. Both parents pay separately in every paid app.</p>
+            <p>Per parent per year: Kidtime free or $70, TalkingParents $77 to $353, AppClose $108, OurFamilyWizard $150 to $396. Clearly is $249 per year for the whole family: one subscription covers both parents. Every other paid app on this list requires both parents to subscribe separately.</p>
           </div>
         </details>
 
@@ -1522,7 +1544,7 @@
         </a>
         <a href="/" class="btn-secondary">See how it works</a>
       </div>
-      <p class="cta-fineprint fade-in">Free to try. From $29.99 per month. iOS.</p>
+      <p class="cta-fineprint fade-in">Free to try. From $24.99 per month for the whole family. iOS.</p>
     </div>
   </section>
 
@@ -1641,11 +1663,12 @@
     "downloadUrl": "https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374",
     "offers": {
       "@type": "Offer",
-      "price": "29.99",
+      "price": "24.99",
       "priceCurrency": "USD",
+      "description": "Family subscription: one plan covers both parents. $249/year or $24.99/month.",
       "priceSpecification": {
         "@type": "UnitPriceSpecification",
-        "price": "29.99",
+        "price": "24.99",
         "priceCurrency": "USD",
         "unitText": "MONTH"
       }
@@ -1714,7 +1737,7 @@
         "name": "How much do co-parenting apps cost in 2026?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Per parent per year: Kidtime free or $70, TalkingParents $77 to $353, AppClose $108, OurFamilyWizard $150 to $396, Clearly $290. Both parents pay separately in every paid app."
+          "text": "Per parent per year: Kidtime free or $70, TalkingParents $77 to $353, AppClose $108, OurFamilyWizard $150 to $396. Clearly is $249 per year for the whole family: one subscription covers both parents. Every other paid app on this list requires both parents to subscribe separately."
         }
       },
       {
