@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["9D273Y593J.app.getclearly"],
+        "components": [
+          {
+            "/": "/join/*",
+            "comment": "Family invite links open Clearly with the code already filled in"
+          }
+        ]
+      }
+    ]
+  }
+}

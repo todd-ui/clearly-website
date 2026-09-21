@@ -119,11 +119,39 @@
   to = "/professionals.html"
   status = 301
 
+# Invite links: /join/W9QZ6V
+#
+# On iOS with Clearly installed, this URL never reaches Netlify at all — the
+# Universal Link in /.well-known/apple-app-site-association hands it straight
+# to the app, which fills in the code. Everyone else lands on the page below,
+# which shows the code and a download button.
+#
+# Status 200 is a rewrite, not a redirect: the browser keeps the /join/CODE
+# URL so the page can read the code out of the path.
+#
+# MUST stay above the catch-all 404 — Netlify applies these in file order.
+[[redirects]]
+  from = "/join/*"
+  to = "/join/index.html"
+  status = 200
+
 # Custom 404 page
 [[redirects]]
   from = "/*"
   to = "/404.html"
   status = 404
+
+# Apple Universal Links association file.
+#
+# Apple requires this to be served as application/json over HTTPS with no
+# redirect. The file has no extension, so without an explicit Content-Type it
+# is served as text/plain and iOS quietly ignores it — the link then falls
+# through to Safari and the app never opens.
+[[headers]]
+  for = "/.well-known/apple-app-site-association"
+  [headers.values]
+    Content-Type = "application/json"
+    Cache-Control = "public, max-age=3600"
 
 # Security headers for all pages
 [[headers]]
