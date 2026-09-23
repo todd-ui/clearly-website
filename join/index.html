@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Join your co-parent on Clearly</title>
+  <meta name="description" content="Open your family code in Clearly, the co-parenting app.">
+  <!-- Invite links are private to the pair using them; keep them out of search. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #1A1917;
+      --muted: #5C5856;
+      --faint: #8C8780;
+      --green: #0D8268;
+      --green-soft: #E6F5F1;
+      --page: #FAFAF9;
+      --card: #FFFFFF;
+      --line: #E8E7E4;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      line-height: 1.6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .wrap { width: 100%; max-width: 480px; }
+    .logo { display: block; width: 56px; height: 56px; border-radius: 14px; margin: 0 auto 32px; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 40px 28px;
+      text-align: center;
+    }
+    h1 {
+      font-family: 'EB Garamond', Georgia, serif;
+      font-size: 30px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      margin: 0 0 16px;
+    }
+    p { color: var(--muted); margin: 0 0 24px; font-size: 16px; }
+    .code-label {
+      color: #0A6B55;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+      margin: 0 0 8px;
+    }
+    .code-box {
+      background: var(--green-soft);
+      border: 2px solid var(--green);
+      border-radius: 12px;
+      padding: 20px;
+      margin: 0 0 8px;
+    }
+    .code {
+      font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+      font-size: 34px;
+      font-weight: 700;
+      letter-spacing: 5px;
+      color: var(--green);
+      margin: 0;
+      word-break: break-all;
+    }
+    .copy {
+      background: none;
+      border: none;
+      color: var(--faint);
+      font-size: 13px;
+      font-family: inherit;
+      cursor: pointer;
+      padding: 6px;
+      margin-bottom: 20px;
+    }
+    .copy:hover { color: var(--muted); }
+    .cta {
+      display: block;
+      background: var(--green);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 16px 24px;
+      border-radius: 10px;
+      margin-bottom: 16px;
+    }
+    .steps { color: var(--faint); font-size: 14px; margin: 0; text-align: left; padding-left: 20px; }
+    .steps li { margin-bottom: 6px; }
+    .foot { text-align: center; margin-top: 24px; font-size: 13px; }
+    .foot a { color: var(--faint); text-decoration: none; }
+    @media (prefers-color-scheme: dark) {
+      :root { --page: #14130F; --card: #1C1B17; --ink: #F5F3EF; --muted: #B5B0A8; --line: #2C2A25; --green-soft: #12312A; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <img class="logo" src="/images/icon.png" alt="Clearly"
+         onerror="this.style.display='none'">
+
+    <div class="card">
+      <h1>Join your co-parent on Clearly</h1>
+      <p>One place for schedules, expenses and changes — instead of a long text thread.</p>
+
+      <p class="code-label" id="code-label" hidden>Your family code</p>
+      <div class="code-box" id="code-box" hidden>
+        <p class="code" id="code"></p>
+      </div>
+      <button class="copy" id="copy" hidden>Copy code</button>
+
+      <a class="cta" href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374">
+        Download Clearly
+      </a>
+
+      <ol class="steps">
+        <li>Install the app.</li>
+        <li>Tap <strong>“I have a family code”</strong>.</li>
+        <li>Enter the code above.</li>
+      </ol>
+    </div>
+
+    <p class="foot"><a href="https://getclearly.app">getclearly.app</a></p>
+  </div>
+
+  <script>
+    // Netlify rewrites /join/ANYTHING to this page with a 200, so the browser
+    // keeps the original URL and the code is still in the path.
+    //
+    // On an iPhone with Clearly installed this page is never reached at all:
+    // the Universal Link declared in /.well-known/apple-app-site-association
+    // hands the URL to the app before Safari opens. This is the fallback for
+    // desktop, Android, and anyone who hasn't installed it yet.
+    (function () {
+      var parts = window.location.pathname.split('/').filter(Boolean);
+      var raw = parts.length > 1 ? decodeURIComponent(parts[1]) : '';
+      // Family codes are short and alphanumeric. Anything else is treated as
+      // no code rather than printed back onto the page.
+      var code = /^[A-Za-z0-9]{4,12}$/.test(raw) ? raw.toUpperCase() : '';
+
+      if (code) {
+        document.getElementById('code').textContent = code;
+        document.getElementById('code-label').hidden = false;
+        document.getElementById('code-box').hidden = false;
+
+        var btn = document.getElementById('copy');
+        if (navigator.clipboard) {
+          btn.hidden = false;
+          btn.addEventListener('click', function () {
+            navigator.clipboard.writeText(code).then(function () {
+              btn.textContent = 'Copied';
+              setTimeout(function () { btn.textContent = 'Copy code'; }, 2000);
+            });
+          });
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
