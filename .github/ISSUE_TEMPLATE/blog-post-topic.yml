@@ -24,11 +24,15 @@ body:
       label: Category
       description: Which category best fits this topic?
       options:
+        - High-Conflict Situations
         - Communication
         - Co-Parenting Basics
         - Your Children
         - Scheduling
+        - Money & Expenses
         - Legal & Documentation
+        - Blended Families
+        - Self-Care & Support
     validations:
       required: true
 

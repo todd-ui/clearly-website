@@ -280,6 +280,7 @@ function mapCategory(formCategory) {
     'Legal & Documentation': 'Legal Basics',
     // New categories
     'Expenses': 'Expenses',
+    'Money & Expenses': 'Money & Expenses',
     'Legal Basics': 'Legal Basics',
     'Self-Care & Support': 'Self-Care & Support',
     'High-Conflict Situations': 'High-Conflict Situations',
