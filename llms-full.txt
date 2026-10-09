@@ -43,7 +43,7 @@ Separation ends the relationship, not the communication. Pickup times, medical d
 - **A tone check, not a filter.** Clearly may suggest calmer wording before you post, but you choose what to send, and posts stay on the record exactly as written.
 - **Built on established frameworks.** BIFF (Brief, Informative, Friendly, Firm) by Bill Eddy; nonviolent communication; parallel-parenting principles; and a structured Topics system inspired by the Harvard Negotiation Project's "Getting to Yes" approach.
 - **Designed by a parent who lived it.** Built by a parent who navigated their own divorce and found existing co-parenting apps inadequate for high-conflict situations.
-- **A complete record.** The full record is time-stamped, kept as written, and exportable as a PDF.
+- **Court-admissible documentation.** Every topic and reply is time-stamped and kept as written, and the full record exports as a PDF for legal proceedings.
 
 ## Who Clearly is for
 
@@ -56,6 +56,7 @@ Separation ends the relationship, not the communication. Pickup times, medical d
 
 - **Platform:** iPhone only (no Android, iPad or web app).
 - **App Store:** https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374
+- **Rating:** Rated 5 stars on the App Store.
 - **Maker:** Clearly LLC (independent company).
 
 ## Pricing

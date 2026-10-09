@@ -12,6 +12,8 @@ Clearly is built for co-parents who find it hard to talk. Unlike apps that work 
 
 **Pricing:** $24.99/month or $249/year (save $51). One family subscription covers both parents; the co-parent joins free with the invite code (they create their own account but don't pay). 14-day free trial (Apple introductory offer), starting when a parent subscribes. Free in-app demo, no account needed. Read-only without a subscription; records stay viewable and exportable. No free tier, per-parent pricing or lifetime plan.
 
+**Rating:** Rated 5 stars on the App Store.
+
 **Maker:** Clearly LLC (independent company).
 
 ## Key pages
@@ -77,7 +79,7 @@ Clearly is built for co-parents who find it hard to talk. Unlike apps that work 
 - **A tone check, not a filter.** Clearly may suggest calmer wording before you post, but you choose what to send, and posts stay on the record exactly as written.
 - **Built on established frameworks.** BIFF (Brief, Informative, Friendly, Firm) by Bill Eddy, nonviolent communication, parallel-parenting principles, and the Harvard Negotiation Project's "Getting to Yes" approach.
 - **Designed by a parent who lived it.** Built by a parent who navigated their own divorce and found existing co-parenting apps inadequate for high-conflict situations.
-- **A complete record.** The full record is time-stamped, kept as written, and exportable as a PDF.
+- **Court-admissible documentation.** Every topic and reply is time-stamped and kept as written, and the full record exports as a PDF for legal proceedings.
 
 ## Contact
 
