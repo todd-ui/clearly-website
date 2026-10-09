@@ -213,7 +213,7 @@
     /* Welcome Cards */
     .pathway-cards {
       display: grid;
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
       gap: 16px;
       margin-top: 24px;
     }
@@ -1677,6 +1677,18 @@
             <h3>Build a new plan</h3>
             <p>Create a personalized custody schedule based on your family's needs</p>
           </div>
+          <div class="pathway-card" onclick="selectPlanCode(event)">
+            <div class="pathway-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+            </div>
+            <h3>I have a plan code</h3>
+            <p>Open the plan you saved: review it, download the PDF or make changes</p>
+            <div class="code-input-row" id="codeInputRow" style="display: none;" onclick="event.stopPropagation()">
+              <input type="text" id="planCodeInput" placeholder="ABC123" maxlength="10" class="code-input" onkeydown="if (event.key === 'Enter') openPlanByCode(event)">
+              <button class="btn-link-code" onclick="openPlanByCode(event)">Open</button>
+            </div>
+            <p class="code-error" id="planCodeError"></p>
+          </div>
         </div>
       </div>
 
@@ -1936,6 +1948,12 @@
         <p class="section-label">Your Parenting Plan</p>
         <h2>Plan Summary</h2>
         <p class="subtitle" id="reviewSubtitle">Review your details below. Tap Edit to make changes.</p>
+        <div id="savedPlanActions" style="display: none; gap: 12px; margin-bottom: 20px;">
+          <button class="btn btn-secondary" onclick="downloadPDF()">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </button>
+        </div>
 
 
         <div id="reviewContent"></div>
@@ -2642,6 +2660,8 @@
         // Button text depends on context
         if (editingFromReview) {
           continueBtn.textContent = 'Save & Return';
+        } else if (screens[state.currentScreen] === 'review' && state.editingSaved) {
+          continueBtn.textContent = 'Save changes';
         } else if (state.currentScreen === screens.length - 2) {
           continueBtn.textContent = 'Email my plan';
         } else {
@@ -2696,6 +2716,12 @@
           state.firstName = document.getElementById('nameInput').value;
           submitPlan();
           return; // submitPlan will advance the screen after success
+        }
+
+        // A reopened plan: Save changes on the review screen
+        if (screens[state.currentScreen] === 'review' && state.editingSaved) {
+          saveChanges();
+          return;
         }
 
         // If editing from review, go back to review instead of next screen
@@ -2816,6 +2842,147 @@
       initScreen('children');
       updateUI();
       window.scrollTo(0, 0);
+    }
+
+    // ==========================================
+    // COMING BACK WITH A PLAN CODE: open a saved plan (before it's used in
+    // the app), review it, download the PDF, change it and save. Once the
+    // code has been used in Clearly, the plan lives in the app.
+    // ==========================================
+    function selectPlanCode(event) {
+      document.querySelectorAll('.pathway-card').forEach(card => card.classList.remove('selected'));
+      event.currentTarget.classList.add('selected');
+      document.getElementById('codeInputRow').style.display = 'flex';
+      document.getElementById('planCodeInput').focus();
+    }
+
+    async function openPlanByCode(event) {
+      const input = document.getElementById('planCodeInput');
+      const errorEl = document.getElementById('planCodeError');
+      const btn = event?.target?.tagName === 'BUTTON' ? event.target : input.parentElement.querySelector('button');
+      const code = input.value.trim().toUpperCase();
+      const showError = (msg) => { errorEl.textContent = msg; errorEl.style.display = 'block'; };
+      if (!code) { showError('Enter your plan code'); return; }
+      errorEl.style.display = 'none';
+      btn.disabled = true; btn.textContent = 'Opening...';
+      try {
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/get-plan-template?code=${encodeURIComponent(code)}`);
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || "That code wasn't found. Check it and try again.");
+        if (data.source === 'family') {
+          throw new Error('This plan is now in Clearly. Make changes in the app, under Shared → Plan.');
+        }
+        if (!data.plan_data) throw new Error("That code wasn't found. Check it and try again.");
+        loadPlanIntoState(data.plan_data);
+        state.planCode = code;
+        state.editingSaved = true;
+        document.getElementById('planCode').textContent = code;
+        goToScreen('review');
+      } catch (error) {
+        showError(error.message);
+      } finally {
+        btn.disabled = false; btn.textContent = 'Open';
+      }
+    }
+
+    // A saved plan (get-plan-template's plan_data) into the builder's state
+    function loadPlanIntoState(p) {
+      if (p.first_name) state.firstName = p.first_name;
+      if (p.family_name) {
+        state.familyName = p.family_name;
+        const familyNameInput = document.getElementById('familyNameInput');
+        if (familyNameInput) familyNameInput.value = p.family_name;
+      }
+      if (Array.isArray(p.children)) {
+        state.children = p.children.map(c => ({ name: c.name || '', birthdate: c.birthdate || null }));
+      }
+      if (p.custody_schedule) state.schedule = p.custody_schedule;
+      const cfg = state.scheduleConfig;
+      if (p.week1_parent) cfg.week1Parent = p.week1_parent;
+      if (p.week1_iso_parity) cfg.week1IsoParity = p.week1_iso_parity;
+      if (p.custody_anchor_date) cfg.anchorDate = p.custody_anchor_date;
+      if (p.custody_anchor_position !== null && p.custody_anchor_position !== undefined) cfg.anchorPosition = p.custody_anchor_position;
+      if (p.custody_anchor_parent) cfg.anchorParent = p.custody_anchor_parent;
+      if (p.exchange_time) cfg.exchangeTime = String(p.exchange_time).slice(0, 5);
+      if (Array.isArray(p.custom_pattern) && p.custom_pattern.length) {
+        cfg.customPattern = p.custom_pattern;
+        cfg.customWeeks = [];
+        for (let i = 0; i < p.custom_pattern.length; i += 7) cfg.customWeeks.push(p.custom_pattern.slice(i, i + 7));
+      }
+      if (Array.isArray(p.tracked_holidays)) state.trackedHolidays = p.tracked_holidays;
+      if (p.holiday_custody) state.holidayCustody = p.holiday_custody;
+      if (p.holiday_scopes) state.holidayScopes = p.holiday_scopes;
+      if (Array.isArray(p.custom_holidays)) state.customHolidays = p.custom_holidays;
+      state.summer.enabled = !!p.summer_enabled;
+      if (p.summer_start) {
+        state.summer.startMonth = p.summer_start.month ?? state.summer.startMonth;
+        state.summer.startWeek = p.summer_start.week ?? state.summer.startWeek;
+        state.summer.startWeekday = p.summer_start.day ?? state.summer.startWeekday;
+      }
+      if (p.summer_end) {
+        state.summer.endMonth = p.summer_end.month ?? state.summer.endMonth;
+        state.summer.endWeek = p.summer_end.week ?? state.summer.endWeek;
+        state.summer.endWeekday = p.summer_end.day ?? state.summer.endWeekday;
+      }
+      if (p.summer_pattern) state.summer.pattern = p.summer_pattern;
+      if (p.summer_start_parent) state.summer.startsWith = p.summer_start_parent;
+      state.pathway = 'explore';
+    }
+
+    // The plan as the server stores it (new plans and saved changes alike)
+    function planPayload() {
+      const isFixed = FIXED_PATTERNS.includes(state.schedule);
+      const isRolling = ROLLING_PATTERNS.includes(state.schedule);
+      const isCustom = state.schedule === 'custom';
+      return {
+        first_name: state.firstName || null,
+        family_name: state.familyName || null,
+        children: state.children.map(c => ({ name: c.name || '', birthdate: c.birthdate || null, ageGroup: getAgeGroupFromBirthdate(c.birthdate) || '' })),
+        custody_schedule: state.schedule,
+        exchange_time: state.scheduleConfig.exchangeTime,
+        week1_parent: isFixed ? state.scheduleConfig.week1Parent : null,
+        week1_iso_parity: isFixed ? state.scheduleConfig.week1IsoParity : null,
+        custody_anchor_date: (isRolling || isCustom) ? state.scheduleConfig.anchorDate : null,
+        custody_anchor_position: (isRolling || isCustom) ? state.scheduleConfig.anchorPosition : null,
+        custody_anchor_parent: isRolling ? state.scheduleConfig.anchorParent : null,
+        custom_pattern: isCustom ? state.scheduleConfig.customPattern : null,
+        tracked_holidays: state.trackedHolidays,
+        holiday_custody: state.holidayCustody,
+        holiday_scopes: state.holidayScopes,
+        custom_holidays: state.customHolidays,
+        summer_schedule_enabled: state.summer.enabled,
+        summer_start_month: state.summer.enabled ? state.summer.startMonth : null,
+        summer_start_week: state.summer.enabled ? state.summer.startWeek : null,
+        summer_start_weekday: state.summer.enabled ? state.summer.startWeekday : null,
+        summer_end_month: state.summer.enabled ? state.summer.endMonth : null,
+        summer_end_week: state.summer.enabled ? state.summer.endWeek : null,
+        summer_end_weekday: state.summer.enabled ? state.summer.endWeekday : null,
+        summer_custody_pattern: state.summer.enabled ? state.summer.pattern : null,
+        summer_starts_with: state.summer.enabled ? state.summer.startsWith : null,
+        plan_summary: buildPlanSummary(),
+      };
+    }
+
+    // Save changes to a reopened plan: same code, and the updated plan is
+    // emailed to the address it was saved with
+    async function saveChanges() {
+      const btn = document.getElementById('continueBtn');
+      btn.disabled = true; btn.textContent = 'Saving...';
+      try {
+        const response = await fetch(`${SUPABASE_URL}/functions/v1/create-plan-template`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ template_code: state.planCode, ...planPayload(), source: 'web-plan-builder-update' }),
+        });
+        const data = await response.json().catch(() => ({}));
+        if (!response.ok) throw new Error(data.error || "Couldn't save your changes. Try again.");
+        showToast('Saved. We’ve emailed you the updated plan.');
+      } catch (error) {
+        alert(error.message);
+      } finally {
+        btn.disabled = false;
+        updateUI();
+      }
     }
 
     function setChildCount(count) {
@@ -4010,13 +4177,11 @@
       }
 
       if (FIXED_PATTERNS.includes(pattern.id)) {
-        const who = state.scheduleConfig.week1Parent === 'you' ? 'You' : 'Co-parent';
-        return `${who} starts Week 1`;
+        return state.scheduleConfig.week1Parent === 'you' ? 'You start Week 1' : 'Co-parent starts Week 1';
       }
 
       if (ROLLING_PATTERNS.includes(pattern.id)) {
-        const who = state.scheduleConfig.anchorParent === 'you' ? 'You' : 'Co-parent';
-        return `${who} starts the pattern`;
+        return state.scheduleConfig.anchorParent === 'you' ? 'You start the pattern' : 'Co-parent starts the pattern';
       }
 
       return '';
@@ -4059,7 +4224,11 @@
       const container = document.getElementById('reviewContent');
       const pattern = schedulePatterns.find(p => p.id === state.schedule);
 
-      document.getElementById('reviewSubtitle').textContent = 'Review your details below. Tap Edit to make changes.';
+      document.getElementById('reviewSubtitle').textContent = state.editingSaved
+        ? `Your saved plan (${state.planCode}). Edit anything, then Save changes.`
+        : 'Review your details below. Tap Edit to make changes.';
+      const savedActions = document.getElementById('savedPlanActions');
+      if (savedActions) savedActions.style.display = state.editingSaved ? 'flex' : 'none';
 
       const childrenInfo = state.children
         .map((c, i) => {
