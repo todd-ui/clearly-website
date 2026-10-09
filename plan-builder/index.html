@@ -4312,6 +4312,9 @@
           reimbursement_method: state.expenses.reimbursementMethod,
           reimbursement_handle: state.expenses.reimbursementHandle,
 
+          // The detailed summary for the email (the same as the PDF)
+          plan_summary: buildPlanSummary(),
+
           // Metadata
           pathway: state.pathway,
           source: 'web-plan-builder'
@@ -4390,37 +4393,119 @@
       }, 2000);
     }
 
-    function downloadPDF() {
-      const pattern = schedulePatterns.find(p => p.id === state.schedule);
-      const childrenList = state.children.map(c => {
-        const name = c.name || 'Child';
+    // ==========================================
+    // PLAN SUMMARY: the same detail in the PDF and the email, written for a
+    // lawyer or mediator: real dates, who has what, nothing to decode
+    // ==========================================
+    function buildPlanSummary() {
+      const me = (state.firstName || '').trim() || 'You';
+      const them = 'Co-parent';
+      const who = (c) => (c === 'you' ? me : them);
+      const SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const fmtDate = (d) => `${SHORT[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
+      const fmtDay = (d) => `${DAYS[d.getDay()].slice(0, 3)}, ${SHORT[d.getMonth()]} ${d.getDate()}`;
+      const [h, m] = (state.scheduleConfig.exchangeTime || '15:00').split(':').map(Number);
+      const time = `${h % 12 || 12}:${String(m || 0).padStart(2, '0')} ${h >= 12 ? 'PM' : 'AM'}`;
+      const today = new Date(); today.setHours(0, 0, 0, 0);
+      const sections = [];
+
+      // Children
+      const kids = state.children.map((c, i) => {
+        const name = (c.name || '').trim() || `Child ${i + 1}`;
+        if (!c.birthdate) return [name, ''];
         const age = getChildAge(c.birthdate);
-        return age !== null ? `${name} (${age})` : name;
-      }).join(', ');
+        return [name, `Born ${fmtDate(parseLocalDate(c.birthdate))}${age !== null ? ` (age ${age})` : ''}`];
+      });
+      if (kids.length) sections.push({ title: 'Children', rows: kids });
 
-      // Format exchange time
-      const [hours, mins] = (state.scheduleConfig.exchangeTime || '15:00').split(':');
-      const hour = parseInt(hours);
-      const ampm = hour >= 12 ? 'PM' : 'AM';
-      const hour12 = hour === 0 ? 12 : hour > 12 ? hour - 12 : hour;
-      const exchangeTimeFormatted = `${hour12}:${mins} ${ampm}`;
-
-      // Build holidays list
-      const holidaysList = state.trackedHolidays.map(id => {
-        const h = getAllHolidays().find(holiday => holiday.id === id);
-        const custody = getMyYearsForHoliday(id);
-        return h ? `${h.name}: You in ${custody} years` : '';
-      }).filter(Boolean);
-
-      // Add custom holidays
-      if (state.customHolidays) {
-        state.customHolidays.forEach(h => {
-          holidaysList.push(`${h.name}: You in ${h.myYears} years`);
-        });
+      // Regular schedule, and the next four weeks as dates
+      const pattern = schedulePatterns.find(p => p.id === state.schedule);
+      const rawName = String(pattern?.name || state.schedule || '').replace(/<[^>]*>/g, ' ').replace(/&nbsp;/g, ' ').replace(/\s+/g, ' ').trim();
+      const patternName = rawName.charAt(0) + rawName.slice(1).toLowerCase();
+      const sched = [['Pattern', `${patternName}${pattern?.split ? ` (${pattern.split})` : ''}`]];
+      if (FIXED_PATTERNS.includes(state.schedule)) {
+        sched.push(['Starts', `${who(state.scheduleConfig.week1Parent)} has Week 1`]);
+      } else if (state.scheduleConfig.anchorDate) {
+        sched.push(['Starts', `${who(state.schedule === 'custom' ? 'you' : state.scheduleConfig.anchorParent)} from ${fmtDate(parseLocalDate(state.scheduleConfig.anchorDate))}`]);
       }
+      const runs = [];
+      const exchangeDays = new Set();
+      for (let i = 0; i < 28; i++) {
+        const d = new Date(today); d.setDate(today.getDate() + i);
+        const c = getCustodyForDate(d);
+        if (!c) continue;
+        if (c.isExchange && i > 0) exchangeDays.add(d.getDay());
+        const last = runs[runs.length - 1];
+        if (last && last.custody === c.custody) last.end = d;
+        else runs.push({ custody: c.custody, start: d, end: d });
+      }
+      const exDays = [...exchangeDays].sort();
+      sched.push(['Exchanges', exDays.length === 1 ? `${DAYS[exDays[0]]}s at ${time}` : `At ${time}`]);
+      if (runs.length) {
+        sched.push(['Next four weeks', '']);
+        runs.forEach(r => sched.push([r.start.getTime() === r.end.getTime() ? fmtDay(r.start) : `${fmtDay(r.start)} – ${fmtDay(r.end)}`, who(r.custody)]));
+      }
+      sections.push({ title: 'Regular schedule', rows: sched });
 
-      // Summer info
-      const summerInfo = getSummerSummary(true);
+      // Holidays: the next date of each, who has it then and the year after
+      const holidays = [];
+      state.trackedHolidays.forEach(id => {
+        const hol = getAllHolidays().find(x => x.id === id);
+        if (!hol) return;
+        let y = today.getFullYear();
+        let date = getHolidayDate(id, y);
+        if (date && date < today) { y += 1; date = getHolidayDate(id, y); }
+        const weekend = getHolidayScope(id) === 'weekend_attached' ? ', with the weekend' : '';
+        holidays.push([hol.name, `${date ? fmtDate(date) : y}: ${who(getCustodyForHolidayInYear(id, y))}${weekend}. ${y + 1}: ${who(getCustodyForHolidayInYear(id, y + 1))}`]);
+      });
+      (state.customHolidays || []).forEach(hol => {
+        const years = Object.keys(hol.years || {}).map(Number).sort();
+        const y = years[0] || today.getFullYear();
+        const dates = formatCustomHolidayDate(hol, y).replace(' - ', '–');
+        const mine = (yr) => (hol.myYears === 'odd' ? (yr % 2 === 1) : (yr % 2 === 0)) ? 'you' : 'coparent';
+        holidays.push([hol.name, `${dates ? `${dates}, ${y}` : y}: ${who(mine(y))}. ${y + 1}: ${who(mine(y + 1))}`]);
+      });
+      sections.push({ title: 'Holidays', rows: holidays.length ? holidays : [['Holidays', 'Follow the regular schedule']] });
+
+      // Summer
+      if (state.summer.enabled) {
+        let y = today.getFullYear();
+        const range = (yr) => [getNthWeekdayOfMonth(yr, state.summer.startMonth - 1, state.summer.startWeek, state.summer.startWeekday),
+          getNthWeekdayOfMonth(yr, state.summer.endMonth - 1, state.summer.endWeek, state.summer.endWeekday)];
+        let [start, end] = range(y);
+        if (end < today) { y += 1; [start, end] = range(y); }
+        const patterns = {
+          'same-as-regular': 'Same as the regular schedule',
+          'alternating-weeks': 'Alternating weeks',
+          'alternating-two-weeks': 'Alternating two weeks',
+          'extended-you': `All summer with ${me}`,
+          'extended-coparent': `All summer with ${them.toLowerCase()}`,
+        };
+        sections.push({ title: 'Summer', rows: [
+          ['Dates', `${fmtDate(start)} to ${fmtDate(end)}`],
+          ['Schedule', patterns[state.summer.pattern] || state.summer.pattern],
+          ['Starts with', who(state.summer.startsWith)],
+        ] });
+      } else {
+        sections.push({ title: 'Summer', rows: [['Summer', 'Same as the regular schedule']] });
+      }
+      return sections;
+    }
+
+    function escapeHtml(str) {
+      return String(str ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+    }
+
+    function downloadPDF() {
+      const sections = buildPlanSummary();
+      const sectionsHtml = sections.map(sec => `
+  <div class="section">
+    <h2>${escapeHtml(sec.title)}</h2>
+    <table>${sec.rows.map(([label, value]) => value
+      ? `<tr><td class="label">${escapeHtml(label)}</td><td>${escapeHtml(value)}</td></tr>`
+      : `<tr><td class="label" colspan="2"><strong>${escapeHtml(label)}</strong></td></tr>`).join('')}</table>
+  </div>`).join('');
 
       // Build PDF HTML
       const pdfHtml = `
@@ -4435,8 +4520,10 @@
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       padding: 40px;
       color: #1A1917;
+      background: #FFFFFF;
       line-height: 1.6;
     }
+    :root { color-scheme: light; }
     .header {
       display: flex;
       justify-content: space-between;
@@ -4481,6 +4568,9 @@
     }
     .section p, .section li { font-size: 15px; margin-bottom: 6px; }
     .section ul { padding-left: 20px; }
+    .section table { width: 100%; border-collapse: collapse; }
+    .section td { font-size: 14px; padding: 5px 0; vertical-align: top; border-bottom: 1px solid #F0EFEC; }
+    .section td.label { width: 38%; color: #5F5E5A; padding-right: 12px; }
     .footer {
       margin-top: 40px;
       padding-top: 20px;
@@ -4505,34 +4595,12 @@
   </div>
 
   <h1>Parenting Plan</h1>
-
-  <div class="section">
-    <h2>Family</h2>
-    <p><strong>${state.familyName || 'Family'}</strong></p>
-    <p>${childrenList}</p>
-  </div>
-
-  <div class="section">
-    <h2>Custody Schedule</h2>
-    <p><strong>${pattern?.name || state.schedule}</strong> (${pattern?.split || ''})</p>
-    <p>Exchange time: ${exchangeTimeFormatted}</p>
-  </div>
-
-  <div class="section">
-    <h2>Holidays</h2>
-    <ul>
-      ${holidaysList.map(h => `<li>${h}</li>`).join('')}
-    </ul>
-  </div>
-
-  <div class="section">
-    <h2>Summer Schedule</h2>
-    ${summerInfo}
-  </div>
+  ${state.familyName ? `<p style="margin-bottom: 16px;"><strong>${escapeHtml(state.familyName)}</strong></p>` : ''}
+${sectionsHtml}
 
   <div class="footer">
     <p>Generated with Clearly | getclearly.app</p>
-    <p>This is a planning tool, not legal advice. Consult an attorney for legal matters.</p>
+    <p>This is a planning tool, not legal advice. Have an attorney review any custody agreement.</p>
   </div>
 </body>
 </html>`;
