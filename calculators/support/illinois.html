@@ -354,10 +354,6 @@
       ]
     };
 
-    const navToggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    navToggle.addEventListener('click', () => { navToggle.classList.toggle('open'); navLinks.classList.toggle('open'); });
-
     function formatCurrency(amount) { return '$' + Math.round(amount).toLocaleString(); }
     function getVal(id) { return parseFloat(document.getElementById(id).value) || 0; }
 

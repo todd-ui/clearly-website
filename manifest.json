@@ -1,7 +1,7 @@
 {
-  "name": "Clearly. - Co-Parenting Communication That Works",
-  "short_name": "Clearly.",
-  "description": "Co-parenting app using interest-based communication to shift patterns and find common ground. Shared calendar, expense tracking, and resolution tools.",
+  "name": "Clearly: Co-Parenting Resolved",
+  "short_name": "Clearly",
+  "description": "Co-parenting app for iPhone. Clearly checks the tone before you post, writes up what you both agree, and keeps the schedule, expenses and plan in one place.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
