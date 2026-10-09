@@ -29,7 +29,7 @@ const footerPartial = fs.readFileSync(path.join(__dirname, '_partials/footer.htm
 
 // Regex patterns to match old or new header and footer sections
 // Matches: skip-link + old <nav class="nav"> or new <header class="site-nav"> + mobile menu script
-const headerRegex = /(<a href="#main-content"[^>]*>Skip to content<\/a>\s*)?(<nav class="nav">[\s\S]*?<\/nav>|<header class="site-nav">[\s\S]*?<\/header>)\s*(<script>[\s\S]*?\/\/ Mobile menu toggle[\s\S]*?<\/script>)?\s*(<script src="\/js\/access-modal\.js"[^>]*><\/script>)?/;
+const headerRegex = /(<a href="#main-content"[^>]*>Skip to content<\/a>\s*)?(<nav class="nav">[\s\S]*?<\/nav>|<header class="site-nav">[\s\S]*?<\/header>)\s*(<script>[\s\S]*?\/\/ Mobile menu toggle[\s\S]*?<\/script>)?\s*(<script src="\/js\/access-modal\.js"[^>]*><\/script>)?(\s*<!-- mobile-app-bar -->[\s\S]*?<!-- \/mobile-app-bar -->)?/;
 const footerRegex = /<footer class="(footer|site-footer)">[\s\S]*?<\/footer>\s*(<script>[\s\S]*?\/\/ Mobile menu toggle[\s\S]*?<\/script>)?/;
 
 function processFile(filePath) {

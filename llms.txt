@@ -21,11 +21,11 @@ Clearly is built for co-parents who find it hard to talk. Unlike apps that work 
 - [Homepage](https://getclearly.app/): Product overview, how Clearly works, pricing, download.
 - [Best Co-Parenting Apps 2026 (honest comparison)](https://getclearly.app/best-co-parenting-apps-2026/): A full comparison of co-parenting apps in 2026 written by the makers of Clearly. Covers OurFamilyWizard, TalkingParents, AppClose, Kidtime, BestInterest, 2houses, Custody X Change, and Clearly. Includes pricing, what changed in 2026 (AppClose and TalkingParents ended free tiers), which app fits which situation, and an extended feature matrix. Establishes the "first generation built to document, this generation built to resolve" thesis. The category anchor page for comparison queries.
 - [High-conflict co-parenting guide](https://getclearly.app/high-conflict-coparenting/): What works and what doesn't when co-parenting is hard. Includes parallel parenting.
-- [FAQ](https://getclearly.app/faq.html): Questions about how Clearly works, the record, privacy, pricing, and setup.
-- [For family & legal professionals](https://getclearly.app/professionals.html): How therapists, mediators, and family-law attorneys use Clearly with clients.
-- [Common Ground blog](https://getclearly.app/blog.html): Articles on co-parenting communication, divorce, custody schedules, and conflict resolution.
-- [Privacy policy](https://getclearly.app/privacy.html): What Clearly collects, its providers (including Anthropic), and account deletion.
-- [Terms](https://getclearly.app/terms.html): Terms of use.
+- [FAQ](https://getclearly.app/faq): Questions about how Clearly works, the record, privacy, pricing, and setup.
+- [For family & legal professionals](https://getclearly.app/professionals): How therapists, mediators, and family-law attorneys use Clearly with clients.
+- [Common Ground blog](https://getclearly.app/blog): Articles on co-parenting communication, divorce, custody schedules, and conflict resolution.
+- [Privacy policy](https://getclearly.app/privacy): What Clearly collects, its providers (including Anthropic), and account deletion.
+- [Terms](https://getclearly.app/terms): Terms of use.
 
 ## Guides
 
@@ -38,19 +38,31 @@ Clearly is built for co-parents who find it hard to talk. Unlike apps that work 
 - [Co-parenting expenses](https://getclearly.app/co-parenting-expenses/): Tracking, splitting, and documenting shared kid expenses.
 - [Co-parent communication](https://getclearly.app/co-parent-communication/): Principles of low-conflict communication.
 
+## Most-read guides
+
+- [When your co-parent weaponizes your child's therapist](https://getclearly.app/blog/when-co-parent-weaponizes-childs-therapist): Therapy records, talking to the therapist, and when to involve the court.
+- [When your co-parent records your conversations](https://getclearly.app/blog/when-co-parent-records-conversations-legal-rights-protection): Recording and consent, how recordings get used in custody cases, and protecting yourself.
+- [When your co-parent threatens to take you to court](https://getclearly.app/blog/how-to-handle-a-co-parent-who-threatens-to-take-you-to-court): Telling real threats from intimidation, and responding calmly.
+- [When your co-parent calls the police during custody exchanges](https://getclearly.app/blog/when-co-parent-calls-police-during-custody-exchanges): Staying calm, documenting it, and making exchanges safer.
+- [When your co-parent refuses to communicate](https://getclearly.app/blog/what-to-do-when-your-co-parent-refuses-to-communicate): Making decisions and documenting attempts without cooperation.
+- [When your child doesn't want to go to the other parent's house](https://getclearly.app/blog/when-your-child-says-they-don-t-want-to-go-to-the-other-parent-s-house): What's behind it and how to respond.
+- [How to build a communication record that protects you](https://getclearly.app/blog/how-to-build-a-communication-record-that-protects-you): Keeping factual, useful co-parenting records.
+- [The BIFF method](https://getclearly.app/blog/biff-method-co-parenting-communication): Brief, Informative, Friendly, Firm replies to hostile messages.
+- [Parallel parenting vs co-parenting](https://getclearly.app/blog/parallel-parenting-vs-co-parenting-what-s-the-difference): When disengaging works better than cooperating.
+
 ## Tools
 
 - [Child support calculators](https://getclearly.app/calculators/): Free, private, browser-based child support estimate calculators.
-- [California child support calculator](https://getclearly.app/calculators/support/california.html): State-specific child support estimate for California.
-- [Florida child support calculator](https://getclearly.app/calculators/support/florida.html): State-specific child support estimate for Florida.
-- [Illinois child support calculator](https://getclearly.app/calculators/support/illinois.html): State-specific child support estimate for Illinois.
-- [New York child support calculator](https://getclearly.app/calculators/support/new-york.html): State-specific child support estimate for New York.
-- [Pennsylvania child support calculator](https://getclearly.app/calculators/support/pennsylvania.html): State-specific child support estimate for Pennsylvania.
-- [Texas child support calculator](https://getclearly.app/calculators/support/texas.html): State-specific child support estimate for Texas.
+- [California child support calculator](https://getclearly.app/calculators/support/california): State-specific child support estimate for California.
+- [Florida child support calculator](https://getclearly.app/calculators/support/florida): State-specific child support estimate for Florida.
+- [Illinois child support calculator](https://getclearly.app/calculators/support/illinois): State-specific child support estimate for Illinois.
+- [New York child support calculator](https://getclearly.app/calculators/support/new-york): State-specific child support estimate for New York.
+- [Pennsylvania child support calculator](https://getclearly.app/calculators/support/pennsylvania): State-specific child support estimate for Pennsylvania.
+- [Texas child support calculator](https://getclearly.app/calculators/support/texas): State-specific child support estimate for Texas.
 
 ## Support
 
-- [Help & support](https://getclearly.app/help.html): Setup, account, and common questions about using Clearly.
+- [Help & support](https://getclearly.app/help): Setup, account, and common questions about using Clearly.
 
 ## What's in the app
 

@@ -5,6 +5,29 @@ const path = require('path');
 const notion = new Client({ auth: process.env.NOTION_API_KEY });
 const DATABASE_ID = '2df435a853a58014b9e9dc6ac1cbba09';
 
+const SITE = 'https://getclearly.app';
+const APP_STORE_URL = 'https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374';
+
+// One URL per post: /blog/<slug>, no ".html". Netlify serves blog/<slug>.html
+// at that path, and netlify/edge-functions/clean-urls.js 301s any .html
+// request back to it, so every link, canonical, sitemap and feed entry
+// must use this form.
+const postPath = slug => `/blog/${slug}`;
+const postUrl = slug => `${SITE}${postPath(slug)}`;
+const BLOG_URL = `${SITE}/blog`;
+
+// Rewrite internal links that still carry ".html" (e.g. links typed into
+// Notion posts) to the clean form so they never point at a redirect.
+function cleanInternalLinks(html) {
+  return html.replace(
+    /href="(https:\/\/(?:www\.)?getclearly\.app)?(\/[^"#?]*?)\.html([#?][^"]*)?"/g,
+    (m, origin, p, rest) => {
+      const clean = p.endsWith('/index') ? p.slice(0, -5) : p;
+      return `href="${origin ? SITE : ''}${clean || '/'}${rest || ''}"`;
+    }
+  );
+}
+
 // Load partials
 const headerPartial = fs.readFileSync(path.join(__dirname, '_partials/header.html'), 'utf-8').trim();
 const footerPartial = fs.readFileSync(path.join(__dirname, '_partials/footer.html'), 'utf-8').trim();
@@ -33,26 +56,28 @@ async function fetchPosts() {
   return allResults;
 }
 
+// Notion returns at most 100 blocks per call; long posts were being cut off.
 async function getPageContent(pageId) {
-  const blocks = await notion.blocks.children.list({ block_id: pageId });
-  return blocks.results;
+  let blocks = [];
+  let cursor;
+  do {
+    const res = await notion.blocks.children.list({ block_id: pageId, start_cursor: cursor, page_size: 100 });
+    blocks = blocks.concat(res.results);
+    cursor = res.has_more ? res.next_cursor : undefined;
+  } while (cursor);
+  return blocks;
 }
 
 function blocksToHtml(blocks) {
   return blocks.map(block => {
     switch (block.type) {
       case 'paragraph':
-        const text = block.paragraph.rich_text.map(t => {
-          let content = escapeHtml(t.plain_text);
-          if (t.annotations.bold) content = `<strong>${content}</strong>`;
-          if (t.annotations.italic) content = `<em>${content}</em>`;
-          if (t.href) content = `<a href="${t.href}">${content}</a>`;
-          return content;
-        }).join('');
+        const text = richTextToHtml(block.paragraph.rich_text);
         return text ? `<p>${text}</p>` : '';
 
+      // The post title is the page's only <h1>
       case 'heading_1':
-        return `<h1>${richTextToHtml(block.heading_1.rich_text)}</h1>`;
+        return `<h2>${richTextToHtml(block.heading_1.rich_text)}</h2>`;
 
       case 'heading_2':
         return `<h2>${richTextToHtml(block.heading_2.rich_text)}</h2>`;
@@ -64,7 +89,7 @@ function blocksToHtml(blocks) {
         return `<li>${richTextToHtml(block.bulleted_list_item.rich_text)}</li>`;
 
       case 'numbered_list_item':
-        return `<li>${richTextToHtml(block.numbered_list_item.rich_text)}</li>`;
+        return `<li data-ol>${richTextToHtml(block.numbered_list_item.rich_text)}</li>`;
 
       case 'quote':
         return `<blockquote>${richTextToHtml(block.quote.rich_text)}</blockquote>`;
@@ -105,8 +130,10 @@ function escapeHtml(text) {
 }
 
 function wrapListItems(html) {
-  // Wrap consecutive <li> items in <ul> tags
-  return html.replace(/(<li>.*?<\/li>\n?)+/g, match => `<ul>${match}</ul>`);
+  // Wrap consecutive numbered items in <ol>, then bulleted items in <ul>
+  return html
+    .replace(/(<li>.*?<\/li>\n?)+/g, match => `<ul>${match}</ul>`)
+    .replace(/(<li data-ol>.*?<\/li>\n?)+/g, match => `<ol>${match.replace(/<li data-ol>/g, '<li>')}</ol>`);
 }
 
 function getProperty(page, name) {
@@ -147,6 +174,122 @@ function generateSlug(title, existingSlug) {
     .replace(/^-|-$/g, '');
 }
 
+// Call-to-action copy matched to what the reader came for. Claims here must
+// match the homepage (tone check, record kept as written, shared calendar,
+// expense splits, 14-day trial, co-parent joins free).
+const CTA_COPY = {
+  'High-Conflict Situations': {
+    kicker: 'When every message matters',
+    text: 'Clearly checks the tone before you post and keeps every message on the record exactly as written, preserved and timestamped. The conversation stays about the kids.'
+  },
+  'Communication': {
+    kicker: 'Say it once, calmly',
+    text: 'Clearly checks the tone of your message before you post and suggests calmer wording. You choose what to send.'
+  },
+  'Schedules & Custody': {
+    kicker: 'One calendar you both trust',
+    text: 'Clearly keeps your custody schedule, holidays and swap requests in one shared calendar, with every change documented.'
+  },
+  'Money & Expenses': {
+    kicker: 'Money, settled',
+    text: 'Log a shared expense once and Clearly works out each parent’s share from the split you agreed. No spreadsheets, no back-and-forth.'
+  },
+  'Legal Basics': {
+    kicker: 'A record you can rely on',
+    text: 'Clearly keeps your messages, agreements and schedule changes preserved and timestamped, and your records stay exportable.'
+  },
+  default: {
+    kicker: 'Co-parenting, resolved',
+    text: 'Clearly is a co-parenting app that checks the tone before you post, helps you both reach an answer, and keeps the schedule, expenses and plan in one place.'
+  }
+};
+CTA_COPY['Expenses'] = CTA_COPY['Money & Expenses'];
+const ctaFor = category => CTA_COPY[category] || CTA_COPY.default;
+const CTA_FINE_PRINT = '14-day free trial · Your co-parent joins free';
+
+const appStoreIcon = `<svg width="18" height="21" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="currentColor"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="currentColor"/></svg>`;
+
+function midArticleCta(category) {
+  const c = ctaFor(category);
+  return `<aside class="inline-cta" aria-label="About Clearly">
+  <p class="inline-cta-kicker">${c.kicker}</p>
+  <p>${c.text}</p>
+  <a href="${APP_STORE_URL}" data-cta="mid-article">${appStoreIcon} Try Clearly free</a>
+</aside>`;
+}
+
+// Put the inline CTA before the third section (or the second, for short
+// posts) so mobile readers see it long before the end of the article.
+function insertMidArticleCta(content, category) {
+  const h2s = [...content.matchAll(/<h2>/g)].map(m => m.index);
+  if (h2s.length < 2) return content;
+  const at = h2s[h2s.length >= 4 ? 2 : 1];
+  return content.slice(0, at) + midArticleCta(category) + '\n' + content.slice(at);
+}
+
+// "<title>" is what shows in Google; keep it under ~60 characters.
+function seoTitle(title) {
+  const branded = `${title} | Clearly`;
+  return branded.length <= 60 ? branded : title;
+}
+
+const STOPWORDS = new Set('a an and are as at be but by can co do does for from how if in into is it its kids child children your you when what with to the of on or not parent parents parenting co-parent co-parenting coparenting without who why their them they this that'.split(' '));
+const keywords = text => new Set(text.toLowerCase().replace(/[^a-z0-9\s-]/g, ' ').split(/\s+/).filter(w => w.length > 2 && !STOPWORDS.has(w)));
+
+// Related posts: shared title keywords count most, same category breaks ties.
+function pickRelated(post, all, n = 3) {
+  const mine = keywords(post.title);
+  return all
+    .filter(p => p.slug !== post.slug)
+    .map(p => {
+      let score = 0;
+      for (const w of keywords(p.title)) if (mine.has(w)) score += 3;
+      if (p.category && p.category === post.category) score += 2;
+      return { p, score };
+    })
+    .sort((a, b) => b.score - a.score || (a.p.dateISO < b.p.dateISO ? 1 : -1))
+    .slice(0, n)
+    .map(x => x.p);
+}
+
+function articleJsonLd(post) {
+  const url = postUrl(post.slug);
+  return JSON.stringify({
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'BlogPosting',
+        '@id': `${url}#article`,
+        headline: post.title,
+        description: post.description,
+        datePublished: post.dateISO,
+        dateModified: post.modifiedISO || post.dateISO,
+        inLanguage: 'en-US',
+        articleSection: post.category || undefined,
+        wordCount: post.wordCount,
+        author: { '@type': 'Organization', name: 'Clearly', url: SITE },
+        publisher: {
+          '@type': 'Organization',
+          name: 'Clearly',
+          url: SITE,
+          logo: { '@type': 'ImageObject', url: `${SITE}/images/app-icon.png` }
+        },
+        mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+        isPartOf: { '@type': 'Blog', '@id': `${BLOG_URL}#blog`, name: 'Common Ground', url: BLOG_URL },
+        image: `${SITE}/images/blog-og.png`
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE}/` },
+          { '@type': 'ListItem', position: 2, name: 'Common Ground', item: BLOG_URL },
+          { '@type': 'ListItem', position: 3, name: post.title, item: url }
+        ]
+      }
+    ]
+  }, null, 2).replace(/</g, '\\u003c');
+}
+
 const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -167,11 +310,14 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0D8268">
-  <title>${escapeHtml(post.title)} | Clearly Blog</title>
+  <title>${escapeHtml(seoTitle(post.title))}</title>
   <meta name="description" content="${escapeHtml(post.description)}">
-  <link rel="canonical" href="https://getclearly.app/blog/${post.slug}.html">
+  <link rel="canonical" href="${postUrl(post.slug)}">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://getclearly.app/blog/${post.slug}.html">
+  <meta property="og:url" content="${postUrl(post.slug)}">
+  <meta property="article:published_time" content="${post.dateISO}">
+  <meta property="article:modified_time" content="${post.modifiedISO || post.dateISO}">${post.category ? `
+  <meta property="article:section" content="${escapeHtml(post.category)}">` : ''}
   <meta property="og:title" content="${escapeHtml(post.title)}">
   <meta property="og:description" content="${escapeHtml(post.description)}">
   <meta property="og:image" content="https://getclearly.app/images/blog-og.png">
@@ -182,7 +328,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   <meta name="twitter:title" content="${escapeHtml(post.title)}">
   <meta name="twitter:description" content="${escapeHtml(post.description)}">
   <meta name="twitter:image" content="https://getclearly.app/images/blog-og.png">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <link rel="alternate" type="application/rss+xml" title="Clearly Blog RSS Feed" href="https://getclearly.app/feed.xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -217,35 +363,23 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
     .share-btn svg { width: 16px; height: 16px; }
     .share-btn.copied { background: var(--primary); color: white; border-color: var(--primary); }
 
-    /* Blog CTA Module */
-    .blog-cta {
-      background: var(--primary-soft);
-      border-radius: 16px;
-      padding: 32px;
-      margin: 48px 0;
-      text-align: center;
-    }
-    .blog-cta p {
-      font-size: 17px;
-      color: var(--text);
-      margin: 0 0 16px 0;
-      font-weight: 500;
-    }
-    .blog-cta a {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--primary);
-      color: white;
-      padding: 14px 24px;
-      border-radius: 10px;
-      font-size: 15px;
-      font-weight: 600;
-      transition: all 0.2s;
-    }
-    .blog-cta a:hover {
-      background: var(--primary-dark, #0a6b55);
-      text-decoration: none;
+    /* Calls to action */
+    .blog-cta { background: var(--primary-soft); border-radius: 16px; padding: 32px; margin: 48px 0; text-align: center; }
+    .blog-cta p { font-size: 17px; line-height: 1.6; color: var(--text); margin: 0 0 20px; }
+    .blog-cta .blog-cta-kicker, .inline-cta .inline-cta-kicker { font-family: 'EB Garamond', serif; font-size: 24px; line-height: 1.3; margin-bottom: 8px; color: var(--text); }
+    .blog-cta > a, .inline-cta > a { display: inline-flex; align-items: center; gap: 10px; background: var(--primary); color: #fff; padding: 14px 24px; border-radius: 10px; font-size: 15px; font-weight: 600; transition: background 0.2s; }
+    .blog-cta > a:hover, .inline-cta > a:hover { background: var(--primary-dark, #0a6b55); text-decoration: none; }
+    .blog-cta .blog-cta-fine { font-size: 14px; color: var(--text-muted); margin: 16px 0 0; }
+    .blog-cta .blog-cta-secondary { color: var(--primary); font-weight: 500; }
+    .inline-cta { border: 1px solid var(--border); border-left: 4px solid var(--primary); border-radius: 12px; padding: 24px; margin: 40px 0; background: var(--surface, #fff); }
+    .blog-post-content .inline-cta p { font-size: 16px; line-height: 1.6; margin: 0 0 16px; color: var(--text-secondary); }
+    .blog-post-content .inline-cta .inline-cta-kicker { font-size: 22px; line-height: 1.3; color: var(--text); margin-bottom: 8px; }
+    .blog-post-content .inline-cta > a { color: #fff; }
+    @media (max-width: 768px) {
+      .blog-post { padding-top: 96px; }
+      .blog-post-title { font-size: 34px; }
+      .blog-cta { padding: 24px 20px; }
+      .blog-cta > a, .inline-cta > a { width: 100%; justify-content: center; }
     }
 
     /* Related Articles */
@@ -273,12 +407,10 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   </style>
 </head>
 <body>
-<a href="#main-content" class="skip-link">Skip to content</a>
-
   ${headerPartial}
 
   <article class="blog-post" id="main-content">
-    <a href="/blog.html" class="back-link">&larr; Back to Blog</a>
+    <a href="/blog" class="back-link">&larr; Back to Blog</a>
     <header class="blog-post-header">
       <h1 class="blog-post-title">${escapeHtml(post.title)}</h1>
       <p class="blog-post-meta">By The Clearly Team &middot; ${post.date}</p>
@@ -287,16 +419,16 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
         <button class="share-btn" onclick="copyLink()" title="Copy link" id="copy-btn">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
         </button>
-        <a class="share-btn" href="https://twitter.com/intent/tweet?url=https://getclearly.app/blog/${post.slug}.html&text=${encodeURIComponent(post.title)}" target="_blank" rel="noopener" title="Share on X">
+        <a class="share-btn" href="https://twitter.com/intent/tweet?url=${postUrl(post.slug)}&text=${encodeURIComponent(post.title)}" target="_blank" rel="noopener" title="Share on X">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
         </a>
-        <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=https://getclearly.app/blog/${post.slug}.html" target="_blank" rel="noopener" title="Share on Facebook">
+        <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=${postUrl(post.slug)}" target="_blank" rel="noopener" title="Share on Facebook">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         </a>
-        <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https://getclearly.app/blog/${post.slug}.html" target="_blank" rel="noopener" title="Share on LinkedIn">
+        <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=${postUrl(post.slug)}" target="_blank" rel="noopener" title="Share on LinkedIn">
           <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
         </a>
-        <a class="share-btn" href="mailto:?subject=${encodeURIComponent(post.title)}&body=I thought you might find this helpful: https://getclearly.app/blog/${post.slug}.html" title="Share via Email">
+        <a class="share-btn" href="mailto:?subject=${encodeURIComponent(post.title)}&body=I thought you might find this helpful: ${postUrl(post.slug)}" title="Share via Email">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
         </a>
       </div>
@@ -305,11 +437,10 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
       ${post.content}
     </div>
     <div class="blog-cta">
-      <p>Ready to put this into practice?</p>
-      <a href="/plan-builder/">
-        Start building your parenting plan
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-      </a>
+      <p class="blog-cta-kicker">${ctaFor(post.category).kicker}</p>
+      <p>${ctaFor(post.category).text}</p>
+      <a href="${APP_STORE_URL}" data-cta="end-of-article">${appStoreIcon} Download on the App Store</a>
+      <p class="blog-cta-fine">${CTA_FINE_PRINT} &middot; <a href="/plan-builder/" class="blog-cta-secondary">Or build a free parenting plan</a></p>
     </div>
   </article>
 
@@ -319,7 +450,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
       <h2>Related Articles</h2>
       <div class="related-grid">
         ${relatedPosts.map(p => `
-        <a href="/blog/${p.slug}.html" class="related-card">
+        <a href="${postPath(p.slug)}" class="related-card">
           <span class="related-category" data-cat="${p.category}">${p.category || 'Article'}</span>
           <h3>${escapeHtml(p.title)}</h3>
           <p>${escapeHtml(p.description.substring(0, 120))}${p.description.length > 120 ? '...' : ''}</p>
@@ -334,32 +465,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
 
   <!-- Article Structured Data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    "headline": "${escapeHtml(post.title)}",
-    "description": "${escapeHtml(post.description)}",
-    "datePublished": "${post.dateISO}",
-    "dateModified": "${post.dateISO}",
-    "author": {
-      "@type": "Organization",
-      "name": "Clearly",
-      "url": "https://getclearly.app"
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": "Clearly",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://getclearly.app/images/blog-og.png"
-      }
-    },
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": "https://getclearly.app/blog/${post.slug}.html"
-    },
-    "image": "https://getclearly.app/images/blog-og.png"
-  }
+${articleJsonLd(post)}
   </script>
 
   <script>
@@ -401,9 +507,9 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
   <meta name="theme-color" content="#0D8268">
   <title>Common Ground - Co-Parenting Tips & Advice | Clearly</title>
   <meta name="description" content="Real topics, practical advice, and perspectives for co-parents. Custody schedules, communication strategies, and tips for calmer co-parenting.">
-  <link rel="canonical" href="https://getclearly.app/blog.html">
+  <link rel="canonical" href="${BLOG_URL}">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://getclearly.app/blog.html">
+  <meta property="og:url" content="${BLOG_URL}">
   <meta property="og:title" content="Common Ground - Co-Parenting Tips & Advice">
   <meta property="og:description" content="Real topics, practical advice, and perspectives for co-parents.">
   <meta property="og:image" content="https://getclearly.app/images/blog-og.png">
@@ -428,7 +534,8 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
     "@type": "Blog",
     "name": "Common Ground",
     "description": "Real topics, practical advice, and perspectives for co-parents. Custody schedules, communication strategies, and tips for calmer co-parenting.",
-    "url": "https://getclearly.app/blog.html",
+    "@id": "${BLOG_URL}#blog",
+    "url": "${BLOG_URL}",
     "publisher": {
       "@type": "Organization",
       "name": "Clearly LLC",
@@ -439,7 +546,7 @@ ${posts.map(post => `      {
         "@type": "BlogPosting",
         "headline": ${JSON.stringify(post.title)},
         "description": ${JSON.stringify(post.description)},
-        "url": "https://getclearly.app/blog/${post.slug}.html",
+        "url": "${postUrl(post.slug)}",
         "datePublished": ${JSON.stringify(post.dateISO)}
       }`).join(',\n')}
     ]
@@ -689,8 +796,6 @@ ${posts.map(post => `      {
   </style>
 </head>
 <body>
-<a href="#main-content" class="skip-link">Skip to content</a>
-
   ${headerPartial}
 
   <header class="blog-hero" id="main-content">
@@ -719,9 +824,9 @@ ${posts.map(post => `      {
         <article class="blog-card" data-category="${escapeHtml(post.category)}">
           ${post.category ? `<span class="blog-card-category" data-cat="${escapeHtml(post.category)}">${escapeHtml(post.category)}</span>` : ''}
           <div class="blog-card-date">${post.date}</div>
-          <h2><a href="/blog/${post.slug}.html">${escapeHtml(post.title)}</a></h2>
+          <h2><a href="${postPath(post.slug)}">${escapeHtml(post.title)}</a></h2>
           <p>${escapeHtml(post.description)}</p>
-          <a href="/blog/${post.slug}.html" class="blog-card-link">
+          <a href="${postPath(post.slug)}" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -763,6 +868,48 @@ ${posts.map(post => `      {
 </body>
 </html>`;
 
+// Static pages for the sitemap, in clean-URL form. Every URL here must
+// be the page's canonical (automation/seo-check.js enforces it).
+const STATIC_PAGES = [
+  ['/', 'index.html'],
+  ['/plan-builder/', 'plan-builder/index.html'],
+  ['/best-co-parenting-apps-2026/', 'best-co-parenting-apps-2026/index.html'],
+  ['/high-conflict-coparenting/', 'high-conflict-coparenting/index.html'],
+  ['/co-parent-communication/', 'co-parent-communication/index.html'],
+  ['/custody-schedule-help/', 'custody-schedule-help/index.html'],
+  ['/co-parenting-expenses/', 'co-parenting-expenses/index.html'],
+  ['/kids-and-divorce/', 'kids-and-divorce/index.html'],
+  ['/mediation-prep/', 'mediation-prep/index.html'],
+  ['/coparenting-alignment-guide/', 'coparenting-alignment-guide/index.html'],
+  ['/communication-styles/', 'communication-styles/index.html'],
+  ['/calculators/', 'calculators/index.html'],
+  ['/calculators/support/california', 'calculators/support/california.html'],
+  ['/calculators/support/florida', 'calculators/support/florida.html'],
+  ['/calculators/support/illinois', 'calculators/support/illinois.html'],
+  ['/calculators/support/new-york', 'calculators/support/new-york.html'],
+  ['/calculators/support/pennsylvania', 'calculators/support/pennsylvania.html'],
+  ['/calculators/support/texas', 'calculators/support/texas.html'],
+  ['/blog', 'blog.html'],
+  ['/faq', 'faq.html'],
+  ['/help', 'help.html'],
+  ['/professionals', 'professionals.html'],
+  ['/privacy', 'privacy.html'],
+  ['/terms', 'terms.html'],
+];
+
+// Last time a file really changed, from git (falls back to today). A
+// sitemap that stamps every URL with today's date teaches Google to
+// ignore lastmod entirely.
+function lastCommitDate(file) {
+  try {
+    const out = require('child_process')
+      .execSync(`git log -1 --format=%cs -- "${file}"`, { cwd: __dirname, stdio: ['ignore', 'pipe', 'ignore'] })
+      .toString().trim();
+    if (/^\d{4}-\d{2}-\d{2}$/.test(out)) return out;
+  } catch (e) {}
+  return new Date().toISOString().split('T')[0];
+}
+
 async function build() {
   console.log('Fetching posts from Notion...');
 
@@ -777,10 +924,20 @@ async function build() {
 
   // Process each post
   const processedPosts = [];
+  const seenSlugs = new Set();
 
   for (const page of posts) {
     const title = getProperty(page, 'Title');
-    const slug = generateSlug(title, getProperty(page, 'Slug'));
+    // A slug is a bare path segment: never ".html", never a slash.
+    const slug = generateSlug(title, getProperty(page, 'Slug').trim())
+      .replace(/\.html?$/i, '')
+      .replace(/^\/+|\/+$/g, '')
+      .replace(/^blog\//, '');
+    if (!slug || seenSlugs.has(slug)) {
+      console.warn(`  ! Skipping "${title}": ${slug ? 'duplicate' : 'empty'} slug "${slug}"`);
+      continue;
+    }
+    seenSlugs.add(slug);
     const rawDescription = getProperty(page, 'Description') || '';
 
     // SEO description: auto-fix bad descriptions so they never reach production
@@ -803,6 +960,8 @@ async function build() {
     const rawDate = getProperty(page, 'Date');
     const date = formatDate(rawDate);
     const dateISO = rawDate || new Date().toISOString().split('T')[0];
+    const edited = (page.last_edited_time || '').split('T')[0];
+    const modifiedISO = edited && edited > dateISO ? edited : dateISO;
     const category = getProperty(page, 'Category') || '';
 
     console.log(`Processing: ${title} [${category || 'No category'}]`);
@@ -811,21 +970,20 @@ async function build() {
     const blocks = await getPageContent(page.id);
     let content = blocksToHtml(blocks);
     content = wrapListItems(content);
+    content = cleanInternalLinks(content);
+    const wordCount = content.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
+    content = insertMidArticleCta(content, category);
 
-    const post = { title, slug, description, date, dateISO, content, category };
+    const post = { title, slug, description, date, dateISO, modifiedISO, content, category, wordCount };
     processedPosts.push(post);
   }
 
   // Write individual post pages with related articles
   for (const post of processedPosts) {
-    // Get 3 related posts (same category first, then others, excluding current)
-    const sameCategory = processedPosts.filter(p => p.slug !== post.slug && p.category === post.category);
-    const otherPosts = processedPosts.filter(p => p.slug !== post.slug && p.category !== post.category);
-    const relatedPosts = [...sameCategory, ...otherPosts].slice(0, 3);
-
+    const relatedPosts = pickRelated(post, processedPosts);
     const postHtml = blogPostTemplate(post, relatedPosts);
     fs.writeFileSync(path.join(blogDir, `${post.slug}.html`), postHtml);
-    console.log(`  -> blog/${post.slug}.html`);
+    console.log(`  -> ${postPath(post.slug)}`);
   }
 
   // Write blog listing page
@@ -834,160 +992,18 @@ async function build() {
   console.log('-> blog.html');
 
   // Generate sitemap.xml
-  const today = new Date().toISOString().split('T')[0];
+  const newestPost = processedPosts.reduce((m, p) => (p.modifiedISO > m ? p.modifiedISO : m), '');
+  const urlEntry = (loc, lastmod) => `  <url>\n    <loc>${loc}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`;
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://getclearly.app/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/plan-builder/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/communication-styles/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/calculators/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/calculators/support/california.html</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/calculators/support/florida.html</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/calculators/support/illinois.html</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/calculators/support/new-york.html</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/calculators/support/pennsylvania.html</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/calculators/support/texas.html</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/co-parent-communication/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/custody-schedule-help/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/blog.html</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/faq.html</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/help.html</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/privacy.html</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/terms.html</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/professionals.html</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/coparenting-alignment-guide/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/kids-and-divorce/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/mediation-prep/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/co-parenting-expenses/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/high-conflict-coparenting/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://getclearly.app/best-co-parenting-apps-2026/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.95</priority>
-  </url>
-${processedPosts.map(post => `  <url>
-    <loc>https://getclearly.app/blog/${post.slug}.html</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>`).join('\n')}
-</urlset>`;
+${STATIC_PAGES.map(([p, file]) => {
+    let lastmod = lastCommitDate(file);
+    if (p === '/blog' && newestPost > lastmod) lastmod = newestPost;
+    return urlEntry(SITE + p, lastmod);
+  }).join('\n')}
+${processedPosts.map(post => urlEntry(postUrl(post.slug), post.modifiedISO)).join('\n')}
+</urlset>
+`;
   fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemap);
   console.log('-> sitemap.xml');
 
@@ -998,20 +1014,20 @@ ${processedPosts.map(post => `  <url>
   <channel>
     <title>Common Ground - Clearly Blog</title>
     <description>Real topics, practical advice, and perspectives for co-parents. Custody schedules, communication strategies, and tips for calmer co-parenting.</description>
-    <link>https://getclearly.app/blog.html</link>
-    <atom:link href="https://getclearly.app/feed.xml" rel="self" type="application/rss+xml"/>
+    <link>${BLOG_URL}</link>
+    <atom:link href="${SITE}/feed.xml" rel="self" type="application/rss+xml"/>
     <language>en-us</language>
     <lastBuildDate>${rssDate}</lastBuildDate>
     <image>
-      <url>https://getclearly.app/images/blog-og.png</url>
+      <url>${SITE}/images/blog-og.png</url>
       <title>Common Ground - Clearly Blog</title>
-      <link>https://getclearly.app/blog.html</link>
+      <link>${BLOG_URL}</link>
     </image>
 ${processedPosts.map(post => `    <item>
       <title>${escapeHtml(post.title)}</title>
       <description>${escapeHtml(post.description)}</description>
-      <link>https://getclearly.app/blog/${post.slug}.html</link>
-      <guid isPermaLink="true">https://getclearly.app/blog/${post.slug}.html</guid>
+      <link>${postUrl(post.slug)}</link>
+      <guid isPermaLink="true">${postUrl(post.slug)}</guid>
       <pubDate>${new Date(post.dateISO).toUTCString()}</pubDate>
       ${post.category ? `<category>${escapeHtml(post.category)}</category>` : ''}
     </item>`).join('\n')}

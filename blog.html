@@ -20,9 +20,9 @@
   <meta name="theme-color" content="#0D8268">
   <title>Common Ground - Co-Parenting Tips & Advice | Clearly</title>
   <meta name="description" content="Real topics, practical advice, and perspectives for co-parents. Custody schedules, communication strategies, and tips for calmer co-parenting.">
-  <link rel="canonical" href="https://getclearly.app/blog.html">
+  <link rel="canonical" href="https://getclearly.app/blog">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://getclearly.app/blog.html">
+  <meta property="og:url" content="https://getclearly.app/blog">
   <meta property="og:title" content="Common Ground - Co-Parenting Tips & Advice">
   <meta property="og:description" content="Real topics, practical advice, and perspectives for co-parents.">
   <meta property="og:image" content="https://getclearly.app/images/blog-og.png">
@@ -293,8 +293,8 @@
 <header class="site-nav">
   <a href="/" class="nav-logo">Clearly.</a>
   <div class="nav-right">
-    <a href="/blog.html" class="nav-link">Common Ground</a>
-    <a href="/professionals.html" class="nav-link">For Professionals</a>
+    <a href="/blog" class="nav-link">Common Ground</a>
+    <a href="/professionals" class="nav-link">For Professionals</a>
     <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge">
       <svg width="22" height="26" viewBox="0 0 22 26" fill="none">
         <path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/>
@@ -322,17 +322,76 @@
       siteNavRight.classList.toggle('open');
     });
   }
-  // Track App Store clicks
+  // Track App Store clicks. data-cta names the placement when there is one.
   document.addEventListener('click', function(e) {
     var link = e.target.closest('a[href*="apps.apple.com"]');
     if (link && typeof gtag === 'function') {
       gtag('event', 'app_store_click', {
         link_url: link.href,
-        link_location: link.closest('header,footer,.final-cta,.hero') ? link.closest('header') ? 'header' : link.closest('footer') ? 'footer' : 'cta' : 'body'
+        link_location: link.dataset.cta || (link.closest('header') ? 'header' : link.closest('footer') ? 'footer' : link.closest('.final-cta,.hero') ? 'cta' : 'body'),
+        page_type: location.pathname.indexOf('/blog/') === 0 ? 'blog_post' : 'page'
       });
     }
   });
-</script><header class="blog-hero" id="main-content">
+</script>
+<!-- mobile-app-bar -->
+<!-- Sticky App Store bar for phones. The header badge sits behind the menu on
+     small screens, so without this a phone reader has no visible way to the app. -->
+<style>
+  .mobile-app-bar { display: none; }
+  @media (max-width: 768px) {
+    .mobile-app-bar {
+      display: flex; align-items: center; gap: 12px;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 900;
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+      background: rgba(246, 245, 241, 0.97); border-top: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.06);
+      transform: translateY(110%); transition: transform 0.25s ease;
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    }
+    .mobile-app-bar.show { transform: translateY(0); }
+    .mobile-app-bar img { width: 40px; height: 40px; border-radius: 9px; flex-shrink: 0; }
+    .mobile-app-bar-text { flex: 1; min-width: 0; line-height: 1.3; }
+    .mobile-app-bar-text strong, .mobile-app-bar-text span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mobile-app-bar-text strong { font-size: 15px; font-weight: 500; color: #1C1C1A; }
+    .mobile-app-bar-text span { font-size: 13px; color: #6B6B67; }
+    .mobile-app-bar a {
+      flex-shrink: 0; background: #0D8268; color: #fff; font-size: 15px; font-weight: 500;
+      padding: 10px 16px; border-radius: 10px; text-decoration: none;
+    }
+  }
+</style>
+<div class="mobile-app-bar" id="mobile-app-bar" aria-hidden="true">
+  <img src="/images/app-icon.png" alt="" width="40" height="40" loading="lazy">
+  <div class="mobile-app-bar-text">
+    <strong>Clearly</strong>
+    <span>Co-parenting app</span>
+  </div>
+  <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" data-cta="mobile-sticky-bar" tabindex="-1">Try it free</a>
+</div>
+<script>
+  (function() {
+    var bar = document.getElementById('mobile-app-bar');
+    if (!bar) return;
+    // Step aside while the footer or a full-size App Store CTA is on screen.
+    var inView = new Set();
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { e.isIntersecting ? inView.add(e.target) : inView.delete(e.target); });
+        update();
+      });
+      document.querySelectorAll('footer, .blog-cta, .final-cta').forEach(function(el) { io.observe(el); });
+    }
+    function update() {
+      var show = window.scrollY > 500 && inView.size === 0;
+      bar.classList.toggle('show', show);
+      bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+      bar.querySelector('a').tabIndex = show ? 0 : -1;
+    }
+    window.addEventListener('scroll', update, { passive: true });
+  })();
+</script>
+<!-- /mobile-app-bar --><header class="blog-hero" id="main-content">
     <div class="container">
       <div class="blog-hero-badge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
@@ -376,9 +435,9 @@
         <article class="blog-card" data-category="Money &amp; Expenses">
           <span class="blog-card-category" data-cat="Money &amp; Expenses">Money &amp; Expenses</span>
           <div class="blog-card-date">April 4, 2026</div>
-          <h2><a href="/blog/how-to-handle-child-extracurricular-activity-costs-co-parenting.html">How to Handle Your Child's Extracurricular Activity Costs in Co-Parenting</a></h2>
+          <h2><a href="/blog/how-to-handle-child-extracurricular-activity-costs-co-parenting">How to Handle Your Child's Extracurricular Activity Costs in Co-Parenting</a></h2>
           <p>Learn practical strategies for splitting sports, music, and activity costs with your co-parent fairly. Includes templates and budgeting tips.</p>
-          <a href="/blog/how-to-handle-child-extracurricular-activity-costs-co-parenting.html" class="blog-card-link">
+          <a href="/blog/how-to-handle-child-extracurricular-activity-costs-co-parenting" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -387,9 +446,9 @@
         <article class="blog-card" data-category="Schedules &amp; Custody">
           <span class="blog-card-category" data-cat="Schedules &amp; Custody">Schedules &amp; Custody</span>
           <div class="blog-card-date">March 28, 2026</div>
-          <h2><a href="/blog/custody-schedules-special-needs-children.html">How to Handle Custody Schedules When Your Child Has Special Needs</a></h2>
+          <h2><a href="/blog/custody-schedules-special-needs-children">How to Handle Custody Schedules When Your Child Has Special Needs</a></h2>
           <p>Create custody schedules that support your special needs child's routine, therapy, and wellbeing while maintaining fair parenting time for both homes.</p>
-          <a href="/blog/custody-schedules-special-needs-children.html" class="blog-card-link">
+          <a href="/blog/custody-schedules-special-needs-children" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -398,9 +457,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">March 21, 2026</div>
-          <h2><a href="/blog/how-to-handle-teacher-conferences-school-events-co-parenting.html">How to Handle Your Child's Teacher Conferences and School Events in Two Homes</a></h2>
+          <h2><a href="/blog/how-to-handle-teacher-conferences-school-events-co-parenting">How to Handle Your Child's Teacher Conferences and School Events in Two Homes</a></h2>
           <p>Learn practical strategies for managing parent-teacher conferences, school performances, and academic events when co-parenting across two households.</p>
-          <a href="/blog/how-to-handle-teacher-conferences-school-events-co-parenting.html" class="blog-card-link">
+          <a href="/blog/how-to-handle-teacher-conferences-school-events-co-parenting" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -409,9 +468,9 @@
         <article class="blog-card" data-category="Your Children">
           <span class="blog-card-category" data-cat="Your Children">Your Children</span>
           <div class="blog-card-date">March 14, 2026</div>
-          <h2><a href="/blog/when-child-asks-which-parent-they-love-more.html">When Your Child Asks Which Parent They Love More: How to Respond</a></h2>
+          <h2><a href="/blog/when-child-asks-which-parent-they-love-more">When Your Child Asks Which Parent They Love More: How to Respond</a></h2>
           <p>Learn how to handle the difficult question when your child asks which parent they love more. Expert guidance for protecting your child's emotional...</p>
-          <a href="/blog/when-child-asks-which-parent-they-love-more.html" class="blog-card-link">
+          <a href="/blog/when-child-asks-which-parent-they-love-more" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -420,9 +479,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">March 7, 2026</div>
-          <h2><a href="/blog/consistent-rules-across-two-homes-co-parenting.html">How to Create Consistent Rules Across Two Homes Without Fighting</a></h2>
+          <h2><a href="/blog/consistent-rules-across-two-homes-co-parenting">How to Create Consistent Rules Across Two Homes Without Fighting</a></h2>
           <p>Learn practical strategies for establishing consistent household rules and expectations between co-parenting homes without conflict or control battles.</p>
-          <a href="/blog/consistent-rules-across-two-homes-co-parenting.html" class="blog-card-link">
+          <a href="/blog/consistent-rules-across-two-homes-co-parenting" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -431,9 +490,9 @@
         <article class="blog-card" data-category="Legal Basics">
           <span class="blog-card-category" data-cat="Legal Basics">Legal Basics</span>
           <div class="blog-card-date">February 28, 2026</div>
-          <h2><a href="/blog/what-happens-when-you-violate-custody-order-legal-consequences.html">What Happens When You Violate a Custody Order: Legal Consequences Explained</a></h2>
+          <h2><a href="/blog/what-happens-when-you-violate-custody-order-legal-consequences">What Happens When You Violate a Custody Order: Legal Consequences Explained</a></h2>
           <p>Learn the serious legal consequences of violating a custody order, from fines to jail time, and how to protect yourself from violations.</p>
-          <a href="/blog/what-happens-when-you-violate-custody-order-legal-consequences.html" class="blog-card-link">
+          <a href="/blog/what-happens-when-you-violate-custody-order-legal-consequences" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -442,9 +501,9 @@
         <article class="blog-card" data-category="Blended Families">
           <span class="blog-card-category" data-cat="Blended Families">Blended Families</span>
           <div class="blog-card-date">February 21, 2026</div>
-          <h2><a href="/blog/gift-giving-special-occasions-blended-families.html">How to Handle Gift-Giving and Special Occasions in Blended Families</a></h2>
+          <h2><a href="/blog/gift-giving-special-occasions-blended-families">How to Handle Gift-Giving and Special Occasions in Blended Families</a></h2>
           <p>Navigate birthdays, holidays, and special events when multiple households, step-parents, and extended families are involved in gift-giving decisions.</p>
-          <a href="/blog/gift-giving-special-occasions-blended-families.html" class="blog-card-link">
+          <a href="/blog/gift-giving-special-occasions-blended-families" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -453,9 +512,9 @@
         <article class="blog-card" data-category="Schedules &amp; Custody">
           <span class="blog-card-category" data-cat="Schedules &amp; Custody">Schedules &amp; Custody</span>
           <div class="blog-card-date">February 14, 2026</div>
-          <h2><a href="/blog/50-50-custody-myth-equal-time-not-always-equal.html">The 50/50 Custody Myth: Why Equal Time Isn't Always Equal</a></h2>
+          <h2><a href="/blog/50-50-custody-myth-equal-time-not-always-equal">The 50/50 Custody Myth: Why Equal Time Isn't Always Equal</a></h2>
           <p>Discover why 50/50 custody schedules don't guarantee equal parenting time and learn how to create truly balanced arrangements that work for your family.</p>
-          <a href="/blog/50-50-custody-myth-equal-time-not-always-equal.html" class="blog-card-link">
+          <a href="/blog/50-50-custody-myth-equal-time-not-always-equal" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -464,9 +523,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">February 7, 2026</div>
-          <h2><a href="/blog/how-to-introduce-co-parenting-rules-to-children-age-guide.html">How to Introduce Co-Parenting Rules to Your Children: Age-by-Age Guide</a></h2>
+          <h2><a href="/blog/how-to-introduce-co-parenting-rules-to-children-age-guide">How to Introduce Co-Parenting Rules to Your Children: Age-by-Age Guide</a></h2>
           <p>Learn how to explain co-parenting boundaries and house rules to children at different ages. Expert tips for making transitions smoother for kids.</p>
-          <a href="/blog/how-to-introduce-co-parenting-rules-to-children-age-guide.html" class="blog-card-link">
+          <a href="/blog/how-to-introduce-co-parenting-rules-to-children-age-guide" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -475,9 +534,9 @@
         <article class="blog-card" data-category="Your Children">
           <span class="blog-card-category" data-cat="Your Children">Your Children</span>
           <div class="blog-card-date">January 31, 2026</div>
-          <h2><a href="/blog/child-refuses-visitation-other-parent-house-what-to-do.html">When Kids Refuse to Go to the Other Parent's House: 5 Essential Steps</a></h2>
+          <h2><a href="/blog/child-refuses-visitation-other-parent-house-what-to-do">When Kids Refuse to Go to the Other Parent's House: 5 Essential Steps</a></h2>
           <p>Expert strategies for handling custody resistance without damaging relationships or putting your child in the middle of co-parenting conflict.</p>
-          <a href="/blog/child-refuses-visitation-other-parent-house-what-to-do.html" class="blog-card-link">
+          <a href="/blog/child-refuses-visitation-other-parent-house-what-to-do" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -486,9 +545,9 @@
         <article class="blog-card" data-category="Legal Basics">
           <span class="blog-card-category" data-cat="Legal Basics">Legal Basics</span>
           <div class="blog-card-date">January 27, 2026</div>
-          <h2><a href="/blog/child-support-modifications-when-how-request-changes.html">Understanding Child Support Modifications: When and How to Request Changes</a></h2>
+          <h2><a href="/blog/child-support-modifications-when-how-request-changes">Understanding Child Support Modifications: When and How to Request Changes</a></h2>
           <p>Learn when you can legally modify child support, what triggers qualify, and the step-by-step process to request changes through the court system.</p>
-          <a href="/blog/child-support-modifications-when-how-request-changes.html" class="blog-card-link">
+          <a href="/blog/child-support-modifications-when-how-request-changes" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -497,9 +556,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">January 25, 2026</div>
-          <h2><a href="/blog/essential-first-steps-beginning-co-parenting-journey.html">Starting Over: Essential First Steps When Beginning Your Co-Parenting Journey</a></h2>
+          <h2><a href="/blog/essential-first-steps-beginning-co-parenting-journey">Starting Over: Essential First Steps When Beginning Your Co-Parenting Journey</a></h2>
           <p>New to co-parenting? Learn the critical first steps every divorced parent needs to take to build a foundation for successful shared parenting.</p>
-          <a href="/blog/essential-first-steps-beginning-co-parenting-journey.html" class="blog-card-link">
+          <a href="/blog/essential-first-steps-beginning-co-parenting-journey" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -508,9 +567,9 @@
         <article class="blog-card" data-category="Blended Families">
           <span class="blog-card-category" data-cat="Blended Families">Blended Families</span>
           <div class="blog-card-date">January 23, 2026</div>
-          <h2><a href="/blog/ex-starts-dating-helping-kids-navigate-new-relationships.html">When Your Ex Starts Dating: Helping Kids Navigate New Relationships</a></h2>
+          <h2><a href="/blog/ex-starts-dating-helping-kids-navigate-new-relationships">When Your Ex Starts Dating: Helping Kids Navigate New Relationships</a></h2>
           <p>Learn how to support your children when your co-parent introduces a new partner. Practical strategies for managing emotions and transitions.</p>
-          <a href="/blog/ex-starts-dating-helping-kids-navigate-new-relationships.html" class="blog-card-link">
+          <a href="/blog/ex-starts-dating-helping-kids-navigate-new-relationships" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -519,9 +578,9 @@
         <article class="blog-card" data-category="Schedules &amp; Custody">
           <span class="blog-card-category" data-cat="Schedules &amp; Custody">Schedules &amp; Custody</span>
           <div class="blog-card-date">January 21, 2026</div>
-          <h2><a href="/blog/age-appropriate-custody-schedules-guide.html">Creating Age-Appropriate Custody Schedules: What Works at Every Stage</a></h2>
+          <h2><a href="/blog/age-appropriate-custody-schedules-guide">Creating Age-Appropriate Custody Schedules: What Works at Every Stage</a></h2>
           <p>Learn how to adjust custody schedules as children grow, from toddlers to teens. Expert tips for creating developmentally appropriate parenting time.</p>
-          <a href="/blog/age-appropriate-custody-schedules-guide.html" class="blog-card-link">
+          <a href="/blog/age-appropriate-custody-schedules-guide" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -530,9 +589,9 @@
         <article class="blog-card" data-category="Schedules &amp; Custody">
           <span class="blog-card-category" data-cat="Schedules &amp; Custody">Schedules &amp; Custody</span>
           <div class="blog-card-date">January 19, 2026</div>
-          <h2><a href="/blog/holiday-custody-schedules-fair-traditions-both-homes.html">Holiday Custody Schedules: Creating Fair Traditions for Both Homes</a></h2>
+          <h2><a href="/blog/holiday-custody-schedules-fair-traditions-both-homes">Holiday Custody Schedules: Creating Fair Traditions for Both Homes</a></h2>
           <p>Learn how to create balanced holiday custody arrangements that honor traditions while building new memories in both co-parenting households.</p>
-          <a href="/blog/holiday-custody-schedules-fair-traditions-both-homes.html" class="blog-card-link">
+          <a href="/blog/holiday-custody-schedules-fair-traditions-both-homes" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -541,9 +600,9 @@
         <article class="blog-card" data-category="High-Conflict Situations">
           <span class="blog-card-category" data-cat="High-Conflict Situations">High-Conflict Situations</span>
           <div class="blog-card-date">January 15, 2026</div>
-          <h2><a href="/blog/requesting-schedule-swaps-work-travel-strategic-approach.html">Requesting Schedule Swaps for Work Travel: A Strategic Approach</a></h2>
+          <h2><a href="/blog/requesting-schedule-swaps-work-travel-strategic-approach">Requesting Schedule Swaps for Work Travel: A Strategic Approach</a></h2>
           <p>Learn how to successfully request custody schedule changes for work travel, even with a difficult co-parent. Proven strategies for professional...</p>
-          <a href="/blog/requesting-schedule-swaps-work-travel-strategic-approach.html" class="blog-card-link">
+          <a href="/blog/requesting-schedule-swaps-work-travel-strategic-approach" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -552,9 +611,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">January 9, 2026</div>
-          <h2><a href="/blog/handling-co-parenting-schedule-changes-without-conflict.html">How to Handle Schedule Changes Without Conflict or Confusion</a></h2>
+          <h2><a href="/blog/handling-co-parenting-schedule-changes-without-conflict">How to Handle Schedule Changes Without Conflict or Confusion</a></h2>
           <p>Learn practical strategies for managing inevitable schedule changes in co-parenting while maintaining stability and reducing stress for everyone involved.</p>
-          <a href="/blog/handling-co-parenting-schedule-changes-without-conflict.html" class="blog-card-link">
+          <a href="/blog/handling-co-parenting-schedule-changes-without-conflict" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -563,9 +622,9 @@
         <article class="blog-card" data-category="Your Children">
           <span class="blog-card-category" data-cat="Your Children">Your Children</span>
           <div class="blog-card-date">January 7, 2026</div>
-          <h2><a href="/blog/children-fear-abandonment-divorce.html">Fear of Abandonment: What Your Child Won't Say But Is Feeling</a></h2>
+          <h2><a href="/blog/children-fear-abandonment-divorce">Fear of Abandonment: What Your Child Won't Say But Is Feeling</a></h2>
           <p>Children of divorced parents often develop abandonment fears when exposed to parental conflict. Learn the signs.</p>
-          <a href="/blog/children-fear-abandonment-divorce.html" class="blog-card-link">
+          <a href="/blog/children-fear-abandonment-divorce" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -574,9 +633,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">January 5, 2026</div>
-          <h2><a href="/blog/creating-first-co-parenting-plan-essential-elements.html">Creating Your First Co-Parenting Plan: Essential Elements Every Parent Needs</a></h2>
+          <h2><a href="/blog/creating-first-co-parenting-plan-essential-elements">Creating Your First Co-Parenting Plan: Essential Elements Every Parent Needs</a></h2>
           <p>Learn the must-have components of an effective co-parenting plan, from custody schedules to decision-making frameworks that protect your family.</p>
-          <a href="/blog/creating-first-co-parenting-plan-essential-elements.html" class="blog-card-link">
+          <a href="/blog/creating-first-co-parenting-plan-essential-elements" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -585,9 +644,9 @@
         <article class="blog-card" data-category="Your Children">
           <span class="blog-card-category" data-cat="Your Children">Your Children</span>
           <div class="blog-card-date">December 31, 2025</div>
-          <h2><a href="/blog/children-wellbeing-divorce-research.html">The #1 Predictor of Children's Wellbeing After Divorce</a></h2>
+          <h2><a href="/blog/children-wellbeing-divorce-research">The #1 Predictor of Children's Wellbeing After Divorce</a></h2>
           <p>It's not the divorce itself that determines how children fare—research points to one factor that matters most.</p>
-          <a href="/blog/children-wellbeing-divorce-research.html" class="blog-card-link">
+          <a href="/blog/children-wellbeing-divorce-research" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -596,9 +655,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">December 27, 2025</div>
-          <h2><a href="/blog/when-to-divorce-timing-separation-around-life-events.html">When to Divorce: Timing Your Separation Around Life Events</a></h2>
+          <h2><a href="/blog/when-to-divorce-timing-separation-around-life-events">When to Divorce: Timing Your Separation Around Life Events</a></h2>
           <p>Strategic considerations for timing divorce around travel, work, birthdays, and major life events to minimize disruption for children and families.</p>
-          <a href="/blog/when-to-divorce-timing-separation-around-life-events.html" class="blog-card-link">
+          <a href="/blog/when-to-divorce-timing-separation-around-life-events" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -607,9 +666,9 @@
         <article class="blog-card" data-category="Self-Care &amp; Support">
           <span class="blog-card-category" data-cat="Self-Care &amp; Support">Self-Care &amp; Support</span>
           <div class="blog-card-date">December 24, 2025</div>
-          <h2><a href="/blog/is-it-time-making-the-hard-decision-about-your-marriage.html">Is It Time? Making the Hard Decision About Your Marriage</a></h2>
+          <h2><a href="/blog/is-it-time-making-the-hard-decision-about-your-marriage">Is It Time? Making the Hard Decision About Your Marriage</a></h2>
           <p>Struggling with whether to stay or leave? Learn to recognize the signs, explore your options, and make decisions that protect both you and your children.</p>
-          <a href="/blog/is-it-time-making-the-hard-decision-about-your-marriage.html" class="blog-card-link">
+          <a href="/blog/is-it-time-making-the-hard-decision-about-your-marriage" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -618,9 +677,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">December 18, 2025</div>
-          <h2><a href="/blog/hidden-truths-about-coparenting-no-one-tells-you.html">The Hidden Truths About Co-Parenting No One Prepared You For</a></h2>
+          <h2><a href="/blog/hidden-truths-about-coparenting-no-one-tells-you">The Hidden Truths About Co-Parenting No One Prepared You For</a></h2>
           <p>The realities of co-parenting that most divorced parents only discover through experience. What nobody warns you about — and how to cope.</p>
-          <a href="/blog/hidden-truths-about-coparenting-no-one-tells-you.html" class="blog-card-link">
+          <a href="/blog/hidden-truths-about-coparenting-no-one-tells-you" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -629,9 +688,9 @@
         <article class="blog-card" data-category="Your Children">
           <span class="blog-card-category" data-cat="Your Children">Your Children</span>
           <div class="blog-card-date">December 14, 2025</div>
-          <h2><a href="/blog/co-parenting-communication-channels.html">Beyond Text: Choosing the Right Communication Channel</a></h2>
+          <h2><a href="/blog/co-parenting-communication-channels">Beyond Text: Choosing the Right Communication Channel</a></h2>
           <p>Email, text, apps, phone calls—each has its place. Learn when to use which channel for different conversations.</p>
-          <a href="/blog/co-parenting-communication-channels.html" class="blog-card-link">
+          <a href="/blog/co-parenting-communication-channels" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -640,9 +699,9 @@
         <article class="blog-card" data-category="Self-Care &amp; Support">
           <span class="blog-card-category" data-cat="Self-Care &amp; Support">Self-Care &amp; Support</span>
           <div class="blog-card-date">December 13, 2025</div>
-          <h2><a href="/blog/surprising-benefits-of-co-parenting-better-than-you-think.html">The Surprising Benefits of Co-Parenting: Why It's Better Than You Think</a></h2>
+          <h2><a href="/blog/surprising-benefits-of-co-parenting-better-than-you-think">The Surprising Benefits of Co-Parenting: Why It's Better Than You Think</a></h2>
           <p>Co-parenting has unexpected advantages nobody talks about — from personal growth to stronger parent-child bonds. Discover the silver linings.</p>
-          <a href="/blog/surprising-benefits-of-co-parenting-better-than-you-think.html" class="blog-card-link">
+          <a href="/blog/surprising-benefits-of-co-parenting-better-than-you-think" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -651,9 +710,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">December 4, 2025</div>
-          <h2><a href="/blog/fatal-flaw-co-parenting-apps-what-actually-works.html">The Fatal Flaw with Most Co-Parenting Apps (And What Actually Works)</a></h2>
+          <h2><a href="/blog/fatal-flaw-co-parenting-apps-what-actually-works">The Fatal Flaw with Most Co-Parenting Apps (And What Actually Works)</a></h2>
           <p>Co-parenting apps promise to reduce conflict, but often just move the same toxic patterns to a new platform. Here's what needs to change instead.</p>
-          <a href="/blog/fatal-flaw-co-parenting-apps-what-actually-works.html" class="blog-card-link">
+          <a href="/blog/fatal-flaw-co-parenting-apps-what-actually-works" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -662,9 +721,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">December 1, 2025</div>
-          <h2><a href="/blog/counter-parenting-signs-solutions.html">When 'Co-Parenting' Becomes 'Counter-Parenting': Recognizing the Difference</a></h2>
+          <h2><a href="/blog/counter-parenting-signs-solutions">When 'Co-Parenting' Becomes 'Counter-Parenting': Recognizing the Difference</a></h2>
           <p>Sometimes what looks like co-parenting is actually working against your child's best interests. Learn to recognize the warning signs.</p>
-          <a href="/blog/counter-parenting-signs-solutions.html" class="blog-card-link">
+          <a href="/blog/counter-parenting-signs-solutions" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -673,9 +732,9 @@
         <article class="blog-card" data-category="Self-Care &amp; Support">
           <span class="blog-card-category" data-cat="Self-Care &amp; Support">Self-Care &amp; Support</span>
           <div class="blog-card-date">November 30, 2025</div>
-          <h2><a href="/blog/unexpected-silver-linings-hidden-benefits-co-parenting.html">The Unexpected Silver Linings: 7 Hidden Benefits of Co-Parenting</a></h2>
+          <h2><a href="/blog/unexpected-silver-linings-hidden-benefits-co-parenting">The Unexpected Silver Linings: 7 Hidden Benefits of Co-Parenting</a></h2>
           <p>Discover the surprising advantages of co-parenting that no one talks about—from personal growth to stronger family bonds and newfound freedom.</p>
-          <a href="/blog/unexpected-silver-linings-hidden-benefits-co-parenting.html" class="blog-card-link">
+          <a href="/blog/unexpected-silver-linings-hidden-benefits-co-parenting" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -684,9 +743,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">November 28, 2025</div>
-          <h2><a href="/blog/timing-your-divorce-when-to-consider-separation-around-life-events.html">Timing Your Divorce: When to Consider Separation Around Life Events</a></h2>
+          <h2><a href="/blog/timing-your-divorce-when-to-consider-separation-around-life-events">Timing Your Divorce: When to Consider Separation Around Life Events</a></h2>
           <p>Navigate the complex decision of divorce timing around birthdays, holidays, work changes, and family milestones. Strategic guidance for protecting...</p>
-          <a href="/blog/timing-your-divorce-when-to-consider-separation-around-life-events.html" class="blog-card-link">
+          <a href="/blog/timing-your-divorce-when-to-consider-separation-around-life-events" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -695,9 +754,9 @@
         <article class="blog-card" data-category="Blended Families">
           <span class="blog-card-category" data-cat="Blended Families">Blended Families</span>
           <div class="blog-card-date">November 22, 2025</div>
-          <h2><a href="/blog/helping-your-child-bond-with-a-stepparent-without-forcing-it.html">Helping Your Child Bond with a Stepparent (Without Forcing It)</a></h2>
+          <h2><a href="/blog/helping-your-child-bond-with-a-stepparent-without-forcing-it">Helping Your Child Bond with a Stepparent (Without Forcing It)</a></h2>
           <p>Support a natural bond between your child and stepparent without pressure. Respect their pace while creating space for connection.</p>
-          <a href="/blog/helping-your-child-bond-with-a-stepparent-without-forcing-it.html" class="blog-card-link">
+          <a href="/blog/helping-your-child-bond-with-a-stepparent-without-forcing-it" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -706,9 +765,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">November 21, 2025</div>
-          <h2><a href="/blog/how-to-set-boundaries-in-co-parent-communication.html">How to Set Boundaries in Co-Parent Communication</a></h2>
+          <h2><a href="/blog/how-to-set-boundaries-in-co-parent-communication">How to Set Boundaries in Co-Parent Communication</a></h2>
           <p>Healthy communication boundaries protect your wellbeing and your kids. Set clear limits on topics, timing, and tone with your co-parent.</p>
-          <a href="/blog/how-to-set-boundaries-in-co-parent-communication.html" class="blog-card-link">
+          <a href="/blog/how-to-set-boundaries-in-co-parent-communication" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -717,9 +776,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">November 20, 2025</div>
-          <h2><a href="/blog/how-to-protect-your-children-from-co-parenting-conflict.html">How to Protect Your Children from Co-Parenting Conflict</a></h2>
+          <h2><a href="/blog/how-to-protect-your-children-from-co-parenting-conflict">How to Protect Your Children from Co-Parenting Conflict</a></h2>
           <p>Shield your children from the effects of co-parenting conflict. Practical strategies to reduce exposure and support their emotional health.</p>
-          <a href="/blog/how-to-protect-your-children-from-co-parenting-conflict.html" class="blog-card-link">
+          <a href="/blog/how-to-protect-your-children-from-co-parenting-conflict" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -728,9 +787,9 @@
         <article class="blog-card" data-category="Legal Basics">
           <span class="blog-card-category" data-cat="Legal Basics">Legal Basics</span>
           <div class="blog-card-date">November 20, 2025</div>
-          <h2><a href="/blog/what-to-expect-in-family-court-a-co-parent-s-guide.html">What to Expect in Family Court: A Co-Parent's Guide</a></h2>
+          <h2><a href="/blog/what-to-expect-in-family-court-a-co-parent-s-guide">What to Expect in Family Court: A Co-Parent's Guide</a></h2>
           <p>Heading to family court for the first time? Understand the process, what judges look for, and how to prepare for custody proceedings.</p>
-          <a href="/blog/what-to-expect-in-family-court-a-co-parent-s-guide.html" class="blog-card-link">
+          <a href="/blog/what-to-expect-in-family-court-a-co-parent-s-guide" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -739,9 +798,9 @@
         <article class="blog-card" data-category="Self-Care &amp; Support">
           <span class="blog-card-category" data-cat="Self-Care &amp; Support">Self-Care &amp; Support</span>
           <div class="blog-card-date">November 16, 2025</div>
-          <h2><a href="/blog/how-to-cope-on-the-days-you-don-t-have-your-kids.html">How to Cope on the Days You Don't Have Your Kids</a></h2>
+          <h2><a href="/blog/how-to-cope-on-the-days-you-don-t-have-your-kids">How to Cope on the Days You Don't Have Your Kids</a></h2>
           <p>The empty days without your children are among the hardest parts of co-parenting. Practical ways to cope and rebuild your routine.</p>
-          <a href="/blog/how-to-cope-on-the-days-you-don-t-have-your-kids.html" class="blog-card-link">
+          <a href="/blog/how-to-cope-on-the-days-you-don-t-have-your-kids" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -750,9 +809,9 @@
         <article class="blog-card" data-category="Blended Families">
           <span class="blog-card-category" data-cat="Blended Families">Blended Families</span>
           <div class="blog-card-date">November 16, 2025</div>
-          <h2><a href="/blog/when-your-child-has-a-new-sibling-at-the-other-house.html">When Your Child Has a New Sibling at the Other House</a></h2>
+          <h2><a href="/blog/when-your-child-has-a-new-sibling-at-the-other-house">When Your Child Has a New Sibling at the Other House</a></h2>
           <p>Your co-parent has a new baby? Help your child navigate complex emotions about their new sibling while maintaining their sense of security.</p>
-          <a href="/blog/when-your-child-has-a-new-sibling-at-the-other-house.html" class="blog-card-link">
+          <a href="/blog/when-your-child-has-a-new-sibling-at-the-other-house" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -761,9 +820,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">November 16, 2025</div>
-          <h2><a href="/blog/how-to-respond-to-a-hostile-co-parenting-message.html">How to Respond to a Hostile Co-Parenting Message</a></h2>
+          <h2><a href="/blog/how-to-respond-to-a-hostile-co-parenting-message">How to Respond to a Hostile Co-Parenting Message</a></h2>
           <p>Pause before you respond. Extract the real question, remove the emotion, and reply with clarity. A step-by-step approach that works.</p>
-          <a href="/blog/how-to-respond-to-a-hostile-co-parenting-message.html" class="blog-card-link">
+          <a href="/blog/how-to-respond-to-a-hostile-co-parenting-message" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -772,9 +831,9 @@
         <article class="blog-card" data-category="Self-Care &amp; Support">
           <span class="blog-card-category" data-cat="Self-Care &amp; Support">Self-Care &amp; Support</span>
           <div class="blog-card-date">November 15, 2025</div>
-          <h2><a href="/blog/rebuilding-your-identity-after-divorce.html">Rebuilding Your Identity After Divorce</a></h2>
+          <h2><a href="/blog/rebuilding-your-identity-after-divorce">Rebuilding Your Identity After Divorce</a></h2>
           <p>Divorce changes who you are. Navigate the identity crisis, rediscover yourself beyond the marriage, and build a life on your own terms.</p>
-          <a href="/blog/rebuilding-your-identity-after-divorce.html" class="blog-card-link">
+          <a href="/blog/rebuilding-your-identity-after-divorce" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -783,9 +842,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">November 14, 2025</div>
-          <h2><a href="/blog/gray-rock-method-coparenting.html">The Gray Rock Method: When Minimal Response Is Best</a></h2>
+          <h2><a href="/blog/gray-rock-method-coparenting">The Gray Rock Method: When Minimal Response Is Best</a></h2>
           <p>Sometimes the most powerful response is the most boring one. Learn how Gray Rock defuses high-conflict situations.</p>
-          <a href="/blog/gray-rock-method-coparenting.html" class="blog-card-link">
+          <a href="/blog/gray-rock-method-coparenting" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -794,9 +853,9 @@
         <article class="blog-card" data-category="Blended Families">
           <span class="blog-card-category" data-cat="Blended Families">Blended Families</span>
           <div class="blog-card-date">November 12, 2025</div>
-          <h2><a href="/blog/how-to-co-parent-when-your-ex-remarries.html">How to Co-Parent When Your Ex Remarries</a></h2>
+          <h2><a href="/blog/how-to-co-parent-when-your-ex-remarries">How to Co-Parent When Your Ex Remarries</a></h2>
           <p>Your ex getting remarried changes the co-parenting dynamic. Navigate new boundaries, roles, and emotions while keeping focus on your kids.</p>
-          <a href="/blog/how-to-co-parent-when-your-ex-remarries.html" class="blog-card-link">
+          <a href="/blog/how-to-co-parent-when-your-ex-remarries" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -805,9 +864,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">November 10, 2025</div>
-          <h2><a href="/blog/what-to-do-when-your-co-parent-badmouths-you-to-the-kids.html">What to Do When Your Co-Parent Badmouths You to the Kids</a></h2>
+          <h2><a href="/blog/what-to-do-when-your-co-parent-badmouths-you-to-the-kids">What to Do When Your Co-Parent Badmouths You to the Kids</a></h2>
           <p>Your children are repeating negative things from the other house? How to respond calmly, protect your bond, and address the behavior.</p>
-          <a href="/blog/what-to-do-when-your-co-parent-badmouths-you-to-the-kids.html" class="blog-card-link">
+          <a href="/blog/what-to-do-when-your-co-parent-badmouths-you-to-the-kids" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -816,9 +875,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">November 9, 2025</div>
-          <h2><a href="/blog/what-makes-co-parenting-communication-actually-work.html">What Makes Co-Parenting Communication Actually Work</a></h2>
+          <h2><a href="/blog/what-makes-co-parenting-communication-actually-work">What Makes Co-Parenting Communication Actually Work</a></h2>
           <p>Discover the principles behind effective co-parenting communication — from structured messaging to removing emotion from logistics.</p>
-          <a href="/blog/what-makes-co-parenting-communication-actually-work.html" class="blog-card-link">
+          <a href="/blog/what-makes-co-parenting-communication-actually-work" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -827,9 +886,9 @@
         <article class="blog-card" data-category="Self-Care &amp; Support">
           <span class="blog-card-category" data-cat="Self-Care &amp; Support">Self-Care &amp; Support</span>
           <div class="blog-card-date">November 8, 2025</div>
-          <h2><a href="/blog/how-to-stop-co-parenting-conflict-from-taking-over-your-life.html">How to Stop Co-Parenting Conflict from Taking Over Your Life</a></h2>
+          <h2><a href="/blog/how-to-stop-co-parenting-conflict-from-taking-over-your-life">How to Stop Co-Parenting Conflict from Taking Over Your Life</a></h2>
           <p>Co-parenting stress is bleeding into every area of your life? Practical strategies to contain the conflict and reclaim your wellbeing.</p>
-          <a href="/blog/how-to-stop-co-parenting-conflict-from-taking-over-your-life.html" class="blog-card-link">
+          <a href="/blog/how-to-stop-co-parenting-conflict-from-taking-over-your-life" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -838,9 +897,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">November 8, 2025</div>
-          <h2><a href="/blog/how-to-co-parent-with-a-narcissist.html">How to Co-Parent with a Narcissist</a></h2>
+          <h2><a href="/blog/how-to-co-parent-with-a-narcissist">How to Co-Parent with a Narcissist</a></h2>
           <p>Narcissistic co-parenting requires a different playbook. Grey rock, parallel parenting, and written-only communication strategies that work.</p>
-          <a href="/blog/how-to-co-parent-with-a-narcissist.html" class="blog-card-link">
+          <a href="/blog/how-to-co-parent-with-a-narcissist" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -849,9 +908,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">November 7, 2025</div>
-          <h2><a href="/blog/when-co-parenting-conflict-won-t-stop-knowing-when-to-get-help.html">When Co-Parenting Conflict Won't Stop: Knowing When to Get Help</a></h2>
+          <h2><a href="/blog/when-co-parenting-conflict-won-t-stop-knowing-when-to-get-help">When Co-Parenting Conflict Won't Stop: Knowing When to Get Help</a></h2>
           <p>Self-help strategies aren't enough? Recognize when co-parenting conflict needs professional intervention — and what kind of help to seek.</p>
-          <a href="/blog/when-co-parenting-conflict-won-t-stop-knowing-when-to-get-help.html" class="blog-card-link">
+          <a href="/blog/when-co-parenting-conflict-won-t-stop-knowing-when-to-get-help" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -860,9 +919,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">November 7, 2025</div>
-          <h2><a href="/blog/what-is-structured-co-parenting-communication.html">What Is Structured Co-Parenting Communication?</a></h2>
+          <h2><a href="/blog/what-is-structured-co-parenting-communication">What Is Structured Co-Parenting Communication?</a></h2>
           <p>Structured communication keeps co-parenting exchanges topic-based, child-focused, and conflict-free. Understand the framework and how to start.</p>
-          <a href="/blog/what-is-structured-co-parenting-communication.html" class="blog-card-link">
+          <a href="/blog/what-is-structured-co-parenting-communication" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -871,9 +930,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">November 4, 2025</div>
-          <h2><a href="/blog/when-your-co-parent-uses-the-kids-as-messengers.html">When Your Co-Parent Uses the Kids as Messengers</a></h2>
+          <h2><a href="/blog/when-your-co-parent-uses-the-kids-as-messengers">When Your Co-Parent Uses the Kids as Messengers</a></h2>
           <p>Stop the cycle of children carrying messages between parents. Understand the damage, set boundaries, and redirect communication properly.</p>
-          <a href="/blog/when-your-co-parent-uses-the-kids-as-messengers.html" class="blog-card-link">
+          <a href="/blog/when-your-co-parent-uses-the-kids-as-messengers" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -882,9 +941,9 @@
         <article class="blog-card" data-category="High-Conflict Situations">
           <span class="blog-card-category" data-cat="High-Conflict Situations">High-Conflict Situations</span>
           <div class="blog-card-date">November 3, 2025</div>
-          <h2><a href="/blog/how-to-handle-a-co-parent-who-threatens-to-take-you-to-court.html">How to Handle a Co-Parent Who Threatens to Take You to Court</a></h2>
+          <h2><a href="/blog/how-to-handle-a-co-parent-who-threatens-to-take-you-to-court">How to Handle a Co-Parent Who Threatens to Take You to Court</a></h2>
           <p>Constant court threats from your co-parent? Know what to take seriously, what's intimidation, and how to respond without escalating.</p>
-          <a href="/blog/how-to-handle-a-co-parent-who-threatens-to-take-you-to-court.html" class="blog-card-link">
+          <a href="/blog/how-to-handle-a-co-parent-who-threatens-to-take-you-to-court" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -893,9 +952,9 @@
         <article class="blog-card" data-category="Self-Care &amp; Support">
           <span class="blog-card-category" data-cat="Self-Care &amp; Support">Self-Care &amp; Support</span>
           <div class="blog-card-date">November 3, 2025</div>
-          <h2><a href="/blog/is-it-time-navigating-whether-to-stay-or-go.html">Is It Time? Navigating the Question of Whether to Stay or Go</a></h2>
+          <h2><a href="/blog/is-it-time-navigating-whether-to-stay-or-go">Is It Time? Navigating the Question of Whether to Stay or Go</a></h2>
           <p>Sitting with the hardest question in marriage. How to navigate the space between staying and leaving when you have kids to consider.</p>
-          <a href="/blog/is-it-time-navigating-whether-to-stay-or-go.html" class="blog-card-link">
+          <a href="/blog/is-it-time-navigating-whether-to-stay-or-go" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -904,9 +963,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">November 2, 2025</div>
-          <h2><a href="/blog/what-to-do-when-your-co-parent-brings-up-the-past-in-every-conversation.html">What to Do When Your Co-Parent Brings Up the Past in Every Conversation</a></h2>
+          <h2><a href="/blog/what-to-do-when-your-co-parent-brings-up-the-past-in-every-conversation">What to Do When Your Co-Parent Brings Up the Past in Every Conversation</a></h2>
           <p>Your co-parent keeps relitigating old issues? Strategies to redirect conversations toward what matters now — your children.</p>
-          <a href="/blog/what-to-do-when-your-co-parent-brings-up-the-past-in-every-conversation.html" class="blog-card-link">
+          <a href="/blog/what-to-do-when-your-co-parent-brings-up-the-past-in-every-conversation" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -915,9 +974,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">November 2, 2025</div>
-          <h2><a href="/blog/how-to-co-parent-when-you-re-afraid-of-your-ex.html">How to Co-Parent When You're Afraid of Your Ex</a></h2>
+          <h2><a href="/blog/how-to-co-parent-when-you-re-afraid-of-your-ex">How to Co-Parent When You're Afraid of Your Ex</a></h2>
           <p>Co-parenting with an intimidating or abusive ex requires different strategies. Protect yourself while meeting your parenting obligations.</p>
-          <a href="/blog/how-to-co-parent-when-you-re-afraid-of-your-ex.html" class="blog-card-link">
+          <a href="/blog/how-to-co-parent-when-you-re-afraid-of-your-ex" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -926,9 +985,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">November 1, 2025</div>
-          <h2><a href="/blog/how-to-co-parent-with-someone-who-won-t-cooperate.html">How to Co-Parent with Someone Who Won't Cooperate</a></h2>
+          <h2><a href="/blog/how-to-co-parent-with-someone-who-won-t-cooperate">How to Co-Parent with Someone Who Won't Cooperate</a></h2>
           <p>When only one parent is trying, standard co-parenting advice fails. Honest strategies for moving forward when cooperation isn't an option.</p>
-          <a href="/blog/how-to-co-parent-with-someone-who-won-t-cooperate.html" class="blog-card-link">
+          <a href="/blog/how-to-co-parent-with-someone-who-won-t-cooperate" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -937,9 +996,9 @@
         <article class="blog-card" data-category="High-Conflict Situations">
           <span class="blog-card-category" data-cat="High-Conflict Situations">High-Conflict Situations</span>
           <div class="blog-card-date">October 31, 2025</div>
-          <h2><a href="/blog/how-to-handle-transitions-and-drop-offs-with-a-high-conflict-co-parent.html">How to Handle Transitions and Drop-Offs with a High-Conflict Co-Parent</a></h2>
+          <h2><a href="/blog/how-to-handle-transitions-and-drop-offs-with-a-high-conflict-co-parent">How to Handle Transitions and Drop-Offs with a High-Conflict Co-Parent</a></h2>
           <p>Make custody handoffs less stressful with high-conflict strategies — neutral locations, brief exchanges, and clear boundaries that protect kids.</p>
-          <a href="/blog/how-to-handle-transitions-and-drop-offs-with-a-high-conflict-co-parent.html" class="blog-card-link">
+          <a href="/blog/how-to-handle-transitions-and-drop-offs-with-a-high-conflict-co-parent" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -948,9 +1007,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">October 31, 2025</div>
-          <h2><a href="/blog/parallel-parenting-vs-co-parenting-what-s-the-difference.html">Parallel Parenting vs Co-Parenting: What's the Difference?</a></h2>
+          <h2><a href="/blog/parallel-parenting-vs-co-parenting-what-s-the-difference">Parallel Parenting vs Co-Parenting: What's the Difference?</a></h2>
           <p>Cooperative co-parenting isn't always possible. Understand when parallel parenting is the better strategy and how to make the transition.</p>
-          <a href="/blog/parallel-parenting-vs-co-parenting-what-s-the-difference.html" class="blog-card-link">
+          <a href="/blog/parallel-parenting-vs-co-parenting-what-s-the-difference" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -959,9 +1018,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">October 31, 2025</div>
-          <h2><a href="/blog/co-parenting-communication-boundaries.html">Setting 'Office Hours' for Co-Parent Communication</a></h2>
+          <h2><a href="/blog/co-parenting-communication-boundaries">Setting 'Office Hours' for Co-Parent Communication</a></h2>
           <p>You don't have to be available 24/7. Learn how communication boundaries reduce stress and improve your co-parenting.</p>
-          <a href="/blog/co-parenting-communication-boundaries.html" class="blog-card-link">
+          <a href="/blog/co-parenting-communication-boundaries" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -970,9 +1029,9 @@
         <article class="blog-card" data-category="High-Conflict Situations">
           <span class="blog-card-category" data-cat="High-Conflict Situations">High-Conflict Situations</span>
           <div class="blog-card-date">October 30, 2025</div>
-          <h2><a href="/blog/signs-your-co-parenting-situation-is-improving-even-when-it-doesn-t-feel-like-it.html">Signs Your Co-Parenting Situation Is Improving (Even When It Doesn't Feel Like It)</a></h2>
+          <h2><a href="/blog/signs-your-co-parenting-situation-is-improving-even-when-it-doesn-t-feel-like-it">Signs Your Co-Parenting Situation Is Improving (Even When It Doesn't Feel Like It)</a></h2>
           <p>Progress in co-parenting is often invisible. Recognize the subtle signs that your situation is improving, even when it feels stuck.</p>
-          <a href="/blog/signs-your-co-parenting-situation-is-improving-even-when-it-doesn-t-feel-like-it.html" class="blog-card-link">
+          <a href="/blog/signs-your-co-parenting-situation-is-improving-even-when-it-doesn-t-feel-like-it" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -981,9 +1040,9 @@
         <article class="blog-card" data-category="Expenses">
           <span class="blog-card-category" data-cat="Expenses">Expenses</span>
           <div class="blog-card-date">October 29, 2025</div>
-          <h2><a href="/blog/co-parenting-expenses-when-one-parent-earns-more.html">Co-Parenting Expenses When One Parent Earns More</a></h2>
+          <h2><a href="/blog/co-parenting-expenses-when-one-parent-earns-more">Co-Parenting Expenses When One Parent Earns More</a></h2>
           <p>Income disparity complicates co-parenting expenses. Understand the difference between equal and equitable — and find an approach that works.</p>
-          <a href="/blog/co-parenting-expenses-when-one-parent-earns-more.html" class="blog-card-link">
+          <a href="/blog/co-parenting-expenses-when-one-parent-earns-more" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -992,9 +1051,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">October 28, 2025</div>
-          <h2><a href="/blog/hidden-realities-co-parenting-no-one-warns-you-about.html">The Hidden Realities of Co-Parenting No One Warns You About</a></h2>
+          <h2><a href="/blog/hidden-realities-co-parenting-no-one-warns-you-about">The Hidden Realities of Co-Parenting No One Warns You About</a></h2>
           <p>Discover the unexpected challenges of co-parenting that catch most divorced parents off guard, from communication struggles to identity shifts.</p>
-          <a href="/blog/hidden-realities-co-parenting-no-one-warns-you-about.html" class="blog-card-link">
+          <a href="/blog/hidden-realities-co-parenting-no-one-warns-you-about" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1003,9 +1062,9 @@
         <article class="blog-card" data-category="High-Conflict Situations">
           <span class="blog-card-category" data-cat="High-Conflict Situations">High-Conflict Situations</span>
           <div class="blog-card-date">October 27, 2025</div>
-          <h2><a href="/blog/how-to-build-a-communication-record-that-protects-you.html">How to Build a Communication Record That Protects You</a></h2>
+          <h2><a href="/blog/how-to-build-a-communication-record-that-protects-you">How to Build a Communication Record That Protects You</a></h2>
           <p>Build a clean, court-admissible communication record for your co-parenting case. What to document, how to organize, and what to avoid.</p>
-          <a href="/blog/how-to-build-a-communication-record-that-protects-you.html" class="blog-card-link">
+          <a href="/blog/how-to-build-a-communication-record-that-protects-you" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1014,9 +1073,9 @@
         <article class="blog-card" data-category="Your Children">
           <span class="blog-card-category" data-cat="Your Children">Your Children</span>
           <div class="blog-card-date">October 23, 2025</div>
-          <h2><a href="/blog/when-your-child-says-they-don-t-want-to-go-to-the-other-parent-s-house.html">When Your Child Says They Don't Want to Go to the Other Parent's House</a></h2>
+          <h2><a href="/blog/when-your-child-says-they-don-t-want-to-go-to-the-other-parent-s-house">When Your Child Says They Don't Want to Go to the Other Parent's House</a></h2>
           <p>When your child resists going to the other house, the reasons matter. Understand what's behind it and how to respond without escalating.</p>
-          <a href="/blog/when-your-child-says-they-don-t-want-to-go-to-the-other-parent-s-house.html" class="blog-card-link">
+          <a href="/blog/when-your-child-says-they-don-t-want-to-go-to-the-other-parent-s-house" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1025,9 +1084,9 @@
         <article class="blog-card" data-category="Schedules &amp; Custody">
           <span class="blog-card-category" data-cat="Schedules &amp; Custody">Schedules &amp; Custody</span>
           <div class="blog-card-date">October 19, 2025</div>
-          <h2><a href="/blog/how-to-handle-last-minute-custody-schedule-changes.html">How to Handle Last-Minute Custody Schedule Changes</a></h2>
+          <h2><a href="/blog/how-to-handle-last-minute-custody-schedule-changes">How to Handle Last-Minute Custody Schedule Changes</a></h2>
           <p>Your co-parent changed plans without notice? Know your rights, how to respond without escalating, and when to document the disruption.</p>
-          <a href="/blog/how-to-handle-last-minute-custody-schedule-changes.html" class="blog-card-link">
+          <a href="/blog/how-to-handle-last-minute-custody-schedule-changes" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1036,9 +1095,9 @@
         <article class="blog-card" data-category="High-Conflict Situations">
           <span class="blog-card-category" data-cat="High-Conflict Situations">High-Conflict Situations</span>
           <div class="blog-card-date">October 18, 2025</div>
-          <h2><a href="/blog/how-to-protect-yourself-from-gaslighting-in-co-parenting.html">How to Protect Yourself from Gaslighting in Co-Parenting</a></h2>
+          <h2><a href="/blog/how-to-protect-yourself-from-gaslighting-in-co-parenting">How to Protect Yourself from Gaslighting in Co-Parenting</a></h2>
           <p>Recognize gaslighting in co-parenting — denied agreements, rewritten history, and manipulation. Protect your clarity and document everything.</p>
-          <a href="/blog/how-to-protect-yourself-from-gaslighting-in-co-parenting.html" class="blog-card-link">
+          <a href="/blog/how-to-protect-yourself-from-gaslighting-in-co-parenting" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1047,9 +1106,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">October 17, 2025</div>
-          <h2><a href="/blog/how-to-keep-co-parenting-conversations-focused-on-the-kids.html">How to Keep Co-Parenting Conversations Focused on the Kids</a></h2>
+          <h2><a href="/blog/how-to-keep-co-parenting-conversations-focused-on-the-kids">How to Keep Co-Parenting Conversations Focused on the Kids</a></h2>
           <p>Stop co-parenting conversations from spiraling into personal attacks. Proven techniques to keep every exchange focused on your children.</p>
-          <a href="/blog/how-to-keep-co-parenting-conversations-focused-on-the-kids.html" class="blog-card-link">
+          <a href="/blog/how-to-keep-co-parenting-conversations-focused-on-the-kids" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1058,9 +1117,9 @@
         <article class="blog-card" data-category="Expenses">
           <span class="blog-card-category" data-cat="Expenses">Expenses</span>
           <div class="blog-card-date">October 17, 2025</div>
-          <h2><a href="/blog/how-to-handle-medical-expenses-in-co-parenting.html">How to Handle Medical Expenses in Co-Parenting</a></h2>
+          <h2><a href="/blog/how-to-handle-medical-expenses-in-co-parenting">How to Handle Medical Expenses in Co-Parenting</a></h2>
           <p>Split medical, dental, and therapy costs fairly with your co-parent. Navigate insurance logistics, reimbursement, and unexpected expenses.</p>
-          <a href="/blog/how-to-handle-medical-expenses-in-co-parenting.html" class="blog-card-link">
+          <a href="/blog/how-to-handle-medical-expenses-in-co-parenting" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1069,9 +1128,9 @@
         <article class="blog-card" data-category="Expenses">
           <span class="blog-card-category" data-cat="Expenses">Expenses</span>
           <div class="blog-card-date">October 17, 2025</div>
-          <h2><a href="/blog/how-to-split-expenses-with-your-co-parent-without-fighting.html">How to Split Expenses with Your Co-Parent Without Fighting</a></h2>
+          <h2><a href="/blog/how-to-split-expenses-with-your-co-parent-without-fighting">How to Split Expenses with Your Co-Parent Without Fighting</a></h2>
           <p>Common expense friction points — who pays first, what counts as shared. Practical systems to track and split costs without conflict.</p>
-          <a href="/blog/how-to-split-expenses-with-your-co-parent-without-fighting.html" class="blog-card-link">
+          <a href="/blog/how-to-split-expenses-with-your-co-parent-without-fighting" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1080,9 +1139,9 @@
         <article class="blog-card" data-category="High-Conflict Situations">
           <span class="blog-card-category" data-cat="High-Conflict Situations">High-Conflict Situations</span>
           <div class="blog-card-date">October 16, 2025</div>
-          <h2><a href="/blog/what-to-do-when-your-co-parent-refuses-to-communicate.html">What to Do When Your Co-Parent Refuses to Communicate</a></h2>
+          <h2><a href="/blog/what-to-do-when-your-co-parent-refuses-to-communicate">What to Do When Your Co-Parent Refuses to Communicate</a></h2>
           <p>Dealing with a co-parent who stonewalls? Strategies for managing decisions, documenting attempts, and moving forward without cooperation.</p>
-          <a href="/blog/what-to-do-when-your-co-parent-refuses-to-communicate.html" class="blog-card-link">
+          <a href="/blog/what-to-do-when-your-co-parent-refuses-to-communicate" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1091,9 +1150,9 @@
         <article class="blog-card" data-category="Schedules &amp; Custody">
           <span class="blog-card-category" data-cat="Schedules &amp; Custody">Schedules &amp; Custody</span>
           <div class="blog-card-date">October 14, 2025</div>
-          <h2><a href="/blog/how-to-make-a-custody-schedule-that-actually-works.html">How to Make a Custody Schedule That Actually Works</a></h2>
+          <h2><a href="/blog/how-to-make-a-custody-schedule-that-actually-works">How to Make a Custody Schedule That Actually Works</a></h2>
           <p>Build a custody schedule that works for your family. Avoid common pitfalls like ambiguity and inflexibility that derail co-parenting.</p>
-          <a href="/blog/how-to-make-a-custody-schedule-that-actually-works.html" class="blog-card-link">
+          <a href="/blog/how-to-make-a-custody-schedule-that-actually-works" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1102,9 +1161,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">October 14, 2025</div>
-          <h2><a href="/blog/mindset-shift-divorced-coparents.html">From Married Co-Parents to Divorced Co-Parents: The Mindset Shift</a></h2>
+          <h2><a href="/blog/mindset-shift-divorced-coparents">From Married Co-Parents to Divorced Co-Parents: The Mindset Shift</a></h2>
           <p>The hardest part of co-parenting after divorce isn't logistics—it's changing how you think about your relationship.</p>
-          <a href="/blog/mindset-shift-divorced-coparents.html" class="blog-card-link">
+          <a href="/blog/mindset-shift-divorced-coparents" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1113,9 +1172,9 @@
         <article class="blog-card" data-category="High-Conflict Situations">
           <span class="blog-card-category" data-cat="High-Conflict Situations">High-Conflict Situations</span>
           <div class="blog-card-date">October 13, 2025</div>
-          <h2><a href="/blog/how-to-communicate-with-a-high-conflict-co-parent.html">How to Communicate with a High-Conflict Co-Parent</a></h2>
+          <h2><a href="/blog/how-to-communicate-with-a-high-conflict-co-parent">How to Communicate with a High-Conflict Co-Parent</a></h2>
           <p>Standard communication fails with high-conflict co-parents. Structured approaches that reduce escalation and keep conversations productive.</p>
-          <a href="/blog/how-to-communicate-with-a-high-conflict-co-parent.html" class="blog-card-link">
+          <a href="/blog/how-to-communicate-with-a-high-conflict-co-parent" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1124,9 +1183,9 @@
         <article class="blog-card" data-category="High-Conflict Situations">
           <span class="blog-card-category" data-cat="High-Conflict Situations">High-Conflict Situations</span>
           <div class="blog-card-date">October 12, 2025</div>
-          <h2><a href="/blog/how-to-co-parent-with-someone-who-uses-email-as-a-weapon.html">How to Co-Parent with Someone Who Uses Email as a Weapon</a></h2>
+          <h2><a href="/blog/how-to-co-parent-with-someone-who-uses-email-as-a-weapon">How to Co-Parent with Someone Who Uses Email as a Weapon</a></h2>
           <p>Your co-parent sends accusatory, manipulative emails? Strategies for defusing the tactic and keeping communication productive.</p>
-          <a href="/blog/how-to-co-parent-with-someone-who-uses-email-as-a-weapon.html" class="blog-card-link">
+          <a href="/blog/how-to-co-parent-with-someone-who-uses-email-as-a-weapon" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1135,9 +1194,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">October 6, 2025</div>
-          <h2><a href="/blog/how-to-deal-with-a-co-parent-who-breaks-agreements.html">How to Deal with a Co-Parent Who Breaks Agreements</a></h2>
+          <h2><a href="/blog/how-to-deal-with-a-co-parent-who-breaks-agreements">How to Deal with a Co-Parent Who Breaks Agreements</a></h2>
           <p>Your co-parent keeps ignoring what was agreed? Know when to document, when to address it directly, and when to involve the court.</p>
-          <a href="/blog/how-to-deal-with-a-co-parent-who-breaks-agreements.html" class="blog-card-link">
+          <a href="/blog/how-to-deal-with-a-co-parent-who-breaks-agreements" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1146,9 +1205,9 @@
         <article class="blog-card" data-category="Your Children">
           <span class="blog-card-category" data-cat="Your Children">Your Children</span>
           <div class="blog-card-date">October 2, 2025</div>
-          <h2><a href="/blog/how-to-talk-to-your-kids-about-the-divorce-at-every-age.html">How to Talk to Your Kids About the Divorce at Every Age</a></h2>
+          <h2><a href="/blog/how-to-talk-to-your-kids-about-the-divorce-at-every-age">How to Talk to Your Kids About the Divorce at Every Age</a></h2>
           <p>Age-appropriate ways to explain divorce to your children — from toddlers to teens. What to say, what to avoid, and when to revisit.</p>
-          <a href="/blog/how-to-talk-to-your-kids-about-the-divorce-at-every-age.html" class="blog-card-link">
+          <a href="/blog/how-to-talk-to-your-kids-about-the-divorce-at-every-age" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1157,9 +1216,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">September 30, 2025</div>
-          <h2><a href="/blog/biff-method-co-parenting-communication.html">The BIFF Method: Brief, Informative, Friendly, and Firm Communication</a></h2>
+          <h2><a href="/blog/biff-method-co-parenting-communication">The BIFF Method: Brief, Informative, Friendly, and Firm Communication</a></h2>
           <p>Master the gold standard for high-conflict co-parenting communication. BIFF responses keep conversations productive.</p>
-          <a href="/blog/biff-method-co-parenting-communication.html" class="blog-card-link">
+          <a href="/blog/biff-method-co-parenting-communication" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1168,9 +1227,9 @@
         <article class="blog-card" data-category="High-Conflict Situations">
           <span class="blog-card-category" data-cat="High-Conflict Situations">High-Conflict Situations</span>
           <div class="blog-card-date">September 29, 2025</div>
-          <h2><a href="/blog/the-48-hour-rule-why-waiting-before-responding-changes-everything.html">The 48-Hour Rule: Why Waiting Before Responding Changes Everything</a></h2>
+          <h2><a href="/blog/the-48-hour-rule-why-waiting-before-responding-changes-everything">The 48-Hour Rule: Why Waiting Before Responding Changes Everything</a></h2>
           <p>Before you respond to that provocative co-parenting message, wait 48 hours. This simple practice can transform your communication.</p>
-          <a href="/blog/the-48-hour-rule-why-waiting-before-responding-changes-everything.html" class="blog-card-link">
+          <a href="/blog/the-48-hour-rule-why-waiting-before-responding-changes-everything" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1179,9 +1238,9 @@
         <article class="blog-card" data-category="Your Children">
           <span class="blog-card-category" data-cat="Your Children">Your Children</span>
           <div class="blog-card-date">September 28, 2025</div>
-          <h2><a href="/blog/how-to-help-your-child-adjust-to-two-homes.html">How to Help Your Child Adjust to Two Homes</a></h2>
+          <h2><a href="/blog/how-to-help-your-child-adjust-to-two-homes">How to Help Your Child Adjust to Two Homes</a></h2>
           <p>Help your child feel secure living between two homes. Practical tips for transitions, consistency, and emotional support during adjustment.</p>
-          <a href="/blog/how-to-help-your-child-adjust-to-two-homes.html" class="blog-card-link">
+          <a href="/blog/how-to-help-your-child-adjust-to-two-homes" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1190,9 +1249,9 @@
         <article class="blog-card" data-category="Blended Families">
           <span class="blog-card-category" data-cat="Blended Families">Blended Families</span>
           <div class="blog-card-date">September 27, 2025</div>
-          <h2><a href="/blog/how-to-handle-holidays-and-events-with-a-blended-family.html">How to Handle Holidays and Events with a Blended Family</a></h2>
+          <h2><a href="/blog/how-to-handle-holidays-and-events-with-a-blended-family">How to Handle Holidays and Events with a Blended Family</a></h2>
           <p>Navigate holiday logistics, birthdays, and school events across blended families. Reduce conflict and create positive memories for kids.</p>
-          <a href="/blog/how-to-handle-holidays-and-events-with-a-blended-family.html" class="blog-card-link">
+          <a href="/blog/how-to-handle-holidays-and-events-with-a-blended-family" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1201,9 +1260,9 @@
         <article class="blog-card" data-category="Self-Care &amp; Support">
           <span class="blog-card-category" data-cat="Self-Care &amp; Support">Self-Care &amp; Support</span>
           <div class="blog-card-date">September 27, 2025</div>
-          <h2><a href="/blog/finding-a-therapist-who-understands-high-conflict-co-parenting.html">Finding a Therapist Who Understands High-Conflict Co-Parenting</a></h2>
+          <h2><a href="/blog/finding-a-therapist-who-understands-high-conflict-co-parenting">Finding a Therapist Who Understands High-Conflict Co-Parenting</a></h2>
           <p>Generic therapy often falls short for high-conflict co-parenting. Find a therapist who understands power dynamics and custody stress.</p>
-          <a href="/blog/finding-a-therapist-who-understands-high-conflict-co-parenting.html" class="blog-card-link">
+          <a href="/blog/finding-a-therapist-who-understands-high-conflict-co-parenting" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1212,9 +1271,9 @@
         <article class="blog-card" data-category="High-Conflict Situations">
           <span class="blog-card-category" data-cat="High-Conflict Situations">High-Conflict Situations</span>
           <div class="blog-card-date">September 24, 2025</div>
-          <h2><a href="/blog/how-to-co-parent-when-your-ex-s-new-partner-gets-involved-in-your-co-parenting.html">How to Co-Parent When Your Ex's New Partner Gets Involved in Your Co-Parenting</a></h2>
+          <h2><a href="/blog/how-to-co-parent-when-your-ex-s-new-partner-gets-involved-in-your-co-parenting">How to Co-Parent When Your Ex's New Partner Gets Involved in Your Co-Parenting</a></h2>
           <p>Your ex's new partner is inserting themselves into co-parenting decisions? Set boundaries while keeping the focus on your children.</p>
-          <a href="/blog/how-to-co-parent-when-your-ex-s-new-partner-gets-involved-in-your-co-parenting.html" class="blog-card-link">
+          <a href="/blog/how-to-co-parent-when-your-ex-s-new-partner-gets-involved-in-your-co-parenting" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1223,9 +1282,9 @@
         <article class="blog-card" data-category="Expenses">
           <span class="blog-card-category" data-cat="Expenses">Expenses</span>
           <div class="blog-card-date">September 24, 2025</div>
-          <h2><a href="/blog/what-counts-as-a-shared-expense-in-co-parenting.html">What Counts as a Shared Expense in Co-Parenting?</a></h2>
+          <h2><a href="/blog/what-counts-as-a-shared-expense-in-co-parenting">What Counts as a Shared Expense in Co-Parenting?</a></h2>
           <p>Extracurriculars, school supplies, medical co-pays — what counts as shared? Clarify the gray areas that cause the most co-parenting arguments.</p>
-          <a href="/blog/what-counts-as-a-shared-expense-in-co-parenting.html" class="blog-card-link">
+          <a href="/blog/what-counts-as-a-shared-expense-in-co-parenting" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1234,9 +1293,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">September 23, 2025</div>
-          <h2><a href="/blog/what-your-kids-experience-when-co-parents-can-t-communicate.html">What Your Kids Experience When Co-Parents Can't Communicate</a></h2>
+          <h2><a href="/blog/what-your-kids-experience-when-co-parents-can-t-communicate">What Your Kids Experience When Co-Parents Can't Communicate</a></h2>
           <p>When co-parents struggle to communicate, children feel it most. Research-backed insights into how conflict affects your kids.</p>
-          <a href="/blog/what-your-kids-experience-when-co-parents-can-t-communicate.html" class="blog-card-link">
+          <a href="/blog/what-your-kids-experience-when-co-parents-can-t-communicate" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1245,9 +1304,9 @@
         <article class="blog-card" data-category="Legal Basics">
           <span class="blog-card-category" data-cat="Legal Basics">Legal Basics</span>
           <div class="blog-card-date">September 19, 2025</div>
-          <h2><a href="/blog/relocation-after-divorce-what-you-need-to-know-before-you-move.html">Relocation After Divorce: What You Need to Know Before You Move</a></h2>
+          <h2><a href="/blog/relocation-after-divorce-what-you-need-to-know-before-you-move">Relocation After Divorce: What You Need to Know Before You Move</a></h2>
           <p>Planning to move after divorce? Understand the legal requirements, notice obligations, and how relocation affects custody arrangements.</p>
-          <a href="/blog/relocation-after-divorce-what-you-need-to-know-before-you-move.html" class="blog-card-link">
+          <a href="/blog/relocation-after-divorce-what-you-need-to-know-before-you-move" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1256,9 +1315,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">September 19, 2025</div>
-          <h2><a href="/blog/how-to-stop-your-co-parent-from-controlling-you-through-the-kids.html">How to Stop Your Co-Parent from Controlling You Through the Kids</a></h2>
+          <h2><a href="/blog/how-to-stop-your-co-parent-from-controlling-you-through-the-kids">How to Stop Your Co-Parent from Controlling You Through the Kids</a></h2>
           <p>Your co-parent uses children and logistics to maintain control? Recognize the patterns and break free without harming your kids.</p>
-          <a href="/blog/how-to-stop-your-co-parent-from-controlling-you-through-the-kids.html" class="blog-card-link">
+          <a href="/blog/how-to-stop-your-co-parent-from-controlling-you-through-the-kids" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1267,9 +1326,9 @@
         <article class="blog-card" data-category="Legal Basics">
           <span class="blog-card-category" data-cat="Legal Basics">Legal Basics</span>
           <div class="blog-card-date">September 14, 2025</div>
-          <h2><a href="/blog/how-to-choose-a-family-law-attorney-for-a-high-conflict-custody-case.html">How to Choose a Family Law Attorney for a High-Conflict Custody Case</a></h2>
+          <h2><a href="/blog/how-to-choose-a-family-law-attorney-for-a-high-conflict-custody-case">How to Choose a Family Law Attorney for a High-Conflict Custody Case</a></h2>
           <p>Choosing the right attorney for a high-conflict custody case matters. Know what to look for, what to ask, and red flags to avoid.</p>
-          <a href="/blog/how-to-choose-a-family-law-attorney-for-a-high-conflict-custody-case.html" class="blog-card-link">
+          <a href="/blog/how-to-choose-a-family-law-attorney-for-a-high-conflict-custody-case" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1278,9 +1337,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">September 14, 2025</div>
-          <h2><a href="/blog/tone-in-text-co-parenting.html">Why Tone Gets Lost in Text—And What to Do About It</a></h2>
+          <h2><a href="/blog/tone-in-text-co-parenting">Why Tone Gets Lost in Text—And What to Do About It</a></h2>
           <p>That message you thought was neutral? Your co-parent read it completely differently. Here's why and what to do.</p>
-          <a href="/blog/tone-in-text-co-parenting.html" class="blog-card-link">
+          <a href="/blog/tone-in-text-co-parenting" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1289,9 +1348,9 @@
         <article class="blog-card" data-category="Legal Basics">
           <span class="blog-card-category" data-cat="Legal Basics">Legal Basics</span>
           <div class="blog-card-date">September 13, 2025</div>
-          <h2><a href="/blog/what-is-contempt-of-court-in-custody-cases.html">What Is Contempt of Court in Custody Cases?</a></h2>
+          <h2><a href="/blog/what-is-contempt-of-court-in-custody-cases">What Is Contempt of Court in Custody Cases?</a></h2>
           <p>Your co-parent violated a court order? Understand what contempt of court means in custody cases and what legal options you have.</p>
-          <a href="/blog/what-is-contempt-of-court-in-custody-cases.html" class="blog-card-link">
+          <a href="/blog/what-is-contempt-of-court-in-custody-cases" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1300,9 +1359,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">September 11, 2025</div>
-          <h2><a href="/blog/how-to-handle-false-accusations-from-your-co-parent.html">How to Handle False Accusations from Your Co-Parent</a></h2>
+          <h2><a href="/blog/how-to-handle-false-accusations-from-your-co-parent">How to Handle False Accusations from Your Co-Parent</a></h2>
           <p>Facing false accusations from your co-parent? Know how to respond, protect yourself legally, and maintain credibility without retaliating.</p>
-          <a href="/blog/how-to-handle-false-accusations-from-your-co-parent.html" class="blog-card-link">
+          <a href="/blog/how-to-handle-false-accusations-from-your-co-parent" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1311,9 +1370,9 @@
         <article class="blog-card" data-category="Blended Families">
           <span class="blog-card-category" data-cat="Blended Families">Blended Families</span>
           <div class="blog-card-date">September 10, 2025</div>
-          <h2><a href="/blog/the-stepparent-s-role-in-co-parenting-boundaries-that-work.html">The Stepparent's Role in Co-Parenting: Boundaries That Work</a></h2>
+          <h2><a href="/blog/the-stepparent-s-role-in-co-parenting-boundaries-that-work">The Stepparent's Role in Co-Parenting: Boundaries That Work</a></h2>
           <p>Define the right role for a stepparent in co-parenting. Clear boundaries that support children while respecting both biological parents.</p>
-          <a href="/blog/the-stepparent-s-role-in-co-parenting-boundaries-that-work.html" class="blog-card-link">
+          <a href="/blog/the-stepparent-s-role-in-co-parenting-boundaries-that-work" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1322,9 +1381,9 @@
         <article class="blog-card" data-category="Self-Care &amp; Support">
           <span class="blog-card-category" data-cat="Self-Care &amp; Support">Self-Care &amp; Support</span>
           <div class="blog-card-date">September 10, 2025</div>
-          <h2><a href="/blog/the-emotional-toll-of-co-parenting-with-a-difficult-ex.html">The Emotional Toll of Co-Parenting with a Difficult Ex</a></h2>
+          <h2><a href="/blog/the-emotional-toll-of-co-parenting-with-a-difficult-ex">The Emotional Toll of Co-Parenting with a Difficult Ex</a></h2>
           <p>The chronic stress of high-conflict co-parenting is real — the hypervigilance, the dread. Validate your experience and find ways to cope.</p>
-          <a href="/blog/the-emotional-toll-of-co-parenting-with-a-difficult-ex.html" class="blog-card-link">
+          <a href="/blog/the-emotional-toll-of-co-parenting-with-a-difficult-ex" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1333,9 +1392,9 @@
         <article class="blog-card" data-category="Your Children">
           <span class="blog-card-category" data-cat="Your Children">Your Children</span>
           <div class="blog-card-date">September 6, 2025</div>
-          <h2><a href="/blog/how-parental-conflict-affects-children-s-relationships-later-in-life.html">How Parental Conflict Affects Children's Relationships Later in Life</a></h2>
+          <h2><a href="/blog/how-parental-conflict-affects-children-s-relationships-later-in-life">How Parental Conflict Affects Children's Relationships Later in Life</a></h2>
           <p>Research shows co-parenting conflict shapes how children form relationships as adults. Understand the long-term impact and how to protect them.</p>
-          <a href="/blog/how-parental-conflict-affects-children-s-relationships-later-in-life.html" class="blog-card-link">
+          <a href="/blog/how-parental-conflict-affects-children-s-relationships-later-in-life" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1344,9 +1403,9 @@
         <article class="blog-card" data-category="High-Conflict Situations">
           <span class="blog-card-category" data-cat="High-Conflict Situations">High-Conflict Situations</span>
           <div class="blog-card-date">September 6, 2025</div>
-          <h2><a href="/blog/when-your-co-parent-undermines-your-parenting.html">When Your Co-Parent Undermines Your Parenting</a></h2>
+          <h2><a href="/blog/when-your-co-parent-undermines-your-parenting">When Your Co-Parent Undermines Your Parenting</a></h2>
           <p>Your co-parent contradicts your rules and decisions? Identify undermining patterns and respond in ways that protect your authority and your kids.</p>
-          <a href="/blog/when-your-co-parent-undermines-your-parenting.html" class="blog-card-link">
+          <a href="/blog/when-your-co-parent-undermines-your-parenting" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1355,9 +1414,9 @@
         <article class="blog-card" data-category="Schedules &amp; Custody">
           <span class="blog-card-category" data-cat="Schedules &amp; Custody">Schedules &amp; Custody</span>
           <div class="blog-card-date">September 4, 2025</div>
-          <h2><a href="/blog/what-is-a-parenting-plan-and-do-you-need-one.html">What Is a Parenting Plan and Do You Need One?</a></h2>
+          <h2><a href="/blog/what-is-a-parenting-plan-and-do-you-need-one">What Is a Parenting Plan and Do You Need One?</a></h2>
           <p>A parenting plan covers custody schedules, decision-making, and communication rules. Understand when courts require one and what to include.</p>
-          <a href="/blog/what-is-a-parenting-plan-and-do-you-need-one.html" class="blog-card-link">
+          <a href="/blog/what-is-a-parenting-plan-and-do-you-need-one" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1366,9 +1425,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">September 1, 2025</div>
-          <h2><a href="/blog/how-to-stop-co-parenting-arguments-over-text.html">How to Stop Co-Parenting Arguments Over Text</a></h2>
+          <h2><a href="/blog/how-to-stop-co-parenting-arguments-over-text">How to Stop Co-Parenting Arguments Over Text</a></h2>
           <p>Text arguments escalate fast because tone is invisible. Practical rules for text-based co-parenting communication that prevent conflict.</p>
-          <a href="/blog/how-to-stop-co-parenting-arguments-over-text.html" class="blog-card-link">
+          <a href="/blog/how-to-stop-co-parenting-arguments-over-text" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1377,9 +1436,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">August 31, 2025</div>
-          <h2><a href="/blog/co-parenting-documentation-guide.html">Documentation That Protects: What to Record and Why</a></h2>
+          <h2><a href="/blog/co-parenting-documentation-guide">Documentation That Protects: What to Record and Why</a></h2>
           <p>Good documentation isn't about building a case—it's about creating clarity and accountability. Learn what to track.</p>
-          <a href="/blog/co-parenting-documentation-guide.html" class="blog-card-link">
+          <a href="/blog/co-parenting-documentation-guide" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1388,9 +1447,9 @@
         <article class="blog-card" data-category="Legal Basics">
           <span class="blog-card-category" data-cat="Legal Basics">Legal Basics</span>
           <div class="blog-card-date">August 29, 2025</div>
-          <h2><a href="/blog/what-is-a-guardian-ad-litem-and-what-do-they-do.html">What Is a Guardian Ad Litem and What Do They Do?</a></h2>
+          <h2><a href="/blog/what-is-a-guardian-ad-litem-and-what-do-they-do">What Is a Guardian Ad Litem and What Do They Do?</a></h2>
           <p>Understand the role of a Guardian Ad Litem in custody cases — who appoints them, what they investigate, and how they affect outcomes.</p>
-          <a href="/blog/what-is-a-guardian-ad-litem-and-what-do-they-do.html" class="blog-card-link">
+          <a href="/blog/what-is-a-guardian-ad-litem-and-what-do-they-do" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1399,9 +1458,9 @@
         <article class="blog-card" data-category="Legal Basics">
           <span class="blog-card-category" data-cat="Legal Basics">Legal Basics</span>
           <div class="blog-card-date">August 28, 2025</div>
-          <h2><a href="/blog/how-to-modify-a-custody-agreement-when-and-how.html">How to Modify a Custody Agreement: When and How</a></h2>
+          <h2><a href="/blog/how-to-modify-a-custody-agreement-when-and-how">How to Modify a Custody Agreement: When and How</a></h2>
           <p>Need to change your custody agreement? Understand what qualifies as a substantial change and the legal steps to modify your order.</p>
-          <a href="/blog/how-to-modify-a-custody-agreement-when-and-how.html" class="blog-card-link">
+          <a href="/blog/how-to-modify-a-custody-agreement-when-and-how" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1410,9 +1469,9 @@
         <article class="blog-card" data-category="Self-Care &amp; Support">
           <span class="blog-card-category" data-cat="Self-Care &amp; Support">Self-Care &amp; Support</span>
           <div class="blog-card-date">August 26, 2025</div>
-          <h2><a href="/blog/managing-anxiety-when-you-can-t-control-what-happens-at-the-other-house.html">Managing Anxiety When You Can't Control What Happens at the Other House</a></h2>
+          <h2><a href="/blog/managing-anxiety-when-you-can-t-control-what-happens-at-the-other-house">Managing Anxiety When You Can't Control What Happens at the Other House</a></h2>
           <p>The anxiety of not knowing what happens at your co-parent's house is real. Practical coping strategies for the things you can't control.</p>
-          <a href="/blog/managing-anxiety-when-you-can-t-control-what-happens-at-the-other-house.html" class="blog-card-link">
+          <a href="/blog/managing-anxiety-when-you-can-t-control-what-happens-at-the-other-house" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1421,9 +1480,9 @@
         <article class="blog-card" data-category="Your Children">
           <span class="blog-card-category" data-cat="Your Children">Your Children</span>
           <div class="blog-card-date">August 26, 2025</div>
-          <h2><a href="/blog/signs-your-child-is-struggling-with-the-divorce-and-what-to-do.html">Signs Your Child Is Struggling with the Divorce (and What to Do)</a></h2>
+          <h2><a href="/blog/signs-your-child-is-struggling-with-the-divorce-and-what-to-do">Signs Your Child Is Struggling with the Divorce (and What to Do)</a></h2>
           <p>Spot the behavioral and emotional signs that your child is struggling with the divorce. What each signal means and how to respond.</p>
-          <a href="/blog/signs-your-child-is-struggling-with-the-divorce-and-what-to-do.html" class="blog-card-link">
+          <a href="/blog/signs-your-child-is-struggling-with-the-divorce-and-what-to-do" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1432,9 +1491,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">August 24, 2025</div>
-          <h2><a href="/blog/why-co-parenting-feels-harder-than-it-should.html">Why Co-Parenting Feels Harder Than It Should</a></h2>
+          <h2><a href="/blog/why-co-parenting-feels-harder-than-it-should">Why Co-Parenting Feels Harder Than It Should</a></h2>
           <p>Co-parenting is harder than anyone prepared you for. Understand the structural reasons why — and what actually makes it easier.</p>
-          <a href="/blog/why-co-parenting-feels-harder-than-it-should.html" class="blog-card-link">
+          <a href="/blog/why-co-parenting-feels-harder-than-it-should" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1443,9 +1502,9 @@
         <article class="blog-card" data-category="Communication">
           <span class="blog-card-category" data-cat="Communication">Communication</span>
           <div class="blog-card-date">August 24, 2025</div>
-          <h2><a href="/blog/what-counts-as-high-conflict-co-parenting.html">What Counts as High-Conflict Co-Parenting?</a></h2>
+          <h2><a href="/blog/what-counts-as-high-conflict-co-parenting">What Counts as High-Conflict Co-Parenting?</a></h2>
           <p>Not sure if your co-parenting is high-conflict? Identify the patterns, understand when to shift strategies, and protect your wellbeing.</p>
-          <a href="/blog/what-counts-as-high-conflict-co-parenting.html" class="blog-card-link">
+          <a href="/blog/what-counts-as-high-conflict-co-parenting" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1454,9 +1513,9 @@
         <article class="blog-card" data-category="Your Children">
           <span class="blog-card-category" data-cat="Your Children">Your Children</span>
           <div class="blog-card-date">August 24, 2025</div>
-          <h2><a href="/blog/what-your-teenager-needs-from-you-during-and-after-divorce.html">What Your Teenager Needs from You During and After Divorce</a></h2>
+          <h2><a href="/blog/what-your-teenager-needs-from-you-during-and-after-divorce">What Your Teenager Needs from You During and After Divorce</a></h2>
           <p>Teenagers process divorce differently. Understand what your teen actually needs from you — more autonomy, less conflict, honest communication.</p>
-          <a href="/blog/what-your-teenager-needs-from-you-during-and-after-divorce.html" class="blog-card-link">
+          <a href="/blog/what-your-teenager-needs-from-you-during-and-after-divorce" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1465,9 +1524,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">August 14, 2025</div>
-          <h2><a href="/blog/co-parenting-spectrum-finding-balance.html">The Spectrum of Co-Parenting: Finding Your Sweet Spot</a></h2>
+          <h2><a href="/blog/co-parenting-spectrum-finding-balance">The Spectrum of Co-Parenting: Finding Your Sweet Spot</a></h2>
           <p>Most families aren't fully cooperative or completely parallel. Discover how to find the right balance for your unique situation.</p>
-          <a href="/blog/co-parenting-spectrum-finding-balance.html" class="blog-card-link">
+          <a href="/blog/co-parenting-spectrum-finding-balance" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1476,9 +1535,9 @@
         <article class="blog-card" data-category="Co-Parenting Basics">
           <span class="blog-card-category" data-cat="Co-Parenting Basics">Co-Parenting Basics</span>
           <div class="blog-card-date">July 31, 2025</div>
-          <h2><a href="/blog/co-parenting-vs-parallel-parenting.html">Co-Parenting vs. Parallel Parenting: Which Approach Fits Your Situation?</a></h2>
+          <h2><a href="/blog/co-parenting-vs-parallel-parenting">Co-Parenting vs. Parallel Parenting: Which Approach Fits Your Situation?</a></h2>
           <p>Not all post-divorce parenting looks the same. Learn the key differences between cooperative co-parenting and low-contact parallel parenting.</p>
-          <a href="/blog/co-parenting-vs-parallel-parenting.html" class="blog-card-link">
+          <a href="/blog/co-parenting-vs-parallel-parenting" class="blog-card-link">
             Read article
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
@@ -1504,7 +1563,7 @@
         <li><a href="/plan-builder/">Custody Plan Builder</a></li>
         <li><a href="/communication-styles/">Communication Style Quiz</a></li>
         <li><a href="/calculators/">Support Calculator</a></li>
-        <li><a href="/blog.html">Common Ground Blog</a></li>
+        <li><a href="/blog">Common Ground Blog</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -1523,11 +1582,11 @@
     <div class="footer-col">
       <div class="footer-col-label">Company</div>
       <ul>
-        <li><a href="/professionals.html">For Family & Legal Professionals</a></li>
+        <li><a href="/professionals">For Family & Legal Professionals</a></li>
         <li><a href="mailto:hello@getclearly.app">Contact</a></li>
-        <li><a href="/faq.html">FAQ</a></li>
-        <li><a href="/privacy.html">Privacy</a></li>
-        <li><a href="/terms.html">Terms</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
       </ul>
     </div>
   </div>
