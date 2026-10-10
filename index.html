@@ -267,6 +267,9 @@
       .callout .txt { transition-delay: calc(1.3s + var(--n) * .25s); }
       .callout .txt strong { font-size: 15px; }
       .callout .txt span { font-size: 14px; }
+      /* The message pile: smaller bubbles so they sit two or three to a row, like a pile, not a list */
+      .pile { gap: 7px; padding: 28px 14px; }
+      .pile span { font-size: 13px; padding: 8px 12px; border-radius: 12px; }
       .flow-card { padding: 36px 24px; }
       .flow { grid-template-columns: 1fr; }
       .phones { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad) 4px; scrollbar-width: none; }
@@ -415,7 +418,7 @@
         <p class="lead" data-reveal style="--i:2">Most co-parenting apps were built to keep score. Clearly was built to help you stop keeping it. <a class="text-link" href="/best-co-parenting-apps-2026/">See how we compare &rarr;</a></p>
       </div>
       <table class="compare" data-scene>
-        <thead><tr><th></th><th>Most co-parenting apps</th><th class="us">Clearly</th></tr></thead>
+        <thead><tr><th></th><th>Most <span class="nowrap">co-parenting</span> apps</th><th class="us">Clearly</th></tr></thead>
         <tbody>
           <tr style="--i:1"><td>Conversations</td><td class="them">A thread that never ends</td><td class="us">Topics that end in an answer</td></tr>
           <tr style="--i:2"><td>Tone</td><td class="them">You're on your own</td><td class="us">A second look before you post</td></tr>
