@@ -149,19 +149,19 @@
     .flow { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; list-style: none; margin: 0; padding: 0; }
     .flow::before, .flow::after { content: ''; position: absolute; top: 15px; left: 16px; right: calc(25% - 16px); height: 1px; }
     .flow::before { background: var(--rule); }
-    .flow::after { background: var(--moss); transform-origin: left; transform: scaleX(0); transition: transform 2.6s cubic-bezier(.45,0,.2,1) .3s; }
-    .flow.is-in::after { transform: scaleX(1); }
+    /* --p (0..1) is set from scroll position, so the line fills as you scroll */
+    .flow::after { background: var(--moss); transform-origin: left; transform: scaleX(var(--p, 0)); transition: transform .15s linear; }
     .flow li { position: relative; }
     .flow .n { position: relative; z-index: 1; width: 32px; height: 32px; border-radius: 50%; display: grid; place-items: center; font-size: 13px; font-weight: 500;
-      background: #FFFFFF; border: 1px solid var(--rule); color: var(--ink-faint); margin-bottom: 28px; transition: background .4s, color .4s, border-color .4s; transition-delay: calc(.3s + var(--i) * .8s); }
-    .flow.is-in .n { background: var(--moss); border-color: var(--moss); color: #FFFFFF; }
+      background: #FFFFFF; border: 1px solid var(--rule); color: var(--ink-faint); margin-bottom: 28px; transition: background .35s, color .35s, border-color .35s; }
+    .flow li.on .n { background: var(--moss); border-color: var(--moss); color: #FFFFFF; }
     .flow h3 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 26px; line-height: 1.15; margin: 0 0 10px; }
     .flow p { font-size: 14px; line-height: 1.6; color: var(--ink-mid); margin: 0 0 20px; }
     .flow .eg { font-family: 'EB Garamond', serif; font-style: italic; font-size: 17px; line-height: 1.45; color: var(--ink); padding-top: 16px; border-top: 1px solid var(--rule); }
     .flow .eg s { color: var(--ink-faint); text-decoration-color: rgba(138,58,58,.6); }
     .flow .eg .ok { font-family: 'Instrument Sans', sans-serif; font-style: normal; font-size: 13px; font-weight: 500; color: var(--moss); }
-    .flow li > * { opacity: 0; transform: translateY(10px); transition: opacity .6s var(--ease), transform .6s var(--ease); transition-delay: calc(.35s + var(--i) * .8s); }
-    .flow.is-in li > * { opacity: 1; transform: none; }
+    .flow li > *:not(.n) { opacity: .18; transform: translateY(8px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+    .flow li.on > * { opacity: 1; transform: none; }
     .foot-credit { margin-top: 32px; font-size: 13px; color: rgba(255,255,255,0.7); }
 
     /* ---------- FAQ ---------- */
@@ -206,7 +206,7 @@
     .close .note { color: rgba(255,255,255,0.7); }
 
     @media (prefers-reduced-motion: reduce) {
-      [data-reveal], .shot .phone, .callout *, .pile span, .flow li > *, .flow::after, .flow .n, .compare tr, .home-hero h1 .line > span { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
+      [data-reveal], .shot .phone, .callout *, .pile span, .flow li > *, .compare tr, .home-hero h1 .line > span { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
     }
 
     @media (max-width: 1080px) {
@@ -325,7 +325,7 @@
         <p class="lead" data-reveal style="--i:2">Most co-parenting apps are a shared inbox with a paper trail. In Clearly, every conversation is a topic with one job: get you both to an answer.</p>
       </div>
       <div class="flow-card" data-reveal>
-        <ol class="flow" data-scene>
+        <ol class="flow">
           <li style="--i:0">
             <span class="n">1</span>
             <h3>Raise it.</h3>
@@ -485,6 +485,34 @@
         onView(el, function (t) { t.classList.add('is-in'); });
       });
 
+
+      // [02] The resolution flow follows the scroll: the line fills between
+      // the first and last step as the card moves up the screen, and each
+      // step lights up when the line reaches it (and un-lights scrolling up).
+      // Stacked on phones, each step lights up as it reaches mid-screen.
+      var flow = document.querySelector('.flow');
+      if (flow) {
+        var steps = flow.querySelectorAll('li');
+        var ticking = false;
+        var update = function () {
+          ticking = false;
+          var vh = window.innerHeight;
+          if (reduce) { steps.forEach(function (li) { li.classList.add('on'); }); flow.style.setProperty('--p', 1); return; }
+          var stacked = getComputedStyle(flow).gridTemplateColumns.split(' ').length < 4;
+          if (stacked) {
+            steps.forEach(function (li) { li.classList.toggle('on', li.getBoundingClientRect().top < vh * 0.62); });
+            return;
+          }
+          var top = flow.getBoundingClientRect().top;
+          var p = Math.min(1, Math.max(0, (vh * 0.8 - top) / (vh * 0.5)));
+          flow.style.setProperty('--p', p.toFixed(3));
+          steps.forEach(function (li, i) { li.classList.toggle('on', p >= i / (steps.length - 1) - 0.001); });
+        };
+        var onScroll = function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        update();
+      }
     })();
   </script>
 
