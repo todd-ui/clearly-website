@@ -437,7 +437,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   <article class="post-panel">
     <div class="post-col">
       <div class="post-top">
-        <a href="/blog" class="back-link">&larr; Common Ground</a>
+        <a href="/blog" class="back-link">&larr; Blog</a>
         ${post.category ? `<span class="pill">${escapeHtml(post.category)}</span>` : ''}
       </div>
       <header>
