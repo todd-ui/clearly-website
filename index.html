@@ -173,7 +173,7 @@
     .flow .eg { font-family: 'EB Garamond', serif; font-style: italic; font-size: 17px; line-height: 1.45; color: var(--ink); padding-top: 16px; border-top: 1px solid var(--rule); }
     .flow .eg s { color: var(--ink-faint); text-decoration-color: rgba(138,58,58,.6); }
     .flow .eg .ok { font-family: 'Instrument Sans', sans-serif; font-style: normal; font-size: 13px; font-weight: 500; color: var(--moss); }
-    .flow li > *:not(.n) { opacity: .18; transform: translateY(8px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
+    .flow li > *:not(.n) { opacity: .32; transform: translateY(8px); transition: opacity .5s var(--ease), transform .5s var(--ease); }
     .flow li.on > * { opacity: 1; transform: none; }
     .foot-credit { margin-top: 32px; font-size: 13px; color: rgba(255,255,255,0.7); }
 
@@ -251,6 +251,7 @@
       .compare td { font-size: 14px; }
       .compare th:first-child { display: none; }
       .pair .panel { padding: 56px var(--pad); }
+      .price-row { flex-direction: column; align-items: flex-start; gap: 6px; }
     }
   </style>
 </head>
@@ -295,7 +296,7 @@
       </div>
       <div class="diagram">
         <div class="shot">
-          <div class="phone"><img src="/images/Today.png" alt="The Today screen in Clearly" width="1027" height="2137" fetchpriority="high"></div>
+          <div class="phone"><picture><source srcset="/images/home/today.webp" type="image/webp"><img src="/images/home/today.png" alt="The Today screen in Clearly" width="600" height="1248" fetchpriority="high"></picture></div>
           <div class="callout" style="--x:.80; --y:.218; --n:0"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Who has the kids</strong><span>And when the next hand-off is.</span></div></div>
           <div class="callout" style="--x:.922; --y:.381; --n:1"><i class="dot"></i><i class="line"></i><div class="txt"><strong>One tap to start</strong><span>Swap a weekend. Log an expense. Raise a topic.</span></div></div>
           <div class="callout" style="--x:.36; --y:.555; --n:2"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Expenses, split for you</strong><span>The math is done. The awkward part, too.</span></div></div>
@@ -410,17 +411,17 @@
       </div>
       <div class="phones">
         <div class="phone-card" data-reveal style="--i:0">
-          <img src="/images/cal.png" alt="Clearly's shared custody calendar" width="1027" height="2137" loading="lazy">
+          <picture><source srcset="/images/home/cal.webp" type="image/webp"><img src="/images/home/cal.png" alt="Clearly's shared custody calendar" width="440" height="916" loading="lazy"></picture>
           <span class="pill">Schedule</span>
           <p>Your custody pattern, holidays and summer. Swaps happen in the app and land in Apple or Google Calendar.</p>
         </div>
         <div class="phone-card" data-reveal style="--i:2">
-          <img src="/images/expense.png" alt="Shared expenses in Clearly with each parent's share" width="1027" height="2137" loading="lazy">
+          <picture><source srcset="/images/home/expense.webp" type="image/webp"><img src="/images/home/expense.png" alt="Shared expenses in Clearly with each parent's share" width="440" height="916" loading="lazy"></picture>
           <span class="pill">Expenses</span>
           <p>Snap the receipt. Clearly does the math. Tap Pay to settle up in Venmo, Cash App or PayPal.</p>
         </div>
         <div class="phone-card" data-reveal style="--i:4">
-          <img src="/images/shared.png" alt="The shared parenting plan, kids' details and contacts in Clearly" width="1027" height="2137" loading="lazy">
+          <picture><source srcset="/images/home/shared.webp" type="image/webp"><img src="/images/home/shared.png" alt="The shared parenting plan, kids' details and contacts in Clearly" width="440" height="916" loading="lazy"></picture>
           <span class="pill">Shared</span>
           <p>The plan, the allergies, the pediatrician's number. Always current, for both of you.</p>
         </div>
@@ -573,7 +574,7 @@
   <div class="footer-main">
     <div class="footer-brand">
       <div class="footer-logo-row">
-        <img class="footer-icon" src="/images/app-icon.png" alt="Clearly." loading="lazy">
+        <img class="footer-icon" src="/images/app-icon-96.png" alt="Clearly." loading="lazy">
         <span class="footer-logo-text">Clearly.</span>
       </div>
       <p class="footer-statement">Co-parenting, <em>resolved.</em></p>
@@ -645,7 +646,7 @@
   }
 </style>
 <div class="mobile-app-bar" id="mobile-app-bar" aria-hidden="true">
-  <img src="/images/app-icon.png" alt="" width="40" height="40">
+  <img src="/images/app-icon-96.png" alt="" width="40" height="40">
   <div class="mobile-app-bar-text">
     <strong>Clearly</strong>
     <span>Co-parenting app</span>
@@ -680,71 +681,6 @@
 <!-- /mobile-app-bar -->
 
   <script>
-    // Scroll reveal animation
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-
-    // Sticky-scroll app story — swap active phone image as user scrolls chapters
-    (function initScrollStory() {
-      const chapters = document.querySelectorAll('.scroll-chapter');
-      const images = document.querySelectorAll('.scroll-story-img');
-      if (!chapters.length || !images.length) return;
-
-      const setActive = (view) => {
-        images.forEach(img => img.classList.toggle('is-active', img.dataset.view === view));
-        chapters.forEach(ch => ch.classList.toggle('is-active', ch.dataset.view === view));
-      };
-
-      const storyObs = new IntersectionObserver((entries) => {
-        // Pick the entry closest to the viewport center
-        const visible = entries.filter(e => e.isIntersecting);
-        if (!visible.length) return;
-        const center = window.innerHeight / 2;
-        let best = visible[0];
-        let bestDist = Infinity;
-        visible.forEach(e => {
-          const rect = e.boundingClientRect;
-          const dist = Math.abs((rect.top + rect.bottom) / 2 - center);
-          if (dist < bestDist) { bestDist = dist; best = e; }
-        });
-        setActive(best.target.dataset.view);
-      }, { rootMargin: '-35% 0px -35% 0px', threshold: [0, 0.25, 0.5, 0.75, 1] });
-
-      chapters.forEach(ch => storyObs.observe(ch));
-
-      // Mobile carousel: sync dots, and allow dot tap to scroll to slide
-      const dots = document.querySelectorAll('.scroll-story-dot');
-      const track = document.querySelector('.scroll-story-chapters');
-      if (dots.length && track) {
-        const setDot = (view) => dots.forEach(d => d.classList.toggle('is-active', d.dataset.view === view));
-        // Horizontal carousel IO — only fires when chapters are side-by-side (mobile)
-        const hObs = new IntersectionObserver((entries) => {
-          const visible = entries.filter(e => e.isIntersecting);
-          if (!visible.length) return;
-          const center = window.innerWidth / 2;
-          let best = visible[0], bestDist = Infinity;
-          visible.forEach(e => {
-            const r = e.boundingClientRect;
-            const d = Math.abs((r.left + r.right) / 2 - center);
-            if (d < bestDist) { bestDist = d; best = e; }
-          });
-          setDot(best.target.dataset.view);
-        }, { root: track, threshold: [0.5, 0.75, 1] });
-        chapters.forEach(ch => hObs.observe(ch));
-        dots.forEach(dot => dot.addEventListener('click', () => {
-          const target = document.querySelector('.scroll-chapter[data-view="' + dot.dataset.view + '"]');
-          if (target) target.scrollIntoView({behavior: 'smooth', inline: 'center', block: 'nearest'});
-        }));
-      }
-    })();
-
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(link => {
       link.addEventListener('click', (e) => {
