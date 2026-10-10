@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
-  <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-DYZ1XEXPMT', (function () { try { var q = location.search; if (/[?&]internal=1/.test(q)) localStorage.setItem('clearly_internal', '1'); if (/[?&]internal=0/.test(q)) localStorage.removeItem('clearly_internal'); return localStorage.getItem('clearly_internal') ? { traffic_type: 'internal' } : {}; } catch (e) { return {}; } })());</script>
+  <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-DYZ1XEXPMT', (function () { try { var q = location.search; if (/[?&]internal=1/.test(q)) localStorage.setItem('clearly_internal', '1'); if (/[?&]internal=0/.test(q)) localStorage.removeItem('clearly_internal'); return (localStorage.getItem('clearly_internal') || location.hostname.indexOf('getclearly.app') === -1) ? { traffic_type: 'internal' } : {}; } catch (e) { return {}; } })());</script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Google Fonts -->
@@ -626,6 +626,8 @@
 
       // Display results
       document.getElementById('resultsSection').classList.add('visible');
+      // GA4: first result shown on this visit
+      if (!window.calcResultTracked && typeof gtag === 'function') { window.calcResultTracked = true; gtag('event', 'calculator_result', { calculator_state: 'florida' }); }
       document.getElementById('monthlySupport').textContent = formatCurrency(monthlySupport);
       document.getElementById('annualSupport').textContent = formatCurrency(monthlySupport * 12);
       document.getElementById('payorParent').textContent = payorIsP1 ? 'Parent 1' : 'Parent 2';
@@ -646,6 +648,7 @@
     }
 
     async function downloadPDF() {
+      if (typeof gtag === 'function') gtag('event', 'calculator_pdf_download', { calculator_state: 'florida' });
 
       try { await window.loadJsPDF(); }
 
