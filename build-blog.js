@@ -672,7 +672,7 @@ ${posts.map(post => `      {
       .filters { flex-direction: row; gap: 4px; overflow-x: auto; scrollbar-width: none; margin: 0 -40px; padding: 0 40px 4px; }
       .filter-group, .filter-all { display: contents; border: 0; padding: 0; }
       .filter-group p { display: none; }
-      .filter-btn { flex-shrink: 0; white-space: nowrap; margin-left: 0; background: var(--paper); font-size: 14px; padding: 7px 14px; }
+      .filter-btn { flex-shrink: 0; white-space: nowrap; margin-left: 0; background: var(--paper); font-size: 14px; padding: 10px 16px; }
       .filter-btn.active { background: var(--ink); color: #FFFFFF; }
       .filter-btn.active span { color: rgba(255,255,255,.7); }
       .blog-grid { grid-template-columns: 1fr 1fr; }
