@@ -137,9 +137,9 @@
     /* ---------- [01] Problem ---------- */
     .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
     /* The messages pile up: a dense wrap of bubbles, heating up toward the end */
-    .pile { display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 8px; background: var(--paper); border-radius: 20px; padding: 28px; }
-    .pile span { background: #FFFFFF; border: 1px solid var(--rule); border-radius: 14px; padding: 8px 13px; font-size: 13px; line-height: 1.35; color: var(--ink-mid);
-      box-shadow: 0 4px 12px rgba(28,28,26,0.04); opacity: 0; transform: translateY(10px) scale(.97); transition: opacity .45s var(--ease), transform .45s var(--ease); transition-delay: calc(var(--i) * 70ms); }
+    .pile { display: flex; flex-wrap: wrap; align-content: center; justify-content: center; gap: 10px; background: var(--paper); border-radius: 20px; padding: 40px 32px; }
+    .pile span { background: #FFFFFF; border: 1px solid var(--rule); border-radius: 14px; padding: 10px 15px; font-size: 14px; line-height: 1.35; color: var(--ink-mid);
+      box-shadow: 0 4px 12px rgba(28,28,26,0.04); opacity: 0; transform: translateY(10px) scale(.97); transition: opacity .45s var(--ease), transform .45s var(--ease); transition-delay: calc(var(--i) * 110ms); }
     .pile span.hot { color: #8A3A3A; background: #FEF6F6; border-color: #F2CACA; }
     .pile.is-in span { opacity: 1; transform: none; }
     .pull { font-family: 'EB Garamond', serif; font-size: 22px; line-height: 1.45; font-style: italic; margin: 28px 0 0; max-width: 24em; }
@@ -302,25 +302,14 @@
         <span style="--i:1">Dentist moved to Tuesday</span>
         <span style="--i:2">Soccer fees due Friday &middot; $140</span>
         <span style="--i:3">Who has Thanksgiving this year?</span>
-        <span style="--i:4">Did she take her medicine?</span>
-        <span style="--i:5">Picture day is Thursday</span>
-        <span style="--i:6">Can we swap weekends?</span>
-        <span style="--i:7">She needs new cleats</span>
-        <span style="--i:8">Parent-teacher conference at 4</span>
-        <span style="--i:9">Did you sign the permission slip?</span>
-        <span style="--i:10" class="hot">You said you&#x27;d be here at 5.</span>
-        <span style="--i:11">Her coat is still at your place</span>
-        <span style="--i:12">Summer camp deadline is Monday</span>
-        <span style="--i:13" class="hot">Why didn&#x27;t you tell me?</span>
-        <span style="--i:14">Can you send the receipt?</span>
-        <span style="--i:15">Who&#x27;s paying for the tutor?</span>
-        <span style="--i:16" class="hot">We agreed on this already.</span>
-        <span style="--i:17">Running 20 minutes late</span>
-        <span style="--i:18">Is she allowed on TikTok?</span>
-        <span style="--i:19" class="hot">Stop changing the plan.</span>
-        <span style="--i:20">Grandma&#x27;s birthday is Saturday</span>
-        <span style="--i:21" class="hot">You never answer me.</span>
-        <span style="--i:22" class="hot">This is exactly what you always do.</span>
+        <span style="--i:4">Can we swap weekends?</span>
+        <span style="--i:5">Did she take her medicine?</span>
+        <span style="--i:6">Her coat is still at your place</span>
+        <span style="--i:7">Who&#x27;s paying for the tutor?</span>
+        <span style="--i:8" class="hot">You said you&#x27;d be here at 5.</span>
+        <span style="--i:9">Can you send the receipt?</span>
+        <span style="--i:10" class="hot">We agreed on this already.</span>
+        <span style="--i:11" class="hot">This is exactly what you always do.</span>
       </div>
     </div>
   </section>
