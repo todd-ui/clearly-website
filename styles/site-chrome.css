@@ -61,11 +61,28 @@
 /* ---------- Footer: an inset dark panel ---------- */
 .site-footer {
   margin: 0 16px 16px;
-  padding: 72px 56px 0;
+  padding: 80px 40px 0;
   border-radius: 28px;
   background: #1C1C1A;
 }
-.site-footer .footer-main { gap: 48px; }
+/* On the site's 3-column grid, like the panels above it: the brand block in
+   column 1, the three link lists sharing columns 2-3 */
+.site-footer .footer-main, .site-footer .footer-bottom { max-width: 1200px; margin-left: auto; margin-right: auto; }
+.site-footer .footer-main { grid-template-columns: repeat(3, 1fr); gap: 16px; padding-bottom: 72px; }
+.site-footer .footer-links { grid-column: 2 / span 2; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.site-footer .footer-col ul { gap: 10px; }
+.site-footer .footer-col ul li a { white-space: normal; }
+.site-footer .footer-col-label { margin-bottom: 18px; }
+.site-footer .footer-bottom { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 28px 0; color: rgba(255, 255, 255, 0.4); }
+.site-footer .footer-legal { display: flex; gap: 24px; }
+.site-footer .footer-legal a { color: rgba(255, 255, 255, 0.55); text-decoration: none; }
+.site-footer .footer-legal a:hover { color: #FFFFFF; }
+/* Tablets and small laptops: brand on top, the three lists across the full width below */
+@media (min-width: 769px) and (max-width: 1100px) {
+  .site-footer .footer-main { grid-template-columns: 1fr; gap: 48px; }
+  .site-footer .footer-brand { grid-column: auto; }
+  .site-footer .footer-links { grid-column: auto; }
+}
 /* styles.css has a legacy .footer-brand rule that makes the whole block bold
    (EB Garamond is only loaded at 400/500, so 700 is a faked bold). */
 .site-footer .footer-brand { font-weight: 400; font-size: 16px; }
@@ -86,4 +103,12 @@
 @media (max-width: 768px) {
   .site-footer { margin: 0 10px 10px; padding: 48px 24px 0; border-radius: 22px; }
   .site-footer .footer-statement { font-size: 26px; }
+  .site-footer .footer-main { grid-template-columns: 1fr; gap: 40px; padding-bottom: 48px; }
+  .site-footer .footer-brand { grid-column: auto; margin: 0; }
+  /* Free tools and Company side by side; Guides below */
+  .site-footer .footer-links { grid-column: auto; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 36px 20px; }
+  .site-footer .footer-links .footer-col:nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+  .site-footer .footer-col ul li a { font-size: 14px; }
+  .site-footer .footer-col-label { font-size: 10px; margin-bottom: 14px; }
+  .site-footer .footer-bottom { padding: 22px 0 26px; }
 }
