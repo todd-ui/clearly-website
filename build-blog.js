@@ -537,10 +537,12 @@ function topicFilters(posts) {
     .filter(([, cats]) => cats.length);
   const btn = (cat, label, n, active) =>
     `<button class="filter-btn${active ? ' active' : ''}" data-category="${escapeHtml(cat)}">${escapeHtml(label)} <span>${n}</span></button>`;
-  return `<div class="filters" role="group" aria-label="Filter by topic">
-        <div class="filter-all">${btn('all', 'All articles', posts.length, true)}</div>
-        ${groups.map(([name, cats]) => `<div class="filter-group"><p>${escapeHtml(name)}</p>${cats.map(c => btn(c, c, counts[c])).join('')}</div>`).join('\n        ')}
-      </div>`;
+  return `<aside class="topics" aria-label="Topics">
+        <nav class="filters" role="group" aria-label="Filter by topic">
+          <div class="filter-all">${btn('all', 'All articles', posts.length, true)}</div>
+          ${groups.map(([name, cats]) => `<div class="filter-group"><p>${escapeHtml(name)}</p>${cats.map(c => btn(c, c, counts[c])).join('')}</div>`).join('\n          ')}
+        </nav>
+      </aside>`;
 }
 
 const blogListTemplate = (posts) => `<!DOCTYPE html>
@@ -622,24 +624,23 @@ ${posts.map(post => `      {
     .label b { font-weight: 500; color: var(--moss); }
     .pill { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--moss); border: 1px solid currentColor; border-radius: 999px; padding: 4px 10px; }
 
-    .list-head { margin-bottom: 40px; }
+    .list-head { margin-bottom: 48px; }
     .list-head h1 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 48px; line-height: 1.05; letter-spacing: -0.4px; color: var(--ink); margin: 0 0 10px; }
     .list-head h1 em { font-style: italic; color: var(--moss); }
     .list-head .intro { font-size: 16px; line-height: 1.6; color: var(--ink-mid); margin: 0; max-width: 40em; }
 
-    /* Topic filters: "All articles" on its own line at the top left, then
-       three groups on the same 3-column grid (and 16px gap) as the cards,
-       so each group lines up with a column of cards below. Each button
-       sits flush with its group label; the selected one gets a soft pill. */
-    .filters { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 16px; row-gap: 20px; margin: 0 0 40px; padding: 24px 0 28px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-    .filter-all { grid-column: 1 / -1; }
+    /* Topics live in a sticky sidebar on the first column of the page's
+       3-column grid; posts fill the other two. Phones: one scrolling row. */
+    .list-body { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 16px; align-items: start; border-top: 1px solid var(--rule); padding-top: 40px; }
+    .topics { position: sticky; top: 96px; }
+    .filters { display: flex; flex-direction: column; gap: 28px; }
     .filter-group { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
-    .filter-group p { font-size: 11px; font-weight: 500; letter-spacing: 1.1px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 8px; }
+    .filter-group p { font-size: 11px; font-weight: 500; letter-spacing: 1.1px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 6px; }
     .filter-btn { font: inherit; font-size: 15px; line-height: 1.4; color: var(--ink-mid); background: transparent; border: 0; border-radius: 999px; padding: 4px 12px; margin-left: -12px; cursor: pointer; text-align: left; transition: background .2s, color .2s; }
     .filter-btn span { color: var(--ink-faint); font-size: 12px; margin-left: 6px; }
     .filter-btn:hover { color: var(--moss); }
     .filter-btn.active { background: var(--paper); color: var(--ink); font-weight: 500; }
-    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .blog-grid { grid-column: 2 / span 2; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .blog-card { position: relative; display: flex; flex-direction: column; background: var(--paper); border-radius: 20px; padding: 28px; transition: transform .25s, box-shadow .25s; }
     .blog-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(28,28,26,0.08); }
     .blog-card .pill { align-self: flex-start; margin-bottom: 20px; }
@@ -652,12 +653,20 @@ ${posts.map(post => `      {
     .no-posts { text-align: center; color: var(--ink-faint); }
 
     @media (max-width: 960px) {
+      .list-body { display: block; padding-top: 24px; }
+      .topics { position: static; margin: 0 0 28px; }
+      .filters { flex-direction: row; gap: 4px; overflow-x: auto; scrollbar-width: none; margin: 0 -40px; padding: 0 40px 4px; }
+      .filter-group, .filter-all { display: contents; }
+      .filter-group p { display: none; }
+      .filter-btn { flex-shrink: 0; white-space: nowrap; margin-left: 0; background: var(--paper); font-size: 14px; padding: 7px 14px; }
+      .filter-btn.active { background: var(--ink); color: #FFFFFF; }
+      .filter-btn.active span { color: rgba(255,255,255,.7); }
       .blog-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 640px) {
       .panel { margin: 0 10px 10px; border-radius: 22px; padding: 56px 22px; }
       .list-head h1 { font-size: 36px; }
-      .filters { grid-template-columns: 1fr; row-gap: 18px; }
+      .filters { margin: 0 -22px; padding: 0 22px 4px; }
       .blog-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -674,6 +683,7 @@ ${posts.map(post => `      {
         <p class="intro">Ideas for calmer co-parenting: schedules, money, hard messages and the kids.</p>
       </header>
       ${posts.length > 0 ? `
+      <div class="list-body">
       ${topicFilters(posts)}
       <div class="blog-grid">
         ${posts.map((post, i) => `
@@ -684,6 +694,7 @@ ${posts.map(post => `      {
           <p class="meta">${post.date} &middot; ${Math.max(1, Math.round((post.wordCount || 0) / 230))} min read</p>
         </article>
         `).join('')}
+      </div>
       </div>
       ` : `
       <div class="no-posts"><p>New articles coming soon.</p></div>
@@ -704,6 +715,9 @@ ${posts.map(post => `      {
           btn.classList.add('active');
           var cat = btn.dataset.category;
           cards.forEach(function (c) { c.classList.toggle('hidden', cat !== 'all' && c.dataset.category !== cat); });
+          // picked from further down: bring the top of the list back into view
+          var list = document.querySelector('.list-body');
+          if (list && list.getBoundingClientRect().top < 0) window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' });
         });
       });
     })();
