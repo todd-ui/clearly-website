@@ -633,9 +633,11 @@ ${posts.map(post => `      {
        3-column grid; posts fill the other two. Phones: one scrolling row. */
     .list-body { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 16px; align-items: start; border-top: 1px solid var(--rule); padding-top: 40px; }
     .topics { position: sticky; top: 96px; }
-    .filters { display: flex; flex-direction: column; gap: 28px; }
-    .filter-group { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
-    .filter-group p { font-size: 11px; font-weight: 500; letter-spacing: 1.1px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 6px; }
+    .filters { display: flex; flex-direction: column; gap: 22px; }
+    /* Group headings read as headings: green, with a thin rule above;
+       the topics under them stay plain grey text. */
+    .filter-group { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding-top: 18px; border-top: 1px solid var(--rule); }
+    .filter-group p { font-size: 11px; font-weight: 500; letter-spacing: 1.3px; text-transform: uppercase; color: var(--moss); margin: 0 0 8px; }
     .filter-btn { font: inherit; font-size: 15px; line-height: 1.4; color: var(--ink-mid); background: transparent; border: 0; border-radius: 999px; padding: 4px 12px; margin-left: -12px; cursor: pointer; text-align: left; transition: background .2s, color .2s; }
     .filter-btn span { color: var(--ink-faint); font-size: 12px; margin-left: 6px; }
     .filter-btn:hover { color: var(--moss); }
@@ -656,7 +658,7 @@ ${posts.map(post => `      {
       .list-body { display: block; padding-top: 24px; }
       .topics { position: static; margin: 0 0 28px; }
       .filters { flex-direction: row; gap: 4px; overflow-x: auto; scrollbar-width: none; margin: 0 -40px; padding: 0 40px 4px; }
-      .filter-group, .filter-all { display: contents; }
+      .filter-group, .filter-all { display: contents; border: 0; padding: 0; }
       .filter-group p { display: none; }
       .filter-btn { flex-shrink: 0; white-space: nowrap; margin-left: 0; background: var(--paper); font-size: 14px; padding: 7px 14px; }
       .filter-btn.active { background: var(--ink); color: #FFFFFF; }
