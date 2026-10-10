@@ -212,6 +212,14 @@
     /* ---------- [05] End pair: price + close ---------- */
     .pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); margin: 0 var(--gap) var(--gap); }
     .pair .panel { margin: 0; padding: 72px 56px; }
+    /* The outer edges follow the 1200px content column, so the pricing
+       copy lines up with every section above it. Padding % on a grid item
+       is of its own column, so the 1200px column's edge works out to
+       100% - 592px (600px half-column less the 8px half-gap). */
+    @media (min-width: 961px) {
+      .pair .panel:first-child { padding-left: max(var(--pad), calc(100% - 592px)); }
+      .pair .panel:last-child { padding-right: max(var(--pad), calc(100% - 592px)); }
+    }
     .price-row { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; margin: 8px 0 24px; }
     .price { font-family: 'EB Garamond', serif; font-size: 44px; line-height: 1; }
     .price small { font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: var(--ink-faint); }
@@ -229,6 +237,14 @@
     @media (max-width: 1080px) {
       .flow { grid-template-columns: 1fr 1fr; row-gap: 48px; }
       .flow::before, .flow::after { display: none; }
+    }
+    /* Small laptops: give the annotated phone the width it needs and
+       shrink the headline so each of its two lines stays on one line. */
+    @media (min-width: 961px) and (max-width: 1120px) {
+      .hero-grid { grid-template-columns: minmax(0, 1fr) 516px; }
+      .home-hero h1 { font-size: clamp(38px, 4vw, 54px); }
+      .callout .line { width: calc((1 - var(--x)) * 290px + 24px); }
+      .callout .txt { width: 188px; }
     }
     @media (max-width: 960px) {
       :root { --gap: 10px; --pad: 22px; --radius: 22px; }
