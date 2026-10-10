@@ -1,15 +1,24 @@
 name: Custom Blog Post
 
+# An issue created from a template with a label fires both "opened" and
+# "labeled", and running on both published every post twice. Run once, when
+# the 'blog-custom' label is added (which also happens on creation).
 on:
   issues:
-    types: [opened, labeled]
+    types: [labeled]
 
 permissions:
   issues: write
 
+# One post at a time across both blog workflows, so the duplicate-title check
+# sees posts created by runs that started moments earlier.
+concurrency:
+  group: blog-generation
+  cancel-in-progress: false
+
 jobs:
   generate-post:
-    if: contains(github.event.issue.labels.*.name, 'blog-custom')
+    if: github.event.label.name == 'blog-custom'
     runs-on: ubuntu-latest
 
     steps:
