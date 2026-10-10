@@ -94,7 +94,8 @@
     .calc-version-banner .version-link { color: var(--primary); text-decoration: none; }
     .calc-version-banner .version-link:hover { text-decoration: underline; }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- PDF library loads on demand (js/pdf-loader.js) -->
+  <script src="/js/pdf-loader.js?v=20261010" defer></script>
   <!-- Panel layout to match the rest of the site; last so it restyles the page's own styles -->
   <link rel="stylesheet" href="/styles/calculator.css?v=20261010">
 </head>
@@ -644,7 +645,19 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    function downloadPDF() {
+    async function downloadPDF() {
+
+      try { await window.loadJsPDF(); }
+
+      catch (e) { alert("Couldn't load the PDF tool. Check your connection and try again."); return; }
+
+      buildPDF();
+
+    }
+
+    
+
+    function buildPDF() {
       const { jsPDF } = window.jspdf;
       const doc = new jsPDF();
       const primaryColor = [13, 130, 104]; // Teal #0D8268
@@ -692,7 +705,7 @@
 
       // Children & Time-sharing
       const numChildren = document.getElementById('numChildren')?.value || '1';
-      const isSubstantial = document.getElementById('substantialToggle')?.classList.contains('active');
+      const isSubstantial = document.getElementById('sharedToggle')?.classList.contains('active');
       doc.setFont('helvetica', 'normal');
       doc.setFontSize(8);
       doc.text('Number of Children: ' + numChildren, 20, yPos);
