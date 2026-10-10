@@ -97,9 +97,42 @@ body { background: var(--c-paper); }
 .final-cta .btn-secondary { background: transparent !important; color: #FFFFFF !important; border: 1px solid rgba(255, 255, 255, 0.4) !important; border-radius: 999px; }
 .final-cta .cta-fineprint { color: rgba(255, 255, 255, 0.7) !important; }
 
-/* ---------- Section rail: only where it fits beside the panels ---------- */
-@media (min-width: 1280px) and (max-width: 1599px) {
-  .page-nav { display: none !important; }
+/* ---------- Section bar: a floating pill just under the floating header ----------
+   Below 1600px (where the side rail would overlap the panels) the page's
+   section links sit in a rounded, frosted bar that matches the header,
+   8px beneath it and inset like every panel. 1600px and up keep the rail. */
+@media (max-width: 1599px) {
+  .page-nav {
+    top: 80px !important; left: 16px !important; right: 16px !important; bottom: auto !important;
+    max-width: none !important; transform: none !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px);
+    border: 1px solid rgba(28, 28, 26, 0.08) !important; border-radius: 999px;
+    box-shadow: 0 10px 30px rgba(28, 28, 26, 0.06);
+    transition: opacity 0.25s ease, transform 0.25s ease !important;
+  }
+  .page-nav.is-hidden { transform: translateY(-8px) !important; }
+  .page-nav-list {
+    display: flex !important; flex-direction: row !important; justify-content: center;
+    gap: 2px !important; padding: 6px !important; overflow-x: auto; scrollbar-width: none;
+  }
+  .page-nav-list::-webkit-scrollbar { display: none; }
+  .page-nav-list li { flex-shrink: 0; padding: 0 !important; }
+  .page-nav-list li::before { display: none !important; }
+  .page-nav-list a {
+    display: inline-block !important; font-size: 13px !important; letter-spacing: 0 !important; line-height: 1 !important;
+    padding: 10px 16px !important; border-radius: 999px; white-space: nowrap; color: #4A4A47 !important;
+  }
+  .page-nav-list a:hover { color: #0D8268 !important; }
+  .page-nav-list .is-active a { background: #E4F4EF !important; color: #0D8268 !important; font-weight: 500; }
+  /* Jump links land below the header and the bar */
+  section[id] { scroll-margin-top: 140px !important; }
+}
+@media (max-width: 768px) {
+  .page-nav { top: 74px !important; left: 10px !important; right: 10px !important; }
+  /* On phones the bar scrolls sideways, so start it at the left edge */
+  .page-nav-list { justify-content: flex-start; }
+  section[id] { scroll-margin-top: 130px !important; }
 }
 
 /* ---------- Phones and tablets ---------- */
