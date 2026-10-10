@@ -1,0 +1,118 @@
+/* ==========================================
+   BEST CO-PARENTING APPS 2026 — panel layout
+   Linked last in the page's <head>; restyles the existing markup without
+   changing any words, tables or URLs. Same panels and 3-column grid as the
+   rest of the site: prose sections put the heading in column 1 and text in
+   columns 2-3; tables, cards and screenshots use the full width.
+   No left-edge accent lines.
+   ========================================== */
+:root {
+  --c-paper: #F6F5F1; --c-ink: #1C1C1A; --c-ink-mid: #4A4A47; --c-ink-faint: #6B6B67;
+  --c-moss: #0D8268; --c-moss-pale: #E4F4EF; --c-rule: rgba(28, 28, 26, 0.10);
+}
+body { background: var(--c-paper); }
+
+/* ---------- Every section is a panel ---------- */
+.lp-hero, .lp-section, .thesis-frame, .cmp-section, .final-cta {
+  margin: 0 16px 16px !important; border-radius: 28px; background: #FFFFFF !important;
+  padding: 88px 40px !important; text-align: left; border: 0 !important;
+}
+.lp-hero { margin-top: 16px !important; background: var(--c-moss-pale) !important; }
+.lp-hero .container, .lp-section .container, .thesis-frame .container,
+.cmp-section .container, .final-cta .container { max-width: 1200px !important; margin: 0 auto; padding: 0 !important; text-align: left; }
+
+/* Headings, one size everywhere */
+.lp-section h2, .cmp-section h2, .final-cta h2 {
+  font-family: 'EB Garamond', serif; font-weight: 400; font-size: 36px; line-height: 1.12;
+  letter-spacing: -0.2px; color: var(--c-ink); text-align: left; margin: 0 0 32px; text-wrap: balance;
+}
+.lp-section p, .cmp-section p { text-align: left; }
+
+/* ---------- Intro ---------- */
+.lp-hero .lp-eyebrow { color: var(--c-moss); text-align: left; margin: 0 0 24px; }
+.lp-hero h1 {
+  font-family: 'EB Garamond', serif; font-weight: 400; font-size: 52px; line-height: 1.06;
+  letter-spacing: -0.4px; text-align: left; margin: 0 0 28px; max-width: 20ch;
+}
+.lp-hero-text { max-width: 40em; margin: 0; text-align: left; }
+.lp-hero-text p { font-size: 18px; line-height: 1.65; color: var(--c-ink-mid); text-align: left; }
+.lp-hero .jump-row { justify-content: flex-start !important; margin-left: 0 !important; margin-top: 40px !important; text-align: left; }
+.lp-hero-thesis { text-align: left; max-width: 40em; margin-left: 0; }
+
+/* ---------- Prose sections: heading in column 1, text in columns 2-3 ---------- */
+#short-answer .container, #what-changed .container, #which-app .container, #faq .container {
+  display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 16px; align-items: start;
+}
+#short-answer .container > *, #what-changed .container > *, #which-app .container > *, #faq .container > * { grid-column: 2 / span 2; }
+#short-answer .container > h2, #what-changed .container > h2, #which-app .container > h2, #faq .container > h2 {
+  grid-column: 1; grid-row: 1 / span 20; position: sticky; top: 100px; margin: 0; padding-right: 24px;
+}
+#short-answer p, #what-changed p { font-size: 17px; line-height: 1.7; color: var(--c-ink-mid); max-width: 44em; }
+
+/* Situations and FAQ: ruled rows */
+.situation-list { list-style: none; margin: 0; padding: 0; counter-reset: none; }
+.situation-item { padding: 20px 0; border-top: 1px solid var(--c-rule); margin: 0; background: transparent; box-shadow: none; border-radius: 0; }
+.situation-item:last-child { border-bottom: 1px solid var(--c-rule); }
+.situation-item h3 { font-family: 'Instrument Sans', sans-serif; font-size: 17px; font-weight: 500; color: var(--c-ink); margin: 0 0 6px; }
+.situation-item p { font-size: 16px; line-height: 1.65; color: var(--c-ink-mid); margin: 0; }
+
+/* ---------- The thesis: a green statement panel ---------- */
+.thesis-frame { background: var(--c-moss) !important; }
+.thesis-frame .thesis { text-align: left; max-width: 26em; margin: 0; }
+.thesis-frame .thesis-line { font-family: 'EB Garamond', serif; font-size: 40px; line-height: 1.15; color: #FFFFFF !important; text-align: left; }
+.thesis-frame .thesis-line + .thesis-line { color: rgba(255, 255, 255, 0.7) !important; }
+.thesis-frame .thesis-tag, .thesis-frame .thesis-tag em { color: rgba(255, 255, 255, 0.75) !important; text-align: left !important; margin-left: 0 !important; padding-left: 0 !important; }
+
+/* ---------- Comparison table and cards: full width ---------- */
+.cmp-intro { max-width: 44em; margin: 0 0 32px; color: var(--c-ink-mid); }
+.why-container { max-width: 1200px !important; }
+.why-h2 { margin: 0 0 40px !important; max-width: none !important; text-align: left !important; }
+.why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; max-width: none; }
+.why-card { background: var(--c-paper); border: 0; border-radius: 20px; padding: 28px; box-shadow: none; text-align: left; }
+.why-card h3 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 23px; line-height: 1.2; color: var(--c-ink); }
+.why-card p { font-size: 15px; line-height: 1.6; color: var(--c-ink-mid); }
+.see-difference .phone-row { justify-content: flex-start; gap: 16px; }
+
+/* ---------- App reviews: name and verdict in column 1, review in 2-3 ---------- */
+.app-review {
+  display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 16px; align-items: start;
+  max-width: none; padding: 32px 0; margin: 0; border: 0; border-top: 1px solid var(--c-rule);
+  background: transparent; box-shadow: none; border-radius: 0; text-align: left;
+}
+.app-review:first-of-type { border-top: 0; padding-top: 0; }
+.app-review > * { grid-column: 2 / span 2; max-width: 44em; }
+.app-review > h3 { grid-column: 1; grid-row: 1; font-family: 'EB Garamond', serif; font-weight: 400; font-size: 30px; line-height: 1.1; color: var(--c-ink); margin: 0 0 6px; }
+.app-review > .app-tagline { grid-column: 1; grid-row: 2; font-size: 15px; color: var(--c-moss); padding-right: 24px; margin: 0; }
+.app-review p { font-size: 16px; line-height: 1.7; color: var(--c-ink-mid); }
+.app-review .app-honest { background: var(--c-paper); border: 0; border-radius: 14px; padding: 16px 18px; font-size: 15px; }
+.app-review .app-meta { font-size: 14px; color: var(--c-ink-faint); }
+
+/* ---------- Closing call to action: green panel ---------- */
+.final-cta { background: var(--c-moss) !important; }
+.final-cta h2 { color: #FFFFFF; max-width: 22ch; }
+.final-cta h2 em { color: rgba(255, 255, 255, 0.7); }
+.final-cta p { color: rgba(255, 255, 255, 0.85) !important; text-align: left; max-width: 40em; margin-left: 0; }
+.final-cta .cta-row { justify-content: flex-start; }
+.final-cta .btn-primary { background: #FFFFFF !important; color: var(--c-ink) !important; border-radius: 999px; }
+.final-cta .btn-secondary { background: transparent !important; color: #FFFFFF !important; border: 1px solid rgba(255, 255, 255, 0.4) !important; border-radius: 999px; }
+.final-cta .cta-fineprint { color: rgba(255, 255, 255, 0.7) !important; }
+
+/* ---------- Section rail: only where it fits beside the panels ---------- */
+@media (min-width: 1280px) and (max-width: 1599px) {
+  .page-nav { display: none !important; }
+}
+
+/* ---------- Phones and tablets ---------- */
+@media (max-width: 900px) {
+  .lp-hero, .lp-section, .thesis-frame, .cmp-section, .final-cta { margin: 0 10px 10px !important; border-radius: 22px; padding: 56px 22px !important; }
+  .lp-hero { margin-top: 10px !important; }
+  .lp-hero h1 { font-size: 38px; }
+  .lp-section h2, .cmp-section h2, .final-cta h2 { font-size: 30px; margin-bottom: 24px; }
+  #short-answer .container, #what-changed .container, #which-app .container, #faq .container { display: block; }
+  #short-answer .container > h2, #what-changed .container > h2, #which-app .container > h2, #faq .container > h2 { position: static; margin-bottom: 24px; }
+  .thesis-frame .thesis-line { font-size: 30px; }
+  .why-grid { grid-template-columns: 1fr; }
+  .app-review { display: block; }
+  .app-review > h3 { margin-bottom: 4px; }
+  .app-review > .app-tagline { margin-bottom: 16px; }
+}
