@@ -83,8 +83,10 @@
     .inner { max-width: 1200px; margin: 0 auto; }
 
     /* Labels: "[01] The problem" and outlined pills */
-    .label { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 24px; }
-    .label b { font-weight: 500; color: var(--moss); letter-spacing: 0; }
+    /* Inline text (not flex) so a long label wraps as one line of text instead of two columns */
+    .label { display: block; font-size: 12px; font-weight: 500; letter-spacing: 1.2px; line-height: 1.5; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 24px; }
+    .label b { font-weight: 500; color: var(--moss); letter-spacing: 0; margin-right: 10px; }
+    .nowrap { white-space: nowrap; }
     .panel-moss .label, .panel-moss .label b { color: rgba(255,255,255,0.75); }
     .pill { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; border: 1px solid currentColor; border-radius: 999px; padding: 4px 10px; }
 
@@ -238,10 +240,33 @@
       .hero-copy { padding-top: 0; }
       .home-hero h1 { font-size: 40px; }
       .h2 { font-size: 34px; }
-      .diagram { height: auto; padding-bottom: 40px; }
-      .shot { width: 240px; margin: 0 auto; }
-      .callout .line { width: 0; }
-      .callout .txt { display: none; }
+      .diagram { height: auto; padding-bottom: 8px; }
+      /* Phones and tablets: the dots become numbered markers on the phone and the
+         callouts become a matching numbered list under it, so nothing is lost.
+         --pw is the phone's width; 2.0808 is the screenshot's height / width. */
+      .shot { --pw: 240px; width: 100%; max-width: 420px; margin: 0 auto; aspect-ratio: auto; padding-top: calc(var(--pw) * 2.0808 + 36px); counter-reset: callout; }
+      .shot .phone { inset: auto; top: 0; left: 50%; width: var(--pw); margin-left: calc(var(--pw) / -2); }
+      .callout { position: static; transform: none; display: grid; grid-template-columns: 26px 1fr; column-gap: 14px; align-items: start; padding: 14px 0; border-top: 1px solid rgba(13, 130, 104, 0.15); counter-increment: callout; }
+      .callout:last-child { border-bottom: 1px solid rgba(13, 130, 104, 0.15); }
+      .callout .line { display: none; }
+      .callout .dot {
+        position: absolute; z-index: 2; width: 18px; height: 18px; margin: -9px 0 0 -9px;
+        left: calc(50% - var(--pw) / 2 + var(--x) * var(--pw)); top: calc(var(--y) * var(--pw) * 2.0808);
+        box-shadow: 0 0 0 3px rgba(13, 130, 104, 0.22); display: grid; place-items: center;
+        font: normal 500 10.5px/1 'Instrument Sans', sans-serif; color: #FFFFFF;
+      }
+      .callout .dot::after { content: counter(callout); }
+      .callout .txt { grid-column: 2; padding: 0; width: auto; }
+      .callout::before {
+        content: counter(callout); width: 26px; height: 26px; border-radius: 50%; background: var(--moss); color: #FFFFFF;
+        display: grid; place-items: center; font-size: 12px; font-weight: 500;
+        opacity: 0; transition: opacity .5s var(--ease); transition-delay: calc(1.2s + var(--n) * .25s);
+      }
+      .home-hero.is-in .callout::before { opacity: 1; }
+      .callout .dot { transition-delay: calc(1.2s + var(--n) * .25s); }
+      .callout .txt { transition-delay: calc(1.3s + var(--n) * .25s); }
+      .callout .txt strong { font-size: 15px; }
+      .callout .txt span { font-size: 14px; }
       .flow-card { padding: 36px 24px; }
       .flow { grid-template-columns: 1fr; }
       .phones { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad) 4px; scrollbar-width: none; }
@@ -290,7 +315,7 @@
   <section class="panel home-hero" data-scene>
     <div class="inner hero-grid">
       <div class="hero-copy">
-        <p class="label" data-reveal="fade"><b>Clearly</b> The most advanced co-parenting app</p>
+        <p class="label" data-reveal="fade"><b>Clearly</b> The most advanced <span class="nowrap">co-parenting app</span></p>
         <h1><span class="line"><span>The marriage ends.</span></span><span class="line"><span>The messages don't.</span></span></h1>
         <p class="hero-lead" data-reveal style="--i:3">The co-parenting app that helps you say it calmly, settle it for good, and get back to your kids.</p>
         <div data-reveal style="--i:4"><a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="home-hero" aria-label="Download Clearly on the App Store"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div></a></div>
