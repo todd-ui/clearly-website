@@ -109,7 +109,7 @@ ${CATEGORIES.map(c => `- ${c}`).join('\n')}
 
 Respond with JSON only:
 {
-  "title": "The article title (compelling, specific, 8-12 words, SEO-friendly)",
+  "title": "The article title: specific and plain, 6-9 words and no more than 60 characters, leading with the phrase a parent would search for. No colon-and-subtitle or parenthetical add-ons.",
   "slug": "url-friendly-slug-like-this",
   "category": "One of the categories listed above",
   "description": "A 1-2 sentence description for SEO meta tags (120-155 characters)",
