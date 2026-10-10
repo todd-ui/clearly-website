@@ -7,7 +7,7 @@
    ========================================== */
 :root {
   --t-paper: #F6F5F1; --t-ink: #1C1C1A; --t-ink-mid: #4A4A47; --t-ink-faint: #6B6B67;
-  --t-moss: #0D8268; --t-moss-pale: #E4F4EF; --t-rule: rgba(28, 28, 26, 0.10);
+  --t-moss: #0D8268; --t-moss-pale: #DBEFE8; --t-rule: rgba(28, 28, 26, 0.10);
 }
 body { background: var(--t-paper); }
 

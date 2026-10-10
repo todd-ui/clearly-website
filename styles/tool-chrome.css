@@ -61,7 +61,7 @@
   width: 52px !important;
   height: 52px !important;
   border-radius: 16px !important;
-  background: #E4F4EF !important;
+  background: #DBEFE8 !important;
   color: #0D8268 !important;
   display: flex; align-items: center; justify-content: center;
 }
@@ -94,11 +94,11 @@
 }
 .style-preview-icon { margin: 0 auto 12px !important; }
 .style-preview-card span { font-size: 13px; font-weight: 500; color: #1C1C1A; }
-.landing-badge { background: #E4F4EF !important; color: #0D8268 !important; border: 0 !important; }
+.landing-badge { background: #DBEFE8 !important; color: #0D8268 !important; border: 0 !important; }
 
 /* Calculators: hero and the three reasons as panels on the site grid */
 .calc-hero {
-  margin: 16px 16px 16px; border-radius: 28px; background: #E4F4EF !important; padding: 88px 40px 72px !important;
+  margin: 16px 16px 16px; border-radius: 28px; background: #DBEFE8 !important; padding: 88px 40px 72px !important;
 }
 .calc-hero h1 { font-family: 'EB Garamond', Georgia, serif; font-weight: 400; }
 .state-chip { background: #FFFFFF !important; border: 0 !important; border-radius: 999px !important; }
@@ -125,7 +125,7 @@
 .states-grid { gap: 8px !important; }
 .state-link { border: 0 !important; border-radius: 14px !important; background: #F6F5F1 !important; padding: 14px 18px !important; }
 .state-link.coming-soon { color: #6B6B67 !important; }
-.state-link.available { background: #E4F4EF !important; color: #0D8268 !important; }
+.state-link.available { background: #DBEFE8 !important; color: #0D8268 !important; }
 .state-link.available:hover { background: #0D8268 !important; color: #FFFFFF !important; }
 .state-link.available:hover .status { color: rgba(255, 255, 255, 0.8) !important; }
 .disclaimer-section { padding: 56px 40px !important; }
@@ -180,7 +180,7 @@
 
 /* Icon tiles inside cards match the opening screen */
 .summary-icon, .benefit-icon, .complete-info-icon {
-  background: #E4F4EF !important; color: #0D8268 !important; border-radius: 12px !important;
+  background: #DBEFE8 !important; color: #0D8268 !important; border-radius: 12px !important;
 }
 
 /* Choices: pill chips, quiet until chosen */
@@ -192,10 +192,10 @@
 .wizard-content .text-input {
   background: #FFFFFF !important; border: 1px solid rgba(28, 28, 26, 0.10) !important; border-radius: 12px !important;
 }
-.wizard-content .text-input:focus { border-color: #0D8268 !important; box-shadow: 0 0 0 3px #E4F4EF !important; outline: none; }
+.wizard-content .text-input:focus { border-color: #0D8268 !important; box-shadow: 0 0 0 3px #DBEFE8 !important; outline: none; }
 
 /* Plan code: a calm pale-green panel */
-.plan-code-card { border: 0 !important; border-radius: 22px !important; background: #E4F4EF !important; }
+.plan-code-card { border: 0 !important; border-radius: 22px !important; background: #DBEFE8 !important; }
 
 /* Bottom bar and buttons */
 .wizard-footer {
@@ -217,7 +217,7 @@
 .email-screen h2 { font-size: 36px !important; }
 .results-screen #resultTitle { font-size: 52px !important; line-height: 1.05; }
 .result-tagline { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 22px !important; color: #0D8268 !important; }
-.result-badge { background: #E4F4EF !important; color: #0D8268 !important; border: 0 !important; }
+.result-badge { background: #DBEFE8 !important; color: #0D8268 !important; border: 0 !important; }
 
 /* Answers and result cards: white, no outline, moss ring when chosen */
 .answer-btn {
@@ -236,7 +236,7 @@
 .result-card h3, .principle-section h3, .assessment-main .final-cta h3 {
   font-family: 'EB Garamond', Georgia, serif !important; font-weight: 400 !important; font-size: 24px !important; color: #1C1C1A;
 }
-.result-card.highlight { background: #E4F4EF !important; box-shadow: none !important; }
+.result-card.highlight { background: #DBEFE8 !important; box-shadow: none !important; }
 .result-card.highlight h3 { color: #0D8268 !important; }
 .principle-section { background: #FFFFFF !important; border: 0 !important; border-radius: 22px !important; box-shadow: none !important; }
 .principle-example { background: #F6F5F1 !important; border: 0 !important; border-radius: 14px !important; }
@@ -253,7 +253,7 @@
 }
 .btn-start:hover, .email-form button:hover { background: #000000 !important; transform: none !important; }
 .email-form input { background: #FFFFFF !important; border: 1px solid rgba(28, 28, 26, 0.10) !important; border-radius: 12px !important; }
-.email-form input:focus { border-color: #0D8268 !important; box-shadow: 0 0 0 3px #E4F4EF !important; outline: none; }
+.email-form input:focus { border-color: #0D8268 !important; box-shadow: 0 0 0 3px #DBEFE8 !important; outline: none; }
 
 @media (max-width: 600px) {
   .wizard-content h1, .wizard-content h2 { font-size: 30px; }
