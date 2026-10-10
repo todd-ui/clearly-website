@@ -7,7 +7,7 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-DYZ1XEXPMT', (function () { try { var q = location.search; if (/[?&]internal=1/.test(q)) localStorage.setItem('clearly_internal', '1'); if (/[?&]internal=0/.test(q)) localStorage.removeItem('clearly_internal'); return localStorage.getItem('clearly_internal') ? { traffic_type: 'internal' } : {}; } catch (e) { return {}; } })());
+    gtag('config', 'G-DYZ1XEXPMT', (function () { try { var q = location.search; if (/[?&]internal=1/.test(q)) localStorage.setItem('clearly_internal', '1'); if (/[?&]internal=0/.test(q)) localStorage.removeItem('clearly_internal'); return (localStorage.getItem('clearly_internal') || location.hostname.indexOf('getclearly.app') === -1) ? { traffic_type: 'internal' } : {}; } catch (e) { return {}; } })());
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -2195,6 +2195,11 @@
       'holidays', 'summer', 'review', 'email', 'complete'
     ];
 
+    // GA4 funnel: start, each step reached, plan emailed, PDF downloaded
+    function track(name, params) {
+      if (typeof gtag === 'function') gtag('event', name, params || {});
+    }
+
     // Track if user is editing from review screen
     let editingFromReview = false;
 
@@ -2737,6 +2742,7 @@
         initScreen(screens[state.currentScreen]);
         updateUI();
         window.scrollTo(0, 0);
+        track('plan_builder_step', { step: screens[state.currentScreen], step_number: state.currentScreen });
       }
     }
 
@@ -2839,6 +2845,7 @@
     // WELCOME SCREEN
     // ==========================================
     function startBuilder() {
+      track('plan_builder_start');
       state.pathway = 'explore';
       state.currentScreen = screens.indexOf('children');
       initScreen('children');
@@ -2879,6 +2886,7 @@
         state.planCode = code;
         state.editingSaved = true;
         document.getElementById('planCode').textContent = code;
+        track('plan_code_open');
         goToScreen('review');
       } catch (error) {
         showError(error.message);
@@ -2978,6 +2986,7 @@
         });
         const data = await response.json().catch(() => ({}));
         if (!response.ok) throw new Error(data.error || "Couldn't save your changes. Try again.");
+        track('plan_builder_update');
         showToast('Saved. We’ve emailed you the updated plan.');
       } catch (error) {
         alert(error.message);
@@ -4510,6 +4519,7 @@
         const result = await response.json();
         state.planCode = result.share_code;
         document.getElementById('planCode').textContent = result.share_code;
+        track('plan_builder_complete', { schedule: state.schedule, children: state.children.length });
 
         // Advance to complete screen
         state.currentScreen++;
@@ -4669,6 +4679,7 @@
     }
 
     function downloadPDF() {
+      track('plan_pdf_download');
       const sections = buildPlanSummary();
       const sectionsHtml = sections.map(sec => `
   <div class="section">
@@ -4816,7 +4827,7 @@ ${sectionsHtml}
     if (link && typeof gtag === 'function') {
       gtag('event', 'app_store_click', {
         link_url: link.href,
-        link_location: 'cta'
+        link_location: link.dataset.cta || 'plan-builder'
       });
     }
   });
