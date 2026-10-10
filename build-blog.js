@@ -518,6 +518,31 @@ ${articleJsonLd(post)}
 </body>
 </html>`;
 
+// Blog topics, grouped for the index page filters. Any category not listed
+// here still gets a filter, under "More".
+const TOPIC_GROUPS = [
+  ['Talking it through', ['Communication', 'High-Conflict Situations']],
+  ['Your family', ['Your Children', 'Blended Families']],
+  ['The practical side', ['Schedules & Custody', 'Money & Expenses', 'Legal Basics']],
+  ['Getting started', ['Co-Parenting Basics', 'Self-Care & Support']],
+];
+
+function topicFilters(posts) {
+  const counts = {};
+  posts.forEach(p => { if (p.category) counts[p.category] = (counts[p.category] || 0) + 1; });
+  const listed = new Set(TOPIC_GROUPS.flatMap(([, cats]) => cats));
+  const extra = Object.keys(counts).filter(c => !listed.has(c));
+  const groups = TOPIC_GROUPS.concat(extra.length ? [['More', extra]] : [])
+    .map(([name, cats]) => [name, cats.filter(c => counts[c])])
+    .filter(([, cats]) => cats.length);
+  const btn = (cat, label, n, active) =>
+    `<button class="filter-btn${active ? ' active' : ''}" data-category="${escapeHtml(cat)}">${escapeHtml(label)} <span>${n}</span></button>`;
+  return `<div class="filters" role="group" aria-label="Filter by topic">
+        <div class="filter-all">${btn('all', 'All articles', posts.length, true)}</div>
+        ${groups.map(([name, cats]) => `<div class="filter-group"><p>${escapeHtml(name)}</p>${cats.map(c => btn(c, c, counts[c])).join('')}</div>`).join('\n        ')}
+      </div>`;
+}
+
 const blogListTemplate = (posts) => `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -602,12 +627,16 @@ ${posts.map(post => `      {
     .list-head h1 em { font-style: italic; color: var(--moss); }
     .list-head .intro { font-size: 16px; line-height: 1.6; color: var(--ink-mid); margin: 0; max-width: 40em; }
 
-    /* Quiet filters: plain text, a soft pill only on the selected one */
-    .filters { display: flex; gap: 2px; flex-wrap: wrap; margin: 0 0 32px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
-    .filter-btn { font: inherit; font-size: 14px; color: var(--ink-faint); background: transparent; border: 0; border-radius: 999px; padding: 7px 14px; cursor: pointer; transition: background .2s, color .2s; }
-    .filter-btn:hover { color: var(--ink); }
+    /* Topic filters, grouped in four columns: plain text, a soft pill only
+       on the selected one, post counts in grey */
+    .filters { display: grid; grid-template-columns: auto repeat(4, 1fr); gap: 8px 32px; align-items: start; margin: 0 0 40px; padding: 24px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .filter-group p { font-size: 11px; font-weight: 500; letter-spacing: 1.1px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 6px 12px; }
+    .filter-group, .filter-all { display: flex; flex-direction: column; align-items: flex-start; }
+    .filter-all { padding-top: 22px; }
+    .filter-btn { font: inherit; font-size: 14px; color: var(--ink-mid); background: transparent; border: 0; border-radius: 999px; padding: 5px 12px; cursor: pointer; text-align: left; transition: background .2s, color .2s; }
+    .filter-btn span { color: var(--ink-faint); font-size: 12px; margin-left: 4px; }
+    .filter-btn:hover { color: var(--moss); }
     .filter-btn.active { background: var(--paper); color: var(--ink); font-weight: 500; }
-
     .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .blog-card { position: relative; display: flex; flex-direction: column; background: var(--paper); border-radius: 20px; padding: 28px; transition: transform .25s, box-shadow .25s; }
     .blog-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(28,28,26,0.08); }
@@ -617,20 +646,19 @@ ${posts.map(post => `      {
     .blog-card h2 a::after { content: ''; position: absolute; inset: 0; border-radius: 20px; } /* whole card is the link */
     .blog-card p { font-size: 14px; line-height: 1.6; color: var(--ink-mid); margin: 0 0 24px; }
     .blog-card .meta { margin-top: auto; font-size: 12px; color: var(--ink-faint); }
-    .blog-card.hidden, .blog-card.later { display: none; }
-    .more-wrap { text-align: center; margin-top: 40px; }
-    .more-btn { font: inherit; font-size: 14px; font-weight: 500; color: var(--ink); background: #FFFFFF; border: 1px solid var(--rule); border-radius: 999px; padding: 12px 22px; cursor: pointer; }
-    .more-btn:hover { border-color: var(--moss); color: var(--moss); }
+    .blog-card.hidden { display: none; }
     .no-posts { text-align: center; color: var(--ink-faint); }
 
     @media (max-width: 960px) {
       .blog-grid { grid-template-columns: 1fr 1fr; }
+      .filters { grid-template-columns: repeat(3, 1fr); }
+      .filter-all { grid-column: 1 / -1; padding-top: 0; }
     }
     @media (max-width: 640px) {
       .panel { margin: 0 10px 10px; border-radius: 22px; padding: 56px 22px; }
       .list-head h1 { font-size: 36px; }
-      .filters { flex-wrap: nowrap; overflow-x: auto; margin: 0 -22px 32px; padding: 0 22px 4px; scrollbar-width: none; }
-      .filter-btn { flex-shrink: 0; }
+      .filters { grid-template-columns: 1fr 1fr; gap: 16px 8px; }
+      .filter-all { grid-column: 1 / -1; padding-top: 0; }
       .blog-grid { grid-template-columns: 1fr; }
     }
   </style>
@@ -647,14 +675,10 @@ ${posts.map(post => `      {
         <p class="intro">Ideas for calmer co-parenting: schedules, money, hard messages and the kids.</p>
       </header>
       ${posts.length > 0 ? `
-      <div class="filters" role="group" aria-label="Filter by topic">
-        <button class="filter-btn active" data-category="all">All</button>
-        ${(() => { const counts = {}; posts.forEach(p => { if (p.category) counts[p.category] = (counts[p.category] || 0) + 1; });
-          return Object.keys(counts).sort((x, y) => counts[y] - counts[x]).map(cat => `<button class="filter-btn" data-category="${escapeHtml(cat)}">${escapeHtml(cat)}</button>`).join('\n        '); })()}
-      </div>
+      ${topicFilters(posts)}
       <div class="blog-grid">
         ${posts.map((post, i) => `
-        <article class="blog-card${i > 23 ? ' later' : ''}" data-category="${escapeHtml(post.category)}">
+        <article class="blog-card" data-category="${escapeHtml(post.category)}">
           ${post.category ? `<span class="pill">${escapeHtml(post.category)}</span>` : ''}
           <h2><a href="${postPath(post.slug)}">${escapeHtml(post.title)}</a></h2>
           <p>${escapeHtml(post.description)}</p>
@@ -662,7 +686,6 @@ ${posts.map(post => `      {
         </article>
         `).join('')}
       </div>
-      ${posts.length > 24 ? `<div class="more-wrap"><button class="more-btn" type="button">Show more articles</button></div>` : ''}
       ` : `
       <div class="no-posts"><p>New articles coming soon.</p></div>
       `}
@@ -673,26 +696,17 @@ ${posts.map(post => `      {
   ${footerPartial}
 
   <script>
-    // Topic filter + "Show more". Every card is in the page (for search
-    // engines); the newest 24 show first, the rest one batch at a time.
+    // Topic filter. Every post is in the page; a topic just hides the rest.
     (function () {
       var cards = [].slice.call(document.querySelectorAll('.blog-card'));
-      var more = document.querySelector('.more-btn');
-      var shown = 24, active = 'all';
-      function render() {
-        var matching = cards.filter(function (c) { return active === 'all' || c.dataset.category === active; });
-        cards.forEach(function (c) { c.classList.add('hidden'); c.classList.remove('later'); });
-        matching.forEach(function (c, i) { if (i < shown) c.classList.remove('hidden'); });
-        if (more) more.parentNode.style.display = matching.length > shown ? '' : 'none';
-      }
       document.querySelectorAll('.filter-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
           document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
           btn.classList.add('active');
-          active = btn.dataset.category; shown = 24; render();
+          var cat = btn.dataset.category;
+          cards.forEach(function (c) { c.classList.toggle('hidden', cat !== 'all' && c.dataset.category !== cat); });
         });
       });
-      if (more) more.addEventListener('click', function () { shown += 24; render(); });
     })();
   </script>
 
