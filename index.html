@@ -295,7 +295,15 @@
       .compare td { font-size: 14px; }
       .compare th:first-child { display: none; }
       .pair .panel { padding: 56px var(--pad); }
-      .price-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+      /* Phones: both prices on one line, a touch smaller */
+      .price-row { flex-wrap: nowrap; gap: 10px; }
+      .price { font-size: 34px; white-space: nowrap; }
+      .price small { font-size: 12px; }
+    }
+    @media (max-width: 360px) {
+      .price-row { gap: 7px; }
+      .price { font-size: 29px; }
+      .price small { font-size: 11px; }
     }
   </style>
 </head>
