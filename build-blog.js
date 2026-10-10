@@ -565,18 +565,18 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0D8268">
-  <title>Common Ground - Co-Parenting Tips & Advice | Clearly</title>
-  <meta name="description" content="Real topics, practical advice, and perspectives for co-parents. Custody schedules, communication strategies, and tips for calmer co-parenting.">
+  <title>Co-Parenting Blog: Custody &amp; Communication Advice | Clearly</title>
+  <meta name="description" content="Co-parenting advice from Clearly: custody schedules, splitting costs, hard conversations, high-conflict exes and helping kids through divorce.">
   <link rel="canonical" href="${BLOG_URL}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${BLOG_URL}">
-  <meta property="og:title" content="Common Ground - Co-Parenting Tips & Advice">
-  <meta property="og:description" content="Real topics, practical advice, and perspectives for co-parents.">
+  <meta property="og:title" content="Co-Parenting Blog: Custody &amp; Communication Advice | Clearly">
+  <meta property="og:description" content="Co-parenting advice from Clearly: custody schedules, splitting costs, hard conversations, high-conflict exes and helping kids through divorce.">
   <meta property="og:image" content="https://getclearly.app/images/blog-og.png">
   <meta property="og:site_name" content="Clearly.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Common Ground - Co-Parenting Tips & Advice">
-  <meta name="twitter:description" content="Real topics, practical advice, and perspectives for co-parents.">
+  <meta name="twitter:title" content="Co-Parenting Blog: Custody &amp; Communication Advice | Clearly">
+  <meta name="twitter:description" content="Co-parenting advice from Clearly: custody schedules, splitting costs, hard conversations, high-conflict exes and helping kids through divorce.">
   <meta name="twitter:image" content="https://getclearly.app/images/blog-og.png">
   <meta name="robots" content="index, follow">
   <meta name="keywords" content="co-parenting tips, custody advice, shared parenting, divorce resources, co-parent communication">
@@ -593,7 +593,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
     "@context": "https://schema.org",
     "@type": "Blog",
     "name": "Common Ground",
-    "description": "Real topics, practical advice, and perspectives for co-parents. Custody schedules, communication strategies, and tips for calmer co-parenting.",
+    "description": "Co-parenting advice from Clearly: custody schedules, splitting costs, hard conversations, high-conflict exes and helping kids through divorce.",
     "@id": "${BLOG_URL}#blog",
     "url": "${BLOG_URL}",
     "publisher": {

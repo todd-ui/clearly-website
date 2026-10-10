@@ -23,15 +23,15 @@ Clearly is built for co-parents who find it hard to talk. Unlike apps that work 
 - [High-conflict co-parenting guide](https://getclearly.app/high-conflict-coparenting/): What works and what doesn't when co-parenting is hard. Includes parallel parenting.
 - [FAQ](https://getclearly.app/faq): Questions about how Clearly works, the record, privacy, pricing, and setup.
 - [For family & legal professionals](https://getclearly.app/professionals): How therapists, mediators, and family-law attorneys use Clearly with clients.
-- [Common Ground blog](https://getclearly.app/blog): Articles on co-parenting communication, divorce, custody schedules, and conflict resolution.
+- [Blog (Common Ground)](https://getclearly.app/blog): Articles on co-parenting communication, divorce, custody schedules, and conflict resolution.
 - [Privacy policy](https://getclearly.app/privacy): What Clearly collects, its providers (including Anthropic), and account deletion.
 - [Terms](https://getclearly.app/terms): Terms of use.
 
 ## Guides
 
 - [Custody schedule help](https://getclearly.app/custody-schedule-help/): Choosing and building a parenting-time schedule.
-- [Custody plan builder](https://getclearly.app/plan-builder/): Free tool for building a parenting plan. It emails a plan code; enter it in Clearly with "I have an invite code" to set up the app with that plan, and your co-parent can join with the same code. Come back with the code to review the plan, download the PDF or change it until it's used in the app.
-- [Communication style quiz](https://getclearly.app/communication-styles/): 2-minute quiz on how you show up in hard conversations.
+- [Parenting plan builder](https://getclearly.app/plan-builder/): Free tool for building a parenting plan. It emails a plan code; enter it in Clearly with "I have an invite code" to set up the app with that plan, and your co-parent can join with the same code. Come back with the code to review the plan, download the PDF or change it until it's used in the app.
+- [Co-parent communication style quiz](https://getclearly.app/communication-styles/): Free 2-minute quiz on how you show up in hard conversations with a co-parent.
 - [Co-parenting alignment guide](https://getclearly.app/coparenting-alignment-guide/): Finding shared ground when co-parenting is hard.
 - [Helping kids through divorce](https://getclearly.app/kids-and-divorce/): What children need from separating parents.
 - [Mediation preparation](https://getclearly.app/mediation-prep/): Getting ready for a family-law mediation.
@@ -96,5 +96,6 @@ Clearly is built for co-parents who find it hard to talk. Unlike apps that work 
 ## Contact
 
 - Email: hello@getclearly.app
+- Contact page: https://getclearly.app/contact
 - Company: Clearly LLC
 - App Store: https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374
