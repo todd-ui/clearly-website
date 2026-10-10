@@ -1686,7 +1686,7 @@
             <h3>I have a plan code</h3>
             <p>Open the plan you saved: review it, download the PDF or make changes</p>
             <div class="code-input-row" id="codeInputRow" style="display: none;" onclick="event.stopPropagation()">
-              <input type="text" id="planCodeInput" placeholder="ABC123" maxlength="10" class="code-input" onkeydown="if (event.key === 'Enter') openPlanByCode(event)">
+              <input type="text" id="planCodeInput" placeholder="ABC123" maxlength="10" class="code-input" autocapitalize="characters" autocorrect="off" autocomplete="off" spellcheck="false" onkeydown="if (event.key === 'Enter') openPlanByCode(event)">
               <button class="btn-link-code" onclick="openPlanByCode(event)">Open</button>
             </div>
             <p class="code-error" id="planCodeError"></p>
