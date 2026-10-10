@@ -684,7 +684,7 @@
         <!-- Email Capture Screen -->
         <div id="emailCapture" class="screen email-screen">
           <h2>Get your results + practical tips</h2>
-          <p>Enter your email to get your relationship pattern results, plus tips you can use in your next conversation. <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374">Clearly is on the App Store now.</a></p>
+          <p>Enter your email to get your relationship pattern results, plus tips you can use in your next conversation. <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" data-cta="quiz-email">Clearly is on the App Store now.</a></p>
           <form class="email-form" id="emailForm">
             <input type="email" id="emailInput" placeholder="you@example.com" required>
             <button type="submit" id="emailSubmitBtn">Send my results</button>
@@ -738,10 +738,7 @@
             <p>The patterns you just explored? Clearly is designed to help you navigate them—every conversation, not just this assessment.</p>
             <p>Topic-based discussions that move toward decisions. Calmer wording, suggested before you post. Structure that keeps things focused on what matters—not who's right.</p>
             <p style="font-weight: 500; color: var(--text); margin-bottom: 28px;">It's a co-parenting app built around the same principles you just learned.</p>
-            <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="btn-primary">
-              Download on the App Store
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
+            <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="quiz-results" aria-label="Download Clearly on the App Store"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div></a>
           </div>
         </div>
 
@@ -904,6 +901,7 @@
     function showScreen(screenId) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById(screenId).classList.add('active');
+      window.scrollTo(0, 0);
     }
 
     // Start assessment
@@ -923,6 +921,7 @@
       document.getElementById('currentQ').textContent = currentQuestion + 1;
       document.getElementById('progressFill').style.width = ((currentQuestion + 1) / 7 * 100) + '%';
       document.getElementById('questionText').textContent = q.text;
+      window.scrollTo(0, 0);
 
       const answersEl = document.getElementById('answers');
       answersEl.innerHTML = '';
@@ -1131,7 +1130,7 @@
     if (link && typeof gtag === 'function') {
       gtag('event', 'app_store_click', {
         link_url: link.href,
-        link_location: 'cta'
+        link_location: link.dataset.cta || 'cta'
       });
     }
   });

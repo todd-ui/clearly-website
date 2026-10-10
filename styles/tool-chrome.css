@@ -315,3 +315,54 @@
 
 /* Calculators index: the App Store link wraps its badge image, so the whole badge is the tap target */
 .disclaimer-section + .cta .app-store-badge { display: inline-block; line-height: 0; }
+
+/* ==========================================
+   TOOLS ON PHONES — Plan Builder and quiz details found in a phone pass
+   ========================================== */
+
+/* Plan Builder: "Copy code" and "Open" as the site's pill buttons (all widths) */
+.plan-code-card .copy-btn { border-radius: 999px !important; padding: 10px 20px !important; }
+.btn-link-code { background: #1C1C1A !important; color: #FFFFFF !important; border: 0 !important; border-radius: 999px !important; padding: 0 20px !important; font-weight: 500 !important; }
+
+/* Quiz: tighter headings (their line height was ~1.8) */
+.email-screen h2, .result-card h3, .principle-section h3, .assessment-main .final-cta h3 { line-height: 1.18 !important; }
+/* Quiz: closing badge sits centred in the green panel */
+.assessment-main .final-cta .app-badge { display: inline-flex; }
+/* Quiz: a tap leaves a "hover" on touch screens, so the answer under the finger
+   looked pre-selected on the next question. Only show hover with a real mouse. */
+@media (hover: none) {
+  .answer-btn:not(.selected):hover { border-color: transparent !important; background: #FFFFFF !important; }
+}
+
+@media (max-width: 600px) {
+  /* Plan Builder: birthdate selects fit "Month"/"September" */
+  .child-birthdate-row select { padding: 14px 10px 14px 12px !important; min-width: 0; }
+  .child-birthdate-row > :first-child { flex: 1.5 1 0; }
+  .child-birthdate-row > :not(:first-child) { flex: 1 1 0; }
+  /* Plan Builder: remove-child and holiday buttons are full tap targets */
+  .remove-child, .holiday-remove-btn, .holiday-swap-btn { min-width: 40px; min-height: 40px; display: inline-grid; place-items: center; }
+  /* Plan Builder: holiday rows - who has it moves under the name so the name has room */
+  .holiday-row { display: grid !important; grid-template-columns: 44px minmax(0, 1fr) auto auto; column-gap: 10px; row-gap: 2px; align-items: center; }
+  .holiday-row .holiday-emoji { grid-column: 1; grid-row: 1 / span 2; }
+  .holiday-row .holiday-info { grid-column: 2; grid-row: 1; min-width: 0; }
+  .holiday-row .holiday-custody-indicator { grid-column: 2; grid-row: 2; justify-self: start; }
+  .holiday-row .holiday-swap-btn { grid-column: 3; grid-row: 1 / span 2; }
+  .holiday-row .holiday-remove-btn { grid-column: 4; grid-row: 1 / span 2; }
+  /* Plan Builder: summary "Edit" links get a real tap area */
+  .summary-edit { display: inline-block; padding: 12px 10px !important; margin: -12px -10px !important; }
+  /* Plan Builder: on the email step, the fields come before the benefit cards */
+  #screen-email.active { display: flex; flex-direction: column; }
+  #screen-email .email-benefits { order: 10; margin-top: 28px; }
+  /* Plan Builder: final screen buttons stacked, full width */
+  .complete-actions { flex-direction: column !important; }
+  .complete-actions .btn { width: 100%; }
+
+  /* Quiz: start content below the floating bar instead of centring it under it */
+  .assessment-main { align-items: flex-start !important; padding-top: 28px !important; }
+  /* Quiz: the five patterns, last row centred, readable labels */
+  .style-preview { display: flex !important; flex-wrap: wrap; justify-content: center; }
+  .style-preview-card { flex: 0 0 calc((100% - 24px) / 3); }
+  .style-preview-card span { font-size: 12px !important; }
+  /* Quiz: "Skip and see results" gets a real tap area */
+  #emailCapture .skip-link { padding: 12px 8px; }
+}
