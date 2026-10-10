@@ -8,6 +8,17 @@
   <!-- Invite links are private to the pair using them; keep them out of search. -->
   <meta name="robots" content="noindex, nofollow">
 
+  <!-- Google Analytics. The invite code is in the address (/join/W9QZ6V), so
+       every hit reports the page as plain /join and the code never reaches GA. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('set', { page_location: location.origin + '/join', page_path: '/join' });
+    gtag('config', 'G-DYZ1XEXPMT', (function () { try { var q = location.search; if (/[?&]internal=1/.test(q)) localStorage.setItem('clearly_internal', '1'); if (/[?&]internal=0/.test(q)) localStorage.removeItem('clearly_internal'); return (localStorage.getItem('clearly_internal') || location.hostname.indexOf('getclearly.app') === -1) ? { traffic_type: 'internal', page_location: location.origin + '/join' } : { page_location: location.origin + '/join' }; } catch (e) { return { page_location: location.origin + '/join' }; } })());
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -123,7 +134,7 @@
       </div>
       <button class="copy" id="copy" hidden>Copy code</button>
 
-      <a class="cta" href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374">
+      <a class="cta" data-cta="join" href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374">
         Download Clearly
       </a>
 
@@ -152,6 +163,12 @@
       // no code rather than printed back onto the page.
       var code = /^[A-Za-z0-9]{4,12}$/.test(raw) ? raw.toUpperCase() : '';
 
+      // GA4: whether the link carried a code (never the code itself)
+      gtag('event', 'join_view', { has_code: code ? 'yes' : 'no' });
+      document.querySelector('.cta').addEventListener('click', function () {
+        gtag('event', 'app_store_click', { link_url: this.href, link_location: 'join' });
+      });
+
       if (code) {
         document.getElementById('code').textContent = code;
         document.getElementById('code-label').hidden = false;
@@ -162,6 +179,7 @@
           btn.hidden = false;
           btn.addEventListener('click', function () {
             navigator.clipboard.writeText(code).then(function () {
+              gtag('event', 'join_code_copy');
               btn.textContent = 'Copied';
               setTimeout(function () { btn.textContent = 'Copy code'; }, 2000);
             });
