@@ -520,11 +520,11 @@ ${articleJsonLd(post)}
 
 // Blog topics, grouped for the index page filters. Any category not listed
 // here still gets a filter, under "More".
+// Three groups, so the filter columns sit exactly on the 3-column card grid.
 const TOPIC_GROUPS = [
   ['Talking it through', ['Communication', 'High-Conflict Situations']],
-  ['Your family', ['Your Children', 'Blended Families']],
-  ['The practical side', ['Schedules & Custody', 'Money & Expenses', 'Legal Basics']],
-  ['Getting started', ['Co-Parenting Basics', 'Self-Care & Support']],
+  ['Kids, family & you', ['Your Children', 'Blended Families', 'Self-Care & Support']],
+  ['The practical side', ['Co-Parenting Basics', 'Schedules & Custody', 'Money & Expenses', 'Legal Basics']],
 ];
 
 function topicFilters(posts) {
@@ -627,14 +627,16 @@ ${posts.map(post => `      {
     .list-head h1 em { font-style: italic; color: var(--moss); }
     .list-head .intro { font-size: 16px; line-height: 1.6; color: var(--ink-mid); margin: 0; max-width: 40em; }
 
-    /* Topic filters, grouped in four columns: plain text, a soft pill only
-       on the selected one, post counts in grey */
-    .filters { display: grid; grid-template-columns: auto repeat(4, 1fr); gap: 8px 32px; align-items: start; margin: 0 0 40px; padding: 24px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-    .filter-group p { font-size: 11px; font-weight: 500; letter-spacing: 1.1px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 6px 12px; }
-    .filter-group, .filter-all { display: flex; flex-direction: column; align-items: flex-start; }
-    .filter-all { padding-top: 22px; }
-    .filter-btn { font: inherit; font-size: 14px; color: var(--ink-mid); background: transparent; border: 0; border-radius: 999px; padding: 5px 12px; cursor: pointer; text-align: left; transition: background .2s, color .2s; }
-    .filter-btn span { color: var(--ink-faint); font-size: 12px; margin-left: 4px; }
+    /* Topic filters: "All articles" on its own line at the top left, then
+       three groups on the same 3-column grid (and 16px gap) as the cards,
+       so each group lines up with a column of cards below. Each button
+       sits flush with its group label; the selected one gets a soft pill. */
+    .filters { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 16px; row-gap: 20px; margin: 0 0 40px; padding: 24px 0 28px; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+    .filter-all { grid-column: 1 / -1; }
+    .filter-group { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; }
+    .filter-group p { font-size: 11px; font-weight: 500; letter-spacing: 1.1px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 8px; }
+    .filter-btn { font: inherit; font-size: 15px; line-height: 1.4; color: var(--ink-mid); background: transparent; border: 0; border-radius: 999px; padding: 4px 12px; margin-left: -12px; cursor: pointer; text-align: left; transition: background .2s, color .2s; }
+    .filter-btn span { color: var(--ink-faint); font-size: 12px; margin-left: 6px; }
     .filter-btn:hover { color: var(--moss); }
     .filter-btn.active { background: var(--paper); color: var(--ink); font-weight: 500; }
     .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -651,14 +653,11 @@ ${posts.map(post => `      {
 
     @media (max-width: 960px) {
       .blog-grid { grid-template-columns: 1fr 1fr; }
-      .filters { grid-template-columns: repeat(3, 1fr); }
-      .filter-all { grid-column: 1 / -1; padding-top: 0; }
     }
     @media (max-width: 640px) {
       .panel { margin: 0 10px 10px; border-radius: 22px; padding: 56px 22px; }
       .list-head h1 { font-size: 36px; }
-      .filters { grid-template-columns: 1fr 1fr; gap: 16px 8px; }
-      .filter-all { grid-column: 1 / -1; padding-top: 0; }
+      .filters { grid-template-columns: 1fr; row-gap: 18px; }
       .blog-grid { grid-template-columns: 1fr; }
     }
   </style>
