@@ -13,7 +13,7 @@ body:
     id: title
     attributes:
       label: Post Title
-      description: What should the blog post be called?
+      description: What should the blog post be called? Aim for 60 characters or fewer so Google shows it in full (a shorter SEO title is added automatically if it runs long).
       placeholder: "e.g., How to Handle Last-Minute Schedule Changes"
     validations:
       required: true
