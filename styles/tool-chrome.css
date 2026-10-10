@@ -149,3 +149,125 @@
   .style-preview-card { padding: 16px 6px 14px !important; }
   .style-preview-card span { font-size: 11px; }
 }
+
+/* ==========================================
+   TOOL FLOWS — every screen of the Plan Builder and the quiz.
+   Garamond headings, soft white cards without outlines (a moss ring
+   marks what's selected), ink pill buttons, a light frosted bottom bar.
+   Layout, steps and wording are unchanged.
+   ========================================== */
+
+/* ---------- Plan Builder ---------- */
+.wizard-content h1, .wizard-content h2 {
+  font-family: 'EB Garamond', Georgia, serif !important; font-weight: 400 !important;
+  font-size: 40px; line-height: 1.1; letter-spacing: -0.3px; color: #1C1C1A;
+}
+.wizard-content .subtitle { font-size: 17px; line-height: 1.6; color: #4A4A47; }
+.wizard-content .section-label, .wizard-content .input-label { font-weight: 500; color: #4A4A47; }
+
+/* Cards: white, soft shadow, transparent edge that turns moss when chosen */
+.schedule-card, .summary-section, .email-benefit, .complete-info-item, .holiday-row,
+.calendar-preview, .year-picker {
+  background: #FFFFFF !important;
+  border: 2px solid transparent !important;
+  border-radius: 20px !important;
+  box-shadow: 0 1px 2px rgba(28, 28, 26, 0.04), 0 8px 24px rgba(28, 28, 26, 0.05) !important;
+}
+.schedule-card:hover { border-color: rgba(13, 130, 104, 0.35) !important; }
+.schedule-card.selected { border-color: #0D8268 !important; background: #FFFFFF !important; }
+.summary-section, .email-benefit, .complete-info-item { border-radius: 18px !important; }
+.email-benefit, .complete-info-item { box-shadow: none !important; background: #FFFFFF !important; }
+
+/* Icon tiles inside cards match the opening screen */
+.summary-icon, .benefit-icon, .complete-info-icon {
+  background: #E4F4EF !important; color: #0D8268 !important; border-radius: 12px !important;
+}
+
+/* Choices: pill chips, quiet until chosen */
+.chip { border: 1px solid rgba(28, 28, 26, 0.12) !important; background: #FFFFFF !important; font-weight: 500 !important; }
+.chip:hover { border-color: #0D8268 !important; }
+.chip.selected { background: #0D8268 !important; border-color: #0D8268 !important; color: #FFFFFF !important; }
+
+/* Text fields */
+.wizard-content .text-input {
+  background: #FFFFFF !important; border: 1px solid rgba(28, 28, 26, 0.10) !important; border-radius: 12px !important;
+}
+.wizard-content .text-input:focus { border-color: #0D8268 !important; box-shadow: 0 0 0 3px #E4F4EF !important; outline: none; }
+
+/* Plan code: a calm pale-green panel */
+.plan-code-card { border: 0 !important; border-radius: 22px !important; background: #E4F4EF !important; }
+
+/* Bottom bar and buttons */
+.wizard-footer {
+  background: rgba(246, 245, 241, 0.86) !important;
+  -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px);
+  border-top: 1px solid rgba(28, 28, 26, 0.06) !important; box-shadow: none !important;
+}
+.wizard-footer .btn, .wizard-content .btn { border-radius: 999px !important; font-weight: 500 !important; }
+.wizard-footer .btn-primary, .wizard-content .btn-primary { background: #1C1C1A !important; color: #FFFFFF !important; }
+.wizard-footer .btn-primary:hover, .wizard-content .btn-primary:hover { background: #000000 !important; }
+.wizard-footer .btn-primary:disabled { background: rgba(28, 28, 26, 0.08) !important; color: #6B6B67 !important; }
+.wizard-footer .btn-secondary, .wizard-content .btn-secondary { background: #FFFFFF !important; border: 1px solid rgba(28, 28, 26, 0.12) !important; }
+
+/* ---------- Communication quiz ---------- */
+.assessment-main h1, .assessment-main h2 {
+  font-family: 'EB Garamond', Georgia, serif !important; font-weight: 400 !important; letter-spacing: -0.3px; color: #1C1C1A;
+}
+.question-screen h2 { font-size: 32px !important; line-height: 1.2; }
+.email-screen h2 { font-size: 36px !important; }
+.results-screen #resultTitle { font-size: 52px !important; line-height: 1.05; }
+.result-tagline { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 22px !important; color: #0D8268 !important; }
+.result-badge { background: #E4F4EF !important; color: #0D8268 !important; border: 0 !important; }
+
+/* Answers and result cards: white, no outline, moss ring when chosen */
+.answer-btn {
+  background: #FFFFFF !important; border: 2px solid transparent !important; border-radius: 16px !important;
+  box-shadow: 0 1px 2px rgba(28, 28, 26, 0.04), 0 6px 18px rgba(28, 28, 26, 0.05) !important;
+}
+.answer-btn:hover { border-color: rgba(13, 130, 104, 0.35) !important; }
+.answer-btn.selected { border-color: #0D8268 !important; background: #FFFFFF !important; }
+.progress-bar { background: rgba(28, 28, 26, 0.08) !important; }
+.progress-fill { background: #0D8268 !important; }
+
+.result-card {
+  background: #FFFFFF !important; border: 0 !important; border-radius: 22px !important; padding: 28px 32px !important;
+  box-shadow: 0 1px 2px rgba(28, 28, 26, 0.04), 0 8px 24px rgba(28, 28, 26, 0.05) !important;
+}
+.result-card h3, .principle-section h3, .assessment-main .final-cta h3 {
+  font-family: 'EB Garamond', Georgia, serif !important; font-weight: 400 !important; font-size: 24px !important; color: #1C1C1A;
+}
+.result-card.highlight { background: #E4F4EF !important; box-shadow: none !important; }
+.result-card.highlight h3 { color: #0D8268 !important; }
+.principle-section { background: #FFFFFF !important; border: 0 !important; border-radius: 22px !important; box-shadow: none !important; }
+.principle-example { background: #F6F5F1 !important; border: 0 !important; border-radius: 14px !important; }
+
+/* Closing call to action: a moss panel */
+.assessment-main .final-cta { background: #0D8268 !important; border: 0 !important; border-radius: 28px !important; padding: 48px 40px !important; }
+.assessment-main .final-cta h3 { color: #FFFFFF !important; font-size: 32px !important; }
+.assessment-main .final-cta p { color: rgba(255, 255, 255, 0.85) !important; }
+.assessment-main .final-cta .btn-primary { background: #FFFFFF !important; color: #1C1C1A !important; border-radius: 999px !important; box-shadow: none !important; }
+
+/* Buttons: solid pills instead of gradients */
+.btn-start, .email-form button {
+  background: #1C1C1A !important; color: #FFFFFF !important; border-radius: 999px !important; box-shadow: none !important; font-weight: 500 !important;
+}
+.btn-start:hover, .email-form button:hover { background: #000000 !important; transform: none !important; }
+.email-form input { background: #FFFFFF !important; border: 1px solid rgba(28, 28, 26, 0.10) !important; border-radius: 12px !important; }
+.email-form input:focus { border-color: #0D8268 !important; box-shadow: 0 0 0 3px #E4F4EF !important; outline: none; }
+
+@media (max-width: 600px) {
+  .wizard-content h1, .wizard-content h2 { font-size: 30px; }
+  .question-screen h2 { font-size: 26px !important; }
+  .results-screen #resultTitle { font-size: 40px !important; }
+  .assessment-main .final-cta { padding: 36px 22px !important; border-radius: 22px !important; }
+  .result-card { padding: 22px !important; }
+}
+
+/* The quiz's "Skip and see results" link shares its class name with the
+   site-wide hidden "Skip to content" link, which moved it off-screen.
+   Put it back where people can see it. */
+#emailCapture .skip-link {
+  position: static !important; display: inline-block; margin-top: 20px; padding: 0; background: none;
+  font-size: 14px; color: #4A4A47; text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+#emailCapture .skip-link:hover { color: #0D8268; }
