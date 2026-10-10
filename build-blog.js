@@ -430,6 +430,10 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
       .blog-cta { padding: 36px 22px; }
       .related-panel { margin: 0 10px 10px; border-radius: 22px; padding: 48px 22px; }
       .related-grid { grid-template-columns: 1fr; }
+      /* Phones: full-size tap targets for the back link and share buttons */
+      .back-link { display: inline-block; padding: 12px 8px 12px 0; margin: -12px 0; }
+      .share-btn { width: 40px; height: 40px; }
+      .share-btn svg { width: 16px; height: 16px; }
     }
   </style>
 </head>
