@@ -1,0 +1,112 @@
+/* ==========================================
+   STATE CALCULATORS — California, Florida, Illinois, New York,
+   Pennsylvania, Texas. Linked last in each page's <head>; restyles the
+   existing markup without changing any figures, words or URLs.
+   A pale-green header panel, then one white panel on the site's 3-column
+   grid: "How [state] calculates" stays in view in column 1, the form and
+   results fill columns 2-3. Sections are soft paper cards, no outlines.
+   No left-edge accent lines.
+   ========================================== */
+:root {
+  --k-paper: #F6F5F1; --k-ink: #1C1C1A; --k-ink-mid: #4A4A47; --k-ink-faint: #6B6B67;
+  --k-moss: #0D8268; --k-moss-pale: #E4F4EF; --k-rule: rgba(28, 28, 26, 0.10);
+}
+body { background: var(--k-paper); }
+
+/* ---------- Header panel ---------- */
+.calc-page-header {
+  margin: 16px 16px 16px; border-radius: 28px; background: var(--k-moss-pale) !important;
+  padding: 72px 40px 56px !important; border: 0 !important;
+}
+.calc-page-header .container { max-width: 1200px !important; margin: 0 auto; padding: 0; }
+.calc-breadcrumb { font-size: 12px !important; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--k-moss) !important; margin-bottom: 24px !important; }
+.calc-breadcrumb a { color: var(--k-moss) !important; }
+.calc-page-header h1 {
+  font-family: 'EB Garamond', Georgia, serif; font-weight: 400; font-size: 52px !important; line-height: 1.06;
+  letter-spacing: -0.4px !important; color: var(--k-ink); margin: 0 0 14px !important;
+}
+.calc-page-header p { font-size: 17px !important; color: var(--k-ink-mid) !important; max-width: 40em; }
+
+/* Effective date / updated / source: three quiet white chips */
+.calc-version-banner { gap: 8px !important; margin-top: 32px !important; padding: 0 !important; background: transparent !important; border: 0 !important; }
+.calc-version-banner .version-item { background: #FFFFFF; border-radius: 14px; padding: 12px 18px; }
+.calc-version-banner .version-label { font-size: 10px; letter-spacing: 1px; color: var(--k-ink-faint) !important; }
+.calc-version-banner .version-value { font-weight: 500 !important; color: var(--k-ink) !important; }
+.calc-version-banner .version-link { font-weight: 500; color: var(--k-moss) !important; }
+
+/* ---------- Calculator panel on the grid ---------- */
+.calculator-section {
+  margin: 0 16px 16px; border-radius: 28px; background: #FFFFFF; padding: 72px 40px 88px !important;
+}
+.calculator-section .container {
+  max-width: 1200px !important; margin: 0 auto; padding: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 16px; align-items: start;
+}
+.calculator-section .container > * { grid-column: 2 / span 2; }
+/* How the state calculates: column 1, stays in view while you fill in the form */
+.calculator-section .container > .calc-info-box {
+  grid-column: 1; grid-row: 1 / span 30; position: sticky; top: 100px;
+  background: transparent !important; border: 0 !important; border-radius: 0; padding: 0 24px 0 0 !important; margin: 0 !important;
+}
+.calc-info-box h4 { font-family: 'EB Garamond', Georgia, serif; font-weight: 400 !important; font-size: 28px !important; line-height: 1.15; color: var(--k-ink); margin: 0 0 16px !important; }
+.calc-info-box p, .calc-info-box li { font-size: 15px !important; line-height: 1.6; color: var(--k-ink-mid) !important; }
+.calc-info-box ul { list-style: none; padding: 0 !important; margin: 16px 0 !important; }
+.calc-info-box li { padding: 10px 0; margin: 0 !important; border-top: 1px solid var(--k-rule); }
+.calc-info-box li:last-child { border-bottom: 1px solid var(--k-rule); }
+.calc-info-box strong { color: var(--k-ink); font-weight: 500; }
+/* New York has no explainer box; its form uses the full width */
+.calculator-section .container:not(:has(.calc-info-box)) > * { grid-column: 1 / -1; }
+
+/* Form sections: paper cards */
+.calc-form-group { background: var(--k-paper) !important; border: 0 !important; border-radius: 22px !important; margin-bottom: 12px !important; }
+.calc-form-header { background: transparent !important; border: 0 !important; padding: 22px 28px !important; }
+.calc-form-header h3 { font-family: 'EB Garamond', Georgia, serif; font-weight: 400 !important; font-size: 23px !important; color: var(--k-ink); gap: 14px !important; }
+.calc-form-header h3 > svg {
+  box-sizing: content-box; width: 18px; height: 18px; padding: 9px; border-radius: 12px;
+  background: var(--k-moss-pale); color: var(--k-moss); stroke-width: 1.6; flex-shrink: 0;
+}
+.calc-form-body { padding: 4px 28px 28px !important; }
+.income-column h4 { font-size: 13px !important; font-weight: 500 !important; letter-spacing: 0.4px; color: var(--k-moss) !important; border-bottom: 1px solid var(--k-rule) !important; }
+.calc-field label { font-weight: 500; color: var(--k-ink-mid) !important; }
+.calc-input, .calc-select { background: #FFFFFF !important; border: 1px solid transparent !important; border-radius: 12px !important; box-shadow: 0 1px 2px rgba(28, 28, 26, 0.05); }
+.calc-input:focus, .calc-select:focus { border-color: var(--k-moss) !important; box-shadow: 0 0 0 3px var(--k-moss-pale) !important; }
+.calc-note { font-style: normal !important; color: var(--k-ink-faint) !important; }
+.calc-subtotal { background: #FFFFFF !important; border-radius: 14px !important; }
+.calc-subtotal label { font-weight: 500 !important; color: var(--k-ink-mid) !important; }
+.calc-subtotal-value { font-weight: 500 !important; color: var(--k-moss) !important; }
+.calc-section-divider { background: var(--k-rule) !important; }
+.calc-formula { background: #FFFFFF !important; border: 0 !important; border-radius: 12px !important; }
+
+/* Buttons: the site's pills */
+.calc-button-row { margin-top: 24px !important; gap: 8px !important; }
+.btn-calculate { background: var(--k-ink) !important; color: #FFFFFF !important; border-radius: 999px !important; font-size: 16px !important; font-weight: 500 !important; padding: 16px 28px !important; }
+.btn-calculate:hover { background: #000000 !important; }
+.btn-reset { background: transparent !important; border: 1px solid var(--k-rule) !important; border-radius: 999px !important; padding: 16px 24px !important; }
+.btn-download { background: transparent !important; border: 1px solid var(--k-rule) !important; border-radius: 999px !important; font-weight: 500 !important; }
+.btn-download:hover { border-color: var(--k-moss) !important; color: var(--k-moss) !important; }
+
+/* Results: a pale-green card, the headline figure in a moss block */
+.calc-results-card { background: var(--k-moss-pale) !important; border: 0 !important; border-radius: 22px !important; padding: 32px !important; }
+.calc-results-card h3 { font-size: 12px !important; font-weight: 500 !important; letter-spacing: 1.2px !important; color: var(--k-moss) !important; }
+.calc-result-row { border-bottom-color: rgba(13, 130, 104, 0.15) !important; }
+.calc-result-value { font-weight: 500 !important; }
+.calc-result-primary { background: var(--k-moss) !important; border-radius: 16px !important; padding: 20px 24px !important; margin: 0 0 12px !important; }
+.calc-result-primary .calc-result-value { font-family: 'EB Garamond', Georgia, serif; font-weight: 400 !important; font-size: 34px !important; }
+
+/* Disclaimer: a quiet grey note instead of a yellow warning */
+.calc-disclaimer { background: var(--k-paper) !important; border: 0 !important; border-radius: 18px !important; padding: 22px 26px !important; }
+.calc-disclaimer h4 { font-weight: 500 !important; color: var(--k-ink) !important; }
+.calc-disclaimer p { color: var(--k-ink-mid) !important; }
+
+/* ---------- Phones and tablets ---------- */
+@media (max-width: 900px) {
+  .calc-page-header { margin: 10px 10px 10px; border-radius: 22px; padding: 48px 22px 40px !important; }
+  .calc-page-header h1 { font-size: 36px !important; }
+  .calculator-section { margin: 0 10px 10px; border-radius: 22px; padding: 40px 16px 56px !important; }
+  .calculator-section .container { display: block; }
+  .calculator-section .container > .calc-info-box { position: static; padding: 0 6px 24px !important; }
+  .calc-form-header { padding: 20px !important; }
+  .calc-form-header h3 { font-size: 20px !important; }
+  .calc-form-body { padding: 4px 20px 22px !important; }
+  .calc-results-card { padding: 22px !important; }
+}
