@@ -150,3 +150,13 @@ body { background: var(--g-paper); }
   .lp-cta-box:has(ul) ul { margin: 24px 0 16px !important; }
   .lp-cta-box:has(ul) .btn-primary { display: inline-flex; margin-top: 24px !important; }
 }
+
+/* ---------- Closing pitch: App Store badge beside "Learn more" ---------- */
+.lp-pitch-cta { display: flex; align-items: center; flex-wrap: wrap; gap: 12px 28px; margin-top: 32px; }
+.lp-pitch-cta .app-badge { display: inline-flex; }
+.lp-pitch-cta .btn-link { margin: 0; }
+
+/* Phones: text links get a full-size tap target */
+@media (max-width: 900px) {
+  .lp-section .btn-link, .lp-cross-link .btn-link { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+}

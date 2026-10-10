@@ -242,7 +242,7 @@
       });
       // This script sits near the top of the page, so wait until the footer
       // and call-to-action panels further down actually exist.
-      var watch = function() { document.querySelectorAll('footer, .blog-cta, .final-cta').forEach(function(el) { io.observe(el); }); };
+      var watch = function() { document.querySelectorAll('footer, .blog-cta, .final-cta, .lp-pitch-cta').forEach(function(el) { io.observe(el); }); };
       if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', watch); else watch();
     }
     function update() {
