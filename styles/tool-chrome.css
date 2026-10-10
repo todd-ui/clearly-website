@@ -312,3 +312,6 @@
 @media (max-width: 420px) {
   .assessment-nav-title { position: static; transform: none; margin-left: auto; font-size: 12px; }
 }
+
+/* Calculators index: the App Store link wraps its badge image, so the whole badge is the tap target */
+.disclaimer-section + .cta .app-store-badge { display: inline-block; line-height: 0; }

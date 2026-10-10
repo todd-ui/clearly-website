@@ -30,7 +30,7 @@ body { background: var(--k-paper); }
 /* Effective date / updated / source: three quiet white chips */
 .calc-version-banner { gap: 8px !important; margin-top: 32px !important; padding: 0 !important; background: transparent !important; border: 0 !important; }
 .calc-version-banner .version-item { background: #FFFFFF; border-radius: 14px; padding: 12px 18px; }
-.calc-version-banner .version-label { font-size: 10px; letter-spacing: 1px; color: var(--k-ink-faint) !important; }
+.calc-version-banner .version-label { font-size: 11px !important; letter-spacing: 1px; color: var(--k-ink-faint) !important; }
 .calc-version-banner .version-value { font-weight: 500 !important; color: var(--k-ink) !important; }
 .calc-version-banner .version-link { font-weight: 500; color: var(--k-moss) !important; }
 
@@ -109,4 +109,13 @@ body { background: var(--k-paper); }
   .calc-form-header h3 { font-size: 20px !important; }
   .calc-form-body { padding: 4px 20px 22px !important; }
   .calc-results-card { padding: 22px !important; }
+  /* Effective date / updated / source: one compact card of label-value rows instead of three stacked boxes */
+  .calc-version-banner { display: block !important; background: #FFFFFF !important; border-radius: 16px !important; padding: 4px 16px !important; }
+  .calc-version-banner .version-item { flex-direction: row !important; justify-content: space-between; align-items: baseline; gap: 12px !important; background: transparent; border-radius: 0; padding: 11px 0; border-bottom: 1px solid var(--k-rule); }
+  .calc-version-banner .version-item:last-child { border-bottom: 0; }
+  .calc-version-banner .version-value, .calc-version-banner .version-link { text-align: right; }
 }
+/* The 'Results' heading in the serif, like every other heading */
+.calc-results-section > h2 { font-family: 'EB Garamond', Georgia, serif !important; font-weight: 400 !important; font-size: 30px !important; letter-spacing: -0.2px; color: var(--k-ink); }
+/* Results scroll into view below the floating site header */
+.calc-results-section { scroll-margin-top: 96px; }
