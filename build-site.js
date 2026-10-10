@@ -5,6 +5,7 @@ const path = require('path');
 const PAGES = [
   'faq.html',
   'help.html',
+  'contact.html',
   'privacy.html',
   'terms.html',
   'professionals.html',
@@ -19,7 +20,13 @@ const PAGES = [
   'mediation-prep/index.html',
   'co-parenting-expenses/index.html',
   'high-conflict-coparenting/index.html',
-  'best-co-parenting-apps-2026/index.html'
+  'best-co-parenting-apps-2026/index.html',
+  'calculators/support/california.html',
+  'calculators/support/florida.html',
+  'calculators/support/illinois.html',
+  'calculators/support/new-york.html',
+  'calculators/support/pennsylvania.html',
+  'calculators/support/texas.html'
   // Note: index.html excluded - has its own inline header/footer
 ];
 
@@ -30,7 +37,9 @@ const footerPartial = fs.readFileSync(path.join(__dirname, '_partials/footer.htm
 // Regex patterns to match old or new header and footer sections
 // Matches: skip-link + old <nav class="nav"> or new <header class="site-nav"> + mobile menu script
 const headerRegex = /(<a href="#main-content"[^>]*>Skip to content<\/a>\s*)?(<nav class="nav">[\s\S]*?<\/nav>|<header class="site-nav">[\s\S]*?<\/header>)\s*(<script>[\s\S]*?\/\/ Mobile menu toggle[\s\S]*?<\/script>)?\s*(<script src="\/js\/access-modal\.js"[^>]*><\/script>)?(\s*<!-- mobile-app-bar -->[\s\S]*?<!-- \/mobile-app-bar -->)?/;
-const footerRegex = /<footer class="(footer|site-footer)">[\s\S]*?<\/footer>\s*(<script>[\s\S]*?\/\/ Mobile menu toggle[\s\S]*?<\/script>)?/;
+// The old mobile-menu script is removed only when it holds nothing else: on
+// some pages (the state calculators) it shared a <script> with page code.
+const footerRegex = /<footer class="(footer|site-footer)">[\s\S]*?<\/footer>\s*(<script>\s*\/\/ Mobile menu toggle(?:(?!<\/script>|function)[\s\S])*<\/script>)?/;
 
 function processFile(filePath) {
   const fullPath = path.join(__dirname, filePath);

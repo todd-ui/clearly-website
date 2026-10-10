@@ -1,0 +1,273 @@
+/* ==========================================
+   TOOL BARS — Plan Builder and the communication quiz
+   These step-by-step flows keep their own top bar (logo, step counter,
+   Back), but it now looks like the site's floating header: inset, rounded,
+   translucent with blur. Loaded last; !important beats the inline styles on
+   the Plan Builder's bar. Positions and heights stay close to the originals
+   so the flows' own spacing still works.
+   ========================================== */
+.wizard-header,
+.assessment-nav {
+  top: 12px !important;
+  left: 16px !important;
+  right: 16px !important;
+  height: 60px;
+  padding: 0 24px 0 28px !important;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(28, 28, 26, 0.08) !important;
+  border-radius: 999px;
+  background: rgba(246, 245, 241, 0.82) !important;
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  backdrop-filter: saturate(1.4) blur(14px);
+  box-shadow: 0 10px 30px rgba(28, 28, 26, 0.06);
+}
+.assessment-nav .container { width: 100%; }
+.wizard-header .logo,
+.assessment-nav-brand {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 22px;
+  color: #0D8268;
+  text-decoration: none;
+}
+.wizard-header .step-counter { font-size: 13px; color: #6B6B67; }
+.wizard-header .back-btn { font-size: 14px; color: #4A4A47; }
+.wizard-header .back-btn:hover { color: #0D8268; }
+
+/* The bar now ends 72px down, so give the Plan Builder's first screen room */
+.wizard-container { padding-top: 112px !important; }
+
+@media (max-width: 768px) {
+  .wizard-container { padding-top: 96px !important; }
+  .wizard-header,
+  .assessment-nav {
+    top: 10px !important;
+    left: 10px !important;
+    right: 10px !important;
+    height: 56px;
+    padding: 0 16px 0 20px !important;
+  }
+}
+
+/* ==========================================
+   TOOL GRAPHICS — the icon tiles and cards on the tools' opening screens
+   (calculators, Plan Builder, communication quiz). One icon style
+   everywhere: thin moss line icons on a pale-green rounded tile. Cards
+   are soft white panels with no outline. No left-edge accent lines.
+   ========================================== */
+.calc-feature-icon,
+.pathway-icon,
+.style-preview-icon {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 16px !important;
+  background: #E4F4EF !important;
+  color: #0D8268 !important;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Plan Builder: two choices */
+.pathway-card {
+  background: #FFFFFF !important;
+  border: 0 !important;
+  border-radius: 22px !important;
+  padding: 28px !important;
+  box-shadow: 0 1px 2px rgba(28, 28, 26, 0.04), 0 8px 24px rgba(28, 28, 26, 0.05);
+  transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+.pathway-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 1px 2px rgba(28, 28, 26, 0.05), 0 14px 32px rgba(28, 28, 26, 0.09);
+}
+.pathway-card .pathway-icon { margin-bottom: 20px !important; }
+.pathway-card h3 { font-family: 'EB Garamond', Georgia, serif; font-weight: 400; font-size: 24px; color: #1C1C1A; margin: 0 0 6px; }
+.pathway-card p { font-size: 15px; line-height: 1.55; color: #4A4A47; }
+
+/* Communication quiz: the five patterns */
+.style-preview { gap: 12px !important; max-width: 680px !important; }
+.style-preview-card {
+  background: #FFFFFF !important;
+  border: 0 !important;
+  border-radius: 20px !important;
+  padding: 22px 10px 18px !important;
+  box-shadow: 0 1px 2px rgba(28, 28, 26, 0.04), 0 8px 24px rgba(28, 28, 26, 0.05);
+}
+.style-preview-icon { margin: 0 auto 12px !important; }
+.style-preview-card span { font-size: 13px; font-weight: 500; color: #1C1C1A; }
+.landing-badge { background: #E4F4EF !important; color: #0D8268 !important; border: 0 !important; }
+
+/* Calculators: hero and the three reasons as panels on the site grid */
+.calc-hero {
+  margin: 16px 16px 16px; border-radius: 28px; background: #E4F4EF !important; padding: 88px 40px 72px !important;
+}
+.calc-hero h1 { font-family: 'EB Garamond', Georgia, serif; font-weight: 400; }
+.state-chip { background: #FFFFFF !important; border: 0 !important; border-radius: 999px !important; }
+.state-chip:hover { background: #0D8268 !important; color: #FFFFFF !important; }
+.features-section {
+  margin: 0 16px 16px; border-radius: 28px; background: #FFFFFF !important; padding: 88px 40px !important;
+}
+.features-section .container { max-width: 1200px; margin: 0 auto; padding: 0; }
+.features-section h2 { font-family: 'EB Garamond', Georgia, serif; font-size: 36px !important; text-align: left !important; margin: 0 0 40px !important; }
+.calc-features { grid-template-columns: repeat(3, 1fr) !important; gap: 16px !important; max-width: none !important; }
+.calc-feature { background: #F6F5F1; border-radius: 22px; padding: 32px 28px; text-align: left !important; }
+.calc-feature-icon { margin: 0 0 24px !important; }
+.calc-feature h3 { font-family: 'EB Garamond', Georgia, serif !important; font-weight: 400 !important; font-size: 24px !important; color: #1C1C1A; margin: 0 0 8px !important; }
+.calc-feature p { line-height: 1.6; color: #4A4A47; margin: 0; }
+
+
+/* Calculators: state list and disclaimer as panels */
+.all-states-section, .disclaimer-section {
+  margin: 0 16px 16px; border-radius: 28px; background: #FFFFFF !important; padding: 88px 40px !important;
+}
+.all-states-section .container, .disclaimer-section .container { max-width: 1200px; margin: 0 auto; padding: 0; }
+.all-states-section h2 { font-family: 'EB Garamond', Georgia, serif; font-size: 36px !important; text-align: left !important; margin: 0 0 10px !important; }
+.all-states-section > .container > p { text-align: left !important; margin: 0 0 36px !important; }
+.states-grid { gap: 8px !important; }
+.state-link { border: 0 !important; border-radius: 14px !important; background: #F6F5F1 !important; padding: 14px 18px !important; }
+.state-link.coming-soon { color: #6B6B67 !important; }
+.state-link.available { background: #E4F4EF !important; color: #0D8268 !important; }
+.state-link.available:hover { background: #0D8268 !important; color: #FFFFFF !important; }
+.state-link.available:hover .status { color: rgba(255, 255, 255, 0.8) !important; }
+.disclaimer-section { padding: 56px 40px !important; }
+.disclaimer-card { max-width: none !important; background: #F6F5F1 !important; border: 0 !important; border-radius: 22px !important; padding: 32px 36px !important; }
+.disclaimer-card h3 { color: #1C1C1A !important; }
+.disclaimer-card p { color: #4A4A47 !important; max-width: 52em; }
+
+.disclaimer-section + .cta { margin: 0 16px 16px; border-radius: 28px; overflow: hidden; background: #0D8268 !important; }
+.disclaimer-section + .cta .cta-pattern { display: none; }
+
+@media (max-width: 900px) {
+  .disclaimer-section + .cta { margin: 0 10px 10px; border-radius: 22px; }
+  .all-states-section, .disclaimer-section { margin: 0 10px 10px; border-radius: 22px; padding: 48px 22px !important; }
+  .calc-hero { margin: 10px 10px 10px; border-radius: 22px; padding: 48px 22px !important; }
+  .features-section { margin: 0 10px 10px; border-radius: 22px; padding: 48px 22px !important; }
+  .features-section h2 { font-size: 30px !important; }
+  .calc-features { grid-template-columns: 1fr !important; }
+}
+@media (max-width: 600px) {
+  .style-preview-icon { width: 44px !important; height: 44px !important; border-radius: 14px !important; }
+  .style-preview-card { padding: 16px 6px 14px !important; }
+  .style-preview-card span { font-size: 11px; }
+}
+
+/* ==========================================
+   TOOL FLOWS — every screen of the Plan Builder and the quiz.
+   Garamond headings, soft white cards without outlines (a moss ring
+   marks what's selected), ink pill buttons, a light frosted bottom bar.
+   Layout, steps and wording are unchanged.
+   ========================================== */
+
+/* ---------- Plan Builder ---------- */
+.wizard-content h1, .wizard-content h2 {
+  font-family: 'EB Garamond', Georgia, serif !important; font-weight: 400 !important;
+  font-size: 40px; line-height: 1.1; letter-spacing: -0.3px; color: #1C1C1A;
+}
+.wizard-content .subtitle { font-size: 17px; line-height: 1.6; color: #4A4A47; }
+.wizard-content .section-label, .wizard-content .input-label { font-weight: 500; color: #4A4A47; }
+
+/* Cards: white, soft shadow, transparent edge that turns moss when chosen */
+.schedule-card, .summary-section, .email-benefit, .complete-info-item, .holiday-row,
+.calendar-preview, .year-picker {
+  background: #FFFFFF !important;
+  border: 2px solid transparent !important;
+  border-radius: 20px !important;
+  box-shadow: 0 1px 2px rgba(28, 28, 26, 0.04), 0 8px 24px rgba(28, 28, 26, 0.05) !important;
+}
+.schedule-card:hover { border-color: rgba(13, 130, 104, 0.35) !important; }
+.schedule-card.selected { border-color: #0D8268 !important; background: #FFFFFF !important; }
+.summary-section, .email-benefit, .complete-info-item { border-radius: 18px !important; }
+.email-benefit, .complete-info-item { box-shadow: none !important; background: #FFFFFF !important; }
+
+/* Icon tiles inside cards match the opening screen */
+.summary-icon, .benefit-icon, .complete-info-icon {
+  background: #E4F4EF !important; color: #0D8268 !important; border-radius: 12px !important;
+}
+
+/* Choices: pill chips, quiet until chosen */
+.chip { border: 1px solid rgba(28, 28, 26, 0.12) !important; background: #FFFFFF !important; font-weight: 500 !important; }
+.chip:hover { border-color: #0D8268 !important; }
+.chip.selected { background: #0D8268 !important; border-color: #0D8268 !important; color: #FFFFFF !important; }
+
+/* Text fields */
+.wizard-content .text-input {
+  background: #FFFFFF !important; border: 1px solid rgba(28, 28, 26, 0.10) !important; border-radius: 12px !important;
+}
+.wizard-content .text-input:focus { border-color: #0D8268 !important; box-shadow: 0 0 0 3px #E4F4EF !important; outline: none; }
+
+/* Plan code: a calm pale-green panel */
+.plan-code-card { border: 0 !important; border-radius: 22px !important; background: #E4F4EF !important; }
+
+/* Bottom bar and buttons */
+.wizard-footer {
+  background: rgba(246, 245, 241, 0.86) !important;
+  -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px);
+  border-top: 1px solid rgba(28, 28, 26, 0.06) !important; box-shadow: none !important;
+}
+.wizard-footer .btn, .wizard-content .btn { border-radius: 999px !important; font-weight: 500 !important; }
+.wizard-footer .btn-primary, .wizard-content .btn-primary { background: #1C1C1A !important; color: #FFFFFF !important; }
+.wizard-footer .btn-primary:hover, .wizard-content .btn-primary:hover { background: #000000 !important; }
+.wizard-footer .btn-primary:disabled { background: rgba(28, 28, 26, 0.08) !important; color: #6B6B67 !important; }
+.wizard-footer .btn-secondary, .wizard-content .btn-secondary { background: #FFFFFF !important; border: 1px solid rgba(28, 28, 26, 0.12) !important; }
+
+/* ---------- Communication quiz ---------- */
+.assessment-main h1, .assessment-main h2 {
+  font-family: 'EB Garamond', Georgia, serif !important; font-weight: 400 !important; letter-spacing: -0.3px; color: #1C1C1A;
+}
+.question-screen h2 { font-size: 32px !important; line-height: 1.2; }
+.email-screen h2 { font-size: 36px !important; }
+.results-screen #resultTitle { font-size: 52px !important; line-height: 1.05; }
+.result-tagline { font-family: 'EB Garamond', Georgia, serif; font-style: italic; font-size: 22px !important; color: #0D8268 !important; }
+.result-badge { background: #E4F4EF !important; color: #0D8268 !important; border: 0 !important; }
+
+/* Answers and result cards: white, no outline, moss ring when chosen */
+.answer-btn {
+  background: #FFFFFF !important; border: 2px solid transparent !important; border-radius: 16px !important;
+  box-shadow: 0 1px 2px rgba(28, 28, 26, 0.04), 0 6px 18px rgba(28, 28, 26, 0.05) !important;
+}
+.answer-btn:hover { border-color: rgba(13, 130, 104, 0.35) !important; }
+.answer-btn.selected { border-color: #0D8268 !important; background: #FFFFFF !important; }
+.progress-bar { background: rgba(28, 28, 26, 0.08) !important; }
+.progress-fill { background: #0D8268 !important; }
+
+.result-card {
+  background: #FFFFFF !important; border: 0 !important; border-radius: 22px !important; padding: 28px 32px !important;
+  box-shadow: 0 1px 2px rgba(28, 28, 26, 0.04), 0 8px 24px rgba(28, 28, 26, 0.05) !important;
+}
+.result-card h3, .principle-section h3, .assessment-main .final-cta h3 {
+  font-family: 'EB Garamond', Georgia, serif !important; font-weight: 400 !important; font-size: 24px !important; color: #1C1C1A;
+}
+.result-card.highlight { background: #E4F4EF !important; box-shadow: none !important; }
+.result-card.highlight h3 { color: #0D8268 !important; }
+.principle-section { background: #FFFFFF !important; border: 0 !important; border-radius: 22px !important; box-shadow: none !important; }
+.principle-example { background: #F6F5F1 !important; border: 0 !important; border-radius: 14px !important; }
+
+/* Closing call to action: a moss panel */
+.assessment-main .final-cta { background: #0D8268 !important; border: 0 !important; border-radius: 28px !important; padding: 48px 40px !important; }
+.assessment-main .final-cta h3 { color: #FFFFFF !important; font-size: 32px !important; }
+.assessment-main .final-cta p { color: rgba(255, 255, 255, 0.85) !important; }
+.assessment-main .final-cta .btn-primary { background: #FFFFFF !important; color: #1C1C1A !important; border-radius: 999px !important; box-shadow: none !important; }
+
+/* Buttons: solid pills instead of gradients */
+.btn-start, .email-form button {
+  background: #1C1C1A !important; color: #FFFFFF !important; border-radius: 999px !important; box-shadow: none !important; font-weight: 500 !important;
+}
+.btn-start:hover, .email-form button:hover { background: #000000 !important; transform: none !important; }
+.email-form input { background: #FFFFFF !important; border: 1px solid rgba(28, 28, 26, 0.10) !important; border-radius: 12px !important; }
+.email-form input:focus { border-color: #0D8268 !important; box-shadow: 0 0 0 3px #E4F4EF !important; outline: none; }
+
+@media (max-width: 600px) {
+  .wizard-content h1, .wizard-content h2 { font-size: 30px; }
+  .question-screen h2 { font-size: 26px !important; }
+  .results-screen #resultTitle { font-size: 40px !important; }
+  .assessment-main .final-cta { padding: 36px 22px !important; border-radius: 22px !important; }
+  .result-card { padding: 22px !important; }
+}
+
+/* The quiz's "Skip and see results" link shares its class name with the
+   site-wide hidden "Skip to content" link, which moved it off-screen.
+   Put it back where people can see it. */
+#emailCapture .skip-link {
+  position: static !important; display: inline-block; margin-top: 20px; padding: 0; background: none;
+  font-size: 14px; color: #4A4A47; text-decoration: underline; text-underline-offset: 3px; cursor: pointer;
+}
+#emailCapture .skip-link:hover { color: #0D8268; }
