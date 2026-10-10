@@ -156,13 +156,17 @@ function getProperty(page, name) {
   }
 }
 
+// Notion dates are calendar days ("2026-04-05"). new Date() reads that as
+// midnight UTC, which printed the day before in US time zones, so format
+// the calendar day itself in UTC.
 function formatDate(dateStr) {
   if (!dateStr) return '';
-  const date = new Date(dateStr);
-  return date.toLocaleDateString('en-US', {
+  const [y, m, d] = dateStr.slice(0, 10).split('-').map(Number);
+  return new Date(Date.UTC(y, m - 1, d)).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
+    timeZone: 'UTC'
   });
 }
 
@@ -582,316 +586,129 @@ ${posts.map(post => `      {
   }
   </script>
   <style>
-    .blog-hero {
-      padding: 100px 0 80px;
-      background: linear-gradient(135deg, #f0faf7 0%, #e8f5f1 50%, #f8fdfb 100%);
-      position: relative;
-      overflow: hidden;
+    /* Blog index in the homepage panel style. No left-edge accent lines. */
+    :root { --paper: #F6F5F1; --ink: #1C1C1A; --ink-mid: #4A4A47; --ink-faint: #6B6B67; --moss: #0D8268; --moss-pale: #E4F4EF; --rule: rgba(28,28,26,0.10); }
+    body { background: var(--paper); }
+    .list-main { padding: 16px 0 0; }
+    .panel { margin: 0 16px 16px; border-radius: 28px; background: #FFFFFF; padding: 88px 40px; }
+    .panel-pale { background: var(--moss-pale); }
+    .inner { max-width: 1200px; margin: 0 auto; }
+    .label { display: inline-flex; gap: 10px; font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 24px; }
+    .label b { font-weight: 500; color: var(--moss); }
+    .pill { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--moss); border: 1px solid currentColor; border-radius: 999px; padding: 4px 10px; }
+
+    .list-head { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 16px; align-items: end; }
+    .list-head > div { grid-column: 1 / span 2; }
+    .list-head h1 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 56px; line-height: 1.05; letter-spacing: -0.5px; color: var(--ink); margin: 0 0 12px; }
+    .list-head .sub { font-family: 'EB Garamond', serif; font-style: italic; font-size: 26px; color: var(--moss); margin: 0; }
+    .list-head .intro { grid-column: 3; font-size: 16px; line-height: 1.65; color: var(--ink-mid); margin: 0; }
+
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 40px; }
+    .filter-btn { font: inherit; font-size: 13px; font-weight: 500; color: var(--ink-mid); background: transparent; border: 1px solid var(--rule); border-radius: 999px; padding: 8px 14px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+    .filter-btn:hover { border-color: var(--moss); color: var(--moss); }
+    .filter-btn.active { background: var(--ink); border-color: var(--ink); color: #FFFFFF; }
+
+    .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .blog-card { position: relative; display: flex; flex-direction: column; background: var(--paper); border-radius: 20px; padding: 28px; transition: transform .25s, box-shadow .25s; }
+    .blog-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(28,28,26,0.08); }
+    .blog-card .pill { align-self: flex-start; margin-bottom: 20px; }
+    .blog-card h2 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 23px; line-height: 1.22; margin: 0 0 12px; }
+    .blog-card h2 a { color: var(--ink); text-decoration: none; }
+    .blog-card h2 a::after { content: ''; position: absolute; inset: 0; border-radius: 20px; } /* whole card is the link */
+    .blog-card p { font-size: 14px; line-height: 1.6; color: var(--ink-mid); margin: 0 0 24px; }
+    .blog-card .meta { margin-top: auto; font-size: 12px; color: var(--ink-faint); }
+    .blog-card.featured { grid-column: 1 / -1; background: var(--moss-pale); padding: 48px; }
+    .blog-card.featured h2 { font-size: 38px; line-height: 1.12; max-width: 22ch; }
+    .blog-card.featured p { font-size: 17px; max-width: 46em; }
+    .blog-card.hidden, .blog-card.later { display: none; }
+    .more-wrap { text-align: center; margin-top: 40px; }
+    .more-btn { font: inherit; font-size: 14px; font-weight: 500; color: var(--ink); background: #FFFFFF; border: 1px solid var(--rule); border-radius: 999px; padding: 12px 22px; cursor: pointer; }
+    .more-btn:hover { border-color: var(--moss); color: var(--moss); }
+    .no-posts { text-align: center; color: var(--ink-faint); }
+
+    @media (max-width: 960px) {
+      .list-head { grid-template-columns: 1fr; row-gap: 20px; }
+      .list-head > div, .list-head .intro { grid-column: auto; }
+      .blog-grid { grid-template-columns: 1fr 1fr; }
     }
-    .blog-hero::before {
-      content: '';
-      position: absolute;
-      top: -50%;
-      right: -20%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(13, 147, 115, 0.08) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-    .blog-hero::after {
-      content: '';
-      position: absolute;
-      bottom: -30%;
-      left: -10%;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(13, 147, 115, 0.05) 0%, transparent 70%);
-      border-radius: 50%;
-    }
-    .blog-hero .container {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      max-width: 700px;
-    }
-    .blog-hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: white;
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 8px 16px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--primary);
-      margin-bottom: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-    }
-    .blog-hero-badge svg {
-      width: 16px;
-      height: 16px;
-    }
-    .blog-hero h1 {
-      font-size: 44px;
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 8px;
-      line-height: 1.2;
-    }
-    .blog-hero-subtitle {
-      font-size: 22px;
-      font-weight: 500;
-      color: var(--primary);
-      margin-bottom: 20px;
-    }
-    .blog-hero p {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-    }
-    .blog-section {
-      padding: 60px 0 100px;
-    }
-    @media (max-width: 768px) {
-      .blog-hero { padding: 80px 0 50px; }
-      .blog-hero h1 { font-size: 32px; }
-    }
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-      gap: 28px;
-    }
-    .blog-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 32px;
-      transition: box-shadow 0.3s, transform 0.3s;
-    }
-    .blog-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
-    }
-    .blog-card-icon {
-      width: 56px;
-      height: 56px;
-      background: var(--primary-soft);
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-    .blog-card-icon svg {
-      width: 28px;
-      height: 28px;
-      color: var(--primary);
-    }
-    .blog-card-date {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--primary);
-      margin-bottom: 10px;
-    }
-    .blog-card h2 {
-      font-size: 20px;
-      font-weight: 400;
-      margin-bottom: 12px;
-      line-height: 1.4;
-    }
-    .blog-card h2 a {
-      color: var(--text);
-    }
-    .blog-card h2 a:hover {
-      color: var(--primary);
-      text-decoration: none;
-    }
-    .blog-card p {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 20px;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    .blog-card-link {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--primary);
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .blog-card-link:hover {
-      text-decoration: none;
-    }
-    .blog-card-link svg {
-      width: 18px;
-      height: 18px;
-      transition: transform 0.2s;
-    }
-    .blog-card:hover .blog-card-link svg {
-      transform: translateX(4px);
-    }
-    .no-posts {
-      text-align: center;
-      padding: 80px 0;
-      color: var(--text-secondary);
-    }
-    @media (max-width: 768px) {
+    @media (max-width: 640px) {
+      .panel { margin: 0 10px 10px; border-radius: 22px; padding: 56px 22px; }
+      .list-head h1 { font-size: 40px; }
+      .list-head .sub { font-size: 21px; }
+      .filters { flex-wrap: nowrap; overflow-x: auto; margin: 0 -22px 32px; padding: 0 22px 4px; scrollbar-width: none; }
+      .filter-btn { flex-shrink: 0; }
       .blog-grid { grid-template-columns: 1fr; }
-    }
-    /* Category Filter */
-    .blog-filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 32px;
-      justify-content: center;
-    }
-    .filter-btn {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      padding: 10px 20px;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .filter-btn:hover {
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-    .filter-btn.active {
-      background: var(--primary);
-      border-color: var(--primary);
-      color: white;
-    }
-    /* Category Chip */
-    .blog-card-category {
-      display: inline-block;
-      font-size: 12px;
-      font-weight: 600;
-      padding: 4px 12px;
-      border-radius: 100px;
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-    .blog-card-category[data-cat="Communication"] {
-      background: rgba(59, 130, 246, 0.1);
-      color: #2563eb;
-    }
-    .blog-card-category[data-cat="Co-Parenting Basics"] {
-      background: rgba(13, 147, 115, 0.1);
-      color: #0d9373;
-    }
-    .blog-card-category[data-cat="Your Children"] {
-      background: rgba(168, 85, 247, 0.1);
-      color: #9333ea;
-    }
-    .blog-card-category[data-cat="Schedules & Custody"] {
-      background: rgba(245, 158, 11, 0.1);
-      color: #d97706;
-    }
-    .blog-card-category[data-cat="High-Conflict Situations"] {
-      background: rgba(239, 68, 68, 0.1);
-      color: #dc2626;
-    }
-    .blog-card-category[data-cat="Money & Expenses"] {
-      background: rgba(16, 185, 129, 0.1);
-      color: #059669;
-    }
-    .blog-card-category[data-cat="Blended Families"] {
-      background: rgba(236, 72, 153, 0.1);
-      color: #db2777;
-    }
-    .blog-card-category[data-cat="Self-Care & Support"] {
-      background: rgba(99, 102, 241, 0.1);
-      color: #4f46e5;
-    }
-    .blog-card-category[data-cat="Legal Basics"] {
-      background: rgba(107, 114, 128, 0.1);
-      color: #4b5563;
-    }
-    .blog-card.hidden {
-      display: none;
+      .blog-card.featured { padding: 32px 24px; }
+      .blog-card.featured h2 { font-size: 29px; }
     }
   </style>
 </head>
 <body>
   ${headerPartial}
 
-  <header class="blog-hero" id="main-content">
-    <div class="container">
-      <div class="blog-hero-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
-        Clearly Blog
+  <main class="list-main" id="main-content">
+  <header class="panel panel-pale">
+    <div class="inner list-head">
+      <div>
+        <p class="label"><b>Clearly</b> The blog</p>
+        <h1>Common Ground</h1>
+        <p class="sub">Ideas for calmer co-parenting.</p>
       </div>
-      <h1>Common Ground</h1>
-      <p class="blog-hero-subtitle">Ideas for calmer co-parenting.</p>
-      <p>Co-parenting brings enough complexity on its own. Common Ground is here to make the communication part a little easier — with real topics, practical advice, and perspectives from people who get it. Whether you're figuring out schedules, navigating tricky conversations, or just looking for a calmer way forward, you're in the right place.</p>
+      <p class="intro">Real topics and practical advice for the conversations co-parenting brings: schedules, money, hard messages and the kids. Whatever you're working through, start here.</p>
     </div>
   </header>
 
-  <section class="blog-section">
-    <div class="container">
+  <section class="panel">
+    <div class="inner">
       ${posts.length > 0 ? `
-      <div class="blog-filters">
+      <div class="filters" role="group" aria-label="Filter by topic">
         <button class="filter-btn active" data-category="all">All</button>
-        ${[...new Set(posts.map(p => p.category).filter(c => c))].map(cat => `
-        <button class="filter-btn" data-category="${escapeHtml(cat)}">${escapeHtml(cat)}</button>
-        `).join('')}
+        ${(() => { const counts = {}; posts.forEach(p => { if (p.category) counts[p.category] = (counts[p.category] || 0) + 1; });
+          return Object.keys(counts).sort((x, y) => counts[y] - counts[x]).map(cat => `<button class="filter-btn" data-category="${escapeHtml(cat)}">${escapeHtml(cat)}</button>`).join('\n        '); })()}
       </div>
       <div class="blog-grid">
-        ${posts.map(post => `
-        <article class="blog-card" data-category="${escapeHtml(post.category)}">
-          ${post.category ? `<span class="blog-card-category" data-cat="${escapeHtml(post.category)}">${escapeHtml(post.category)}</span>` : ''}
-          <div class="blog-card-date">${post.date}</div>
+        ${posts.map((post, i) => `
+        <article class="blog-card${i === 0 ? ' featured' : ''}${i > 24 ? ' later' : ''}" data-category="${escapeHtml(post.category)}">
+          ${post.category ? `<span class="pill">${escapeHtml(post.category)}</span>` : ''}
           <h2><a href="${postPath(post.slug)}">${escapeHtml(post.title)}</a></h2>
           <p>${escapeHtml(post.description)}</p>
-          <a href="${postPath(post.slug)}" class="blog-card-link">
-            Read article
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-          </a>
+          <p class="meta">${post.date} &middot; ${Math.max(1, Math.round((post.wordCount || 0) / 230))} min read</p>
         </article>
         `).join('')}
       </div>
+      ${posts.length > 25 ? `<div class="more-wrap"><button class="more-btn" type="button">Show more articles</button></div>` : ''}
       ` : `
-      <div class="no-posts">
-        <p>New articles coming soon.</p>
-      </div>
+      <div class="no-posts"><p>New articles coming soon.</p></div>
       `}
     </div>
   </section>
+  </main>
 
   ${footerPartial}
 
   <script>
-    // Category filtering
-    document.querySelectorAll('.filter-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const category = btn.dataset.category;
-
-        // Update active button
-        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        // Filter cards
-        document.querySelectorAll('.blog-card').forEach(card => {
-          if (category === 'all' || card.dataset.category === category) {
-            card.classList.remove('hidden');
-          } else {
-            card.classList.add('hidden');
-          }
+    // Topic filter + "Show more". Every card is in the page (for search
+    // engines); the newest 25 show first, the rest one batch at a time.
+    (function () {
+      var cards = [].slice.call(document.querySelectorAll('.blog-card'));
+      var more = document.querySelector('.more-btn');
+      var shown = 25, active = 'all';
+      function render() {
+        var matching = cards.filter(function (c) { return active === 'all' || c.dataset.category === active; });
+        cards.forEach(function (c) { c.classList.add('hidden'); c.classList.remove('later'); });
+        matching.forEach(function (c, i) { if (i < shown) c.classList.remove('hidden'); });
+        cards[0].classList.toggle('featured', active === 'all');
+        if (more) more.parentNode.style.display = matching.length > shown ? '' : 'none';
+      }
+      document.querySelectorAll('.filter-btn').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          active = btn.dataset.category; shown = 25; render();
         });
       });
-    });
+      if (more) more.addEventListener('click', function () { shown += 24; render(); });
+    })();
   </script>
 
 </body>
@@ -991,7 +808,8 @@ async function build() {
     const dateISO = rawDate || new Date().toISOString().split('T')[0];
     const edited = (page.last_edited_time || '').split('T')[0];
     const modifiedISO = edited && edited > dateISO ? edited : dateISO;
-    const category = getProperty(page, 'Category') || '';
+    const rawCategory = getProperty(page, 'Category') || '';
+    const category = rawCategory === 'Expenses' ? 'Money & Expenses' : rawCategory;
 
     console.log(`Processing: ${title} [${category || 'No category'}]`);
 
