@@ -590,23 +590,23 @@ ${posts.map(post => `      {
     :root { --paper: #F6F5F1; --ink: #1C1C1A; --ink-mid: #4A4A47; --ink-faint: #6B6B67; --moss: #0D8268; --moss-pale: #E4F4EF; --rule: rgba(28,28,26,0.10); }
     body { background: var(--paper); }
     .list-main { padding: 16px 0 0; }
-    .panel { margin: 0 16px 16px; border-radius: 28px; background: #FFFFFF; padding: 88px 40px; }
+    .panel { margin: 0 16px 16px; border-radius: 28px; background: #FFFFFF; padding: 72px 40px 88px; }
     .panel-pale { background: var(--moss-pale); }
     .inner { max-width: 1200px; margin: 0 auto; }
     .label { display: inline-flex; gap: 10px; font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 24px; }
     .label b { font-weight: 500; color: var(--moss); }
     .pill { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--moss); border: 1px solid currentColor; border-radius: 999px; padding: 4px 10px; }
 
-    .list-head { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 16px; align-items: end; }
-    .list-head > div { grid-column: 1 / span 2; }
-    .list-head h1 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 56px; line-height: 1.05; letter-spacing: -0.5px; color: var(--ink); margin: 0 0 12px; }
-    .list-head .sub { font-family: 'EB Garamond', serif; font-style: italic; font-size: 26px; color: var(--moss); margin: 0; }
-    .list-head .intro { grid-column: 3; font-size: 16px; line-height: 1.65; color: var(--ink-mid); margin: 0; }
+    .list-head { margin-bottom: 40px; }
+    .list-head h1 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 48px; line-height: 1.05; letter-spacing: -0.4px; color: var(--ink); margin: 0 0 10px; }
+    .list-head h1 em { font-style: italic; color: var(--moss); }
+    .list-head .intro { font-size: 16px; line-height: 1.6; color: var(--ink-mid); margin: 0; max-width: 40em; }
 
-    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 0 0 40px; }
-    .filter-btn { font: inherit; font-size: 13px; font-weight: 500; color: var(--ink-mid); background: transparent; border: 1px solid var(--rule); border-radius: 999px; padding: 8px 14px; cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
-    .filter-btn:hover { border-color: var(--moss); color: var(--moss); }
-    .filter-btn.active { background: var(--ink); border-color: var(--ink); color: #FFFFFF; }
+    /* Quiet filters: plain text, a soft pill only on the selected one */
+    .filters { display: flex; gap: 2px; flex-wrap: wrap; margin: 0 0 32px; padding-bottom: 24px; border-bottom: 1px solid var(--rule); }
+    .filter-btn { font: inherit; font-size: 14px; color: var(--ink-faint); background: transparent; border: 0; border-radius: 999px; padding: 7px 14px; cursor: pointer; transition: background .2s, color .2s; }
+    .filter-btn:hover { color: var(--ink); }
+    .filter-btn.active { background: var(--paper); color: var(--ink); font-weight: 500; }
 
     .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .blog-card { position: relative; display: flex; flex-direction: column; background: var(--paper); border-radius: 20px; padding: 28px; transition: transform .25s, box-shadow .25s; }
@@ -617,9 +617,6 @@ ${posts.map(post => `      {
     .blog-card h2 a::after { content: ''; position: absolute; inset: 0; border-radius: 20px; } /* whole card is the link */
     .blog-card p { font-size: 14px; line-height: 1.6; color: var(--ink-mid); margin: 0 0 24px; }
     .blog-card .meta { margin-top: auto; font-size: 12px; color: var(--ink-faint); }
-    .blog-card.featured { grid-column: 1 / -1; background: var(--moss-pale); padding: 48px; }
-    .blog-card.featured h2 { font-size: 38px; line-height: 1.12; max-width: 22ch; }
-    .blog-card.featured p { font-size: 17px; max-width: 46em; }
     .blog-card.hidden, .blog-card.later { display: none; }
     .more-wrap { text-align: center; margin-top: 40px; }
     .more-btn { font: inherit; font-size: 14px; font-weight: 500; color: var(--ink); background: #FFFFFF; border: 1px solid var(--rule); border-radius: 999px; padding: 12px 22px; cursor: pointer; }
@@ -627,19 +624,14 @@ ${posts.map(post => `      {
     .no-posts { text-align: center; color: var(--ink-faint); }
 
     @media (max-width: 960px) {
-      .list-head { grid-template-columns: 1fr; row-gap: 20px; }
-      .list-head > div, .list-head .intro { grid-column: auto; }
       .blog-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 640px) {
       .panel { margin: 0 10px 10px; border-radius: 22px; padding: 56px 22px; }
-      .list-head h1 { font-size: 40px; }
-      .list-head .sub { font-size: 21px; }
+      .list-head h1 { font-size: 36px; }
       .filters { flex-wrap: nowrap; overflow-x: auto; margin: 0 -22px 32px; padding: 0 22px 4px; scrollbar-width: none; }
       .filter-btn { flex-shrink: 0; }
       .blog-grid { grid-template-columns: 1fr; }
-      .blog-card.featured { padding: 32px 24px; }
-      .blog-card.featured h2 { font-size: 29px; }
     }
   </style>
 </head>
@@ -647,19 +639,13 @@ ${posts.map(post => `      {
   ${headerPartial}
 
   <main class="list-main" id="main-content">
-  <header class="panel panel-pale">
-    <div class="inner list-head">
-      <div>
-        <p class="label"><b>Clearly</b> The blog</p>
-        <h1>Common Ground</h1>
-        <p class="sub">Ideas for calmer co-parenting.</p>
-      </div>
-      <p class="intro">Real topics and practical advice for the conversations co-parenting brings: schedules, money, hard messages and the kids. Whatever you're working through, start here.</p>
-    </div>
-  </header>
-
   <section class="panel">
     <div class="inner">
+      <header class="list-head">
+        <p class="label"><b>Clearly</b> The blog</p>
+        <h1>Common Ground</h1>
+        <p class="intro">Ideas for calmer co-parenting: schedules, money, hard messages and the kids.</p>
+      </header>
       ${posts.length > 0 ? `
       <div class="filters" role="group" aria-label="Filter by topic">
         <button class="filter-btn active" data-category="all">All</button>
@@ -668,7 +654,7 @@ ${posts.map(post => `      {
       </div>
       <div class="blog-grid">
         ${posts.map((post, i) => `
-        <article class="blog-card${i === 0 ? ' featured' : ''}${i > 24 ? ' later' : ''}" data-category="${escapeHtml(post.category)}">
+        <article class="blog-card${i > 23 ? ' later' : ''}" data-category="${escapeHtml(post.category)}">
           ${post.category ? `<span class="pill">${escapeHtml(post.category)}</span>` : ''}
           <h2><a href="${postPath(post.slug)}">${escapeHtml(post.title)}</a></h2>
           <p>${escapeHtml(post.description)}</p>
@@ -676,7 +662,7 @@ ${posts.map(post => `      {
         </article>
         `).join('')}
       </div>
-      ${posts.length > 25 ? `<div class="more-wrap"><button class="more-btn" type="button">Show more articles</button></div>` : ''}
+      ${posts.length > 24 ? `<div class="more-wrap"><button class="more-btn" type="button">Show more articles</button></div>` : ''}
       ` : `
       <div class="no-posts"><p>New articles coming soon.</p></div>
       `}
@@ -688,23 +674,22 @@ ${posts.map(post => `      {
 
   <script>
     // Topic filter + "Show more". Every card is in the page (for search
-    // engines); the newest 25 show first, the rest one batch at a time.
+    // engines); the newest 24 show first, the rest one batch at a time.
     (function () {
       var cards = [].slice.call(document.querySelectorAll('.blog-card'));
       var more = document.querySelector('.more-btn');
-      var shown = 25, active = 'all';
+      var shown = 24, active = 'all';
       function render() {
         var matching = cards.filter(function (c) { return active === 'all' || c.dataset.category === active; });
         cards.forEach(function (c) { c.classList.add('hidden'); c.classList.remove('later'); });
         matching.forEach(function (c, i) { if (i < shown) c.classList.remove('hidden'); });
-        cards[0].classList.toggle('featured', active === 'all');
         if (more) more.parentNode.style.display = matching.length > shown ? '' : 'none';
       }
       document.querySelectorAll('.filter-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
           document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
           btn.classList.add('active');
-          active = btn.dataset.category; shown = 25; render();
+          active = btn.dataset.category; shown = 24; render();
         });
       });
       if (more) more.addEventListener('click', function () { shown += 24; render(); });
