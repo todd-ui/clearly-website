@@ -651,7 +651,16 @@ ${posts.map(post => `      {
     .blog-card h2 a::after { content: ''; position: absolute; inset: 0; border-radius: 20px; } /* whole card is the link */
     .blog-card p { font-size: 14px; line-height: 1.6; color: var(--ink-mid); margin: 0 0 24px; }
     .blog-card .meta { margin-top: auto; font-size: 12px; color: var(--ink-faint); }
-    .blog-card.hidden { display: none; }
+    .blog-card.hidden, .blog-card.off-page { display: none; }
+    /* Pages of 12. Every post stays in the page (search engines see all of them);
+       the pager just shows one page at a time. */
+    .pager { grid-column: 2 / span 2; display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 4px; margin: 40px 0 0; }
+    .pager[hidden] { display: none; }
+    .pager button { font: inherit; font-size: 14px; min-width: 40px; height: 40px; padding: 0 12px; border-radius: 999px; border: 1px solid transparent; background: transparent; color: var(--ink-mid); cursor: pointer; }
+    .pager button:hover:not(:disabled) { color: var(--moss); border-color: var(--rule); }
+    .pager button[aria-current="page"] { background: var(--ink); color: #FFFFFF; font-weight: 500; }
+    .pager button:disabled { opacity: .35; cursor: default; }
+    .pager .gap { min-width: 24px; text-align: center; color: var(--ink-faint); }
     .no-posts { text-align: center; color: var(--ink-faint); }
 
     @media (max-width: 960px) {
@@ -664,12 +673,18 @@ ${posts.map(post => `      {
       .filter-btn.active { background: var(--ink); color: #FFFFFF; }
       .filter-btn.active span { color: rgba(255,255,255,.7); }
       .blog-grid { grid-template-columns: 1fr 1fr; }
+      /* The topic chips scroll sideways: fade the right edge so that reads */
+      .filters { -webkit-mask-image: linear-gradient(to right, #000 82%, transparent); mask-image: linear-gradient(to right, #000 82%, transparent); }
     }
     @media (max-width: 640px) {
       .panel { margin: 0 10px 10px; border-radius: 22px; padding: 56px 22px; }
       .list-head h1 { font-size: 36px; }
       .filters { margin: 0 -22px; padding: 0 22px 4px; }
-      .blog-grid { grid-template-columns: 1fr; }
+      .blog-grid { grid-template-columns: 1fr; gap: 10px; }
+      .blog-card { padding: 22px; border-radius: 18px; }
+      .blog-card .pill { margin-bottom: 14px; }
+      .blog-card h2 { font-size: 21px; margin-bottom: 8px; }
+      .blog-card p { margin-bottom: 14px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     }
   </style>
 </head>
@@ -708,20 +723,68 @@ ${posts.map(post => `      {
   ${footerPartial}
 
   <script>
-    // Topic filter. Every post is in the page; a topic just hides the rest.
+    // Topic filter and pages. Every post is in the page; a topic shows all of
+    // its posts, 12 to a page, with numbered pages when there are more.
     (function () {
       var cards = [].slice.call(document.querySelectorAll('.blog-card'));
+      var grid = document.querySelector('.blog-grid');
+      var PER = 12, page = 1, cat = 'all';
+      var pager = document.createElement('nav');
+      pager.className = 'pager';
+      pager.setAttribute('aria-label', 'Pages');
+      if (grid) grid.insertAdjacentElement('afterend', pager);
+
+      function button(label, target, opts) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = label;
+        if (opts && opts.aria) b.setAttribute('aria-label', opts.aria);
+        if (opts && opts.current) b.setAttribute('aria-current', 'page');
+        if (opts && opts.disabled) b.disabled = true;
+        b.addEventListener('click', function () { page = target; render(); toList(); });
+        return b;
+      }
+      // 1 … 4 5 6 … 12 : first, last, and the pages either side of the current one
+      function pageList(n) {
+        var out = [];
+        for (var i = 1; i <= n; i++) {
+          if (i === 1 || i === n || Math.abs(i - page) <= 1) out.push(i);
+          else if (out[out.length - 1] !== '…') out.push('…');
+        }
+        return out;
+      }
+      function render() {
+        var matching = cards.filter(function (c) { return cat === 'all' || c.dataset.category === cat; });
+        var pages = Math.max(1, Math.ceil(matching.length / PER));
+        page = Math.min(Math.max(page, 1), pages);
+        cards.forEach(function (c) { c.classList.toggle('hidden', matching.indexOf(c) === -1); c.classList.remove('off-page'); });
+        matching.forEach(function (c, i) { if (i < (page - 1) * PER || i >= page * PER) c.classList.add('off-page'); });
+        pager.innerHTML = '';
+        pager.hidden = pages === 1;
+        if (pages === 1) return;
+        pager.appendChild(button('\u2039', page - 1, { aria: 'Previous page', disabled: page === 1 }));
+        pageList(pages).forEach(function (p) {
+          if (p === '…') { var g = document.createElement('span'); g.className = 'gap'; g.textContent = '…'; pager.appendChild(g); }
+          else pager.appendChild(button(String(p), p, { current: p === page, aria: 'Page ' + p }));
+        });
+        pager.appendChild(button('\u203a', page + 1, { aria: 'Next page', disabled: page === pages }));
+      }
+      // bring the top of the list back into view after a topic or page change
+      function toList() {
+        var list = document.querySelector('.list-body');
+        if (list && list.getBoundingClientRect().top < 0) window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' });
+      }
       document.querySelectorAll('.filter-btn').forEach(function (btn) {
         btn.addEventListener('click', function () {
           document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
           btn.classList.add('active');
-          var cat = btn.dataset.category;
-          cards.forEach(function (c) { c.classList.toggle('hidden', cat !== 'all' && c.dataset.category !== cat); });
-          // picked from further down: bring the top of the list back into view
-          var list = document.querySelector('.list-body');
-          if (list && list.getBoundingClientRect().top < 0) window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' });
+          cat = btn.dataset.category;
+          page = 1;
+          render();
+          toList();
         });
       });
+      render();
     })();
   </script>
 
