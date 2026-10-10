@@ -180,23 +180,23 @@ function generateSlug(title, existingSlug) {
 const CTA_COPY = {
   'High-Conflict Situations': {
     kicker: 'When every message matters',
-    text: 'Clearly checks the tone before you post and keeps every message on the record exactly as written, preserved and timestamped. The conversation stays about the kids.'
+    text: 'Clearly is a co-parenting app that checks the tone before you post and keeps every message on the record exactly as written.'
   },
   'Communication': {
     kicker: 'Say it once, calmly',
-    text: 'Clearly checks the tone of your message before you post and suggests calmer wording. You choose what to send.'
+    text: 'Clearly is a co-parenting app that checks the tone of your message before you post and suggests calmer wording. You choose what to send.'
   },
   'Schedules & Custody': {
     kicker: 'One calendar you both trust',
-    text: 'Clearly keeps your custody schedule, holidays and swap requests in one shared calendar, with every change documented.'
+    text: 'Clearly is a co-parenting app that keeps your custody schedule, holidays and swap requests in one shared calendar.'
   },
   'Money & Expenses': {
     kicker: 'Money, settled',
-    text: 'Log a shared expense once and Clearly works out each parent’s share from the split you agreed. No spreadsheets, no back-and-forth.'
+    text: 'Clearly is a co-parenting app that works out each parent\u2019s share of every shared expense from the split you agreed.'
   },
   'Legal Basics': {
     kicker: 'A record you can rely on',
-    text: 'Clearly keeps your messages, agreements and schedule changes preserved and timestamped, and your records stay exportable.'
+    text: 'Clearly is a co-parenting app that keeps your messages, agreements and schedule changes preserved, timestamped and exportable.'
   },
   default: {
     kicker: 'Co-parenting, resolved',
@@ -207,14 +207,19 @@ CTA_COPY['Expenses'] = CTA_COPY['Money & Expenses'];
 const ctaFor = category => CTA_COPY[category] || CTA_COPY.default;
 const CTA_FINE_PRINT = '14-day free trial · Your co-parent joins free';
 
-const appStoreIcon = `<svg width="18" height="21" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="currentColor"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="currentColor"/></svg>`;
+// The App Store badge, same markup and styles (.app-badge in styles.css) as
+// the header badge.
+const appStoreBadge = cta => `<a href="${APP_STORE_URL}" class="app-badge" data-cta="${cta}" aria-label="Download Clearly on the App Store">
+    <svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg>
+    <div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div>
+  </a>`;
 
+// A quiet one-line mention partway through the post: what Clearly is, and
+// the badge. No heading, so it reads as an aside rather than an ad.
 function midArticleCta(category) {
-  const c = ctaFor(category);
   return `<aside class="inline-cta" aria-label="About Clearly">
-  <p class="inline-cta-kicker">${c.kicker}</p>
-  <p>${c.text}</p>
-  <a href="${APP_STORE_URL}" data-cta="mid-article">${appStoreIcon} Try Clearly free</a>
+  <p>${ctaFor(category).text}</p>
+  ${appStoreBadge('mid-article')}
 </aside>`;
 }
 
@@ -347,7 +352,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
     .blog-post-content p { font-size: 17px; line-height: 1.8; margin-bottom: 24px; color: var(--text-secondary); }
     .blog-post-content ul, .blog-post-content ol { margin: 0 0 24px 24px; }
     .blog-post-content li { font-size: 17px; line-height: 1.8; margin-bottom: 8px; color: var(--text-secondary); }
-    .blog-post-content blockquote { border-left: 4px solid var(--primary); padding-left: 24px; margin: 32px 0; font-style: italic; color: var(--text-secondary); }
+    .blog-post-content blockquote { margin: 32px 0; padding: 0 24px; font-family: 'EB Garamond', serif; font-size: 22px; line-height: 1.5; font-style: italic; color: var(--text); }
     .blog-post-content figure { margin: 32px 0; }
     .blog-post-content img { max-width: 100%; border-radius: 12px; }
     .blog-post-content figcaption { text-align: center; font-size: 14px; color: var(--text-muted); margin-top: 8px; }
@@ -363,23 +368,21 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
     .share-btn svg { width: 16px; height: 16px; }
     .share-btn.copied { background: var(--primary); color: white; border-color: var(--primary); }
 
-    /* Calls to action */
+    /* Calls to action (no accent edges: whole-border or background only) */
     .blog-cta { background: var(--primary-soft); border-radius: 16px; padding: 32px; margin: 48px 0; text-align: center; }
     .blog-cta p { font-size: 17px; line-height: 1.6; color: var(--text); margin: 0 0 20px; }
-    .blog-cta .blog-cta-kicker, .inline-cta .inline-cta-kicker { font-family: 'EB Garamond', serif; font-size: 24px; line-height: 1.3; margin-bottom: 8px; color: var(--text); }
-    .blog-cta > a, .inline-cta > a { display: inline-flex; align-items: center; gap: 10px; background: var(--primary); color: #fff; padding: 14px 24px; border-radius: 10px; font-size: 15px; font-weight: 600; transition: background 0.2s; }
-    .blog-cta > a:hover, .inline-cta > a:hover { background: var(--primary-dark, #0a6b55); text-decoration: none; }
+    .blog-cta .blog-cta-kicker { font-family: 'EB Garamond', serif; font-size: 24px; line-height: 1.3; margin-bottom: 8px; color: var(--text); }
     .blog-cta .blog-cta-fine { font-size: 14px; color: var(--text-muted); margin: 16px 0 0; }
     .blog-cta .blog-cta-secondary { color: var(--primary); font-weight: 500; }
-    .inline-cta { border: 1px solid var(--border); border-left: 4px solid var(--primary); border-radius: 12px; padding: 24px; margin: 40px 0; background: var(--surface, #fff); }
-    .blog-post-content .inline-cta p { font-size: 16px; line-height: 1.6; margin: 0 0 16px; color: var(--text-secondary); }
-    .blog-post-content .inline-cta .inline-cta-kicker { font-size: 22px; line-height: 1.3; color: var(--text); margin-bottom: 8px; }
-    .blog-post-content .inline-cta > a { color: #fff; }
+    .blog-post .app-badge, .blog-post .app-badge:hover { color: #fff; text-decoration: none; }
+    .inline-cta { display: flex; align-items: center; gap: 20px; margin: 36px 0; padding: 18px 20px; border: 1px solid var(--border); border-radius: 12px; }
+    .blog-post-content .inline-cta p { flex: 1; font-size: 15px; line-height: 1.6; margin: 0; color: var(--text-secondary); }
+    .inline-cta .app-badge { flex-shrink: 0; }
     @media (max-width: 768px) {
       .blog-post { padding-top: 96px; }
       .blog-post-title { font-size: 34px; }
       .blog-cta { padding: 24px 20px; }
-      .blog-cta > a, .inline-cta > a { width: 100%; justify-content: center; }
+      .inline-cta { flex-direction: column; align-items: flex-start; gap: 14px; }
     }
 
     /* Related Articles */
@@ -439,7 +442,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
     <div class="blog-cta">
       <p class="blog-cta-kicker">${ctaFor(post.category).kicker}</p>
       <p>${ctaFor(post.category).text}</p>
-      <a href="${APP_STORE_URL}" data-cta="end-of-article">${appStoreIcon} Download on the App Store</a>
+      ${appStoreBadge('end-of-article')}
       <p class="blog-cta-fine">${CTA_FINE_PRINT} &middot; <a href="/plan-builder/" class="blog-cta-secondary">Or build a free parenting plan</a></p>
     </div>
   </article>
