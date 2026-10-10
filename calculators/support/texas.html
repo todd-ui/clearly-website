@@ -127,7 +127,8 @@
     .calc-version-banner .version-link { color: var(--primary); text-decoration: none; }
     .calc-version-banner .version-link:hover { text-decoration: underline; }
   </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- PDF library loads on demand (js/pdf-loader.js) -->
+  <script src="/js/pdf-loader.js?v=20261010" defer></script>
   <!-- Panel layout to match the rest of the site; last so it restyles the page's own styles -->
   <link rel="stylesheet" href="/styles/calculator.css?v=20261010">
 </head>
@@ -564,6 +565,112 @@
       document.getElementById('netResourcesUsed').textContent = txMoney(cappedNet);
       document.getElementById('capNote').style.display = net > TX_CAP ? 'flex' : 'none';
       document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Download PDF: the library loads on demand (js/pdf-loader.js)
+    async function downloadPDF() {
+      try { await window.loadJsPDF(); }
+      catch (e) { alert("Couldn't load the PDF tool. Check your connection and try again."); return; }
+      buildPDF();
+    }
+
+    function buildPDF() {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF();
+      const primaryColor = [13, 130, 104]; // Teal #0D8268
+      const primaryLight = [230, 245, 241];
+      const textColor = [26, 25, 23];
+      const mutedColor = [140, 135, 128];
+
+      // Header
+      doc.setFillColor(...primaryColor);
+      doc.rect(0, 0, 210, 32, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(20);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Clearly', 20, 20);
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Child Support Estimate  |  Texas', 52, 20);
+      doc.setFontSize(8);
+      doc.text(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }), 20, 28);
+
+      let yPos = 42;
+
+      // Income and deductions (non-custodial parent, monthly)
+      doc.setFillColor(...primaryLight);
+      doc.roundedRect(15, yPos - 3, 180, 50, 2, 2, 'F');
+      doc.setTextColor(...primaryColor);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.text("Non-Custodial Parent's Monthly Income", 20, yPos + 5);
+      doc.setTextColor(...textColor);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Gross income: ' + txMoney(txVal('grossIncome')) + '  |  Other income: ' + txMoney(txVal('otherIncome')), 20, yPos + 14);
+      doc.text('Taxes: ' + txMoney(txVal('taxes')) + '  |  Social Security: ' + txMoney(txVal('socialSecurity')) + '  |  Union dues: ' + txMoney(txVal('unionDues')) + '  |  Child health insurance: ' + txMoney(txVal('healthInsurance')), 20, yPos + 22);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Net resources: ' + document.getElementById('netResources').textContent, 20, yPos + 32);
+      doc.setFont('helvetica', 'normal');
+      const children = document.getElementById('numChildren');
+      const others = document.getElementById('otherChildren');
+      doc.text('Children before the court: ' + children.options[children.selectedIndex].text + '  |  Other children the obligor supports: ' + others.options[others.selectedIndex].text, 20, yPos + 40);
+
+      yPos += 56;
+
+      // Results
+      const monthlySupport = document.getElementById('monthlySupport').textContent;
+      const annualSupport = document.getElementById('annualSupport').textContent;
+      const pct = document.getElementById('percentageApplied').textContent;
+      const used = document.getElementById('netResourcesUsed').textContent;
+      const capped = document.getElementById('capNote').style.display !== 'none';
+
+      doc.setFillColor(...primaryColor);
+      doc.roundedRect(15, yPos - 3, 180, 42, 2, 2, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(10);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Guideline Child Support', 20, yPos + 6);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'normal');
+      doc.text('Percentage applied: ' + pct + '  |  Net resources used: ' + used + (capped ? ' (capped at $11,700/month)' : ''), 20, yPos + 14);
+      doc.setFontSize(14);
+      doc.setFont('helvetica', 'bold');
+      doc.text('TOTAL: ' + monthlySupport + '/month  (' + annualSupport + '/year)', 20, yPos + 32);
+
+      yPos += 52;
+
+      // Guidelines
+      doc.setTextColor(...textColor);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'bold');
+      doc.text('Guidelines Applied:', 20, yPos);
+      doc.setFont('helvetica', 'normal');
+      doc.setTextColor(...mutedColor);
+      yPos += 5;
+      doc.text('Texas Family Code 154.125 (percentages), 154.129 (multiple families), 154.126 (net resources cap)', 20, yPos);
+
+      yPos += 12;
+
+      // Disclaimer
+      doc.setFontSize(7);
+      const disclaimer = 'DISCLAIMER: This estimate is based on Texas Family Code Chapter 154 guidelines. Actual amounts may differ based on judicial discretion, deviation factors and the child\'s best interests. This is not legal advice.';
+      const splitDisclaimer = doc.splitTextToSize(disclaimer, 175);
+      doc.text(splitDisclaimer, 20, yPos);
+
+      yPos += splitDisclaimer.length * 3 + 8;
+
+      // Footer
+      doc.setDrawColor(...primaryColor);
+      doc.setLineWidth(0.5);
+      doc.line(20, yPos, 190, yPos);
+      doc.setFontSize(8);
+      doc.setTextColor(...primaryColor);
+      doc.text('Generated by Clearly  |  getclearly.app', 20, yPos + 5);
+      doc.setTextColor(...mutedColor);
+      doc.text('Guidelines: September 2025', 140, yPos + 5);
+
+      doc.save('TX-Child-Support-Estimate-' + new Date().toISOString().split('T')[0] + '.pdf');
     }
 
     function resetCalculator() {

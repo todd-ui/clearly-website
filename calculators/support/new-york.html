@@ -464,9 +464,8 @@
       }
     }
   </style>
-
-  <!-- jsPDF Library for PDF Generation -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- PDF library loads on demand (js/pdf-loader.js) -->
+  <script src="/js/pdf-loader.js?v=20261010" defer></script>
   <!-- Panel layout to match the rest of the site; last so it restyles the page's own styles -->
   <link rel="stylesheet" href="/styles/calculator.css?v=20261010">
 </head>
@@ -1244,7 +1243,19 @@
       });
     }
 
-    function downloadPDF() {
+    async function downloadPDF() {
+
+      try { await window.loadJsPDF(); }
+
+      catch (e) { alert("Couldn't load the PDF tool. Check your connection and try again."); return; }
+
+      buildPDF();
+
+    }
+
+    
+
+    function buildPDF() {
       if (!window.jspdf) { alert('PDF library not loaded.'); return; }
       const doc = new window.jspdf.jsPDF();
       let y = 22;
