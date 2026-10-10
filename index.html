@@ -278,8 +278,8 @@
         left: calc(50% - var(--pw) / 2 + var(--x) * var(--pw)); width: calc((1 - var(--x)) * var(--pw) + 14px);
         transition: opacity .5s var(--ease); transition-delay: calc(1.3s + var(--n) * .25s);
       }
-      /* On phones, the expense callout points at the expense's icon, so its line doesn't cross out the amount */
-      .callout.is-left { --x: .148 !important; --y: .541 !important; }
+      /* On phones, the topic callout points at the topic's icon from the left margin, so its line doesn't cross out the question */
+      .callout.is-left { --x: .157 !important; --y: .555 !important; }
       .callout.is-left .line { left: calc(50% - var(--pw) / 2 - 14px); width: calc(var(--x) * var(--pw) + 14px); }
       .home-hero.is-in .callout .line { opacity: 1; transform: none; }
       .callout .line::after {
@@ -367,11 +367,11 @@
       <div class="diagram">
         <div class="shot">
           <div class="phone"><picture><source srcset="/images/home/today.webp" type="image/webp"><img src="/images/home/today.png" alt="The Today screen in Clearly" width="600" height="1248" fetchpriority="high"></picture></div>
-          <div class="callout" style="--x:.80; --y:.218; --n:0"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Who has the kids</strong><span>And when the next hand-off is.</span></div></div>
-          <div class="callout" style="--x:.922; --y:.381; --n:1"><i class="dot"></i><i class="line"></i><div class="txt"><strong>One tap to start</strong><span>Swap a weekend. Log an expense. Raise a topic.</span></div></div>
-          <div class="callout is-left" style="--x:.36; --y:.555; --n:2"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Expenses, split for you</strong><span>The math is done. The awkward part, too.</span></div></div>
-          <div class="callout" style="--x:.80; --y:.668; --n:3"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Topics that end</strong><span>Every one of them. On purpose.</span></div></div>
-          <div class="callout" style="--x:.905; --y:.838; --n:4"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Swap requests</strong><span>Trade a day without the back-and-forth.</span></div></div>
+          <div class="callout" style="--x:.80; --y:.21; --n:0"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Who has the kids</strong><span>And when the next hand-off is.</span></div></div>
+          <div class="callout" style="--x:.918; --y:.363; --n:1"><i class="dot"></i><i class="line"></i><div class="txt"><strong>One tap to start</strong><span>Swap a weekend. Log an expense. Raise a topic.</span></div></div>
+          <div class="callout is-left" style="--x:.862; --y:.555; --n:2"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Topics that end</strong><span>Every one of them. On purpose.</span></div></div>
+          <div class="callout" style="--x:.25; --y:.69; --n:3"><i class="dot"></i><i class="line"></i><div class="txt"><strong>What&#x27;s coming up</strong><span>Practices, classes and swaps, in one list.</span></div></div>
+          <div class="callout" style="--x:.90; --y:.845; --n:4"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Swap requests</strong><span>Trade a day without the back-and-forth.</span></div></div>
         </div>
       </div>
     </div>
