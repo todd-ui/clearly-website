@@ -136,21 +136,14 @@
 
     /* ---------- [01] Problem ---------- */
     .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-    /* A week of messages: questions pile up, none get answered */
-    .week { background: var(--paper); border-radius: 20px; padding: 32px 32px 28px; }
-    .week .cap { font-size: 11px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 4px; }
-    .week ol { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
-    .week .day { display: flex; align-items: center; gap: 12px; margin: 14px 0 4px; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--ink-faint); }
-    .week .day::before, .week .day::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
-    .week .msg { max-width: 76%; padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.45; background: #FFFFFF; border: 1px solid var(--rule); }
-    .week .msg.sam { align-self: flex-start; border-bottom-left-radius: 5px; }
-    .week .msg.alex { align-self: flex-end; border-bottom-right-radius: 5px; background: var(--moss-pale); border-color: #CBE7DD; }
-    .week .msg.heat { background: #FEF6F6; border-color: #F2CACA; color: #8A3A3A; }
-    .week .msg small { display: block; font-size: 11px; color: var(--ink-faint); margin-bottom: 2px; }
-    .week li { opacity: 0; transform: translateY(8px); transition: opacity .5s var(--ease), transform .5s var(--ease); transition-delay: calc(.15s + var(--i) * .32s); }
-    .week .verdict { margin: 22px 0 0; padding-top: 18px; border-top: 1px solid var(--rule); font-family: 'EB Garamond', serif; font-style: italic; font-size: 20px; color: var(--moss);
-      opacity: 0; transition: opacity .8s var(--ease) 3.9s; }
-    .week.is-in li, .week.is-in .verdict { opacity: 1; transform: none; }
+    /* The messages pile up: an even, alternating stack (no tilt) */
+    .pile { display: flex; flex-direction: column; gap: 12px; background: var(--paper); border-radius: 20px; padding: 36px; }
+    .pile span { max-width: 78%; background: #FFFFFF; border: 1px solid var(--rule); border-radius: 16px; padding: 11px 16px; font-size: 14px; color: var(--ink-mid);
+      box-shadow: 0 6px 18px rgba(28,28,26,0.05); opacity: 0; transform: translateY(12px); transition: opacity .55s var(--ease), transform .55s var(--ease); transition-delay: calc(var(--i) * 140ms); }
+    .pile span:nth-child(odd) { align-self: flex-start; border-bottom-left-radius: 5px; }
+    .pile span:nth-child(even) { align-self: flex-end; border-bottom-right-radius: 5px; }
+    .pile span.hot { color: #8A3A3A; background: #FEF6F6; border-color: #F2CACA; }
+    .pile.is-in span { opacity: 1; transform: none; }
     .pull { font-family: 'EB Garamond', serif; font-size: 22px; line-height: 1.45; font-style: italic; margin: 28px 0 0; max-width: 24em; }
 
     /* ---------- [02] The resolution flow ---------- */
@@ -215,7 +208,7 @@
     .close .note { color: rgba(255,255,255,0.7); }
 
     @media (prefers-reduced-motion: reduce) {
-      [data-reveal], .shot .phone, .callout *, .week li, .week .verdict, .flow li > *, .flow::after, .flow .n, .compare tr, .home-hero h1 .line > span { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
+      [data-reveal], .shot .phone, .callout *, .pile span, .flow li > *, .flow::after, .flow .n, .compare tr, .home-hero h1 .line > span { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
     }
 
     @media (max-width: 1080px) {
@@ -306,22 +299,14 @@
         <p class="lead" data-reveal style="--i:2">Pickup times, doctors, school forms, expenses, holidays. You'll talk to this person more than you expect, for longer than you expect. And most of the time you agree on more than you think. It's the way the conversation goes that keeps burying it.</p>
         <p class="pull" data-reveal style="--i:3">Every text about Tuesday pickup carries the weight of everything that came before it.</p>
       </div>
-      <div class="week" data-scene aria-label="Example of a week of co-parenting texts where nothing gets answered">
-        <p class="cap">A typical week</p>
-        <ol>
-          <li class="day" style="--i:0">Monday</li>
-          <li class="msg sam" style="--i:1"><small>Sam</small>Can you do pickup at 3 instead of 5 on Friday?</li>
-          <li class="day" style="--i:2">Thursday</li>
-          <li class="msg sam" style="--i:3"><small>Sam</small>Dentist moved to Tuesday. Can you take her?</li>
-          <li class="msg alex" style="--i:4"><small>Alex</small>Still waiting on the $140 for soccer.</li>
-          <li class="day" style="--i:5">Friday</li>
-          <li class="msg alex" style="--i:6"><small>Alex</small>Who has Thanksgiving this year?</li>
-          <li class="msg sam heat" style="--i:7"><small>Sam</small>It's 3:20. Where are you?</li>
-          <li class="day" style="--i:8">Sunday</li>
-          <li class="msg alex heat" style="--i:9"><small>Alex</small>You never said 3. This is exactly what you always do.</li>
-          <li class="msg sam heat" style="--i:10"><small>Sam</small>Forget it.</li>
-        </ol>
-        <p class="verdict">Four topics. Seven messages. Not one answer.</p>
+      <div class="pile" data-scene aria-hidden="true">
+        <span style="--i:0">Can you do pickup at 3 instead?</span>
+        <span style="--i:1">Dentist moved to Tuesday</span>
+        <span style="--i:2">Soccer fees due Friday &middot; $140</span>
+        <span style="--i:3">Who has Thanksgiving this year?</span>
+        <span style="--i:4" class="hot">You said you'd be here at 5.</span>
+        <span style="--i:5">Did she take her medicine?</span>
+        <span style="--i:6" class="hot">This is exactly what you always do.</span>
       </div>
     </div>
   </section>
