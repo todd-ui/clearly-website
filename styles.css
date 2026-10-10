@@ -12,7 +12,7 @@
   --ink-mid: #4A4A47;
   --ink-faint: #8A8A87;
   --moss: #0D8268;
-  --moss-pale: #E4F4EF;
+  --moss-pale: #DBEFE8;
   --rule: rgba(0,0,0,0.08);
   --dark: #1C1C1A;
 }
@@ -268,7 +268,7 @@ img.footer-icon {
   --primary: #0D8268;
   --primary-dark: #0a6b56;
   --primary-light: #14b89a;
-  --primary-soft: #E6F5F1;
+  --primary-soft: #DBEFE8;
   --primary-border: #A8DFD0;
   --bg: #FAFAF9;
   --surface: #FFFFFF;

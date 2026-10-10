@@ -8,7 +8,7 @@
    ========================================== */
 :root {
   --c-paper: #F6F5F1; --c-ink: #1C1C1A; --c-ink-mid: #4A4A47; --c-ink-faint: #6B6B67;
-  --c-moss: #0D8268; --c-moss-pale: #E4F4EF; --c-rule: rgba(28, 28, 26, 0.10);
+  --c-moss: #0D8268; --c-moss-pale: #DBEFE8; --c-rule: rgba(28, 28, 26, 0.10);
 }
 body { background: var(--c-paper); }
 

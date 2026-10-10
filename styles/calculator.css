@@ -9,7 +9,7 @@
    ========================================== */
 :root {
   --k-paper: #F6F5F1; --k-ink: #1C1C1A; --k-ink-mid: #4A4A47; --k-ink-faint: #6B6B67;
-  --k-moss: #0D8268; --k-moss-pale: #E4F4EF; --k-rule: rgba(28, 28, 26, 0.10);
+  --k-moss: #0D8268; --k-moss-pale: #DBEFE8; --k-rule: rgba(28, 28, 26, 0.10);
 }
 body { background: var(--k-paper); }
 

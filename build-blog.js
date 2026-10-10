@@ -359,7 +359,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
     /* Post page in the homepage's panel style: one white panel with a
        single reading column, related posts in a second panel. No left-edge
        accent lines. */
-    :root { --paper: #F6F5F1; --ink: #1C1C1A; --ink-mid: #4A4A47; --ink-faint: #6B6B67; --moss: #0D8268; --moss-pale: #E4F4EF; --rule: rgba(28,28,26,0.10); }
+    :root { --paper: #F6F5F1; --ink: #1C1C1A; --ink-mid: #4A4A47; --ink-faint: #6B6B67; --moss: #0D8268; --moss-pale: #DBEFE8; --rule: rgba(28,28,26,0.10); }
     body { background: var(--paper); }
     .post-main { padding: 16px 0 0; }
     .post-panel { margin: 0 16px 16px; background: #FFFFFF; border-radius: 28px; padding: 88px 40px 96px; }
@@ -621,7 +621,7 @@ ${posts.map(post => `      {
   </script>
   <style>
     /* Blog index in the homepage panel style. No left-edge accent lines. */
-    :root { --paper: #F6F5F1; --ink: #1C1C1A; --ink-mid: #4A4A47; --ink-faint: #6B6B67; --moss: #0D8268; --moss-pale: #E4F4EF; --rule: rgba(28,28,26,0.10); }
+    :root { --paper: #F6F5F1; --ink: #1C1C1A; --ink-mid: #4A4A47; --ink-faint: #6B6B67; --moss: #0D8268; --moss-pale: #DBEFE8; --rule: rgba(28,28,26,0.10); }
     body { background: var(--paper); }
     .list-main { padding: 16px 0 0; }
     .panel { margin: 0 16px 16px; border-radius: 28px; background: #FFFFFF; padding: 72px 40px 88px; }

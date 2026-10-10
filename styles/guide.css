@@ -8,7 +8,7 @@
    ========================================== */
 :root {
   --g-paper: #F6F5F1; --g-ink: #1C1C1A; --g-ink-mid: #4A4A47; --g-ink-faint: #6B6B67;
-  --g-moss: #0D8268; --g-moss-pale: #E4F4EF; --g-rule: rgba(28, 28, 26, 0.10);
+  --g-moss: #0D8268; --g-moss-pale: #DBEFE8; --g-rule: rgba(28, 28, 26, 0.10);
 }
 body { background: var(--g-paper); }
 
