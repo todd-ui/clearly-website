@@ -83,8 +83,10 @@
     .inner { max-width: 1200px; margin: 0 auto; }
 
     /* Labels: "[01] The problem" and outlined pills */
-    .label { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 24px; }
-    .label b { font-weight: 500; color: var(--moss); letter-spacing: 0; }
+    /* Inline text (not flex) so a long label wraps as one line of text instead of two columns */
+    .label { display: block; font-size: 12px; font-weight: 500; letter-spacing: 1.2px; line-height: 1.5; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 24px; }
+    .label b { font-weight: 500; color: var(--moss); letter-spacing: 0; margin-right: 10px; }
+    .nowrap { white-space: nowrap; }
     .panel-moss .label, .panel-moss .label b { color: rgba(255,255,255,0.75); }
     .pill { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; border: 1px solid currentColor; border-radius: 999px; padding: 4px 10px; }
 
@@ -238,10 +240,52 @@
       .hero-copy { padding-top: 0; }
       .home-hero h1 { font-size: 40px; }
       .h2 { font-size: 34px; }
-      .diagram { height: auto; padding-bottom: 40px; }
-      .shot { width: 240px; margin: 0 auto; }
-      .callout .line { width: 0; }
-      .callout .txt { display: none; }
+      .diagram { height: auto; padding-bottom: 8px; }
+      /* Phones and tablets: the dots become numbered markers on the phone and the
+         callouts become a matching numbered list under it, so nothing is lost.
+         --pw is the phone's width; 2.0808 is the screenshot's height / width. */
+      .shot { --pw: 240px; width: 100%; max-width: 420px; margin: 0 auto; aspect-ratio: auto; padding-top: calc(var(--pw) * 2.0808 + 36px); counter-reset: callout; }
+      .shot .phone { inset: auto; top: 0; left: 50%; width: var(--pw); margin-left: calc(var(--pw) / -2); }
+      .callout { position: static; transform: none; display: grid; grid-template-columns: 26px 1fr; column-gap: 14px; align-items: start; padding: 14px 0; border-top: 1px solid rgba(13, 130, 104, 0.15); counter-increment: callout; }
+      .callout:last-child { border-bottom: 1px solid rgba(13, 130, 104, 0.15); }
+      /* A small dot on the element, a thin line out to the phone's edge, and
+         the number in the margin beside the phone, so it can't be mistaken
+         for part of the app. Callouts on the left half go to the left margin. */
+      .callout .dot {
+        position: absolute; z-index: 2; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px;
+        left: calc(50% - var(--pw) / 2 + var(--x) * var(--pw)); top: calc(var(--y) * var(--pw) * 2.0808);
+        box-shadow: 0 0 0 3px rgba(13, 130, 104, 0.2);
+      }
+      .callout .line {
+        position: absolute; z-index: 2; height: 1px; transform: none; opacity: 0; background: rgba(13, 130, 104, 0.6);
+        top: calc(var(--y) * var(--pw) * 2.0808);
+        left: calc(50% - var(--pw) / 2 + var(--x) * var(--pw)); width: calc((1 - var(--x)) * var(--pw) + 14px);
+        transition: opacity .5s var(--ease); transition-delay: calc(1.3s + var(--n) * .25s);
+      }
+      /* On phones, the expense callout points at the expense's icon, so its line doesn't cross out the amount */
+      .callout.is-left { --x: .148 !important; --y: .541 !important; }
+      .callout.is-left .line { left: calc(50% - var(--pw) / 2 - 14px); width: calc(var(--x) * var(--pw) + 14px); }
+      .home-hero.is-in .callout .line { opacity: 1; transform: none; }
+      .callout .line::after {
+        content: counter(callout); position: absolute; top: -10px; right: -20px; width: 20px; height: 20px; border-radius: 50%;
+        background: var(--moss); color: #FFFFFF; display: grid; place-items: center;
+        font: normal 500 11px/1 'Instrument Sans', sans-serif;
+      }
+      .callout.is-left .line::after { right: auto; left: -20px; }
+      .callout .txt { grid-column: 2; padding: 0; width: auto; }
+      .callout::before {
+        content: counter(callout); width: 26px; height: 26px; border-radius: 50%; background: var(--moss); color: #FFFFFF;
+        display: grid; place-items: center; font-size: 12px; font-weight: 500;
+        opacity: 0; transition: opacity .5s var(--ease); transition-delay: calc(1.2s + var(--n) * .25s);
+      }
+      .home-hero.is-in .callout::before { opacity: 1; }
+      .callout .dot { transition-delay: calc(1.2s + var(--n) * .25s); }
+      .callout .txt { transition-delay: calc(1.3s + var(--n) * .25s); }
+      .callout .txt strong { font-size: 15px; }
+      .callout .txt span { font-size: 14px; }
+      /* The message pile: smaller bubbles so they sit two or three to a row, like a pile, not a list */
+      .pile { gap: 7px; padding: 28px 14px; }
+      .pile span { font-size: 13px; padding: 8px 12px; border-radius: 12px; }
       .flow-card { padding: 36px 24px; }
       .flow { grid-template-columns: 1fr; }
       .phones { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad) 4px; scrollbar-width: none; }
@@ -290,7 +334,7 @@
   <section class="panel home-hero" data-scene>
     <div class="inner hero-grid">
       <div class="hero-copy">
-        <p class="label" data-reveal="fade"><b>Clearly</b> The most advanced co-parenting app</p>
+        <p class="label" data-reveal="fade"><b>Clearly</b> The most advanced <span class="nowrap">co-parenting app</span></p>
         <h1><span class="line"><span>The marriage ends.</span></span><span class="line"><span>The messages don't.</span></span></h1>
         <p class="hero-lead" data-reveal style="--i:3">The co-parenting app that helps you say it calmly, settle it for good, and get back to your kids.</p>
         <div data-reveal style="--i:4"><a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="home-hero" aria-label="Download Clearly on the App Store"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div></a></div>
@@ -301,7 +345,7 @@
           <div class="phone"><picture><source srcset="/images/home/today.webp" type="image/webp"><img src="/images/home/today.png" alt="The Today screen in Clearly" width="600" height="1248" fetchpriority="high"></picture></div>
           <div class="callout" style="--x:.80; --y:.218; --n:0"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Who has the kids</strong><span>And when the next hand-off is.</span></div></div>
           <div class="callout" style="--x:.922; --y:.381; --n:1"><i class="dot"></i><i class="line"></i><div class="txt"><strong>One tap to start</strong><span>Swap a weekend. Log an expense. Raise a topic.</span></div></div>
-          <div class="callout" style="--x:.36; --y:.555; --n:2"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Expenses, split for you</strong><span>The math is done. The awkward part, too.</span></div></div>
+          <div class="callout is-left" style="--x:.36; --y:.555; --n:2"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Expenses, split for you</strong><span>The math is done. The awkward part, too.</span></div></div>
           <div class="callout" style="--x:.80; --y:.668; --n:3"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Topics that end</strong><span>Every one of them. On purpose.</span></div></div>
           <div class="callout" style="--x:.905; --y:.838; --n:4"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Swap requests</strong><span>Trade a day without the back-and-forth.</span></div></div>
         </div>
@@ -390,7 +434,7 @@
         <p class="lead" data-reveal style="--i:2">Most co-parenting apps were built to keep score. Clearly was built to help you stop keeping it. <a class="text-link" href="/best-co-parenting-apps-2026/">See how we compare &rarr;</a></p>
       </div>
       <table class="compare" data-scene>
-        <thead><tr><th></th><th>Most co-parenting apps</th><th class="us">Clearly</th></tr></thead>
+        <thead><tr><th></th><th>Most <span class="nowrap">co-parenting</span> apps</th><th class="us">Clearly</th></tr></thead>
         <tbody>
           <tr style="--i:1"><td>Conversations</td><td class="them">A thread that never ends</td><td class="us">Topics that end in an answer</td></tr>
           <tr style="--i:2"><td>Tone</td><td class="them">You're on your own</td><td class="us">A second look before you post</td></tr>
