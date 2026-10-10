@@ -603,7 +603,14 @@
     <nav class="assessment-nav">
       <div class="container">
         <a href="/" class="assessment-nav-brand">Clearly.</a>
-        <span class="assessment-nav-title">Communication Style Quiz</span>
+        <span class="assessment-nav-title" id="navTitle">Communication Style Quiz</span>
+        <!-- Shown in place of the title while answering, like the Plan Builder's step counter -->
+        <div class="assessment-nav-progress" id="navProgress" hidden>
+          <span class="step-counter">Question <span id="currentQ">1</span> of 7</span>
+          <div class="progress-bar" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="7" aria-valuenow="1" id="navProgressBar">
+            <div class="progress-fill" id="progressFill" style="width: 14.28%"></div>
+          </div>
+        </div>
       </div>
     </nav>
 
@@ -673,10 +680,6 @@
 
         <!-- Question Screens -->
         <div id="questions" class="screen question-screen">
-          <p class="progress-text">Question <span id="currentQ">1</span> of 7</p>
-          <div class="progress-bar">
-            <div class="progress-fill" id="progressFill" style="width: 14.28%"></div>
-          </div>
           <h2 id="questionText"></h2>
           <div class="answers" id="answers"></div>
         </div>
@@ -901,6 +904,10 @@
     function showScreen(screenId) {
       document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
       document.getElementById(screenId).classList.add('active');
+      // The bar shows progress while answering, the quiz name otherwise
+      const answering = screenId === 'questions';
+      document.getElementById('navProgress').hidden = !answering;
+      document.getElementById('navTitle').hidden = answering;
       window.scrollTo(0, 0);
     }
 
@@ -920,6 +927,7 @@
       const q = QUESTIONS[currentQuestion];
       document.getElementById('currentQ').textContent = currentQuestion + 1;
       document.getElementById('progressFill').style.width = ((currentQuestion + 1) / 7 * 100) + '%';
+      document.getElementById('navProgressBar').setAttribute('aria-valuenow', currentQuestion + 1);
       document.getElementById('questionText').textContent = q.text;
       window.scrollTo(0, 0);
 

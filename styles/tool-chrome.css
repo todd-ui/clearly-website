@@ -303,7 +303,14 @@
   font-size: 13px; font-weight: 500; color: #4A4A47; white-space: nowrap;
 }
 
+/* Quiz, while answering: "Question 3 of 7" with its track, centred in the bar like the Plan Builder's */
+.assessment-nav-progress { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); display: grid; justify-items: center; gap: 7px; }
+.assessment-nav-progress .step-counter { font-size: 13px; font-weight: 500; color: #4A4A47; white-space: nowrap; line-height: 1.2; }
+.assessment-nav-progress .progress-bar { position: static !important; transform: none; top: auto !important; left: auto !important; margin: 0; width: 132px; }
+[hidden].assessment-nav-title, [hidden].assessment-nav-progress { display: none !important; }
+
 @media (max-width: 768px) {
+  .assessment-nav-progress .progress-bar { width: 104px; }
   .wizard-header .step-counter { top: 15px; }
   .progress-bar { top: 44px !important; width: 104px; }
   .wizard-header .back-btn { padding: 6px 12px 6px 8px !important; font-size: 13px; }
