@@ -30,6 +30,10 @@
 .site-nav .nav-logo { font-size: 22px; }
 .site-nav .nav-right { gap: 28px; }
 .site-nav .nav-link { font-size: 14px; }
+/* Four links plus the badge: tighten the spacing on narrow desktops and tablets */
+@media (min-width: 769px) and (max-width: 960px) {
+  .site-nav .nav-right { gap: 18px; }
+}
 .site-nav .app-badge { height: 40px; padding: 5px 13px 5px 10px; border-radius: 999px; border-color: #000; }
 .site-nav .app-badge svg { width: 18px; height: 21px; }
 .site-nav .app-badge .badge-small { font-size: 8.5px; }
@@ -48,6 +52,10 @@
     box-shadow: 0 16px 40px rgba(28, 28, 26, 0.12);
   }
   .site-nav .app-badge { align-self: flex-start; }
+  /* Links left-aligned like the badge, as ruled rows */
+  .site-nav .nav-right { align-items: stretch; gap: 0; }
+  .site-nav .nav-right .nav-link { text-align: left; font-size: 17px; padding: 14px 4px; border-bottom: 1px solid rgba(28, 28, 26, 0.08); }
+  .site-nav .nav-right .app-badge { margin-top: 18px; }
 }
 
 /* ---------- Footer: an inset dark panel ---------- */

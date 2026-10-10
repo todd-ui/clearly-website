@@ -97,11 +97,6 @@ body { background: var(--c-paper); }
 .final-cta .btn-secondary { background: transparent !important; color: #FFFFFF !important; border: 1px solid rgba(255, 255, 255, 0.4) !important; border-radius: 999px; }
 .final-cta .cta-fineprint { color: rgba(255, 255, 255, 0.7) !important; }
 
-/* ---------- Section rail: only where it fits beside the panels ---------- */
-@media (min-width: 1280px) and (max-width: 1599px) {
-  .page-nav { display: none !important; }
-}
-
 /* ---------- Phones and tablets ---------- */
 @media (max-width: 900px) {
   .lp-hero, .lp-section, .thesis-frame, .cmp-section, .final-cta { margin: 0 10px 10px !important; border-radius: 22px; padding: 56px 22px !important; }
