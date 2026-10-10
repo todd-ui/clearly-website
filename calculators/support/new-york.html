@@ -470,15 +470,117 @@
 </head>
 <body>
 
-  <!-- Navigation (Utility) -->
-  <nav class="nav">
-    <div class="container">
-      <a href="/" class="nav-brand">Clearly.</a>
-      <ul class="nav-links">
-        <li><a href="/calculators/">← All Calculators</a></li>
-      </ul>
-    </div>
-  </nav>
+<a href="#main-content" class="skip-link">Skip to content</a>
+<header class="site-nav">
+  <link rel="stylesheet" href="/styles/site-chrome.css">
+  <a href="/" class="nav-logo">Clearly.</a>
+  <div class="nav-right">
+    <a href="/blog" class="nav-link">Common Ground</a>
+    <a href="/professionals" class="nav-link">For Professionals</a>
+    <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge">
+      <svg width="22" height="26" viewBox="0 0 22 26" fill="none">
+        <path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/>
+        <path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/>
+      </svg>
+      <div class="badge-text">
+        <span class="badge-small">Download on the</span>
+        <span class="badge-large">App Store</span>
+      </div>
+    </a>
+  </div>
+  <button class="nav-toggle" aria-label="Menu">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</header>
+<script>
+  // Mobile menu toggle
+  const siteNavToggle = document.querySelector('.site-nav .nav-toggle');
+  const siteNavRight = document.querySelector('.nav-right');
+  if (siteNavToggle && siteNavRight) {
+    siteNavToggle.addEventListener('click', () => {
+      siteNavToggle.classList.toggle('open');
+      siteNavRight.classList.toggle('open');
+    });
+  }
+  // Header gets a soft shadow once the page scrolls under it
+  var siteNav = document.querySelector('.site-nav');
+  if (siteNav) {
+    var navShadow = function () { siteNav.classList.toggle('is-scrolled', window.scrollY > 8); };
+    window.addEventListener('scroll', navShadow, { passive: true });
+    navShadow();
+  }
+  // Track App Store clicks. data-cta names the placement when there is one.
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest('a[href*="apps.apple.com"]');
+    if (link && typeof gtag === 'function') {
+      gtag('event', 'app_store_click', {
+        link_url: link.href,
+        link_location: link.dataset.cta || (link.closest('header') ? 'header' : link.closest('footer') ? 'footer' : link.closest('.final-cta,.hero') ? 'cta' : 'body'),
+        page_type: location.pathname.indexOf('/blog/') === 0 ? 'blog_post' : 'page'
+      });
+    }
+  });
+</script>
+<!-- mobile-app-bar -->
+<!-- Sticky App Store bar for phones. The header badge sits behind the menu on
+     small screens, so without this a phone reader has no visible way to the app. -->
+<style>
+  .mobile-app-bar { display: none; }
+  @media (max-width: 768px) {
+    .mobile-app-bar {
+      display: flex; align-items: center; gap: 12px;
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 900;
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+      background: rgba(246, 245, 241, 0.97); border-top: 1px solid rgba(0,0,0,0.08);
+      box-shadow: 0 -4px 16px rgba(0,0,0,0.06);
+      transform: translateY(110%); transition: transform 0.25s ease;
+      -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
+    }
+    .mobile-app-bar.show { transform: translateY(0); }
+    .mobile-app-bar img { width: 40px; height: 40px; border-radius: 9px; flex-shrink: 0; }
+    .mobile-app-bar-text { flex: 1; min-width: 0; line-height: 1.3; }
+    .mobile-app-bar-text strong, .mobile-app-bar-text span { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .mobile-app-bar-text strong { font-size: 15px; font-weight: 500; color: #1C1C1A; }
+    .mobile-app-bar-text span { font-size: 13px; color: #6B6B67; }
+    .mobile-app-bar .app-badge { flex-shrink: 0; }
+  }
+</style>
+<div class="mobile-app-bar" id="mobile-app-bar" aria-hidden="true">
+  <img src="/images/app-icon-96.png" alt="" width="40" height="40">
+  <div class="mobile-app-bar-text">
+    <strong>Clearly</strong>
+    <span>Co-parenting app</span>
+  </div>
+  <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="mobile-sticky-bar" tabindex="-1" aria-label="Download Clearly on the App Store">
+    <svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg>
+    <div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div>
+  </a>
+</div>
+<script>
+  (function() {
+    var bar = document.getElementById('mobile-app-bar');
+    if (!bar) return;
+    // Step aside while the footer or a full-size App Store CTA is on screen.
+    var inView = new Set();
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) { e.isIntersecting ? inView.add(e.target) : inView.delete(e.target); });
+        update();
+      });
+      document.querySelectorAll('footer, .blog-cta, .final-cta').forEach(function(el) { io.observe(el); });
+    }
+    function update() {
+      var show = window.scrollY > 500 && inView.size === 0;
+      bar.classList.toggle('show', show);
+      bar.setAttribute('aria-hidden', show ? 'false' : 'true');
+      bar.querySelector('a').tabIndex = show ? 0 : -1;
+    }
+    window.addEventListener('scroll', update, { passive: true });
+  })();
+</script>
+<!-- /mobile-app-bar -->
 
   <!-- Page Header -->
   <header class="calc-page-header">
@@ -905,222 +1007,57 @@
     </div>
   </section>
 
-  <!-- Footer (Utility) -->
-  <footer class="footer" style="padding: 40px 0; background: var(--surface); border-top: 1px solid var(--border);">
-    <div class="container" style="text-align: center;">
-      <p style="margin: 0 0 8px 0; font-size: 14px; color: var(--text-secondary);">
-        A free tool from <a href="/" style="color: var(--primary); font-weight: 500;">Clearly.</a>
-      </p>
-      <p style="margin: 0; font-size: 13px; color: var(--text-muted);">
-        &copy; 2026 Clearly LLC. <a href="/privacy" style="color: var(--text-muted);">Privacy</a> · <a href="/terms" style="color: var(--text-muted);">Terms</a>
-      </p>
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <div class="footer-logo-row">
+        <img class="footer-icon" src="/images/app-icon-96.png" alt="Clearly." loading="lazy">
+        <span class="footer-logo-text">Clearly.</span>
+      </div>
+      <p class="footer-statement">Co-parenting, <em>resolved.</em></p>
+      <div class="footer-tagline">The most advanced co-parenting app.</div>
+      <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="footer" aria-label="Download Clearly on the App Store">
+        <svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg>
+        <div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div>
+      </a>
     </div>
-  </footer>
-
-  <script>
-    // Mobile menu toggle
-    const navToggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    if (navToggle && navLinks) {
-      navToggle.addEventListener('click', () => {
-        navToggle.classList.toggle('open');
-        navLinks.classList.toggle('open');
-      });
-    }
-
-    // ==================================================================
-    // New York maintenance + child support calculator
-    // DRL §236(B)(6) (maintenance) + §240 / CSSA (child support).
-    // All inputs annual. Estimate only — courts have final authority.
-    // ==================================================================
-    const NY = {
-      maintenanceCap: 241000,    // 2026 payor income cap (eff. Mar 1, 2026)
-      cssaCap: 193000,           // 2026 combined parental income cap
-      selfSupportReserve: 21546, // 135% × 2026 federal poverty ($15,960)
-      ssWageBase: 176100,        // Social Security wage base (matches reference calculator)
-      addlMedicareThreshold: 200000, // Additional Medicare Tax (0.9%) applies above this
-      cssaPct: { 1: 0.17, 2: 0.25, 3: 0.29, 4: 0.31, 5: 0.35 }
-    };
-
-    function nyMoney(n) { return '$' + Math.round(n).toLocaleString(); }
-    function nyVal(id) { const el = document.getElementById(id); return el ? (parseFloat(el.value) || 0) : 0; }
-
-    // FICA estimate: SS 6.2% capped at the wage base + Medicare 1.45% + Additional
-    // Medicare 0.9% over $200k; self-employment via SECA on 92.35% of net earnings.
-    function estFICA(wages, selfEmp) {
-      let fica = 0.062 * Math.min(wages, NY.ssWageBase) + 0.0145 * wages;
-      if (selfEmp > 0) {
-        const seBase = 0.9235 * selfEmp;
-        const room = Math.max(0, NY.ssWageBase - wages);
-        fica += 0.124 * Math.min(seBase, room) + 0.029 * seBase;
-      }
-      const medicareBase = wages + (selfEmp > 0 ? 0.9235 * selfEmp : 0);
-      if (medicareBase > NY.addlMedicareThreshold) fica += 0.009 * (medicareBase - NY.addlMedicareThreshold);
-      return fica;
-    }
-
-    function partyIncome(p) {
-      const wages = nyVal(p + 'Wages'), se = nyVal(p + 'SelfEmployment');
-      const gross = wages + se + nyVal(p + 'Investment') + nyVal(p + 'Other') + nyVal(p + 'Benefits');
-      const method = (document.querySelector('input[name="ficaMethod"]:checked') || {}).value;
-      const fica = method === 'manual' ? nyVal(p + 'FICA') : estFICA(wages, se);
-      const deductions = fica + nyVal(p + 'CityTax') + nyVal(p + 'OtherSupport');
-      return { gross: gross, adjusted: Math.max(0, gross - deductions) };
-    }
-
-    function calculateTotals() {
-      ['p1', 'p2'].forEach(function (p) {
-        const r = partyIncome(p);
-        const g = document.getElementById(p + 'GrossTotal'); if (g) g.textContent = nyMoney(r.gross);
-        const a = document.getElementById(p + 'AdjustedTotal'); if (a) a.textContent = nyMoney(r.adjusted);
-      });
-    }
-
-    function calculateDuration() {
-      const m = document.getElementById('marriageDate').value;
-      const d = document.getElementById('divorceDate').value;
-      const box = document.getElementById('durationResult');
-      if (!m || !d) { if (box) box.style.display = 'none'; return null; }
-      const years = (new Date(d) - new Date(m)) / (365.25 * 24 * 3600 * 1000);
-      if (isNaN(years) || years < 0) { if (box) box.style.display = 'none'; return null; }
-      let lo, hi;
-      if (years < 15) { lo = 0.15; hi = 0.30; }
-      else if (years <= 20) { lo = 0.30; hi = 0.40; }
-      else { lo = 0.35; hi = 0.50; }
-      document.getElementById('marriageLength').textContent = years.toFixed(1) + ' years';
-      const range = (years * lo).toFixed(1) + '–' + (years * hi).toFixed(1) + ' years';
-      document.getElementById('maintenanceDuration').textContent = range;
-      box.style.display = 'block';
-      return range;
-    }
-
-    function calculateSupport() {
-      calculateTotals();
-      const p1 = partyIncome('p1').adjusted, p2 = partyIncome('p2').adjusted;
-      if (p1 + p2 <= 0) { alert('Please enter income for at least one party.'); return; }
-
-      const payorIsP1 = p1 >= p2;
-      const payorInc = payorIsP1 ? p1 : p2, payeeInc = payorIsP1 ? p2 : p1;
-      const payorName = payorIsP1 ? 'Party 1' : 'Party 2', payeeName = payorIsP1 ? 'Party 2' : 'Party 1';
-
-      const hasChildren = ((document.querySelector('input[name="hasChildren"]:checked') || {}).value) === 'yes';
-      const numChildren = parseInt(document.getElementById('numChildren').value, 10) || 1;
-      const custodial = document.getElementById('custodialParent').value; // party1 | party2
-      const payorParty = payorIsP1 ? 'party1' : 'party2';
-      const payorIsNonCustodial = hasChildren && custodial !== payorParty;
-
-      // ---- Spousal maintenance (payor income capped) ----
-      const capInc = Math.min(payorInc, NY.maintenanceCap);
-      const m1 = payorIsNonCustodial ? (0.20 * capInc - 0.25 * payeeInc) : (0.30 * capInc - 0.20 * payeeInc);
-      const m2 = 0.40 * (capInc + payeeInc) - payeeInc;
-      const maintenance = Math.max(0, Math.min(m1, m2));
-
-      // ---- Child support (CSSA) on maintenance-adjusted income ----
-      let childSupport = 0, cssaPct = 0, csPayorName = '-';
-      if (hasChildren) {
-        const p1CS = payorIsP1 ? (payorInc - maintenance) : (payeeInc + maintenance);
-        const p2CS = payorIsP1 ? (payeeInc + maintenance) : (payorInc - maintenance);
-        const cpi = Math.max(0, p1CS + p2CS);
-        cssaPct = NY.cssaPct[Math.min(Math.max(numChildren, 1), 5)];
-        const basic = Math.min(cpi, NY.cssaCap) * cssaPct;
-        const ncIsP1 = custodial === 'party2';
-        const ncIncome = ncIsP1 ? p1CS : p2CS;
-        const ncShare = cpi > 0 ? ncIncome / cpi : 0;
-        childSupport = basic * ncShare;
-        // self-support reserve floor
-        const available = ncIncome - NY.selfSupportReserve;
-        if (childSupport > available) childSupport = Math.max(available, 0);
-        if (childSupport <= 0 && ncIncome > 0) childSupport = 300; // $25/mo statutory minimum
-        csPayorName = ncIsP1 ? 'Party 1' : 'Party 2';
-      }
-
-      // ---- Render ----
-      document.getElementById('resultsSection').classList.add('visible');
-      document.getElementById('maintenanceMonthly').textContent = nyMoney(maintenance / 12);
-      document.getElementById('maintenanceAnnual').textContent = nyMoney(maintenance);
-      document.getElementById('maintenancePayor').textContent = maintenance > 0 ? payorName : '-';
-      document.getElementById('maintenancePayee').textContent = maintenance > 0 ? payeeName : '-';
-
-      const dur = calculateDuration();
-      const durRow = document.getElementById('durationRow');
-      if (dur) { document.getElementById('maintenanceDurationResult').textContent = dur; durRow.style.display = 'flex'; }
-      else { durRow.style.display = 'none'; }
-
-      const csCard = document.getElementById('childSupportResults');
-      if (hasChildren) {
-        csCard.style.display = 'block';
-        document.getElementById('childSupportMonthly').textContent = nyMoney(childSupport / 12);
-        document.getElementById('childSupportAnnual').textContent = nyMoney(childSupport);
-        document.getElementById('cssaPercentage').textContent = Math.round(cssaPct * 100) + '%';
-        document.getElementById('childSupportPayor').textContent = csPayorName;
-      } else {
-        csCard.style.display = 'none';
-      }
-
-      const total = maintenance + childSupport;
-      document.getElementById('totalMonthly').textContent = nyMoney(total / 12);
-      document.getElementById('totalAnnual').textContent = nyMoney(total);
-      document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function resetCalculator() {
-      document.querySelectorAll('.calc-input').forEach(function (i) { i.value = ''; });
-      document.querySelectorAll('.calc-select').forEach(function (s) { s.selectedIndex = 0; });
-      calculateTotals();
-      document.getElementById('resultsSection').classList.remove('visible');
-      document.getElementById('durationResult').style.display = 'none';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    // ---- UI helpers ----
-    function toggleSection(header) { header.closest('.calc-form-group').classList.toggle('collapsed'); }
-
-    function toggleFICA(method) {
-      document.getElementById('manualFICA').style.display = method === 'manual' ? 'grid' : 'none';
-      document.querySelectorAll('input[name="ficaMethod"]').forEach(function (r) { r.checked = r.value === method; });
-      document.querySelectorAll('.calc-toggle').forEach(function (t) {
-        const inp = t.querySelector('input[name="ficaMethod"]');
-        if (inp) t.classList.toggle('active', inp.value === method);
-      });
-      calculateTotals();
-    }
-
-    function toggleChildren(val) {
-      document.getElementById('childrenDetails').style.display = val === 'yes' ? 'block' : 'none';
-      document.querySelectorAll('input[name="hasChildren"]').forEach(function (r) { r.checked = r.value === val; });
-      document.querySelectorAll('.calc-toggle').forEach(function (t) {
-        const inp = t.querySelector('input[name="hasChildren"]');
-        if (inp) t.classList.toggle('active', inp.value === val);
-      });
-    }
-
-    function downloadPDF() {
-      if (!window.jspdf) { alert('PDF library not loaded.'); return; }
-      const doc = new window.jspdf.jsPDF();
-      let y = 22;
-      doc.setFontSize(18); doc.text('New York Support Estimate', 20, y); y += 12;
-      doc.setFontSize(11);
-      function row(label, val) { doc.text(label, 20, y); doc.text(String(val), 130, y); y += 8; }
-      row('Spousal maintenance (monthly):', document.getElementById('maintenanceMonthly').textContent);
-      row('Spousal maintenance (annual):', document.getElementById('maintenanceAnnual').textContent);
-      row('Maintenance payor:', document.getElementById('maintenancePayor').textContent);
-      if (document.getElementById('childSupportResults').style.display !== 'none') {
-        row('Child support (monthly):', document.getElementById('childSupportMonthly').textContent);
-        row('Child support (annual):', document.getElementById('childSupportAnnual').textContent);
-        row('Child support payor:', document.getElementById('childSupportPayor').textContent);
-      }
-      row('Total monthly support:', document.getElementById('totalMonthly').textContent);
-      y += 6; doc.setFontSize(9);
-      doc.text('Estimate only, based on NY DRL §236 & §240. Not legal advice.', 20, y);
-      doc.save('ny-support-estimate.pdf');
-    }
-
-    // ---- Init default UI state ----
-    document.addEventListener('DOMContentLoaded', function () {
-      toggleFICA(((document.querySelector('input[name="ficaMethod"]:checked') || {}).value) || 'estimate');
-      toggleChildren(((document.querySelector('input[name="hasChildren"]:checked') || {}).value) || 'no');
-    });
-  </script>
+    <div class="footer-col">
+      <div class="footer-col-label">Tools & Resources</div>
+      <ul>
+        <li><a href="/plan-builder/">Custody Plan Builder</a></li>
+        <li><a href="/communication-styles/">Communication Style Quiz</a></li>
+        <li><a href="/calculators/">Support Calculator</a></li>
+        <li><a href="/blog">Common Ground Blog</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Guides</div>
+      <ul>
+        <li><a href="/best-co-parenting-apps-2026/">Best Co-Parenting Apps 2026</a></li>
+        <li><a href="/high-conflict-coparenting/">High-Conflict Co-Parenting</a></li>
+        <li><a href="/kids-and-divorce/">Helping Your Kids Through Divorce</a></li>
+        <li><a href="/mediation-prep/">Preparing for Mediation</a></li>
+        <li><a href="/co-parenting-expenses/">Co-Parenting Expenses</a></li>
+        <li><a href="/co-parent-communication/">Co-Parent Communication</a></li>
+        <li><a href="/custody-schedule-help/">Custody Schedule</a></li>
+        <li><a href="/coparenting-alignment-guide/">Co-Parenting Alignment</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-label">Company</div>
+      <ul>
+        <li><a href="/professionals">For Family & Legal Professionals</a></li>
+        <li><a href="/contact">Contact</a></li>
+        <li><a href="/faq">FAQ</a></li>
+        <li><a href="/privacy">Privacy</a></li>
+        <li><a href="/terms">Terms</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>&copy; 2026 Clearly LLC</span>
+  </div>
+</footer>
 
   <!-- Structured Data -->
   <script type="application/ld+json">

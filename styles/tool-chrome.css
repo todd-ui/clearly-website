@@ -1,0 +1,50 @@
+/* ==========================================
+   TOOL BARS — Plan Builder and the communication quiz
+   These step-by-step flows keep their own top bar (logo, step counter,
+   Back), but it now looks like the site's floating header: inset, rounded,
+   translucent with blur. Loaded last; !important beats the inline styles on
+   the Plan Builder's bar. Positions and heights stay close to the originals
+   so the flows' own spacing still works.
+   ========================================== */
+.wizard-header,
+.assessment-nav {
+  top: 12px !important;
+  left: 16px !important;
+  right: 16px !important;
+  height: 60px;
+  padding: 0 24px 0 28px !important;
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(28, 28, 26, 0.08) !important;
+  border-radius: 999px;
+  background: rgba(246, 245, 241, 0.82) !important;
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  backdrop-filter: saturate(1.4) blur(14px);
+  box-shadow: 0 10px 30px rgba(28, 28, 26, 0.06);
+}
+.assessment-nav .container { width: 100%; }
+.wizard-header .logo,
+.assessment-nav-brand {
+  font-family: 'EB Garamond', Georgia, serif;
+  font-size: 22px;
+  color: #0D8268;
+  text-decoration: none;
+}
+.wizard-header .step-counter { font-size: 13px; color: #6B6B67; }
+.wizard-header .back-btn { font-size: 14px; color: #4A4A47; }
+.wizard-header .back-btn:hover { color: #0D8268; }
+
+/* The bar now ends 72px down, so give the Plan Builder's first screen room */
+.wizard-container { padding-top: 112px !important; }
+
+@media (max-width: 768px) {
+  .wizard-container { padding-top: 96px !important; }
+  .wizard-header,
+  .assessment-nav {
+    top: 10px !important;
+    left: 10px !important;
+    right: 10px !important;
+    height: 56px;
+    padding: 0 16px 0 20px !important;
+  }
+}

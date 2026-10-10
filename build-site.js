@@ -5,6 +5,7 @@ const path = require('path');
 const PAGES = [
   'faq.html',
   'help.html',
+  'contact.html',
   'privacy.html',
   'terms.html',
   'professionals.html',
@@ -19,7 +20,13 @@ const PAGES = [
   'mediation-prep/index.html',
   'co-parenting-expenses/index.html',
   'high-conflict-coparenting/index.html',
-  'best-co-parenting-apps-2026/index.html'
+  'best-co-parenting-apps-2026/index.html',
+  'calculators/support/california.html',
+  'calculators/support/florida.html',
+  'calculators/support/illinois.html',
+  'calculators/support/new-york.html',
+  'calculators/support/pennsylvania.html',
+  'calculators/support/texas.html'
   // Note: index.html excluded - has its own inline header/footer
 ];
 

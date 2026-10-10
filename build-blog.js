@@ -752,6 +752,7 @@ const STATIC_PAGES = [
   ['/blog', 'blog.html'],
   ['/faq', 'faq.html'],
   ['/help', 'help.html'],
+  ['/contact', 'contact.html'],
   ['/professionals', 'professionals.html'],
   ['/privacy', 'privacy.html'],
   ['/terms', 'terms.html'],
