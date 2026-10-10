@@ -210,7 +210,10 @@
     .contact-links { list-style: none; padding: 18px 0 0 !important; margin: 0 0 16px; }
     .contact-links li { display: flex; flex-direction: column; gap: 2px; padding: 14px 0; border-bottom: 1px solid rgba(28,28,26,0.10); margin: 0; }
     .contact-links li:first-child { border-top: 1px solid rgba(28,28,26,0.10); }
+    .contact-links li { position: relative; }
     .contact-links a { font-weight: 500; }
+    /* The whole row is the link, not just its title (easier to tap on phones) */
+    .contact-links a::after { content: ''; position: absolute; inset: 0; }
     .contact-links span { font-size: 15px; color: #6B6B67; }
     @media (max-width: 900px) { .contact-page .contact-address { font-size: 27px; } }
   </style>
