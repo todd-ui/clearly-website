@@ -1669,7 +1669,7 @@
       <!-- Screen 1: Welcome -->
       <div class="screen active" id="screen-welcome">
         <h1>Parenting Plan Builder</h1>
-        <p class="subtitle">Build your custody plan. Free. Step through your schedule, holidays, expenses, and exchange logistics at your own pace. Share it with your co-parent, your lawyer — or import it into Clearly to get the app set up in one tap.</p>
+        <p class="subtitle">Still working out custody? Try different schedules and see what each one would look like for your family, before you agree to anything. Free, a few minutes, no account.</p>
 
         <div class="pathway-cards">
           <div class="pathway-card" onclick="startBuilder()">
@@ -1677,7 +1677,7 @@
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/><path d="M12 13v5M9.5 15.5h5"/></svg>
             </div>
             <h3>Build a new plan</h3>
-            <p>Create a personalized custody schedule based on your family's needs</p>
+            <p>Try schedules, add holidays and summer, and see it all on a calendar</p>
           </div>
           <div class="pathway-card" onclick="selectPlanCode(event)">
             <div class="pathway-icon">
@@ -1692,6 +1692,36 @@
             <p class="code-error" id="planCodeError"></p>
           </div>
         </div>
+
+        <!-- What this is: the steps, what you leave with, and why -->
+        <section class="pb-intro" aria-label="About the Plan Builder">
+          <div class="pb-intro-block">
+            <h2 class="pb-intro-h">How it works</h2>
+            <ol class="pb-steps">
+              <li><strong>Try a schedule on.</strong> Week on, week off, 2-2-3, 5-2-2-5, every other weekend, or one you build yourself. See it on a calendar: who has the kids, on which days.</li>
+              <li><strong>Work through the parts people forget.</strong> Holidays, summer, exchange times and how you&rsquo;d split expenses.</li>
+              <li><strong>Save it and take it with you.</strong> Enter your email at the end and we send you the plan, with a code to reopen it and make changes.</li>
+            </ol>
+          </div>
+          <div class="pb-intro-block">
+            <h2 class="pb-intro-h">What you leave with</h2>
+            <ul class="pb-gets">
+              <li>
+                <span class="pb-chip"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3.5H7a2.5 2.5 0 0 0-2.5 2.5v12A2.5 2.5 0 0 0 7 20.5h10a2.5 2.5 0 0 0 2.5-2.5V9z"/><path d="M14 3.5V9h5.5M8.5 13h7M8.5 16.5h5"/></svg></span>
+                <div><strong>A draft plan you can see</strong><span>Schedule, holidays and summer in one place, emailed to you.</span></div>
+              </li>
+              <li>
+                <span class="pb-chip"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5 12 15l4.5-4.5M5 19.5h14"/></svg></span>
+                <div><strong>A PDF to bring to the conversation</strong><span>With your co-parent, your lawyer or a mediator.</span></div>
+              </li>
+              <li>
+                <span class="pb-chip"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2.5"/><path d="M10.5 6h3M9.8 13l1.6 1.6 3-3.2"/></svg></span>
+                <div><strong>A plan code, for when you&rsquo;re ready</strong><span>Enter it in the Clearly app and your schedule is already set up. Optional, and good for 90 days.</span></div>
+              </li>
+            </ul>
+          </div>
+          <p class="pb-why"><strong>Why try it here first?</strong> A schedule is easier to talk about when you can both look at it than when you&rsquo;re each imagining it. Nothing here is binding, and you can change it as often as you like.</p>
+        </section>
       </div>
 
       <!-- Screen 2: Children -->
