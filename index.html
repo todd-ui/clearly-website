@@ -64,1269 +64,122 @@
 
   <style>
     /* ==========================================
-       HOMEPAGE STYLES
+       HOMEPAGE (story layout)
+       One idea per section: problem -> how Clearly is different -> the rest
+       of the app -> price -> close. No left-edge accent lines anywhere.
        ========================================== */
+    body { font-family: 'Instrument Sans', sans-serif; background: #F6F5F1; color: #1C1C1A; -webkit-font-smoothing: antialiased; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 32px; }
+    .sec { padding: 112px 0; }
+    .sec-white { background: #FFFFFF; }
+    .eyebrow { font-size: 13px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: #0D8268; margin: 0 0 16px; }
+    .h2 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 48px; line-height: 1.1; letter-spacing: -0.5px; margin: 0 0 20px; }
+    .h2 em { font-style: italic; color: #0D8268; }
+    .body { font-size: 18px; line-height: 1.65; color: #4A4A47; margin: 0 0 16px; max-width: 60ch; }
+    .center { text-align: center; }
+    .center .body { margin-left: auto; margin-right: auto; }
+    .note { font-size: 14px; color: #6B6B67; margin: 14px 0 0; }
+    .app-badge { height: 48px; padding: 8px 18px 8px 14px; border-radius: 10px; }
+    .app-badge .badge-large { font-size: 20px; }
+    .app-badge .badge-small { font-size: 10.5px; }
+    .text-link { color: #0D8268; font-weight: 500; text-decoration: none; }
+    .text-link:hover { text-decoration: underline; }
 
-    /* Body font */
-    body {
-      font-family: 'Instrument Sans', sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
+    /* Hero */
+    .hero { padding: 140px 0 96px; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 64px; align-items: center; }
+    .hero h1 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 68px; line-height: 1.02; letter-spacing: -1px; margin: 0 0 24px; }
+    .hero h1 em { font-style: italic; color: #0D8268; display: block; }
+    .hero-lead { font-size: 20px; line-height: 1.6; color: #4A4A47; margin: 0 0 32px; max-width: 30em; }
+    .hero-phone { justify-self: center; width: 100%; max-width: 340px; filter: drop-shadow(0 30px 50px rgba(28,28,26,0.18)); }
+    .hero-phone img { width: 100%; height: auto; display: block; }
 
-    /* Section rhythm */
-    .hp-section {
-      padding: 88px 56px;
-      margin: 0 auto;
-    }
-    .hp-section .inner { max-width: 960px; margin: 0 auto; }
-    .hp-section .inner-narrow { max-width: 680px; margin: 0 auto; }
-    .hp-section .inner-mid { max-width: 800px; margin: 0 auto; }
+    /* Problem */
+    .problem { max-width: 760px; }
+    .problem .pull { font-family: 'EB Garamond', serif; font-size: 28px; line-height: 1.4; font-style: italic; color: #1C1C1A; margin: 32px 0 0; }
 
-    .bg-paper { background: var(--paper); }
-    .bg-white { background: var(--white); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
-    .bg-moss { background: var(--moss); }
+    /* How it's different */
+    .steps { display: grid; gap: 96px; margin-top: 72px; }
+    .step { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .step:nth-child(even) .step-text { order: 2; }
+    .step-num { font-size: 13px; font-weight: 500; color: #6B6B67; letter-spacing: 1px; margin: 0 0 12px; }
+    .step h3 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 34px; line-height: 1.15; margin: 0 0 16px; }
+    .demo { background: #F6F5F1; border-radius: 24px; padding: 32px; }
+    .msg { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; padding: 18px 20px; font-size: 16px; line-height: 1.55; }
+    .msg-label { font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #6B6B67; margin: 0 0 8px; }
+    .msg-before { color: #7F1D1D; border-color: #F5C2C2; background: #FEF6F6; }
+    .msg-before .msg-label { color: #B45C5C; }
+    .msg-after { border-color: #A8D8C9; background: #EEF8F4; color: #1C1C1A; }
+    .msg-after .msg-label { color: #0D8268; }
+    .demo-arrow { text-align: center; color: #0D8268; font-size: 13px; font-weight: 500; margin: 14px 0; }
+    .topic { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; padding: 20px; }
+    .topic-q { font-size: 17px; font-weight: 500; margin: 0 0 16px; }
+    .topic-btns { display: flex; gap: 10px; }
+    .topic-btns span { flex: 1; text-align: center; padding: 12px; border-radius: 12px; font-weight: 500; font-size: 15px; border: 1px solid rgba(0,0,0,0.1); }
+    .topic-btns .yes { background: #0D8268; border-color: #0D8268; color: #fff; }
+    .topic-done { margin: 14px 0 0; font-size: 14px; color: #0D8268; font-weight: 500; }
+    .record-row { display: flex; justify-content: space-between; gap: 12px; padding: 14px 0; border-bottom: 1px solid rgba(0,0,0,0.06); font-size: 15px; }
+    .record-row:last-child { border-bottom: 0; }
+    .record-row time { color: #6B6B67; white-space: nowrap; font-size: 13px; }
+    .credit { font-size: 14px; color: #6B6B67; margin-top: 64px; text-align: center; }
 
-    /* Typography */
-    .hp-eyebrow {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
-      color: var(--moss);
-      margin-bottom: 16px;
-    }
-    h1 {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 54px;
-      line-height: 1.06;
-      letter-spacing: -1px;
-      font-weight: 400;
-      color: var(--ink);
-      margin-bottom: 24px;
-    }
-    h1 em, h2 em {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-style: italic;
-      font-weight: 400;
-      color: var(--moss);
-    }
-    h2 {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 38px;
-      line-height: 1.1;
-      letter-spacing: -0.5px;
-      font-weight: 400;
-      color: var(--ink);
-      margin-bottom: 24px;
-    }
-    h2.sm {
-      font-size: 28px;
-      line-height: 1.15;
-      letter-spacing: -0.3px;
-      font-weight: 400;
-    }
-    .hp-lead {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 18px;
-      font-weight: 500;
-      color: var(--ink);
-      line-height: 1.6;
-    }
-    .hero-lead-br { display: none; }
-    .hp-body {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.8;
-      color: var(--ink-mid);
-      margin-bottom: 20px;
-    }
-    .hp-body:last-child { margin-bottom: 0; }
-    .hp-body strong { color: var(--ink); font-weight: 500; }
-    .hp-punch {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: #1C1C1A;
-      padding-top: 24px;
-      border-top: 1px solid rgba(0,0,0,0.08);
-      margin-top: 24px;
-    }
-    .hp-credit {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      font-style: italic;
-      color: var(--ink-faint);
-      margin-top: 20px;
-    }
-    .hp-small {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      color: var(--ink-faint);
-    }
-    .hp-divider {
-      border: none;
-      border-top: 1px solid rgba(0,0,0,0.07);
-      margin: 0;
-    }
+    /* Versus */
+    .versus { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 48px; }
+    .versus-col { border-radius: 20px; padding: 32px; }
+    .versus-them { background: #FFFFFF; border: 1px solid rgba(0,0,0,0.08); }
+    .versus-us { background: #0D8268; color: #FFFFFF; }
+    .versus-col h3 { font-size: 15px; font-weight: 500; letter-spacing: 0.5px; margin: 0 0 20px; }
+    .versus-them h3 { color: #6B6B67; }
+    .versus-col ul { list-style: none; margin: 0; padding: 0; }
+    .versus-col li { font-size: 17px; line-height: 1.5; padding: 12px 0; border-top: 1px solid rgba(0,0,0,0.06); }
+    .versus-us li { border-top-color: rgba(255,255,255,0.18); }
+    .versus-them li { color: #4A4A47; }
 
-    /* Buttons */
-    .btn-moss {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #0D8268;
-      color: #FFFFFF;
-      padding: 13px 24px;
-      border-radius: 8px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-    }
-    .btn-moss:hover { opacity: 0.9; text-decoration: none; }
-    .btn-ghost {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: transparent;
-      color: #1C1C1A;
-      border: 1px solid rgba(0,0,0,0.2);
-      padding: 13px 24px;
-      border-radius: 8px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .btn-ghost:hover { border-color: rgba(0,0,0,0.4); text-decoration: none; }
-    .btn-white {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #FFFFFF;
-      color: #0D8268;
-      padding: 14px 28px;
-      border-radius: 8px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-    }
-    .btn-white:hover { opacity: 0.9; text-decoration: none; }
-    .btn-ghost-white {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: transparent;
-      color: #FFFFFF;
-      border: 1.5px solid rgba(255,255,255,0.5);
-      padding: 14px 28px;
-      border-radius: 8px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .btn-ghost-white:hover { border-color: rgba(255,255,255,0.8); text-decoration: none; }
-    .btn-dark {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #FFFFFF;
-      color: #1C1C1A;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-    }
-    .btn-dark:hover { opacity: 0.9; text-decoration: none; }
+    /* Everything else */
+    .phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 56px; }
+    .phone-card img { width: 100%; max-width: 260px; height: auto; display: block; margin: 0 auto 24px; filter: drop-shadow(0 18px 30px rgba(28,28,26,0.14)); }
+    .phone-card h3 { font-size: 18px; font-weight: 500; margin: 0 0 8px; text-align: center; }
+    .phone-card p { font-size: 15px; line-height: 1.6; color: #4A4A47; margin: 0 auto; text-align: center; max-width: 30ch; }
 
-    /* ==========================================
-       HERO
-       ========================================== */
-    #hero {
-      min-height: 600px;
-      display: flex;
-      align-items: center;
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 72px;
-      align-items: center;
-    }
-    /* Stack layout for two-block sections */
-    .stack {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .stack > div {
-      padding: 56px 0;
-    }
-    .stack > div:first-child {
-      padding-top: 0;
-    }
-    .stack > div:last-child {
-      padding-bottom: 0;
-    }
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      border: 1px solid rgba(0,0,0,0.12);
-      border-radius: 20px;
-      padding: 5px 12px 5px 8px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      color: #4A4A47;
-      background: #FFFFFF;
-      margin-bottom: 28px;
-    }
-    .pill-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #0D8268;
-    }
-    .hero-lead-divider {
-      padding-bottom: 20px;
-      border-bottom: 1px solid rgba(0,0,0,0.1);
-      margin-bottom: 20px;
-    }
-    .hero-btns {
-      display: flex;
-      gap: 10px;
-      margin-top: 28px;
-    }
+    /* Pricing */
+    .price-card { max-width: 640px; margin: 48px auto 0; background: #FFFFFF; border: 1px solid rgba(0,0,0,0.08); border-radius: 24px; padding: 48px; text-align: center; }
+    .price-row { display: flex; justify-content: center; align-items: baseline; gap: 28px; flex-wrap: wrap; margin-bottom: 8px; }
+    .price { font-family: 'EB Garamond', serif; font-size: 52px; line-height: 1; }
+    .price small { font-family: 'Instrument Sans', sans-serif; font-size: 16px; color: #6B6B67; }
+    .price-or { color: #6B6B67; font-size: 15px; }
+    .price-points { list-style: none; padding: 0; margin: 28px 0 32px; display: grid; gap: 10px; font-size: 16px; color: #4A4A47; }
+    .price-points li::before { content: '\2713'; color: #0D8268; font-weight: 600; margin-right: 10px; }
 
-    /* Phone mockup */
-    .phone {
-      background: #F6F5F1;
-      border-radius: 20px;
-      border: 1px solid rgba(0,0,0,0.1);
-      overflow: hidden;
-      box-shadow: 0 2px 32px rgba(0,0,0,0.07);
-      max-width: 300px;
-      margin: 0 auto;
-      font-family: 'Instrument Sans', sans-serif;
-    }
-    .ph-bar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 16px;
-      background: #FFFFFF;
-      border-bottom: 1px solid rgba(0,0,0,0.07);
-    }
-    .ph-bar-back { font-size: 13px; color: #0D8268; font-weight: 500; }
-    .ph-bar-title { font-size: 14px; font-weight: 600; color: #1C1C1A; }
-    .ph-bar-spacer { width: 50px; }
-    .ph-summary {
-      background: #FFFFFF;
-      border-radius: 12px;
-      margin: 12px 12px 0;
-      border: 1px solid rgba(0,0,0,0.07);
-      padding: 14px;
-    }
-    .ph-summary-label {
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-      color: #0D8268;
-      margin-bottom: 8px;
-    }
-    .ph-summary-text { font-size: 13px; color: #1C1C1A; line-height: 1.5; }
-    .ph-hold {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: calc(100% - 24px);
-      margin: 10px 12px 0;
-      padding: 12px;
-      background: #FFFFFF;
-      border: 1.5px solid #BFBFBB;
-      border-radius: 10px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 13px;
-      color: #8A8A87;
-      cursor: pointer;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-    .ph-res {
-      background: #E4F4EF;
-      border-radius: 12px;
-      padding: 14px;
-      border: 1px solid rgba(13,130,104,0.15);
-      margin: 10px 12px 12px;
-    }
-    .ph-res-label {
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      color: #0D8268;
-      margin-bottom: 8px;
-    }
-    .ph-res-text {
-      font-size: 13px;
-      color: #1C1C1A;
-      line-height: 1.5;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(13,130,104,0.15);
-      margin-bottom: 12px;
-    }
-    .ph-res-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .ph-res-btns button {
-      padding: 10px;
-      border-radius: 8px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 13px;
-      cursor: pointer;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-    .ph-btn-keep { background: #FFFFFF; border: 1.5px solid #BFBFBB; color: #4A4A47; }
-    .ph-btn-resolve { background: #0D8268; border: none; color: #FFFFFF; font-weight: 500; }
+    /* Close */
+    .final-cta { background: #0D8268; color: #FFFFFF; text-align: center; padding: 120px 0; }
+    .final-cta .h2 { color: #FFFFFF; font-size: 56px; }
+    .final-cta .h2 em { color: rgba(255,255,255,0.65); }
+    .final-cta .body { color: rgba(255,255,255,0.85); margin: 0 auto 36px; }
+    .final-cta .note { color: rgba(255,255,255,0.75); }
 
-    /* Hero layered cards */
-    .hero-cards {
-      position: relative;
-      width: 100%;
-      max-width: 440px;
-      margin: 0 auto;
-      padding: 12px 0 48px;
-    }
-    .hero-card {
-      border-radius: 12px;
-      padding: 22px 26px;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.05);
-    }
-    .hero-card-label {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .hero-card-text {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
-    }
-    .hero-card-sent {
-      background: #FEF2F2;
-      border: 1px solid rgba(252,165,165,0.35);
-      width: 88%;
-      opacity: 0;
-      transform: translateY(18px);
-      animation: hero-card-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.45s forwards;
-    }
-    .hero-card-sent .hero-card-label { color: #C97B7B; }
-    .hero-card-sent .hero-card-text {
-      color: #7F1D1D;
-      font-style: italic;
-    }
-    .hero-card-delivered {
-      background: #E4F4EF;
-      border: 1px solid rgba(13,130,104,0.18);
-      width: 92%;
-      margin-left: auto;
-      margin-top: -18px;
-      position: relative;
-      opacity: 0;
-      transform: translateY(24px) translateX(12px) scale(0.98);
-      animation: hero-card-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.05s forwards;
-    }
-    @keyframes hero-card-in {
-      to {
-        opacity: 1;
-        transform: translateY(0) translateX(0) scale(1);
-      }
-    }
-    .hero-card-delivered .hero-card-label { color: #0D8268; }
-    .hero-card-delivered .hero-card-text {
-      color: var(--ink);
-      font-weight: 500;
-    }
-    .hero-card-note {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      font-style: italic;
-      color: #4A4A47;
-      margin-top: 10px;
-    }
+    /* Reveal */
+    .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .fade-in.visible { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { .fade-in { opacity: 1; transform: none; transition: none; } }
 
-    /* ==========================================
-       TRANSFORMATION (See it work)
-       ========================================== */
-    .orig {
-      background: #FEF2F2;
-      border: 1px solid #FCA5A5;
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
-      padding: 20px 24px;
-      margin-bottom: 0;
-    }
-    .orig-label {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: #C97B7B;
-      margin-bottom: 10px;
-    }
-    .orig-text {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 15px;
-      color: #7F1D1D;
-      font-style: italic;
-      line-height: 1.6;
-    }
-    .flow-connector {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-      padding: 6px 0;
-    }
-    .flow-connector .flow-line {
-      width: 2px;
-      height: 16px;
-      background: #0D8268;
-      opacity: 0.25;
-    }
-    .flow-connector .flow-arrow {
-      font-size: 14px;
-      color: #0D8268;
-      opacity: 0.4;
-      line-height: 1;
-    }
-    .flow-connector .flow-label {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      color: #0D8268;
-      letter-spacing: 0.5px;
-      opacity: 0.5;
-      padding: 2px 0;
-    }
-    .arrow-down {
-      text-align: center;
-      font-size: 18px;
-      color: #AEAEAD;
-      padding: 8px 0;
-      margin-bottom: 12px;
-    }
-    .steps-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 0;
-    }
-    .step {
-      background: #FFFFFF;
-      border-radius: 10px;
-      border: 1px solid rgba(0,0,0,0.06);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
-      padding: 18px 20px;
-    }
-    .step-label {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 0.8px;
-      text-transform: uppercase;
-      color: #0D8268;
-      margin-bottom: 8px;
-    }
-    .step h3 {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 8px;
-    }
-    .step p {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 13px;
-      color: var(--ink-mid);
-      line-height: 1.5;
-    }
-    .output {
-      background: #E4F4EF;
-      border: 1px solid rgba(13,130,104,0.15);
-      border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
-      padding: 22px 24px;
-      margin-bottom: 20px;
-    }
-    .output-label {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: #0D8268;
-      margin-bottom: 10px;
-    }
-    .output-text {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--ink);
-      line-height: 1.6;
-      margin-bottom: 12px;
-    }
-    .output-note {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      font-style: italic;
-      color: #4A4A47;
-    }
-
-    /* Narrated transformation — three stacked steps, read top-to-bottom */
-    .transformation {
-      margin-top: 48px;
-    }
-    .transformation-intro {
-      margin-bottom: 8px;
-    }
-    .transformation-intro .hp-body {
-      max-width: 620px;
-    }
-    .transformation-steps {
-      margin-top: 64px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-    }
-    .step {
-      width: 100%;
-      max-width: 640px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-    .step-num {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 1.4px;
-      text-transform: uppercase;
-      color: #0D8268;
-      margin: 0 0 14px;
-    }
-    .step h3 {
-      font-family: 'Instrument Serif', serif;
-      font-size: clamp(28px, 3.2vw, 38px);
-      font-weight: 400;
-      line-height: 1.15;
-      color: var(--ink);
-      margin: 0 0 28px;
-      letter-spacing: -0.01em;
-      max-width: 520px;
-    }
-    .step h3 em {
-      font-style: italic;
-      color: #0D8268;
-    }
-    .step .msg {
-      width: 100%;
-      text-align: left;
-    }
-    .step-note {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
-      color: var(--ink-mid);
-      margin: 22px 0 0;
-      max-width: 520px;
-    }
-    .step-note em {
-      font-style: italic;
-      color: #0D8268;
-      font-weight: 500;
-    }
-    .step-arrow {
-      display: flex;
-      justify-content: center;
-      padding: 40px 0;
-    }
-    .step-arrow svg { display: block; }
-
-    /* Message card visuals */
-    .msg {
-      border-radius: 12px;
-      padding: 28px 30px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.06), 0 2px 6px rgba(0,0,0,0.04);
-    }
-    .msg-label {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    .msg-text {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.7;
-    }
-    .msg-sent {
-      background: #FEF2F2;
-      border: 1px solid rgba(252,165,165,0.35);
-    }
-    .msg-sent .msg-label { color: #C97B7B; }
-    .msg-sent .msg-text { color: #7F1D1D; font-style: italic; }
-    .msg-delivered {
-      background: #E4F4EF;
-      border: 1px solid rgba(13,130,104,0.18);
-    }
-    .msg-delivered .msg-label { color: #0D8268; }
-    .msg-delivered .msg-text { color: var(--ink); font-weight: 500; font-style: normal; }
-
-    /* Marked-up state used in step 02 — strike emotion, highlight keyword */
-    .m-strike {
-      color: rgba(127, 29, 29, 0.32);
-      text-decoration: line-through;
-      text-decoration-color: rgba(127, 29, 29, 0.55);
-      text-decoration-thickness: 1.5px;
-    }
-    .m-highlight {
-      background: #FEF3C7;
-      color: #78350F;
-      display: inline-block;
-      padding: 0 4px;
-      margin: 0 1px;
-      border-radius: 3px;
-      box-shadow: 0 0 0 3px #FEF3C7;
-    }
-
-    /* ==========================================
-       FEATURES
-       ========================================== */
-
-    /* Sticky-scroll app story */
-    .scroll-story {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 80px;
-      margin-top: 56px;
-      align-items: stretch;
-    }
-    .scroll-story-media {
-      /* Flex would break sticky on the child; keep as block. */
-    }
-    .scroll-story-media-inner {
-      position: sticky;
-      top: 88px;
-      height: calc(100vh - 120px);
-      max-height: 760px;
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .scroll-story-phone {
-      position: relative;
-      width: 100%;
-      max-width: 340px;
-      aspect-ratio: 1027 / 2137;
-    }
-    .scroll-story-img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.12)) drop-shadow(0 6px 12px rgba(0,0,0,0.06));
-    }
-    .scroll-story-img.is-active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .scroll-story-chapters {
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-    }
-    .scroll-chapter {
-      min-height: 70vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 40px 0;
-      opacity: 0.35;
-      transition: opacity 0.5s ease;
-    }
-    .scroll-chapter.is-active {
-      opacity: 1;
-    }
-    .scroll-chapter:first-child {
-      padding-top: 0;
-      min-height: 60vh;
-    }
-    .scroll-chapter:last-child {
-      padding-bottom: 0;
-      min-height: 60vh;
-    }
-    .scroll-chapter-num {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: #0D8268;
-      margin-bottom: 16px;
-    }
-    .scroll-chapter h3 {
-      font-family: 'Instrument Serif', serif;
-      font-size: clamp(28px, 3.2vw, 40px);
-      font-weight: 400;
-      line-height: 1.15;
-      color: var(--ink);
-      margin-bottom: 18px;
-      letter-spacing: -0.01em;
-    }
-    .scroll-chapter p {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 16px;
-      line-height: 1.65;
-      color: var(--ink-mid);
-      max-width: 460px;
-    }
-    .scroll-chapter-img-mobile {
-      display: none;
-    }
-    .scroll-story-dots,
-    .scroll-story-hint {
-      display: none;
-    }
-
-    .feat-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      margin-top: 48px;
-    }
-    .feat-card {
-      background: #FFFFFF;
-      border-radius: 16px;
-      border: 1px solid rgba(0,0,0,0.06);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
-      padding: 28px;
-    }
-    .feat-icon {
-      width: 44px;
-      height: 44px;
-      background: #E4F4EF;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 16px;
-    }
-    .feat-icon svg { color: #0D8268; }
-    .feat-card h3 {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 18px;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 8px;
-    }
-    .feat-card p {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 14px;
-      color: var(--ink-mid);
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-    /* Mini UI inside feature cards */
-    .mini-ui {
-      background: var(--paper);
-      border-radius: 10px;
-      padding: 12px 14px;
-      margin-top: 14px;
-      border: 1px solid rgba(0,0,0,0.06);
-      font-size: 12px;
-    }
-    .mini-label {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 10px;
-      font-weight: 500;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin-bottom: 10px;
-    }
-    .mini-row {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #FFFFFF;
-      border-radius: 7px;
-      padding: 8px 10px;
-      border: 1px solid rgba(0,0,0,0.06);
-      margin-bottom: 6px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      color: var(--ink);
-    }
-    .mini-row:last-child { margin-bottom: 0; }
-    .mini-dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-    .mini-dot-green { background: #0D8268; }
-    .mini-dot-amber { background: #D97706; }
-    .mini-cal-grid {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      gap: 4px;
-      text-align: center;
-    }
-    .mini-cal-day {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 11px;
-      color: var(--ink-faint);
-      padding: 2px;
-    }
-    .mini-cal-cell {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      color: var(--ink-mid);
-      padding: 6px 2px;
-      border-radius: 6px;
-    }
-    .mini-cal-cell.you { background: #E4F4EF; color: #0D8268; font-weight: 500; }
-    .mini-expense {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 0;
-      font-family: 'Instrument Sans', sans-serif;
-    }
-    .mini-expense + .mini-expense { border-top: 1px solid rgba(0,0,0,0.05); }
-    .mini-expense-name { font-size: 13px; color: var(--ink-mid); }
-    .mini-expense-split { font-size: 11px; color: var(--ink-faint); }
-    .mini-expense-amt { font-size: 13px; color: #0D8268; font-weight: 500; }
-    .mini-info-row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 0;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 13px;
-      color: var(--ink-mid);
-    }
-    .mini-info-row + .mini-info-row { border-top: 1px solid rgba(0,0,0,0.05); }
-    .mini-info-icon { color: var(--ink-faint); flex-shrink: 0; }
-
-    /* Plan Builder CTA card */
-    .plan-cta {
-      background: #1C1C1A;
-      border-radius: 16px;
-      padding: 40px 48px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 40px;
-      align-items: center;
-      margin-top: 24px;
-    }
-    .plan-cta h3 {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 26px;
-      font-weight: 400;
-      color: #FFFFFF;
-      margin-bottom: 8px;
-    }
-    .plan-cta p {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 14px;
-      color: rgba(255,255,255,0.55);
-      line-height: 1.6;
-    }
-
-    /* ==========================================
-       PRICING
-       ========================================== */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 48px;
-      align-items: center;
-    }
-    .pricing-intro { text-align: center; max-width: 680px; margin: 0 auto; }
-    .pricing-intro .hp-eyebrow { text-align: center; }
-    .pricing-intro .price-compare { text-align: center; }
-    .price-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      align-items: stretch;
-    }
-    .price-card {
-      background: #F6F5F1;
-      border-radius: 16px;
-      border: 1px solid rgba(0,0,0,0.06);
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
-      padding: 36px;
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
-    .price-card-featured {
-      border: 2px solid #0D8268;
-      box-shadow: 0 4px 16px rgba(13,130,104,0.08), 0 2px 6px rgba(13,130,104,0.06);
-    }
-    .price-amt {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 64px;
-      font-weight: 400;
-      letter-spacing: -2px;
-      color: var(--ink);
-      line-height: 1;
-    }
-    .price-amt-unit {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 18px;
-      font-weight: 400;
-      color: var(--ink-faint);
-      letter-spacing: 0;
-      margin-left: 4px;
-      vertical-align: baseline;
-    }
-    .price-per {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 14px;
-      color: var(--ink-faint);
-      margin-top: 4px;
-      margin-bottom: 12px;
-    }
-    .price-tag {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      color: #0D8268;
-      margin-bottom: 24px;
-    }
-    .price-tag-muted {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 13px;
-      color: var(--ink-faint);
-      margin-bottom: 24px;
-    }
-    .price-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 28px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .price-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 14px;
-      color: var(--ink-mid);
-      line-height: 1.5;
-    }
-    .price-check {
-      color: #0D8268;
-      flex-shrink: 0;
-      margin-top: 2px;
-    }
-    .price-monthly-note {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-style: italic;
-      font-size: 17px;
-      line-height: 1.55;
-      color: var(--ink-mid);
-      margin: 0 0 28px;
-    }
-    .price-card .btn-moss { margin-top: auto; }
-    .price-fine {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      color: var(--ink-faint);
-      text-align: center;
-      margin-top: 12px;
-    }
-    .price-compare {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 13px;
-      font-style: italic;
-      color: var(--ink-faint);
-      margin-top: 20px;
-      line-height: 1.6;
-    }
-    .price-disclosure {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      color: var(--ink-faint);
-      text-align: center;
-      margin-top: 24px;
-      line-height: 1.6;
-    }
-    .price-family-callout {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 14px;
-      line-height: 1.55;
-      color: var(--ink-mid);
-      background: var(--moss-pale);
-      border: 1px solid rgba(13,130,104,0.18);
-      border-radius: 999px;
-      padding: 12px 22px;
-      margin: 32px auto 24px;
-      max-width: 640px;
-      text-align: center;
-    }
-    .price-family-callout strong {
-      color: var(--moss);
-      font-weight: 500;
-    }
-    @media (max-width: 600px) {
-      .price-family-callout {
-        border-radius: 14px;
-        padding: 14px 18px;
-        font-size: 13.5px;
-      }
-    }
-
-    /* ==========================================
-       CLOSE (green section)
-       ========================================== */
-    .close-section {
-      text-align: center;
-      padding: 96px 56px;
-      background: #0D8268;
-    }
-    .close-section h2 {
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 46px;
-      font-weight: 400;
-      color: #FFFFFF;
-      letter-spacing: -1px;
-      margin-bottom: 24px;
-    }
-    .close-section h2 em { color: rgba(255,255,255,0.55); }
-    .close-section .close-body {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 17px;
-      color: rgba(255,255,255,0.85);
-      max-width: 440px;
-      margin: 0 auto 34px;
-      line-height: 1.75;
-    }
-    .close-btns {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-    }
-    .close-note {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      color: rgba(255,255,255,0.4);
-      margin-top: 16px;
-    }
-
-    /* ==========================================
-       ADA CONTRAST
-       ========================================== */
-    .hp-credit, .price-fine, .close-note, .price-compare {
-      color: #6B6B67;
-    }
-    .step p {
-      color: #4A4A47;
-    }
-    a:focus, button:focus {
-      outline: 2px solid #0D8268;
-      outline-offset: 2px;
-    }
-
-    /* ==========================================
-       ANIMATIONS
-       ========================================== */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(16px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .fade-in.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ==========================================
-       RESPONSIVE
-       ========================================== */
     @media (max-width: 900px) {
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 40px;
-      }
-      /* Show copy first, cards second on mobile */
-      .hero-copy { order: 1; }
-      .hero-phone { order: 2; display: flex; justify-content: center; width: 100%; }
-      .hero-cards { order: 2; max-width: 360px; }
-      .hero-btns { justify-content: center; }
-      .phone { max-width: 300px; }
-      .steps-grid { grid-template-columns: 1fr; }
-      .feat-grid { grid-template-columns: 1fr; }
-      /* Mobile: tighten the linear-step spacing */
-      .transformation { margin-top: 24px; }
-      .transformation-intro { margin-bottom: 8px; }
-      .transformation-intro h2 { font-size: 32px; }
-      .transformation-steps { margin-top: 40px; }
-      .step h3 { margin-bottom: 22px; }
-      .step-note { font-size: 14px; margin-top: 18px; max-width: 360px; }
-      .step-arrow { padding: 28px 0; }
-
-      /* Mobile: horizontal swipe carousel instead of long vertical stack */
-      .scroll-story { grid-template-columns: 1fr; gap: 0; margin-top: 24px; }
-      .scroll-story-media { display: none; }
-      .scroll-story-chapters {
-        display: flex;
-        flex-direction: row;
-        gap: 12px;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-snap-type: x mandatory;
-        scroll-behavior: smooth;
-        margin: 0 -20px;
-        padding: 0 7vw;
-        scroll-padding-inline: 7vw;
-        scrollbar-width: none;
-      }
-      .scroll-story-chapters::-webkit-scrollbar { display: none; }
-      .scroll-chapter {
-        flex: 0 0 86vw;
-        min-width: 86vw;
-        min-height: 560px;
-        padding: 0;
-        scroll-snap-align: start;
-        opacity: 1;
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-      }
-      .scroll-chapter-img-mobile {
-        display: block;
-        width: auto;
-        max-width: 190px;
-        height: 390px;
-        flex: 0 0 390px;
-        margin: 0 auto;
-        object-fit: contain;
-        object-position: center bottom;
-        filter: drop-shadow(0 16px 32px rgba(0,0,0,0.12));
-      }
-      .scroll-chapter-num {
-        display: none;
-      }
-      .scroll-chapter h3 {
-        margin-top: 22px;
-      }
-      .scroll-chapter h3 {
-        font-size: 22px;
-        margin-bottom: 10px;
-        line-height: 1.22;
-        min-height: 54px;
-      }
-      .scroll-chapter p {
-        margin: 0 auto;
-        font-size: 14px;
-        line-height: 1.55;
-        max-width: 320px;
-      }
-      /* Dot pagination + hint: visible on mobile only */
-      .scroll-story-hint { display: block; }
-      .scroll-story-dots {
-        display: flex;
-        justify-content: center;
-        gap: 8px;
-        margin-top: 28px;
-      }
-      .scroll-story-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: rgba(0,0,0,0.15);
-        border: none;
-        padding: 0;
-        cursor: pointer;
-        transition: background 0.3s ease, transform 0.3s ease;
-      }
-      .scroll-story-dot.is-active {
-        background: #0D8268;
-        transform: scale(1.25);
-      }
-      /* Swipe hint label */
-      .scroll-story-hint {
-        display: block;
-        text-align: center;
-        font-family: 'Instrument Sans', sans-serif;
-        font-size: 11px;
-        letter-spacing: 0.8px;
-        text-transform: uppercase;
-        color: #8A8A87;
-        margin-top: 14px;
-      }
-      .pricing-grid { grid-template-columns: 1fr; gap: 40px; }
-      .price-cards { grid-template-columns: 1fr; gap: 20px; max-width: 440px; margin: 0 auto; }
-      .price-card { padding: 28px; }
-      .plan-cta { grid-template-columns: 1fr; text-align: center; }
-      h1 { font-size: 40px; }
-      h2 { font-size: 30px; }
-      .close-section h2 { font-size: 36px; }
-      #hero { min-height: auto; }
-    }
-    @media (max-width: 600px) {
-      .hp-section { padding: 56px 20px; }
-      .close-section { padding: 56px 20px; }
-      #hero { padding: 28px 20px 48px; }
-      .hero-lead-br { display: none; } /* keep on one line */
-      .hero-btns { flex-direction: row; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 20px; }
-      .hero-btns .btn-moss, .hero-btns .btn-ghost { padding: 10px 16px; font-size: 13px; }
-      .close-btns { flex-direction: column; align-items: center; }
-      h1 { font-size: 30px; line-height: 1.1; }
-      .hp-lead { font-size: 14px; line-height: 1.45; }
-      .hero-cards { max-width: 320px; padding-bottom: 24px; }
-      .hero-card { padding: 16px 18px; }
-      .hero-card-label { font-size: 10px; margin-bottom: 8px; }
-      .hero-card-text { font-size: 12px; line-height: 1.5; }
-      .hero-card-note { font-size: 10px; margin-top: 8px; }
-      .hero-card-delivered { margin-top: -4px; } /* looser overlap on mobile */
-      .price-amt { font-size: 48px; }
+      .sec { padding: 80px 0; }
+      .wrap { padding: 0 20px; }
+      .hero { padding: 112px 0 64px; }
+      .hero-grid, .step, .versus { grid-template-columns: 1fr; gap: 40px; }
+      .step:nth-child(even) .step-text { order: 0; }
+      .steps { gap: 72px; margin-top: 48px; }
+      .hero h1 { font-size: 48px; }
+      .hero-lead { font-size: 18px; }
+      .hero-phone { max-width: 260px; }
+      .h2 { font-size: 36px; }
+      .final-cta .h2 { font-size: 40px; }
+      .step h3 { font-size: 28px; }
+      .demo { padding: 20px; }
+      .phones { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 20px; margin: 40px -20px 0; padding: 0 20px 8px; }
+      .phone-card { flex: 0 0 72%; scroll-snap-align: center; }
+      .price-card { padding: 32px 20px; }
+      .final-cta { padding: 88px 0; }
     }
   </style>
 </head>
@@ -1358,327 +211,186 @@
 
   <main id="main-content">
 
-  <!-- SECTION 1: HERO -->
-  <section class="hp-section bg-paper" id="hero">
-    <div class="inner">
-      <div class="hero-grid">
-        <div class="hero-copy fade-in">
-          <div class="pill">
-            <span class="pill-dot"></span>
-            Now on iPhone
-          </div>
-          <h1>The marriage ends.<br>The messages <em>don't.</em></h1>
-          <p class="hp-lead">Move from messaging to <em>communicating.</em></p>
-          <p style="font-family:'Instrument Sans',sans-serif; font-size:16px; line-height:1.6; color:var(--ink); max-width:48ch; margin:0 0 28px;">Clearly is a co-parenting app. Before you post, it checks the tone and suggests calmer wording, then helps you both reach an answer you each accept.</p>
-          <div class="hero-btns">
-            <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="btn-moss">Download for iPhone</a>
-            <a href="#how-it-works" class="btn-ghost">See how it works</a>
-          </div>
-        </div>
-        <div class="hero-cards fade-in">
-          <div class="hero-card hero-card-sent">
-            <div class="hero-card-label">What you wrote</div>
-            <div class="hero-card-text">"You're ALWAYS late. Every single time. I have a life too and you have zero respect for my time or for these kids. I'm so sick of your selfish behavior, it's exhausting."</div>
-          </div>
-          <div class="hero-card hero-card-delivered">
-            <div class="hero-card-label">&#10022; A calmer way to say it</div>
-            <div class="hero-card-text">"Drop-off has been late on multiple recent occasions. Please confirm you can meet the agreed pick-up/drop-off time going forward."</div>
-            <div class="hero-card-note">Same request, without the blame. You choose what to send.</div>
-          </div>
-        </div>
+  <!-- 1. HERO: who it's for and what it does, with the app in hand -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow">The co-parenting app</p>
+        <h1>The marriage ends.<em>The messages don't.</em></h1>
+        <p class="hero-lead">Clearly is a co-parenting app that helps you both say it calmly, agree on an answer, and get back to your kids. The schedule, expenses and plan live there too.</p>
+        <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="home-hero" aria-label="Download Clearly on the App Store"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div></a>
+        <p class="note">14-day free trial &middot; Your co-parent joins free</p>
+      </div>
+      <div class="hero-phone">
+        <img src="/images/Today.png" alt="The Today screen in Clearly: next exchange, new expense, a topic to answer and a date swap" width="1027" height="2137" fetchpriority="high">
       </div>
     </div>
   </section>
 
-  <!-- SECTION 2: PROBLEM -->
-  <section class="hp-section bg-white" id="problem">
-    <div class="inner-narrow stack">
-      <div class="fade-in">
-        <p class="hp-eyebrow">What nobody tells you</p>
-        <h2>Separation doesn't reduce communication.<br><em>It increases it.</em></h2>
-        <p class="hp-body">You think once you're living apart, the hard conversations will stop. But pickup times, medical decisions, school forms, expenses, holidays, schedule changes — you're going to talk to this person more than you expect, about more than you expect, for longer than you expect.</p>
-        <p class="hp-body"><strong>Every text about Tuesday pickup carries the weight of everything that came before it.</strong> That's not unique to you. That's what happens when two people with history try to make decisions together through a screen.</p>
-      </div>
-      <hr class="hp-divider">
-      <div class="fade-in">
-        <p class="hp-eyebrow">Most parents don't realize</p>
-        <h2>You probably agree on<br><em>more than you think.</em></h2>
-        <p class="hp-body">You both love your kids. You both want this to be as easy on them as possible. Most co-parents are closer to agreement than they realize — but the way they're communicating makes it impossible to act on that.</p>
-        <p class="hp-body">A question about soccer becomes a fight about something else. A simple expense turns into a referendum on fairness. The shared ground is there — the conversation keeps burying it.</p>
-        <p class="hp-punch">Clearly was built to uncover it.</p>
-      </div>
+  <!-- 2. THE PROBLEM -->
+  <section class="sec sec-white">
+    <div class="wrap problem fade-in">
+      <p class="eyebrow">What nobody tells you</p>
+      <h2 class="h2">Separation doesn't reduce communication. <em>It increases it.</em></h2>
+      <p class="body">Pickup times, doctors, school forms, expenses, holidays. You'll talk to this person more than you expect, about more than you expect, for longer than you expect.</p>
+      <p class="body">And most of the time you agree on more than you think. You both love your kids. It's the way the conversation goes that keeps burying it.</p>
+      <p class="pull">Every text about Tuesday pickup carries the weight of everything that came before it.</p>
     </div>
   </section>
 
-  <!-- SECTION 3: SEE IT WORK -->
-  <section class="hp-section bg-paper" id="how-it-works">
-    <div class="inner">
-      <!-- Section intro: lives above the scroll-story on both desktop & mobile -->
-      <div class="fade-in transformation-intro">
-        <p class="hp-eyebrow">What makes Clearly different</p>
-        <h2>Other apps bring your patterns with you.<br><em>Clearly shifts them.</em></h2>
-        <p class="hp-body">Most apps digitize the same dynamic that didn't work in your marriage and hand it back to you. Before you post, Clearly checks the tone and may suggest calmer wording. You choose what to send, and posts stay on the record as written. Then Clearly helps you both reach an answer you each accept.</p>
+  <!-- 3. HOW CLEARLY IS DIFFERENT -->
+  <section class="sec" id="how-it-works">
+    <div class="wrap">
+      <div class="center fade-in">
+        <p class="eyebrow">How Clearly is different</p>
+        <h2 class="h2">Other apps keep a record of the fight. <em>Clearly helps you end it.</em></h2>
+        <p class="body">Most co-parenting apps are a shared inbox with a paper trail. Clearly changes how the conversation goes.</p>
       </div>
 
-      <!-- Three linear steps that walk the reader through the transformation -->
-      <div class="transformation">
-        <div class="transformation-steps">
-          <div class="step fade-in">
-            <p class="step-num">Step 01 &middot; The message they'd send</p>
-            <h3>The same pattern from the marriage.</h3>
-            <div class="msg msg-sent">
-              <div class="msg-label">What you wrote</div>
-              <div class="msg-text">"You're ALWAYS late. Every single time. I have a life too and you have zero respect for my time or for these kids. I'm so sick of your selfish behavior, it's exhausting."</div>
+      <div class="steps">
+        <div class="step fade-in">
+          <div class="step-text">
+            <p class="step-num">01</p>
+            <h3>A second look before you post.</h3>
+            <p class="body">Clearly checks the tone of your message and suggests a calmer way to say it. Use it or keep your own words. You choose what to send.</p>
+          </div>
+          <div class="demo" aria-label="Example of the tone check">
+            <div class="msg msg-before"><p class="msg-label">What you wrote</p>"You're ALWAYS late. Every single time. I have a life too and you have zero respect for my time or for these kids."</div>
+            <p class="demo-arrow">&#10022; Clearly suggests</p>
+            <div class="msg msg-after"><p class="msg-label">A calmer way to say it</p>"Drop-off has been late on several recent occasions. Please confirm you can make the agreed time going forward."</div>
+          </div>
+        </div>
+
+        <div class="step fade-in">
+          <div class="step-text">
+            <p class="step-num">02</p>
+            <h3>Every topic ends in an answer.</h3>
+            <p class="body">Questions get a one-tap Yes or No. Bigger conversations end in a written resolution you both accept, so nobody has to ask "what did we decide?" again.</p>
+          </div>
+          <div class="demo" aria-label="Example of a topic">
+            <div class="topic">
+              <p class="topic-q">Can Maya stay with me Saturday night for her cousin's birthday? I'll drop her at yours by 10am Sunday.</p>
+              <div class="topic-btns"><span class="yes">Yes</span><span>No</span></div>
+              <p class="topic-done">&#10003; Answered Yes &middot; Apr 12, 9:14 AM</p>
             </div>
-            <p class="step-note">Same tone. Same triggers. Without a second look, this is what reaches the other parent, and the fight starts over again.</p>
           </div>
+        </div>
 
-          <div class="step-arrow" aria-hidden="true">
-            <svg width="20" height="32" viewBox="0 0 18 24" fill="none">
-              <path d="M9 2 V22 M3 16 L9 22 L15 16" stroke="#0D8268" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
-            </svg>
+        <div class="step fade-in">
+          <div class="step-text">
+            <p class="step-num">03</p>
+            <h3>The record stays exactly as written.</h3>
+            <p class="body">Topics and replies can't be edited or deleted. Every one is timestamped, and you can export a PDF report whenever you need one.</p>
           </div>
-
-          <div class="step fade-in">
-            <p class="step-num">Step 02 &middot; Clearly checks the tone</p>
-            <h3><em>A second look before you post.</em></h3>
-            <div class="msg msg-sent">
-              <div class="msg-label">What you wrote</div>
-              <div class="msg-text">"<span class="m-strike">You're </span><span class="m-strike">ALWAYS </span><span class="m-highlight">late</span><span class="m-strike">. Every single time.</span> <span class="m-strike">I have a life too and you have zero respect for my time or for these kids.</span> <span class="m-strike">I'm so sick of your selfish behavior, it's exhausting.</span>"</div>
+          <div class="demo" aria-label="Example of the record">
+            <div class="topic">
+              <div class="record-row"><span>Swap for Apr 19 accepted</span><time>Apr 12, 9:14 AM</time></div>
+              <div class="record-row"><span>Soccer cleats &middot; $27.00 split 50/50</span><time>Apr 10, 6:02 PM</time></div>
+              <div class="record-row"><span>Holiday gifts &middot; resolved</span><time>Apr 8, 8:41 PM</time></div>
             </div>
-            <p class="step-note">The absolutes. The blame. The history. Clearly points out what may land hard and what actually needs an answer: <em>late.</em></p>
-          </div>
-
-          <div class="step-arrow" aria-hidden="true">
-            <svg width="20" height="32" viewBox="0 0 18 24" fill="none">
-              <path d="M9 2 V22 M3 16 L9 22 L15 16" stroke="#0D8268" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.55"/>
-            </svg>
-          </div>
-
-          <div class="step fade-in">
-            <p class="step-num">Step 03 &middot; You choose what to send</p>
-            <h3>You choose what to send.</h3>
-            <div class="msg msg-delivered">
-              <div class="msg-label">&#10022; A calmer way to say it</div>
-              <div class="msg-text">"Drop-off has been late on multiple recent occasions. Please confirm you can meet the agreed pick-up/drop-off time going forward."</div>
-            </div>
-            <p class="step-note">Use the suggestion or keep your own words. It's your call. Whatever you post is what your co-parent sees, and it stays on the record exactly as written.</p>
           </div>
         </div>
       </div>
 
+      <p class="credit fade-in">Built on the principles of mediation and the Harvard Negotiation Project's <em>Getting to Yes</em>.</p>
     </div>
   </section>
 
-  <!-- SECTION 4: THE FOUNDATION -->
-  <section class="hp-section bg-white" id="foundation">
-    <div class="inner-narrow">
-      <div class="fade-in">
-        <p class="hp-eyebrow">The foundation</p>
-        <h2>Built on frameworks that<br><em>resolve real conflict.</em></h2>
-        <p class="hp-body">The same principles used in mediation and high-stakes negotiation — separate the person from the problem, focus on interests not positions, create a path to a decision.</p>
-        <p class="hp-body">Because the conversations you're having with your co-parent are genuinely difficult. They deserve a system designed for that.</p>
-        <p class="hp-credit">Grounded in the Harvard Negotiation Project's Getting to Yes framework</p>
+  <!-- 4. WHY CLEARLY OVER THE REST -->
+  <section class="sec sec-white">
+    <div class="wrap">
+      <div class="center fade-in">
+        <p class="eyebrow">Why parents switch</p>
+        <h2 class="h2">Built to resolve, <em>not just record.</em></h2>
       </div>
+      <div class="versus fade-in">
+        <div class="versus-col versus-them">
+          <h3>Most co-parenting apps</h3>
+          <ul>
+            <li>A message thread that spirals</li>
+            <li>You're on your own with the wording</li>
+            <li>A record of every argument</li>
+            <li>Each parent pays for their own account</li>
+          </ul>
+        </div>
+        <div class="versus-col versus-us">
+          <h3>Clearly</h3>
+          <ul>
+            <li>Topics that end in an answer</li>
+            <li>Checks the tone before you post and suggests calmer words</li>
+            <li>A record of what you agreed</li>
+            <li>One subscription covers both parents</li>
+          </ul>
+        </div>
+      </div>
+      <p class="center note fade-in" style="margin-top:28px;"><a class="text-link" href="/best-co-parenting-apps-2026/">See our honest comparison of co-parenting apps &rarr;</a></p>
     </div>
   </section>
 
-  <!-- SECTION 5: FEATURES -->
-  <section class="hp-section bg-paper" id="features">
-    <div class="inner">
-      <p class="hp-eyebrow fade-in">Everything included</p>
-      <h2 class="fade-in">And yes — it handles the logistics too.</h2>
-      <p class="hp-body fade-in" style="max-width: 520px;">Best-in-class custody calendar. Shared expenses. A today view that surfaces what needs your attention. Everything both parents need, in one place.</p>
-
-      <!-- Sticky-scroll app story -->
-      <div class="scroll-story">
-        <div class="scroll-story-media">
-          <div class="scroll-story-media-inner">
-            <div class="scroll-story-phone">
-              <img class="scroll-story-img is-active" data-view="today" src="/images/Today.png" alt="Today view in the Clearly app" loading="lazy">
-              <img class="scroll-story-img" data-view="schedule" src="/images/cal.png" alt="Schedule view with custody calendar" loading="lazy">
-              <img class="scroll-story-img" data-view="expenses" src="/images/expense.png" alt="Expenses view with unpaid and paid balances" loading="lazy">
-              <img class="scroll-story-img" data-view="shared" src="/images/shared.png" alt="Shared plan, kids, and contacts view" loading="lazy">
-            </div>
-          </div>
-        </div>
-        <div class="scroll-story-chapters">
-          <div class="scroll-chapter" data-view="today">
-            <img class="scroll-chapter-img-mobile" src="/images/Today.png" alt="Today view in the Clearly app" loading="lazy">
-            <p class="scroll-chapter-num">01 &middot; Today</p>
-            <h3>Everything in one place.<br><em>Clearly.</em></h3>
-            <p>One screen. Every action, exchange, and pending topic — surfaced and prioritized. No searching, no tabs, no surprises. Just what the next twenty-four hours need from you.</p>
-          </div>
-          <div class="scroll-chapter" data-view="schedule">
-            <img class="scroll-chapter-img-mobile" src="/images/cal.png" alt="Schedule view with custody calendar" loading="lazy">
-            <p class="scroll-chapter-num">02 &middot; Schedule</p>
-            <h3>Custody without the calendar fights.</h3>
-            <p>The weekly pattern. Holidays. Summer. Swap requests handled in-app, documented, done. Add your schedule to Apple or Google Calendar with a private calendar link.</p>
-          </div>
-          <div class="scroll-chapter" data-view="expenses">
-            <img class="scroll-chapter-img-mobile" src="/images/expense.png" alt="Expenses view with unpaid and paid balances" loading="lazy">
-            <p class="scroll-chapter-num">03 &middot; Expenses</p>
-            <h3>Money, settled.</h3>
-            <p>Log it once. Clearly calculates each parent's share based on your agreed split. No spreadsheets. No interpretation. No "what did we decide again" conversations.</p>
-          </div>
-          <div class="scroll-chapter" data-view="shared">
-            <img class="scroll-chapter-img-mobile" src="/images/shared.png" alt="Shared plan, kids, and contacts view" loading="lazy">
-            <p class="scroll-chapter-num">04 &middot; Shared</p>
-            <h3>The source of truth you both trust.</h3>
-            <p>Custody plan. Split agreements. Pediatricians, medications, addresses, school contacts. Everything you've decided together — maintained in one place, always current, visible to both of you.</p>
-          </div>
-        </div>
-        <div class="scroll-story-dots" aria-hidden="true">
-          <button class="scroll-story-dot is-active" data-view="today" aria-label="Today"></button>
-          <button class="scroll-story-dot" data-view="schedule" aria-label="Schedule"></button>
-          <button class="scroll-story-dot" data-view="expenses" aria-label="Expenses"></button>
-          <button class="scroll-story-dot" data-view="shared" aria-label="Shared"></button>
-        </div>
-        <span class="scroll-story-hint">Swipe to explore</span>
+  <!-- 5. EVERYTHING ELSE -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="center fade-in">
+        <p class="eyebrow">And the logistics</p>
+        <h2 class="h2">Everything else, <em>in one place.</em></h2>
       </div>
-
-      <div class="feat-grid" style="display:none">
-        <!-- Today -->
-        <div class="feat-card fade-in">
-          <div class="feat-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          </div>
-          <h3>Today</h3>
-          <p>One screen that shows you everything that needs your attention — action items, upcoming exchanges, pending topics. No digging through tabs.</p>
-          <div class="mini-ui">
-            <div class="mini-label">Today</div>
-            <div class="mini-row"><span class="mini-dot mini-dot-green"></span> Pickup at 3pm &middot; Alex's turn</div>
-            <div class="mini-row"><span class="mini-dot mini-dot-amber"></span> Expense pending &middot; $84</div>
-            <div class="mini-row"><span class="mini-dot mini-dot-green"></span> Topic needs response &middot; Pickup timing</div>
-          </div>
-        </div>
-        <!-- Schedule -->
-        <div class="feat-card fade-in">
-          <div class="feat-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          </div>
+      <div class="phones">
+        <div class="phone-card fade-in">
+          <img src="/images/cal.png" alt="Clearly's shared custody calendar" width="1027" height="2137" loading="lazy">
           <h3>Schedule</h3>
-          <p>Best-in-class custody calendar — weekly patterns, holidays, summer. Swap requests handled in-app. Add your schedule to Apple or Google Calendar with a private calendar link.</p>
-          <div class="mini-ui">
-            <div class="mini-cal-grid">
-              <div class="mini-cal-day">M</div><div class="mini-cal-day">T</div><div class="mini-cal-day">W</div><div class="mini-cal-day">T</div><div class="mini-cal-day">F</div><div class="mini-cal-day">S</div><div class="mini-cal-day">S</div>
-              <div class="mini-cal-cell you">7</div><div class="mini-cal-cell you">8</div><div class="mini-cal-cell">9</div><div class="mini-cal-cell">10</div><div class="mini-cal-cell you">11</div><div class="mini-cal-cell you">12</div><div class="mini-cal-cell you">13</div>
-              <div class="mini-cal-cell">14</div><div class="mini-cal-cell">15</div><div class="mini-cal-cell you">16</div><div class="mini-cal-cell you">17</div><div class="mini-cal-cell">18</div><div class="mini-cal-cell">19</div><div class="mini-cal-cell">20</div>
-            </div>
-          </div>
+          <p>Your custody pattern, holidays and summer. Swap requests handled in the app. Syncs to Apple or Google Calendar.</p>
         </div>
-        <!-- Expenses -->
-        <div class="feat-card fade-in">
-          <div class="feat-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-          </div>
+        <div class="phone-card fade-in">
+          <img src="/images/expense.png" alt="Shared expenses in Clearly with each parent's share" width="1027" height="2137" loading="lazy">
           <h3>Expenses</h3>
-          <p>Log shared costs and Clearly pre-calculates each parent's share based on your split. No spreadsheets. No back-and-forth about who owes what.</p>
-          <div class="mini-ui">
-            <div class="mini-expense">
-              <div><div class="mini-expense-name">Soccer registration</div><div class="mini-expense-split">Your share: 60%</div></div>
-              <div class="mini-expense-amt">$144</div>
-            </div>
-            <div class="mini-expense">
-              <div><div class="mini-expense-name">School supplies</div><div class="mini-expense-split">Your share: 60%</div></div>
-              <div class="mini-expense-amt">$52</div>
-            </div>
-          </div>
+          <p>Log it once and Clearly works out each share from your split. Tap Pay to open Venmo, Cash App or PayPal.</p>
         </div>
-        <!-- Shared info -->
-        <div class="feat-card fade-in">
-          <div class="feat-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-          </div>
-          <h3>Shared info</h3>
-          <p>Medications, emergency contacts, school info, addresses, doctors — everything both parents need access to, always current, in one place.</p>
-          <div class="mini-ui">
-            <div class="mini-info-row">
-              <svg class="mini-info-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72"/></svg>
-              Dr. Martinez &middot; Pediatrician
-            </div>
-            <div class="mini-info-row">
-              <svg class="mini-info-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              142 Oak St &middot; Mom's address
-            </div>
-            <div class="mini-info-row">
-              <svg class="mini-info-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-              Lincoln Elementary &middot; Grade 3
-            </div>
-          </div>
+        <div class="phone-card fade-in">
+          <img src="/images/shared.png" alt="The shared parenting plan, kids' details and contacts in Clearly" width="1027" height="2137" loading="lazy">
+          <h3>Shared</h3>
+          <p>The parenting plan, the kids' details and every contact, always current and visible to both of you.</p>
         </div>
-      </div>
-
-      <!-- Plan Builder CTA -->
-      <div class="plan-cta fade-in">
-        <div>
-          <h3>Not sure where to start?</h3>
-          <p>Build your custody plan. Free. Step through your schedule, holidays, expenses, and exchange logistics at your own pace. Share it with your co-parent or your lawyer, or enter its plan code in Clearly to set up the app with your plan. Your co-parent can join with the same code.</p>
-        </div>
-        <a href="/plan-builder/" class="btn-dark">Build your plan &rarr;</a>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 6: PRICING -->
-  <section class="hp-section bg-white" id="pricing">
-    <div class="inner">
-      <div class="pricing-grid">
-        <div class="pricing-intro fade-in">
-          <p class="hp-eyebrow">Pricing</p>
-          <h2>Less than one difficult conversation costs you.</h2>
-          <p class="hp-body">A single hour of mediation runs $300–500. One avoided conflict pays for the year.</p>
-          <p class="hp-body">Clearly isn't priced like a utility because <strong>it isn't one.</strong> It's a system that changes how two people with history communicate about the most important thing in both their lives.</p>
-          <p class="price-compare">Therapy: $200–300/session &middot; Mediation: $300–500/hour<br>Clearly: less than one session per year, for the whole family. Used every day.</p>
+  <!-- 6. PRICE -->
+  <section class="sec sec-white" id="pricing">
+    <div class="wrap center">
+      <div class="fade-in">
+        <p class="eyebrow">Pricing</p>
+        <h2 class="h2">Less than one hour <em>of mediation.</em></h2>
+        <p class="body">One subscription covers the whole family.</p>
+      </div>
+      <div class="price-card fade-in">
+        <div class="price-row">
+          <span class="price">$249<small> / year</small></span>
+          <span class="price-or">or</span>
+          <span class="price">$24.99<small> / month</small></span>
         </div>
-
-        <p class="price-family-callout fade-in"><strong>One subscription covers both parents.</strong> Your co-parent joins free with your invite code. Your subscription covers them.</p>
-
-        <div class="price-cards fade-in">
-          <!-- Annual card -->
-          <div class="price-card price-card-featured">
-            <div class="price-amt">$249<span class="price-amt-unit">/year</span></div>
-            <div class="price-per">Covers both parents &middot; Billed annually</div>
-            <div class="price-tag">Best value: save $51 a year</div>
-            <ul class="price-list">
-              <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Tone check with calmer wording before you post</li>
-              <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Shared custody calendar with swap requests</li>
-              <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Shared expense tracking and splits</li>
-              <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Topics that resolve — not threads that spiral</li>
-              <li><svg class="price-check" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0D8268" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Full communication record, preserved and timestamped</li>
-            </ul>
-            <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="btn-moss" style="width: 100%; justify-content: center;">Download for iPhone</a>
-            <div class="price-fine">14-day free trial &middot; Cancel anytime</div>
-          </div>
-
-          <!-- Monthly card -->
-          <div class="price-card">
-            <div class="price-amt">$24.99<span class="price-amt-unit">/month</span></div>
-            <div class="price-per">Covers both parents &middot; Billed monthly</div>
-            <div class="price-tag-muted">Start month-to-month, switch to annual anytime</div>
-            <p class="price-monthly-note">Same features. Same product.<br>Just a different commitment.</p>
-            <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="btn-moss" style="width: 100%; justify-content: center;">Download for iPhone</a>
-            <div class="price-fine">14-day free trial &middot; Cancel anytime</div>
-          </div>
-        </div>
-
-        <p class="price-disclosure fade-in">One subscription covers both parents: $24.99 a month or $249 a year (save $51). Each starts with a 14-day free trial. Your <span style="white-space:nowrap">co-parent</span> joins free. Without a subscription, Clearly is read-only, and your records stay viewable and exportable. Try the demo first, no account needed.</p>
+        <ul class="price-points">
+          <li>14-day free trial</li>
+          <li>Your co-parent joins free</li>
+          <li>Cancel anytime</li>
+        </ul>
+        <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="home-pricing" aria-label="Download Clearly on the App Store"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div></a>
+        <p class="note">Not ready yet? <a class="text-link" href="/plan-builder/">Build your custody plan free &rarr;</a></p>
       </div>
     </div>
   </section>
 
-  <!-- SECTION 7: CLOSE -->
-  <section class="close-section">
-    <h2 class="fade-in">For the kids.<br><em>And for you.</em></h2>
-    <p class="close-body fade-in">The way you communicate with your co-parent will shape your kids' experience of this more than anything else. Clearly helps you find the common ground, make the decisions, and keep it about the kids.</p>
-    <div class="close-btns fade-in">
-      <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="btn-white">Download for iPhone</a>
-      <a href="#how-it-works" class="btn-ghost-white">See how it works</a>
+  <!-- 7. CLOSE -->
+  <section class="final-cta">
+    <div class="wrap">
+      <h2 class="h2 fade-in">For the kids. <em>And for you.</em></h2>
+      <p class="body fade-in">The way you and your co-parent talk shapes your kids' experience of all this more than anything else. Clearly helps you keep it about them.</p>
+      <div class="fade-in"><a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="home-close" aria-label="Download Clearly on the App Store"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div></a></div>
+      <p class="note fade-in">14-day free trial &middot; Your co-parent joins free</p>
     </div>
-    <p class="close-note fade-in">14-day free trial &middot; From $24.99/month &middot; iPhone</p>
   </section>
 
   </main>
+
 
   <!-- Footer -->
   <footer class="site-footer">
