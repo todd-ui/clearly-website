@@ -10,10 +10,11 @@ on:
 permissions:
   issues: write
 
-# One post at a time across both blog workflows, so the duplicate-title check
-# sees posts created by runs that started moments earlier.
+# Never two runs for the same issue (e.g. label removed and re-added quickly).
+# Scoped per issue: a shared group would cancel queued runs when you submit
+# several topics at once.
 concurrency:
-  group: blog-generation
+  group: blog-issue-${{ github.event.issue.number }}
   cancel-in-progress: false
 
 jobs:
