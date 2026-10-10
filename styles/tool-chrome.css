@@ -366,3 +366,22 @@
   /* Quiz: "Skip and see results" gets a real tap area */
   #emailCapture .skip-link { padding: 12px 8px; }
 }
+
+/* ============================================================
+   PLAN BUILDER: "what is this" under the start cards
+   ============================================================ */
+.pb-intro { margin-top: 40px; padding-top: 32px; border-top: 1px solid rgba(28, 28, 26, 0.10); display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px; }
+.pb-intro .pb-intro-h { font-family: 'Instrument Sans', sans-serif !important; font-size: 12px !important; font-weight: 500 !important; letter-spacing: 1.2px !important; text-transform: uppercase; color: #6B6B67 !important; margin: 0 0 16px !important; line-height: 1.5 !important; }
+.pb-steps { list-style: none; margin: 0; padding: 0; counter-reset: pbstep; display: grid; gap: 16px; }
+.pb-steps li { counter-increment: pbstep; position: relative; padding-left: 40px; font-size: 15px; line-height: 1.55; color: #4A4A47; }
+.pb-steps li::before { content: counter(pbstep); position: absolute; left: 0; top: 0; width: 26px; height: 26px; border-radius: 50%; border: 1px solid #0D8268; color: #0D8268; display: grid; place-items: center; font-size: 12px; font-weight: 500; }
+.pb-steps strong, .pb-gets strong { color: #1C1C1A; font-weight: 500; }
+.pb-gets { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
+.pb-gets li { display: grid; grid-template-columns: 40px 1fr; gap: 0 14px; align-items: start; font-size: 15px; line-height: 1.55; color: #4A4A47; }
+.pb-gets li strong, .pb-gets li div > span { display: block; }
+.pb-chip { width: 40px; height: 40px; border-radius: 12px; background: #DBEFE8; color: #0D8268; display: grid; place-items: center; }
+.pb-why { grid-column: 1 / -1; margin: 4px 0 0; padding: 18px 22px; border-radius: 16px; background: #FFFFFF; font-size: 15px; line-height: 1.6; color: #4A4A47; }
+.pb-why strong { color: #1C1C1A; font-weight: 500; }
+@media (max-width: 700px) {
+  .pb-intro { grid-template-columns: 1fr; gap: 28px; margin-top: 32px; padding-top: 28px; }
+}
