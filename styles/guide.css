@@ -29,8 +29,11 @@ body { background: var(--g-paper); }
 .lp-hero-text { max-width: 40em; margin: 0; }
 .lp-hero-text p { font-size: 18px; line-height: 1.65; color: var(--g-ink-mid); margin: 0 0 16px; }
 .lp-hero-text p:last-child { font-weight: 400; color: var(--g-ink); margin-bottom: 0; }
-.lp-hero-cta { justify-content: flex-start !important; text-align: left; }
-.lp-hero-note { text-align: left; }
+.lp-hero-cta { justify-content: flex-start !important; text-align: left; margin-top: 36px !important; }
+/* A button placed straight after the intro text gets the same breathing room */
+.lp-hero .container > .btn-primary { margin-top: 36px; }
+.lp-hero-cta .btn-primary { margin-top: 0; }
+.lp-hero-note { text-align: left; margin: 14px 0 0 !important; font-size: 13px; color: var(--g-ink-faint); }
 
 /* ---------- Sections: white panels on the 3-column grid ---------- */
 .lp-section, .lp-section-alt {
