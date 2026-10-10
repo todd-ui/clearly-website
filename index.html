@@ -248,14 +248,30 @@
       .shot .phone { inset: auto; top: 0; left: 50%; width: var(--pw); margin-left: calc(var(--pw) / -2); }
       .callout { position: static; transform: none; display: grid; grid-template-columns: 26px 1fr; column-gap: 14px; align-items: start; padding: 14px 0; border-top: 1px solid rgba(13, 130, 104, 0.15); counter-increment: callout; }
       .callout:last-child { border-bottom: 1px solid rgba(13, 130, 104, 0.15); }
-      .callout .line { display: none; }
+      /* A small dot on the element, a thin line out to the phone's edge, and
+         the number in the margin beside the phone, so it can't be mistaken
+         for part of the app. Callouts on the left half go to the left margin. */
       .callout .dot {
-        position: absolute; z-index: 2; width: 18px; height: 18px; margin: -9px 0 0 -9px;
+        position: absolute; z-index: 2; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px;
         left: calc(50% - var(--pw) / 2 + var(--x) * var(--pw)); top: calc(var(--y) * var(--pw) * 2.0808);
-        box-shadow: 0 0 0 3px rgba(13, 130, 104, 0.22); display: grid; place-items: center;
-        font: normal 500 10.5px/1 'Instrument Sans', sans-serif; color: #FFFFFF;
+        box-shadow: 0 0 0 3px rgba(13, 130, 104, 0.2);
       }
-      .callout .dot::after { content: counter(callout); }
+      .callout .line {
+        position: absolute; z-index: 2; height: 1px; transform: none; opacity: 0; background: rgba(13, 130, 104, 0.6);
+        top: calc(var(--y) * var(--pw) * 2.0808);
+        left: calc(50% - var(--pw) / 2 + var(--x) * var(--pw)); width: calc((1 - var(--x)) * var(--pw) + 14px);
+        transition: opacity .5s var(--ease); transition-delay: calc(1.3s + var(--n) * .25s);
+      }
+      /* On phones, the expense callout points at the expense's icon, so its line doesn't cross out the amount */
+      .callout.is-left { --x: .148 !important; --y: .541 !important; }
+      .callout.is-left .line { left: calc(50% - var(--pw) / 2 - 14px); width: calc(var(--x) * var(--pw) + 14px); }
+      .home-hero.is-in .callout .line { opacity: 1; transform: none; }
+      .callout .line::after {
+        content: counter(callout); position: absolute; top: -10px; right: -20px; width: 20px; height: 20px; border-radius: 50%;
+        background: var(--moss); color: #FFFFFF; display: grid; place-items: center;
+        font: normal 500 11px/1 'Instrument Sans', sans-serif;
+      }
+      .callout.is-left .line::after { right: auto; left: -20px; }
       .callout .txt { grid-column: 2; padding: 0; width: auto; }
       .callout::before {
         content: counter(callout); width: 26px; height: 26px; border-radius: 50%; background: var(--moss); color: #FFFFFF;
@@ -329,7 +345,7 @@
           <div class="phone"><picture><source srcset="/images/home/today.webp" type="image/webp"><img src="/images/home/today.png" alt="The Today screen in Clearly" width="600" height="1248" fetchpriority="high"></picture></div>
           <div class="callout" style="--x:.80; --y:.218; --n:0"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Who has the kids</strong><span>And when the next hand-off is.</span></div></div>
           <div class="callout" style="--x:.922; --y:.381; --n:1"><i class="dot"></i><i class="line"></i><div class="txt"><strong>One tap to start</strong><span>Swap a weekend. Log an expense. Raise a topic.</span></div></div>
-          <div class="callout" style="--x:.36; --y:.555; --n:2"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Expenses, split for you</strong><span>The math is done. The awkward part, too.</span></div></div>
+          <div class="callout is-left" style="--x:.36; --y:.555; --n:2"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Expenses, split for you</strong><span>The math is done. The awkward part, too.</span></div></div>
           <div class="callout" style="--x:.80; --y:.668; --n:3"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Topics that end</strong><span>Every one of them. On purpose.</span></div></div>
           <div class="callout" style="--x:.905; --y:.838; --n:4"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Swap requests</strong><span>Trade a day without the back-and-forth.</span></div></div>
         </div>
