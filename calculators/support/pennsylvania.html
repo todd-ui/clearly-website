@@ -255,7 +255,7 @@
               <h4>Parent 1</h4>
               <div class="calc-field">
                 <label>Monthly Net Income</label>
-                <div class="calc-input-prefix"><input type="number" class="calc-input" id="p1Income" placeholder="0" onchange="calculateTotals()"></div>
+                <div class="calc-input-prefix"><input type="number" inputmode="decimal" class="calc-input" id="p1Income" placeholder="0" onchange="calculateTotals()"></div>
                 <p class="calc-note">After taxes, FICA, union dues, etc.</p>
               </div>
             </div>
@@ -263,7 +263,7 @@
               <h4>Parent 2</h4>
               <div class="calc-field">
                 <label>Monthly Net Income</label>
-                <div class="calc-input-prefix"><input type="number" class="calc-input" id="p2Income" placeholder="0" onchange="calculateTotals()"></div>
+                <div class="calc-input-prefix"><input type="number" inputmode="decimal" class="calc-input" id="p2Income" placeholder="0" onchange="calculateTotals()"></div>
                 <p class="calc-note">After taxes, FICA, union dues, etc.</p>
               </div>
             </div>
@@ -307,7 +307,7 @@
           <div id="sharedFields" style="display: none; margin-top: 20px;">
             <div class="calc-field">
               <label>Non-Custodial Parent's Overnights per Year</label>
-              <input type="number" class="calc-input" id="obligorOvernights" placeholder="146" max="182">
+              <input type="number" inputmode="decimal" class="calc-input" id="obligorOvernights" placeholder="146" max="182">
               <p class="calc-note">Must be at least 146 (40%) for shared custody formula</p>
             </div>
           </div>
@@ -322,12 +322,12 @@
           <div class="income-grid">
             <div class="calc-field">
               <label>Monthly Childcare Costs</label>
-              <div class="calc-input-prefix"><input type="number" class="calc-input" id="childcare" placeholder="0"></div>
+              <div class="calc-input-prefix"><input type="number" inputmode="decimal" class="calc-input" id="childcare" placeholder="0"></div>
               <p class="calc-note">Work-related childcare expenses</p>
             </div>
             <div class="calc-field">
               <label>Monthly Health Insurance (children)</label>
-              <div class="calc-input-prefix"><input type="number" class="calc-input" id="healthIns" placeholder="0"></div>
+              <div class="calc-input-prefix"><input type="number" inputmode="decimal" class="calc-input" id="healthIns" placeholder="0"></div>
               <p class="calc-note">Premium attributable to children only</p>
             </div>
           </div>

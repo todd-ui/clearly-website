@@ -255,7 +255,7 @@
               <h4>Parent 1</h4>
               <div class="calc-field">
                 <label>Net Monthly Income</label>
-                <div class="calc-input-prefix"><input type="number" class="calc-input" id="p1Income" placeholder="0" onchange="calculateTotals()"></div>
+                <div class="calc-input-prefix"><input type="number" inputmode="decimal" class="calc-input" id="p1Income" placeholder="0" onchange="calculateTotals()"></div>
                 <p class="calc-note">After taxes and allowable deductions</p>
               </div>
             </div>
@@ -263,7 +263,7 @@
               <h4>Parent 2</h4>
               <div class="calc-field">
                 <label>Net Monthly Income</label>
-                <div class="calc-input-prefix"><input type="number" class="calc-input" id="p2Income" placeholder="0" onchange="calculateTotals()"></div>
+                <div class="calc-input-prefix"><input type="number" inputmode="decimal" class="calc-input" id="p2Income" placeholder="0" onchange="calculateTotals()"></div>
                 <p class="calc-note">After taxes and allowable deductions</p>
               </div>
             </div>
@@ -301,11 +301,11 @@
             </div>
             <div class="calc-field">
               <label>Monthly Childcare Costs</label>
-              <div class="calc-input-prefix"><input type="number" class="calc-input" id="childcare" placeholder="0"></div>
+              <div class="calc-input-prefix"><input type="number" inputmode="decimal" class="calc-input" id="childcare" placeholder="0"></div>
             </div>
             <div class="calc-field">
               <label>Monthly Health Insurance (children)</label>
-              <div class="calc-input-prefix"><input type="number" class="calc-input" id="healthIns" placeholder="0"></div>
+              <div class="calc-input-prefix"><input type="number" inputmode="decimal" class="calc-input" id="healthIns" placeholder="0"></div>
             </div>
           </div>
           <div class="calc-toggle" style="margin-top: 20px;">
@@ -316,11 +316,11 @@
             <div class="income-grid">
               <div class="calc-field">
                 <label>Parent 1's Overnights per Year</label>
-                <input type="number" class="calc-input" id="p1Overnights" placeholder="182" max="365">
+                <input type="number" inputmode="decimal" class="calc-input" id="p1Overnights" placeholder="182" max="365">
               </div>
               <div class="calc-field">
                 <label>Parent 2's Overnights per Year</label>
-                <input type="number" class="calc-input" id="p2Overnights" placeholder="183" max="365">
+                <input type="number" inputmode="decimal" class="calc-input" id="p2Overnights" placeholder="183" max="365">
               </div>
             </div>
             <p class="calc-note">For substantial time-sharing, non-custodial parent must have at least 73 overnights (20%).</p>
