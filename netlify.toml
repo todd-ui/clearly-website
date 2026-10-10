@@ -222,12 +222,16 @@
 [[headers]]
   for = "*.css"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    # Not fingerprinted (same filename after every change), so browsers must
+    # check for a newer copy; Netlify answers 304 when it hasn't changed.
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "*.js"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    # Not fingerprinted (same filename after every change), so browsers must
+    # check for a newer copy; Netlify answers 304 when it hasn't changed.
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "*.png"
