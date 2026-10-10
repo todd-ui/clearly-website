@@ -225,6 +225,12 @@ function midArticleCta(category) {
 
 // Put the inline CTA before the third section (or the second, for short
 // posts) so mobile readers see it long before the end of the article.
+// "Key Takeaways" (a heading followed by a list) gets its own tinted box.
+function wrapTakeaways(content) {
+  return content.replace(/<h2>(Key Takeaways?)<\/h2>\s*(<(ul|ol)>[\s\S]*?<\/\3>)/i,
+    (m, h, list) => `<section class="takeaways"><h2>${h}</h2>${list}</section>`);
+}
+
 function insertMidArticleCta(content, category) {
   const h2s = [...content.matchAll(/<h2>/g)].map(m => m.index);
   if (h2s.length < 2) return content;
@@ -343,118 +349,137 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   <link rel="icon" href="/images/favicon-32.png">
   <link rel="manifest" href="/manifest.json">
   <style>
-    .blog-post { max-width: 720px; margin: 0 auto; padding: 120px 24px 80px; }
-    .blog-post-header { margin-bottom: 48px; }
-    .blog-post-title { font-size: 42px; font-weight: 400; line-height: 1.2; margin-bottom: 16px; }
-    .blog-post-meta { color: var(--text-muted); font-size: 15px; }
-    .blog-post-content h2 { font-size: 28px; margin: 48px 0 16px; }
-    .blog-post-content h3 { font-size: 22px; margin: 32px 0 12px; }
-    .blog-post-content p { font-size: 17px; line-height: 1.8; margin-bottom: 24px; color: var(--text-secondary); }
-    .blog-post-content ul, .blog-post-content ol { margin: 0 0 24px 24px; }
-    .blog-post-content li { font-size: 17px; line-height: 1.8; margin-bottom: 8px; color: var(--text-secondary); }
-    .blog-post-content blockquote { margin: 32px 0; padding: 0 24px; font-family: 'EB Garamond', serif; font-size: 22px; line-height: 1.5; font-style: italic; color: var(--text); }
-    .blog-post-content figure { margin: 32px 0; }
-    .blog-post-content img { max-width: 100%; border-radius: 12px; }
-    .blog-post-content figcaption { text-align: center; font-size: 14px; color: var(--text-muted); margin-top: 8px; }
-    .blog-post-content a { color: var(--primary); }
-    .back-link { display: inline-block; margin-bottom: 32px; color: var(--primary); font-weight: 500; }
-    .back-link:hover { text-decoration: none; }
+    /* Post page in the homepage's panel style: one white panel with a
+       single reading column, related posts in a second panel. No left-edge
+       accent lines. */
+    :root { --paper: #F6F5F1; --ink: #1C1C1A; --ink-mid: #4A4A47; --ink-faint: #6B6B67; --moss: #0D8268; --moss-pale: #E4F4EF; --rule: rgba(28,28,26,0.10); }
+    body { background: var(--paper); }
+    .post-main { padding: 16px 0 0; }
+    .post-panel { margin: 0 16px 16px; background: #FFFFFF; border-radius: 28px; padding: 88px 40px 96px; }
+    .post-col { max-width: 680px; margin: 0 auto; }
+    .post-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 40px; }
+    .back-link { font-size: 13px; font-weight: 500; color: var(--ink-faint); text-decoration: none; }
+    .back-link:hover { color: var(--moss); text-decoration: none; }
+    .pill { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: var(--moss); border: 1px solid currentColor; border-radius: 999px; padding: 4px 10px; text-decoration: none; }
+    .blog-post-title { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 48px; line-height: 1.08; letter-spacing: -0.4px; color: var(--ink); margin: 0 0 20px; text-wrap: balance; }
+    .post-dek { font-size: 19px; line-height: 1.6; color: var(--ink-mid); margin: 0 0 32px; }
+    .post-meta { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding: 18px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); margin-bottom: 48px; }
+    .post-meta p { font-size: 13px; color: var(--ink-faint); margin: 0; }
+    .share-buttons { display: flex; gap: 6px; }
+    .share-btn { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: transparent; border: 1px solid var(--rule); color: var(--ink-faint); cursor: pointer; transition: background .2s, color .2s, border-color .2s; }
+    .share-btn:hover, .share-btn.copied { background: var(--moss); border-color: var(--moss); color: #FFFFFF; }
+    .share-btn svg { width: 14px; height: 14px; }
 
-    /* Share Buttons */
-    .share-buttons { display: flex; align-items: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
-    .share-buttons span { font-size: 14px; color: var(--text-muted); font-weight: 500; }
-    .share-btn { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: var(--bg-secondary); border: 1px solid var(--border); color: var(--text-secondary); transition: all 0.2s ease; cursor: pointer; }
-    .share-btn:hover { background: var(--primary); color: white; border-color: var(--primary); }
-    .share-btn svg { width: 16px; height: 16px; }
-    .share-btn.copied { background: var(--primary); color: white; border-color: var(--primary); }
+    .blog-post-content { color: var(--ink-mid); }
+    .blog-post-content p { font-size: 18px; line-height: 1.75; margin: 0 0 24px; color: var(--ink-mid); }
+    .blog-post-content strong { color: var(--ink); font-weight: 500; }
+    .blog-post-content h2 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 32px; line-height: 1.15; color: var(--ink); margin: 64px 0 18px; }
+    .blog-post-content h3 { font-family: 'Instrument Sans', sans-serif; font-weight: 500; font-size: 19px; color: var(--ink); margin: 40px 0 12px; }
+    .blog-post-content ul, .blog-post-content ol { list-style: none; margin: 0 0 28px; padding: 0; }
+    .blog-post-content li { position: relative; font-size: 18px; line-height: 1.7; margin: 0 0 12px; padding-left: 28px; color: var(--ink-mid); }
+    .blog-post-content ul > li::before { content: ''; position: absolute; left: 6px; top: 13px; width: 6px; height: 6px; border-radius: 50%; background: var(--moss); }
+    .blog-post-content ol { counter-reset: n; }
+    .blog-post-content ol > li { counter-increment: n; padding-left: 36px; }
+    .blog-post-content ol > li::before { content: counter(n); position: absolute; left: 0; top: 3px; width: 24px; height: 24px; border-radius: 50%; background: var(--moss-pale); color: var(--moss); font-size: 12px; font-weight: 500; display: grid; place-items: center; }
+    .blog-post-content blockquote { margin: 40px 0; padding: 0; font-family: 'EB Garamond', serif; font-size: 26px; line-height: 1.4; font-style: italic; color: var(--ink); }
+    .blog-post-content figure { margin: 40px 0; }
+    .blog-post-content img { max-width: 100%; border-radius: 16px; }
+    .blog-post-content figcaption { text-align: center; font-size: 13px; color: var(--ink-faint); margin-top: 10px; }
+    .blog-post-content a { color: var(--moss); text-underline-offset: 3px; }
+    .blog-post-content .takeaways { background: var(--paper); border-radius: 20px; padding: 36px 36px 20px; margin: 64px 0 0; }
+    .blog-post-content .takeaways h2 { font-size: 26px; margin: 0 0 20px; }
+    .blog-post-content .takeaways li { font-size: 16px; line-height: 1.65; }
 
-    /* Calls to action (no accent edges: whole-border or background only) */
-    .blog-cta { background: var(--primary-soft); border-radius: 16px; padding: 32px; margin: 48px 0; text-align: center; }
-    .blog-cta p { font-size: 17px; line-height: 1.6; color: var(--text); margin: 0 0 20px; }
-    .blog-cta .blog-cta-kicker { font-family: 'EB Garamond', serif; font-size: 24px; line-height: 1.3; margin-bottom: 8px; color: var(--text); }
-    .blog-cta .blog-cta-fine { font-size: 14px; color: var(--text-muted); margin: 16px 0 0; }
-    .blog-cta .blog-cta-secondary { color: var(--primary); font-weight: 500; }
-    .blog-post .app-badge, .blog-post .app-badge:hover { color: #fff; text-decoration: none; }
-    .inline-cta { display: flex; align-items: center; gap: 20px; margin: 36px 0; padding: 18px 20px; border: 1px solid var(--border); border-radius: 12px; }
-    .blog-post-content .inline-cta p { flex: 1; font-size: 15px; line-height: 1.6; margin: 0; color: var(--text-secondary); }
+    /* Calls to action: no accent edges, whole-border or background only */
+    .post-panel .app-badge, .post-panel .app-badge:hover { color: #FFFFFF; text-decoration: none; }
+    .inline-cta { display: flex; align-items: center; gap: 20px; margin: 48px 0; padding: 20px 22px; border: 1px solid var(--rule); border-radius: 16px; }
+    .blog-post-content .inline-cta p { flex: 1; font-size: 15px; line-height: 1.6; margin: 0; }
     .inline-cta .app-badge { flex-shrink: 0; }
-    @media (max-width: 768px) {
-      .blog-post { padding-top: 96px; }
-      .blog-post-title { font-size: 34px; }
-      .blog-cta { padding: 24px 20px; }
-      .inline-cta { flex-direction: column; align-items: flex-start; gap: 14px; }
-    }
+    .blog-cta { margin: 64px 0 0; background: var(--moss); border-radius: 22px; padding: 48px 40px; text-align: center; color: #FFFFFF; }
+    .blog-cta .blog-cta-kicker { font-family: 'EB Garamond', serif; font-size: 30px; line-height: 1.2; margin: 0 0 12px; color: #FFFFFF; }
+    .blog-cta p { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.85); margin: 0 auto 28px; max-width: 34em; }
+    .blog-cta .blog-cta-fine { font-size: 13px; color: rgba(255,255,255,0.7); margin: 18px 0 0; }
+    .blog-cta .blog-cta-secondary { color: #FFFFFF; font-weight: 500; }
 
-    /* Related Articles */
-    .related-articles { background: var(--surface); padding: 80px 0; border-top: 1px solid var(--border); }
-    .related-articles h2 { font-size: 28px; font-weight: 400; margin-bottom: 32px; text-align: center; }
-    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 960px; margin: 0 auto; }
-    .related-card { background: var(--bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; }
-    .related-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); text-decoration: none; }
-    .related-card h3 { font-size: 18px; font-weight: 400; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
-    .related-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.6; margin: 0; }
-    .related-category { display: inline-block; font-size: 12px; font-weight: 600; padding: 4px 10px; border-radius: 20px; margin-bottom: 12px; background: rgba(13, 130, 104, 0.1); color: #0d9373; }
-    .related-category[data-cat="Communication"] { background: rgba(59, 130, 246, 0.1); color: #2563eb; }
-    .related-category[data-cat="Co-Parenting Basics"] { background: rgba(13, 147, 115, 0.1); color: #0d9373; }
-    .related-category[data-cat="Your Children"] { background: rgba(168, 85, 247, 0.1); color: #9333ea; }
-    .related-category[data-cat="Schedules & Custody"] { background: rgba(245, 158, 11, 0.1); color: #d97706; }
-    .related-category[data-cat="High-Conflict Situations"] { background: rgba(239, 68, 68, 0.1); color: #dc2626; }
-    .related-category[data-cat="Money & Expenses"] { background: rgba(16, 185, 129, 0.1); color: #059669; }
-    .related-category[data-cat="Blended Families"] { background: rgba(236, 72, 153, 0.1); color: #db2777; }
-    .related-category[data-cat="Self-Care & Support"] { background: rgba(99, 102, 241, 0.1); color: #4f46e5; }
-    .related-category[data-cat="Legal Basics"] { background: rgba(107, 114, 128, 0.1); color: #4b5563; }
+    /* Related articles */
+    .related-panel { margin: 0 16px 16px; background: #FFFFFF; border-radius: 28px; padding: 72px 40px; }
+    .related-inner { max-width: 1080px; margin: 0 auto; }
+    .related-panel .label { font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 24px; }
+    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .related-card { display: flex; flex-direction: column; background: var(--paper); border-radius: 20px; padding: 28px; text-decoration: none; transition: transform .25s, box-shadow .25s; }
+    .related-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(28,28,26,0.08); text-decoration: none; }
+    .related-card .pill { align-self: flex-start; margin-bottom: 20px; }
+    .related-card h3 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 22px; line-height: 1.25; color: var(--ink); margin: 0 0 10px; }
+    .related-card p { font-size: 14px; line-height: 1.6; color: var(--ink-mid); margin: 0; }
+
     @media (max-width: 768px) {
+      .post-panel { margin: 0 10px 10px; border-radius: 22px; padding: 56px 22px 64px; }
+      .blog-post-title { font-size: 34px; }
+      .post-dek { font-size: 17px; }
+      .blog-post-content p, .blog-post-content li { font-size: 17px; }
+      .blog-post-content h2 { font-size: 27px; margin-top: 48px; }
+      .blog-post-content .takeaways { padding: 28px 22px 12px; }
+      .inline-cta { flex-direction: column; align-items: flex-start; gap: 14px; }
+      .blog-cta { padding: 36px 22px; }
+      .related-panel { margin: 0 10px 10px; border-radius: 22px; padding: 48px 22px; }
       .related-grid { grid-template-columns: 1fr; }
-      .related-articles { padding: 60px 24px; }
     }
   </style>
 </head>
 <body>
   ${headerPartial}
 
-  <article class="blog-post" id="main-content">
-    <a href="/blog" class="back-link">&larr; Back to Blog</a>
-    <header class="blog-post-header">
-      <h1 class="blog-post-title">${escapeHtml(post.title)}</h1>
-      <p class="blog-post-meta">By The Clearly Team &middot; ${post.date}</p>
-      <div class="share-buttons">
-        <span>Share:</span>
-        <button class="share-btn" onclick="copyLink()" title="Copy link" id="copy-btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
-        </button>
-        <a class="share-btn" href="https://twitter.com/intent/tweet?url=${postUrl(post.slug)}&text=${encodeURIComponent(post.title)}" target="_blank" rel="noopener" title="Share on X">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=${postUrl(post.slug)}" target="_blank" rel="noopener" title="Share on Facebook">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        </a>
-        <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=${postUrl(post.slug)}" target="_blank" rel="noopener" title="Share on LinkedIn">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </a>
-        <a class="share-btn" href="mailto:?subject=${encodeURIComponent(post.title)}&body=I thought you might find this helpful: ${postUrl(post.slug)}" title="Share via Email">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-        </a>
+  <main class="post-main" id="main-content">
+  <article class="post-panel">
+    <div class="post-col">
+      <div class="post-top">
+        <a href="/blog" class="back-link">&larr; Common Ground</a>
+        ${post.category ? `<span class="pill">${escapeHtml(post.category)}</span>` : ''}
       </div>
-    </header>
-    <div class="blog-post-content">
-      ${post.content}
-    </div>
-    <div class="blog-cta">
-      <p class="blog-cta-kicker">${ctaFor(post.category).kicker}</p>
-      <p>${ctaFor(post.category).text}</p>
-      ${appStoreBadge('end-of-article')}
-      <p class="blog-cta-fine">${CTA_FINE_PRINT} &middot; <a href="/plan-builder/" class="blog-cta-secondary">Or build a free parenting plan</a></p>
+      <header>
+        <h1 class="blog-post-title">${escapeHtml(post.title)}</h1>
+        <p class="post-dek">${escapeHtml(post.description)}</p>
+        <div class="post-meta">
+          <p>By the Clearly team &middot; <time datetime="${post.dateISO}">${post.date}</time> &middot; ${Math.max(1, Math.round((post.wordCount || 0) / 230))} min read</p>
+          <div class="share-buttons" aria-label="Share">
+            <button class="share-btn" onclick="copyLink()" title="Copy link" id="copy-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+            </button>
+            <a class="share-btn" href="https://twitter.com/intent/tweet?url=${postUrl(post.slug)}&text=${encodeURIComponent(post.title)}" target="_blank" rel="noopener" title="Share on X">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            </a>
+            <a class="share-btn" href="https://www.facebook.com/sharer/sharer.php?u=${postUrl(post.slug)}" target="_blank" rel="noopener" title="Share on Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a class="share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=${postUrl(post.slug)}" target="_blank" rel="noopener" title="Share on LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a class="share-btn" href="mailto:?subject=${encodeURIComponent(post.title)}&body=I thought you might find this helpful: ${postUrl(post.slug)}" title="Share via Email">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            </a>
+          </div>
+        </div>
+      </header>
+      <div class="blog-post-content">
+        ${post.content}
+      </div>
+      <div class="blog-cta final-cta">
+        <p class="blog-cta-kicker">${ctaFor(post.category).kicker}</p>
+        <p>${ctaFor(post.category).text}</p>
+        ${appStoreBadge('end-of-article')}
+        <p class="blog-cta-fine">${CTA_FINE_PRINT} &middot; <a href="/plan-builder/" class="blog-cta-secondary">Or build a free parenting plan</a></p>
+      </div>
     </div>
   </article>
 
   ${relatedPosts.length > 0 ? `
-  <section class="related-articles">
-    <div class="container">
-      <h2>Related Articles</h2>
+  <section class="related-panel" aria-label="Related articles">
+    <div class="related-inner">
+      <p class="label">Keep reading</p>
       <div class="related-grid">
         ${relatedPosts.map(p => `
         <a href="${postPath(p.slug)}" class="related-card">
-          <span class="related-category" data-cat="${p.category}">${p.category || 'Article'}</span>
+          ${p.category ? `<span class="pill">${escapeHtml(p.category)}</span>` : ''}
           <h3>${escapeHtml(p.title)}</h3>
           <p>${escapeHtml(p.description.substring(0, 120))}${p.description.length > 120 ? '...' : ''}</p>
         </a>
@@ -463,6 +488,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
     </div>
   </section>
   ` : ''}
+  </main>
 
   ${footerPartial}
 
@@ -975,7 +1001,7 @@ async function build() {
     content = wrapListItems(content);
     content = cleanInternalLinks(content);
     const wordCount = content.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
-    content = insertMidArticleCta(content, category);
+    content = insertMidArticleCta(wrapTakeaways(content), category);
 
     const post = { title, slug, description, date, dateISO, modifiedISO, content, category, wordCount };
     processedPosts.push(post);
