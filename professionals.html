@@ -23,7 +23,7 @@
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
   <meta name="theme-color" content="#0D8268">
   <title>For Professionals — Clearly</title>
-  <meta name="description" content="How Clearly keeps time-stamped co-parent records as written. AI summaries are labeled and kept separate from what parents wrote. PDF export for review.">
+  <meta name="description" content="For attorneys, mediators and therapists: Clearly keeps a time-stamped, neutral record of co-parent communication, as written, with PDF and CSV export.">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://getclearly.app/professionals">
@@ -35,7 +35,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app/professionals">
   <meta property="og:title" content="For Legal & Family Professionals | Clearly">
-  <meta property="og:description" content="How Clearly keeps time-stamped co-parent records as written. AI summaries are labeled and kept separate from what parents wrote. PDF export for review.">
+  <meta property="og:description" content="For attorneys, mediators and therapists: Clearly keeps a time-stamped, neutral record of co-parent communication, as written, with PDF and CSV export.">
   <meta property="og:image" content="https://getclearly.app/images/og-default.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -44,7 +44,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="For Legal & Family Professionals | Clearly">
-  <meta name="twitter:description" content="How Clearly keeps time-stamped co-parent records as written. AI summaries are labeled and kept separate from what parents wrote. PDF export for review.">
+  <meta name="twitter:description" content="For attorneys, mediators and therapists: Clearly keeps a time-stamped, neutral record of co-parent communication, as written, with PDF and CSV export.">
   <meta name="twitter:image" content="https://getclearly.app/images/og-default.png">
 
   <link rel="stylesheet" href="styles.css">
@@ -53,272 +53,88 @@
   <link rel="manifest" href="/manifest.json">
   <link rel="apple-touch-icon" href="/images/app-icon.png">
   <style>
-    /* Professional page specific styles - editorial, restrained */
-    .pro-page {
-      padding: 60px 0 80px;
-    }
-    .pro-page .container {
-      max-width: 680px;
-    }
-    .pro-intro {
-      margin-bottom: 48px;
-    }
-    .pro-intro p {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.8;
-      margin-bottom: 16px;
-    }
-    .pro-section {
-      margin-bottom: 48px;
-    }
-    .pro-section h2 {
-      font-size: 38px;
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 20px;
-      letter-spacing: -0.5px;
-      line-height: 1.1;
-    }
-    .pro-section p {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin-bottom: 16px;
-    }
-    .pro-list {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 16px 0;
-    }
-    .pro-list li {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      padding: 8px 0;
-      padding-left: 20px;
-      position: relative;
-    }
-    .pro-list li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--primary);
-      font-weight: 600;
-    }
-    .pro-list-no li::before {
-      content: "✕";
-      color: var(--text-muted);
-    }
-    .pro-list-plain {
-      list-style: none;
-      padding: 0;
-      margin: 0 0 16px 0;
-    }
-    .pro-list-plain li {
-      font-size: 16px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-      padding: 6px 0;
-      padding-left: 20px;
-      position: relative;
-    }
-    .pro-list-plain li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: var(--primary);
-      font-weight: 600;
-    }
-    .pro-note {
-      font-size: 15px;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-top: 12px;
-    }
-    .pro-divider {
-      height: 1px;
-      background: var(--border);
-      margin: 48px 0;
-    }
-    .pro-closing {
-      font-size: 15px;
-      color: var(--text-muted);
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid var(--border);
-    }
-    /* Flow diagram */
-    .pro-flow {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin: 32px 0 48px;
-      padding: 32px;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-    }
-    .pro-flow-step {
-      flex: 1;
-      text-align: center;
-    }
-    .pro-flow-icon {
-      width: 48px;
-      height: 48px;
-      background: var(--primary-soft);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 12px;
-      color: var(--primary);
-    }
-    .pro-flow-icon svg {
-      width: 24px;
-      height: 24px;
-    }
-    .pro-flow-label {
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--text);
-    }
-    .pro-flow-arrow {
-      color: var(--text-muted);
-      flex-shrink: 0;
-    }
-    .pro-flow-arrow svg {
-      width: 20px;
-      height: 20px;
-    }
-    @media (max-width: 600px) {
-      .pro-flow {
-        flex-direction: column;
-        gap: 24px;
-      }
-      .pro-flow-arrow {
-        transform: rotate(90deg);
-      }
-    }
-    /* FAQ section */
-    .pro-faq {
-      margin-top: 48px;
-      padding-top: 48px;
-      border-top: 1px solid var(--border);
-    }
-    .pro-faq h2 {
-      font-size: 38px;
-      font-weight: 400;
-      color: var(--text);
-      margin-bottom: 24px;
-      letter-spacing: -0.5px;
-      line-height: 1.1;
-    }
-    .pro-faq-item {
-      margin-bottom: 24px;
-    }
-    .pro-faq-item h3 {
-      font-family: 'Instrument Sans', Helvetica Neue, Helvetica, Arial, sans-serif;
-      font-size: 16px;
-      font-weight: 500;
-      color: var(--text);
-      margin-bottom: 8px;
-    }
-    .pro-faq-item p {
-      font-size: 15px;
-      color: var(--text-secondary);
-      line-height: 1.7;
-      margin: 0;
-    }
-    .page-header-pro {
-      padding: 80px 0 80px;
-      text-align: left;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-    }
-    .page-header-pro .container {
-      max-width: 680px;
-    }
-    .page-header-pro h1 {
-      font-size: 38px;
-      font-weight: 400;
-      margin-bottom: 12px;
-      letter-spacing: -0.02em;
-      color: var(--text);
-    }
-    .page-header-pro p {
-      font-size: 17px;
-      color: var(--text-secondary);
-      line-height: 1.6;
-    }
-    /* Professional Signup */
-    .pro-signup {
-      margin-top: 48px;
-      padding: 32px;
-      background: var(--primary-soft);
-      border-radius: 16px;
-      text-align: center;
-    }
-    .pro-signup h2 {
-      font-size: 20px;
-      margin-bottom: 8px;
-    }
-    .pro-signup > p {
-      font-size: 15px;
-      color: var(--text-secondary);
-      margin-bottom: 20px;
-    }
-    .pro-signup-form {
-      display: flex;
-      gap: 12px;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-    .pro-signup-form input {
-      flex: 1;
-      padding: 12px 16px;
-      font-size: 15px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      background: white;
-    }
-    .pro-signup-form input:focus {
-      outline: none;
-      border-color: var(--primary);
-    }
-    .pro-signup-form button {
-      padding: 12px 20px;
-      background: var(--primary);
-      color: white;
-      font-size: 15px;
-      font-weight: 600;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background 0.2s;
-      white-space: nowrap;
-    }
-    .pro-signup-form button:hover {
-      background: var(--primary-dark);
-    }
-    .pro-signup-form button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-    .pro-signup-btn {
-      padding: 14px 28px;
-      background: var(--primary);
-      color: white;
-      font-size: 16px;
-      font-weight: 600;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    .pro-signup-btn:hover {
-      background: var(--primary-dark);
+    /* For Professionals: plain, factual, same panels and grid as the rest
+       of the site. No animation beyond a gentle fade-in. No left-edge
+       accent lines. */
+    :root { --paper: #F6F5F1; --ink: #1C1C1A; --ink-mid: #4A4A47; --ink-faint: #6B6B67; --moss: #0D8268; --moss-pale: #E4F4EF; --rule: rgba(28,28,26,0.10); }
+    body { background: var(--paper); color: var(--ink); }
+    .pro-main { padding: 16px 0 0; }
+    .panel { margin: 0 16px 16px; border-radius: 28px; background: #FFFFFF; padding: 88px 40px; }
+    .panel-pale { background: var(--moss-pale); }
+    .panel-moss { background: var(--moss); color: #FFFFFF; }
+    .inner { max-width: 1200px; margin: 0 auto; }
+    .label { display: inline-flex; gap: 10px; font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 24px; }
+    .label b { font-weight: 500; color: var(--moss); }
+    .panel-moss .label, .panel-moss .label b { color: rgba(255,255,255,0.75); }
+    .h1 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 52px; line-height: 1.06; letter-spacing: -0.4px; margin: 0 0 20px; max-width: 22ch; text-wrap: balance; }
+    .h2 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 36px; line-height: 1.12; margin: 0; max-width: 20ch; text-wrap: balance; }
+    .lead { font-size: 18px; line-height: 1.65; color: var(--ink-mid); margin: 0; max-width: 36em; }
+    .panel-moss .lead { color: rgba(255,255,255,0.85); }
+    .muted { font-size: 14px; line-height: 1.6; color: var(--ink-faint); margin: 0; }
+
+    /* 3-column grid shared by every section */
+    .grid { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 16px; row-gap: 40px; }
+    .span2 { grid-column: span 2; }
+    .head-row { margin-bottom: 48px; align-items: end; }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+    .btn { font: inherit; font-size: 15px; font-weight: 500; border-radius: 999px; padding: 13px 22px; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; }
+    .btn-primary { background: var(--ink); color: #FFFFFF; border: 1px solid var(--ink); }
+    .btn-primary:hover { background: #000; text-decoration: none; }
+    .btn-quiet { background: transparent; color: var(--ink); border: 1px solid var(--rule); }
+    .btn-quiet:hover { border-color: var(--moss); color: var(--moss); text-decoration: none; }
+    .panel-moss .btn-primary { background: #FFFFFF; color: var(--ink); border-color: #FFFFFF; }
+    .roles { margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(28,28,26,0.12); font-size: 14px; color: var(--ink-mid); }
+    .roles span { color: var(--ink-faint); margin-right: 8px; }
+
+    /* At a glance: three facts */
+    .fact { padding-top: 20px; border-top: 1px solid var(--rule); }
+    .fact .k { font-size: 12px; font-weight: 500; letter-spacing: 1.1px; text-transform: uppercase; color: var(--moss); margin: 0 0 12px; }
+    .fact h3 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 24px; line-height: 1.2; margin: 0 0 10px; }
+    .fact p { font-size: 15px; line-height: 1.6; color: var(--ink-mid); margin: 0; }
+
+    /* Definition table: term in column 1, explanation across 2-3 */
+    .spec { border-top: 1px solid var(--rule); }
+    .spec-row { display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 16px; padding: 20px 0; border-bottom: 1px solid var(--rule); }
+    .spec-row dt { font-size: 15px; font-weight: 500; color: var(--ink); }
+    .spec-row dd { grid-column: span 2; margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-mid); }
+
+    /* Plain lists with a small check or dash */
+    .list { list-style: none; margin: 0; padding: 0; }
+    .list li { position: relative; padding: 10px 0 10px 28px; border-bottom: 1px solid var(--rule); font-size: 15px; line-height: 1.55; color: var(--ink-mid); }
+    .list li::before { content: '\2713'; position: absolute; left: 4px; top: 10px; color: var(--moss); font-weight: 600; }
+    .list.not li::before { content: '\2014'; color: var(--ink-faint); font-weight: 400; }
+    .col-title { font-size: 12px; font-weight: 500; letter-spacing: 1.1px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 12px; }
+
+    .box { background: var(--paper); border-radius: 20px; padding: 32px; }
+    .box h3 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 24px; margin: 0 0 12px; }
+    .box p { font-size: 15px; line-height: 1.6; color: var(--ink-mid); margin: 0 0 12px; }
+    .box a { color: var(--moss); font-weight: 500; }
+
+    /* FAQ */
+    .faq { border-top: 1px solid var(--rule); }
+    .faq details { border-bottom: 1px solid var(--rule); }
+    .faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; gap: 24px; align-items: center; padding: 20px 0; font-size: 17px; font-weight: 500; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: '+'; font-size: 22px; font-weight: 300; color: var(--moss); transition: transform .3s; }
+    .faq details[open] summary::after { transform: rotate(45deg); }
+    .faq details p { font-size: 15px; line-height: 1.65; color: var(--ink-mid); margin: 0 0 22px; max-width: 46em; }
+
+    .contact { margin-top: 20px; font-size: 14px; color: rgba(255,255,255,0.75); }
+    .contact a { color: #FFFFFF; }
+
+    [data-reveal] { opacity: 0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease; }
+    [data-reveal].is-in { opacity: 1; transform: none; }
+    @media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; transition: none; } }
+
+    @media (max-width: 900px) {
+      .panel { margin: 0 10px 10px; border-radius: 22px; padding: 56px 22px; }
+      .grid, .spec-row { grid-template-columns: 1fr; row-gap: 28px; }
+      .span2, .spec-row dd { grid-column: auto; }
+      .spec-row { row-gap: 6px; }
+      .h1 { font-size: 38px; }
+      .h2 { font-size: 30px; }
+      .lead { font-size: 17px; }
     }
   </style>
 </head>
@@ -433,190 +249,201 @@
     window.addEventListener('scroll', update, { passive: true });
   })();
 </script>
-<!-- /mobile-app-bar --><!-- Page Header -->
-  <header class="page-header-pro">
-    <div class="container">
-      <h1>For Legal & Family Professionals</h1>
-      <p>Clear, neutral communication records designed to support review, mediation, and court processes.</p>
-    </div>
-  </header>
+<!-- /mobile-app-bar -->
 
-  <!-- Main Content -->
-  <section class="pro-page" id="main-content">
-    <div class="container">
+  <main class="pro-main" id="main-content">
 
-      <!-- Intro -->
-      <div class="pro-intro">
-        <p>Clearly provides structured communication records for co-parents that are time-stamped, neutral, and auditable.</p>
-        <p>The platform does not analyze behavior or draw conclusions. It captures factual records of communication and system actions so professionals can review complete, unaltered context when needed.</p>
+  <!-- Intro -->
+  <section class="panel panel-pale">
+    <div class="inner">
+      <p class="label"><b>Clearly</b> For professionals</p>
+      <h1 class="h1">A complete, neutral record of how co&#8209;parents communicate.</h1>
+      <p class="lead">Clearly is a co-parenting app. Parents raise each topic, answer it, and resolve it in writing. You get a time-stamped record of what was said, what was agreed and what wasn't, exported in one document.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary" type="button" data-professional-modal>Join the professional network</button>
+        <a class="btn btn-quiet" href="/plan-builder/">Free parenting plan builder</a>
       </div>
-
-      <!-- How it works flow -->
-      <div class="pro-flow">
-        <div class="pro-flow-step">
-          <div class="pro-flow-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-          </div>
-          <div class="pro-flow-label">Communication captured</div>
-        </div>
-        <div class="pro-flow-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </div>
-        <div class="pro-flow-step">
-          <div class="pro-flow-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
-          </div>
-          <div class="pro-flow-label">Structured record</div>
-        </div>
-        <div class="pro-flow-arrow">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-        </div>
-        <div class="pro-flow-step">
-          <div class="pro-flow-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-          </div>
-          <div class="pro-flow-label">Export PDF</div>
-        </div>
-      </div>
-
-      <!-- What the platform produces -->
-      <div class="pro-section">
-        <h2>What the platform produces</h2>
-        <p>Clearly generates:</p>
-        <ul class="pro-list">
-          <li>Chronological records of parent-to-parent communication</li>
-          <li>Original user-authored messages (preserved as the canonical record)</li>
-          <li>System-generated topic summaries (clearly labeled and separated)</li>
-          <li>Resolution attempts, confirmations, and outcomes</li>
-        </ul>
-        <p>Each record includes clear distinction between:</p>
-        <ul class="pro-list-plain">
-          <li>Mutual agreement</li>
-          <li>Resolutions proposed but not accepted within 30 days (closed as not accepted, never treated as agreed)</li>
-          <li>Topics closed after 30 days without activity, kept on the record</li>
-        </ul>
-        <p>All exports include provenance information and disclaimers.</p>
-      </div>
-
-      <!-- How records are exported -->
-      <div class="pro-section">
-        <h2>How records are exported</h2>
-        <p>Records can be exported as a single, comprehensive PDF covering all topics within a selected time range (last 30 days, last 90 days, or all time).</p>
-        <p>Exports include an index of topics followed by full message timelines for each topic. Message bodies are included by default.</p>
-        <p class="pro-note">A raw CSV export is also available for advanced or forensic review.</p>
-      </div>
-
-      <!-- Neutrality & integrity -->
-      <div class="pro-section">
-        <h2>Neutrality and integrity</h2>
-        <p>Clearly is designed to preserve neutrality.</p>
-        <ul class="pro-list">
-          <li>The platform does not score, rank, or evaluate behavior</li>
-          <li>Silence is not treated as agreement</li>
-          <li>System actions (such as closure due to inactivity) are explicitly labeled</li>
-          <li>All records are time-stamped and immutable after submission</li>
-          <li>System-generated content is clearly distinguished from user-authored content</li>
-        </ul>
-      </div>
-
-      <!-- Why professionals use it -->
-      <div class="pro-section">
-        <h2>For attorneys, mediators, and evaluators</h2>
-        <ul class="pro-list">
-          <li>Reduces ambiguity around "what happened when"</li>
-          <li>Preserves full context instead of excerpts or screenshots</li>
-          <li>Minimizes interpretive framing by the platform</li>
-          <li>Supports faster review and preparation</li>
-          <li>Produces records that are consistent across exports</li>
-        </ul>
-      </div>
-
-      <!-- What the platform does not do -->
-      <div class="pro-section">
-        <h2>What the platform does not do</h2>
-        <p>Clearly does not:</p>
-        <ul class="pro-list pro-list-no">
-          <li>Provide legal advice</li>
-          <li>Take sides or decide for either parent</li>
-          <li>Determine fault or intent</li>
-          <li>Replace professional judgment</li>
-          <li>Interpret communications on behalf of the reader</li>
-        </ul>
-      </div>
-
-      <!-- When to recommend -->
-      <div class="pro-section">
-        <h2>When to recommend Clearly</h2>
-        <p>Clearly works best when clients need structure before or during the co-parenting process:</p>
-        <ul class="pro-list">
-          <li>Newly separated parents who need a starting point for schedules and agreements</li>
-          <li>Parents stuck in circular conversations who need a shared framework</li>
-          <li>Cases where communication history may matter for mediation or court</li>
-          <li>Situations where expense tracking and decision documentation would reduce conflict</li>
-        </ul>
-        <p>You can recommend the <a href="/plan-builder/">free Parenting Plan Builder</a> as a starting point — it works without an account, creates a shareable summary, and emails a plan code that sets up the Clearly app with the plan.</p>
-      </div>
-
-      <!-- What clients walk away with -->
-      <div class="pro-section">
-        <h2>What clients walk away with</h2>
-        <p>From the Parenting Plan Builder (free, no account required):</p>
-        <ul class="pro-list-plain">
-          <li>A structured parenting plan covering custody schedules, holidays, and expenses</li>
-          <li>A PDF summary they can share with you, their co-parent, or a mediator</li>
-          <li>A plan code by email that sets up the Clearly app with the plan; their co-parent can join with the same code</li>
-          <li>A starting point for negotiation — not a final agreement</li>
-        </ul>
-        <p>From Clearly's ongoing coordination tools:</p>
-        <ul class="pro-list-plain">
-          <li>Time-stamped, immutable communication records</li>
-          <li>Shared calendar with documented schedule changes</li>
-          <li>Expense tracking with receipt upload and split calculation</li>
-          <li>PDF exports for mediation, court, or professional review</li>
-        </ul>
-      </div>
-
-      <div class="pro-divider"></div>
-
-      <!-- FAQ -->
-      <div class="pro-faq">
-        <h2>Common questions</h2>
-
-        <div class="pro-faq-item">
-          <h3>Can these records be used as evidence?</h3>
-          <p>Clearly produces time-stamped, unaltered records of communication. Whether any document is admissible depends on jurisdiction, case type, and judicial discretion. The platform provides factual records; evidentiary determinations remain with the court and counsel.</p>
-        </div>
-
-        <div class="pro-faq-item">
-          <h3>Does the platform interpret or analyze behavior?</h3>
-          <p>No. Clearly captures what was communicated and when. It does not score, rank, or evaluate either parent's behavior. System-generated summaries are clearly labeled and separated from original user content.</p>
-        </div>
-
-        <div class="pro-faq-item">
-          <h3>What if one parent doesn't respond?</h3>
-          <p>Silence is never treated as agreement. Records explicitly distinguish between mutual agreement, resolutions not accepted within 30 days (closed as not accepted), and topics closed after 30 days without activity. Each outcome is labeled clearly in exports.</p>
-        </div>
-
-        <div class="pro-faq-item">
-          <h3>Are records tamper-proof?</h3>
-          <p>All records are time-stamped and immutable after submission. Users cannot edit or delete messages once sent. Exports include provenance information and system disclaimers.</p>
-        </div>
-      </div>
-
-      <!-- Professional Signup -->
-      <div class="pro-signup">
-        <h2>Stay informed</h2>
-        <p>Get updates for professionals and partnership news.</p>
-        <button class="pro-signup-btn" data-professional-modal>Join the professional network</button>
-      </div>
-
-      <!-- Closing -->
-      <p class="pro-closing">Questions about professional referrals or partnerships? <a href="mailto:hello@getclearly.app?subject=Professional%20partnership%20inquiry">Contact us directly</a>.</p>
-
+      <p class="roles"><span>Built for</span> family law attorneys &middot; mediators &middot; parenting coordinators &middot; therapists &middot; custody evaluators</p>
     </div>
   </section>
 
-  <!-- Footer -->
+  <!-- At a glance -->
+  <section class="panel">
+    <div class="inner grid">
+      <div class="fact" data-reveal>
+        <p class="k">The record</p>
+        <h3>Kept exactly as written.</h3>
+        <p>Every topic and reply is time-stamped. Once posted, messages can't be edited or deleted by either parent.</p>
+      </div>
+      <div class="fact" data-reveal>
+        <p class="k">The export</p>
+        <h3>One document for review.</h3>
+        <p>A single PDF for the last 30 days, 90 days or all time: an index of topics, then each full timeline. CSV for detailed review.</p>
+      </div>
+      <div class="fact" data-reveal>
+        <p class="k">Neutrality</p>
+        <h3>No scores. No conclusions.</h3>
+        <p>Clearly doesn't rate, rank or interpret either parent. Silence is never treated as agreement.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's in a record -->
+  <section class="panel">
+    <div class="inner">
+      <div class="grid head-row">
+        <div class="span2">
+          <p class="label"><b>[01]</b> The record</p>
+          <h2 class="h2">What a Clearly record shows.</h2>
+        </div>
+        <p class="muted">Each item is labeled, so a reader never has to guess whether something was said by a parent, agreed by both, or recorded by the system.</p>
+      </div>
+      <dl class="spec" data-reveal>
+        <div class="spec-row"><dt>Parent messages</dt><dd>The original words of each parent, in order, with date and time. This is the canonical record.</dd></div>
+        <div class="spec-row"><dt>System summaries</dt><dd>Topic summaries written by Clearly are labeled as system-generated and kept separate from what parents wrote.</dd></div>
+        <div class="spec-row"><dt>Agreements</dt><dd>A topic is recorded as agreed only when both parents accept the same written resolution.</dd></div>
+        <div class="spec-row"><dt>Not accepted</dt><dd>A resolution proposed but not accepted within 30 days closes as &ldquo;not accepted.&rdquo; It is never treated as agreed.</dd></div>
+        <div class="spec-row"><dt>Inactive topics</dt><dd>A topic with no activity for 30 days closes and stays on the record, marked as a system action.</dd></div>
+        <div class="spec-row"><dt>Schedule and expenses</dt><dd>Swap requests and their answers, shared expenses with receipts and splits, and changes to the parenting plan.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Exports + limits -->
+  <section class="panel">
+    <div class="inner">
+      <div class="grid head-row">
+        <div class="span2">
+          <p class="label"><b>[02]</b> Exports and limits</p>
+          <h2 class="h2">What you receive, and what Clearly doesn't do.</h2>
+        </div>
+      </div>
+      <div class="grid">
+        <div data-reveal>
+          <p class="col-title">PDF export</p>
+          <ul class="list">
+            <li>Last 30 days, last 90 days, or all time</li>
+            <li>Index of topics, then full message timelines</li>
+            <li>Message bodies included by default</li>
+            <li>Provenance information and disclaimers</li>
+          </ul>
+        </div>
+        <div data-reveal>
+          <p class="col-title">CSV export</p>
+          <ul class="list">
+            <li>All data as a spreadsheet</li>
+            <li>For detailed or forensic review</li>
+            <li>Consistent from one export to the next</li>
+          </ul>
+        </div>
+        <div data-reveal>
+          <p class="col-title">Clearly does not</p>
+          <ul class="list not">
+            <li>Give legal advice</li>
+            <li>Take sides or decide for either parent</li>
+            <li>Determine fault or intent</li>
+            <li>Interpret messages for the reader</li>
+            <li>Replace professional judgment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Recommending Clearly -->
+  <section class="panel">
+    <div class="inner">
+      <div class="grid head-row">
+        <div class="span2">
+          <p class="label"><b>[03]</b> Recommending Clearly</p>
+          <h2 class="h2">When it helps your clients.</h2>
+        </div>
+      </div>
+      <div class="grid">
+        <div data-reveal>
+          <p class="col-title">Good fit</p>
+          <ul class="list">
+            <li>Newly separated parents who need a starting structure</li>
+            <li>Parents stuck in circular conversations</li>
+            <li>Cases where communication history may matter in mediation or court</li>
+            <li>Disputes over expenses or schedule changes</li>
+          </ul>
+        </div>
+        <div class="box" data-reveal>
+          <h3>Start with a plan</h3>
+          <p>The Parenting Plan Builder is free and needs no account. Clients map out the schedule, holidays and expenses, get a PDF summary to share with you, and receive a plan code that sets up the app.</p>
+          <p><a href="/plan-builder/">Open the plan builder &rarr;</a></p>
+        </div>
+        <div class="box" data-reveal>
+          <h3>Then the app</h3>
+          <p>One subscription covers both parents: $24.99 a month or $249 a year, with a 14-day free trial. The co-parent joins free with the same code. iPhone only.</p>
+          <p><a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" data-cta="professionals">View on the App Store &rarr;</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Questions -->
+  <section class="panel">
+    <div class="inner grid">
+      <div>
+        <p class="label"><b>[04]</b> Questions</p>
+        <h2 class="h2">Common questions.</h2>
+      </div>
+      <div class="faq span2">
+        <details>
+          <summary>Can these records be used as evidence?</summary>
+          <p>Clearly produces time-stamped records of communication, kept as written. Whether any document is admissible depends on the jurisdiction, the case and the court. Clearly provides the record; evidentiary decisions belong to the court and counsel.</p>
+        </details>
+        <details>
+          <summary>Does Clearly analyze or score either parent?</summary>
+          <p>No. Clearly records what was communicated and when. It does not score, rank or evaluate behavior. Its tone check only suggests calmer wording to the person writing, before they post, and they choose what to send.</p>
+        </details>
+        <details>
+          <summary>What happens when one parent doesn&#x27;t respond?</summary>
+          <p>Silence is never treated as agreement. A proposed resolution that isn&#x27;t accepted within 30 days closes as “not accepted,” and a topic with no activity for 30 days closes and stays on the record. Both are labeled as system actions.</p>
+        </details>
+        <details>
+          <summary>Can parents edit or delete messages?</summary>
+          <p>No. Topics and replies can&#x27;t be edited or deleted once posted. Exports include provenance information and disclaimers.</p>
+        </details>
+        <details>
+          <summary>Does the other parent have to pay?</summary>
+          <p>No. One subscription covers both parents. The co-parent joins free with an invite code. Without a subscription, Clearly is read-only and records stay viewable and exportable.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Network -->
+  <section class="panel panel-moss">
+    <div class="inner grid">
+      <div class="span2">
+        <p class="label"><b>Clearly</b> Professional network</p>
+        <h2 class="h2" style="color:#FFFFFF;">Stay informed.</h2>
+        <p class="lead" style="margin-top:16px;">Updates for professionals, sample exports and partnership news. No spam.</p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" type="button" data-professional-modal>Join the professional network</button>
+        </div>
+        <p class="contact">Questions about referrals or partnerships? <a href="mailto:hello@getclearly.app">hello@getclearly.app</a></p>
+      </div>
+    </div>
+  </section>
+
+  </main>
+
+  <script>
+    (function () {
+      var els = document.querySelectorAll('[data-reveal]');
+      if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('is-in'); }); return; }
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); } });
+      }, { rootMargin: '0px 0px -8% 0px' });
+      els.forEach(function (e) { io.observe(e); });
+    })();
+  </script>
+
+
   <footer class="site-footer">
   <div class="footer-main">
     <div class="footer-brand">
@@ -704,6 +531,56 @@
     "audience": {"@type": "Audience", "audienceType": "Family-law professionals, mediators, therapists, and parenting coordinators"},
     "inLanguage": "en-US"
   }
+  </script>
+
+  <!-- Structured Data - FAQ -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Can these records be used as evidence?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Clearly produces time-stamped records of communication, kept as written. Whether any document is admissible depends on the jurisdiction, the case and the court. Clearly provides the record; evidentiary decisions belong to the court and counsel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does Clearly analyze or score either parent?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Clearly records what was communicated and when. It does not score, rank or evaluate behavior. Its tone check only suggests calmer wording to the person writing, before they post, and they choose what to send."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens when one parent doesn't respond?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Silence is never treated as agreement. A proposed resolution that isn't accepted within 30 days closes as \u201cnot accepted,\u201d and a topic with no activity for 30 days closes and stays on the record. Both are labeled as system actions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can parents edit or delete messages?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Topics and replies can't be edited or deleted once posted. Exports include provenance information and disclaimers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the other parent have to pay?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. One subscription covers both parents. The co-parent joins free with an invite code. Without a subscription, Clearly is read-only and records stay viewable and exportable."
+      }
+    }
+  ]
+}
   </script>
 
   <!-- Structured Data - Breadcrumb -->
