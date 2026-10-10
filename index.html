@@ -88,7 +88,7 @@
     .panel-moss .label, .panel-moss .label b { color: rgba(255,255,255,0.75); }
     .pill { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; border: 1px solid currentColor; border-radius: 999px; padding: 4px 10px; }
 
-    .h2 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 44px; line-height: 1.1; letter-spacing: -0.3px; margin: 0 0 20px; max-width: 16ch; }
+    .h2 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 44px; line-height: 1.1; letter-spacing: -0.3px; margin: 0 0 20px; max-width: 20ch; text-wrap: balance; }
     .h2 em { font-style: italic; color: var(--moss); }
     .panel-moss .h2 em { color: rgba(255,255,255,0.7); }
     .lead { font-size: 16px; line-height: 1.65; color: var(--ink-mid); margin: 0; max-width: 34em; }
@@ -136,12 +136,18 @@
 
     /* ---------- [01] Problem ---------- */
     .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-    .pile { position: relative; height: 340px; background: var(--paper); border-radius: 20px; }
-    .pile span { position: absolute; background: #FFFFFF; border: 1px solid var(--rule); border-radius: 14px; padding: 10px 14px; font-size: 13px; color: var(--ink-mid);
-      box-shadow: 0 6px 18px rgba(28,28,26,0.05); white-space: nowrap; opacity: 0; transform: translateY(14px);
-      transition: opacity .55s var(--ease), transform .55s var(--ease); transition-delay: calc(var(--i) * 150ms); }
-    .pile.is-in span { opacity: 1; transform: rotate(var(--r, 0deg)); }
-    .pile span.hot { color: #8A3A3A; background: #FEF6F6; border-color: #F2CACA; }
+    /* A thread that spirals: one question, no answer */
+    .thread { background: var(--paper); border-radius: 20px; padding: 36px 36px 32px; }
+    .thread .cap { font-size: 11px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 8px; }
+    .thread ol { list-style: none; margin: 0; padding: 0; }
+    .thread li { display: grid; grid-template-columns: 64px 1fr; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--rule); font-size: 15px; line-height: 1.5;
+      opacity: 0; transform: translateY(8px); transition: opacity .6s var(--ease), transform .6s var(--ease); transition-delay: calc(.2s + var(--i) * .5s); }
+    .thread time { font-size: 12px; color: var(--ink-faint); font-variant-numeric: tabular-nums; padding-top: 2px; }
+    .thread .who { display: block; font-size: 12px; color: var(--ink-faint); margin-bottom: 2px; }
+    .thread li.heat { color: #8A3A3A; }
+    .thread .verdict { margin: 20px 0 0; font-family: 'EB Garamond', serif; font-style: italic; font-size: 20px; color: var(--moss);
+      opacity: 0; transition: opacity .8s var(--ease) 2.4s; }
+    .thread.is-in li, .thread.is-in .verdict { opacity: 1; transform: none; }
     .pull { font-family: 'EB Garamond', serif; font-size: 22px; line-height: 1.45; font-style: italic; margin: 28px 0 0; max-width: 24em; }
 
     /* ---------- [02] The resolution flow ---------- */
@@ -206,7 +212,7 @@
     .close .note { color: rgba(255,255,255,0.7); }
 
     @media (prefers-reduced-motion: reduce) {
-      [data-reveal], .shot .phone, .callout *, .pile span, .flow li > *, .flow::after, .flow .n, .compare tr, .home-hero h1 .line > span { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
+      [data-reveal], .shot .phone, .callout *, .thread li, .thread .verdict, .flow li > *, .flow::after, .flow .n, .compare tr, .home-hero h1 .line > span { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
     }
 
     @media (max-width: 1080px) {
@@ -297,14 +303,15 @@
         <p class="lead" data-reveal style="--i:2">Pickup times, doctors, school forms, expenses, holidays. You'll talk to this person more than you expect, for longer than you expect. And most of the time you agree on more than you think. It's the way the conversation goes that keeps burying it.</p>
         <p class="pull" data-reveal style="--i:3">Every text about Tuesday pickup carries the weight of everything that came before it.</p>
       </div>
-      <div class="pile" data-scene aria-hidden="true">
-        <span style="--i:0; left:6%;  top:6%;  --r:-2deg">Can you do pickup at 3 instead?</span>
-        <span style="--i:1; left:40%; top:17%; --r:1.5deg">Dentist moved to Tuesday</span>
-        <span style="--i:2; left:12%; top:30%; --r:1deg">Soccer fees due Friday &middot; $140</span>
-        <span style="--i:3; left:44%; top:43%; --r:-1.5deg">Who has Thanksgiving this year?</span>
-        <span style="--i:4; left:5%;  top:56%; --r:-1deg" class="hot">You said you'd be here at 5.</span>
-        <span style="--i:5; left:38%; top:69%; --r:2deg">Did she take her medicine?</span>
-        <span style="--i:6; left:10%; top:82%; --r:-2deg" class="hot">This is exactly what you always do.</span>
+      <div class="thread" data-scene aria-label="Example of a co-parenting text thread that never reaches an answer">
+        <p class="cap">A typical Tuesday</p>
+        <ol>
+          <li style="--i:0"><time>9:02</time><span><span class="who">Sam</span>Can you do pickup at 3 instead of 5 on Friday?</span></li>
+          <li style="--i:1"><time>9:47</time><span><span class="who">Alex</span>Why does it always have to change?</span></li>
+          <li style="--i:2" class="heat"><time>10:15</time><span><span class="who">Sam</span>You said you'd be flexible. You never are.</span></li>
+          <li style="--i:3" class="heat"><time>10:16</time><span><span class="who">Alex</span>This is exactly what you always do.</span></li>
+        </ol>
+        <p class="verdict">One question. Four messages. No answer.</p>
       </div>
     </div>
   </section>
