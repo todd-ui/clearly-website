@@ -1,4 +1,5 @@
 const Anthropic = require('@anthropic-ai/sdk');
+const { generateSeoMeta, createPageWithSeoTitle } = require('./seo-meta');
 const { Client } = require('@notionhq/client');
 const { requestJson, topicSchema, articleSchema } = require('./json-response');
 
@@ -71,7 +72,7 @@ Respond with JSON only:
 {
   "title": "The article title (compelling, specific, 8-12 words)",
   "slug": "url-friendly-slug-like-this",
-  "description": "A 1-2 sentence description for SEO meta tags (150-160 characters)",
+  "description": "A 1-2 sentence description for SEO meta tags (120-155 characters)",
   "keywords": ["keyword 1", "keyword 2", "keyword 3"]
 }`;
 
@@ -282,9 +283,12 @@ function articleToNotionBlocks(article) {
 // Create Notion page with content
 async function createNotionPage(topic, article, publishDate) {
   console.log(`Creating Notion page: ${topic.title}`);
+
+  // Short SEO title and a meta description of the length Google shows (see seo-meta.js)
+  const seo = await generateSeoMeta(topic);
   
   // Create the page with properties
-  const page = await notion.pages.create({
+  const page = await createPageWithSeoTitle(notion, {
     parent: { database_id: DATABASE_ID },
     properties: {
       'Title': {
@@ -294,7 +298,7 @@ async function createNotionPage(topic, article, publishDate) {
         rich_text: [{ text: { content: topic.slug } }]
       },
       'Description': {
-        rich_text: [{ text: { content: topic.description } }]
+        rich_text: [{ text: { content: seo.description } }]
       },
      'Published': {
   checkbox: true
@@ -306,7 +310,7 @@ async function createNotionPage(topic, article, publishDate) {
   select: { name: topic.category }
 }
     }
-  });
+  }, seo.seoTitle);
   
   // Add content blocks
   const blocks = articleToNotionBlocks(article);

@@ -9,6 +9,7 @@
  */
 
 const { generateArticle, triggerNetlifyBuild } = require('./generate-post');
+const { generateSeoMeta, createPageWithSeoTitle } = require('./seo-meta');
 const { Client } = require('@notionhq/client');
 
 // Initialize Notion client
@@ -422,7 +423,10 @@ function articleToNotionBlocks(article) {
 async function createNotionPage(topic, article, publishDate) {
   console.log(`Creating Notion page: ${topic.title}`);
 
-  const page = await notion.pages.create({
+  // Short SEO title and a meta description of the length Google shows (see seo-meta.js)
+  const seo = await generateSeoMeta(topic);
+
+  const page = await createPageWithSeoTitle(notion, {
     parent: { database_id: DATABASE_ID },
     properties: {
       'Title': {
@@ -432,7 +436,7 @@ async function createNotionPage(topic, article, publishDate) {
         rich_text: [{ text: { content: topic.slug } }]
       },
       'Description': {
-        rich_text: [{ text: { content: topic.description } }]
+        rich_text: [{ text: { content: seo.description } }]
       },
       'Published': {
         checkbox: true
@@ -444,7 +448,7 @@ async function createNotionPage(topic, article, publishDate) {
         select: { name: topic.category }
       }
     }
-  });
+  }, seo.seoTitle);
 
   // Add content blocks
   const blocks = articleToNotionBlocks(article);
@@ -602,7 +606,7 @@ async function main() {
   console.log('='.repeat(60));
   console.log(`   Title: ${topic.title}`);
   console.log(`   Date: ${publishDate}`);
-  console.log(`   URL: https://getclearly.app/blog/${topic.slug}.html`);
+  console.log(`   URL: https://getclearly.app/blog/${topic.slug}`);
 
   // Write result file for GitHub Actions to read
   const fs = require('fs');
@@ -611,7 +615,7 @@ async function main() {
     title: topic.title,
     slug: topic.slug,
     date: publishDate,
-    url: `https://getclearly.app/blog/${topic.slug}.html`
+    url: `https://getclearly.app/blog/${topic.slug}`
   }));
 }
 

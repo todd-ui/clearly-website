@@ -243,9 +243,12 @@ function insertMidArticleCta(content, category) {
 }
 
 // "<title>" is what shows in Google; keep it under ~60 characters.
-function seoTitle(title) {
-  const branded = `${title} | Clearly`;
-  return branded.length <= 60 ? branded : title;
+// Title for Google and social previews: the optional Notion "SEO Title" when
+// it's filled in, otherwise the post title. " | Clearly" is added when it fits.
+function seoTitle(post) {
+  const base = post.seoTitle || post.title;
+  const branded = `${base} | Clearly`;
+  return branded.length <= 60 ? branded : base;
 }
 
 const STOPWORDS = new Set('a an and are as at be but by can co do does for from how if in into is it its kids child children your you when what with to the of on or not parent parents parenting co-parent co-parenting coparenting without who why their them they this that'.split(' '));
@@ -325,7 +328,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#0D8268">
-  <title>${escapeHtml(seoTitle(post.title))}</title>
+  <title>${escapeHtml(seoTitle(post))}</title>
   <meta name="description" content="${escapeHtml(post.description)}">
   <link rel="canonical" href="${postUrl(post.slug)}">
   <meta property="og:type" content="article">
@@ -333,14 +336,14 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
   <meta property="article:published_time" content="${post.dateISO}">
   <meta property="article:modified_time" content="${post.modifiedISO || post.dateISO}">${post.category ? `
   <meta property="article:section" content="${escapeHtml(post.category)}">` : ''}
-  <meta property="og:title" content="${escapeHtml(post.title)}">
+  <meta property="og:title" content="${escapeHtml(post.seoTitle || post.title)}">
   <meta property="og:description" content="${escapeHtml(post.description)}">
   <meta property="og:image" content="https://getclearly.app/images/blog-og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="Clearly.">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="${escapeHtml(post.title)}">
+  <meta name="twitter:title" content="${escapeHtml(post.seoTitle || post.title)}">
   <meta name="twitter:description" content="${escapeHtml(post.description)}">
   <meta name="twitter:image" content="https://getclearly.app/images/blog-og.png">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
@@ -852,6 +855,7 @@ async function build() {
 
   for (const page of posts) {
     const title = getProperty(page, 'Title');
+    const seoTitleText = (getProperty(page, 'SEO Title') || '').trim();
     // A slug is a bare path segment: never ".html", never a slash.
     const slug = generateSlug(title, getProperty(page, 'Slug').trim())
       .replace(/\.html?$/i, '')
@@ -899,7 +903,7 @@ async function build() {
     const wordCount = content.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
     content = insertMidArticleCta(wrapTakeaways(content), category);
 
-    const post = { title, slug, description, date, dateISO, modifiedISO, content, category, wordCount };
+    const post = { title, seoTitle: seoTitleText, slug, description, date, dateISO, modifiedISO, content, category, wordCount };
     processedPosts.push(post);
   }
 
