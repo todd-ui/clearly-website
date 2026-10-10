@@ -410,7 +410,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
 
     /* Related articles */
     .related-panel { margin: 0 16px 16px; background: #FFFFFF; border-radius: 28px; padding: 72px 40px; }
-    .related-inner { max-width: 1080px; margin: 0 auto; }
+    .related-inner { max-width: 1200px; margin: 0 auto; }
     .related-panel .label { font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 24px; }
     .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     .related-card { display: flex; flex-direction: column; background: var(--paper); border-radius: 20px; padding: 28px; text-decoration: none; transition: transform .25s, box-shadow .25s; }
