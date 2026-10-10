@@ -64,198 +64,197 @@
 
   <style>
     /* ==========================================
-       HOMEPAGE — story layout with build-ins
-       Every animation shows something the app does (a message getting
-       calmer, a question getting answered, the record filling in). Nothing
-       moves just to move. Type stays modest; sections get room to breathe.
-       No left-edge accent lines anywhere.
+       HOMEPAGE — panel layout
+       Sections are rounded panels inset 16px from the page, so panel edge
+       + 40px padding lines up with the header's 56px gutter. One label
+       system ([01] ...), one radius, one gap. Every animation shows the
+       product doing something. No left-edge accent lines.
        ========================================== */
     :root {
-      --paper: #F6F5F1; --ink: #1C1C1A; --ink-mid: #4A4A47; --ink-faint: #6B6B67;
-      --moss: #0D8268; --moss-deep: #0A6B55; --moss-pale: #E4F4EF; --rule: rgba(28,28,26,0.08);
-      --ease: cubic-bezier(.2,.7,.2,1);
+      --paper: #F6F5F1; --white: #FFFFFF; --ink: #1C1C1A; --ink-mid: #4A4A47; --ink-faint: #6B6B67;
+      --moss: #0D8268; --moss-pale: #E4F4EF; --rule: rgba(28,28,26,0.10);
+      --gap: 16px; --pad: 40px; --radius: 28px; --ease: cubic-bezier(.2,.7,.2,1);
     }
     body { font-family: 'Instrument Sans', sans-serif; background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; }
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 40px; }
-    .sec { padding: 168px 0; }
-    .sec-white { background: #FFFFFF; }
-    .eyebrow { font-size: 12px; font-weight: 500; letter-spacing: 1.4px; text-transform: uppercase; color: var(--moss); margin: 0 0 20px; }
-    .h2 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 42px; line-height: 1.15; letter-spacing: -0.3px; margin: 0 0 24px; max-width: 18ch; }
+    main { padding: var(--gap) 0 0; }
+    .panel { margin: 0 var(--gap) var(--gap); border-radius: var(--radius); background: var(--white); padding: 96px var(--pad); position: relative; overflow: hidden; }
+    .panel-pale { background: var(--moss-pale); }
+    .panel-moss { background: var(--moss); color: #FFFFFF; }
+    .inner { max-width: 1200px; margin: 0 auto; }
+
+    /* Labels: "[01] The problem" and outlined pills */
+    .label { display: inline-flex; align-items: center; gap: 10px; font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 24px; }
+    .label b { font-weight: 500; color: var(--moss); letter-spacing: 0; }
+    .panel-moss .label, .panel-moss .label b { color: rgba(255,255,255,0.75); }
+    .pill { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; border: 1px solid currentColor; border-radius: 999px; padding: 4px 10px; }
+
+    .h2 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 44px; line-height: 1.1; letter-spacing: -0.3px; margin: 0 0 20px; max-width: 16ch; }
     .h2 em { font-style: italic; color: var(--moss); }
-    .center .h2 { margin-left: auto; margin-right: auto; }
-    .body { font-size: 17px; line-height: 1.7; color: var(--ink-mid); margin: 0 0 18px; max-width: 34em; }
-    .center { text-align: center; }
-    .center .body { margin-left: auto; margin-right: auto; }
-    .note { font-size: 13px; color: var(--ink-faint); margin: 16px 0 0; }
-    .text-link { color: var(--moss); font-weight: 500; text-decoration: none; }
+    .panel-moss .h2 em { color: rgba(255,255,255,0.7); }
+    .lead { font-size: 16px; line-height: 1.65; color: var(--ink-mid); margin: 0; max-width: 34em; }
+    .panel-moss .lead { color: rgba(255,255,255,0.82); }
+    .note { font-size: 13px; color: var(--ink-faint); margin: 14px 0 0; }
+    .head-row { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; margin-bottom: 64px; }
+    .head-row .h2 { margin: 0; }
+    .text-link { color: var(--moss); font-weight: 500; text-decoration: none; font-size: 14px; }
     .text-link:hover { text-decoration: underline; }
     main .app-badge { height: 44px; }
 
-    /* ---------- Reveal system ---------- */
-    [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); transition-delay: calc(var(--i, 0) * 110ms); }
+    /* Reveal */
+    [data-reveal] { opacity: 0; transform: translateY(20px); transition: opacity .8s var(--ease), transform .8s var(--ease); transition-delay: calc(var(--i, 0) * 100ms); }
     [data-reveal].is-in { opacity: 1; transform: none; }
     [data-reveal="fade"] { transform: none; }
-    [data-reveal="rise"] { transform: translateY(60px); }
-    [data-reveal="left"] { transform: translateX(-28px); }
-    [data-reveal="right"] { transform: translateX(28px); }
 
-    /* ---------- 1. Hero ---------- */
-    .hero { position: relative; padding: 168px 0 136px; overflow: hidden; }
-    .hero::before { content: ''; position: absolute; width: 760px; height: 760px; right: -180px; top: -120px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(13,130,104,0.10), rgba(13,130,104,0) 65%); pointer-events: none; }
-    .hero-grid { position: relative; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 80px; align-items: center; }
-    .hero h1 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 56px; line-height: 1.06; letter-spacing: -0.6px; margin: 0 0 28px; }
-    .hero h1 .line { display: block; overflow: hidden; padding-bottom: 4px; }
-    .hero h1 .line > span { display: block; transform: translateY(105%); transition: transform 1.1s var(--ease); }
-    .hero h1 .line:nth-child(2) > span { transition-delay: .15s; font-style: italic; color: var(--moss); }
-    .hero.is-in h1 .line > span { transform: none; }
-    .hero-lead { font-size: 18px; line-height: 1.7; color: var(--ink-mid); margin: 0 0 36px; max-width: 28em; }
-    .hero-stage { position: relative; justify-self: center; width: 300px; }
-    .hero-phone { position: relative; z-index: 1; filter: drop-shadow(0 40px 60px rgba(28,28,26,0.16)); }
-    .hero-phone img { width: 100%; height: auto; display: block; }
-    .hero .hero-phone { opacity: 0; transform: translateY(80px) rotate(3deg); transition: opacity 1.2s var(--ease) .2s, transform 1.4s var(--ease) .2s; }
-    .hero.is-in .hero-phone { opacity: 1; transform: none; }
-    .chip { position: absolute; z-index: 2; display: flex; align-items: center; gap: 10px; background: #FFFFFF; border: 1px solid var(--rule);
-      border-radius: 14px; padding: 10px 14px; font-size: 13px; line-height: 1.3; color: var(--ink); white-space: nowrap;
-      box-shadow: 0 12px 30px rgba(28,28,26,0.08); opacity: 0; transform: translateY(14px) scale(.96); transition: opacity .7s var(--ease), transform .7s var(--ease); }
-    .chip small { display: block; color: var(--ink-faint); font-size: 12px; }
-    .chip i { width: 28px; height: 28px; border-radius: 8px; background: var(--moss-pale); color: var(--moss); display: grid; place-items: center; font-style: normal; font-size: 14px; flex-shrink: 0; }
-    .chip-1 { top: 16%; left: -200px; transition-delay: 1.1s; }
-    .chip-2 { top: 48%; right: -150px; transition-delay: 1.5s; }
-    .chip-3 { bottom: 12%; left: -170px; transition-delay: 1.9s; }
-    .hero.is-in .chip { opacity: 1; transform: none; }
-    .hero.is-in .chip-2 { animation: bob 6s ease-in-out 2.6s infinite; }
+    /* ---------- Hero: the phone, annotated ---------- */
+    .home-hero { padding-top: 88px; padding-bottom: 0; background: linear-gradient(180deg, var(--moss-pale) 0%, #F1F8F5 100%); }
+    .hero-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 40px; align-items: start; }
+    .hero-copy { padding-top: 56px; }
+    .home-hero h1 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 54px; line-height: 1.05; letter-spacing: -0.5px; margin: 0 0 24px; }
+    .home-hero h1 .line { display: block; overflow: hidden; padding-bottom: 4px; }
+    .home-hero h1 .line > span { display: block; transform: translateY(105%); transition: transform 1s var(--ease); }
+    .home-hero h1 .line:nth-child(2) > span { transition-delay: .12s; font-style: italic; color: var(--moss); }
+    .home-hero.is-in h1 .line > span { transform: none; }
+    .hero-lead { font-size: 17px; line-height: 1.65; color: var(--ink-mid); margin: 0 0 32px; max-width: 26em; }
+    .diagram { position: relative; height: 640px; }
+    .diagram .phone { position: absolute; left: 0; top: 0; width: 290px; filter: drop-shadow(0 30px 50px rgba(28,28,26,0.16));
+      opacity: 0; transform: translateY(70px); transition: opacity 1.1s var(--ease) .15s, transform 1.3s var(--ease) .15s; }
+    .diagram .phone img { width: 100%; height: auto; display: block; }
+    .home-hero.is-in .diagram .phone { opacity: 1; transform: none; }
+    /* Callouts: a line draws from the screen, then the note appears */
+    .callout { position: absolute; left: 238px; display: flex; align-items: center; gap: 0; }
+    .callout .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--moss); box-shadow: 0 0 0 4px rgba(13,130,104,0.18); flex-shrink: 0; transform: scale(0); transition: transform .4s var(--ease); }
+    .callout .line { width: 110px; height: 1px; background: var(--moss); opacity: .5; transform-origin: left; transform: scaleX(0); transition: transform .7s var(--ease); }
+    .callout .txt { padding-left: 14px; opacity: 0; transform: translateX(-6px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+    .callout .txt strong { display: block; font-size: 14px; font-weight: 500; color: var(--ink); }
+    .callout .txt span { display: block; font-size: 13px; line-height: 1.45; color: var(--ink-faint); max-width: 22ch; }
+    .home-hero.is-in .callout .dot { transform: scale(1); }
+    .home-hero.is-in .callout .line { transform: scaleX(1); }
+    .home-hero.is-in .callout .txt { opacity: 1; transform: none; }
+    .c1 { top: 19.5%; } .c2 { top: 33%; } .c3 { top: 51%; } .c4 { top: 63%; }
+    .c1 .dot { transition-delay: 1.3s; } .c1 .line { transition-delay: 1.4s; } .c1 .txt { transition-delay: 1.8s; }
+    .c2 .dot { transition-delay: 1.9s; } .c2 .line { transition-delay: 2.0s; } .c2 .txt { transition-delay: 2.4s; }
+    .c3 .dot { transition-delay: 2.5s; } .c3 .line { transition-delay: 2.6s; } .c3 .txt { transition-delay: 3.0s; }
+    .c4 .dot { transition-delay: 3.1s; } .c4 .line { transition-delay: 3.2s; } .c4 .txt { transition-delay: 3.6s; }
 
-    @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
-
-    /* ---------- 2. Problem: the messages pile up ---------- */
-    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 96px; align-items: center; }
-    .pile { position: relative; height: 380px; }
-    .pile span { position: absolute; background: #FFFFFF; border: 1px solid var(--rule); border-radius: 16px; padding: 12px 16px; font-size: 14px; color: var(--ink-mid);
-      box-shadow: 0 8px 24px rgba(28,28,26,0.05); white-space: nowrap; opacity: 0; transform: translateY(18px) scale(.97);
-      transition: opacity .6s var(--ease), transform .6s var(--ease); transition-delay: calc(var(--i) * 140ms); }
+    /* ---------- [01] Problem ---------- */
+    .split { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+    .pile { position: relative; height: 340px; background: var(--paper); border-radius: 20px; }
+    .pile span { position: absolute; background: #FFFFFF; border: 1px solid var(--rule); border-radius: 14px; padding: 10px 14px; font-size: 13px; color: var(--ink-mid);
+      box-shadow: 0 6px 18px rgba(28,28,26,0.05); white-space: nowrap; opacity: 0; transform: translateY(14px);
+      transition: opacity .55s var(--ease), transform .55s var(--ease); transition-delay: calc(var(--i) * 150ms); }
     .pile.is-in span { opacity: 1; transform: rotate(var(--r, 0deg)); }
     .pile span.hot { color: #8A3A3A; background: #FEF6F6; border-color: #F2CACA; }
-    .pull { font-family: 'EB Garamond', serif; font-size: 24px; line-height: 1.45; font-style: italic; color: var(--ink); margin: 40px 0 0; max-width: 24em; }
+    .pull { font-family: 'EB Garamond', serif; font-size: 22px; line-height: 1.45; font-style: italic; margin: 28px 0 0; max-width: 24em; }
 
-    /* ---------- 3. How it's different ---------- */
-    .steps { display: grid; gap: 168px; margin-top: 120px; }
-    .step { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 96px; align-items: center; }
-    .step:nth-child(even) { grid-template-columns: 1.1fr 0.9fr; }
-    .step:nth-child(even) .step-text { order: 2; }
-    .step-num { font-size: 12px; font-weight: 500; color: var(--ink-faint); letter-spacing: 1.4px; margin: 0 0 16px; }
-    .step h3 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 32px; line-height: 1.2; margin: 0 0 20px; }
-    .demo { background: #FFFFFF; border: 1px solid var(--rule); border-radius: 28px; padding: 40px; min-height: 360px; box-shadow: 0 30px 60px rgba(28,28,26,0.06); }
-    .demo-cap { font-size: 11px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 12px; }
+    /* ---------- [02] How it works: three cards ---------- */
+    .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+    .card { background: #FFFFFF; color: var(--ink); border-radius: 22px; padding: 28px; display: flex; flex-direction: column; }
+    .card-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; color: var(--moss); }
+    .card-top .num { font-size: 12px; color: var(--ink-faint); }
+    .card h3 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 26px; line-height: 1.15; margin: 0 0 10px; }
+    .card p.desc { font-size: 14px; line-height: 1.6; color: var(--ink-mid); margin: 0 0 24px; }
+    .stage { margin-top: auto; background: var(--paper); border-radius: 16px; padding: 18px; min-height: 270px; }
+    .cap { font-size: 10px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 10px; }
 
-    /* Tone check demo */
-    .compose { border: 1px solid var(--rule); border-radius: 18px; padding: 18px 20px; font-size: 15px; line-height: 1.6; min-height: 104px; color: var(--ink); background: #FBFAF8; }
-    .compose .caret { display: inline-block; width: 1.5px; height: 1.1em; background: var(--ink); vertical-align: -2px; margin-left: 1px; animation: blink 1s steps(1) infinite; }
-    .compose mark { background: none; color: inherit; background-image: linear-gradient(#E9A3A3, #E9A3A3); background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 2px; transition: background-size .5s var(--ease); }
+    .compose { background: #FFFFFF; border: 1px solid var(--rule); border-radius: 14px; padding: 12px 14px; font-size: 13px; line-height: 1.55; min-height: 84px; }
+    .compose .caret { display: inline-block; width: 1.5px; height: 1.05em; background: var(--ink); vertical-align: -2px; margin-left: 1px; animation: blink 1s steps(1) infinite; }
+    .compose mark { background: none; color: inherit; background-image: linear-gradient(#E9A3A3, #E9A3A3); background-repeat: no-repeat; background-position: 0 100%; background-size: 0% 2px; transition: background-size .45s var(--ease); }
     .compose mark.on { background-size: 100% 2px; color: #8A3A3A; }
-    .checking { display: flex; align-items: center; gap: 8px; height: 0; overflow: hidden; opacity: 0; font-size: 13px; color: var(--moss); transition: opacity .4s, height .4s var(--ease), margin .4s; }
-    .checking.on { height: 22px; opacity: 1; margin: 16px 0 0; }
-    .checking .dots i { display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: var(--moss); margin-right: 3px; animation: dot 1.2s infinite; }
-    .checking .dots i:nth-child(2) { animation-delay: .15s; } .checking .dots i:nth-child(3) { animation-delay: .3s; }
-    .suggest { margin-top: 16px; border: 1px solid #BFE3D7; background: #F1F9F6; border-radius: 18px; padding: 18px 20px; opacity: 0; transform: translateY(20px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .checking { display: flex; align-items: center; gap: 8px; height: 0; overflow: hidden; opacity: 0; font-size: 12px; color: var(--moss); transition: opacity .4s, height .4s var(--ease), margin .4s; }
+    .checking.on { height: 18px; opacity: 1; margin-top: 12px; }
+    .checking i { display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: var(--moss); animation: dot 1.2s infinite; }
+    .checking i:nth-child(2) { animation-delay: .15s; } .checking i:nth-child(3) { animation-delay: .3s; }
+    .suggest { margin-top: 12px; border: 1px solid #BFE3D7; background: #F1F9F6; border-radius: 14px; padding: 12px 14px; opacity: 0; transform: translateY(14px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
     .suggest.on { opacity: 1; transform: none; }
-    .suggest .demo-cap { color: var(--moss); }
-    .suggest p { font-size: 15px; line-height: 1.6; margin: 0 0 16px; }
-    .choice { display: flex; gap: 10px; }
-    .choice span { font-size: 13px; font-weight: 500; padding: 8px 14px; border-radius: 10px; border: 1px solid var(--rule); background: #FFFFFF; transition: transform .2s, background .3s, color .3s; }
+    .suggest .cap { color: var(--moss); margin-bottom: 6px; }
+    .suggest p { font-size: 13px; line-height: 1.55; margin: 0 0 10px; }
+    .choice { display: flex; gap: 8px; }
+    .choice span { font-size: 12px; font-weight: 500; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--rule); background: #FFFFFF; transition: transform .2s, background .3s, color .3s; }
     .choice .use.press { background: var(--moss); border-color: var(--moss); color: #FFFFFF; transform: scale(.96); }
-    @keyframes blink { 50% { opacity: 0; } }
-    @keyframes dot { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
 
-    /* Topic demo */
-    .bubble { max-width: 88%; background: #F3F1EC; border-radius: 18px 18px 18px 6px; padding: 14px 18px; font-size: 15px; line-height: 1.55; opacity: 0; transform: translateY(16px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
-    .bubble .who { display: block; font-size: 12px; color: var(--ink-faint); margin-bottom: 4px; }
-    .yn { display: flex; gap: 10px; margin-top: 18px; opacity: 0; transition: opacity .5s var(--ease); }
-    .yn span { flex: 1; text-align: center; padding: 12px; border-radius: 12px; border: 1px solid var(--rule); font-weight: 500; font-size: 15px; transition: transform .2s, background .3s, color .3s, border-color .3s; }
+    .bubble { background: #FFFFFF; border: 1px solid var(--rule); border-radius: 14px 14px 14px 4px; padding: 12px 14px; font-size: 13px; line-height: 1.55; opacity: 0; transform: translateY(12px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+    .bubble .who { display: block; font-size: 11px; color: var(--ink-faint); margin-bottom: 3px; }
+    .yn { display: flex; gap: 8px; margin-top: 14px; opacity: 0; transition: opacity .5s var(--ease); }
+    .yn span { flex: 1; text-align: center; padding: 10px; border-radius: 10px; border: 1px solid var(--rule); background: #FFFFFF; font-weight: 500; font-size: 13px; transition: transform .2s, background .3s, color .3s, border-color .3s; }
     .yn .yes.press { background: var(--moss); border-color: var(--moss); color: #FFFFFF; transform: scale(.97); }
-    .resolved { display: flex; align-items: center; gap: 10px; margin-top: 20px; font-size: 14px; color: var(--moss); font-weight: 500; opacity: 0; transform: translateY(8px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
-    .resolved b { width: 22px; height: 22px; border-radius: 50%; background: var(--moss); color: #FFFFFF; display: grid; place-items: center; font-size: 12px; }
+    .resolved { display: flex; align-items: center; gap: 8px; margin-top: 16px; font-size: 13px; color: var(--moss); font-weight: 500; opacity: 0; transform: translateY(6px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+    .resolved b { width: 20px; height: 20px; border-radius: 50%; background: var(--moss); color: #FFFFFF; display: grid; place-items: center; font-size: 11px; }
     .resolved small { color: var(--ink-faint); font-weight: 400; }
     .topic-demo.s1 .bubble, .topic-demo.s2 .yn, .topic-demo.s4 .resolved { opacity: 1; transform: none; }
 
-    /* Record demo */
-    .rec { list-style: none; margin: 0; padding: 0; }
-    .rec li { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 16px 0; border-bottom: 1px solid var(--rule); font-size: 15px;
-      opacity: 0; transform: translateY(12px); transition: opacity .6s var(--ease), transform .6s var(--ease); transition-delay: calc(var(--i) * 260ms); }
+    .rec { list-style: none; margin: 0; padding: 0; background: #FFFFFF; border: 1px solid var(--rule); border-radius: 14px; padding: 2px 14px; }
+    .rec li { display: flex; justify-content: space-between; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--rule); font-size: 12.5px;
+      opacity: 0; transform: translateY(8px); transition: opacity .5s var(--ease), transform .5s var(--ease); transition-delay: calc(var(--i) * 280ms); }
     .rec li:last-child { border-bottom: 0; }
-    .rec time { font-size: 12px; color: var(--ink-faint); white-space: nowrap; font-variant-numeric: tabular-nums; }
-    .rec .lock { color: var(--ink-faint); font-size: 12px; margin-left: 6px; }
-    .export { display: inline-flex; align-items: center; gap: 8px; margin-top: 24px; font-size: 13px; font-weight: 500; color: var(--moss); border: 1px solid #BFE3D7; border-radius: 10px; padding: 8px 14px;
-      opacity: 0; transition: opacity .6s var(--ease) 1.3s; }
+    .rec time { font-size: 11px; color: var(--ink-faint); white-space: nowrap; font-variant-numeric: tabular-nums; }
+    .export { display: inline-block; margin-top: 14px; font-size: 12px; font-weight: 500; color: var(--moss); border: 1px solid #BFE3D7; background: #FFFFFF; border-radius: 8px; padding: 6px 10px; opacity: 0; transition: opacity .5s var(--ease) 1.4s; }
     .record-demo.is-in .rec li, .record-demo.is-in .export { opacity: 1; transform: none; }
-    .credit { font-size: 13px; color: var(--ink-faint); margin-top: 120px; text-align: center; }
+    .foot-credit { margin-top: 40px; font-size: 13px; color: rgba(255,255,255,0.7); }
 
-    /* ---------- 4. Versus ---------- */
-    .versus { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 72px; }
-    .versus-col { border-radius: 24px; padding: 40px; }
-    .versus-them { background: var(--paper); }
-    .versus-us { background: var(--moss); color: #FFFFFF; }
-    .versus-col h3 { font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; margin: 0 0 16px; }
-    .versus-them h3 { color: var(--ink-faint); }
-    .versus-us h3 { color: rgba(255,255,255,0.75); }
-    .versus-col ul { list-style: none; margin: 0; padding: 0; }
-    .versus-col li { font-size: 16px; line-height: 1.5; padding: 16px 0; border-top: 1px solid var(--rule); }
-    .versus-them li { color: var(--ink-faint); }
-    .versus-us li { border-top-color: rgba(255,255,255,0.16); }
+    @keyframes blink { 50% { opacity: 0; } }
+    @keyframes dot { 0%, 80%, 100% { opacity: .25; } 40% { opacity: 1; } }
 
-    /* ---------- 5. Logistics ---------- */
-    .phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 56px; margin-top: 88px; align-items: start; }
-    .phone-card:nth-child(2) { margin-top: 64px; }
-    .phone-card img { width: 100%; max-width: 230px; height: auto; display: block; margin: 0 auto 32px; filter: drop-shadow(0 24px 36px rgba(28,28,26,0.12)); }
-    .phone-card h3 { font-size: 16px; font-weight: 500; margin: 0 0 8px; text-align: center; }
-    .phone-card p { font-size: 15px; line-height: 1.65; color: var(--ink-mid); margin: 0 auto; text-align: center; max-width: 26ch; }
+    /* ---------- [03] Why parents switch: comparison table ---------- */
+    .compare { width: 100%; border-collapse: collapse; font-size: 15px; }
+    .compare th { text-align: left; font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-faint); padding: 0 0 16px; }
+    .compare th.us { color: var(--moss); }
+    .compare td { padding: 18px 0; border-top: 1px solid var(--rule); vertical-align: top; width: 33%; }
+    .compare td:first-child { color: var(--ink-faint); font-size: 13px; padding-right: 24px; }
+    .compare td.them { color: var(--ink-faint); }
+    .compare td.us { color: var(--ink); font-weight: 500; }
+    .compare td.us::before { content: '\2713'; color: var(--moss); margin-right: 10px; }
+    .compare tr { opacity: 0; transform: translateY(10px); transition: opacity .6s var(--ease), transform .6s var(--ease); transition-delay: calc(var(--i, 0) * 120ms); }
+    .compare.is-in tr { opacity: 1; transform: none; }
 
-    /* ---------- 6. Pricing ---------- */
-    .price-card { max-width: 560px; margin: 64px auto 0; background: var(--paper); border-radius: 28px; padding: 56px 48px; text-align: center; }
-    .price-row { display: flex; justify-content: center; align-items: baseline; gap: 24px; flex-wrap: wrap; }
+    /* ---------- [04] Logistics ---------- */
+    .phones { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--gap); }
+    .phone-card { background: var(--paper); border-radius: 22px; padding: 40px 28px 32px; text-align: center; }
+    .phone-card img { width: 100%; max-width: 200px; height: auto; display: block; margin: 0 auto 28px; filter: drop-shadow(0 18px 28px rgba(28,28,26,0.12)); }
+    .phone-card .pill { color: var(--moss); margin-bottom: 12px; }
+    .phone-card p { font-size: 14px; line-height: 1.6; color: var(--ink-mid); margin: 0 auto; max-width: 26ch; }
+
+    /* ---------- [05] End pair: price + close ---------- */
+    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); margin: 0 var(--gap) var(--gap); }
+    .pair .panel { margin: 0; padding: 72px 56px; }
+    .price-row { display: flex; align-items: baseline; gap: 20px; flex-wrap: wrap; margin: 8px 0 24px; }
     .price { font-family: 'EB Garamond', serif; font-size: 44px; line-height: 1; }
-    .price small { font-family: 'Instrument Sans', sans-serif; font-size: 14px; color: var(--ink-faint); }
-    .price-or { color: var(--ink-faint); font-size: 14px; }
-    .price-points { list-style: none; padding: 0; margin: 32px 0 36px; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; color: var(--ink-mid); }
-    .price-points li::before { content: '\2713'; color: var(--moss); font-weight: 600; margin-right: 8px; }
-
-    /* ---------- 7. Close ---------- */
-    .final-cta { background: var(--moss); color: #FFFFFF; text-align: center; padding: 168px 0; }
-    .final-cta .h2 { color: #FFFFFF; margin-left: auto; margin-right: auto; }
-    .final-cta .h2 em { color: rgba(255,255,255,0.7); }
-    .final-cta .body { color: rgba(255,255,255,0.85); margin: 0 auto 40px; }
-    .final-cta .note { color: rgba(255,255,255,0.7); }
+    .price small { font-family: 'Instrument Sans', sans-serif; font-size: 13px; color: var(--ink-faint); }
+    .price-or { color: var(--ink-faint); font-size: 13px; }
+    .price-points { list-style: none; padding: 0; margin: 0 0 32px; display: grid; gap: 10px; font-size: 14px; color: var(--ink-mid); }
+    .price-points li::before { content: '\2713'; color: var(--moss); font-weight: 600; margin-right: 10px; }
+    .close .h2 { color: #FFFFFF; max-width: 12ch; }
+    .close .lead { margin-bottom: 32px; }
+    .close .note { color: rgba(255,255,255,0.7); }
 
     @media (prefers-reduced-motion: reduce) {
-      [data-reveal], .hero .hero-phone, .chip, .pile span, .bubble, .yn, .resolved, .rec li, .export, .suggest, .hero h1 .line > span { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
+      [data-reveal], .diagram .phone, .callout *, .pile span, .bubble, .yn, .resolved, .rec li, .export, .suggest, .compare tr, .home-hero h1 .line > span { opacity: 1 !important; transform: none !important; transition: none !important; animation: none !important; }
     }
 
-    @media (max-width: 960px) {
-      .sec { padding: 112px 0; }
-      .wrap { padding: 0 24px; }
-      .hero { padding: 128px 0 96px; }
-      .hero-grid, .problem-grid, .step, .step:nth-child(even), .versus { grid-template-columns: 1fr; gap: 56px; }
-      .step:nth-child(even) .step-text { order: 0; }
-      .steps { gap: 112px; margin-top: 72px; }
-      .hero h1 { font-size: 40px; }
-      .hero-lead { font-size: 17px; }
-      .hero-stage { width: 230px; margin-top: 8px; }
-      .chip { font-size: 12px; padding: 8px 12px; }
-      .chip-1 { left: -96px; } .chip-2 { right: -96px; } .chip-3 { left: -84px; }
-      .h2 { font-size: 32px; }
-      .step h3 { font-size: 26px; }
-      .demo { padding: 24px; min-height: 0; border-radius: 22px; }
-      .pile { height: 320px; }
-      .phones { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 24px; margin: 56px -24px 0; padding: 0 24px 16px; scrollbar-width: none; }
-      .phone-card { flex: 0 0 68%; scroll-snap-align: center; }
-      .phone-card:nth-child(2) { margin-top: 0; }
-      .price-card { padding: 40px 24px; }
-      .credit { margin-top: 88px; }
-      .final-cta { padding: 120px 0; }
+    @media (max-width: 1080px) {
+      .cards { grid-template-columns: 1fr; }
+      .stage { min-height: 0; }
     }
-    @media (max-width: 420px) {
-      .chip { display: none; }
-      .hero h1 { font-size: 36px; }
+    @media (max-width: 960px) {
+      :root { --gap: 10px; --pad: 22px; --radius: 22px; }
+      .panel { padding: 64px var(--pad); }
+      .home-hero { padding-top: 56px; }
+      .hero-grid, .split, .head-row, .pair { grid-template-columns: 1fr; }
+      .head-row { gap: 20px; margin-bottom: 40px; }
+      .hero-copy { padding-top: 0; }
+      .home-hero h1 { font-size: 40px; }
+      .h2 { font-size: 34px; }
+      .diagram { height: auto; padding-bottom: 32px; }
+      .diagram .phone { position: relative; width: 230px; margin: 0 auto; }
+      .callout { position: static; margin: 14px auto 0; max-width: 300px; }
+      .callout .dot, .callout .line { display: none; }
+      .callout .txt { padding-left: 0; text-align: center; }
+      .callout .txt span { max-width: none; }
+      .phones { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 calc(var(--pad) * -1); padding: 0 var(--pad) 4px; scrollbar-width: none; }
+      .phone-card { flex: 0 0 75%; scroll-snap-align: center; }
+      .compare td:first-child { display: none; }
+      .compare td { width: 50%; font-size: 14px; }
+      .compare th:first-child { display: none; }
+      .pair .panel { padding: 56px var(--pad); }
     }
   </style>
 </head>
@@ -287,265 +286,238 @@
 
   <main id="main-content">
 
-  <!-- 1. HERO -->
-  <section class="hero" data-scene>
-    <div class="wrap hero-grid">
-      <div>
-        <p class="eyebrow" data-reveal="fade">The co-parenting app</p>
+  <!-- HERO: the app, annotated -->
+  <section class="panel home-hero" data-scene>
+    <div class="inner hero-grid">
+      <div class="hero-copy">
+        <p class="label" data-reveal="fade"><b>Clearly</b> The co-parenting app</p>
         <h1><span class="line"><span>The marriage ends.</span></span><span class="line"><span>The messages don't.</span></span></h1>
         <p class="hero-lead" data-reveal style="--i:3">Clearly is a co-parenting app that helps you both say it calmly, agree on an answer, and get back to your kids.</p>
         <div data-reveal style="--i:4"><a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="home-hero" aria-label="Download Clearly on the App Store"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div></a></div>
         <p class="note" data-reveal style="--i:5">14-day free trial &middot; Your co-parent joins free</p>
       </div>
-      <div class="hero-stage">
-        <div class="hero-phone">
-          <img src="/images/Today.png" alt="The Today screen in Clearly: next exchange, a new expense, a topic to answer and a date swap" width="1027" height="2137" fetchpriority="high">
-        </div>
-        <div class="chip chip-1" aria-hidden="true"><i>&#10022;</i><span>Calmer wording suggested<small>You choose what to send</small></span></div>
-        <div class="chip chip-2" aria-hidden="true"><i>&#10003;</i><span>Swap for Apr 19<small>Accepted</small></span></div>
-        <div class="chip chip-3" aria-hidden="true"><i>$</i><span>Soccer cleats &middot; $27<small>Split 50/50</small></span></div>
+      <div class="diagram">
+        <div class="phone"><img src="/images/Today.png" alt="The Today screen in Clearly" width="1027" height="2137" fetchpriority="high"></div>
+        <div class="callout c1"><i class="dot"></i><i class="line"></i><div class="txt"><strong>The next exchange</strong><span>Who has the kids, and when they switch.</span></div></div>
+        <div class="callout c2"><i class="dot"></i><i class="line"></i><div class="txt"><strong>One tap to start</strong><span>A swap, an expense, an event or a topic.</span></div></div>
+        <div class="callout c3"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Expenses, split for you</strong><span>Each share worked out from your plan.</span></div></div>
+        <div class="callout c4"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Topics that end</strong><span>Every conversation works toward an answer.</span></div></div>
       </div>
     </div>
   </section>
 
-  <!-- 2. THE PROBLEM -->
-  <section class="sec sec-white">
-    <div class="wrap problem-grid">
+  <!-- [01] THE PROBLEM -->
+  <section class="panel">
+    <div class="inner split">
       <div>
-        <p class="eyebrow" data-reveal="fade">What nobody tells you</p>
+        <p class="label" data-reveal="fade"><b>[01]</b> The problem</p>
         <h2 class="h2" data-reveal style="--i:1">Separation doesn't reduce communication. <em>It increases it.</em></h2>
-        <p class="body" data-reveal style="--i:2">Pickup times, doctors, school forms, expenses, holidays. You'll talk to this person more than you expect, about more than you expect, for longer than you expect.</p>
-        <p class="body" data-reveal style="--i:3">Most of the time you agree on more than you think. It's the way the conversation goes that keeps burying it.</p>
-        <p class="pull" data-reveal style="--i:4">Every text about Tuesday pickup carries the weight of everything that came before it.</p>
+        <p class="lead" data-reveal style="--i:2">Pickup times, doctors, school forms, expenses, holidays. You'll talk to this person more than you expect, for longer than you expect. And most of the time you agree on more than you think. It's the way the conversation goes that keeps burying it.</p>
+        <p class="pull" data-reveal style="--i:3">Every text about Tuesday pickup carries the weight of everything that came before it.</p>
       </div>
       <div class="pile" data-scene aria-hidden="true">
-        <span style="--i:0; left:4%;  top:2%;  --r:-2deg">Can you do pickup at 3 instead?</span>
-        <span style="--i:1; left:38%; top:14%; --r:1.5deg">Dentist moved to Tuesday</span>
-        <span style="--i:2; left:10%; top:27%; --r:1deg">Soccer fees are due Friday &middot; $140</span>
-        <span style="--i:3; left:46%; top:40%; --r:-1.5deg">Who has Thanksgiving this year?</span>
-        <span style="--i:4; left:0%;  top:53%; --r:-1deg" class="hot">You said you'd be here at 5.</span>
-        <span style="--i:5; left:34%; top:66%; --r:2deg">Did she take her medicine?</span>
-        <span style="--i:6; left:8%;  top:80%; --r:-2deg" class="hot">This is exactly what you always do.</span>
+        <span style="--i:0; left:6%;  top:6%;  --r:-2deg">Can you do pickup at 3 instead?</span>
+        <span style="--i:1; left:40%; top:17%; --r:1.5deg">Dentist moved to Tuesday</span>
+        <span style="--i:2; left:12%; top:30%; --r:1deg">Soccer fees due Friday &middot; $140</span>
+        <span style="--i:3; left:44%; top:43%; --r:-1.5deg">Who has Thanksgiving this year?</span>
+        <span style="--i:4; left:5%;  top:56%; --r:-1deg" class="hot">You said you'd be here at 5.</span>
+        <span style="--i:5; left:38%; top:69%; --r:2deg">Did she take her medicine?</span>
+        <span style="--i:6; left:10%; top:82%; --r:-2deg" class="hot">This is exactly what you always do.</span>
       </div>
     </div>
   </section>
 
-  <!-- 3. HOW CLEARLY IS DIFFERENT -->
-  <section class="sec" id="how-it-works">
-    <div class="wrap">
-      <div class="center">
-        <p class="eyebrow" data-reveal="fade">How Clearly is different</p>
-        <h2 class="h2" data-reveal style="--i:1">Other apps keep a record of the fight. <em>Clearly helps you end it.</em></h2>
-        <p class="body" data-reveal style="--i:2">Most co-parenting apps are a shared inbox with a paper trail. Clearly changes how the conversation goes.</p>
+  <!-- [02] HOW CLEARLY WORKS -->
+  <section class="panel panel-moss" id="how-it-works">
+    <div class="inner">
+      <div class="head-row">
+        <div>
+          <p class="label" data-reveal="fade"><b>[02]</b> How Clearly is different</p>
+          <h2 class="h2" data-reveal style="--i:1">Other apps keep a record of the fight. <em>Clearly helps you end it.</em></h2>
+        </div>
+        <p class="lead" data-reveal style="--i:2">Most co-parenting apps are a shared inbox with a paper trail. Clearly changes how the conversation goes, in three ways.</p>
       </div>
-
-      <div class="steps">
-        <div class="step">
-          <div class="step-text">
-            <p class="step-num" data-reveal="fade">01 &middot; Tone check</p>
-            <h3 data-reveal style="--i:1">A second look before you post.</h3>
-            <p class="body" data-reveal style="--i:2">Clearly reads your message before it goes, points out what may land hard, and suggests a calmer way to say it. Use it or keep your own words. You choose what to send.</p>
-          </div>
-          <div class="demo tone-demo" data-reveal="right" aria-label="Animated example of the tone check">
-            <p class="demo-cap">New message</p>
+      <div class="cards">
+        <article class="card" data-reveal style="--i:0">
+          <div class="card-top"><span class="pill">Tone check</span><span class="num">01</span></div>
+          <h3>A second look before you post.</h3>
+          <p class="desc">Clearly points out what may land hard and suggests a calmer way to say it. You choose what to send.</p>
+          <div class="stage tone-demo" aria-label="Animated example of the tone check">
+            <p class="cap">New message</p>
             <div class="compose"><span class="typed"></span><span class="caret"></span></div>
-            <div class="checking"><span class="dots"><i></i><i></i><i></i></span> Checking the tone</div>
+            <div class="checking"><i></i><i></i><i></i> Checking the tone</div>
             <div class="suggest">
-              <p class="demo-cap">A calmer way to say it</p>
-              <p>Drop-off has been late on several recent occasions. Please confirm you can make the agreed time going forward.</p>
+              <p class="cap">A calmer way to say it</p>
+              <p>Drop-off has been late several times recently. Please confirm you can make the agreed time.</p>
               <div class="choice"><span class="use">Use this</span><span>Keep mine</span></div>
             </div>
           </div>
-        </div>
-
-        <div class="step">
-          <div class="step-text">
-            <p class="step-num" data-reveal="fade">02 &middot; Topics</p>
-            <h3 data-reveal style="--i:1">Every topic ends in an answer.</h3>
-            <p class="body" data-reveal style="--i:2">Questions get a one-tap Yes or No. Bigger conversations end in a written resolution you both accept, so nobody has to ask "what did we decide?" again.</p>
-          </div>
-          <div class="demo topic-demo" data-reveal="left" aria-label="Animated example of a topic being answered">
-            <p class="demo-cap">Question &middot; Weekend plans</p>
+        </article>
+        <article class="card" data-reveal style="--i:1">
+          <div class="card-top"><span class="pill">Topics</span><span class="num">02</span></div>
+          <h3>Every topic ends in an answer.</h3>
+          <p class="desc">Questions get a one-tap Yes or No. Bigger conversations end in a written resolution you both accept.</p>
+          <div class="stage topic-demo" aria-label="Animated example of a topic being answered">
+            <p class="cap">Question &middot; Weekend plans</p>
             <div class="bubble"><span class="who">Alex</span>Can Maya stay with me Saturday night for her cousin's birthday? I'll drop her at yours by 10am Sunday.</div>
             <div class="yn"><span class="yes">Yes</span><span>No</span></div>
             <div class="resolved"><b>&#10003;</b><span>Answered Yes <small>&middot; Apr 12, 9:14 AM</small></span></div>
           </div>
-        </div>
-
-        <div class="step">
-          <div class="step-text">
-            <p class="step-num" data-reveal="fade">03 &middot; The record</p>
-            <h3 data-reveal style="--i:1">The record stays exactly as written.</h3>
-            <p class="body" data-reveal style="--i:2">Topics and replies can't be edited or deleted. Every one is timestamped, and you can export a PDF report whenever you need one.</p>
-          </div>
-          <div class="demo record-demo" data-reveal="right" aria-label="Example of the timestamped record">
-            <p class="demo-cap">Record</p>
+        </article>
+        <article class="card" data-reveal style="--i:2">
+          <div class="card-top"><span class="pill">The record</span><span class="num">03</span></div>
+          <h3>The record stays as written.</h3>
+          <p class="desc">Topics and replies can't be edited or deleted. Every one is timestamped and exports to a PDF.</p>
+          <div class="stage record-demo" aria-label="Example of the timestamped record">
+            <p class="cap">Record</p>
             <ul class="rec">
-              <li style="--i:0"><span>Swap for Apr 19 &middot; accepted</span><time>Apr 12 &middot; 9:14 AM</time></li>
-              <li style="--i:1"><span>Soccer cleats &middot; $27 split 50/50</span><time>Apr 10 &middot; 6:02 PM</time></li>
-              <li style="--i:2"><span>Holiday gifts &middot; resolved</span><time>Apr 8 &middot; 8:41 PM</time></li>
-              <li style="--i:3"><span>Pickup time &middot; answered Yes</span><time>Apr 5 &middot; 7:30 AM</time></li>
+              <li style="--i:0"><span>Swap for Apr 19 accepted</span><time>Apr 12 &middot; 9:14</time></li>
+              <li style="--i:1"><span>Cleats &middot; $27 split 50/50</span><time>Apr 10 &middot; 6:02</time></li>
+              <li style="--i:2"><span>Holiday gifts resolved</span><time>Apr 8 &middot; 8:41</time></li>
+              <li style="--i:3"><span>Pickup time &middot; Yes</span><time>Apr 5 &middot; 7:30</time></li>
             </ul>
             <span class="export">&#8595; Export PDF report</span>
           </div>
-        </div>
+        </article>
       </div>
-
-      <p class="credit" data-reveal="fade">Built on the principles of mediation and the Harvard Negotiation Project's <em>Getting to Yes</em>.</p>
+      <p class="foot-credit" data-reveal="fade">Built on the principles of mediation and the Harvard Negotiation Project's <em>Getting to Yes</em>.</p>
     </div>
   </section>
 
-  <!-- 4. WHY CLEARLY OVER THE REST -->
-  <section class="sec sec-white">
-    <div class="wrap">
-      <div class="center">
-        <p class="eyebrow" data-reveal="fade">Why parents switch</p>
-        <h2 class="h2" data-reveal style="--i:1">Built to resolve, <em>not just record.</em></h2>
-      </div>
-      <div class="versus">
-        <div class="versus-col versus-them" data-reveal="left">
-          <h3>Most co-parenting apps</h3>
-          <ul>
-            <li>A message thread that spirals</li>
-            <li>You're on your own with the wording</li>
-            <li>A record of every argument</li>
-            <li>Each parent pays for their own account</li>
-          </ul>
+  <!-- [03] WHY PARENTS SWITCH -->
+  <section class="panel">
+    <div class="inner">
+      <div class="head-row">
+        <div>
+          <p class="label" data-reveal="fade"><b>[03]</b> Why parents switch</p>
+          <h2 class="h2" data-reveal style="--i:1">Built to resolve, <em>not just record.</em></h2>
         </div>
-        <div class="versus-col versus-us" data-reveal="right" style="--i:2">
-          <h3>Clearly</h3>
-          <ul>
-            <li>Topics that end in an answer</li>
-            <li>Checks the tone before you post</li>
-            <li>A record of what you agreed</li>
-            <li>One subscription covers both parents</li>
-          </ul>
-        </div>
+        <p class="lead" data-reveal style="--i:2">The first co-parenting apps were built to document conflict. Clearly is built to get you both to an answer. <a class="text-link" href="/best-co-parenting-apps-2026/">See our honest comparison &rarr;</a></p>
       </div>
-      <p class="center note" data-reveal="fade" style="margin-top:40px;"><a class="text-link" href="/best-co-parenting-apps-2026/">See our honest comparison of co-parenting apps &rarr;</a></p>
+      <table class="compare" data-scene>
+        <thead><tr><th></th><th>Most co-parenting apps</th><th class="us">Clearly</th></tr></thead>
+        <tbody>
+          <tr style="--i:1"><td>Conversations</td><td class="them">A message thread that spirals</td><td class="us">Topics that end in an answer</td></tr>
+          <tr style="--i:2"><td>Tone</td><td class="them">You're on your own with the wording</td><td class="us">Checked before you post, with calmer wording</td></tr>
+          <tr style="--i:3"><td>The record</td><td class="them">A record of every argument</td><td class="us">A record of what you agreed</td></tr>
+          <tr style="--i:4"><td>Price</td><td class="them">Each parent pays for their own account</td><td class="us">One subscription covers both parents</td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
-  <!-- 5. THE LOGISTICS -->
-  <section class="sec">
-    <div class="wrap">
-      <div class="center">
-        <p class="eyebrow" data-reveal="fade">And the logistics</p>
-        <h2 class="h2" data-reveal style="--i:1">Everything else, <em>in one place.</em></h2>
+  <!-- [04] THE LOGISTICS -->
+  <section class="panel">
+    <div class="inner">
+      <div class="head-row">
+        <div>
+          <p class="label" data-reveal="fade"><b>[04]</b> The logistics</p>
+          <h2 class="h2" data-reveal style="--i:1">Everything else, <em>in one place.</em></h2>
+        </div>
+        <p class="lead" data-reveal style="--i:2">The calendar, the money and the details you both need, kept current for both of you.</p>
       </div>
       <div class="phones">
-        <div class="phone-card" data-reveal="rise">
+        <div class="phone-card" data-reveal style="--i:0">
           <img src="/images/cal.png" alt="Clearly's shared custody calendar" width="1027" height="2137" loading="lazy">
-          <h3>Schedule</h3>
-          <p>Your custody pattern, holidays and summer. Swaps handled in the app, synced to Apple or Google Calendar.</p>
+          <span class="pill">Schedule</span>
+          <p>Your custody pattern, holidays and summer. Swaps in the app, synced to Apple or Google Calendar.</p>
         </div>
-        <div class="phone-card" data-reveal="rise" style="--i:2">
+        <div class="phone-card" data-reveal style="--i:2">
           <img src="/images/expense.png" alt="Shared expenses in Clearly with each parent's share" width="1027" height="2137" loading="lazy">
-          <h3>Expenses</h3>
+          <span class="pill">Expenses</span>
           <p>Log it once and Clearly works out each share. Tap Pay to open Venmo, Cash App or PayPal.</p>
         </div>
-        <div class="phone-card" data-reveal="rise" style="--i:4">
+        <div class="phone-card" data-reveal style="--i:4">
           <img src="/images/shared.png" alt="The shared parenting plan, kids' details and contacts in Clearly" width="1027" height="2137" loading="lazy">
-          <h3>Shared</h3>
-          <p>The parenting plan, the kids' details and every contact, current for both of you.</p>
+          <span class="pill">Shared</span>
+          <p>The parenting plan, the kids' details and every contact, in one place.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- 6. PRICE -->
-  <section class="sec sec-white" id="pricing">
-    <div class="wrap center">
-      <p class="eyebrow" data-reveal="fade">Pricing</p>
+  <!-- [05] PRICE + CLOSE -->
+  <div class="pair" id="pricing">
+    <section class="panel">
+      <p class="label" data-reveal="fade"><b>[05]</b> Pricing</p>
       <h2 class="h2" data-reveal style="--i:1">Less than one hour <em>of mediation.</em></h2>
-      <p class="body" data-reveal style="--i:2">One subscription covers the whole family.</p>
-      <div class="price-card" data-reveal style="--i:3">
-        <div class="price-row">
-          <span class="price">$249<small> / year</small></span>
-          <span class="price-or">or</span>
-          <span class="price">$24.99<small> / month</small></span>
-        </div>
-        <ul class="price-points">
-          <li>14-day free trial</li>
-          <li>Your co-parent joins free</li>
-          <li>Cancel anytime</li>
-        </ul>
-        <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="home-pricing" aria-label="Download Clearly on the App Store"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div></a>
-        <p class="note">Not ready yet? <a class="text-link" href="/plan-builder/">Build your custody plan free &rarr;</a></p>
+      <div class="price-row" data-reveal style="--i:2">
+        <span class="price">$249<small> / year</small></span>
+        <span class="price-or">or</span>
+        <span class="price">$24.99<small> / month</small></span>
       </div>
-    </div>
-  </section>
-
-  <!-- 7. CLOSE -->
-  <section class="final-cta">
-    <div class="wrap">
-      <h2 class="h2" data-reveal>For the kids. <em>And for you.</em></h2>
-      <p class="body" data-reveal style="--i:1">The way you and your co-parent talk shapes your kids' experience of all this more than anything else. Clearly helps you keep it about them.</p>
-      <div data-reveal style="--i:2"><a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="home-close" aria-label="Download Clearly on the App Store"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div></a></div>
-      <p class="note" data-reveal style="--i:3">14-day free trial &middot; Your co-parent joins free</p>
-    </div>
-  </section>
+      <ul class="price-points" data-reveal style="--i:3">
+        <li>One subscription covers both parents</li>
+        <li>14-day free trial, cancel anytime</li>
+        <li>Your co-parent joins free</li>
+      </ul>
+      <p class="note" data-reveal style="--i:4">Not ready yet? <a class="text-link" href="/plan-builder/">Build your custody plan free &rarr;</a></p>
+    </section>
+    <section class="panel panel-moss close final-cta">
+      <p class="label" data-reveal="fade"><b>Clearly</b></p>
+      <h2 class="h2" data-reveal style="--i:1">For the kids. <em>And for you.</em></h2>
+      <p class="lead" data-reveal style="--i:2">The way you and your co-parent talk shapes your kids' experience of all this more than anything else. Clearly helps you keep it about them.</p>
+      <div data-reveal style="--i:3"><a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="home-close" aria-label="Download Clearly on the App Store"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div></a></div>
+      <p class="note" data-reveal style="--i:4">14-day free trial &middot; Your co-parent joins free</p>
+    </section>
+  </div>
 
   </main>
 
   <script>
-    // Story animations. Each one plays once, when it scrolls into view.
+    // Story animations. Each plays once, when it scrolls into view.
     (function () {
       var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var wait = function (ms) { return new Promise(function (r) { setTimeout(r, reduce ? 0 : ms); }); };
-
       function onView(el, fn, margin) {
         if (!('IntersectionObserver' in window)) return fn(el);
         var io = new IntersectionObserver(function (entries) {
           entries.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); fn(e.target); } });
-        }, { rootMargin: margin || '0px 0px -12% 0px' });
+        }, { rootMargin: margin || '0px 0px -10% 0px' });
         io.observe(el);
       }
-
       document.querySelectorAll('[data-reveal], [data-scene]').forEach(function (el) {
         onView(el, function (t) { t.classList.add('is-in'); });
       });
 
-      // 01: an angry message types itself, gets checked, charged phrases are
-      // marked, then the calmer version arrives and "Use this" is tapped.
+      // Tone check: a message types, charged phrases are marked, a calmer
+      // version arrives, "Use this" is tapped.
       var tone = document.querySelector('.tone-demo');
       if (tone) onView(tone, async function () {
         var typed = tone.querySelector('.typed');
-        var text = "You're ALWAYS late. Every single time. I have a life too and you have zero respect for my time.";
+        var text = "You're ALWAYS late. Every single time. You have zero respect for my time.";
         var hot = ['ALWAYS', 'Every single time', 'zero respect'];
-        await wait(700);
-        for (var i = 0; i <= text.length; i++) {
-          typed.textContent = text.slice(0, i);
-          if (!reduce) await wait(text[i - 1] === ' ' ? 34 : 22);
-        }
+        await wait(600);
+        for (var i = 0; i <= text.length; i++) { typed.textContent = text.slice(0, i); if (!reduce) await wait(24); }
         typed.innerHTML = hot.reduce(function (h, p) { return h.replace(p, '<mark>' + p + '</mark>'); }, text);
         tone.querySelector('.caret').style.display = 'none';
         var checking = tone.querySelector('.checking');
         checking.classList.add('on');
-        await wait(1100);
+        await wait(1000);
         var marks = tone.querySelectorAll('mark');
-        for (var m = 0; m < marks.length; m++) { marks[m].classList.add('on'); await wait(280); }
-        await wait(500);
+        for (var m = 0; m < marks.length; m++) { marks[m].classList.add('on'); await wait(260); }
+        await wait(400);
         checking.classList.remove('on');
         tone.querySelector('.suggest').classList.add('on');
-        await wait(1400);
+        await wait(1300);
         tone.querySelector('.use').classList.add('press');
-      }, '0px 0px -25% 0px');
+      }, '0px 0px -20% 0px');
 
-      // 02: the question arrives, Yes is tapped, the topic is answered.
+      // Topic: the question arrives, Yes is tapped, it's answered.
       var topic = document.querySelector('.topic-demo');
       if (topic) onView(topic, async function () {
-        await wait(500); topic.classList.add('s1');
+        await wait(1200); topic.classList.add('s1');
         await wait(900); topic.classList.add('s2');
         await wait(1000); topic.querySelector('.yes').classList.add('press');
-        await wait(500); topic.classList.add('s4');
-      }, '0px 0px -25% 0px');
+        await wait(450); topic.classList.add('s4');
+      }, '0px 0px -20% 0px');
 
-      // 03: entries stamp into the record one by one.
+      // Record: entries stamp in one by one.
       var rec = document.querySelector('.record-demo');
-      if (rec) onView(rec, function () { rec.classList.add('is-in'); }, '0px 0px -25% 0px');
+      if (rec) onView(rec, async function () { await wait(1800); rec.classList.add('is-in'); }, '0px 0px -20% 0px');
     })();
   </script>
+
 
 
 
