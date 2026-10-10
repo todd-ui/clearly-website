@@ -781,17 +781,53 @@ ${posts.map(post => `      {
         var list = document.querySelector('.list-body');
         if (list && list.getBoundingClientRect().top < 0) window.scrollTo({ top: list.getBoundingClientRect().top + window.scrollY - 96, behavior: 'smooth' });
       }
-      document.querySelectorAll('.filter-btn').forEach(function (btn) {
+      // The topic and page live in the address (#communication, #communication-p2,
+      // #p2), so Back steps through them and a link opens the same view. The
+      // part after # isn't sent to the server, so Google still sees one /blog.
+      var btns = [].slice.call(document.querySelectorAll('.filter-btn'));
+      function slug(c) { return c.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, ''); }
+      function hashFor() {
+        var t = cat === 'all' ? '' : slug(cat);
+        if (page > 1) t += (t ? '-' : '') + 'p' + page;
+        return t ? '#' + t : '';
+      }
+      function readHash() {
+        var h = decodeURIComponent(location.hash.slice(1));
+        var m = h.match(/(?:^|-)p([0-9]+)$/);
+        var t = m ? h.slice(0, m.index) : h;
+        var found = btns.filter(function (b) { return b.dataset.category !== 'all' && slug(b.dataset.category) === t; })[0];
+        cat = found ? found.dataset.category : 'all';
+        page = m ? parseInt(m[1], 10) : 1;
+      }
+      function markChip() {
+        btns.forEach(function (b) { b.classList.toggle('active', b.dataset.category === cat); });
+      }
+      function remember() {
+        var url = location.pathname + location.search + hashFor();
+        if (url !== location.pathname + location.search + location.hash) history.pushState(null, '', url);
+      }
+      btns.forEach(function (btn) {
         btn.addEventListener('click', function () {
-          document.querySelectorAll('.filter-btn').forEach(function (b) { b.classList.remove('active'); });
-          btn.classList.add('active');
           cat = btn.dataset.category;
           page = 1;
+          markChip();
           render();
+          remember();
           toList();
         });
       });
+      // Page buttons call render() then toList(); record the new page in the address too
+      pager.addEventListener('click', function (e) { if (e.target.closest('button')) remember(); });
+      window.addEventListener('popstate', function () { readHash(); markChip(); render(); toList(); });
+
+      readHash();
+      markChip();
       render();
+      // Opened with a topic or page in the address: start at the list
+      if (location.hash) {
+        var list = document.querySelector('.list-body');
+        if (list) window.scrollTo(0, list.getBoundingClientRect().top + window.scrollY - 96);
+      }
     })();
   </script>
 
