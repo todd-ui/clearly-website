@@ -1,0 +1,118 @@
+/* ==========================================
+   GUIDE PAGES — shared template for the lp-* guides
+   (high-conflict, kids & divorce, mediation prep, expenses, communication,
+   custody schedule, alignment). Linked last in each guide's <head> so it
+   restyles the existing markup without touching any words or headings.
+   Panels on the site's 3-column grid: the section heading sits in column 1
+   and stays in view, the text spans columns 2-3. No left-edge accent lines.
+   ========================================== */
+:root {
+  --g-paper: #F6F5F1; --g-ink: #1C1C1A; --g-ink-mid: #4A4A47; --g-ink-faint: #6B6B67;
+  --g-moss: #0D8268; --g-moss-pale: #E4F4EF; --g-rule: rgba(28, 28, 26, 0.10);
+}
+body { background: var(--g-paper); }
+
+/* ---------- Hero: pale green panel, left-aligned ---------- */
+.lp-hero {
+  margin: 16px 16px 16px; border-radius: 28px; background: var(--g-moss-pale);
+  padding: 96px 40px 88px; text-align: left;
+}
+.lp-hero .container { max-width: 1200px; margin: 0 auto; padding: 0; }
+.lp-hero .container::before {
+  content: 'Clearly \00a0\00a0 Guide'; display: block; margin-bottom: 24px;
+  font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--g-moss);
+}
+.lp-hero h1 {
+  font-family: 'EB Garamond', serif; font-weight: 400; font-size: 54px; line-height: 1.06;
+  letter-spacing: -0.4px; color: var(--g-ink); margin: 0 0 28px; max-width: 18ch; text-wrap: balance;
+}
+.lp-hero-text { max-width: 40em; margin: 0; }
+.lp-hero-text p { font-size: 18px; line-height: 1.65; color: var(--g-ink-mid); margin: 0 0 16px; }
+.lp-hero-text p:last-child { font-weight: 400; color: var(--g-ink); margin-bottom: 0; }
+.lp-hero-cta { justify-content: flex-start !important; text-align: left; }
+.lp-hero-note { text-align: left; }
+
+/* ---------- Sections: white panels on the 3-column grid ---------- */
+.lp-section, .lp-section-alt {
+  margin: 0 16px 16px; border-radius: 28px; background: #FFFFFF; padding: 88px 40px;
+}
+/* !important: some guides set an inline max-width on a container */
+.lp-section .container {
+  max-width: 1200px !important; margin: 0 auto; padding: 0; text-align: left;
+  display: grid; grid-template-columns: repeat(3, 1fr); column-gap: 16px; row-gap: 0; align-items: start;
+}
+.lp-section .container > * { grid-column: 2 / span 2; }
+.lp-section .container > h2 {
+  grid-column: 1; grid-row: 1 / span 30; align-self: start; position: sticky; top: 100px;
+  font-family: 'EB Garamond', serif; font-weight: 400; font-size: 34px; line-height: 1.12;
+  letter-spacing: -0.2px; color: var(--g-ink); margin: 0; padding-right: 24px; text-wrap: balance;
+}
+.lp-section p { font-size: 17px; line-height: 1.7; color: var(--g-ink-mid); margin: 0 0 20px; max-width: 42em; text-align: left; }
+.lp-section p:last-child { margin-bottom: 0; }
+.lp-section p strong { color: var(--g-ink); font-weight: 500; }
+.lp-section ul, .lp-section ol { text-align: left; }
+
+/* Tips: bold-led paragraphs as ruled rows */
+.lp-tips-list, .lp-learn-list, .lp-feature-list { max-width: none; margin: 0 0 32px; text-align: left; }
+.lp-tips-list:last-child, .lp-learn-list:last-child, .lp-feature-list:last-child { margin-bottom: 0; }
+.lp-tips-list p { margin: 0; padding: 18px 0; border-top: 1px solid var(--g-rule); max-width: none; }
+.lp-tips-list p:last-child { border-bottom: 1px solid var(--g-rule); }
+.lp-tips-list p strong { display: block; margin-bottom: 4px; font-size: 17px; }
+.lp-learn-list li, .lp-feature-list li { padding: 12px 0; border-top: 1px solid var(--g-rule); }
+
+/* Feature and tool cards: paper cards in the content columns */
+.lp-feature-cards, .lp-tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; text-align: left; max-width: none; margin: 0 0 32px; }
+.lp-feature-card, .lp-tool-card {
+  background: var(--g-paper); border: 0; border-radius: 20px; padding: 28px; text-align: left; box-shadow: none;
+}
+.lp-feature-card-icon { margin: 0 0 16px; }
+
+/* Thought bubbles: quiet quotes */
+.lp-thought-bubbles { text-align: left; justify-content: flex-start; max-width: none; margin: 8px 0 28px; }
+.lp-thought-bubble {
+  background: var(--g-paper); border: 0; border-radius: 16px 16px 16px 4px; padding: 14px 18px;
+  font-family: 'EB Garamond', serif; font-style: italic; font-size: 19px; color: var(--g-ink); box-shadow: none;
+}
+
+/* A section that holds only a call-out (quiz / tool): one green card across the grid */
+.lp-section .container > .lp-cta-box { grid-column: 1 / -1; }
+.lp-cta-box {
+  display: grid; grid-template-columns: auto 1fr auto; column-gap: 24px; align-items: center;
+  max-width: none; margin: 0; padding: 40px; border-radius: 22px; background: var(--g-moss-pale); text-align: left;
+}
+.lp-cta-box .lp-cta-icon { grid-row: 1 / span 3; margin: 0; background: #FFFFFF; }
+.lp-cta-box h2 { grid-column: 2; position: static; font-family: 'EB Garamond', serif; font-weight: 400; font-size: 26px; margin: 0 0 6px; }
+.lp-cta-box p { grid-column: 2; font-size: 15px; margin: 0 0 4px; max-width: 40em; }
+.lp-cta-box .tool-meta { grid-column: 2; font-size: 13px; color: var(--g-ink-faint); margin: 4px 0 0; }
+.lp-cta-box .btn-primary { grid-column: 3; grid-row: 1 / span 3; }
+
+/* ---------- Buttons and links, matching the rest of the site ---------- */
+.lp-hero .btn-primary, .lp-section .btn-primary {
+  background: var(--g-ink); color: #FFFFFF; border-radius: 999px; padding: 13px 22px; font-size: 15px; font-weight: 500; white-space: nowrap;
+}
+.lp-hero .btn-primary:hover, .lp-section .btn-primary:hover { background: #000000; }
+.lp-section .btn-link, .lp-cross-link .btn-link { color: var(--g-moss); font-weight: 500; font-size: 15px; }
+
+/* ---------- Cross-link: a slim closing panel ---------- */
+.lp-cross-link {
+  margin: 0 16px 16px; border-radius: 28px; background: #FFFFFF; padding: 40px; border: 0;
+}
+.lp-cross-link .container {
+  max-width: 1200px; margin: 0 auto; padding: 0; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; text-align: left;
+}
+.lp-cross-link p { margin: 0; font-family: 'EB Garamond', serif; font-size: 24px; color: var(--g-ink); }
+
+/* ---------- Phones and tablets ---------- */
+@media (max-width: 900px) {
+  .lp-hero { margin: 10px; border-radius: 22px; padding: 56px 22px; }
+  .lp-hero h1 { font-size: 38px; }
+  .lp-hero-text p { font-size: 17px; }
+  .lp-section, .lp-section-alt { margin: 0 10px 10px; border-radius: 22px; padding: 56px 22px; }
+  .lp-section .container { display: block; }
+  .lp-section .container > h2 { position: static; font-size: 29px; margin: 0 0 24px; padding: 0; }
+  .lp-feature-cards, .lp-tools-grid { grid-template-columns: 1fr; }
+  .lp-cta-box { grid-template-columns: 1fr; row-gap: 8px; padding: 28px 22px; }
+  .lp-cta-box .lp-cta-icon, .lp-cta-box h2, .lp-cta-box p, .lp-cta-box .tool-meta, .lp-cta-box .btn-primary { grid-column: 1; grid-row: auto; }
+  .lp-cta-box .btn-primary { justify-self: start; margin-top: 12px; }
+  .lp-cross-link { margin: 0 10px 10px; border-radius: 22px; padding: 32px 22px; }
+}
