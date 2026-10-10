@@ -289,165 +289,6 @@
       margin-top: 0;
     }
 
-    /* Sticky page nav: desktop vertical rail, mobile horizontal pill bar */
-    .page-nav {
-      position: fixed;
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity 0.25s ease;
-      z-index: 90;
-    }
-    .page-nav.is-visible {
-      pointer-events: auto;
-      opacity: 1;
-    }
-    .page-nav-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-    }
-    .page-nav-list a {
-      font-family: 'Instrument Sans', sans-serif;
-      text-decoration: none;
-      color: var(--text-muted);
-      transition: color 0.2s ease, background 0.2s ease;
-    }
-    .page-nav-list a:hover { color: var(--primary); text-decoration: none; }
-    .page-nav-list .is-active a { color: var(--primary); font-weight: 500; }
-    /* Desktop: vertical rail on the left. Threshold raised to 1280 so the rail
-       never overlaps the 1040px content container. */
-    @media (min-width: 1280px) {
-      .page-nav {
-        left: 32px;
-        top: 50%;
-        transform: translateY(-50%);
-        max-width: 160px;
-      }
-      .page-nav-list {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        padding: 8px 0;
-      }
-      .page-nav-list li {
-        position: relative;
-        padding-left: 20px;
-      }
-      .page-nav-list li::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        width: 10px;
-        height: 1px;
-        background: var(--border);
-        transition: width 0.2s ease, background 0.2s ease;
-      }
-      .page-nav-list .is-active::before {
-        width: 16px;
-        background: var(--primary);
-      }
-      .page-nav-list a {
-        font-size: 12px;
-        letter-spacing: 0.4px;
-        line-height: 1.2;
-        display: block;
-        padding: 4px 0;
-      }
-    }
-    /* Tablet/mobile: horizontal pill bar at top below site-nav */
-    @media (max-width: 1279px) {
-      .page-nav {
-        top: 64px; /* sits directly under .site-nav */
-        left: 0;
-        right: 0;
-        background: rgba(255,255,255,0.96);
-        backdrop-filter: saturate(180%) blur(12px);
-        -webkit-backdrop-filter: saturate(180%) blur(12px);
-        border-bottom: 1px solid var(--border);
-      }
-      .page-nav-list {
-        display: flex;
-        gap: 4px;
-        padding: 8px 16px;
-        overflow-x: auto;
-        scrollbar-width: none;
-        -webkit-overflow-scrolling: touch;
-      }
-      .page-nav-list::-webkit-scrollbar { display: none; }
-      .page-nav-list li { flex-shrink: 0; }
-      .page-nav-list a {
-        display: inline-block;
-        font-size: 13px;
-        padding: 8px 14px;
-        border-radius: 999px;
-        white-space: nowrap;
-        min-height: 36px; /* touch target */
-      }
-      .page-nav-list .is-active a {
-        background: var(--primary-soft);
-        color: var(--primary);
-      }
-    }
-
-    /* Sticky mobile CTA bar pinned to bottom */
-    .mobile-cta {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 95;
-      display: none;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 12px 18px calc(12px + env(safe-area-inset-bottom));
-      background: var(--text);
-      color: white;
-      text-decoration: none;
-      box-shadow: 0 -8px 32px rgba(0,0,0,0.12);
-      opacity: 0;
-      transform: translateY(100%);
-      transition: opacity 0.25s ease, transform 0.25s ease;
-    }
-    .mobile-cta:hover { text-decoration: none; }
-    .mobile-cta.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .mobile-cta-content {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      flex: 1;
-      min-width: 0;
-    }
-    .mobile-cta-title {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      color: white;
-    }
-    .mobile-cta-meta {
-      font-family: 'Instrument Sans', sans-serif;
-      font-size: 12px;
-      color: rgba(255,255,255,0.7);
-    }
-    .mobile-cta-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: var(--primary);
-      flex-shrink: 0;
-    }
-    @media (max-width: 768px) {
-      .mobile-cta { display: flex; }
-    }
-
     /* Comparison matrix: feature-as-row, app-as-column, Clearly column highlighted */
     .cmp-section { padding: 96px 0; background: white; }
     .cmp-section.lp-section-alt { background: #FAFAF9; }
@@ -721,15 +562,6 @@
       .situation-item::before { padding-top: 0; }
     }
 
-    /* Auto-hide page-nav on scroll-down (improvement #2) */
-    .page-nav.is-hidden { opacity: 0; pointer-events: none; }
-    @media (min-width: 1280px) {
-      .page-nav.is-hidden { transform: translateY(-50%) translateX(-30px); }
-    }
-    @media (max-width: 1279px) {
-      .page-nav.is-hidden { transform: translateY(-12px); }
-    }
-
     /* Why this is different: six-up */
     .why-container { max-width: 1040px; }
     .why-h2 { text-align: center; max-width: 720px; margin: 0 auto 56px !important; }
@@ -947,16 +779,13 @@
       transform: translateY(0);
     }
 
-    /* Anchor-link scroll offset so the sticky site-nav (and page-nav pill bar on mobile) don't cover headings */
+    /* Anchor-link scroll offset so the floating header doesn't cover headings */
     html { scroll-behavior: smooth; }
     section[id] { scroll-margin-top: 88px; }
 
     @media (max-width: 900px) {
       .why-grid { grid-template-columns: repeat(2, 1fr); gap: 32px 36px; }
       .phone-row { grid-template-columns: repeat(2, 1fr); gap: 32px 24px; }
-    }
-    @media (max-width: 1279px) {
-      section[id] { scroll-margin-top: 132px; }
     }
     @media (max-width: 768px) {
       /* Swap horizontal-scroll matrix for stacked cmp-cards on mobile */
@@ -1100,33 +929,7 @@
     window.addEventListener('scroll', update, { passive: true });
   })();
 </script>
-<!-- /mobile-app-bar --><!-- Sticky page navigation: desktop vertical rail (left), mobile horizontal pill bar (top below site-nav) -->
-  <nav class="page-nav" aria-label="Page sections">
-    <ol class="page-nav-list">
-      <li><a href="#short-answer" data-target="short-answer">Short answer</a></li>
-      <li><a href="#what-changed" data-target="what-changed">What changed</a></li>
-      <li><a href="#comparison" data-target="comparison">Comparison</a></li>
-      <li><a href="#why-different" data-target="why-different">Why it's different</a></li>
-      <li><a href="#which-app" data-target="which-app">Which app</a></li>
-      <li><a href="#faq" data-target="faq">FAQ</a></li>
-    </ol>
-  </nav>
-
-  <!-- Sticky mobile CTA bar: pinned to bottom of viewport, visible after scrolling past hero -->
-  <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="mobile-cta" aria-label="Download Clearly on the App Store">
-    <div class="mobile-cta-content">
-      <span class="mobile-cta-title">Download Clearly</span>
-      <span class="mobile-cta-meta">From $24.99/mo for both parents &middot; Free to try</span>
-    </div>
-    <span class="mobile-cta-btn" aria-hidden="true">
-      <svg width="18" height="22" viewBox="0 0 22 26" fill="none">
-        <path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/>
-        <path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/>
-      </svg>
-    </span>
-  </a>
-
-  <!-- HERO -->
+<!-- /mobile-app-bar --><!-- HERO -->
   <section class="lp-hero" id="main-content">
     <div class="container">
       <p class="lp-eyebrow fade-in">The 2026 co-parenting app comparison</p>
@@ -1912,90 +1715,10 @@
     }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
     document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
 
-    // Sticky page-nav and mobile CTA: visible after hero is scrolled past, hidden once CTA is reached
-    (function setupStickyVisibility() {
-      const hero = document.getElementById('main-content');
-      const finalCta = document.querySelector('.final-cta');
-      const pageNav = document.querySelector('.page-nav');
-      const mobileCta = document.querySelector('.mobile-cta');
-      if (!hero || !finalCta || !pageNav) return;
-
-      let heroOut = false;
-      let ctaIn = false;
-      const update = () => {
-        const show = heroOut && !ctaIn;
-        pageNav.classList.toggle('is-visible', show);
-        if (mobileCta) mobileCta.classList.toggle('is-visible', show);
-      };
-
-      new IntersectionObserver(([entry]) => {
-        heroOut = !entry.isIntersecting;
-        update();
-      }, { threshold: 0, rootMargin: '-80px 0px 0px 0px' }).observe(hero);
-
-      new IntersectionObserver(([entry]) => {
-        ctaIn = entry.isIntersecting;
-        update();
-      }, { threshold: 0.1 }).observe(finalCta);
-    })();
-
-    // Active-section highlighting in the sticky page-nav
-    (function setupActiveSection() {
-      const links = document.querySelectorAll('.page-nav-list li');
-      if (!links.length) return;
-      const sections = Array.from(links).map(li => {
-        const a = li.querySelector('a');
-        const target = a && a.getAttribute('data-target');
-        return target ? { li: li, el: document.getElementById(target) } : null;
-      }).filter(s => s && s.el);
-
-      const setActive = (id) => {
-        sections.forEach(s => s.li.classList.toggle('is-active', s.el.id === id));
-      };
-
-      const obs = new IntersectionObserver((entries) => {
-        const visible = entries.filter(e => e.isIntersecting);
-        if (!visible.length) return;
-        const activeLine = window.innerHeight / 3;
-        let best = visible[0], bestDist = Infinity;
-        visible.forEach(e => {
-          const d = Math.abs(e.boundingClientRect.top - activeLine);
-          if (d < bestDist) { bestDist = d; best = e; }
-        });
-        setActive(best.target.id);
-      }, { rootMargin: '-30% 0px -55% 0px', threshold: [0, 0.1, 0.5, 1] });
-
-      sections.forEach(s => obs.observe(s.el));
-    })();
-
-    // Auto-hide page-nav on scroll-down, show on scroll-up (improvement #2)
-    (function setupAutoHide() {
-      const pageNav = document.querySelector('.page-nav');
-      if (!pageNav) return;
-      let lastY = window.scrollY;
-      let accum = 0;
-      const THRESHOLD = 48;
-      window.addEventListener('scroll', () => {
-        const y = window.scrollY;
-        const delta = y - lastY;
-        if (Math.abs(delta) < 4) { lastY = y; return; }
-        accum += delta;
-        if (accum > THRESHOLD) {
-          if (pageNav.classList.contains('is-visible')) pageNav.classList.add('is-hidden');
-          accum = 0;
-        } else if (accum < -THRESHOLD) {
-          pageNav.classList.remove('is-hidden');
-          accum = 0;
-        }
-        if (delta * accum < 0) accum = 0; // reset on direction change
-        lastY = y;
-      }, { passive: true });
-    })();
-
     // Auto-expand the first accordion item when an anchor link jumps to the FAQ section
     (function setupAccordionAutoExpand() {
       const accordionTargets = ['faq'];
-      document.querySelectorAll('.page-nav-list a, .jump-row a').forEach(link => {
+      document.querySelectorAll('.jump-row a').forEach(link => {
         link.addEventListener('click', () => {
           const href = link.getAttribute('href') || '';
           const target = href.replace('#', '');
