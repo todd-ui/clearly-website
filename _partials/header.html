@@ -1,5 +1,6 @@
 <a href="#main-content" class="skip-link">Skip to content</a>
 <header class="site-nav">
+  <link rel="stylesheet" href="/styles/site-chrome.css">
   <a href="/" class="nav-logo">Clearly.</a>
   <div class="nav-right">
     <a href="/blog" class="nav-link">Common Ground</a>
@@ -30,6 +31,13 @@
       siteNavToggle.classList.toggle('open');
       siteNavRight.classList.toggle('open');
     });
+  }
+  // Header gets a soft shadow once the page scrolls under it
+  var siteNav = document.querySelector('.site-nav');
+  if (siteNav) {
+    var navShadow = function () { siteNav.classList.toggle('is-scrolled', window.scrollY > 8); };
+    window.addEventListener('scroll', navShadow, { passive: true });
+    navShadow();
   }
   // Track App Store clicks. data-cta names the placement when there is one.
   document.addEventListener('click', function(e) {
@@ -68,7 +76,7 @@
   }
 </style>
 <div class="mobile-app-bar" id="mobile-app-bar" aria-hidden="true">
-  <img src="/images/app-icon.png" alt="" width="40" height="40">
+  <img src="/images/app-icon-96.png" alt="" width="40" height="40">
   <div class="mobile-app-bar-text">
     <strong>Clearly</strong>
     <span>Co-parenting app</span>
