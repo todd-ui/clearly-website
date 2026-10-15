@@ -23,6 +23,8 @@ const BLOG_URL = `${SITE}/blog`;
 const MERGED_POSTS = {
   // Oct 2026: Google crawled it and declined to index; same ground as the vs. article
   'co-parenting-spectrum-finding-balance': 'parallel-parenting-vs-co-parenting-what-s-the-difference',
+  // Oct 2026: a near-duplicate of the same article (same title, ~60% the same wording)
+  'co-parenting-vs-parallel-parenting': 'parallel-parenting-vs-co-parenting-what-s-the-difference',
 };
 
 // Rewrite internal links that still carry ".html" (e.g. links typed into

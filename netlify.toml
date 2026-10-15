@@ -96,6 +96,12 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/blog/co-parenting-vs-parallel-parenting"
+  to = "/blog/parallel-parenting-vs-co-parenting-what-s-the-difference"
+  status = 301
+  force = true
+
 # Pages are served at clean URLs (/blog, /faq, /blog/<slug>) via Netlify Pretty
 # URLs; requests for the .html versions are 301ed to them by
 # netlify/edge-functions/clean-urls.js. Never add a rule here that sends a
