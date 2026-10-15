@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "node build-blog.js && node automation/check-links.js",
+    "build": "node build-blog.js && node automation/check-links.js && node automation/check-related.js",
     "test": "node automation/seo-check.js && node automation/check-links.js"
   },
   "repository": {

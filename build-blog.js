@@ -251,24 +251,9 @@ function seoTitle(post) {
   return branded.length <= 60 ? branded : base;
 }
 
-const STOPWORDS = new Set('a an and are as at be but by can co do does for from how if in into is it its kids child children your you when what with to the of on or not parent parents parenting co-parent co-parenting coparenting without who why their them they this that'.split(' '));
-const keywords = text => new Set(text.toLowerCase().replace(/[^a-z0-9\s-]/g, ' ').split(/\s+/).filter(w => w.length > 2 && !STOPWORDS.has(w)));
-
-// Related posts: shared title keywords count most, same category breaks ties.
-function pickRelated(post, all, n = 3) {
-  const mine = keywords(post.title);
-  return all
-    .filter(p => p.slug !== post.slug)
-    .map(p => {
-      let score = 0;
-      for (const w of keywords(p.title)) if (mine.has(w)) score += 3;
-      if (p.category && p.category === post.category) score += 2;
-      return { p, score };
-    })
-    .sort((a, b) => b.score - a.score || (a.p.dateISO < b.p.dateISO ? 1 : -1))
-    .slice(0, n)
-    .map(x => x.p);
-}
+// Related articles and guide "Further reading": balanced so every article is
+// linked from several pages (see automation/related.js)
+const { buildLinkPlan, GUIDE_PAGES, writeFurtherReading } = require('./automation/related.js');
 
 function articleJsonLd(post) {
   const url = postUrl(post.slug);
@@ -412,7 +397,8 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
     .related-panel { margin: 0 16px 16px; background: #FFFFFF; border-radius: 28px; padding: 72px 40px; }
     .related-inner { max-width: 1200px; margin: 0 auto; }
     .related-panel .label { font-size: 12px; font-weight: 500; letter-spacing: 1.2px; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 24px; }
-    .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    @media (max-width: 1100px) { .related-grid { grid-template-columns: repeat(2, 1fr); } }
     .related-card { display: flex; flex-direction: column; background: var(--paper); border-radius: 20px; padding: 28px; text-decoration: none; transition: transform .25s, box-shadow .25s; }
     .related-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(28,28,26,0.08); text-decoration: none; }
     .related-card .pill { align-self: flex-start; margin-bottom: 20px; }
@@ -929,7 +915,6 @@ async function build() {
     const date = formatDate(rawDate);
     const dateISO = rawDate || new Date().toISOString().split('T')[0];
     const edited = (page.last_edited_time || '').split('T')[0];
-    const modifiedISO = edited && edited > dateISO ? edited : dateISO;
     const rawCategory = getProperty(page, 'Category') || '';
     const category = rawCategory === 'Expenses' ? 'Money & Expenses' : rawCategory;
 
@@ -943,16 +928,46 @@ async function build() {
     const wordCount = content.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
     content = insertMidArticleCta(wrapTakeaways(content), category);
 
-    const post = { title, seoTitle: seoTitleText, slug, description, date, dateISO, modifiedISO, content, category, wordCount };
+    const post = { title, seoTitle: seoTitleText, slug, description, date, dateISO, edited, content, category, wordCount };
     processedPosts.push(post);
   }
 
+  // Last-modified dates. Notion bumps last_edited_time on every property edit,
+  // so a bulk metadata change (SEO titles, descriptions, an import) stamps the
+  // same day on dozens of posts and tells Google nothing. A date shared by many
+  // posts counts as a bulk edit: those posts keep their publish date instead.
+  const BULK_EDIT_MIN = 8;
+  const editedCounts = {};
+  processedPosts.forEach(p => { if (p.edited) editedCounts[p.edited] = (editedCounts[p.edited] || 0) + 1; });
+  const bulkDates = new Set(Object.keys(editedCounts).filter(d => editedCounts[d] >= BULK_EDIT_MIN));
+  if (bulkDates.size) console.log(`Bulk edit dates ignored for lastmod: ${[...bulkDates].sort().join(', ')}`);
+  for (const p of processedPosts) {
+    p.modifiedISO = p.edited && p.edited > p.dateISO && !bulkDates.has(p.edited) ? p.edited : p.dateISO;
+    delete p.edited;
+  }
+
+  // Related articles for every post and "Further reading" for the guides, in one
+  // pass so links are spread across all articles
+  const linkPlan = buildLinkPlan(processedPosts, GUIDE_PAGES);
+  const inboundCounts = [...linkPlan.inbound.values()];
+  console.log(`Internal links per article (related + guides): min ${Math.min(...inboundCounts)}, max ${Math.max(...inboundCounts)}`);
+
   // Write individual post pages with related articles
   for (const post of processedPosts) {
-    const relatedPosts = pickRelated(post, processedPosts);
+    const relatedPosts = linkPlan.related.get(post.slug) || [];
     const postHtml = blogPostTemplate(post, relatedPosts);
     fs.writeFileSync(path.join(blogDir, `${post.slug}.html`), postHtml);
     console.log(`  -> ${postPath(post.slug)}`);
+  }
+
+  // Guides: refresh their "Further reading" lists
+  for (const g of GUIDE_PAGES) {
+    const file = path.join(__dirname, g.file);
+    const html = fs.readFileSync(file, 'utf8');
+    const next = writeFurtherReading(html, linkPlan.pages.get(g.id));
+    if (next === null) { console.warn(`  ! ${g.file} has no further-reading markers`); continue; }
+    if (next !== html) fs.writeFileSync(file, next);
+    console.log(`  -> /${g.id}/ further reading (${(linkPlan.pages.get(g.id) || []).length})`);
   }
 
   // Write blog listing page

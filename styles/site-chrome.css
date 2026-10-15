@@ -112,3 +112,24 @@
   .site-footer .footer-col-label { font-size: 10px; margin-bottom: 14px; }
   .site-footer .footer-bottom { padding: 22px 0 26px; }
 }
+
+/* ==========================================
+   Guides and the comparison page: "Further reading", written by build-blog.js
+   from automation/related.js (relevant articles, spread so every article gets
+   linked). Plain rows: topic, title, one line of description.
+   ========================================== */
+.further-reading .fr-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.further-reading .fr-list li { border-top: 1px solid rgba(28, 28, 26, 0.10); }
+.further-reading .fr-list li:last-child { border-bottom: 1px solid rgba(28, 28, 26, 0.10); }
+.further-reading .fr-list a { display: grid; grid-template-columns: 1fr auto; gap: 4px 20px; padding: 18px 0; text-decoration: none; color: inherit; }
+.further-reading .fr-list a::after { content: '\2192'; grid-column: 2; grid-row: 1 / span 3; align-self: center; color: #0D8268; font-size: 18px; transition: transform .2s ease; }
+.further-reading .fr-list a:hover::after { transform: translateX(3px); }
+.further-reading .fr-topic { grid-column: 1; font-size: 11px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; color: #0D8268; }
+.further-reading .fr-title { grid-column: 1; font-family: 'EB Garamond', Georgia, serif; font-size: 21px; line-height: 1.25; color: #1C1C1A; }
+.further-reading .fr-list a:hover .fr-title { color: #0D8268; }
+.further-reading .fr-desc { grid-column: 1; font-size: 14px; line-height: 1.55; color: #6B6B67; }
+.further-reading .fr-list a:focus-visible { outline: 2px solid #0D8268; outline-offset: 4px; border-radius: 6px; }
+@media (max-width: 768px) {
+  .further-reading .fr-title { font-size: 19px; }
+  .further-reading .fr-list a { padding: 16px 0; gap: 4px 12px; }
+}
