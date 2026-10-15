@@ -84,9 +84,23 @@
   status = 301
 
 [[redirects]]
-  from = "/best-co-parenting-apps-2026"
-  to = "/best-co-parenting-apps-2026/"
+  from = "/best-co-parenting-apps"
+  to = "/best-co-parenting-apps/"
   status = 301
+
+# The comparison page moved to a permanent, year-free address in Oct 2026
+# (the year lives in its title and updates every January). Keep these forever.
+[[redirects]]
+  from = "/best-co-parenting-apps-2026"
+  to = "/best-co-parenting-apps/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/best-co-parenting-apps-2026/*"
+  to = "/best-co-parenting-apps/"
+  status = 301
+  force = true
 
 # Blog posts merged into a stronger article (keep in sync with MERGED_POSTS
 # in build-blog.js). force: an old built copy of the page must not be served.

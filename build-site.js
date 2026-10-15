@@ -20,7 +20,7 @@ const PAGES = [
   'mediation-prep/index.html',
   'co-parenting-expenses/index.html',
   'high-conflict-coparenting/index.html',
-  'best-co-parenting-apps-2026/index.html',
+  'best-co-parenting-apps/index.html',
   'calculators/support/california.html',
   'calculators/support/florida.html',
   'calculators/support/illinois.html',

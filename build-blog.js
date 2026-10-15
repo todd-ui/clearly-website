@@ -37,6 +37,10 @@ function cleanInternalLinks(html) {
       return `href="${origin ? SITE : ''}${clean || '/'}${rest || ''}"`;
     }
   ).replace(
+    // Pages that moved (links typed into Notion posts still use the old address)
+    /href="(https:\/\/(?:www\.)?getclearly\.app)?\/best-co-parenting-apps-2026\/?([#?][^"]*)?"/g,
+    (m, origin, rest) => `href="${origin ? SITE : ''}/best-co-parenting-apps/${rest || ''}"`
+  ).replace(
     /href="(https:\/\/(?:www\.)?getclearly\.app)?\/blog\/([a-z0-9-]+)([#?][^"]*)?"/g,
     (m, origin, slug, rest) => MERGED_POSTS[slug]
       ? `href="${origin ? SITE : ''}${postPath(MERGED_POSTS[slug])}${rest || ''}"`
@@ -869,7 +873,7 @@ ${posts.map(post => `      {
 const STATIC_PAGES = [
   ['/', 'index.html'],
   ['/plan-builder/', 'plan-builder/index.html'],
-  ['/best-co-parenting-apps-2026/', 'best-co-parenting-apps-2026/index.html'],
+  ['/best-co-parenting-apps/', 'best-co-parenting-apps/index.html'],
   ['/high-conflict-coparenting/', 'high-conflict-coparenting/index.html'],
   ['/co-parent-communication/', 'co-parent-communication/index.html'],
   ['/custody-schedule-help/', 'custody-schedule-help/index.html'],

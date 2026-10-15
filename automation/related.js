@@ -109,7 +109,7 @@ const GUIDE_PAGES = [
   { id: 'co-parent-communication', file: 'co-parent-communication/index.html', category: 'Communication', text: 'communication messages text respond tone calm biff email boundaries conversations' },
   { id: 'custody-schedule-help', file: 'custody-schedule-help/index.html', category: 'Schedules & Custody', text: 'custody schedule 50-50 holidays summer exchanges swaps parenting time plan age' },
   { id: 'coparenting-alignment-guide', file: 'coparenting-alignment-guide/index.html', category: 'Co-Parenting Basics', text: 'co-parenting plan rules consistency agreement values two homes first steps working together' },
-  { id: 'best-co-parenting-apps-2026', file: 'best-co-parenting-apps-2026/index.html', category: 'Communication', text: 'co-parenting app communication tools documentation record messages calendar expenses' },
+  { id: 'best-co-parenting-apps', file: 'best-co-parenting-apps/index.html', category: 'Communication', text: 'co-parenting app communication tools documentation record messages calendar expenses' },
 ];
 
 module.exports = { buildLinkPlan, GUIDE_PAGES, keywords, RELATED_PER_POST, MIN_INBOUND, MAX_INBOUND };
