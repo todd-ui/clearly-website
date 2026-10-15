@@ -88,6 +88,14 @@
   to = "/best-co-parenting-apps-2026/"
   status = 301
 
+# Blog posts merged into a stronger article (keep in sync with MERGED_POSTS
+# in build-blog.js). force: an old built copy of the page must not be served.
+[[redirects]]
+  from = "/blog/co-parenting-spectrum-finding-balance"
+  to = "/blog/parallel-parenting-vs-co-parenting-what-s-the-difference"
+  status = 301
+  force = true
+
 # Pages are served at clean URLs (/blog, /faq, /blog/<slug>) via Netlify Pretty
 # URLs; requests for the .html versions are 301ed to them by
 # netlify/edge-functions/clean-urls.js. Never add a rule here that sends a
