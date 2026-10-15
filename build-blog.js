@@ -16,6 +16,15 @@ const postPath = slug => `/blog/${slug}`;
 const postUrl = slug => `${SITE}${postPath(slug)}`;
 const BLOG_URL = `${SITE}/blog`;
 
+// Posts folded into a stronger article on the same topic. They are left out of
+// the build (no page, sitemap, feed or related link) and links to them point at
+// the article they were merged into. Each one needs a matching 301 in
+// netlify.toml, which ships in the same deploy.
+const MERGED_POSTS = {
+  // Oct 2026: Google crawled it and declined to index; same ground as the vs. article
+  'co-parenting-spectrum-finding-balance': 'parallel-parenting-vs-co-parenting-what-s-the-difference',
+};
+
 // Rewrite internal links that still carry ".html" (e.g. links typed into
 // Notion posts) to the clean form so they never point at a redirect.
 function cleanInternalLinks(html) {
@@ -25,6 +34,11 @@ function cleanInternalLinks(html) {
       const clean = p.endsWith('/index') ? p.slice(0, -5) : p;
       return `href="${origin ? SITE : ''}${clean || '/'}${rest || ''}"`;
     }
+  ).replace(
+    /href="(https:\/\/(?:www\.)?getclearly\.app)?\/blog\/([a-z0-9-]+)([#?][^"]*)?"/g,
+    (m, origin, slug, rest) => MERGED_POSTS[slug]
+      ? `href="${origin ? SITE : ''}${postPath(MERGED_POSTS[slug])}${rest || ''}"`
+      : m
   );
 }
 
@@ -293,6 +307,26 @@ function articleJsonLd(post) {
   }, null, 2).replace(/</g, '\\u003c');
 }
 
+// State child support calculators, linked from every article about child
+// support or shared expenses so Google finds them from more than /calculators/.
+const SUPPORT_CALCULATORS = [
+  ['california', 'California'], ['florida', 'Florida'], ['illinois', 'Illinois'],
+  ['new-york', 'New York'], ['pennsylvania', 'Pennsylvania'], ['texas', 'Texas'],
+];
+const isSupportTopic = post => ['Money & Expenses', 'Expenses'].includes(post.category)
+  || /child[- ]support/i.test(`${post.slug} ${post.title} ${post.description}`);
+function supportCalculators(post) {
+  if (!isSupportTopic(post)) return '';
+  return `<aside class="support-calcs" aria-label="Child support calculators">
+        <h2>Estimate child support in your state</h2>
+        <p>Free calculators that follow each state's guidelines. A starting point for the conversation, not legal advice.</p>
+        <ul>
+          ${SUPPORT_CALCULATORS.map(([slug, name]) => `<li><a href="/calculators/support/${slug}">${name} child support calculator</a></li>`).join('\n          ')}
+          <li><a href="/calculators/" class="all">All states &rarr;</a></li>
+        </ul>
+      </aside>`;
+}
+
 const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -387,6 +421,13 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
     .inline-cta { display: flex; align-items: center; gap: 20px; margin: 48px 0; padding: 20px 22px; border: 1px solid var(--rule); border-radius: 16px; }
     .blog-post-content .inline-cta p { flex: 1; font-size: 15px; line-height: 1.6; margin: 0; }
     .inline-cta .app-badge { flex-shrink: 0; }
+    .support-calcs { margin: 56px 0 0; padding: 28px 28px 24px; border: 1px solid var(--rule); border-radius: 20px; }
+    .support-calcs h2 { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 26px; line-height: 1.2; color: var(--ink); margin: 0 0 8px; }
+    .support-calcs p { font-size: 15px; line-height: 1.6; color: var(--ink-mid); margin: 0 0 18px; }
+    .support-calcs ul { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 0; padding: 0; }
+    .support-calcs a { display: inline-block; padding: 9px 16px; border: 1px solid var(--rule); border-radius: 999px; font-size: 14px; color: var(--ink); text-decoration: none; transition: border-color .2s, color .2s; }
+    .support-calcs a:hover, .support-calcs a:focus-visible { border-color: var(--moss); color: var(--moss); }
+    .support-calcs .all { border-color: transparent; color: var(--moss); padding-left: 6px; }
     .blog-cta { margin: 64px 0 0; background: var(--moss); border-radius: 22px; padding: 48px 40px; text-align: center; color: #FFFFFF; }
     .blog-cta .blog-cta-kicker { font-family: 'EB Garamond', serif; font-size: 30px; line-height: 1.2; margin: 0 0 12px; color: #FFFFFF; }
     .blog-cta p { font-size: 16px; line-height: 1.6; color: rgba(255,255,255,0.85); margin: 0 auto 28px; max-width: 34em; }
@@ -460,6 +501,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
       <div class="blog-post-content">
         ${post.content}
       </div>
+      ${supportCalculators(post)}
       <div class="blog-cta final-cta">
         <p class="blog-cta-kicker">${ctaFor(post.category).kicker}</p>
         <p>${ctaFor(post.category).text}</p>
@@ -887,6 +929,10 @@ async function build() {
       .replace(/\.html?$/i, '')
       .replace(/^\/+|\/+$/g, '')
       .replace(/^blog\//, '');
+    if (MERGED_POSTS[slug]) {
+      console.log(`  → Skipping "${title}": merged into /blog/${MERGED_POSTS[slug]}`);
+      continue;
+    }
     if (!slug || seenSlugs.has(slug)) {
       console.warn(`  ! Skipping "${title}": ${slug ? 'duplicate' : 'empty'} slug "${slug}"`);
       continue;
