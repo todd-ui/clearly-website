@@ -1,0 +1,20 @@
+name: New year rebuild
+
+# Deploys the site just after midnight Eastern on January 1, so the build's
+# automation/roll-year.js puts the new year into "Best Co-Parenting Apps <year>"
+# and the footer straight away. The comparison page's address never changes.
+on:
+  schedule:
+    - cron: '10 5 1 1 *'   # 05:10 UTC on Jan 1 = 00:10 EST
+  workflow_dispatch:
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger a Netlify deploy
+        env:
+          NETLIFY_BUILD_HOOK: ${{ secrets.NETLIFY_BUILD_HOOK }}
+        run: |
+          test -n "$NETLIFY_BUILD_HOOK" || { echo "NETLIFY_BUILD_HOOK secret is missing"; exit 1; }
+          curl -fsS -X POST -d '{}' "$NETLIFY_BUILD_HOOK"
