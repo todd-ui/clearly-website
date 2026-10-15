@@ -568,6 +568,15 @@ const TOPIC_GROUPS = [
   ['The practical side', ['Co-Parenting Basics', 'Schedules & Custody', 'Money & Expenses', 'Legal Basics']],
 ];
 
+// An article's section headings, so the blog search also finds words used in
+// the article, not just its title and description.
+function searchHeadings(html) {
+  return [...String(html || '').matchAll(/<h[23][^>]*>([\s\S]*?)<\/h[23]>/g)]
+    .map(m => m[1].replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&[a-z#0-9]+;/gi, ' ').trim())
+    .filter(t => t && !/^key takeaways$/i.test(t))
+    .join(' · ');
+}
+
 function topicFilters(posts) {
   const counts = {};
   posts.forEach(p => { if (p.category) counts[p.category] = (counts[p.category] || 0) + 1; });
@@ -578,7 +587,12 @@ function topicFilters(posts) {
     .filter(([, cats]) => cats.length);
   const btn = (cat, label, n, active) =>
     `<button class="filter-btn${active ? ' active' : ''}" data-category="${escapeHtml(cat)}">${escapeHtml(label)} <span>${n}</span></button>`;
-  return `<aside class="topics" aria-label="Topics">
+  return `<aside class="topics" aria-label="Search and topics">
+        <div class="blog-search" role="search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="16.5" y1="16.5" x2="21" y2="21"></line></svg>
+          <input id="blog-q" type="search" placeholder="Search articles" aria-label="Search articles" autocomplete="off" spellcheck="false" enterkeyhint="search">
+          <button type="button" class="search-clear" aria-label="Clear search" hidden>&times;</button>
+        </div>
         <nav class="filters" role="group" aria-label="Filter by topic">
           <div class="filter-all">${btn('all', 'All articles', posts.length, true)}</div>
           ${groups.map(([name, cats]) => `<div class="filter-group"><p>${escapeHtml(name)}</p>${cats.map(c => btn(c, c, counts[c])).join('')}</div>`).join('\n          ')}
@@ -704,9 +718,24 @@ ${posts.map(post => `      {
     .pager .gap { min-width: 24px; text-align: center; color: var(--ink-faint); }
     .no-posts { text-align: center; color: var(--ink-faint); }
 
+    /* Search: filters the cards as you type, within the chosen topic */
+    .blog-search { position: relative; margin: 0 0 24px; }
+    .blog-search svg { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; color: var(--ink-faint); pointer-events: none; }
+    .blog-search input { width: 100%; box-sizing: border-box; font: inherit; font-size: 16px; color: var(--ink); background: #FFFFFF; border: 1px solid var(--rule); border-radius: 999px; padding: 11px 40px 11px 40px; -webkit-appearance: none; appearance: none; transition: border-color .2s, box-shadow .2s; }
+    .blog-search input::placeholder { color: var(--ink-faint); }
+    .blog-search input:focus { outline: none; border-color: var(--moss); box-shadow: 0 0 0 3px rgba(13,130,104,0.14); }
+    .blog-search input::-webkit-search-cancel-button { display: none; }
+    .search-clear { position: absolute; right: 6px; top: 50%; transform: translateY(-50%); width: 32px; height: 32px; border: 0; border-radius: 50%; background: transparent; color: var(--ink-faint); font-size: 20px; line-height: 1; cursor: pointer; }
+    .search-clear:hover, .search-clear:focus-visible { background: var(--paper); color: var(--ink); }
+    .search-clear[hidden] { display: none; }
+    .search-status { grid-column: 1 / -1; font-size: 14px; line-height: 1.6; color: var(--ink-mid); margin: 0 0 4px; }
+    .search-status[hidden] { display: none; }
+    .search-status button { font: inherit; color: var(--moss); background: none; border: 0; padding: 0; margin-left: 10px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+
     @media (max-width: 960px) {
       .list-body { display: block; padding-top: 24px; }
       .topics { position: static; margin: 0 0 28px; }
+      .blog-search { margin: 0 0 14px; }
       .filters { flex-direction: row; gap: 4px; overflow-x: auto; scrollbar-width: none; margin: 0 -40px; padding: 0 40px 4px; }
       .filter-group, .filter-all { display: contents; border: 0; padding: 0; }
       .filter-group p { display: none; }
@@ -744,8 +773,9 @@ ${posts.map(post => `      {
       <div class="list-body">
       ${topicFilters(posts)}
       <div class="blog-grid">
+        <p class="search-status" aria-live="polite" hidden></p>
         ${posts.map((post, i) => `
-        <article class="blog-card" data-category="${escapeHtml(post.category)}">
+        <article class="blog-card" data-category="${escapeHtml(post.category)}" data-headings="${escapeHtml(searchHeadings(post.content))}">
           ${post.category ? `<span class="pill">${escapeHtml(post.category)}</span>` : ''}
           <h2><a href="${postPath(post.slug)}">${escapeHtml(post.title)}</a></h2>
           <p>${escapeHtml(post.description)}</p>
@@ -794,8 +824,44 @@ ${posts.map(post => `      {
         }
         return out;
       }
+      // Search: every word must appear in the title, description, topic or a
+      // section heading ("boundaries" also finds "boundary"). Best matches first.
+      var input = document.getElementById('blog-q');
+      var clearBtn = document.querySelector('.search-clear');
+      var status = document.querySelector('.search-status');
+      var q = '';
+      function norm(t) { return String(t || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/&/g, ' and ').replace(/['\u2019]/g, '').replace(/[^a-z0-9]+/g, ' '); }
+      function stem(w) { return w.length > 4 ? w.replace(/(ies|es|s)$/, '') : w; }
+      cards.forEach(function (c, i) {
+        c._order = i;
+        c._title = norm(c.querySelector('h2').textContent);
+        c._desc = norm((c.querySelector('p:not(.meta)') || {}).textContent) + ' ' + norm(c.dataset.category);
+        c._head = norm(c.dataset.headings);
+      });
+      function score(c, words) {
+        var total = 0;
+        for (var i = 0; i < words.length; i++) {
+          var w = words[i], s = 0;
+          if (c._title.indexOf(w) !== -1) s = 3;
+          else if (c._desc.indexOf(w) !== -1) s = 2;
+          else if (c._head.indexOf(w) !== -1) s = 1;
+          if (!s) return 0;
+          total += s;
+        }
+        return total;
+      }
       function render() {
+        var words = norm(q).split(' ').filter(Boolean).map(stem);
         var matching = cards.filter(function (c) { return cat === 'all' || c.dataset.category === cat; });
+        if (words.length) {
+          matching = matching.map(function (c) { return { c: c, s: score(c, words) }; })
+            .filter(function (x) { return x.s > 0; })
+            .sort(function (a, b) { return b.s - a.s || a.c._order - b.c._order; })
+            .map(function (x) { return x.c; });
+        }
+        // Results in ranked order; back to newest first when the search is cleared
+        (words.length ? matching : cards).forEach(function (c) { grid.appendChild(c); });
+        showStatus(words.length, matching.length);
         var pages = Math.max(1, Math.ceil(matching.length / PER));
         page = Math.min(Math.max(page, 1), pages);
         cards.forEach(function (c) { c.classList.toggle('hidden', matching.indexOf(c) === -1); c.classList.remove('off-page'); });
@@ -809,6 +875,53 @@ ${posts.map(post => `      {
           else pager.appendChild(button(String(p), p, { current: p === page, aria: 'Page ' + p }));
         });
         pager.appendChild(button('\u203a', page + 1, { aria: 'Next page', disabled: page === pages }));
+      }
+      function showStatus(searching, n) {
+        status.hidden = !searching;
+        if (!searching) return;
+        var where = cat === 'all' ? '' : ' in ' + cat;
+        status.textContent = n
+          ? n + (n === 1 ? ' article' : ' articles') + ' for \u201c' + q.trim() + '\u201d' + where
+          : 'No articles for \u201c' + q.trim() + '\u201d' + where + '.';
+        if (!n && cat !== 'all') status.appendChild(action('Search all topics', function () { cat = 'all'; markChip(); render(); remember(); }));
+        status.appendChild(action('Clear search', clearSearch));
+      }
+      function action(label, fn) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.textContent = label;
+        b.addEventListener('click', fn);
+        return b;
+      }
+      function clearSearch() { input.value = ''; onType(); input.focus(); }
+      var typing, sent = '', sendTimer;
+      function onType() {
+        clearTimeout(typing);
+        typing = setTimeout(function () {
+          q = input.value;
+          clearBtn.hidden = !q;
+          page = 1;
+          render();
+          history.replaceState(null, '', address());
+          // Tell GA what people look for once they stop typing (ideas for new articles)
+          clearTimeout(sendTimer);
+          sendTimer = setTimeout(function () {
+            var term = q.trim().toLowerCase();
+            if (term.length >= 3 && term !== sent && typeof gtag === 'function') {
+              sent = term;
+              gtag('event', 'search', { search_term: term, results: cards.filter(function (c) { return !c.classList.contains('hidden'); }).length });
+            }
+          }, 1500);
+        }, 120);
+      }
+      if (input) {
+        input.addEventListener('input', onType);
+        input.addEventListener('keydown', function (e) { if (e.key === 'Escape' && input.value) { e.preventDefault(); clearSearch(); } });
+        clearBtn.addEventListener('click', clearSearch);
+        // "/" jumps to the search box, as on most sites with search
+        document.addEventListener('keydown', function (e) {
+          if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName) && !e.metaKey && !e.ctrlKey) { e.preventDefault(); input.focus(); }
+        });
       }
       // bring the top of the list back into view after a topic or page change
       function toList() {
@@ -836,8 +949,10 @@ ${posts.map(post => `      {
       function markChip() {
         btns.forEach(function (b) { b.classList.toggle('active', b.dataset.category === cat); });
       }
+      // The search sits in ?q= (shareable; /blog stays the canonical page)
+      function address() { return location.pathname + (q.trim() ? '?q=' + encodeURIComponent(q.trim()) : '') + hashFor(); }
       function remember() {
-        var url = location.pathname + location.search + hashFor();
+        var url = address();
         if (url !== location.pathname + location.search + location.hash) history.pushState(null, '', url);
       }
       btns.forEach(function (btn) {
@@ -852,9 +967,15 @@ ${posts.map(post => `      {
       });
       // Page buttons call render() then toList(); record the new page in the address too
       pager.addEventListener('click', function (e) { if (e.target.closest('button')) remember(); });
-      window.addEventListener('popstate', function () { readHash(); markChip(); render(); toList(); });
+      window.addEventListener('popstate', function () {
+        readHash();
+        if (input) { input.value = q = new URLSearchParams(location.search).get('q') || ''; clearBtn.hidden = !q; }
+        markChip(); render(); toList();
+      });
 
       readHash();
+      var startQ = new URLSearchParams(location.search).get('q');
+      if (startQ && input) { input.value = q = startQ; clearBtn.hidden = false; }
       markChip();
       render();
       // Opened with a topic or page in the address: start at the list
