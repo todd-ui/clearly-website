@@ -554,6 +554,19 @@ ${articleJsonLd(post)}
         }, 2000);
       });
     }
+    // Track App Store clicks, same as every other page. data-cta names the
+    // placement (mid-article, end-of-article); the fallback labels the rest so
+    // a post click is never recorded as "(not set)".
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('a[href*="apps.apple.com"]');
+      if (link && typeof gtag === 'function') {
+        gtag('event', 'app_store_click', {
+          link_url: link.href,
+          link_location: link.dataset.cta || (link.closest('header') ? 'header' : link.closest('footer') ? 'footer' : link.closest('.final-cta,.hero') ? 'cta' : 'body'),
+          page_type: location.pathname.indexOf('/blog/') === 0 ? 'blog_post' : 'page'
+        });
+      }
+    });
   </script>
 
 </body>
