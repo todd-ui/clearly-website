@@ -10,6 +10,8 @@ Clearly is built for co-parents who find it hard to talk. Unlike apps that work 
 
 **Platform:** iPhone only (no Android, iPad or web app).
 
+**Languages:** Works in your language. Parents can write in Spanish, French, Portuguese, Chinese, Vietnamese, Korean, Arabic, Tagalog or most other languages; the tone check, suggested wording, topic titles and written-up agreements come back in the language they write in. App menus are in English.
+
 **Pricing:** $24.99/month or $249/year (save $51). One family subscription covers both parents; the co-parent joins free with the invite code (they create their own account but don't pay). 14-day free trial (Apple introductory offer), starting when a parent subscribes. Free in-app demo, no account needed. Read-only without a subscription; records stay viewable and exportable. No free tier, per-parent pricing or lifetime plan.
 
 **Rating:** Rated 5 stars on the App Store.

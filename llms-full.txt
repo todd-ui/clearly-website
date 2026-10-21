@@ -55,6 +55,7 @@ Separation ends the relationship, not the communication. Pickup times, medical d
 ## Platform and availability
 
 - **Platform:** iPhone only (no Android, iPad or web app).
+- **Languages:** Works in your language. Parents can write in Spanish, French, Portuguese, Chinese, Vietnamese, Korean, Arabic, Tagalog or most other languages; the tone check, suggested wording, topic titles and written-up agreements come back in the language they write in. App menus are in English.
 - **App Store:** https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374
 - **Rating:** Rated 5 stars on the App Store.
 - **Maker:** Clearly LLC (independent company).
@@ -82,6 +83,9 @@ Clearly is built around helping conversations reach resolution. Its structured T
 
 **How does Clearly help reduce conflict?**
 Before you post, Clearly checks the tone and may suggest calmer wording. You choose what to send. Posts stay on the record as written. For a stalled topic, "Where this stands" shows what's settled and a friendly next step, and in a real disagreement Clearly can suggest a fair middle ground. It never takes sides.
+
+**Does Clearly work in my language?**
+Yes. Write in Spanish, French, Portuguese, Chinese, Vietnamese, Korean, Arabic, Tagalog or most other languages, and Clearly answers in the language you write in: the tone check, suggested wording, topic titles and the agreements it writes up for you both to accept. The app's menus and buttons are in English for now.
 
 **How long does setup take?**
 Most parents complete setup in under 10 minutes. Choose from pre-loaded custody patterns or create your own, set up holidays, configure your expense split, and you're ready to go. A plan code from the website plan builder sets the app up with your plan.
