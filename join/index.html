@@ -111,6 +111,11 @@
       border-radius: 10px;
       margin-bottom: 16px;
     }
+    .paths { display: flex; flex-direction: column; gap: 10px; margin-bottom: 18px; }
+    .paths .cta { margin-bottom: 0; }
+    /* The second route reads as the alternative, not a twin of the first */
+    .paths .cta.secondary { background: none; color: var(--green); border: 1.5px solid var(--green); padding: 14.5px 24px; }
+    .steps-web { color: var(--faint); font-size: 14px; margin: 0; }
     .steps { color: var(--faint); font-size: 14px; margin: 0; text-align: left; padding-left: 20px; }
     .steps li { margin-bottom: 6px; }
     .foot { text-align: center; margin-top: 24px; font-size: 13px; }
@@ -135,15 +140,21 @@
       </div>
       <button class="copy" id="copy" hidden>Copy code</button>
 
-      <a class="cta" data-cta="join" href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374">
-        Download Clearly
-      </a>
+      <div class="paths">
+        <a class="cta" id="cta-app" data-cta="join" href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374">
+          Get the iPhone app
+        </a>
+        <a class="cta" id="cta-web" data-cta="join_web" href="https://web.getclearly.app/join">
+          Use Clearly on the web
+        </a>
+      </div>
 
-      <ol class="steps">
+      <ol class="steps" id="steps-app">
         <li>Install the app.</li>
         <li>Tap <strong>“I have an invite code”</strong>.</li>
         <li>Enter the code above.</li>
       </ol>
+      <p class="steps-web" id="steps-web" hidden>Works on any computer or phone, Android included. Create your account and you’re joined straight away: no code to type.</p>
     </div>
 
     <p class="foot"><a href="https://getclearly.app">getclearly.app</a></p>
@@ -164,10 +175,30 @@
       // no code rather than printed back onto the page.
       var code = /^[A-Za-z0-9]{4,12}$/.test(raw) ? raw.toUpperCase() : '';
 
+      // Both routes, the one that fits this device first: the App Store on
+      // an iPhone or iPad, the web app everywhere else (Android, computers)
+      var appleDevice = /iPhone|iPad|iPod/.test(navigator.userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+      var app = document.getElementById('cta-app');
+      var web = document.getElementById('cta-web');
+      // The web app joins the family from the link itself
+      if (code) web.href = 'https://web.getclearly.app/join/' + encodeURIComponent(code);
+      if (appleDevice) {
+        web.classList.add('secondary');
+      } else {
+        app.classList.add('secondary');
+        app.parentNode.insertBefore(web, app);
+        document.getElementById('steps-app').hidden = true;
+        document.getElementById('steps-web').hidden = false;
+      }
+
       // GA4: whether the link carried a code (never the code itself)
-      gtag('event', 'join_view', { has_code: code ? 'yes' : 'no' });
-      document.querySelector('.cta').addEventListener('click', function () {
+      gtag('event', 'join_view', { has_code: code ? 'yes' : 'no', device: appleDevice ? 'apple' : 'other' });
+      app.addEventListener('click', function () {
         gtag('event', 'app_store_click', { link_url: this.href, link_location: 'join' });
+      });
+      web.addEventListener('click', function () {
+        gtag('event', 'web_app_click', { link_location: 'join' });
       });
 
       if (code) {
