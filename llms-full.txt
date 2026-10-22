@@ -109,6 +109,7 @@ Clearly positions itself against the established category (OurFamilyWizard, Talk
 - **Helping kids through divorce** — what children need from separating parents: https://getclearly.app/kids-and-divorce/
 - **Mediation preparation** — getting ready for a family-law mediation: https://getclearly.app/mediation-prep/
 - **Co-parenting expenses** — tracking, splitting, and documenting shared kid expenses: https://getclearly.app/co-parenting-expenses/
+- **Switching from OurFamilyWizard** — moving to Clearly from OurFamilyWizard, TalkingParents, AppClose, Cozi or 2houses: bring the calendar (.ics), contacts (.vcf) and message report (PDF, kept exactly as uploaded in Records and labelled imported). Old messages are not converted into Clearly messages, because Clearly can only vouch for what happened in Clearly: https://getclearly.app/switch-from-ourfamilywizard/
 
 ## For family & legal professionals
 
