@@ -39,6 +39,7 @@ Clearly is built for co-parents who find it hard to talk. Unlike apps that work 
 - [Mediation preparation](https://getclearly.app/mediation-prep/): Getting ready for a family-law mediation.
 - [Co-parenting expenses](https://getclearly.app/co-parenting-expenses/): Tracking, splitting, and documenting shared kid expenses.
 - [Co-parent communication](https://getclearly.app/co-parent-communication/): Principles of low-conflict communication.
+- [Switching from OurFamilyWizard](https://getclearly.app/switch-from-ourfamilywizard/): Moving to Clearly from OurFamilyWizard, TalkingParents, AppClose, Cozi or 2houses: bring the calendar (.ics), contacts (.vcf) and message report (PDF, kept as uploaded in Records, labelled imported). Old messages are not converted into Clearly messages.
 
 ## Most-read guides
 
