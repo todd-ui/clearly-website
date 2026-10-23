@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Check a Clearly document</title>
+  <meta name="description" content="Check that a record or exhibit from Clearly, the co-parenting app, is genuine and unchanged. Enter its document ID or add the PDF.">
+  <link rel="canonical" href="https://getclearly.app/verify/">
+  <link rel="icon" href="/images/favicon-32.png">
+
+  <!-- Google Analytics. The document ID is in the address (/verify/CLR-…), so
+       every hit reports the page as plain /verify and the ID never reaches GA. -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DYZ1XEXPMT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DYZ1XEXPMT', { page_location: location.origin + '/verify', page_path: '/verify' });
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #1A1917; --muted: #5C5856; --faint: #8C8780;
+      --green: #0D8268; --green-ink: #0A6B55; --green-soft: #DBEFE8;
+      --red: #B3261E; --red-soft: #FBE9E7;
+      --page: #FAFAF9; --card: #FFFFFF; --line: #E8E7E4;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--page); color: var(--ink); font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.55; padding: 40px 16px 64px; }
+    .wrap { max-width: 640px; margin: 0 auto; }
+    .brand { font-family: 'EB Garamond', Georgia, serif; font-size: 28px; color: var(--green); text-decoration: none; letter-spacing: -0.01em; }
+    h1 { font-family: 'EB Garamond', Georgia, serif; font-weight: 400; font-size: clamp(32px, 6vw, 44px); line-height: 1.1; letter-spacing: -0.01em; margin: 40px 0 12px; }
+    .lede { color: var(--muted); font-size: 17px; margin: 0 0 32px; max-width: 560px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+    label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 8px; }
+    .row { display: flex; gap: 10px; }
+    input[type=text] { flex: 1; min-width: 0; font: 500 18px 'SF Mono', ui-monospace, Menlo, monospace; letter-spacing: 0.06em; text-transform: uppercase; padding: 13px 14px; border: 1px solid #D5D3CF; border-radius: 10px; background: #fff; color: var(--ink); }
+    input[type=text]:focus { outline: 2px solid var(--green); outline-offset: 1px; border-color: transparent; }
+    button { font: 600 15px inherit; font-family: inherit; background: var(--green); color: #fff; border: 0; border-radius: 10px; padding: 0 20px; cursor: pointer; white-space: nowrap; }
+    button:disabled { opacity: .55; cursor: default; }
+    .hint { color: var(--faint); font-size: 13px; margin: 8px 0 0; }
+    .result { display: none; }
+    .result.on { display: block; }
+    .verdict { display: flex; gap: 12px; align-items: flex-start; padding: 18px 20px; border-radius: 12px; margin-bottom: 18px; }
+    .verdict.ok { background: var(--green-soft); color: var(--green-ink); }
+    .verdict.bad { background: var(--red-soft); color: var(--red); }
+    .verdict.wait { background: #F3F2EF; color: var(--muted); }
+    .verdict svg { flex: none; width: 22px; height: 22px; margin-top: 1px; }
+    .verdict b { display: block; font-size: 16px; }
+    .verdict span { font-size: 14px; color: inherit; opacity: .9; }
+    dl { display: grid; grid-template-columns: 150px 1fr; gap: 8px 16px; margin: 0; font-size: 15px; }
+    dt { color: var(--faint); }
+    dd { margin: 0; }
+    .mono { font-family: 'SF Mono', ui-monospace, Menlo, monospace; font-size: 13px; letter-spacing: .02em; word-break: break-all; }
+    .drop { margin-top: 20px; border: 1.5px dashed #CFCCC6; border-radius: 12px; padding: 22px; text-align: center; color: var(--muted); font-size: 15px; cursor: pointer; transition: background .15s, border-color .15s; }
+    .drop:hover, .drop.over { background: #F6F5F2; border-color: var(--green); }
+    .drop b { color: var(--green-ink); }
+    .drop input { display: none; }
+    .fileresult { margin-top: 14px; }
+    .about { color: var(--muted); font-size: 14px; }
+    .about h2 { font-family: 'EB Garamond', Georgia, serif; font-weight: 500; font-size: 22px; color: var(--ink); margin: 32px 0 8px; }
+    .about p { margin: 0 0 10px; }
+    a { color: var(--green-ink); }
+    @media (max-width: 560px) {
+      .row { flex-direction: column; } button { padding: 13px 20px; }
+      dl { grid-template-columns: 1fr; gap: 2px 0; } dt { margin-top: 8px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <a class="brand" href="/">Clearly.</a>
+    <h1>Check a Clearly document</h1>
+    <p class="lede">Every record and exhibit Clearly produces has a document ID on each page. Enter it to see what Clearly produced, then add the PDF to confirm it hasn’t been changed.</p>
+
+    <form class="card" id="form" autocomplete="off">
+      <label for="code">Document ID</label>
+      <div class="row">
+        <input type="text" id="code" placeholder="CLR-XXXX-XXXX-XXXX" spellcheck="false" aria-describedby="code-hint">
+        <button type="submit" id="go">Check</button>
+      </div>
+      <p class="hint" id="code-hint">It’s on the first page and at the bottom of every page, and in the QR code.</p>
+    </form>
+
+    <section class="card result" id="result" aria-live="polite">
+      <div class="verdict wait" id="verdict"></div>
+      <dl id="facts"></dl>
+      <label class="drop" id="drop" for="file" hidden>
+        <input type="file" id="file" accept="application/pdf,.pdf">
+        <span id="drop-text"><b>Add the PDF</b> to check it’s unchanged, or drop it here.<br><small>It stays on this device. Nothing is uploaded.</small></span>
+      </label>
+      <div class="fileresult" id="fileresult"></div>
+    </section>
+
+    <section class="about">
+      <h2>What this check tells you</h2>
+      <p><b>The document ID</b> confirms Clearly produced a document under that ID, and shows when, for which family, how many pages, and who asked for it (a parent, or a professional with a parent’s permission). No messages or other content are ever shown here.</p>
+      <p><b>Adding the PDF</b> compares its fingerprint (SHA-256) with the one Clearly recorded when it produced the file. If even one character or page has changed, they won’t match. The check runs in your browser: the file isn’t sent anywhere.</p>
+      <p>Messages in Clearly can’t be edited or deleted by anyone after they’re sent, and every time is set by Clearly’s servers. More about how records are kept is on the last pages of each document.</p>
+      <p>Questions about a document? Email <a href="mailto:hello@getclearly.app">hello@getclearly.app</a> with its ID.</p>
+    </section>
+  </main>
+
+  <script>
+    (function () {
+      var API = /^(localhost|127\.0\.0\.1)$/.test(location.hostname)
+        ? 'http://127.0.0.1:54321/functions/v1/verify-record'
+        : 'https://dwncravjhkbclbuzijra.supabase.co/functions/v1/verify-record';
+      var $ = function (id) { return document.getElementById(id); };
+      var doc = null;
+      var ICON = {
+        ok: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>',
+        bad: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>',
+        wait: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>'
+      };
+      function verdict(el, kind, title, text) {
+        el.className = 'verdict ' + kind;
+        el.innerHTML = ICON[kind] + '<div><b></b><span></span></div>';
+        el.querySelector('b').textContent = title;
+        el.querySelector('span').textContent = text || '';
+      }
+      // Lowercase, spaces, missing dashes, O for 0, I or L for 1: all fine
+      function normalize(v) {
+        var s = String(v || '').toUpperCase().replace(/[^0-9A-Z]/g, '');
+        if (s.indexOf('CLR') === 0) s = s.slice(3);
+        s = s.replace(/O/g, '0').replace(/[IL]/g, '1');
+        return s.length === 12 ? 'CLR-' + s.slice(0, 4) + '-' + s.slice(4, 8) + '-' + s.slice(8) : '';
+      }
+      var fmtDate = function (iso, withTime) {
+        var d = new Date(withTime ? iso : iso + 'T12:00:00');
+        return d.toLocaleString('en-US', withTime ? { month: 'long', day: 'numeric', year: 'numeric', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' } : { month: 'long', day: 'numeric', year: 'numeric' });
+      };
+      function row(k, v, mono) {
+        var dt = document.createElement('dt'); dt.textContent = k;
+        var dd = document.createElement('dd'); dd.textContent = v; if (mono) dd.className = 'mono';
+        $('facts').append(dt, dd);
+      }
+
+      async function check(raw) {
+        var code = normalize(raw);
+        $('result').classList.add('on');
+        $('facts').innerHTML = ''; $('fileresult').innerHTML = ''; $('drop').hidden = true; doc = null;
+        if (!code) { verdict($('verdict'), 'bad', 'That isn’t a Clearly document ID', 'IDs look like CLR-7KQ4-M2XD-9PTA: CLR, then three groups of four letters and numbers.'); return; }
+        $('code').value = code;
+        if (location.pathname !== '/verify/' + code) history.replaceState(null, '', '/verify/' + code);
+        verdict($('verdict'), 'wait', 'Checking ' + code + '…');
+        $('go').disabled = true;
+        try {
+          var res = await fetch(API + '?code=' + encodeURIComponent(code));
+          var d = await res.json();
+          if (!res.ok) throw new Error(d.error || 'Could not check right now.');
+          if (!d.found) { verdict($('verdict'), 'bad', 'No Clearly document has this ID', 'Check it against the document: it’s on every page. If it matches and still isn’t found, the document didn’t come from Clearly.'); return; }
+          doc = d;
+          verdict($('verdict'), 'ok', 'Clearly produced this document', 'Now add the PDF below to check that the copy you have is unchanged.');
+          row('Document ID', d.code, true);
+          row('Type', d.kind === 'record' ? 'Record of communications (the full record for the period)' : 'Exhibit (an excerpt of the record)');
+          row('Family', d.family_label);
+          if (d.period_from && d.period_to) row('Period', fmtDate(d.period_from) + ' to ' + fmtDate(d.period_to));
+          row('Produced', fmtDate(d.created_at, true));
+          row('Pages', d.pages + ' (' + d.bates_first + ' to ' + d.bates_last + ')');
+          row('Requested by', d.requested_role === 'professional' ? 'A professional, with a parent’s permission' : 'A parent in the family');
+          row('Fingerprint (SHA-256)', d.sha256, true);
+          $('drop').hidden = false;
+          if (typeof gtag === 'function') gtag('event', 'verify_document', { result: 'found' });
+        } catch (e) {
+          verdict($('verdict'), 'bad', 'Couldn’t check right now', e.message || 'Please try again in a moment.');
+        } finally { $('go').disabled = false; }
+      }
+
+      async function checkFile(file) {
+        if (!doc || !file) return;
+        var out = $('fileresult'); out.innerHTML = '<div class="verdict wait"></div>';
+        verdict(out.firstChild, 'wait', 'Reading ' + file.name + '…');
+        try {
+          var buf = await file.arrayBuffer();
+          var hash = await crypto.subtle.digest('SHA-256', buf);
+          var hex = Array.from(new Uint8Array(hash), function (b) { return b.toString(16).padStart(2, '0'); }).join('');
+          if (hex === doc.sha256) verdict(out.firstChild, 'ok', 'This file is unchanged', 'It’s exactly the file Clearly produced as ' + doc.code + ', byte for byte.');
+          else verdict(out.firstChild, 'bad', 'This file doesn’t match', 'It isn’t the file Clearly produced as ' + doc.code + '. It may have been edited, re-saved or printed to a new PDF, or it may be a different document. Ask for the original file.');
+          if (typeof gtag === 'function') gtag('event', 'verify_document', { result: hex === doc.sha256 ? 'match' : 'mismatch' });
+        } catch (e) { verdict(out.firstChild, 'bad', 'Couldn’t read that file', 'Try adding the PDF again.'); }
+      }
+
+      $('form').addEventListener('submit', function (e) { e.preventDefault(); check($('code').value); });
+      $('file').addEventListener('change', function () { checkFile(this.files[0]); });
+      var drop = $('drop');
+      ['dragenter', 'dragover'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.add('over'); }); });
+      ['dragleave', 'drop'].forEach(function (t) { drop.addEventListener(t, function (e) { e.preventDefault(); drop.classList.remove('over'); }); });
+      drop.addEventListener('drop', function (e) { checkFile(e.dataTransfer.files[0]); });
+
+      // /verify/CLR-… (the QR code): check straight away
+      var fromPath = decodeURIComponent(location.pathname.replace(/^\/verify\/?/, ''));
+      var fromQuery = new URLSearchParams(location.search).get('code');
+      if (fromPath || fromQuery) check(fromPath || fromQuery);
+      else $('code').focus();
+    })();
+  </script>
+</body>
+</html>
