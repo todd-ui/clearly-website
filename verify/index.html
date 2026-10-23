@@ -154,7 +154,7 @@
           var d = await res.json();
           if (!res.ok) throw new Error(d.error || 'Could not check right now.');
           if (!d.found) { verdict($('verdict'), 'bad', 'No Clearly document has this ID', 'Check it against the document: it’s on every page. If it matches and still isn’t found, the document didn’t come from Clearly.'); return; }
-          if (d.sample) { verdict($('verdict'), 'bad', 'This is a sample document', 'It was made from the Taylors, a made-up family Clearly uses to show what a record looks like. It isn’t a record of any real family.'); return; }
+          if (d.sample) { verdict($('verdict'), 'bad', 'This is a sample document', 'It was made from the Taylors, a fictional family Clearly uses to show what a record looks like. It isn’t a record of any real family.'); return; }
           doc = d;
           verdict($('verdict'), 'ok', 'Clearly produced this document', 'Now add the PDF below to check that the copy you have is unchanged.');
           row('Document ID', d.code, true);
