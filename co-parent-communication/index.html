@@ -476,13 +476,28 @@
       web.tabIndex = -1;
       web.setAttribute('data-cta', 'mobile-sticky-bar-web');
       web.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Open Clearly';
-      web.addEventListener('click', function() {
-        if (typeof gtag === 'function') gtag('event', 'web_app_click', { link_url: web.href, link_location: 'mobile-sticky-bar', page_type: location.pathname === '/' ? 'home' : 'page' });
-      });
       a.replaceWith(web);
       bar.querySelector('.mobile-app-bar-text span').textContent = 'Use it in your browser';
     }
   })();
+  // Every link into Clearly on the web, on every page: counted in Google
+  // Analytics (web_app_click, by placement), and marked from=site so the web
+  // app can tell the visit came from here.
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest && e.target.closest('a[href*="web.getclearly.app"], a[href*="pro.getclearly.app"]');
+    if (!link) return;
+    if (typeof gtag === 'function') {
+      gtag('event', 'web_app_click', {
+        link_url: link.href.split('?')[0],
+        link_location: link.dataset.cta || (link.closest('header') ? 'header' : link.closest('footer') ? 'footer' : link.closest('#mobile-app-bar') ? 'mobile-sticky-bar' : 'body'),
+        page_type: location.pathname === '/' ? 'home' : location.pathname.indexOf('/blog/') === 0 ? 'blog_post' : 'page'
+      });
+    }
+    try {
+      var u = new URL(link.href);
+      if (!u.searchParams.has('from')) { u.searchParams.set('from', 'site'); link.href = u.toString(); }
+    } catch (err) { /* old browser: the link still works */ }
+  });
 </script>
 <!-- /mobile-app-bar --><!-- Hero -->
   <section class="lp-hero" id="main-content">
