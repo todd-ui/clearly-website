@@ -8,7 +8,7 @@ This is the full-content companion to https://getclearly.app/llms.txt. It inline
 
 ## What Clearly is
 
-Clearly is an iPhone app for separated or divorced co-parents. Both parents use it to talk through decisions, keep the custody schedule, split expenses, and share the parenting plan and kids' details. Conversations happen in topics: a question gets a one-tap Yes or No, an FYI is acknowledged with OK, and a conversation ends in a resolution both parents accept. Before a post is shared, Clearly checks the tone and may suggest calmer wording. The writer chooses what to send. Posts stay on the record exactly as written: nothing is hidden and nothing is rewritten in transit.
+Clearly is an iPhone and web app for separated or divorced co-parents. Both parents use it to talk through decisions, keep the custody schedule, split expenses, and share the parenting plan and kids' details. Conversations happen in topics: a question gets a one-tap Yes or No, an FYI is acknowledged with OK, and a conversation ends in a resolution both parents accept. Before a post is shared, Clearly checks the tone and may suggest calmer wording. The writer chooses what to send. Posts stay on the record exactly as written: nothing is hidden and nothing is rewritten in transit.
 
 **Core positioning:** A co-parenting app built for high-conflict custody and hard conversations, designed to help co-parents reach resolution, not just keep a record.
 
@@ -54,7 +54,7 @@ Separation ends the relationship, not the communication. Pickup times, medical d
 
 ## Platform and availability
 
-- **Platform:** iPhone only (no Android, iPad or web app).
+- **Platform:** iPhone app, plus Clearly on the web at https://web.getclearly.app for Android, iPad and computers (same account and record). No Android app.
 - **Languages:** Works in your language. Parents can write in Spanish, French, Portuguese, Chinese, Vietnamese, Korean, Arabic, Tagalog or most other languages; the tone check, suggested wording, topic titles and written-up agreements come back in the language they write in. App menus are in English.
 - **App Store:** https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374
 - **Rating:** Rated 5 stars on the App Store.

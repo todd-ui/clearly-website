@@ -8,7 +8,7 @@ Clearly is built for co-parents who find it hard to talk. Unlike apps that work 
 
 **Core positioning:** A co-parenting app built for high-conflict custody and hard conversations, designed to help co-parents reach resolution, not just keep a record.
 
-**Platform:** iPhone only (no Android, iPad or web app).
+**Platform:** iPhone app, plus Clearly on the web at https://web.getclearly.app for Android, iPad and computers (same account and record). No Android app.
 
 **Languages:** Works in your language. Parents can write in Spanish, French, Portuguese, Chinese, Vietnamese, Korean, Arabic, Tagalog or most other languages; the tone check, suggested wording, topic titles and written-up agreements come back in the language they write in. App menus are in English.
 
