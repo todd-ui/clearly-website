@@ -209,7 +209,42 @@
     .phone-card .pill { color: var(--moss); margin-bottom: 12px; }
     .phone-card p { font-size: 14px; line-height: 1.6; color: var(--ink-mid); margin: 0 auto; max-width: 26ch; }
 
-    /* ---------- [05] End pair: price + close ---------- */
+    /* ---------- [05] On the web ---------- */
+    .web-panel { background: var(--moss-pale); }
+    .web-tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: rgba(255,255,255,0.7); border: 1px solid rgba(13,130,104,0.14); margin: 0 0 20px; }
+    .web-tabs button { font: inherit; font-size: 14px; font-weight: 500; color: var(--ink-mid); background: none; border: 0; border-radius: 999px; padding: 8px 16px; cursor: pointer; }
+    .web-tabs button[aria-selected="true"] { background: #FFFFFF; color: var(--ink); box-shadow: 0 1px 2px rgba(28,28,26,0.08); }
+    .web-window { border-radius: 14px; background: #FFFFFF; border: 1px solid rgba(28,28,26,0.12); box-shadow: 0 1px 2px rgba(28,28,26,0.05), 0 24px 60px -22px rgba(28,28,26,0.32); overflow: hidden; }
+    .web-bar { height: 34px; display: flex; align-items: center; gap: 7px; padding: 0 14px; background: #F1F0EC; border-bottom: 1px solid rgba(28,28,26,0.08); }
+    .web-bar i { width: 10px; height: 10px; border-radius: 50%; background: rgba(28,28,26,0.14); }
+    .web-bar span { margin: 0 auto; font-size: 12px; color: var(--ink-faint); background: #FFFFFF; border-radius: 6px; padding: 3px 14px; transform: translateX(-20px); }
+    .web-window img { display: block; width: 100%; height: auto; }
+    .web-window picture { display: block; }
+    .web-window picture[hidden] { display: none; }
+    .web-reasons { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--gap); margin-top: 48px; }
+    .web-reason { border-top: 1px solid rgba(13,130,104,0.22); padding-top: 18px; }
+    .web-reason h3 { font-size: 16px; font-weight: 500; margin: 0 0 8px; }
+    .web-reason p { font-size: 14px; line-height: 1.6; color: var(--ink-mid); margin: 0; }
+    .web-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 44px; }
+    .web-btn { display: inline-flex; align-items: center; gap: 10px; height: 44px; padding: 0 22px; border-radius: 999px; background: var(--ink); color: #FFFFFF; font-size: 15px; font-weight: 500; text-decoration: none; }
+    .web-btn:hover { background: #000; }
+    .web-btn svg { width: 18px; height: 18px; }
+    .hero-web { display: inline-block; margin-top: 16px; font-size: 14px; color: var(--ink-mid); text-decoration: none; }
+    .hero-web b { color: var(--moss); font-weight: 500; }
+    .hero-web:hover b { text-decoration: underline; }
+    .close .web-alt { display: inline-block; margin-top: 16px; font-size: 14px; color: rgba(255,255,255,0.85); }
+    .close .web-alt b { color: #FFFFFF; font-weight: 500; }
+    @media (max-width: 960px) {
+      .web-reasons { grid-template-columns: 1fr 1fr; row-gap: 28px; }
+      .web-window { border-radius: 10px; }
+      .web-bar { height: 24px; padding: 0 10px; gap: 5px; }
+      .web-bar i { width: 7px; height: 7px; }
+      .web-bar span { display: none; }
+    }
+    @media (max-width: 600px) { .web-window { max-width: 320px; margin: 0 auto !important; } .web-tabs { display: flex; width: max-content; margin: 0 auto 20px; } }
+    @media (max-width: 560px) { .web-reasons { grid-template-columns: 1fr; } }
+
+    /* ---------- [07] End pair: price + close ---------- */
     .pair { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap); margin: 0 var(--gap) var(--gap); }
     .pair .panel { margin: 0; padding: 72px 56px; }
     /* The outer edges follow the 1200px content column, so the pricing
@@ -361,7 +396,7 @@
         <p class="label" data-reveal="fade">A new breed of <span class="nowrap">co-parenting app</span></p>
         <h1><span class="line"><span>The marriage ends.</span></span><span class="line"><span>The messages don't.</span></span></h1>
         <p class="hero-lead" data-reveal style="--i:3">The co-parenting app with a smart framework that helps you reach agreement, settle it for good, and get back to your kids.</p>
-        <div data-reveal style="--i:4"><a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="home-hero" aria-label="Download Clearly on the App Store"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div></a></div>
+        <div data-reveal style="--i:4"><a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="home-hero" aria-label="Download Clearly on the App Store"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div></a><br><a class="hero-web" href="https://web.getclearly.app" data-cta="home-hero-web">No iPhone? <b>Use Clearly on the web &rarr;</b></a></div>
         <p class="note" data-reveal style="--i:5">14-day free trial &middot; Your co-parent joins free</p>
       </div>
       <div class="diagram">
@@ -499,11 +534,56 @@
     </div>
   </section>
 
-  <!-- [05] QUESTIONS -->
+  <!-- [05] ON THE WEB -->
+  <section class="panel web-panel" id="web">
+    <div class="inner">
+      <div class="head-row">
+        <div>
+          <p class="label" data-reveal="fade"><b>[05]</b> On the web</p>
+          <h2 class="h2" data-reveal style="--i:1">On iPhone. <em>Or any browser.</em></h2>
+        </div>
+        <p class="lead" data-reveal style="--i:2">Not every family is an iPhone family, and some conversations deserve a bigger screen. Clearly on the web is the whole app, with the same account and the same record as the iPhone app.</p>
+      </div>
+      <div data-reveal style="--i:2">
+        <div class="web-tabs" role="tablist" aria-label="Clearly on the web">
+          <button type="button" role="tab" aria-selected="true" data-web="today">Today</button>
+          <button type="button" role="tab" aria-selected="false" data-web="topic">Topics</button>
+          <button type="button" role="tab" aria-selected="false" data-web="calendar">Schedule</button>
+        </div>
+        <figure class="web-window" style="margin:0;">
+          <div class="web-bar" aria-hidden="true"><i></i><i></i><i></i><span>web.getclearly.app</span></div>
+          <picture data-web-shot="today">
+            <source media="(max-width: 600px)" srcset="/images/home/web/web-today-phone.webp" width="780" height="1400">
+            <img src="/images/home/web/web-today-1440.webp" srcset="/images/home/web/web-today-1440.webp 1440w, /images/home/web/web-today-2880.webp 2880w" sizes="(max-width: 1240px) 94vw, 1200px" width="1440" height="900" loading="lazy" alt="Clearly on the web: Today, showing who has the kids, the next exchange, what's waiting for you and what's coming up.">
+          </picture>
+          <picture data-web-shot="topic" hidden>
+            <source media="(max-width: 600px)" srcset="/images/home/web/web-topic-phone.webp" width="780" height="1400">
+            <img src="/images/home/web/web-topic-1440.webp" srcset="/images/home/web/web-topic-1440.webp 1440w, /images/home/web/web-topic-2880.webp 2880w" sizes="(max-width: 1240px) 94vw, 1200px" width="1440" height="900" loading="lazy" alt="A topic in Clearly on the web: both parents' messages with read receipts, and a reply box.">
+          </picture>
+          <picture data-web-shot="calendar" hidden>
+            <source media="(max-width: 600px)" srcset="/images/home/web/web-calendar-phone.webp" width="780" height="1400">
+            <img src="/images/home/web/web-calendar-1440.webp" srcset="/images/home/web/web-calendar-1440.webp 1440w, /images/home/web/web-calendar-2880.webp 2880w" sizes="(max-width: 1240px) 94vw, 1200px" width="1440" height="900" loading="lazy" alt="The custody schedule in Clearly on the web: a month with each parent's days, parenting time and a swap request to answer.">
+          </picture>
+        </figure>
+      </div>
+      <div class="web-reasons">
+        <div class="web-reason" data-reveal style="--i:0"><h3>No iPhone? No problem.</h3><p>Use Clearly in the browser on any computer, Android phone or tablet. Nothing to install.</p></div>
+        <div class="web-reason" data-reveal style="--i:1"><h3>One of each</h3><p>One parent on iPhone, the other on Android or a laptop. Same topics, same calendar, one subscription for you both.</p></div>
+        <div class="web-reason" data-reveal style="--i:2"><h3>A bigger screen</h3><p>Write the careful messages at your desk, search everything at once and pull records for your lawyer with room to see.</p></div>
+        <div class="web-reason" data-reveal style="--i:3"><h3>Always in sync</h3><p>Start a topic on your laptop and answer it from your phone. Everything you do shows up everywhere.</p></div>
+      </div>
+      <div class="web-actions" data-reveal style="--i:2">
+        <a class="web-btn" href="https://web.getclearly.app" data-cta="home-web"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Use Clearly on the web</a>
+        <span class="note" style="margin:0;">Free 14-day trial. One subscription covers both parents, wherever each of you uses it.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- [06] QUESTIONS -->
   <section class="panel">
     <div class="inner split" style="align-items:start;">
       <div>
-        <p class="label" data-reveal="fade"><b>[05]</b> Questions</p>
+        <p class="label" data-reveal="fade"><b>[06]</b> Questions</p>
         <h2 class="h2" data-reveal style="--i:1">Good <em>questions.</em></h2>
         <p class="lead" data-reveal style="--i:2">The ones parents ask before they download. More in the <a class="text-link" href="/faq">full FAQ &rarr;</a></p>
       </div>
@@ -526,7 +606,7 @@
         </details>
         <details>
           <summary>Is Clearly on Android?</summary>
-          <p>Not yet. Clearly is on iPhone. You can still add your schedule to Apple or Google Calendar with a private link.</p>
+          <p>Yes, in your browser. Clearly on the web works on any Android phone or computer at <a class="text-link" href="https://web.getclearly.app">web.getclearly.app</a>, with the same account and record as the iPhone app. There&rsquo;s no Android app to download yet.</p>
         </details>
         <details>
           <summary>What happens if we stop subscribing?</summary>
@@ -536,10 +616,10 @@
     </div>
   </section>
 
-  <!-- [06] PRICE + CLOSE -->
+  <!-- [07] PRICE + CLOSE -->
   <div class="pair" id="pricing">
     <section class="panel">
-      <p class="label" data-reveal="fade"><b>[06]</b> Pricing</p>
+      <p class="label" data-reveal="fade"><b>[07]</b> Pricing</p>
       <h2 class="h2" data-reveal style="--i:1">Less than one hour <em>of mediation.</em></h2>
       <div class="price-row" data-reveal style="--i:2">
         <span class="price">$249<small> / year</small></span>
@@ -557,7 +637,7 @@
       <p class="label" data-reveal="fade"><b>Clearly</b></p>
       <h2 class="h2" data-reveal style="--i:1">For the kids. <em>And for you.</em></h2>
       <p class="lead" data-reveal style="--i:2">How you two talk shapes how your kids feel about all of this. Clearly helps you keep it about them.</p>
-      <div data-reveal style="--i:3"><a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="home-close" aria-label="Download Clearly on the App Store"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div></a></div>
+      <div data-reveal style="--i:3"><a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="home-close" aria-label="Download Clearly on the App Store"><svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg><div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div></a><br><a class="web-alt" href="https://web.getclearly.app" data-cta="home-close-web">Or <b>use Clearly on the web &rarr;</b></a></div>
       <p class="note" data-reveal style="--i:4">14-day free trial &middot; Your co-parent joins free</p>
     </section>
   </div>
@@ -798,6 +878,11 @@
           page_type: 'home'
         });
       }
+      // And the web app
+      var web = e.target.closest('a[href*="web.getclearly.app"]');
+      if (web && typeof gtag === 'function') {
+        gtag('event', 'web_app_click', { link_url: web.href, link_location: web.dataset.cta || 'body', page_type: 'home' });
+      }
     });
   </script>
 
@@ -844,7 +929,7 @@
       "name": "Is Clearly on Android?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Not yet. Clearly is on iPhone. You can still add your schedule to Apple or Google Calendar with a private link."
+        "text": "Yes, in your browser. Clearly on the web works on any Android phone or computer at web.getclearly.app, with the same account and record as the iPhone app. There\u2019s no Android app to download yet."
       }
     },
     {
@@ -897,8 +982,8 @@
     "@type": "MobileApplication",
     "name": "Clearly",
     "applicationCategory": "LifestyleApplication",
-    "operatingSystem": "iOS",
-    "description": "Co-parenting, resolved. Before you post, Clearly checks the tone and may suggest calmer wording. It writes up what you both agree, and keeps the custody schedule, expenses and parenting plan in one place. iPhone only.",
+    "operatingSystem": "iOS, Web",
+    "description": "Co-parenting, resolved. Before you post, Clearly checks the tone and may suggest calmer wording. It writes up what you both agree, and keeps the custody schedule, expenses and parenting plan in one place. On iPhone and the web.",
     "url": "https://getclearly.app",
     "downloadUrl": "https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374",
     "publisher": {
@@ -931,5 +1016,17 @@
   }
   </script>
 
+  <script>
+    // [05] On the web: switch the screen in the browser window
+    (function () {
+      var tabs = document.querySelectorAll('[data-web]');
+      tabs.forEach(function (t) {
+        t.addEventListener('click', function () {
+          tabs.forEach(function (x) { x.setAttribute('aria-selected', x === t ? 'true' : 'false'); });
+          document.querySelectorAll('[data-web-shot]').forEach(function (img) { img.hidden = img.getAttribute('data-web-shot') !== t.getAttribute('data-web'); });
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
