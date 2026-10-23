@@ -23,7 +23,7 @@
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
   <meta name="theme-color" content="#0D8268">
   <title>For Professionals: a free caseload view — Clearly</title>
-  <meta name="description" content="Free for attorneys, mediators and parenting coordinators: one Dashboard of what changed in every case, a record kept exactly as written, exhibits in a minute, and access parents choose area by area.">
+  <meta name="description" content="Free for attorneys, mediators and parenting coordinators: one Dashboard of what changed in every case, a record kept exactly as written, court-ready exhibits anyone can check, and access parents choose area by area.">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://getclearly.app/professionals">
@@ -35,7 +35,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app/professionals">
   <meta property="og:title" content="Clearly for Family Professionals: your whole caseload, free">
-  <meta property="og:description" content="Free for attorneys, mediators and parenting coordinators: one Dashboard of what changed in every case, a record kept exactly as written, exhibits in a minute, and access parents choose area by area.">
+  <meta property="og:description" content="Free for attorneys, mediators and parenting coordinators: one Dashboard of what changed in every case, a record kept exactly as written, court-ready exhibits anyone can check, and access parents choose area by area.">
   <meta property="og:image" content="https://getclearly.app/images/pro/og-pro.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -44,7 +44,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Clearly for Family Professionals: your whole caseload, free">
-  <meta name="twitter:description" content="Free for attorneys, mediators and parenting coordinators: one Dashboard of what changed in every case, a record kept exactly as written, exhibits in a minute, and access parents choose area by area.">
+  <meta name="twitter:description" content="Free for attorneys, mediators and parenting coordinators: one Dashboard of what changed in every case, a record kept exactly as written, court-ready exhibits anyone can check, and access parents choose area by area.">
   <meta name="twitter:image" content="https://getclearly.app/images/pro/og-pro.png">
 
   <link rel="stylesheet" href="styles.css">
@@ -152,6 +152,22 @@
     .anywhere { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px 48px; align-items: center; }
     .anywhere .copy { grid-column: span 7; }
     .anywhere .media { grid-column: 9 / span 4; }
+
+    /* Court-ready records: two pages of a sample record, and what makes it hold up */
+    .rec { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: center; }
+    .rec-pages { position: relative; margin: 0; padding: 0 0 36px; }
+    .rec-page { display: block; width: 74%; height: auto; border-radius: 4px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(28,28,26,0.06), 0 22px 50px -20px rgba(28,28,26,0.34); }
+    .rec-page-back { position: absolute; top: 0; right: 0; transform: rotate(3deg); transform-origin: bottom left; }
+    .rec-page-front { position: relative; margin-top: 28px; transform: rotate(-1.5deg); }
+    .rec-pages figcaption { position: absolute; left: 0; bottom: 0; font-size: 13px; color: var(--ink-faint); }
+    .rec-points { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 16px; }
+    .rec-point { border-top: 1px solid var(--rule); padding-top: 16px; }
+    .rec-point h3 { font-size: 16px; font-weight: 500; margin: 0 0 8px; }
+    .rec-point p { font-size: 14.5px; line-height: 1.6; color: var(--ink-mid); margin: 0; }
+    .rec-point a { color: var(--moss); font-weight: 500; }
+    #records .actions { margin-top: 48px; }
+    @media (max-width: 1000px) { .rec { grid-template-columns: 1fr; gap: 40px; } .rec-pages { max-width: 440px; width: 100%; margin: 0 auto; } }
+    @media (max-width: 560px) { .rec-points { grid-template-columns: 1fr; gap: 22px; } }
 
     /* What Clearly does and doesn't do */
     .cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px 48px; }
@@ -359,7 +375,7 @@
       <div class="hero-copy">
         <p class="label">For family professionals</p>
         <h1 class="h1">Your whole caseload, and what needs you first.</h1>
-        <p class="lead">Free for attorneys, mediators and parenting coordinators. See what changed in every case, read the record exactly as written, and build an exhibit in a minute.</p>
+        <p class="lead">Free for attorneys, mediators and parenting coordinators. See what changed in every case, read the record exactly as written, and export court-ready exhibits anyone can check.</p>
         <div class="actions">
           <a class="btn btn-primary" href="https://web.getclearly.app/pro/signup" data-cta="pro-hero">Create a free professional account</a>
           <a class="btn btn-quiet" href="https://web.getclearly.app/pro/login">Sign in</a>
@@ -392,7 +408,7 @@
         <div class="fix" data-reveal>
           <p class="was"><s>A 400-page PDF the night before mediation</s></p>
           <h3>Build the exhibit you need.</h3>
-          <p>Filter by dates, parent, keyword or flagged entries, and get a clean, numbered timeline to print, save as a PDF or open as a spreadsheet.</p>
+          <p>Filter by dates, parent, keyword or flagged entries, and get a numbered, court-ready PDF with a document ID on every page, or a spreadsheet.</p>
         </div>
         <div class="fix" data-reveal>
           <p class="was"><s>Clicking into every family to see what changed</s></p>
@@ -409,6 +425,38 @@
           <h3>Fast, calm and modern.</h3>
           <p>Search every case and message with &#8984;K, step between families, and use it on any device with nothing to install.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Court-ready records -->
+  <section class="panel panel-paper" id="records">
+    <div class="inner">
+      <div class="head">
+        <div>
+          <p class="label"><b>[02]</b> Court-ready records</p>
+          <h2 class="h2">Records and exhibits that hold up, and anyone can check.</h2>
+        </div>
+        <p class="body" style="margin:0;">The same document whether you or a parent exports it, from the full record to a single topic. Only &ldquo;Requested by&rdquo; changes.</p>
+      </div>
+      <div class="rec">
+        <figure class="rec-pages" data-reveal>
+          <img class="rec-page rec-page-back" src="/images/records/record-p3-640.webp" srcset="/images/records/record-p3-640.webp 640w, /images/records/record-p3-1280.webp 1280w" sizes="(max-width: 760px) 70vw, 360px" width="640" height="828" loading="lazy" alt="A page of a Clearly record: a topic with every reply in order, each entry numbered with the time it was sent, who sent it and when the other parent first read it.">
+          <img class="rec-page rec-page-front" src="/images/records/record-p1-640.webp" srcset="/images/records/record-p1-640.webp 640w, /images/records/record-p1-1280.webp 1280w" sizes="(max-width: 760px) 70vw, 360px" width="640" height="828" loading="lazy" alt="The cover of a Clearly record of communications for a fictional family, requested by a family lawyer: parents, children, period, time zone, counts, and a box with a QR code and document ID to check it is genuine.">
+          <figcaption>A sample record from the fictional Taylor family</figcaption>
+        </figure>
+        <div class="rec-points">
+          <div class="rec-point" data-reveal><h3>An ID and a page number on every page</h3><p>Each document gets its own ID, and every page is numbered from it (CLR-7KQ4-0003), so a page can be cited in a filing or at a hearing.</p></div>
+          <div class="rec-point" data-reveal><h3>Checkable by anyone</h3><p>Scan the code or drop the PDF into <a href="/verify/">getclearly.app/verify</a>. Clearly confirms it made that exact file and that nothing in it has changed. The file is checked in the browser, never uploaded.</p></div>
+          <div class="rec-point" data-reveal><h3>Numbered, timed and read</h3><p>Every entry is numbered, timed by Clearly&rsquo;s server in the family&rsquo;s time zone, and shows when the other parent first opened it.</p></div>
+          <div class="rec-point" data-reveal><h3>Parenting time and money, summed up</h3><p>Overnights with each parent from the schedule and accepted changes, how each topic stands, and who owes whom.</p></div>
+          <div class="rec-point" data-reveal><h3>Says exactly what it covers</h3><p>The cover states the period, the time zone and exactly what was included. An &ldquo;About this record&rdquo; page explains how it was made.</p></div>
+          <div class="rec-point" data-reveal><h3>Ready for the court file</h3><p>Children can appear as initials, and a parent can sign the included declaration if the court asks for one.</p></div>
+        </div>
+      </div>
+      <div class="actions" data-reveal>
+        <a class="btn btn-primary" href="/samples/clearly-sample-record.pdf" data-cta="pro-sample-record">See a sample record (PDF)</a>
+        <a class="btn btn-quiet" href="/verify/">Check a document</a>
       </div>
     </div>
   </section>
@@ -462,6 +510,7 @@
             <li><b>Filter</b> by dates, parent, keyword or flagged entries</li>
             <li><b>Messages, outcomes, swaps</b> and expenses in one timeline</li>
             <li><b>The full record</b> as one PDF, or a spreadsheet</li>
+            <li><b>A document ID</b> and page number on every page</li>
           </ul>
         </div>
         <div class="media">
@@ -498,7 +547,7 @@
     <div class="inner">
       <div class="head">
         <div>
-          <p class="label"><b>[02]</b> Access, on purpose</p>
+          <p class="label"><b>[03]</b> Access, on purpose</p>
           <h2 class="h2">Parents decide what you see. Both of them can see that you did.</h2>
         </div>
         <p class="body" style="margin:0;">Deliberate, visible access is what makes the record easy for everyone in the case to trust.</p>
@@ -533,7 +582,7 @@
     <div class="inner">
       <div class="head">
         <div>
-          <p class="label"><b>[03]</b> Getting started</p>
+          <p class="label"><b>[04]</b> Getting started</p>
           <h2 class="h2">Free for every professional.</h2>
         </div>
         <p class="body" style="margin:0;">No seats, per-case fees or contract. Families pay for their own subscription, one for both parents. Clearly never pays for referrals.</p>
@@ -550,7 +599,7 @@
   <section class="panel">
     <div class="inner anywhere">
       <div class="copy" data-reveal>
-        <p class="label"><b>[04]</b> Anywhere</p>
+        <p class="label"><b>[05]</b> Anywhere</p>
         <h2 class="h2">At your desk, or in the hallway before a hearing.</h2>
         <p class="lead" style="margin-top:18px;">Any browser, on a laptop, tablet or phone. Families use Clearly on iPhone or the web, with the same record either way.</p>
         <p class="muted" style="margin-top:22px;">Coming from OurFamilyWizard or another app? Families can bring their message reports, calendar and contacts with them. <a href="/switch-from-ourfamilywizard/">How switching works</a></p>
@@ -566,7 +615,7 @@
     <div class="inner">
       <div class="head">
         <div>
-          <p class="label"><b>[05]</b> Neutral by design</p>
+          <p class="label"><b>[06]</b> Neutral by design</p>
           <h2 class="h2">A record you can rely on, and nothing more.</h2>
         </div>
         <p class="body" style="margin:0;">Clearly records what happened and when. The judgment is yours.</p>
@@ -578,6 +627,7 @@
             <li>Nothing can be edited or deleted once posted</li>
             <li>Agreed only when both parents accept the same words</li>
             <li>Silence is never treated as agreement</li>
+            <li>Every exported document can be checked at getclearly.app/verify</li>
           </ul>
         </div>
         <div data-reveal>
@@ -595,7 +645,7 @@
   <!-- Questions -->
   <section class="panel">
     <div class="inner">
-      <p class="label"><b>[06]</b> Questions</p>
+      <p class="label"><b>[07]</b> Questions</p>
       <h2 class="h2" style="margin-bottom:40px;">Common questions.</h2>
       <div class="faq">
         <details><summary>Is it really free for professionals?</summary><p>Yes. Professional accounts are free, with no limit on cases. Families pay for their own Clearly subscription, and one subscription covers both parents.</p></details>
@@ -603,7 +653,8 @@
         <details><summary>Does the other parent know I have access?</summary><p>Yes. The other parent is told whenever a professional is invited, when what they can see changes, and when access ends. Both parents can see who has access and what each professional opened.</p></details>
         <details><summary>What happens when my access ends?</summary><p>You keep a read-only copy of what you could see up to that moment, for your case file, along with your private notes. Nothing added to the family's record afterwards reaches it.</p></details>
         <details><summary>Can I invite my clients to Clearly?</summary><p>Yes. Invite a family from your Dashboard by email, and resend, change or withdraw the invitation from Settings. Nothing is shared with you until a parent chooses to.</p></details>
-        <details><summary>Can these records be used as evidence?</summary><p>Clearly produces time-stamped records of communication, kept as written. Whether any document is admissible depends on the jurisdiction, the case and the court. Clearly provides the record; evidentiary decisions belong to the court and counsel.</p></details>
+        <details><summary>Can these records be used as evidence?</summary><p>Clearly produces time-stamped records of communication, kept as written, with a document ID and page number on every page that anyone can check at getclearly.app/verify. Whether any document is admissible depends on the jurisdiction, the case and the court. Clearly provides the record; evidentiary decisions belong to the court and counsel.</p></details>
+        <details><summary>How can a court check that a record is genuine?</summary><p>Every Clearly record and exhibit has a document ID on every page and a QR code on its cover. Anyone can scan the code or drop the PDF into <a href="/verify/">getclearly.app/verify</a>: Clearly confirms it produced that exact file and that nothing in it has changed since. The file is checked in the browser and never uploaded.</p></details>
         <details><summary>Does Clearly analyze or score either parent?</summary><p>No. Clearly records what was communicated and when. Its tone check only suggests calmer wording to the person writing, before they post, and they choose what to send.</p></details>
         <details><summary>Does Clearly pay referral fees?</summary><p>No. Clearly never pays professionals for referrals, and families are told so.</p></details>
       </div>
@@ -781,7 +832,15 @@
       "name": "Can these records be used as evidence?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Clearly produces time-stamped records of communication, kept as written. Whether any document is admissible depends on the jurisdiction, the case and the court. Clearly provides the record; evidentiary decisions belong to the court and counsel."
+        "text": "Clearly produces time-stamped records of communication, kept as written, with a document ID and page number on every page that anyone can check at getclearly.app/verify. Whether any document is admissible depends on the jurisdiction, the case and the court. Clearly provides the record; evidentiary decisions belong to the court and counsel."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How can a court check that a record is genuine?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every Clearly record and exhibit has a document ID on every page and a QR code on its cover. Anyone can scan the code or drop the PDF into getclearly.app/verify: Clearly confirms it produced that exact file and that nothing in it has changed since. The file is checked in the browser and never uploaded."
       }
     },
     {
