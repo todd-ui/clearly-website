@@ -222,6 +222,14 @@
   to = "/join/index.html"
   status = 200
 
+# Document checks: /verify/CLR-7KQ4-M2XD-9PTA (the QR code on every Clearly
+# record and exhibit). A rewrite, so the page reads the ID from the path.
+# MUST stay above the catch-all 404.
+[[redirects]]
+  from = "/verify/*"
+  to = "/verify/index.html"
+  status = 200
+
 # Custom 404 page
 [[redirects]]
   from = "/*"
