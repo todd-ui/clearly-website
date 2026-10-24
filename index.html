@@ -181,6 +181,8 @@
     .flow li.on > * { opacity: 1; transform: none; }
     .foot-credit { margin-top: 32px; font-size: 13px; color: rgba(255,255,255,0.7); }
     /* What it all comes to, for the kids: under the steps, above the credit */
+    .flow-stuck { margin: 28px 0 0; padding-top: 18px; border-top: 1px solid var(--rule); font-size: 14px; color: var(--ink-mid); }
+    .pin.pinned .flow-stuck, .pin.settled .flow-stuck { margin-top: 20px; padding-top: 14px; }
     .flow-foot { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 32px; margin-top: 32px; }
     .flow-foot .foot-credit { margin: 0; }
     .kids-line { margin: 0; font-family: 'EB Garamond', serif; font-size: 26px; line-height: 1.25; color: #FFFFFF; }
@@ -500,7 +502,7 @@
           <p class="label" data-reveal="fade"><b>[02]</b> How Clearly is different</p>
           <h2 class="h2" data-reveal style="--i:1">Other apps give you a thread. <em>Clearly gets you to an answer.</em></h2>
         </div>
-        <p class="lead" data-reveal style="--i:2">Every conversation in Clearly is a topic with one job: get to an answer you both accept. Most go straight through. When one starts to go sideways, Clearly steps in like a mediator would, and only then.</p>
+        <p class="lead" data-reveal style="--i:2">Every conversation in Clearly is a topic with one job: get to an answer you both accept. Most go straight through. When one starts to go sideways, Clearly steps in like a mediator would, and only then. So decisions get made, and the kids stay out of the middle.</p>
       </div>
       <div class="flow-card" data-reveal>
         <ol class="flow">
@@ -514,21 +516,22 @@
             <span class="n">2</span>
             <h3>Clearly steps in.</h3>
             <p>Only when it&rsquo;s needed.</p>
-            <div class="eg"><span class="who">What you get</span>&ldquo;Can we keep Friday pickup at 5:30? Late pickups are hard on Ava.&rdquo;</div>
+            <div class="eg"><span class="who">Reframed by Clearly</span>&ldquo;Can we keep Friday pickup at 5:30? Late pickups are hard on Ava.&rdquo;</div>
           </li>
           <li style="--i:2">
             <span class="n">3</span>
             <h3>Answer it.</h3>
-            <p>A real question. One tap.</p>
+            <p>Yes, No, or a proposal.</p>
             <div class="eg"><span class="who">Your answer</span>&ldquo;Yes. If I&rsquo;m running late, I&rsquo;ll text by 3.&rdquo;</div>
           </li>
           <li style="--i:3">
             <span class="n">4</span>
             <h3>Settle it.</h3>
-            <p>Same words, both accepted. Done.</p>
+            <p>Clearly writes it up. You both accept.</p>
             <div class="eg"><span class="who">Agreed</span>&ldquo;Friday pickup is 5:30. A text by 3 if plans change.&rdquo; <span class="ok">&#10003; both accepted</span></div>
           </li>
         </ol>
+        <p class="flow-stuck">Stuck? Clearly shows where it stands and suggests a fair middle ground.</p>
       </div>
       <div class="flow-foot">
         <p class="kids-line" data-reveal="fade">Less back-and-forth. Real answers. <em>Kids out of the middle.</em></p>
@@ -847,6 +850,9 @@
           steps.forEach(function (li) { li.classList.add('on'); });
         });
         layout();
+        // Measured again once the web fonts are in: the fallback fonts are
+        // taller, so a first look can wrongly decide the panel doesn't fit
+        if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
       }
     })();
   </script>
