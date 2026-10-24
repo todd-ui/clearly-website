@@ -210,6 +210,26 @@
     .phone-card p { font-size: 14px; line-height: 1.6; color: var(--ink-mid); margin: 0 auto; max-width: 26ch; }
 
     /* ---------- [05] On the web ---------- */
+    /* On this page: a floating pill at the foot of the screen (a row under
+       the header on phones). Hidden over the hero and the footer. */
+    .jump { position: fixed; left: 50%; bottom: 20px; z-index: 90; display: flex; gap: 2px; padding: 5px; border-radius: 999px;
+      background: rgba(255,255,255,0.86); border: 1px solid rgba(28,28,26,0.08); box-shadow: 0 10px 30px rgba(28,28,26,0.12);
+      -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px);
+      transform: translate(-50%, 16px); opacity: 0; pointer-events: none; transition: opacity .3s ease, transform .3s var(--ease); }
+    .jump[hidden] { display: none; }
+    .jump.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+    .jump a { font-size: 13.5px; font-weight: 500; color: var(--ink-mid); text-decoration: none; padding: 8px 15px; border-radius: 999px; white-space: nowrap; transition: background .2s ease, color .2s ease; }
+    .jump a:hover { color: var(--ink); background: rgba(28,28,26,0.05); }
+    .jump a.on { color: #FFFFFF; background: var(--ink); }
+    #how-it-works, #records, #logistics, #web, #pricing { scroll-margin-top: 88px; }
+    @media (max-width: 760px) {
+      .jump { top: 74px; bottom: auto; left: 10px; right: 10px; transform: translateY(-8px); justify-content: flex-start; overflow-x: auto; scrollbar-width: none; padding: 4px; }
+      .jump::-webkit-scrollbar { display: none; }
+      .jump.show { transform: none; }
+      .jump a { font-size: 13px; padding: 7px 12px; flex: none; }
+      #how-it-works, #records, #logistics, #web, #pricing { scroll-margin-top: 124px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .jump { transition: none; } }
     /* Court-ready records: two pages of a sample record, and what makes it hold up */
     .rec { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 56px; align-items: center; }
     .rec-pages { position: relative; margin: 0; padding: 0 0 36px; min-height: 100%; }
@@ -404,6 +424,15 @@
 
   <main id="main-content">
 
+  <!-- On this page: appears once past the hero, follows the scroll -->
+  <nav class="jump" aria-label="On this page" hidden>
+    <a href="#how-it-works" data-cta="home-jump-how">Tone check &amp; answers</a>
+    <a href="#records" data-cta="home-jump-records">Court-ready records</a>
+    <a href="#logistics" data-cta="home-jump-logistics">Schedule &amp; expenses</a>
+    <a href="#web" data-cta="home-jump-web">iPhone &amp; web</a>
+    <a href="#pricing" data-cta="home-jump-pricing">Pricing</a>
+  </nav>
+
   <!-- HERO: the app, annotated -->
   <section class="panel home-hero" data-scene>
     <div class="inner hero-grid">
@@ -550,7 +579,7 @@
   </section>
 
   <!-- [05] THE LOGISTICS -->
-  <section class="panel">
+  <section class="panel" id="logistics">
     <div class="inner">
       <div class="head-row">
         <div>
@@ -704,6 +733,40 @@
       document.querySelectorAll('[data-reveal], [data-scene]').forEach(function (el) {
         onView(el, function (t) { t.classList.add('is-in'); });
       });
+
+    // On this page: shown past the hero (and away from the footer), with
+    // the section being read marked
+    (function () {
+      var jump = document.querySelector('.jump');
+      if (!jump || !('IntersectionObserver' in window)) return;
+      jump.hidden = false;
+      var links = Array.prototype.slice.call(jump.querySelectorAll('a'));
+      var hero = document.querySelector('.home-hero');
+      // Past most of the hero, and before the footer comes up
+      var show = function () {
+        var vh = window.innerHeight;
+        var pastHero = !hero || hero.getBoundingClientRect().bottom < vh * 0.6;
+        // the footer comes after this script, so it's looked up each time
+        var footer = document.querySelector('.site-footer');
+        var beforeFooter = !footer || footer.getBoundingClientRect().top > vh * 0.5;
+        jump.classList.toggle('show', pastHero && beforeFooter);
+      };
+      window.addEventListener('scroll', show, { passive: true });
+      window.addEventListener('resize', show);
+      show();
+      var mark = function (id) {
+        links.forEach(function (a) {
+          var on = a.getAttribute('href') === '#' + id;
+          a.classList.toggle('on', on);
+          if (on) { a.setAttribute('aria-current', 'true'); if (jump.scrollWidth > jump.clientWidth) jump.scrollTo({ left: a.offsetLeft - 12, behavior: 'smooth' }); }
+          else a.removeAttribute('aria-current');
+        });
+      };
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) mark(e.target.id); });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      links.forEach(function (a) { var t = document.querySelector(a.getAttribute('href')); if (t) io.observe(t); });
+    })();
 
 
       // [02] The resolution flow follows the scroll. On desktop the panel is
