@@ -825,6 +825,16 @@
         };
         window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
         window.addEventListener('resize', layout);
+        // Jumping past this section (from the menu): finish the build at once
+        // and let go of the pin, so the scroll carries on to where it's going
+        pin.addEventListener('settle', function () {
+          if (done && !pin.classList.contains('pinned')) return;
+          done = true;
+          pin.classList.remove('pinned');
+          pin.classList.add('settled');
+          flow.style.setProperty('--p', '1');
+          steps.forEach(function (li) { li.classList.add('on'); });
+        });
         layout();
       }
     })();
@@ -989,6 +999,10 @@
         const target = document.querySelector(link.getAttribute('href'));
         if (target) {
           e.preventDefault();
+          // Going past the pinned [02] section: it settles first, so it
+          // doesn't hold the scroll on the way through
+          const pin = document.querySelector('.pin');
+          if (pin && target !== pin && (pin.compareDocumentPosition(target) & Node.DOCUMENT_POSITION_FOLLOWING)) pin.dispatchEvent(new Event('settle'));
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
