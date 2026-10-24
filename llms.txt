@@ -2,7 +2,7 @@
 
 > Clearly is a co-parenting app for iPhone and the web, for separated and divorced parents, built for high-conflict custody situations. Conversations happen in topics that end in a clear answer or a resolution both parents accept. When a conversation needs it, Clearly steps in like a mediator, helping word a message so it moves toward an answer; the writer chooses what to send, and every post stays on the record exactly as written. It also covers the custody schedule, expenses, a shared parenting plan, court-ready records anyone can check at getclearly.app/verify, and a free portal for family-law professionals.
 
-**Full-content version for AI systems:** https://getclearly.app/llms-full.txt — the substantive content of Clearly's key pages inlined in a single file.
+**Full-content version for AI systems:** https://getclearly.app/llms-full.txt, the substantive content of Clearly's key pages inlined in a single file.
 
 Clearly is built for co-parents who find it hard to talk. Unlike apps that work as a shared inbox, Clearly organizes each conversation as a topic: a question answered with a one-tap Yes or No, an FYI acknowledged with OK, or a conversation that ends in a resolution both parents accept. Clearly steps in like a mediator only when a conversation needs it, helping word a hard message so it moves toward an answer. You choose what to send. Posts stay on the record as written: nothing is hidden and nothing is rewritten in transit. The AI is provided by Anthropic, photos are never sent to it, and Clearly never takes sides.
 
@@ -74,7 +74,7 @@ Clearly is built for co-parents who find it hard to talk. Unlike apps that work 
 
 - **Topics:** Questions get a one-tap Yes or No; FYIs are acknowledged with OK; conversations end in a resolution both parents accept, and "Not yet" keeps talking. Clearly titles topics and writes up what both parents agreed so both accept the same words. Topics and replies can't be edited or deleted once posted.
 - **Help when it's needed:** Most messages go straight through. When one would start a fight, Clearly steps in like a mediator, suggesting wording that moves the conversation toward an answer. The writer chooses what to send; posts stay on the record exactly as written.
-- **Where this stands:** For a quiet or circling topic, Clearly shows what's settled, what's still open, and a friendly next step. It suggests a fair middle ground only in a real disagreement.
+- **Where this stands:** For a quiet or circling topic, Clearly shows what's settled, what's still open, and a friendly next step. Only in a real disagreement, it suggests options based on what both parents have said.
 - **Ask Clearly:** Answers questions about your record.
 - **30-day closing rules:** A topic with no activity for 30 days closes and stays on the record. A resolution proposed but not accepted within 30 days closes as "not accepted"; it is never treated as agreed.
 - **Schedule:** Custody calendar (2-2-3, 5-2-2-5, 3-4-4-3, week on/week off, every other weekend, or custom), holidays (alternating years, custom holidays), summer schedules, swap requests, and events. Add your schedule to Apple or Google Calendar with a private calendar link (one-way).

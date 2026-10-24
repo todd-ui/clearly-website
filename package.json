@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "node automation/roll-year.js && node build-blog.js && node automation/check-links.js && node automation/check-related.js",
-    "test": "node automation/seo-check.js && node automation/check-links.js"
+    "test": "node automation/seo-check.js && node automation/check-links.js && node automation/no-em-dash.js"
   },
   "repository": {
     "type": "git",

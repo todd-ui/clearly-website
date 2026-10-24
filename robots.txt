@@ -16,7 +16,7 @@ User-agent: Googlebot
 Allow: /
 
 # ---------------------------------------------------------------
-# AI / LLM crawlers — explicitly allowed so Clearly can be cited
+# AI / LLM crawlers: explicitly allowed so Clearly can be cited
 # in ChatGPT, Claude, Perplexity, Gemini, and other AI answers.
 # ---------------------------------------------------------------
 
