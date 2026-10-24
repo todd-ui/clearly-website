@@ -138,3 +138,22 @@
 .state-calc-links { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 16px 0 0; padding: 0; }
 .state-calc-links a { display: inline-block; padding: 9px 16px; border: 1px solid var(--g-rule, #E4E2DC); border-radius: 999px; font-size: 14px; color: var(--g-ink, #1A1A18); text-decoration: none; transition: border-color .2s, color .2s; }
 .state-calc-links a:hover, .state-calc-links a:focus-visible { border-color: var(--g-moss); color: var(--g-moss); }
+
+/* ---------------------------------------------------------------
+   Get started (Clearly on the web) first; the iPhone app is the
+   companion, a quiet link beside it
+   --------------------------------------------------------------- */
+.site-nav .nav-cta { display: inline-flex; align-items: center; height: 40px; padding: 0 18px; border-radius: 999px; background: #1C1C1A; color: #FFFFFF; font-size: 14px; font-weight: 500; text-decoration: none; }
+.site-nav .nav-cta:hover { opacity: 0.9; }
+@media (max-width: 768px) {
+  .site-nav .nav-right .nav-cta { align-self: flex-start; margin-top: 18px; height: 46px; font-size: 16px; padding: 0 22px; }
+}
+.start-row { display: flex; align-items: center; gap: 14px 20px; flex-wrap: wrap; }
+.start-btn { display: inline-flex; align-items: center; height: 46px; padding: 0 24px; border-radius: 999px; background: #1C1C1A; color: #FFFFFF; font-size: 16px; font-weight: 500; text-decoration: none; }
+.start-btn:hover { opacity: 0.9; }
+.app-link { font-size: 15px; color: inherit; text-decoration: underline; text-underline-offset: 3px; opacity: 0.85; }
+.app-link:hover { opacity: 1; }
+/* On the dark footer, and any dark panel: the light version */
+.site-footer .start-row { margin-top: 20px; }
+.site-footer .start-btn, .panel-moss .start-btn { background: #FFFFFF; color: #1C1C1A; }
+.site-footer .app-link, .panel-moss .app-link { color: #FFFFFF; }

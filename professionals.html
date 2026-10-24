@@ -219,23 +219,15 @@
 <body>
 <a href="#main-content" class="skip-link">Skip to content</a>
 <header class="site-nav">
-  <link rel="stylesheet" href="/styles/site-chrome.css?v=20261010">
+  <link rel="stylesheet" href="/styles/site-chrome.css?v=20261024">
   <a href="/" class="nav-logo">Clearly.</a>
   <div class="nav-right">
     <a href="/blog" class="nav-link">Blog</a>
     <a href="/best-co-parenting-apps/" class="nav-link">Compare apps</a>
     <a href="/plan-builder/" class="nav-link">Free plan builder</a>
     <a href="/professionals" class="nav-link">For Professionals</a>
-    <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge">
-      <svg width="22" height="26" viewBox="0 0 22 26" fill="none">
-        <path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/>
-        <path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/>
-      </svg>
-      <div class="badge-text">
-        <span class="badge-small">Download on the</span>
-        <span class="badge-large">App Store</span>
-      </div>
-    </a>
+    <a href="https://web.getclearly.app/login" class="nav-link" data-cta="header-sign-in">Sign in</a>
+    <a href="https://web.getclearly.app/signup" class="nav-cta" data-cta="header-start">Get started</a>
   </div>
   <button class="nav-toggle" aria-label="Menu">
     <span></span>
@@ -273,8 +265,10 @@
   });
 </script>
 <!-- mobile-app-bar -->
-<!-- Sticky App Store bar for phones. The header badge sits behind the menu on
-     small screens, so without this a phone reader has no visible way to the app. -->
+<!-- Sticky "Get started" bar for phones. The header button sits behind the
+     menu on small screens, so without this a phone reader has no visible way in.
+     It opens Clearly on the web, which works on any phone; the iPhone app is
+     the companion. -->
 <style>
   .mobile-app-bar { display: none; }
   @media (max-width: 768px) {
@@ -294,7 +288,6 @@
     .mobile-app-bar-text strong { font-size: 15px; font-weight: 500; color: #1C1C1A; }
     .mobile-app-bar-text span { font-size: 13px; color: #6B6B67; }
     .mobile-app-bar .app-badge { flex-shrink: 0; }
-    /* Android: Clearly on the web instead of the App Store */
     .mobile-app-bar .web-pill { flex-shrink: 0; display: inline-flex; align-items: center; gap: 8px; height: 44px; padding: 0 18px; border-radius: 999px; background: #1C1C1A; color: #FFFFFF; font-size: 15px; font-weight: 500; text-decoration: none; }
     .mobile-app-bar .web-pill svg { width: 18px; height: 18px; }
   }
@@ -303,18 +296,15 @@
   <img src="/images/app-icon-96.png" alt="" width="40" height="40">
   <div class="mobile-app-bar-text">
     <strong>Clearly</strong>
-    <span>Co-parenting app</span>
+    <span>Co-parenting app, web and iPhone</span>
   </div>
-  <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="mobile-sticky-bar" tabindex="-1" aria-label="Download Clearly on the App Store">
-    <svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg>
-    <div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div>
-  </a>
+  <a href="https://web.getclearly.app/signup" class="web-pill" data-cta="mobile-sticky-bar" tabindex="-1">Get started</a>
 </div>
 <script>
   (function() {
     var bar = document.getElementById('mobile-app-bar');
     if (!bar) return;
-    // Step aside while the footer or a full-size App Store CTA is on screen.
+    // Step aside while the footer or a full-size call to action is on screen.
     var inView = new Set();
     if ('IntersectionObserver' in window) {
       var io = new IntersectionObserver(function(entries) {
@@ -333,18 +323,6 @@
       bar.querySelector('a').tabIndex = show ? 0 : -1;
     }
     window.addEventListener('scroll', update, { passive: true });
-    // No App Store on Android: offer Clearly on the web instead
-    if (/Android/i.test(navigator.userAgent)) {
-      var a = bar.querySelector('a');
-      var web = document.createElement('a');
-      web.href = 'https://web.getclearly.app';
-      web.className = 'web-pill';
-      web.tabIndex = -1;
-      web.setAttribute('data-cta', 'mobile-sticky-bar-web');
-      web.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Open Clearly';
-      a.replaceWith(web);
-      bar.querySelector('.mobile-app-bar-text span').textContent = 'Use it in your browser';
-    }
   })();
   // Every link into Clearly on the web, on every page: counted in Google
   // Analytics (web_app_click, by placement), and marked from=site so the web
@@ -571,7 +549,7 @@
       </div>
       <div class="promises">
         <div class="promise" data-reveal><h3>Area by area</h3><p>Each area shared separately, with an optional end date.</p></div>
-        <div class="promise" data-reveal><h3>The co-parent is told</h3><p>When you're invited, when access changes and when it ends.</p></div>
+        <div class="promise" data-reveal><h3>The co-parent is told</h3><p>When you're invited, when access changes, and when a parent ends it. If you're a mediator or parenting coordinator, either parent can end your access.</p></div>
         <div class="promise" data-reveal><h3>Read-only, always</h3><p>You can't post, change or delete anything.</p></div>
         <div class="promise" data-reveal><h3>Your file stays yours</h3><p>When access ends, you keep a read-only copy and your private notes.</p></div>
       </div>
@@ -651,7 +629,7 @@
       <div class="faq">
         <details><summary>Is it really free for professionals?</summary><p>Yes. Professional accounts are free, with no limit on cases. Families pay for their own Clearly subscription, and one subscription covers both parents.</p></details>
         <details><summary>What can I see in a family's record?</summary><p>Only the areas the inviting parent chooses: topics and replies, the schedule, expenses, family info, records to export, and how often Clearly paused a message to suggest clearer wording. Access is always read-only, and it can have an end date.</p></details>
-        <details><summary>Does the other parent know I have access?</summary><p>Yes. The other parent is told whenever a professional is invited, when what they can see changes, and when access ends. Both parents can see who has access and what each professional opened.</p></details>
+        <details><summary>Does the other parent know I have access?</summary><p>Yes. The other parent is told when a professional is invited, when what they can see changes, and when a parent ends access. Access with an end date stops on that date. Both parents can see who has access and every part of the record each professional opened, including their dashboard and searches.</p></details>
         <details><summary>Why is an area of a case greyed out?</summary><p>The parent who shared the case hasn't shared that area with you. Parents choose each area on its own: topics, the schedule, expenses, family info and records. To see it, ask that parent to turn it on in Clearly, under Professionals on the web or Settings › Professionals on iPhone, then Change access. You'll see it as soon as they save, and the other parent is told what changed.</p></details>
         <details><summary>What happens when my access ends?</summary><p>You keep a read-only copy of what you could see up to that moment, for your case file, along with your private notes. Nothing added to the family's record afterwards reaches it.</p></details>
         <details><summary>Can I invite my clients to Clearly?</summary><p>Yes. Invite a family from your Dashboard by email, and resend, change or withdraw the invitation from Settings. Nothing is shared with you until a parent chooses to.</p></details>
@@ -699,10 +677,10 @@
         <span class="footer-logo-text">Clearly.</span>
       </div>
       <p class="footer-statement">Co-parenting, <em>resolved.</em></p>
-      <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-badge" data-cta="footer" aria-label="Download Clearly on the App Store">
-        <svg width="22" height="26" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M18.05 13.77C18.03 11.09 19.77 9.79 19.86 9.73C18.85 8.27 17.29 8.07 16.74 8.05C15.4 7.91 14.1 8.84 13.42 8.84C12.72 8.84 11.67 8.07 10.55 8.09C9.09 8.11 7.72 8.94 6.97 10.23C5.42 12.85 6.57 16.72 8.06 18.85C8.81 19.89 9.69 21.06 10.85 21.01C11.99 20.96 12.41 20.29 13.77 20.29C15.11 20.29 15.51 21.01 16.69 20.98C17.91 20.96 18.68 19.93 19.41 18.88C20.27 17.69 20.62 16.52 20.63 16.46C20.6 16.45 18.07 15.47 18.05 13.77Z" fill="white"/><path d="M15.87 6.54C16.47 5.81 16.87 4.81 16.76 3.8C15.89 3.83 14.8 4.38 14.17 5.09C13.61 5.72 13.12 6.74 13.25 7.72C14.22 7.79 15.25 7.26 15.87 6.54Z" fill="white"/></svg>
-        <div class="badge-text"><span class="badge-small">Download on the</span><span class="badge-large">App Store</span></div>
-      </a>
+      <div class="start-row">
+        <a href="https://web.getclearly.app/signup" class="start-btn" data-cta="footer">Get started</a>
+        <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-link" data-cta="footer-iphone">Get the companion iPhone app</a>
+      </div>
     </div>
     <div class="footer-links">
       <div class="footer-col">
@@ -811,7 +789,7 @@
       "name": "Does the other parent know I have access?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Yes. The other parent is told whenever a professional is invited, when what they can see changes, and when access ends. Both parents can see who has access and what each professional opened."
+        "text": "Yes. The other parent is told when a professional is invited, when what they can see changes, and when a parent ends access. Access with an end date stops on that date. Both parents can see who has access and every part of the record each professional opened, including their dashboard and searches."
       }
     },
     {
