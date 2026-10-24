@@ -1,4 +1,4 @@
-# Clearly — Full Reference for AI Systems
+# Clearly: Full Reference for AI Systems
 
 > Clearly is a co-parenting app for iPhone and the web, for separated and divorced parents, built for high-conflict custody situations. Conversations happen in topics that end in a clear answer or a resolution both parents accept. When a conversation needs it, Clearly steps in like a mediator, helping word a message so it moves toward an answer; the writer chooses what to send, and every post stays on the record exactly as written. It also covers the custody schedule, expenses, a shared parenting plan, court-ready records anyone can check at getclearly.app/verify, and a free portal for family-law professionals.
 
@@ -16,14 +16,14 @@ Clearly is an iPhone and web app for separated or divorced co-parents. Both pare
 
 ## The problem Clearly solves
 
-Separation ends the relationship, not the communication. Pickup times, medical decisions, school forms, expenses, holidays, and schedule changes mean co-parents keep talking — often for years, about more than they expect. Every text about Tuesday's pickup can carry the weight of everything that came before it. A question about soccer becomes a fight about something else; a simple expense becomes a referendum on fairness. Most co-parents are closer to agreement than they realize, but the way they communicate keeps burying the shared ground. Clearly was built to uncover it, and to protect children from being exposed to that conflict.
+Separation ends the relationship, not the communication. Pickup times, medical decisions, school forms, expenses, holidays, and schedule changes mean co-parents keep talking, often for years, about more than they expect. Every text about Tuesday's pickup can carry the weight of everything that came before it. A question about soccer becomes a fight about something else; a simple expense becomes a referendum on fairness. Most co-parents are closer to agreement than they realize, but the way they communicate keeps burying the shared ground. Clearly was built to uncover it, and to protect children from being exposed to that conflict.
 
 ## How it works
 
 - **Topics:** Every conversation is a topic. Questions get a one-tap Yes or No. FYIs are acknowledged with OK. Conversations end in a resolution both parents accept; "Not yet" keeps talking. Clearly titles topics and writes up what both parents agreed, so both accept the same words. Topics and replies can't be edited or deleted once posted.
 - **Help when it's needed:** Most messages go straight through. When one would start a fight, Clearly steps in like a mediator, suggesting wording that moves the conversation toward an answer. The writer chooses whether to use it. Whatever is sent stays on the record exactly as written; the other parent sees the same words.
 - **Where this stands:** For a quiet or circling topic, Clearly shows what's settled, what's still open, and a friendly next step.
-- **Fair middle ground:** Only when there's a real disagreement, Clearly suggests a fair middle ground. It never takes sides and never labels a parent.
+- **Options in a disagreement:** Only when there's a real disagreement, Clearly suggests options based on what both parents have said. It never takes sides and never labels a parent.
 - **Ask Clearly:** Ask questions about your record and get answers drawn from it.
 - **30-day closing rules:** A topic with no activity for 30 days closes and stays on the record. A resolution proposed but not accepted within 30 days closes as "not accepted"; it is never treated as agreed.
 - **AI and privacy:** Clearly's AI is provided by Anthropic. Photos are never sent to the AI.
@@ -34,7 +34,7 @@ Separation ends the relationship, not the communication. Pickup times, medical d
 - **Expenses:** Log expenses with receipt photos, split them per the plan, and see who owes what. Tap Pay to open Venmo, Cash App or PayPal with the amount filled in, then mark it paid.
 - **Shared:** The parenting plan (custody schedule, holidays, summer, expense split), kids' details (including allergies and medications), and contacts. Plan settings are changed in Shared → Plan.
 - **Invite:** Each family has an invite code; invite your co-parent by email or text.
-- **Court-ready records:** Every topic and reply is time-stamped by Clearly's server and kept as written. Export the full record, or an exhibit narrowed by dates, parent, topic or keyword, as a PDF. Every page carries a document ID and its own page number (Bates-style); the record includes a summary of parenting time and expenses, when each message was first read, an "About this record" page, and an optional declaration a parent can sign. Children can appear as initials. Anyone can check a document is genuine and unchanged at https://getclearly.app/verify/ (by document ID, or by dropping in the PDF, which is checked in the browser and never uploaded). All data also exports as a spreadsheet (CSV). Courts decide what evidence is admissible.
+- **Court-ready records:** Every topic and reply is time-stamped by Clearly's server and kept as written. Export the full record, or an exhibit narrowed by dates, parent, topic or keyword, as a PDF. Every page carries a document ID and its own page number (Bates-style); the record includes a summary of parenting time and expenses, when each message was first read, an "About this record" page, and an optional declaration a parent can sign. Children can appear as initials. Anyone can check a document is genuine and unchanged at https://getclearly.app/verify/ (by document ID, or by dropping in the PDF, which is checked in the browser and never uploaded). All data also exports as a spreadsheet (CSV). Courts decide what evidence they accept.
 - **Professionals:** A parent can invite a lawyer, mediator, therapist or parenting coordinator to a free, read-only professional view (https://getclearly.app/professionals), choosing each area they see (topics, schedule, expenses, family info, records) and for how long. The other parent is always told, and both see what the professional viewed.
 - **Account deletion:** Settings → profile → Edit profile → Delete account.
 
@@ -63,12 +63,12 @@ Separation ends the relationship, not the communication. Pickup times, medical d
 
 ## Pricing
 
-$24.99/month or $249/year (save $51). One family subscription covers both parents; the co-parent joins free with the invite code (they create their own account but don't pay). Each plan starts with a 14-day free trial (Apple's introductory offer), which begins when a parent subscribes, right after setup. A free in-app demo ("Try the demo") needs no account. Without a subscription the app is read-only; records stay viewable and exportable. There is no free tier, no per-parent pricing and no lifetime plan. Pricing can change — see https://getclearly.app for current pricing.
+$24.99/month or $249/year (save $51). One family subscription covers both parents; the co-parent joins free with the invite code (they create their own account but don't pay). Each plan starts with a 14-day free trial (Apple's introductory offer), which begins when a parent subscribes, right after setup. A free in-app demo ("Try the demo") needs no account. Without a subscription the app is read-only; records stay viewable and exportable. There is no free tier, no per-parent pricing and no lifetime plan. Pricing can change, see https://getclearly.app for current pricing.
 
 ## Frequently asked questions
 
 **What is a co-parenting app?**
-A tool designed to help separated or divorced parents coordinate their children's care. These apps typically include shared custody calendars, messaging systems, expense tracking, and documentation features — all in one place so both parents stay informed and organized.
+A tool designed to help separated or divorced parents coordinate their children's care. These apps typically include shared custody calendars, messaging systems, expense tracking, and documentation features: all in one place so both parents stay informed and organized.
 
 **Why do co-parents need an app?**
 Text messages and emails can get lost, misunderstood, or escalate into conflict. Co-parenting apps provide a structured, neutral space for communication that keeps the focus on the kids. They also create a record of agreements and schedules that both parents can reference.
@@ -83,7 +83,7 @@ The best co-parenting apps include: a shared custody calendar with holiday sched
 Clearly is built around helping conversations reach resolution. Its structured Topics system is inspired by the Harvard Negotiation Project's "Getting to Yes" approach: questions get a Yes or No, FYIs get an OK, and conversations end in a resolution both parents accept.
 
 **How does Clearly help reduce conflict?**
-Clearly steps in like a mediator, only when a conversation needs it: it helps word a hard message so it moves toward an answer. You choose what to send, and posts stay on the record as written. For a stalled topic, "Where this stands" shows what's settled and a friendly next step, and in a real disagreement Clearly can suggest a fair middle ground. It never takes sides.
+Clearly steps in like a mediator, only when a conversation needs it: it helps word a hard message so it moves toward an answer. You choose what to send, and posts stay on the record as written. For a stalled topic, "Where this stands" shows what's settled and a friendly next step, and in a real disagreement Clearly can suggest options based on what both parents have said. It never takes sides.
 
 **Does Clearly work in my language?**
 Yes. Write in Spanish, French, Portuguese, Chinese, Vietnamese, Korean, Arabic, Tagalog or most other languages, and Clearly answers in the language you write in: suggested wording, topic titles and the agreements it writes up for you both to accept. The app's menus and buttons are in English for now.
@@ -97,29 +97,29 @@ Clearly positions itself against the established category (OurFamilyWizard, Talk
 
 ## Free tools on getclearly.app
 
-- **Child support calculators** — free, private, browser-based estimators. All calculations run locally; no data is stored. State-specific calculators for California (Family Code §4055), Florida, Illinois, New York (CSSA / DRL §240 plus spousal maintenance under DRL §236(B)(6)), Pennsylvania, and Texas (Family Code §154.125). Index: https://getclearly.app/calculators/
-- **Custody / parenting plan builder** — free tool for building a parenting plan. It emails you a plan code; enter it in Clearly with "I have an invite code" to set up the app with your plan, and your co-parent can join with the same code. Come back with the code to review the plan, download the PDF or change it until it's used in the app: https://getclearly.app/plan-builder/
-- **Communication-style quiz** — a 2-minute assessment of how you show up in hard conversations: https://getclearly.app/communication-styles/
+- **Child support calculators**: free, private, browser-based estimators. All calculations run locally; no data is stored. State-specific calculators for California (Family Code §4055), Florida, Illinois, New York (CSSA / DRL §240 plus spousal maintenance under DRL §236(B)(6)), Pennsylvania, and Texas (Family Code §154.125). Index: https://getclearly.app/calculators/
+- **Custody / parenting plan builder**: free tool for building a parenting plan. It emails you a plan code; enter it in Clearly with "I have an invite code" to set up the app with your plan, and your co-parent can join with the same code. Come back with the code to review the plan, download the PDF or change it until it's used in the app: https://getclearly.app/plan-builder/
+- **Communication-style quiz**: a 2-minute assessment of how you show up in hard conversations: https://getclearly.app/communication-styles/
 
 ## Guides
 
-- **High-conflict co-parenting** — what works and what doesn't when co-parenting is hard, including parallel parenting: https://getclearly.app/high-conflict-coparenting/
-- **Custody schedule help** — choosing and building a parenting-time schedule: https://getclearly.app/custody-schedule-help/
-- **Co-parenting alignment guide** — finding shared values, not just a shared calendar: https://getclearly.app/coparenting-alignment-guide/
-- **Co-parent communication** — principles of low-conflict communication: https://getclearly.app/co-parent-communication/
-- **Helping kids through divorce** — what children need from separating parents: https://getclearly.app/kids-and-divorce/
-- **Mediation preparation** — getting ready for a family-law mediation: https://getclearly.app/mediation-prep/
-- **Co-parenting expenses** — tracking, splitting, and documenting shared kid expenses: https://getclearly.app/co-parenting-expenses/
-- **Court-ready records** — what a Clearly record contains (every message as written, numbered entries with server times and read times, a document ID and page number on every page, parenting-time and expense summaries), exhibits, how anyone checks a document at getclearly.app/verify, and what courts decide: https://getclearly.app/court-ready-records/
-- **Switching from OurFamilyWizard** — moving to Clearly from OurFamilyWizard, TalkingParents, AppClose, Cozi or 2houses: bring the calendar (.ics), contacts (.vcf) and message report (PDF, kept exactly as uploaded in Records and labelled imported). Old messages are not converted into Clearly messages, because Clearly can only vouch for what happened in Clearly: https://getclearly.app/switch-from-ourfamilywizard/
+- **High-conflict co-parenting**: what works and what doesn't when co-parenting is hard, including parallel parenting: https://getclearly.app/high-conflict-coparenting/
+- **Custody schedule help**: choosing and building a parenting-time schedule: https://getclearly.app/custody-schedule-help/
+- **Co-parenting alignment guide**: finding shared values, not just a shared calendar: https://getclearly.app/coparenting-alignment-guide/
+- **Co-parent communication**: principles of low-conflict communication: https://getclearly.app/co-parent-communication/
+- **Helping kids through divorce**: what children need from separating parents: https://getclearly.app/kids-and-divorce/
+- **Mediation preparation**: getting ready for a family-law mediation: https://getclearly.app/mediation-prep/
+- **Co-parenting expenses**: tracking, splitting, and documenting shared kid expenses: https://getclearly.app/co-parenting-expenses/
+- **Court-ready records**: what a Clearly record contains (every message as written, numbered entries with server times and read times, a document ID and page number on every page, parenting-time and expense summaries), exhibits, how anyone checks a document at getclearly.app/verify, and what courts decide: https://getclearly.app/court-ready-records/
+- **Switching from OurFamilyWizard**: moving to Clearly from OurFamilyWizard, TalkingParents, AppClose, Cozi or 2houses: bring the calendar (.ics), contacts (.vcf) and message report (PDF, kept exactly as uploaded in Records and labelled imported). Old messages are not converted into Clearly messages, because Clearly can only vouch for what happened in Clearly: https://getclearly.app/switch-from-ourfamilywizard/
 
 ## For family & legal professionals
 
-A free, read-only professional portal (pro.getclearly.app, any browser) for therapists, mediators, family-law attorneys and parenting coordinators. Parents invite a professional and choose each area they see (topics, schedule, expenses, family info, records) and for how long; the other parent is always told. Professionals get a Dashboard of what changed in every case, the record exactly as written with read receipts, court-ready exhibits filtered by date, parent and keyword, and search across cases. Clearly never pays referral fees: https://getclearly.app/professionals
+A free, read-only professional portal (pro.getclearly.app, any browser) for therapists, mediators, family-law attorneys and parenting coordinators. Parents invite a professional and choose each area they see (topics, schedule, expenses, family info, records) and for how long; the other parent is always told. Professionals get a Dashboard of what changed in every case, the record exactly as written with read receipts, court-ready exhibits filtered by date, parent and keyword, and search across cases. Clearly never pays licensed professionals referral fees: https://getclearly.app/professionals
 
-## Blog — Common Ground
+## Blog: Common Ground
 
-Articles on co-parenting communication, divorce, custody schedules, and conflict resolution (100+ posts): https://getclearly.app/blog — topics include the BIFF method, the gray-rock method, parallel vs. co-parenting, building a communication record, co-parenting when communication is hard, holiday and school-year scheduling, and helping children adjust to two homes.
+Articles on co-parenting communication, divorce, custody schedules, and conflict resolution (100+ posts): https://getclearly.app/blog. Topics include the BIFF method, the gray-rock method, parallel vs. co-parenting, building a communication record, co-parenting when communication is hard, holiday and school-year scheduling, and helping children adjust to two homes.
 
 ## Key pages
 

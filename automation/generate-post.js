@@ -105,6 +105,7 @@ REQUIREMENTS:
 - Do NOT include dates, "last updated", or time-sensitive references
 - Write for parents going through divorce/separation who want to do right by their kids
 - Be empathetic but not preachy
+- No em dashes. Use a comma, a colon or a new sentence instead
 
 STRUCTURE:
 1. Opening hook (2-3 paragraphs) - connect with the reader's real experience, introduce the topic naturally

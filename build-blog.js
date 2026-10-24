@@ -1,3 +1,7 @@
+// House style, whatever the Notion post says (automation/no-em-dash.js):
+// no em dashes, and no claim that records are admissible in court
+const { withoutEmDashes: noDashes, withoutLegalClaims } = require('./automation/no-em-dash');
+const withoutEmDashes = (html) => withoutLegalClaims(noDashes(html));
 const { Client } = require('@notionhq/client');
 const fs = require('fs');
 const path = require('path');
@@ -1146,7 +1150,7 @@ async function build() {
   for (const post of processedPosts) {
     const relatedPosts = linkPlan.related.get(post.slug) || [];
     const postHtml = blogPostTemplate(post, relatedPosts);
-    fs.writeFileSync(path.join(blogDir, `${post.slug}.html`), postHtml);
+    fs.writeFileSync(path.join(blogDir, `${post.slug}.html`), withoutEmDashes(postHtml));
     console.log(`  -> ${postPath(post.slug)}`);
   }
 
@@ -1154,7 +1158,8 @@ async function build() {
   for (const g of GUIDE_PAGES) {
     const file = path.join(__dirname, g.file);
     const html = fs.readFileSync(file, 'utf8');
-    const next = writeFurtherReading(html, linkPlan.pages.get(g.id));
+    const read = writeFurtherReading(html, linkPlan.pages.get(g.id));
+    const next = read === null ? null : withoutEmDashes(read);
     if (next === null) { console.warn(`  ! ${g.file} has no further-reading markers`); continue; }
     if (next !== html) fs.writeFileSync(file, next);
     console.log(`  -> /${g.id}/ further reading (${(linkPlan.pages.get(g.id) || []).length})`);
@@ -1162,7 +1167,7 @@ async function build() {
 
   // Write blog listing page
   const listHtml = blogListTemplate(processedPosts);
-  fs.writeFileSync(path.join(__dirname, 'blog.html'), listHtml);
+  fs.writeFileSync(path.join(__dirname, 'blog.html'), withoutEmDashes(listHtml));
   console.log('-> blog.html');
 
   // Generate sitemap.xml
@@ -1207,7 +1212,7 @@ ${processedPosts.map(post => `    <item>
     </item>`).join('\n')}
   </channel>
 </rss>`;
-  fs.writeFileSync(path.join(__dirname, 'feed.xml'), rssFeed);
+  fs.writeFileSync(path.join(__dirname, 'feed.xml'), withoutEmDashes(rssFeed));
   console.log('-> feed.xml');
 
   console.log('Blog build complete!');
