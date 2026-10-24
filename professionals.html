@@ -22,8 +22,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
   <meta name="theme-color" content="#0D8268">
-  <title>For Professionals: a free caseload view | Clearly</title>
-  <meta name="description" content="Free for attorneys, mediators and parenting coordinators: one Dashboard of what changed in every case, a record kept exactly as written, court-ready exhibits anyone can check, and access parents choose area by area.">
+  <title>Co-Parenting App for Professionals: Free Caseload View | Clearly</title>
+  <meta name="description" content="The co-parenting app record, free for attorneys, mediators and parenting coordinators: one Dashboard of every case, messages kept as written, court-ready exhibits, and access parents choose.">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://getclearly.app/professionals">
@@ -35,7 +35,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app/professionals">
   <meta property="og:title" content="Clearly for Family Professionals: your whole caseload, free">
-  <meta property="og:description" content="Free for attorneys, mediators and parenting coordinators: one Dashboard of what changed in every case, a record kept exactly as written, court-ready exhibits anyone can check, and access parents choose area by area.">
+  <meta property="og:description" content="The co-parenting app record, free for attorneys, mediators and parenting coordinators: one Dashboard of every case, messages kept as written, court-ready exhibits, and access parents choose.">
   <meta property="og:image" content="https://getclearly.app/images/pro/og-pro.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -44,7 +44,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Clearly for Family Professionals: your whole caseload, free">
-  <meta name="twitter:description" content="Free for attorneys, mediators and parenting coordinators: one Dashboard of what changed in every case, a record kept exactly as written, court-ready exhibits anyone can check, and access parents choose area by area.">
+  <meta name="twitter:description" content="The co-parenting app record, free for attorneys, mediators and parenting coordinators: one Dashboard of every case, messages kept as written, court-ready exhibits, and access parents choose.">
   <meta name="twitter:image" content="https://getclearly.app/images/pro/og-pro.png">
 
   <link rel="stylesheet" href="styles.css">
@@ -331,11 +331,15 @@
     var link = e.target.closest && e.target.closest('a[href*="web.getclearly.app"], a[href*="pro.getclearly.app"]');
     if (!link) return;
     if (typeof gtag === 'function') {
-      gtag('event', 'web_app_click', {
+      var params = {
         link_url: link.href.split('?')[0],
         link_location: link.dataset.cta || (link.closest('header') ? 'header' : link.closest('footer') ? 'footer' : link.closest('#mobile-app-bar') ? 'mobile-sticky-bar' : 'body'),
         page_type: location.pathname === '/' ? 'home' : location.pathname.indexOf('/blog/') === 0 ? 'blog_post' : 'page'
-      });
+      };
+      gtag('event', 'web_app_click', params);
+      // Get started (web sign-up), the site's main call to action: counted
+      // on its own too, so the Control Room can follow it to a paying family
+      try { if (new URL(link.href).pathname.indexOf('/signup') === 0) gtag('event', 'get_started_click', params); } catch (err) { /* old browser */ }
     }
     try {
       var u = new URL(link.href);

@@ -17,7 +17,7 @@
   <link rel="dns-prefetch" href="https://dwncravjhkbclbuzijra.supabase.co">
 
   <title>Clearly: Co-Parenting App for the Web and iPhone</title>
-  <meta name="description" content="Clearly is a co-parenting communication system for the web and iPhone: topics that get settled, a shared custody schedule, expense splits, and a record you can share with your lawyer or mediator. 14-day free trial.">
+  <meta name="description" content="Clearly is the co-parenting app for the web and iPhone: conversations that reach an answer, a shared custody schedule, expense splits, and a record your lawyer can see. 14-day free trial.">
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://getclearly.app/">
@@ -26,7 +26,7 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getclearly.app/">
   <meta property="og:title" content="Clearly: Co-Parenting App for the Web and iPhone">
-  <meta property="og:description" content="Clearly is a co-parenting communication system for the web and iPhone: topics that get settled, a shared custody schedule, expense splits, and a record you can share with your lawyer or mediator. 14-day free trial.">
+  <meta property="og:description" content="Clearly is the co-parenting app for the web and iPhone: conversations that reach an answer, a shared custody schedule, expense splits, and a record your lawyer can see. 14-day free trial.">
   <meta property="og:image" content="https://getclearly.app/images/og-default.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -37,7 +37,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Clearly: Co-Parenting App for the Web and iPhone">
-  <meta name="twitter:description" content="Clearly is a co-parenting communication system for the web and iPhone: topics that get settled, a shared custody schedule, expense splits, and a record you can share with your lawyer or mediator. 14-day free trial.">
+  <meta name="twitter:description" content="Clearly is the co-parenting app for the web and iPhone: conversations that reach an answer, a shared custody schedule, expense splits, and a record your lawyer can see. 14-day free trial.">
   <meta name="twitter:image" content="https://getclearly.app/images/og-default.png">
   <meta name="twitter:image:alt" content="Clearly: Change the conversation">
 
@@ -981,11 +981,15 @@
     var link = e.target.closest && e.target.closest('a[href*="web.getclearly.app"], a[href*="pro.getclearly.app"]');
     if (!link) return;
     if (typeof gtag === 'function') {
-      gtag('event', 'web_app_click', {
+      var params = {
         link_url: link.href.split('?')[0],
         link_location: link.dataset.cta || (link.closest('header') ? 'header' : link.closest('footer') ? 'footer' : link.closest('#mobile-app-bar') ? 'mobile-sticky-bar' : 'body'),
         page_type: location.pathname === '/' ? 'home' : location.pathname.indexOf('/blog/') === 0 ? 'blog_post' : 'page'
-      });
+      };
+      gtag('event', 'web_app_click', params);
+      // Get started (web sign-up), the site's main call to action: counted
+      // on its own too, so the Control Room can follow it to a paying family
+      try { if (new URL(link.href).pathname.indexOf('/signup') === 0) gtag('event', 'get_started_click', params); } catch (err) { /* old browser */ }
     }
     try {
       var u = new URL(link.href);
@@ -1135,6 +1139,7 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Clearly",
+    "alternateName": "Clearly co-parenting app",
     "applicationCategory": "LifestyleApplication",
     "operatingSystem": "Web, iOS, Android (web)",
     "description": "Co-parenting, resolved. When a conversation needs it, Clearly steps in like a mediator, with wording that moves you toward an answer. It writes up what you both agree, and keeps the custody schedule, expenses and parenting plan in one place. On iPhone and the web.",
