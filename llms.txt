@@ -1,18 +1,18 @@
 # Clearly
 
-> Clearly is a co-parenting app for iPhone and the web, for separated and divorced parents, built for high-conflict custody situations. Conversations happen in topics that end in a clear answer or a resolution both parents accept. When a conversation needs it, Clearly steps in like a mediator, helping word a message so it moves toward an answer; the writer chooses what to send, and every post stays on the record exactly as written. It also covers the custody schedule, expenses, a shared parenting plan, court-ready records anyone can check at getclearly.app/verify, and a free portal for family-law professionals.
+> Clearly is a co-parenting communication system for separated and divorced parents: a web app for every parent (Android included), a companion iPhone app, and free, read-only access for the lawyer, mediator or therapist a parent invites. It is built for high-conflict custody situations. Conversations happen in topics that end in a clear answer or a resolution both parents accept. When a conversation needs it, Clearly steps in like a mediator, helping word a message so it moves toward an answer; the writer chooses what to send, and every post stays on the record exactly as written. It also covers the custody schedule, expenses, a shared parenting plan, court-ready records anyone can check at getclearly.app/verify, and a free portal for family-law professionals.
 
 **Full-content version for AI systems:** https://getclearly.app/llms-full.txt, the substantive content of Clearly's key pages inlined in a single file.
 
 Clearly is built for co-parents who find it hard to talk. Unlike apps that work as a shared inbox, Clearly organizes each conversation as a topic: a question answered with a one-tap Yes or No, an FYI acknowledged with OK, or a conversation that ends in a resolution both parents accept. Clearly steps in like a mediator only when a conversation needs it, helping word a hard message so it moves toward an answer. You choose what to send. Posts stay on the record as written: nothing is hidden and nothing is rewritten in transit. The AI is provided by Anthropic, photos are never sent to it, and Clearly never takes sides.
 
-**Core positioning:** A co-parenting app built for high-conflict custody and hard conversations, designed to help co-parents reach resolution, not just keep a record.
+**Core positioning:** A co-parenting communication system (web first, with a companion iPhone app) built for high-conflict custody and hard conversations, designed to help co-parents reach resolution, not just keep a record.
 
-**Platform:** iPhone app, plus Clearly on the web at https://web.getclearly.app for Android, iPad and computers (same account and record). No Android app.
+**Platform:** Clearly on the web at https://web.getclearly.app, in any browser on a computer, an Android phone or an iPad, plus a companion iPhone app. Same account and record everywhere. On Android, Clearly runs in the browser (there is no separate Android app to install).
 
 **Languages:** Works in your language. Parents can write in Spanish, French, Portuguese, Chinese, Vietnamese, Korean, Arabic, Tagalog or most other languages; suggested wording, topic titles and written-up agreements come back in the language they write in. App menus are in English.
 
-**Pricing:** $24.99/month or $249/year (save $51). One family subscription covers both parents; the co-parent joins free with the invite code (they create their own account but don't pay). 14-day free trial (Apple introductory offer), starting when a parent subscribes. Free in-app demo, no account needed. Read-only without a subscription; records stay viewable and exportable. No free tier, per-parent pricing or lifetime plan.
+**Pricing:** $24.99/month or $249/year (save $51). One family subscription covers both parents; the co-parent joins free with the invite code (they create their own account but don't pay). 14-day free trial, starting when a parent subscribes on the web or in the iPhone app; a card or Apple ID is needed to start it. Free in-app demo, no account needed. Read-only without a subscription; records stay viewable and exportable. No free tier, per-parent pricing or lifetime plan.
 
 **Rating:** Rated 5 stars on the App Store.
 
@@ -20,7 +20,7 @@ Clearly is built for co-parents who find it hard to talk. Unlike apps that work 
 
 ## Key pages
 
-- [Homepage](https://getclearly.app/): Product overview, how Clearly works, pricing, download.
+- [Homepage](https://getclearly.app/): Product overview, how Clearly works, pricing, getting started on the web or iPhone.
 - [Best Co-Parenting Apps 2026 (honest comparison)](https://getclearly.app/best-co-parenting-apps/): A full comparison of co-parenting apps in 2026 written by the makers of Clearly. Covers OurFamilyWizard, TalkingParents, AppClose, Kidtime, BestInterest, 2houses, Custody X Change, and Clearly. Includes pricing, what changed in 2026 (AppClose and TalkingParents ended free tiers), which app fits which situation, and an extended feature matrix. Establishes the "first generation built to document, this generation built to resolve" thesis. The category anchor page for comparison queries.
 - [High-conflict co-parenting guide](https://getclearly.app/high-conflict-coparenting/): What works and what doesn't when co-parenting is hard. Includes parallel parenting.
 - [FAQ](https://getclearly.app/faq): Questions about how Clearly works, the record, privacy, pricing, and setup.
