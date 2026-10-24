@@ -16,7 +16,7 @@ Clearly is built for co-parents who find it hard to talk. Unlike apps that work 
 
 **Rating:** Rated 5 stars on the App Store.
 
-**Maker:** Clearly LLC (independent company).
+**Maker:** Clearly, an independent co-parenting company.
 
 ## Key pages
 
@@ -104,5 +104,5 @@ Clearly is built for co-parents who find it hard to talk. Unlike apps that work 
 
 - Email: hello@getclearly.app
 - Contact page: https://getclearly.app/contact
-- Company: Clearly LLC
+- Company: Clearly
 - App Store: https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374

@@ -667,7 +667,7 @@ const blogListTemplate = (posts) => `<!DOCTYPE html>
     "url": "${BLOG_URL}",
     "publisher": {
       "@type": "Organization",
-      "name": "Clearly LLC",
+      "name": "Clearly",
       "url": "https://getclearly.app"
     },
     "blogPost": [

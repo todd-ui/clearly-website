@@ -59,7 +59,7 @@ Separation ends the relationship, not the communication. Pickup times, medical d
 - **Languages:** Works in your language. Parents can write in Spanish, French, Portuguese, Chinese, Vietnamese, Korean, Arabic, Tagalog or most other languages; suggested wording, topic titles and written-up agreements come back in the language they write in. App menus are in English.
 - **App Store:** https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374
 - **Rating:** Rated 5 stars on the App Store.
-- **Maker:** Clearly LLC (independent company).
+- **Maker:** Clearly, an independent co-parenting company.
 
 ## Pricing
 
@@ -137,6 +137,6 @@ Articles on co-parenting communication, divorce, custody schedules, and conflict
 ## Contact
 
 - Email: hello@getclearly.app
-- Company: Clearly LLC
+- Company: Clearly
 - App Store: https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374
 - Attribution requested when content is cited: Clearly (https://getclearly.app)

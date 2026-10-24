@@ -38,7 +38,7 @@ const PAGE_PHRASES = [
 const SITE_PHRASES = [
   'Best Co-Parenting Apps {Y}',                         // footer link, llms.txt
   'A full comparison of co-parenting apps in {Y}',      // llms.txt
-  '&copy; {Y} Clearly LLC',                             // footer
+  '&copy; {Y} Clearly',                             // footer
 ];
 
 const esc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
