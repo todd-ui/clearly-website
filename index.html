@@ -111,7 +111,7 @@
     [data-reveal].is-in { opacity: 1; transform: none; }
     [data-reveal="fade"] { transform: none; }
 
-    /* ---------- Hero: the phone, annotated ---------- */
+    /* ---------- Hero: web and iPhone ---------- */
     .home-hero { padding-top: 88px; padding-bottom: 0; background: var(--moss-pale); }
     .hero-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 40px; align-items: start; }
     .hero-copy { padding-top: 56px; }
@@ -130,6 +130,12 @@
       opacity: 0; transform: translateY(70px); transition: opacity 1.1s var(--ease) .15s, transform 1.3s var(--ease) .15s; }
     .shot .phone img { width: 100%; height: auto; display: block; }
     .home-hero.is-in .shot .phone { opacity: 1; transform: none; }
+    /* Web and iPhone together: the browser window, and the phone in front of
+       its lower-right corner, both showing Today */
+    .devices { position: relative; padding: 36px 0 72px; }
+    .devices .dev-web { width: calc(100% - 56px); margin: 0; }
+    .devices .dev-phone { position: absolute; right: 0; bottom: 24px; width: 30%; max-width: 210px; filter: drop-shadow(0 24px 36px rgba(13,82,66,0.22)); }
+    .devices .dev-phone img { display: block; width: 100%; height: auto; }
     .callout { position: absolute; left: calc(var(--x) * 100%); top: calc(var(--y) * 100%); display: flex; align-items: center; transform: translateY(-50%); z-index: 2; }
     .callout .dot { width: 9px; height: 9px; margin-left: -4.5px; border-radius: 50%; background: var(--moss); box-shadow: 0 0 0 4px rgba(13,130,104,0.2); flex-shrink: 0; transform: scale(0); transition: transform .4s var(--ease); transition-delay: calc(1.2s + var(--n) * .55s); }
     .callout .line { width: calc((1 - var(--x)) * 290px + 44px); height: 1px; background: var(--moss); opacity: .55; transform-origin: left; transform: scaleX(0); transition: transform .6s var(--ease); transition-delay: calc(1.3s + var(--n) * .55s); }
@@ -338,6 +344,9 @@
       .home-hero h1 { font-size: 40px; }
       .h2 { font-size: 34px; }
       .diagram { height: auto; padding-bottom: 8px; }
+      .devices { padding: 8px 0 48px; max-width: 560px; margin: 0 auto; }
+      .devices .dev-web { width: 88%; }
+      .devices .dev-phone { width: 32%; bottom: 8px; }
       /* Phones and tablets: the dots become numbered markers on the phone and the
          callouts become a matching numbered list under it, so nothing is lost.
          --pw is the phone's width; 2.0808 is the screenshot's height / width. */
@@ -436,7 +445,7 @@
     <a href="#pricing" data-cta="home-jump-pricing">Pricing</a>
   </nav>
 
-  <!-- HERO: the app, annotated -->
+  <!-- HERO: Clearly on the web and on iPhone -->
   <section class="panel home-hero" data-scene>
     <div class="inner hero-grid">
       <div class="hero-copy">
@@ -446,15 +455,15 @@
         <div data-reveal style="--i:4"><div class="start-row"><a href="https://web.getclearly.app/signup" class="start-btn" data-cta="home-hero">Get started</a><a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-link" data-cta="home-hero-iphone">Or get the iPhone app</a></div></div>
         <p class="note" data-reveal style="--i:5">14-day free trial &middot; Your co-parent joins free</p>
       </div>
-      <div class="diagram">
-        <div class="shot">
-          <div class="phone"><picture><source srcset="/images/home/today-2.webp" type="image/webp"><img src="/images/home/today-2.png" alt="The Today screen in Clearly" width="600" height="1248" fetchpriority="high"></picture></div>
-          <div class="callout" style="--x:.80; --y:.21; --n:0"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Who has the kids</strong><span>And when the next hand-off is.</span></div></div>
-          <div class="callout" style="--x:.918; --y:.363; --n:1"><i class="dot"></i><i class="line"></i><div class="txt"><strong>One tap to start</strong><span>Swap a weekend. Log an expense. Raise a topic.</span></div></div>
-          <div class="callout is-left" style="--x:.862; --y:.555; --n:2"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Topics that end</strong><span>Every one of them. On purpose.</span></div></div>
-          <div class="callout" style="--x:.25; --y:.69; --n:3"><i class="dot"></i><i class="line"></i><div class="txt"><strong>What&#x27;s coming up</strong><span>Practices, classes and swaps, in one list.</span></div></div>
-          <div class="callout" style="--x:.90; --y:.845; --n:4"><i class="dot"></i><i class="line"></i><div class="txt"><strong>Swap requests</strong><span>Trade a day without the back-and-forth.</span></div></div>
-        </div>
+      <!-- The same Today screen in a browser and on iPhone: one record, both places -->
+      <div class="devices" aria-label="Clearly on the web and on iPhone, showing the same Today screen">
+        <figure class="web-window dev-web" data-reveal style="--i:2">
+          <div class="web-bar" aria-hidden="true"><i></i><i></i><i></i><span>web.getclearly.app</span></div>
+          <picture>
+            <img src="/images/home/web/web-today-1440.webp" srcset="/images/home/web/web-today-1440.webp 1440w, /images/home/web/web-today-2880.webp 2880w" sizes="(max-width: 960px) 88vw, 680px" width="1440" height="900" fetchpriority="high" alt="Clearly on the web: Today, showing who has the kids, what needs an answer and what's coming up">
+          </picture>
+        </figure>
+        <div class="dev-phone" data-reveal style="--i:4"><picture><source srcset="/images/home/today-2.webp" type="image/webp"><img src="/images/home/today-2.png" alt="The same Today screen in the Clearly iPhone app" width="600" height="1248"></picture></div>
       </div>
     </div>
   </section>
