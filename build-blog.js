@@ -1010,6 +1010,8 @@ const STATIC_PAGES = [
   ['/plan-builder/', 'plan-builder/index.html'],
   ['/best-co-parenting-apps/', 'best-co-parenting-apps/index.html'],
   ['/switch-from-ourfamilywizard/', 'switch-from-ourfamilywizard/index.html'],
+  ['/court-ready-records/', 'court-ready-records/index.html'],
+  ['/verify/', 'verify/index.html'],
   ['/high-conflict-coparenting/', 'high-conflict-coparenting/index.html'],
   ['/co-parent-communication/', 'co-parent-communication/index.html'],
   ['/custody-schedule-help/', 'custody-schedule-help/index.html'],
