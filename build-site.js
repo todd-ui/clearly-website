@@ -22,6 +22,7 @@ const PAGES = [
   'high-conflict-coparenting/index.html',
   'best-co-parenting-apps/index.html',
   'switch-from-ourfamilywizard/index.html',
+  'court-ready-records/index.html',
   'calculators/support/california.html',
   'calculators/support/florida.html',
   'calculators/support/illinois.html',

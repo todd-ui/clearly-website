@@ -199,16 +199,17 @@ function generateSlug(title, existingSlug) {
 }
 
 // Call-to-action copy matched to what the reader came for. Claims here must
-// match the homepage (tone check, record kept as written, shared calendar,
-// expense splits, 14-day trial, co-parent joins free).
+// match the homepage (help with hard conversations only when needed, record
+// kept as written and court-ready, shared calendar, expense splits, 14-day
+// trial, co-parent joins free).
 const CTA_COPY = {
   'High-Conflict Situations': {
     kicker: 'When every message matters',
-    text: 'Clearly is a co-parenting app that checks the tone before you post and keeps every message on the record exactly as written.'
+    text: 'Clearly is a co-parenting app that steps in like a mediator when a conversation needs it, and keeps every message on the record exactly as written.'
   },
   'Communication': {
-    kicker: 'Say it once, calmly',
-    text: 'Clearly is a co-parenting app that checks the tone of your message before you post and suggests calmer wording. You choose what to send.'
+    kicker: 'Get to an answer',
+    text: 'Clearly is a co-parenting app that helps word the hard conversations so they reach an answer, stepping in only when it\u2019s needed. You choose what to send.'
   },
   'Schedules & Custody': {
     kicker: 'One calendar you both trust',
@@ -219,12 +220,12 @@ const CTA_COPY = {
     text: 'Clearly is a co-parenting app that works out each parent\u2019s share of every shared expense from the split you agreed.'
   },
   'Legal Basics': {
-    kicker: 'A record you can rely on',
-    text: 'Clearly is a co-parenting app that keeps your messages, agreements and schedule changes preserved, timestamped and exportable.'
+    kicker: 'For the record',
+    text: 'Clearly is a co-parenting app that keeps every message, agreement and schedule change as written, and exports court-ready records with a document ID on every page.'
   },
   default: {
     kicker: 'Co-parenting, resolved',
-    text: 'Clearly is a co-parenting app that checks the tone before you post, helps you both reach an answer, and keeps the schedule, expenses and plan in one place.'
+    text: 'Clearly is a co-parenting app that helps each conversation reach an answer, and keeps the schedule, expenses and plan in one place.'
   }
 };
 CTA_COPY['Expenses'] = CTA_COPY['Money & Expenses'];
