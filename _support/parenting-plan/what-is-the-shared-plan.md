@@ -20,4 +20,4 @@ Either parent can change any of it, and the change shows for both of you straigh
 
 ## The family name
 
-The family name shows at the top of Clearly and to any professional you share with. **On the web,** click `Rename` on a Shared page. **On iPhone,** open **Settings**, then **Family**, then `Family name`. Leave it empty and Clearly uses both parents' names.
+The family name is how your family is named on PDF records and for any professional you share with. **On the web,** go to **Settings**, then **Family name**. **On iPhone,** open **Settings**, then **Family**, then `Family name`. Leave it empty and Clearly uses both parents' names.
