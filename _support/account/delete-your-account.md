@@ -24,7 +24,7 @@ Deleting your account can't be undone. You may want to [export your record](/sup
 - Your profile and login are deleted, along with your swap requests and your exports.
 - **If your co-parent uses Clearly,** what you shared (topics, messages, expenses and events) stays in their record, shown as "Former co-parent".
 - **If your co-parent hasn't joined,** the family's record is deleted, files included.
-- Any professional's access you shared ends.
+- Any professional's access you shared ends, and they're told. If your co-parent stays, the professional keeps a read-only copy up to today. If not, their copy is deleted with the family's record.
 - You get a confirmation email.
 
 ## Your subscription

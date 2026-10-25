@@ -9,7 +9,7 @@ related: [when-clearly-holds-a-message, reach-a-resolution, privacy-and-security
 Clearly uses AI from Anthropic for a few jobs:
 
 - Working out what kind of topic you're starting and giving it a title.
-- Checking each message before your co-parent sees it, and holding back anything hostile.
+- Checking each message before your co-parent sees it, and suggesting other wording when one is likely to make things harder.
 - Suggesting wording, drafting a reply and suggesting a resolution.
 - Summing up where a conversation stands.
 

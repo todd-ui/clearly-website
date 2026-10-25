@@ -16,8 +16,11 @@ Open **Settings** in the sidebar.
 - **Appearance:** light, dark or automatic.
 - **Getting started:** show the welcome steps again, take the tour, or bring back the sample family.
 - **Inviting clients:** how a client can invite you from their own app.
-- **Account:** `Sign out`.
+- **Account:** `Sign out` and `Delete my account`.
 
-## Close your professional account
+## Delete your professional account
 
-Email [hello@getclearly.app](mailto:hello@getclearly.app) from your sign-in address and we'll close it.
+1. Go to **Settings**, then **Account**, then `Delete my account`.
+2. Type DELETE and click `Delete for good`.
+
+Your access to every case ends straight away, and each family is told. Your private notes, case names and the copies of past cases you kept are deleted. Invitations you sent that haven't been answered are cancelled; a free month a family already started stays theirs. The families keep the record of what you viewed.

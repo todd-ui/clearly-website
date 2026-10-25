@@ -16,11 +16,9 @@ related: [request-or-answer-a-swap, subscribe-to-your-calendar, start-a-topic]
 4. Under `Repeat`, choose `Never`, `Daily`, `Weekly`, `Every 2 weeks` or `Monthly`, with an end date or none.
 5. Choose which kids it's for, add notes if you like, and tap `Create event`.
 
-**On the web:** on **Schedule**, click `Add event`. Fill in the event, date, time, and optionally the location, kids and notes. Click `Add event`.
+**On the web:** on **Schedule**, click `Add event`. Fill in the event, date and time. To repeat it, choose `Daily`, `Weekly`, `Every 2 weeks` or `Monthly` under `Repeat`, and an `Until` date. Add the location, kids and notes if you like, and click `Add event`.
 
-Your co-parent is told about a new event.
-
-> Note: Repeating events are created in the iPhone app, or come in with a calendar import. You can edit them on the web.
+A repeating event with no end date is added for the next 6 months. Your co-parent is told once, about the whole series.
 
 ## Edit or delete
 

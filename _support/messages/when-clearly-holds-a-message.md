@@ -1,13 +1,13 @@
 ---
 title: When Clearly holds a message before it's sent
-summary: If a message reads as hostile, Clearly doesn't post it as written and suggests other wording. You choose what to send.
+summary: When a message is likely to make things harder, Clearly doesn't post it as written and suggests other wording. You choose what to send.
 apps: [iphone, web]
 keywords: [held, not posted, not sent as written, rewrite, suggested wording, tone, reframing]
 popular: yes
 order: 4
 related: [how-clearly-uses-ai, reply-and-answer, can-messages-be-edited-or-deleted]
 ---
-Clearly checks each message before your co-parent sees it. If a message reads as hostile, Clearly doesn't post it as written. Your co-parent doesn't see it.
+Clearly checks each message before your co-parent sees it. When a message is likely to make things harder between you, Clearly doesn't post it as written, and your co-parent doesn't see it. It says why, and suggests wording that keeps things moving.
 
 ## What you see
 

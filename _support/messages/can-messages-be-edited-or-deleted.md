@@ -13,7 +13,7 @@ That's what makes the record dependable for both of you, and for anyone you shar
 
 ## What you can do
 
-- **Before you post,** read it through. Clearly also checks each message and holds back anything hostile. See [When Clearly holds a message](/support/when-clearly-holds-a-message).
+- **Before you post,** read it through. Clearly also checks each message, and suggests other wording when one is likely to make things harder. See [When Clearly holds a message](/support/when-clearly-holds-a-message).
 - **After you post,** add a reply to correct or explain something.
 - **If you started a topic by mistake,** close or withdraw it. It stays on the record as no longer needed. See [Close or withdraw a topic](/support/close-or-withdraw-a-topic).
 

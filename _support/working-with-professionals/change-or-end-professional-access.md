@@ -35,4 +35,4 @@ Use `End access`, or `Cancel invite` for one they haven't accepted yet.
 
 They don't see anything new from that moment. They keep a read-only copy of your record as it was then, like a case file. Both parents are told.
 
-Access also ends on its own on the end date, if you set one.
+Access also ends on its own on the end date, if you set one. Both parents and the professional are told that day. An invitation nobody accepts within 30 days expires, and the parent who sent it is told.
