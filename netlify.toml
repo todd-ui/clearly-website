@@ -5,6 +5,19 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# The help page became the support center (Oct 2026)
+[[redirects]]
+  from = "/help"
+  to = "/support/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/help.html"
+  to = "/support/"
+  status = 301
+  force = true
+
 # Alignment tool archived — redirect to guide page
 [[redirects]]
   from = "/alignment/"

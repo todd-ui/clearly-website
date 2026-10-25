@@ -4,7 +4,6 @@ const path = require('path');
 // Pages to process (excluding blog posts which are handled by build-blog.js)
 const PAGES = [
   'faq.html',
-  'help.html',
   'contact.html',
   'privacy.html',
   'terms.html',

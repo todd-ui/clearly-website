@@ -1037,12 +1037,15 @@ const STATIC_PAGES = [
   ['/calculators/support/texas', 'calculators/support/texas.html'],
   ['/blog', 'blog.html'],
   ['/faq', 'faq.html'],
-  ['/help', 'help.html'],
   ['/contact', 'contact.html'],
   ['/professionals', 'professionals.html'],
   ['/privacy', 'privacy.html'],
   ['/terms', 'terms.html'],
 ];
+// The support center's pages, listed by build-support.js
+try {
+  STATIC_PAGES.push(...JSON.parse(fs.readFileSync(path.join(__dirname, 'support/pages.json'), 'utf-8')));
+} catch (e) {}
 
 // Last time a file really changed, from git (falls back to today). A
 // sitemap that stamps every URL with today's date teaches Google to
