@@ -10,7 +10,7 @@ related: [accept-a-parents-invitation, invite-a-family, the-dashboard]
 The professional portal is free. Professionals never need a subscription.
 
 1. Go to [web.getclearly.app/pro/signup](https://web.getclearly.app/pro/signup).
-2. Enter your full name and work email. If a client invited you, use the email they invited.
+2. Enter your first and last name and your work email. If a client invited you, use the email they invited.
 3. Choose your role: family lawyer, mediator, therapist, parenting coordinator, guardian ad litem, custody evaluator, social worker, coach or other professional.
 4. Add your firm or practice and your bar or license number if you like. Both are optional.
 5. Choose a password: at least 8 characters, with an uppercase letter, a lowercase letter and a number.
