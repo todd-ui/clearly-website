@@ -5,7 +5,7 @@ apps: [iphone, web]
 keywords: [family subscription, both parents, co-parent pays, covered, who pays, shared subscription]
 popular: yes
 order: 3
-related: [share-the-subscription-cost, if-you-both-paid, plans-and-prices]
+related: [if-you-both-paid, plans-and-prices, log-an-expense]
 ---
 A Clearly subscription belongs to the family. Whichever of you pays, it covers you both, wherever you use Clearly. It doesn't matter whether it was bought on the web or in the iPhone app.
 
@@ -22,7 +22,7 @@ If your family is already covered, Clearly won't let either of you buy a second 
 
 ## Sharing the cost
 
-The parent who pays can add each charge to Expenses so you split it. See [Share the cost of Clearly through Expenses](/support/share-the-subscription-cost).
+If you split the cost of Clearly, the parent who pays can log it as an expense, like any other shared cost. See [Log an expense](/support/log-an-expense).
 
 ## If the paying parent leaves Clearly
 

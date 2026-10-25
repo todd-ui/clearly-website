@@ -5,6 +5,19 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# A retired help article (Oct 2026)
+[[redirects]]
+  from = "/support/expenses/share-the-subscription-cost/*"
+  to = "/support/billing/one-subscription-covers-both-parents/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/support/expenses/share-the-subscription-cost"
+  to = "/support/billing/one-subscription-covers-both-parents/"
+  status = 301
+  force = true
+
 # The help page became the support center (Oct 2026)
 [[redirects]]
   from = "/help"
