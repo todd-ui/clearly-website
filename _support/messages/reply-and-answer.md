@@ -24,4 +24,8 @@ Replies can be up to 5,000 characters.
 
 ## Add a photo
 
-On iPhone, tap the photo button next to the reply box, then `Take photo` or `Choose from library`. The photo stays in that topic, on the record. Photos can be viewed on the web, but they're added from the iPhone app.
+**On iPhone:** tap the photo button next to the reply box, then `Take photo` or `Choose from library`.
+
+**On the web:** click the photo button at the left of the reply box and choose a photo or screenshot (up to 25 MB). Click the X to remove it before you send.
+
+You can send a photo with or without words. It stays in that topic, on the record, and can't be removed once it's sent.

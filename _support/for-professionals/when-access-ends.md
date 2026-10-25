@@ -9,8 +9,9 @@ related: [read-a-case, accept-a-parents-invitation, professional-settings]
 ## How access ends
 
 - **A parent ends it.** For a mediator, parenting coordinator, guardian ad litem or custody evaluator, either parent can. For anyone else, only the parent who invited you can.
-- **The end date passes,** if the parent set one. `Access ending` shows on your Dashboard 14 days before.
+- **The end date passes,** if the parent set one. `Access ending` shows on your Dashboard 14 days before, and you and both parents are told on the day.
 - **You leave.** Open the case menu and choose `Leave case`. Both parents are told.
+- **The parent who shared it leaves Clearly.** If their co-parent stays, your access ends and you keep your copy, as below. If the whole family leaves Clearly, the family's record is deleted, including your copy.
 
 ## What you keep
 
