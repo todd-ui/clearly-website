@@ -7,7 +7,6 @@ Paste into App Store Connect when the 2.0.7 build is submitted. Nothing here is 
 One family subscription, wherever you use Clearly.
 
 - Your family's subscription now covers you both on iPhone and on the web, whichever of you pays. If your co-parent's subscription already covers you, you won't be asked to buy one.
-- Share the cost: the parent who pays can split each charge in Expenses, at your usual split or any other.
 - Professionals: either of you can end a mediator's or parenting coordinator's access. Your own lawyer, therapist or coach stays yours to manage.
 - A professional's invitation with a free month now works however you sign up.
 - Clearer wording about what professionals can see and when you're told.
