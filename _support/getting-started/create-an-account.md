@@ -12,14 +12,14 @@ If your co-parent already uses Clearly, ask them for an invite link or code firs
 ## On the web
 
 1. Go to [web.getclearly.app/signup](https://web.getclearly.app/signup).
-2. Enter `Your name`, `Email` and `Password`.
+2. Enter your `First name`, `Last name`, `Email` and `Password`.
 3. Tick `I agree to the Terms and Privacy Policy`.
 4. Click `Create account`.
 
 ## In the iPhone app
 
 1. Open Clearly and tap `Get started`.
-2. Enter `First name`, `Email` and `Create a password`.
+2. Enter your `First name`, `Last name`, `Email` and `Create a password`.
 3. Tap `Create account`.
 
 ## Password rules
