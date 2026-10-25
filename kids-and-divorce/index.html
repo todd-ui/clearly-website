@@ -362,11 +362,15 @@
     var link = e.target.closest && e.target.closest('a[href*="web.getclearly.app"], a[href*="pro.getclearly.app"]');
     if (!link) return;
     if (typeof gtag === 'function') {
-      gtag('event', 'web_app_click', {
+      var params = {
         link_url: link.href.split('?')[0],
         link_location: link.dataset.cta || (link.closest('header') ? 'header' : link.closest('footer') ? 'footer' : link.closest('#mobile-app-bar') ? 'mobile-sticky-bar' : 'body'),
         page_type: location.pathname === '/' ? 'home' : location.pathname.indexOf('/blog/') === 0 ? 'blog_post' : 'page'
-      });
+      };
+      gtag('event', 'web_app_click', params);
+      // Get started (web sign-up), the site's main call to action: counted
+      // on its own too, so the Control Room can follow it to a paying family
+      try { if (new URL(link.href).pathname.indexOf('/signup') === 0) gtag('event', 'get_started_click', params); } catch (err) { /* old browser */ }
     }
     try {
       var u = new URL(link.href);
