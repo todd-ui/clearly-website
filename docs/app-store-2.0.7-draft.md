@@ -2,6 +2,8 @@
 
 Paste into App Store Connect when the 2.0.7 build is submitted. Nothing here is live until you do.
 
+2.0.7 went out as build 36. The kid colour sync and the medication details came after it and ship in 2.0.8 (`app-store-2.0.8-draft.md`).
+
 ## What's New in This Version
 
 One family subscription, wherever you use Clearly.
@@ -10,7 +12,6 @@ One family subscription, wherever you use Clearly.
 - Professionals: either of you can end a mediator's or parenting coordinator's access. Your own lawyer, therapist or coach stays yours to manage.
 - A professional's invitation with a free month now works however you sign up.
 - Clearer wording about what professionals can see and when you're told.
-- Medications: add what each one is for and when it expires. Expiration dates go on the shared calendar for both of you, and you can tap a medication to change it.
 
 ## Promotional text (170 max; can change anytime without review)
 
