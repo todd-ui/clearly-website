@@ -1530,6 +1530,7 @@
     /* Complete Screen */
     .complete-actions {
       display: flex;
+      flex-direction: column;
       gap: 12px;
       margin: 24px 0;
     }
@@ -2102,7 +2103,7 @@
         <div class="complete-actions">
           <a href="https://web.getclearly.app/signup" data-cta="plan-complete" class="btn btn-primary" target="_blank" rel="noopener">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-            Start Clearly on the web
+            Save this plan and share it with your co-parent in Clearly
           </a>
           <button class="btn btn-secondary" onclick="downloadPDF()">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -2230,6 +2231,23 @@
     function track(name, params) {
       if (typeof gtag === 'function') gtag('event', name, params || {});
     }
+
+    // Which button brought this visitor here, so starts and finished plans can
+    // be told apart by source: the link they clicked on this site (page +
+    // placement, saved by first-visit.js), a ?from= or utm_source tag on the
+    // link, or the site that sent them.
+    const startFrom = (function () {
+      let saved = null;
+      try { saved = JSON.parse(sessionStorage.getItem('clearly_pb_from') || 'null'); } catch (e) { /* private window */ }
+      const q = new URLSearchParams(location.search);
+      let ref = '';
+      try { ref = document.referrer ? new URL(document.referrer) : ''; } catch (e) { /* none */ }
+      const internal = ref && /(^|\.)getclearly\.app$/.test(ref.hostname);
+      return {
+        start_source: (saved && saved.cta) || q.get('from') || q.get('utm_source') || (ref ? (internal ? 'link' : ref.hostname.replace(/^www\./, '')) : 'direct'),
+        start_page: (saved && saved.page) || (internal ? ref.pathname : '(external)')
+      };
+    })();
 
     // Track if user is editing from review screen
     let editingFromReview = false;
@@ -2876,7 +2894,7 @@
     // WELCOME SCREEN
     // ==========================================
     function startBuilder() {
-      track('plan_builder_start');
+      track('plan_builder_start', startFrom);
       state.pathway = 'explore';
       state.currentScreen = screens.indexOf('children');
       initScreen('children');
@@ -4550,7 +4568,7 @@
         const result = await response.json();
         state.planCode = result.share_code;
         document.getElementById('planCode').textContent = result.share_code;
-        track('plan_builder_complete', { schedule: state.schedule, children: state.children.length });
+        track('plan_builder_complete', Object.assign({ schedule: state.schedule, children: state.children.length }, startFrom));
 
         // Advance to complete screen
         state.currentScreen++;
@@ -4858,9 +4876,30 @@ ${sectionsHtml}
     if (link && typeof gtag === 'function') {
       gtag('event', 'app_store_click', {
         link_url: link.href,
-        link_location: link.dataset.cta || 'plan-builder'
+        link_location: link.dataset.cta || 'plan-builder',
+        page_type: 'plan_builder'
       });
     }
+  });
+  // Links into Clearly on the web: counted in Google Analytics like on every
+  // other page (web_app_click by placement, get_started_click for sign-up) and
+  // marked from=site so the web app can tell the visit came from here.
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest && e.target.closest('a[href*="web.getclearly.app"], a[href*="pro.getclearly.app"]');
+    if (!link) return;
+    if (typeof gtag === 'function') {
+      var params = {
+        link_url: link.href.split('?')[0],
+        link_location: link.dataset.cta || (link.closest('header') ? 'header' : link.closest('footer') ? 'footer' : 'plan-builder'),
+        page_type: 'plan_builder'
+      };
+      gtag('event', 'web_app_click', params);
+      try { if (new URL(link.href).pathname.indexOf('/signup') === 0) gtag('event', 'get_started_click', params); } catch (err) { /* old browser */ }
+    }
+    try {
+      var u = new URL(link.href);
+      if (!u.searchParams.has('from')) { u.searchParams.set('from', 'site'); link.href = u.toString(); }
+    } catch (err) { /* old browser: the link still works */ }
   });
   </script>
 </body>

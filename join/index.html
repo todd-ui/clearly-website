@@ -196,10 +196,10 @@
       // GA4: whether the link carried a code (never the code itself)
       gtag('event', 'join_view', { has_code: code ? 'yes' : 'no', device: appleDevice ? 'apple' : 'other' });
       app.addEventListener('click', function () {
-        gtag('event', 'app_store_click', { link_url: this.href, link_location: 'join' });
+        gtag('event', 'app_store_click', { link_url: this.href, link_location: 'join', page_type: 'join' });
       });
       web.addEventListener('click', function () {
-        gtag('event', 'web_app_click', { link_location: 'join' });
+        gtag('event', 'web_app_click', { link_location: 'join', page_type: 'join' });
       });
 
       if (code) {

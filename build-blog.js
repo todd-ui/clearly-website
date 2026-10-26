@@ -522,7 +522,7 @@ const blogPostTemplate = (post, relatedPosts = []) => `<!DOCTYPE html>
         <p class="blog-cta-kicker">${ctaFor(post.category).kicker}</p>
         <p>${ctaFor(post.category).text}</p>
         ${startCta('end-of-article')}
-        <p class="blog-cta-fine">${CTA_FINE_PRINT} &middot; <a href="/plan-builder/" class="blog-cta-secondary">Or build a free parenting plan</a></p>
+        <p class="blog-cta-fine">${CTA_FINE_PRINT} &middot; <a href="/plan-builder/" class="blog-cta-secondary" data-cta="blog-end-plan-builder">Or build a free parenting plan</a></p>
       </div>
     </div>
   </article>
