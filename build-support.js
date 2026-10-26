@@ -17,10 +17,40 @@ const ROOT = __dirname;
 const SRC = path.join(ROOT, '_support');
 const OUT = path.join(ROOT, 'support');
 const ORIGIN = 'https://getclearly.app';
-const CSS_V = '20261025';
+const CSS_V = '20261026';
 
 const header = fs.readFileSync(path.join(ROOT, '_partials/header.html'), 'utf-8').trim();
 const footer = fs.readFileSync(path.join(ROOT, '_partials/footer.html'), 'utf-8').trim();
+
+// The home page's sections, in order; each category names its group in categories.json
+const GROUPS = [
+  { id: 'start', title: 'Get started', lede: 'New to Clearly, or setting up on a new device.' },
+  { id: 'use', title: 'Using Clearly', lede: 'Messages, the calendar, expenses, your plan and your record.' },
+  { id: 'account', title: 'Account and billing', lede: 'Your subscription, signing in, privacy, and fixes when something isn’t working.' },
+  { id: 'pro', title: 'Lawyers, mediators and therapists', lede: 'Sharing your record with a professional, and the free professional portal.' },
+];
+
+// Shortcuts under the search box: what people most often come here for
+const QUICK = [['invite-your-co-parent', 'Invite your co-parent'], ['cancel-your-subscription', 'Cancel'], ['export-your-record', 'Export records'],
+  ['forgot-password', 'Reset password'], ['subscribe-to-your-calendar', 'Google or Apple Calendar'], ['use-clearly-on-android', 'Android']];
+
+// Topic icons (24px line icons, drawn inline so the page needs no extra requests)
+const ICONS = {
+  sparkle: '<path d="M12 3l1.9 5.1L19 10l-5.1 1.9L12 17l-1.9-5.1L5 10l5.1-1.9z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z"/>',
+  phone: '<rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/>',
+  globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9S9.5 5.6 12 3z"/>',
+  message: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>',
+  calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+  receipt: '<path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h4"/>',
+  heart: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+  file: '<path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
+  card: '<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/>',
+  lock: '<rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/>',
+  wrench: '<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.6 2.6-2.4-.6-.6-2.4z"/>',
+  share: '<circle cx="6" cy="12" r="3"/><circle cx="18" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8.7 10.7l6.6-3.4M8.7 13.3l6.6 3.4"/>',
+  briefcase: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>',
+};
+const icon = (name) => `<svg class="sp-icon" viewBox="0 0 24 24" aria-hidden="true">${ICONS[name] || ICONS.file}</svg>`;
 
 const APPS = {
   iphone: 'iPhone app',
@@ -219,9 +249,13 @@ function crumbsHtml(crumbs) {
   return `<nav class="sp-crumbs" aria-label="Breadcrumb">${crumbs.map((c, i) => i === crumbs.length - 1 ? `<span>${esc(c.name)}</span>` : `<a href="${c.url}">${esc(c.name)}</a>`).join('<span class="sep">/</span>')}</nav>`;
 }
 
-const contactBlock = `<section class="sp-contact">
-  <h2>Still need help?</h2>
-  <p>Email <a href="mailto:hello@getclearly.app">hello@getclearly.app</a> and a person will reply, usually within one business day. Tell us which app you use (iPhone, web or the professional portal) and what you were trying to do. Please don't include your password.</p>
+// subject: what the email starts with, so we know where the question came from
+const contactBlock = (subject = 'Help with Clearly') => `<section class="sp-contact">
+  <div>
+    <h2>Still need help?</h2>
+    <p>A person reads every email and replies, usually within one business day. Say which app you use (iPhone, web or the professional portal) and what you were trying to do. Please don't send your password.</p>
+  </div>
+  <a class="sp-contact-btn" href="mailto:hello@getclearly.app?subject=${encodeURIComponent(subject)}">Email hello@getclearly.app</a>
 </section>`;
 
 function write(rel, html) {
@@ -235,37 +269,48 @@ fs.rmSync(OUT, { recursive: true, force: true });
 const pages = [];
 const home = { name: 'Support', url: '/support/' };
 
-// Home
+// Home: search with shortcuts, the most asked questions, then every topic in
+// four sections, each card listing its first articles so most answers are one click away
 {
-  const groups = categories.map((c) => {
+  for (const [q] of QUICK) if (!bySlug[q]) throw new Error(`QUICK links to ${q}, which does not exist`);
+  const quick = QUICK.map(([q, label]) => `<a href="${bySlug[q].url}" title="${esc(bySlug[q].title)}">${esc(label)}</a>`).join('');
+  const most = articles.filter((a) => a.popular).sort((x, y) => x.order - y.order).slice(0, 6);
+  const card = (c) => {
     const list = inCat(c.slug);
-    if (!list.length) return '';
-    return `<a class="sp-cat" href="/support/${c.slug}/"><h3>${esc(c.title)}</h3><p>${esc(c.description)}</p><span class="n">${list.length} article${list.length === 1 ? '' : 's'}</span></a>`;
+    const shown = list.slice(0, 3);
+    return `<div class="sp-cat">
+      <a class="sp-cat-head" href="/support/${c.slug}/">${icon(c.icon)}<h3>${esc(c.title)}</h3></a>
+      <p>${esc(c.description)}</p>
+      <ul>${shown.map((a) => `<li><a href="${a.url}">${esc(a.title)}</a></li>`).join('')}</ul>
+      ${list.length > shown.length ? `<a class="sp-all" href="/support/${c.slug}/">All ${list.length} articles</a>` : ''}
+    </div>`;
+  };
+  const groups = GROUPS.map((g) => {
+    const cats = categories.filter((c) => c.group === g.id && inCat(c.slug).length);
+    if (!cats.length) return '';
+    return `<section class="sp-wrap sp-group" id="${g.id}">
+  <div class="sp-group-head"><h2 class="sp-h">${esc(g.title)}</h2><p>${esc(g.lede)}</p></div>
+  <div class="sp-cats">${cats.map(card).join('\n')}</div>
+</section>`;
   }).join('\n');
-  const popular = articles.filter((a) => a.popular).sort((x, y) => x.order - y.order);
-  const doors = [
-    ['iphone-app', 'I use the iPhone app', 'Installing, the demo, the plans screen, notifications and settings on iPhone.'],
-    ['web-app', 'I use Clearly in a browser', 'Signing in at web.getclearly.app on a computer, Android phone or tablet.'],
-    ['for-professionals', 'I\'m a professional', 'The free portal for family lawyers, mediators, therapists and parenting coordinators.'],
-  ].map(([s, t, d]) => `<a class="sp-door" href="/support/${s}/"><h2>${esc(t)}</h2><p>${esc(d)}</p></a>`).join('\n');
+  const left = categories.filter((c) => !GROUPS.some((g) => g.id === c.group) && inCat(c.slug).length);
+  if (left.length) throw new Error(`categories.json: ${left.map((c) => c.slug).join(', ')} need a group (${GROUPS.map((g) => g.id).join(', ')})`);
   const body = `<section class="sp-hero">
   <div class="sp-wrap">
     <p class="sp-eyebrow">Clearly support</p>
     <h1>How can we help?</h1>
     <p class="sp-lede">Step-by-step help for Clearly on iPhone, on the web, and in the professional portal.</p>
     ${searchBox(true)}
+    <div class="sp-quick"><span>Popular:</span>${quick}</div>
   </div>
 </section>
-<section class="sp-wrap sp-doors">${doors}</section>
-<section class="sp-wrap">
-  <h2 class="sp-h">Popular articles</h2>
-  <ul class="sp-list two">${popular.map((a) => `<li><a href="${a.url}">${esc(a.title)}</a><span>${esc(a.summary)}</span></li>`).join('')}</ul>
+<nav class="sp-wrap sp-jump" aria-label="Help topics">${GROUPS.map((g) => `<a href="#${g.id}">${esc(g.title)}</a>`).join('')}</nav>
+<section class="sp-wrap sp-most">
+  <h2 class="sp-h">Most asked</h2>
+  <ul class="sp-list two">${most.map((a) => `<li><a href="${a.url}">${esc(a.title)}</a><span>${esc(a.summary)}</span></li>`).join('')}</ul>
 </section>
-<section class="sp-wrap">
-  <h2 class="sp-h">Browse by topic</h2>
-  <div class="sp-cats">${groups}</div>
-</section>
-<div class="sp-wrap">${contactBlock}</div>`;
+${groups}
+<div class="sp-wrap">${contactBlock()}</div>`;
   write('index.html', page({ url: '/support/', title: 'Clearly Support: Help for the Co-Parenting App on Web and iPhone', description: 'Help articles for Clearly, the co-parenting app for the web and iPhone: getting started, messages, the custody schedule, expenses, records, billing, and the free professional portal.', crumbs: [home], body }));
   pages.push(['/support/', 'support/index.html']);
 }
@@ -279,7 +324,7 @@ const home = { name: 'Support', url: '/support/' };
   <div id="sp-search-page" class="sp-search-page"></div>
   <noscript><p>Search needs JavaScript. <a href="/support/">Browse all topics</a> instead.</p></noscript>
 </section>
-<div class="sp-wrap">${contactBlock}</div>`;
+<div class="sp-wrap">${contactBlock('Help with Clearly: I couldn’t find an answer')}</div>`;
   const html = page({ url: '/support/search/', title: 'Search Clearly Support', description: 'Search the Clearly help articles.', crumbs: [home, { name: 'Search', url: '/support/search/' }], body })
     .replace('<meta name="robots" content="index, follow">', '<meta name="robots" content="noindex, follow">');
   write('search/index.html', html);
@@ -292,13 +337,13 @@ for (const c of categories) {
   const crumbs = [home, { name: c.title, url: `/support/${c.slug}/` }];
   const body = `<section class="sp-wrap sp-page">
   ${crumbsHtml(crumbs)}
-  <h1>${esc(c.title)}</h1>
+  <h1 class="sp-cat-title">${icon(c.icon)}${esc(c.title)}</h1>
   <p class="sp-lede">${esc(c.description)}</p>
   ${searchBox(false)}
   <ul class="sp-list">${list.map((a) => `<li><a href="${a.url}">${esc(a.title)}</a><span>${esc(a.summary)}</span>${appChips(a.apps)}</li>`).join('')}</ul>
   <p class="sp-back"><a href="/support/">All topics</a></p>
 </section>
-<div class="sp-wrap">${contactBlock}</div>`;
+<div class="sp-wrap">${contactBlock(`Help with Clearly: ${c.title}`)}</div>`;
   write(`${c.slug}/index.html`, page({ url: `/support/${c.slug}/`, title: `${c.title} | Clearly Support`, description: c.meta || c.description, crumbs, body }));
   pages.push([`/support/${c.slug}/`, `support/${c.slug}/index.html`]);
 }
@@ -307,7 +352,11 @@ for (const c of categories) {
 for (const a of articles) {
   const c = catOf[a.cat];
   const crumbs = [home, { name: c.title, url: `/support/${c.slug}/` }, { name: a.title, url: a.url }];
-  const siblings = inCat(c.slug).filter((x) => x.slug !== a.slug);
+  const order = inCat(c.slug), at = order.findIndex((x) => x.slug === a.slug);
+  const siblings = order.filter((x) => x.slug !== a.slug);
+  // Previous and next in the topic, so a topic reads like a short guide
+  const prev = order[at - 1], next = order[at + 1];
+  const pager = prev || next ? `<nav class="sp-pager" aria-label="More in ${esc(c.title)}">${prev ? `<a class="prev" href="${prev.url}"><span>Previous</span>${esc(prev.title)}</a>` : '<span></span>'}${next ? `<a class="next" href="${next.url}"><span>Next</span>${esc(next.title)}</a>` : ''}</nav>` : '';
   const related = a.related.length ? a.related.map((s) => bySlug[s]) : siblings.slice(0, 5);
   const toc = a.toc.length >= 3 ? `<nav class="sp-toc" aria-label="On this page"><p>On this page</p><ul>${a.toc.map((t) => `<li><a href="#${t.id}">${esc(t.text)}</a></li>`).join('')}</ul></nav>` : '';
   const body = `<div class="sp-wrap sp-article-wrap">
@@ -325,6 +374,7 @@ ${a.html}
       <button type="button" data-v="yes">Yes</button><button type="button" data-v="no">No</button>
       <span class="thanks" hidden>Thanks. If something is missing, email <a href="mailto:hello@getclearly.app?subject=${encodeURIComponent('Help article: ' + a.title)}">hello@getclearly.app</a>.</span>
     </div>
+    ${pager}
   </article>
   <aside class="sp-side">
     ${searchBox(false)}
@@ -333,7 +383,7 @@ ${a.html}
     <ul>${inCat(c.slug).map((x) => x.slug === a.slug ? `<li class="here">${esc(x.title)}</li>` : `<li><a href="${x.url}">${esc(x.title)}</a></li>`).join('')}</ul>
   </aside>
 </div>
-<div class="sp-wrap">${contactBlock}</div>`;
+<div class="sp-wrap">${contactBlock(`Help article: ${a.title}`)}</div>`;
   write(`${c.slug}/${a.slug}/index.html`, page({ url: a.url, title: `${a.title} | Clearly Support`, description: a.summary, crumbs, body }));
   pages.push([a.url, `support/${c.slug}/${a.slug}/index.html`]);
 }

@@ -28,7 +28,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="/styles.css?v=20261010">
   <link rel="stylesheet" href="/styles/brand.css?v=20261010">
-  <link rel="stylesheet" href="/styles/support.css?v=20261025">
+  <link rel="stylesheet" href="/styles/support.css?v=20261026">
   <link rel="icon" href="/images/favicon-32.png">
   <link rel="manifest" href="/manifest.json">
   <link rel="apple-touch-icon" href="/images/app-icon.png">
@@ -169,7 +169,7 @@
 <main id="main-content">
 <section class="sp-wrap sp-page">
   <nav class="sp-crumbs" aria-label="Breadcrumb"><a href="/support/">Support</a><span class="sep">/</span><span>Expenses</span></nav>
-  <h1>Expenses</h1>
+  <h1 class="sp-cat-title"><svg class="sp-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h12v20l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6M9 16h4"/></svg>Expenses</h1>
   <p class="sp-lede">Logging shared costs, splits, receipts and settling up.</p>
   <form class="sp-search" action="/support/search/" role="search">
   <label class="sr-only" for="sp-q2">Search help articles</label>
@@ -181,8 +181,11 @@
   <p class="sp-back"><a href="/support/">All topics</a></p>
 </section>
 <div class="sp-wrap"><section class="sp-contact">
-  <h2>Still need help?</h2>
-  <p>Email <a href="mailto:hello@getclearly.app">hello@getclearly.app</a> and a person will reply, usually within one business day. Tell us which app you use (iPhone, web or the professional portal) and what you were trying to do. Please don't include your password.</p>
+  <div>
+    <h2>Still need help?</h2>
+    <p>A person reads every email and replies, usually within one business day. Say which app you use (iPhone, web or the professional portal) and what you were trying to do. Please don't send your password.</p>
+  </div>
+  <a class="sp-contact-btn" href="mailto:hello@getclearly.app?subject=Help%20with%20Clearly%3A%20Expenses">Email hello@getclearly.app</a>
 </section></div>
 </main>
 <footer class="site-footer">
@@ -226,6 +229,9 @@
       <div class="footer-col">
         <div class="footer-col-label">Company</div>
         <ul>
+          <li><a href="/how-it-works/">How it works</a></li>
+          <li><a href="/pricing/">Pricing</a></li>
+          <li><a href="/android/">Clearly on Android</a></li>
           <li><a href="/professionals">For Professionals</a></li>
           <li><a href="/faq">FAQ</a></li>
           <li><a href="/support/">Support</a></li>
@@ -239,6 +245,6 @@
     <nav class="footer-legal" aria-label="Legal"><a href="/privacy">Privacy</a><a href="/terms">Terms</a></nav>
   </div>
 </footer>
-<script src="/js/support.js?v=20261025" defer></script>
+<script src="/js/support.js?v=20261026" defer></script>
 </body>
 </html>
