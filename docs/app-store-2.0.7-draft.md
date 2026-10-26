@@ -12,6 +12,7 @@ One family subscription, wherever you use Clearly.
 - Professionals: either of you can end a mediator's or parenting coordinator's access. Your own lawyer, therapist or coach stays yours to manage.
 - A professional's invitation with a free month now works however you sign up.
 - Clearer wording about what professionals can see and when you're told.
+- Medications: add what each one is for and when it expires. Expiration dates go on the shared calendar for both of you, and you can tap a medication to change it.
 
 ## Promotional text (170 max; can change anytime without review)
 
