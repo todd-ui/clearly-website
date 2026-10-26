@@ -31,7 +31,7 @@ const GROUPS = [
 ];
 
 // Shortcuts under the search box: what people most often come here for
-const QUICK = [['invite-your-co-parent', 'Invite your co-parent'], ['cancel-your-subscription', 'Cancel'], ['export-your-record', 'Export records'],
+const QUICK = [['invite-your-co-parent', 'Invite your co-parent'], ['export-your-record', 'Export records'],
   ['forgot-password', 'Reset password'], ['subscribe-to-your-calendar', 'Google or Apple Calendar'], ['use-clearly-on-android', 'Android']];
 
 // Topic icons (24px line icons, drawn inline so the page needs no extra requests)
