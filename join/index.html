@@ -19,6 +19,7 @@
     gtag('set', { page_location: location.origin + '/join', page_path: '/join' });
     gtag('config', 'G-DYZ1XEXPMT', (function () { try { var q = location.search; if (/[?&]internal=1/.test(q)) localStorage.setItem('clearly_internal', '1'); if (/[?&]internal=0/.test(q)) localStorage.removeItem('clearly_internal'); return (localStorage.getItem('clearly_internal') || location.hostname.indexOf('getclearly.app') === -1) ? { traffic_type: 'internal', page_location: location.origin + '/join' } : { page_location: location.origin + '/join' }; } catch (e) { return { page_location: location.origin + '/join' }; } })());
   </script>
+  <script src="/js/first-visit.js" defer></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
