@@ -559,6 +559,13 @@
       transition: all 0.25s;
     }
 
+    .final-cta .start-btn {
+      height: auto;
+      min-height: 46px;
+      padding: 12px 24px;
+      justify-content: center;
+      text-align: center;
+    }
     .final-cta .btn-primary:hover {
       transform: translateY(-2px);
       opacity: 0.9;
@@ -742,7 +749,7 @@
             <p>The patterns you just explored? Clearly is designed to help you navigate them: every conversation, not just this assessment.</p>
             <p>Topic-based discussions that move toward decisions. Help with wording, only when a conversation needs it. Structure that keeps things focused on what matters, not who's right.</p>
             <p style="font-weight: 500; color: var(--text); margin-bottom: 28px;">It's a co-parenting app built around the same principles you just learned.</p>
-            <a href="https://web.getclearly.app/signup" class="start-btn" data-cta="quiz-results">Get started</a>
+            <a href="https://web.getclearly.app/signup" class="start-btn" data-cta="quiz-results">Save your results and invite your co-parent to Clearly</a>
         <a href="https://apps.apple.com/us/app/clearly-co-parenting-resolved/id6758027374" class="app-link" data-cta="quiz-results-iphone">Get the companion iPhone app</a>
           </div>
         </div>
@@ -1140,9 +1147,30 @@
     if (link && typeof gtag === 'function') {
       gtag('event', 'app_store_click', {
         link_url: link.href,
-        link_location: link.dataset.cta || 'cta'
+        link_location: link.dataset.cta || 'cta',
+        page_type: 'quiz'
       });
     }
+  });
+  // Links into Clearly on the web: counted in Google Analytics like on every
+  // other page (web_app_click by placement, get_started_click for sign-up) and
+  // marked from=site so the web app can tell the visit came from here.
+  document.addEventListener('click', function(e) {
+    var link = e.target.closest && e.target.closest('a[href*="web.getclearly.app"], a[href*="pro.getclearly.app"]');
+    if (!link) return;
+    if (typeof gtag === 'function') {
+      var params = {
+        link_url: link.href.split('?')[0],
+        link_location: link.dataset.cta || (link.closest('header') ? 'header' : link.closest('footer') ? 'footer' : 'body'),
+        page_type: 'quiz'
+      };
+      gtag('event', 'web_app_click', params);
+      try { if (new URL(link.href).pathname.indexOf('/signup') === 0) gtag('event', 'get_started_click', params); } catch (err) { /* old browser */ }
+    }
+    try {
+      var u = new URL(link.href);
+      if (!u.searchParams.has('from')) { u.searchParams.set('from', 'site'); link.href = u.toString(); }
+    } catch (err) { /* old browser: the link still works */ }
   });
   </script>
 </body>

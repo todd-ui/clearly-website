@@ -34,4 +34,13 @@
       link.href = u.toString();
     } catch (err) { /* old browser: the link still works */ }
   }, true);
+  // Which button sent someone to the free Plan Builder: the page it was on and
+  // its placement (data-cta, or header / footer / body). Kept for this tab only;
+  // the Plan Builder adds it to plan_builder_start in Google Analytics.
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest && e.target.closest('a[href*="/plan-builder"]');
+    if (!link || location.pathname.indexOf('/plan-builder') === 0) return;
+    var cta = link.dataset.cta || (link.closest('header') ? 'header' : link.closest('footer') ? 'footer' : link.closest('#mobile-app-bar') ? 'mobile-sticky-bar' : 'body');
+    try { sessionStorage.setItem('clearly_pb_from', JSON.stringify({ cta: cta.slice(0, 60), page: location.pathname.slice(0, 80) })); } catch (err) { /* private window */ }
+  }, true);
 })();

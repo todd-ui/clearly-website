@@ -119,3 +119,8 @@ body { background: var(--k-paper); }
 .calc-results-section > h2 { font-family: 'EB Garamond', Georgia, serif !important; font-weight: 400 !important; font-size: 30px !important; letter-spacing: -0.2px; color: var(--k-ink); }
 /* Results scroll into view below the floating site header */
 .calc-results-section { scroll-margin-top: 96px; }
+/* After the results: the next step, saving the numbers in Clearly with the co-parent */
+.calc-next-step { margin-top: 24px; padding: 24px; border-radius: 16px; background: var(--k-ink, #1C1C1A); color: #FFFFFF; }
+.calc-next-step h3 { font-family: 'EB Garamond', Georgia, serif; font-weight: 400; font-size: 24px; margin: 0 0 8px; color: #FFFFFF; }
+.calc-next-step p { font-size: 15px; line-height: 1.55; margin: 0 0 18px; color: rgba(255,255,255,0.82); }
+.calc-next-step .start-btn { height: auto; min-height: 46px; padding: 12px 24px; justify-content: center; text-align: center; background: #FFFFFF; color: #1C1C1A; }
