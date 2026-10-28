@@ -5,6 +5,15 @@
 [build.environment]
   NODE_VERSION = "18"
 
+# A creator's link (the creator program, Oct 2026): getclearly.app/with/NAME
+# opens their page in the web app, which counts the visit and gives the
+# 30-day offer
+[[redirects]]
+  from = "/with/*"
+  to = "https://web.getclearly.app/with/:splat"
+  status = 302
+  force = true
+
 # A retired help article (Oct 2026)
 [[redirects]]
   from = "/support/expenses/share-the-subscription-cost/*"
